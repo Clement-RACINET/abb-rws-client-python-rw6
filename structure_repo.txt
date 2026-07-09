@@ -58,6 +58,7 @@ abb_rws_client_python_rw6
 │   ├── docs
 │   │   ├── config.py
 │   │   ├── generate_api.py
+│   │   ├── hooks.py
 │   │   └── run_docs.py
 │   ├── generator
 │   │   └── main.py
@@ -72,6 +73,321 @@ abb_rws_client_python_rw6
 │   ├── export_structure.py
 │   └── README.md
 ├── docs
+│   ├── api
+│   │   └── abb_rws_client
+│   │       ├── _core
+│   │       │   ├── client.md
+│   │       │   ├── exceptions.md
+│   │       │   └── serializers.md
+│   │       ├── image
+│   │       │   └── index
+│   │       │       └── 1783628351457.png
+│   │       └── rws
+│   │           ├── ctrl
+│   │           │   ├── backup.md
+│   │           │   ├── clock.md
+│   │           │   ├── ctrl.md
+│   │           │   └── identity.md
+│   │           ├── iosystem
+│   │           │   ├── devices.md
+│   │           │   ├── iosystem.md
+│   │           │   ├── networks.md
+│   │           │   └── signals.md
+│   │           ├── rapid
+│   │           │   ├── aliasio.md
+│   │           │   ├── execution.md
+│   │           │   ├── modules.md
+│   │           │   ├── rapid.md
+│   │           │   ├── symbol.md
+│   │           │   ├── symbols.md
+│   │           │   ├── taskpanel.md
+│   │           │   ├── tasks.md
+│   │           │   └── uiinstr.md
+│   │           ├── rw
+│   │           │   └── misc.md
+│   │           ├── users
+│   │           │   ├── grants.md
+│   │           │   ├── remote.md
+│   │           │   ├── rmmp.md
+│   │           │   └── users.md
+│   │           ├── cfg.md
+│   │           ├── devices.md
+│   │           ├── dipc.md
+│   │           ├── elog.md
+│   │           ├── fileservice.md
+│   │           ├── mastership.md
+│   │           ├── motionsystem.md
+│   │           ├── operations_on_io_profinet_device.md
+│   │           ├── panel.md
+│   │           ├── retcode.md
+│   │           ├── root.md
+│   │           ├── subscription.md
+│   │           ├── system.md
+│   │           └── vision.md
+│   ├── coverage
+│   │   ├── .gitignore
+│   │   ├── class_index.html
+│   │   ├── coverage_html_cb_188fc9a4.js
+│   │   ├── favicon_32_cb_c827f16f.png
+│   │   ├── function_index.html
+│   │   ├── index.html
+│   │   ├── keybd_closed_cb_900cfef5.png
+│   │   ├── status.json
+│   │   ├── style_cb_0853b3de.css
+│   │   ├── z_0895de5cdd7df75f___init___py.html
+│   │   ├── z_0895de5cdd7df75f_devices_py.html
+│   │   ├── z_0895de5cdd7df75f_iosystem_py.html
+│   │   ├── z_0895de5cdd7df75f_networks_py.html
+│   │   ├── z_0895de5cdd7df75f_signals_py.html
+│   │   ├── z_1d405d585ce67479___init___py.html
+│   │   ├── z_1d405d585ce67479_misc_py.html
+│   │   ├── z_48d36c98a7cd0aa8___init___py.html
+│   │   ├── z_7249e9724a6c1a9e___init___py.html
+│   │   ├── z_7249e9724a6c1a9e_client_py.html
+│   │   ├── z_7249e9724a6c1a9e_exceptions_py.html
+│   │   ├── z_7249e9724a6c1a9e_serializers_py.html
+│   │   ├── z_8cd531ca9cd4eebd___init___py.html
+│   │   ├── z_8cd531ca9cd4eebd_aliasio_py.html
+│   │   ├── z_8cd531ca9cd4eebd_execution_py.html
+│   │   ├── z_8cd531ca9cd4eebd_modules_py.html
+│   │   ├── z_8cd531ca9cd4eebd_rapid_py.html
+│   │   ├── z_8cd531ca9cd4eebd_symbol_py.html
+│   │   ├── z_8cd531ca9cd4eebd_symbols_py.html
+│   │   ├── z_8cd531ca9cd4eebd_taskpanel_py.html
+│   │   ├── z_8cd531ca9cd4eebd_tasks_py.html
+│   │   ├── z_8cd531ca9cd4eebd_uiinstr_py.html
+│   │   ├── z_a521d9b7d85d7d67___init___py.html
+│   │   ├── z_a521d9b7d85d7d67_backup_py.html
+│   │   ├── z_a521d9b7d85d7d67_clock_py.html
+│   │   ├── z_a521d9b7d85d7d67_ctrl_py.html
+│   │   ├── z_a521d9b7d85d7d67_identity_py.html
+│   │   ├── z_ac61a8e48b8a27d7___init___py.html
+│   │   ├── z_ac61a8e48b8a27d7_cfg_py.html
+│   │   ├── z_ac61a8e48b8a27d7_devices_py.html
+│   │   ├── z_ac61a8e48b8a27d7_dipc_py.html
+│   │   ├── z_ac61a8e48b8a27d7_elog_py.html
+│   │   ├── z_ac61a8e48b8a27d7_fileservice_py.html
+│   │   ├── z_ac61a8e48b8a27d7_mastership_py.html
+│   │   ├── z_ac61a8e48b8a27d7_motionsystem_py.html
+│   │   ├── z_ac61a8e48b8a27d7_operations_on_io_profinet_device_py.html
+│   │   ├── z_ac61a8e48b8a27d7_panel_py.html
+│   │   ├── z_ac61a8e48b8a27d7_retcode_py.html
+│   │   ├── z_ac61a8e48b8a27d7_root_py.html
+│   │   ├── z_ac61a8e48b8a27d7_subscription_py.html
+│   │   ├── z_ac61a8e48b8a27d7_system_py.html
+│   │   ├── z_ac61a8e48b8a27d7_vision_py.html
+│   │   ├── z_b80718ddebc4ac7f___init___py.html
+│   │   ├── z_b80718ddebc4ac7f_grants_py.html
+│   │   ├── z_b80718ddebc4ac7f_remote_py.html
+│   │   ├── z_b80718ddebc4ac7f_rmmp_py.html
+│   │   └── z_b80718ddebc4ac7f_users_py.html
+│   ├── coverage.md
+│   └── index.md
+├── site
+│   ├── api
+│   │   └── abb_rws_client
+│   │       ├── _core
+│   │       │   ├── client
+│   │       │   │   └── index.html
+│   │       │   ├── exceptions
+│   │       │   │   └── index.html
+│   │       │   └── serializers
+│   │       │       └── index.html
+│   │       ├── image
+│   │       │   └── index
+│   │       │       └── 1783628351457.png
+│   │       └── rws
+│   │           ├── cfg
+│   │           │   └── index.html
+│   │           ├── ctrl
+│   │           │   ├── backup
+│   │           │   │   └── index.html
+│   │           │   ├── clock
+│   │           │   │   └── index.html
+│   │           │   ├── ctrl
+│   │           │   │   └── index.html
+│   │           │   └── identity
+│   │           │       └── index.html
+│   │           ├── devices
+│   │           │   └── index.html
+│   │           ├── dipc
+│   │           │   └── index.html
+│   │           ├── elog
+│   │           │   └── index.html
+│   │           ├── fileservice
+│   │           │   └── index.html
+│   │           ├── iosystem
+│   │           │   ├── devices
+│   │           │   │   └── index.html
+│   │           │   ├── iosystem
+│   │           │   │   └── index.html
+│   │           │   ├── networks
+│   │           │   │   └── index.html
+│   │           │   └── signals
+│   │           │       └── index.html
+│   │           ├── mastership
+│   │           │   └── index.html
+│   │           ├── motionsystem
+│   │           │   └── index.html
+│   │           ├── operations_on_io_profinet_device
+│   │           │   └── index.html
+│   │           ├── panel
+│   │           │   └── index.html
+│   │           ├── rapid
+│   │           │   ├── aliasio
+│   │           │   │   └── index.html
+│   │           │   ├── execution
+│   │           │   │   └── index.html
+│   │           │   ├── modules
+│   │           │   │   └── index.html
+│   │           │   ├── rapid
+│   │           │   │   └── index.html
+│   │           │   ├── symbol
+│   │           │   │   └── index.html
+│   │           │   ├── symbols
+│   │           │   │   └── index.html
+│   │           │   ├── taskpanel
+│   │           │   │   └── index.html
+│   │           │   ├── tasks
+│   │           │   │   └── index.html
+│   │           │   └── uiinstr
+│   │           │       └── index.html
+│   │           ├── retcode
+│   │           │   └── index.html
+│   │           ├── root
+│   │           │   └── index.html
+│   │           ├── rw
+│   │           │   └── misc
+│   │           │       └── index.html
+│   │           ├── subscription
+│   │           │   └── index.html
+│   │           ├── system
+│   │           │   └── index.html
+│   │           ├── users
+│   │           │   ├── grants
+│   │           │   │   └── index.html
+│   │           │   ├── remote
+│   │           │   │   └── index.html
+│   │           │   ├── rmmp
+│   │           │   │   └── index.html
+│   │           │   └── users
+│   │           │       └── index.html
+│   │           └── vision
+│   │               └── index.html
+│   ├── assets
+│   │   ├── images
+│   │   │   └── favicon.png
+│   │   ├── javascripts
+│   │   │   ├── lunr
+│   │   │   │   ├── min
+│   │   │   │   │   ├── lunr.ar.min.js
+│   │   │   │   │   ├── lunr.da.min.js
+│   │   │   │   │   ├── lunr.de.min.js
+│   │   │   │   │   ├── lunr.du.min.js
+│   │   │   │   │   ├── lunr.el.min.js
+│   │   │   │   │   ├── lunr.es.min.js
+│   │   │   │   │   ├── lunr.fi.min.js
+│   │   │   │   │   ├── lunr.fr.min.js
+│   │   │   │   │   ├── lunr.he.min.js
+│   │   │   │   │   ├── lunr.hi.min.js
+│   │   │   │   │   ├── lunr.hu.min.js
+│   │   │   │   │   ├── lunr.hy.min.js
+│   │   │   │   │   ├── lunr.it.min.js
+│   │   │   │   │   ├── lunr.ja.min.js
+│   │   │   │   │   ├── lunr.jp.min.js
+│   │   │   │   │   ├── lunr.kn.min.js
+│   │   │   │   │   ├── lunr.ko.min.js
+│   │   │   │   │   ├── lunr.multi.min.js
+│   │   │   │   │   ├── lunr.nl.min.js
+│   │   │   │   │   ├── lunr.no.min.js
+│   │   │   │   │   ├── lunr.pt.min.js
+│   │   │   │   │   ├── lunr.ro.min.js
+│   │   │   │   │   ├── lunr.ru.min.js
+│   │   │   │   │   ├── lunr.sa.min.js
+│   │   │   │   │   ├── lunr.stemmer.support.min.js
+│   │   │   │   │   ├── lunr.sv.min.js
+│   │   │   │   │   ├── lunr.ta.min.js
+│   │   │   │   │   ├── lunr.te.min.js
+│   │   │   │   │   ├── lunr.th.min.js
+│   │   │   │   │   ├── lunr.tr.min.js
+│   │   │   │   │   ├── lunr.vi.min.js
+│   │   │   │   │   └── lunr.zh.min.js
+│   │   │   │   ├── tinyseg.js
+│   │   │   │   └── wordcut.js
+│   │   │   ├── workers
+│   │   │   │   ├── search.2c215733.min.js
+│   │   │   │   └── search.2c215733.min.js.map
+│   │   │   ├── bundle.79ae519e.min.js
+│   │   │   └── bundle.79ae519e.min.js.map
+│   │   ├── stylesheets
+│   │   │   ├── main.484c7ddc.min.css
+│   │   │   ├── main.484c7ddc.min.css.map
+│   │   │   ├── palette.ab4e12ef.min.css
+│   │   │   └── palette.ab4e12ef.min.css.map
+│   │   └── _mkdocstrings.css
+│   ├── coverage
+│   │   ├── class_index.html
+│   │   ├── coverage_html_cb_188fc9a4.js
+│   │   ├── favicon_32_cb_c827f16f.png
+│   │   ├── function_index.html
+│   │   ├── index.html
+│   │   ├── keybd_closed_cb_900cfef5.png
+│   │   ├── status.json
+│   │   ├── style_cb_0853b3de.css
+│   │   ├── z_0895de5cdd7df75f___init___py.html
+│   │   ├── z_0895de5cdd7df75f_devices_py.html
+│   │   ├── z_0895de5cdd7df75f_iosystem_py.html
+│   │   ├── z_0895de5cdd7df75f_networks_py.html
+│   │   ├── z_0895de5cdd7df75f_signals_py.html
+│   │   ├── z_1d405d585ce67479___init___py.html
+│   │   ├── z_1d405d585ce67479_misc_py.html
+│   │   ├── z_48d36c98a7cd0aa8___init___py.html
+│   │   ├── z_7249e9724a6c1a9e___init___py.html
+│   │   ├── z_7249e9724a6c1a9e_client_py.html
+│   │   ├── z_7249e9724a6c1a9e_exceptions_py.html
+│   │   ├── z_7249e9724a6c1a9e_serializers_py.html
+│   │   ├── z_8cd531ca9cd4eebd___init___py.html
+│   │   ├── z_8cd531ca9cd4eebd_aliasio_py.html
+│   │   ├── z_8cd531ca9cd4eebd_execution_py.html
+│   │   ├── z_8cd531ca9cd4eebd_modules_py.html
+│   │   ├── z_8cd531ca9cd4eebd_rapid_py.html
+│   │   ├── z_8cd531ca9cd4eebd_symbol_py.html
+│   │   ├── z_8cd531ca9cd4eebd_symbols_py.html
+│   │   ├── z_8cd531ca9cd4eebd_taskpanel_py.html
+│   │   ├── z_8cd531ca9cd4eebd_tasks_py.html
+│   │   ├── z_8cd531ca9cd4eebd_uiinstr_py.html
+│   │   ├── z_a521d9b7d85d7d67___init___py.html
+│   │   ├── z_a521d9b7d85d7d67_backup_py.html
+│   │   ├── z_a521d9b7d85d7d67_clock_py.html
+│   │   ├── z_a521d9b7d85d7d67_ctrl_py.html
+│   │   ├── z_a521d9b7d85d7d67_identity_py.html
+│   │   ├── z_ac61a8e48b8a27d7___init___py.html
+│   │   ├── z_ac61a8e48b8a27d7_cfg_py.html
+│   │   ├── z_ac61a8e48b8a27d7_devices_py.html
+│   │   ├── z_ac61a8e48b8a27d7_dipc_py.html
+│   │   ├── z_ac61a8e48b8a27d7_elog_py.html
+│   │   ├── z_ac61a8e48b8a27d7_fileservice_py.html
+│   │   ├── z_ac61a8e48b8a27d7_mastership_py.html
+│   │   ├── z_ac61a8e48b8a27d7_motionsystem_py.html
+│   │   ├── z_ac61a8e48b8a27d7_operations_on_io_profinet_device_py.html
+│   │   ├── z_ac61a8e48b8a27d7_panel_py.html
+│   │   ├── z_ac61a8e48b8a27d7_retcode_py.html
+│   │   ├── z_ac61a8e48b8a27d7_root_py.html
+│   │   ├── z_ac61a8e48b8a27d7_subscription_py.html
+│   │   ├── z_ac61a8e48b8a27d7_system_py.html
+│   │   ├── z_ac61a8e48b8a27d7_vision_py.html
+│   │   ├── z_b80718ddebc4ac7f___init___py.html
+│   │   ├── z_b80718ddebc4ac7f_grants_py.html
+│   │   ├── z_b80718ddebc4ac7f_remote_py.html
+│   │   ├── z_b80718ddebc4ac7f_rmmp_py.html
+│   │   └── z_b80718ddebc4ac7f_users_py.html
+│   ├── search
+│   │   └── search_index.json
+│   ├── 404.html
+│   ├── index.html
+│   ├── objects.inv
+│   ├── sitemap.xml
+│   └── sitemap.xml.gz
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
@@ -130,6 +446,7 @@ abb_rws_client_python_rw6
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md
+├── coverage.xml
 ├── mkdocs.yml
 ├── objectifs.md
 ├── pixi.lock

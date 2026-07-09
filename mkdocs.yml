@@ -18,14 +18,67 @@ plugins:
             show_source: true
             show_root_heading: true
 
+hooks:
+  - contrib/docs/hooks.py 
+
 nav:
   - Accueil: index.md
   - API Reference:
     # --- AUTOGEN_API_START ---
+    - Abb Rws Client:
+      - Core:
+        - Client: api/abb_rws_client/_core/client.md
+        - Exceptions: api/abb_rws_client/_core/exceptions.md
+        - Serializers: api/abb_rws_client/_core/serializers.md
+      - Rws:
+        - Cfg: api/abb_rws_client/rws/cfg.md
+        - Devices: api/abb_rws_client/rws/devices.md
+        - Dipc: api/abb_rws_client/rws/dipc.md
+        - Elog: api/abb_rws_client/rws/elog.md
+        - Fileservice: api/abb_rws_client/rws/fileservice.md
+        - Mastership: api/abb_rws_client/rws/mastership.md
+        - Motionsystem: api/abb_rws_client/rws/motionsystem.md
+        - Operations On Io Profinet Device: api/abb_rws_client/rws/operations_on_io_profinet_device.md
+        - Panel: api/abb_rws_client/rws/panel.md
+        - Retcode: api/abb_rws_client/rws/retcode.md
+        - Root: api/abb_rws_client/rws/root.md
+        - Subscription: api/abb_rws_client/rws/subscription.md
+        - System: api/abb_rws_client/rws/system.md
+        - Vision: api/abb_rws_client/rws/vision.md
+        - Ctrl:
+          - Backup: api/abb_rws_client/rws/ctrl/backup.md
+          - Clock: api/abb_rws_client/rws/ctrl/clock.md
+          - Ctrl: api/abb_rws_client/rws/ctrl/ctrl.md
+          - Identity: api/abb_rws_client/rws/ctrl/identity.md
+        - Iosystem:
+          - Devices: api/abb_rws_client/rws/iosystem/devices.md
+          - Iosystem: api/abb_rws_client/rws/iosystem/iosystem.md
+          - Networks: api/abb_rws_client/rws/iosystem/networks.md
+          - Signals: api/abb_rws_client/rws/iosystem/signals.md
+        - Rapid:
+          - Aliasio: api/abb_rws_client/rws/rapid/aliasio.md
+          - Execution: api/abb_rws_client/rws/rapid/execution.md
+          - Modules: api/abb_rws_client/rws/rapid/modules.md
+          - Rapid: api/abb_rws_client/rws/rapid/rapid.md
+          - Symbol: api/abb_rws_client/rws/rapid/symbol.md
+          - Symbols: api/abb_rws_client/rws/rapid/symbols.md
+          - Taskpanel: api/abb_rws_client/rws/rapid/taskpanel.md
+          - Tasks: api/abb_rws_client/rws/rapid/tasks.md
+          - Uiinstr: api/abb_rws_client/rws/rapid/uiinstr.md
+        - Rw:
+          - Misc: api/abb_rws_client/rws/rw/misc.md
+        - Users:
+          - Grants: api/abb_rws_client/rws/users/grants.md
+          - Remote: api/abb_rws_client/rws/users/remote.md
+          - Rmmp: api/abb_rws_client/rws/users/rmmp.md
+          - Users: api/abb_rws_client/rws/users/users.md
     # --- AUTOGEN_API_END ---
-  - Coverage: coverage/index.html
+  - Coverage: coverage.md
 
 markdown_extensions:
   - admonition
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: ["."]
+  - md_in_html

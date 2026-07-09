@@ -9,7 +9,7 @@ from __future__ import annotations
 import fnmatch
 from pathlib import Path
 
-from scripts.doc.config import DocConfig, build_config
+from contrib.docs.config import DocConfig, build_config
 
 
 # ---------------------------------------------------------------------------

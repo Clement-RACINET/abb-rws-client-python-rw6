@@ -83,6 +83,13 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 log_cli = true
 log_cli_level = "INFO"
+addopts = [
+    "--cov=abb_rws_client",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=html:docs/coverage",
+    "--cov-report=xml:coverage.xml",
+]
 
 # ---------------------------------------------------------------------------
 # Coverage
@@ -109,6 +116,8 @@ exclude_lines = [
 show_missing = true
 skip_covered = false
 
+[tool.coverage.html]
+directory = "docs/coverage"
 # ---------------------------------------------------------------------------
 # basedpyright — type checker VS Code
 # ---------------------------------------------------------------------------

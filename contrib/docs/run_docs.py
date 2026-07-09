@@ -1,35 +1,42 @@
-# run_docs.py
-
+# contrib/docs/run_docs.py
 """Orchestrateur : génère la doc API, le rapport coverage, et lance mkdocs serve."""
 from __future__ import annotations
 
 import subprocess
 import sys
+from pathlib import Path
 
-from scripts.doc.config import build_config
-from scripts.doc.generate_api import generate_api_docs, update_mkdocs_nav
+from contrib.docs.config import build_config
+from contrib.docs.generate_api import generate_api_docs, update_mkdocs_nav
 
 
-def _generate_coverage(project_root) -> None:
-    """Lance pytest --cov pour produire le rapport HTML dans docs/coverage/."""
+def _generate_coverage(project_root: Path) -> None:
+    """Lance pytest pour produire le rapport HTML dans docs/htmlcov/.
+
+    Args:
+        project_root: Racine absolue du projet.
+    """
     print("\n📊 Génération du rapport coverage...")
     result = subprocess.run(
         [
             sys.executable, "-m", "pytest",
-            "--cov=trajcenter",
+            "--cov=abb_rws_client",
             "--cov-branch",
-            "--cov-report=html:docs/coverage",
+            "--cov-report=html:docs/htmlcov",
             "--no-header", "-q",
         ],
         cwd=project_root,
+        check=False,
     )
     if result.returncode != 0:
         print("⚠️  Des tests ont échoué — rapport coverage peut être incomplet.")
 
 
 def main() -> None:
+    """Point d'entrée principal de la pipeline documentaire."""
     cfg = build_config()
 
+    print("\n📁 Génération des pages API...")
     nav = generate_api_docs(cfg)
     update_mkdocs_nav(cfg, nav)
 
@@ -40,8 +47,9 @@ def main() -> None:
         subprocess.run(
             [sys.executable, "-m", "mkdocs", "serve"],
             cwd=cfg.project_root,
+            check=True,
         )
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, subprocess.CalledProcessError):
         print("\n👋 Serveur arrêté.")
         sys.exit(0)
 

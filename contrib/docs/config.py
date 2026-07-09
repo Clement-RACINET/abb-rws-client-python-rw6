@@ -24,7 +24,9 @@ class DocConfig:
         docs_api_dir: Sous-dossier généré automatiquement (API Reference).
         packages_to_scan: Liste des packages Python à documenter.
         exclude_dirs: Noms de dossiers à ignorer lors du scan.
-        exclude_files: Noms de fichiers à ignorer lors du scan.
+        exclude_files: Patterns de fichiers à ignorer lors du scan (fnmatch).
+        balise_api_debut: Balise de début de la section AUTOGEN dans mkdocs.yml.
+        balise_api_fin: Balise de fin de la section AUTOGEN dans mkdocs.yml.
     """
 
     project_root: Path
@@ -34,6 +36,8 @@ class DocConfig:
     packages_to_scan: list[str]
     exclude_dirs: set[str] = field(default_factory=set)
     exclude_files: set[str] = field(default_factory=set)
+    balise_api_debut: str = "# --- AUTOGEN_API_START ---"
+    balise_api_fin: str = "# --- AUTOGEN_API_END ---"
 
 
 def build_config() -> DocConfig:
@@ -66,4 +70,6 @@ def build_config() -> DocConfig:
             "__init__.py",
             "test_*.py",
         },
+        balise_api_debut="# --- AUTOGEN_API_START ---",
+        balise_api_fin="# --- AUTOGEN_API_END ---",
     )

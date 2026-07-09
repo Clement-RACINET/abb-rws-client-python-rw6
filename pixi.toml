@@ -34,7 +34,7 @@ mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 [feature.dev.tasks]
 lint       = "ruff check abb_rws_client tests"
 format     = "ruff format abb_rws_client tests"
-test       = "pytest tests/ -v --cov=abb_rws_client --cov-report=term-missing"
+test       = "python pytest tests/ -v" 
 docs       = "python contrib/docs/run_docs.py"
 docs-build = "python -m mkdocs build"
 
