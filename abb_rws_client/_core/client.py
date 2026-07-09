@@ -65,6 +65,7 @@ _RETRY_JITTER: float = 0.1
 #: Types d'exceptions httpx déclenchant un retry (erreurs transport uniquement)
 _RETRYABLE_EXCEPTIONS = (
     httpx.ConnectError,
+    httpx.ConnectTimeout, 
     httpx.ReadTimeout,
     httpx.PoolTimeout,
 )
@@ -196,7 +197,7 @@ class RWSClient:
 
     def __repr__(self) -> str:
         state = "open" if self._http is not None else "closed"
-        return f"RWSClient(host={self.host!r}, state={state!r})"
+        return f"RWSClient(host={self.host!r}, timeout={self.timeout}, state={state!r})"
 
     # ── Requête interne avec retry ───────────────────────────────────────────
 

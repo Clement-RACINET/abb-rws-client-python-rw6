@@ -17,6 +17,9 @@ from typing import TypeAlias
 
 from abb_rws_client._core.exceptions import RWSValueError  # ← import mis à jour
 
+# Types RAPID nommés supportés
+_RAPID_TYPES = frozenset({"num", "bool", "string", "robtarget"})
+
 # Valeur sentinelle ABB pour un axe externe inactif
 _INACTIVE_AXIS = 9e9
 _INACTIVE_AXIS_STR = "9E+9"
@@ -142,67 +145,86 @@ def rws_to_robtarget(raw: str) -> RobTarget:
     )
 
 
-def python_to_rapid_value(value: RapidValue) -> str:
+
+def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str) -> str:
     """Convertit une valeur Python en string RAPID pour l'API RWS.
 
     Args:
-        value: Valeur Python à convertir (float, bool, str ou RobTarget).
+        value: Valeur Python à convertir.
+        rapid_type: Type RAPID cible : ``"num"``, ``"bool"``, ``"string"``, ``"robtarget"``.
 
     Returns:
         String au format attendu par RWS.
 
     Raises:
-        RWSValueError: Si le type n'est pas supporté.
+        RWSValueError: Si le type RAPID est inconnu ou si la valeur ne correspond pas.
 
     Example:
-        >>> python_to_rapid_value(True)
-        'TRUE'
-        >>> python_to_rapid_value(3.14)
+        >>> python_to_rapid_value(3.14, "num")
         '3.14'
+        >>> python_to_rapid_value(True, "bool")
+        'TRUE'
+        >>> python_to_rapid_value("hello", "string")
+        '"hello"'
     """
-    if isinstance(value, bool):
+    if rapid_type not in _RAPID_TYPES:
+        raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}. Expected one of {sorted(_RAPID_TYPES)}")
+    if rapid_type == "num":
+        if isinstance(value, bool):
+            raise RWSValueError("bool is not a valid 'num' — use rapid_type='bool'")
+        if not isinstance(value, float | int):
+            raise RWSValueError(f"Expected float for 'num', got {type(value).__name__}")
+        return str(float(value)) if isinstance(value, float) and value != int(value) else str(int(value)) if isinstance(value, int | float) and value == int(value) else repr(value)
+    if rapid_type == "bool":
+        if not isinstance(value, bool):
+            raise RWSValueError(f"Expected bool for 'bool', got {type(value).__name__}")
         return "TRUE" if value else "FALSE"
-    if isinstance(value, float | int):
-        return str(value)
-    if isinstance(value, str):
+    if rapid_type == "string":
+        if not isinstance(value, str):
+            raise RWSValueError(f"Expected str for 'string', got {type(value).__name__}")
         return f'"{value}"'
-    if isinstance(value, RobTarget):
+    if rapid_type == "robtarget":
+        if not isinstance(value, RobTarget):
+            raise RWSValueError(f"Expected RobTarget for 'robtarget', got {type(value).__name__}")
         return robtarget_to_rws(value)
-    raise RWSValueError(f"Unsupported RAPID value type: {type(value).__name__}")
+    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable mais mypy content
 
 
-def rapid_value_to_python(raw: str, expected_type: type[RapidValue]) -> RapidValue:
-    """Convertit une string RWS en valeur Python typée.
+def rapid_value_to_python(raw: str, rapid_type: str) -> float | bool | str | RobTarget:
+    """Convertit une string RWS en valeur Python selon le type RAPID.
 
     Args:
         raw: String brute retournée par le contrôleur RWS.
-        expected_type: Type Python attendu (``float``, ``bool``, ``str``, ``RobTarget``).
+        rapid_type: Type RAPID : ``"num"``, ``"bool"``, ``"string"``, ``"robtarget"``.
 
     Returns:
-        Valeur Python du type demandé.
+        Valeur Python typée.
 
     Raises:
-        RWSValueError: Si la conversion échoue ou le type n'est pas supporté.
+        RWSValueError: Si la conversion échoue ou le type est inconnu.
 
     Example:
-        >>> rapid_value_to_python("TRUE", bool)
-        True
-        >>> rapid_value_to_python("3.14", float)
+        >>> rapid_value_to_python("3.14", "num")
         3.14
+        >>> rapid_value_to_python("TRUE", "bool")
+        True
     """
-    if expected_type is bool:
-        if raw.upper() == "TRUE":
-            return True
-        if raw.upper() == "FALSE":
-            return False
-        raise RWSValueError(f"Cannot parse bool from: {raw!r}")
-    if expected_type is float:
+    if rapid_type not in _RAPID_TYPES:
+        raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}. Expected one of {sorted(_RAPID_TYPES)}")
+    if rapid_type == "num":
         try:
             return float(raw)
         except ValueError as exc:
-            raise RWSValueError(f"Cannot parse float from: {raw!r}") from exc
-    if expected_type is str:
+            raise RWSValueError(f"Cannot parse num from: {raw!r}") from exc
+    if rapid_type == "bool":
+        normalized = raw.strip().lower()
+        if normalized in {"true", "1", "yes"}:
+            return True
+        if normalized in {"false", "0", "no"}:
+            return False
+        raise RWSValueError(f"Cannot parse bool from: {raw!r}")
+    if rapid_type == "string":
         return raw.strip('"')
-    if expected_type is RobTarget:
+    if rapid_type == "robtarget":
         return rws_to_robtarget(raw)
-    raise RWSValueError(f"Unsupported expected_type: {expected_type.__name__}")
+    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable
