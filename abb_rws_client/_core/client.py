@@ -65,7 +65,7 @@ _RETRY_JITTER: float = 0.1
 #: Types d'exceptions httpx déclenchant un retry (erreurs transport uniquement)
 _RETRYABLE_EXCEPTIONS = (
     httpx.ConnectError,
-    httpx.ConnectTimeout, 
+    httpx.ConnectTimeout,
     httpx.ReadTimeout,
     httpx.PoolTimeout,
 )
