@@ -1,0 +1,1235 @@
+20:16:25 ============================================================
+20:16:25   PHASE 1 — Crawl via fichiers .js Doxygen
+20:16:25 ============================================================
+20:16:25   ✅ [  1] (+ parent) Root Resource
+20:16:25   📂 Root Resource  (2 enfants)
+20:16:25   ✅ [  2] Root Resource > Get Service list
+20:16:25   ✅ [  3] Root Resource > Logout
+20:16:25   ✅ [  4] (+ parent) Subscription Service
+20:16:25   📂 Subscription Service  (3 enfants)
+20:16:25   ✅ [  5] Subscription Service > Get Subscription Actions
+20:16:25   ✅ [  6] Subscription Service > Subscribe on resources
+20:16:25   ✅ [  7] (+ parent) Subscription Service > Operations on Subscription Group
+20:16:25   📂 Subscription Service > Operations on Subscription Group  (4 enfants)
+20:16:25   ✅ [  8] Subscription Service > Operations on Subscription Group > Get Subscription Group Actions
+20:16:25   ✅ [  9] Subscription Service > Operations on Subscription Group > Add new resources, Remove existing Resources or change existing resources priorities.
+20:16:25   ✅ [ 10] Subscription Service > Operations on Subscription Group > Unsubscribe or remove the subscription group/resources in group.
+20:16:26   ✅ [ 11] (+ parent) Subscription Service > Operations on Subscription Group > Operations on Subscription Resource
+20:16:26   📂 Subscription Service > Operations on Subscription Group > Operations on Subscription Resource  (1 enfants)
+20:16:26   ✅ [ 12] Subscription Service > Operations on Subscription Group > Operations on Subscription Resource > Unsubscribe or remove the resource from subscription group.
+20:16:26   ✅ [ 13] (+ parent) User Service
+20:16:26   📂 User Service  (8 enfants)
+20:16:26   ✅ [ 14] User Service > Get User Resources
+20:16:26   ✅ [ 15] User Service > Get User Actions
+20:16:26   ✅ [ 16] User Service > Register the user
+20:16:26   ✅ [ 17] User Service > Impersonate a user
+20:16:26   ✅ [ 18] User Service > Login as Local User
+20:16:27   ✅ [ 19] (+ parent) User Service > Operations on Users grants
+20:16:27   📂 User Service > Operations on Users grants  (1 enfants)
+20:16:27   ✅ [ 20] User Service > Operations on Users grants > Get User grants
+20:16:27   ✅ [ 21] (+ parent) User Service > Operations on RMMP
+20:16:27   📂 User Service > Operations on RMMP  (7 enfants)
+20:16:27   ✅ [ 22] User Service > Operations on RMMP > Get RMMP state
+20:16:27   ✅ [ 23] User Service > Operations on RMMP > Get RMMP Actions
+20:16:27   ✅ [ 24] User Service > Operations on RMMP > Request RMMP
+20:16:27   ✅ [ 25] User Service > Operations on RMMP > Grant or deny an RMMP request
+20:16:27   ✅ [ 26] User Service > Operations on RMMP > Cancel held or requested RMMP
+20:16:27   ✅ [ 27] User Service > Operations on RMMP > Subscribe on RMMP Request event
+20:16:27   ✅ [ 28] User Service > Operations on RMMP > Poll for RMMP grant status
+20:16:27   ✅ [ 29] (+ parent) User Service > Operations on Remote User
+20:16:27   📂 User Service > Operations on Remote User  (4 enfants)
+20:16:27   ✅ [ 30] User Service > Operations on Remote User > Get remote user actions
+20:16:27   ✅ [ 31] User Service > Operations on Remote User > Remote User Logon Request
+20:16:28   ✅ [ 32] User Service > Operations on Remote User > Remote User Logout Request
+20:16:28   ✅ [ 33] User Service > Operations on Remote User > Subscribe on remote user state
+20:16:28   ✅ [ 34] (+ parent) Controller Service
+20:16:28   📂 Controller Service  (16 enfants)
+20:16:28   ✅ [ 35] Controller Service > Get Controller Resources
+20:16:28   ✅ [ 36] Controller Service > Get Controller Actions
+20:16:28   ✅ [ 37] Controller Service > Get Controller environment variable
+20:16:28   ✅ [ 38] Controller Service > Restart or Shutdown controller
+20:16:28   ✅ [ 39] Controller Service > Set Controller language
+20:16:28   ✅ [ 40] (+ parent) Controller Service > Operations on Clock Resource
+20:16:28   📂 Controller Service > Operations on Clock Resource  (5 enfants)
+20:16:28   ✅ [ 41] Controller Service > Operations on Clock Resource > Get Clock Resource
+20:16:28   ✅ [ 42] Controller Service > Operations on Clock Resource > Get Clock Actions
+20:16:28   ✅ [ 43] Controller Service > Operations on Clock Resource > Set the Clock of the controller
+20:16:28   ✅ [ 44] (+ parent) Controller Service > Operations on Clock Resource > Operations on Timezone Resource
+20:16:28   📂 Controller Service > Operations on Clock Resource > Operations on Timezone Resource  (3 enfants)
+20:16:28   ✅ [ 45] Controller Service > Operations on Clock Resource > Operations on Timezone Resource > Get timezone resource
+20:16:28   ✅ [ 46] Controller Service > Operations on Clock Resource > Operations on Timezone Resource > Get timezone actions
+20:16:28   ✅ [ 47] Controller Service > Operations on Clock Resource > Operations on Timezone Resource > Set the time zone
+20:16:29   ✅ [ 48] (+ parent) Controller Service > Operations on Clock Resource > Operations on Timeserver Resource
+20:16:29   📂 Controller Service > Operations on Clock Resource > Operations on Timeserver Resource  (4 enfants)
+20:16:29   ✅ [ 49] Controller Service > Operations on Clock Resource > Operations on Timeserver Resource > Get time server resource
+20:16:29   ✅ [ 50] Controller Service > Operations on Clock Resource > Operations on Timeserver Resource > Get time server actions
+20:16:29   ✅ [ 51] Controller Service > Operations on Clock Resource > Operations on Timeserver Resource > Set the time server
+20:16:29   ✅ [ 52] Controller Service > Operations on Clock Resource > Operations on Timeserver Resource > Test Time Server
+20:16:29   ✅ [ 53] (+ parent) Controller Service > Operations on Identity Resource
+20:16:29   📂 Controller Service > Operations on Identity Resource  (3 enfants)
+20:16:29   ✅ [ 54] Controller Service > Operations on Identity Resource > Get Identity Resource
+20:16:29   ✅ [ 55] Controller Service > Operations on Identity Resource > Get Identity Actions
+20:16:29   ✅ [ 56] Controller Service > Operations on Identity Resource > Set the Identity of the controller
+20:16:29   ✅ [ 57] (+ parent) Controller Service > Operations on System Resource
+20:16:29   📂 Controller Service > Operations on System Resource  (15 enfants)
+20:16:29   ✅ [ 58] Controller Service > Operations on System Resource > Get list of installed systems
+20:16:29   ✅ [ 59] Controller Service > Operations on System Resource > Get actions on system
+20:16:29   ✅ [ 60] Controller Service > Operations on System Resource > Set Boot Device
+20:16:30   ✅ [ 61] Controller Service > Operations on System Resource > Get Boot Device
+20:16:30   ✅ [ 62] Controller Service > Operations on System Resource > Load Boot Image
+20:16:30   ✅ [ 63] Controller Service > Operations on System Resource > Unload Boot Image
+20:16:30   ✅ [ 64] Controller Service > Operations on System Resource > Get selected system name
+20:16:30   ✅ [ 65] Controller Service > Operations on System Resource > Install deployment package
+20:16:30   ✅ [ 66] Controller Service > Operations on System Resource > Validate deployment package
+20:16:30   ✅ [ 67] Controller Service > Operations on System Resource > Get system resource
+20:16:30   ✅ [ 68] Controller Service > Operations on System Resource > Get actions on a system resource
+20:16:30   ✅ [ 69] Controller Service > Operations on System Resource > Rename a system
+20:16:30   ✅ [ 70] Controller Service > Operations on System Resource > Select a system
+20:16:30   ✅ [ 71] Controller Service > Operations on System Resource > Delete a System
+20:16:30   ✅ [ 72] Controller Service > Operations on System Resource > Deselect a System
+20:16:30   ✅ [ 73] (+ parent) Controller Service > Operations on network Resource
+20:16:30   📂 Controller Service > Operations on network Resource  (5 enfants)
+20:16:30   ✅ [ 74] Controller Service > Operations on network Resource > Get Network Resource
+20:16:30   ✅ [ 75] Controller Service > Operations on network Resource > Get Network setting actions
+20:16:30   ✅ [ 76] Controller Service > Operations on network Resource > Set Network configuration
+20:16:31   ✅ [ 77] (+ parent) Controller Service > Operations on network Resource > Operations on DNS Resource
+20:16:31   📂 Controller Service > Operations on network Resource > Operations on DNS Resource  (1 enfants)
+20:16:31   ✅ [ 78] Controller Service > Operations on network Resource > Operations on DNS Resource > Get DNS Resource
+20:16:31   ✅ [ 79] (+ parent) Controller Service > Operations on network Resource > Operations on Routing Table Resource
+20:16:31   📂 Controller Service > Operations on network Resource > Operations on Routing Table Resource  (4 enfants)
+20:16:31   ✅ [ 80] Controller Service > Operations on network Resource > Operations on Routing Table Resource > Add a route table entry
+20:16:31   ✅ [ 81] Controller Service > Operations on network Resource > Operations on Routing Table Resource > Options to add a route table entry
+20:16:31   ✅ [ 82] Controller Service > Operations on network Resource > Operations on Routing Table Resource > Remove a route table entry
+20:16:31   ✅ [ 83] Controller Service > Operations on network Resource > Operations on Routing Table Resource > Options to remove a route table entry
+20:16:31   ✅ [ 84] (+ parent) Controller Service > Operations on Backup Resource
+20:16:31   📂 Controller Service > Operations on Backup Resource  (8 enfants)
+20:16:31   ✅ [ 85] Controller Service > Operations on Backup Resource > Get backup resources
+20:16:31   ✅ [ 86] Controller Service > Operations on Backup Resource > Get backup actions
+20:16:31   ✅ [ 87] Controller Service > Operations on Backup Resource > Create a Backup
+20:16:31   ✅ [ 88] Controller Service > Operations on Backup Resource > Restore a backup.
+20:16:31   ✅ [ 89] Controller Service > Operations on Backup Resource > Check Restore
+20:16:31   ✅ [ 90] Controller Service > Operations on Backup Resource > Get Backup State
+20:16:31   ✅ [ 91] Controller Service > Operations on Backup Resource > Subscribe on Backup System Information
+20:16:32   ✅ [ 92] (+ parent) Controller Service > Operations on Backup Resource > Operations on backup system information
+20:16:32   📂 Controller Service > Operations on Backup Resource > Operations on backup system information  (1 enfants)
+20:16:32   ✅ [ 93] Controller Service > Operations on Backup Resource > Operations on backup system information > Get backup system information
+20:16:32   ✅ [ 94] (+ parent) Controller Service > Operations on Compress Resource
+20:16:32   📂 Controller Service > Operations on Compress Resource  (3 enfants)
+20:16:32   ✅ [ 95] Controller Service > Operations on Compress Resource > Get compress resources
+20:16:32   ✅ [ 96] Controller Service > Operations on Compress Resource > Get compress actions
+20:16:32   ✅ [ 97] Controller Service > Operations on Compress Resource > Compress/Decompress Resource
+20:16:32   ✅ [ 98] (+ parent) Controller Service > Operations on Diagnostics Resource
+20:16:32   📂 Controller Service > Operations on Diagnostics Resource  (5 enfants)
+20:16:32   ✅ [ 99] Controller Service > Operations on Diagnostics Resource > Get diagnostics resources
+20:16:32   ✅ [100] Controller Service > Operations on Diagnostics Resource > Get diagnostics actions
+20:16:32   ✅ [101] Controller Service > Operations on Diagnostics Resource > Save system diagnostics
+20:16:32   ✅ [102] Controller Service > Operations on Diagnostics Resource > Subscribe on system dump
+20:16:32   ✅ [103] Controller Service > Operations on Diagnostics Resource > Subscribe on Diagnostics States (Get System Diagnostics)
+20:16:33   ✅ [104] (+ parent) Controller Service > Operations on CtrlSafetyResource
+20:16:33   📂 Controller Service > Operations on CtrlSafetyResource  (15 enfants)
+20:16:33   ✅ [105] Controller Service > Operations on CtrlSafetyResource > Get safety resources
+20:16:33   ✅ [106] Controller Service > Operations on CtrlSafetyResource > Get Safety actions
+20:16:33   ✅ [107] Controller Service > Operations on CtrlSafetyResource > Load Safety configuration file to controller
+20:16:33   ✅ [108] Controller Service > Operations on CtrlSafetyResource > Set Safety Mode of the controller
+20:16:33   ✅ [109] Controller Service > Operations on CtrlSafetyResource > Get Config status
+20:16:33   ✅ [110] Controller Service > Operations on CtrlSafetyResource > Get Safety Mode status
+20:16:33   ✅ [111] Controller Service > Operations on CtrlSafetyResource > Get Safety Cyclic Brake Check status
+20:16:33   ✅ [112] Controller Service > Operations on CtrlSafetyResource > Get LoadOperation status
+20:16:33   ✅ [113] Controller Service > Operations on CtrlSafetyResource > Get Safety Configurations
+20:16:33   ✅ [114] Controller Service > Operations on CtrlSafetyResource > Get Safety Violation Info
+20:16:33   ✅ [115] Controller Service > Operations on CtrlSafetyResource > Unlock the safety configuration
+20:16:33   ✅ [116] Controller Service > Operations on CtrlSafetyResource > Software Sync Acknowledgement
+20:16:33   ✅ [117] Controller Service > Operations on CtrlSafetyResource > Add Validation info
+20:16:33   ✅ [118] Controller Service > Operations on CtrlSafetyResource > Remove Validation info
+20:16:33   ✅ [119] Controller Service > Operations on CtrlSafetyResource > Set Reset Safety Controller
+20:16:34   ✅ [120] (+ parent) Controller Service > Operations on options Resource
+20:16:34   📂 Controller Service > Operations on options Resource  (1 enfants)
+20:16:34   ✅ [121] Controller Service > Operations on options Resource > Get options resource
+20:16:34   ✅ [122] (+ parent) Controller Service > Operations on Compatabile Resource
+20:16:34   📂 Controller Service > Operations on Compatabile Resource  (1 enfants)
+20:16:34   ✅ [123] Controller Service > Operations on Compatabile Resource > Check Robotware version compatibility with contorller hardware
+20:16:34   ✅ [124] (+ parent) Controller Service > Operation on Virtual Time
+20:16:34   📂 Controller Service > Operation on Virtual Time  (6 enfants)
+20:16:34   ✅ [125] Controller Service > Operation on Virtual Time > Get Virtual Time resources
+20:16:34   ✅ [126] (+ parent) Controller Service > Operation on Virtual Time > Operation on VTTime
+20:16:34   📂 Controller Service > Operation on Virtual Time > Operation on VTTime  (1 enfants)
+20:16:34   ✅ [127] Controller Service > Operation on Virtual Time > Operation on VTTime > Get Virtualtime
+20:16:34   ✅ [128] (+ parent) Controller Service > Operation on Virtual Time > Operation on VTTimeslice
+20:16:34   📂 Controller Service > Operation on Virtual Time > Operation on VTTimeslice  (3 enfants)
+20:16:34   ✅ [129] Controller Service > Operation on Virtual Time > Operation on VTTimeslice > Get VTTimeslice Value
+20:16:34   ✅ [130] Controller Service > Operation on Virtual Time > Operation on VTTimeslice > Actions on VTTimeslice
+20:16:34   ✅ [131] Controller Service > Operation on Virtual Time > Operation on VTTimeslice > Set VTTimeslice Value
+20:16:35   ✅ [132] (+ parent) Controller Service > Operation on Virtual Time > Operation on VTSpeed
+20:16:35   📂 Controller Service > Operation on Virtual Time > Operation on VTSpeed  (3 enfants)
+20:16:35   ✅ [133] Controller Service > Operation on Virtual Time > Operation on VTSpeed > Get Speed of Virtual Time
+20:16:35   ✅ [134] Controller Service > Operation on Virtual Time > Operation on VTSpeed > Get actions on a VTSpeed
+20:16:35   ✅ [135] Controller Service > Operation on Virtual Time > Operation on VTSpeed > Set Speed of Virtualtime
+20:16:35   ✅ [136] (+ parent) Controller Service > Operation on Virtual Time > Operation on VTState
+20:16:35   📂 Controller Service > Operation on Virtual Time > Operation on VTState  (3 enfants)
+20:16:35   ✅ [137] Controller Service > Operation on Virtual Time > Operation on VTState > Get State of Virtual Time
+20:16:35   ✅ [138] Controller Service > Operation on Virtual Time > Operation on VTState > Get actions on a VTState
+20:16:35   ✅ [139] Controller Service > Operation on Virtual Time > Operation on VTState > Set State of Virtualtime
+20:16:35   ✅ [140] (+ parent) Controller Service > Operation on Virtual Time > Operation on VTRun
+20:16:35   📂 Controller Service > Operation on Virtual Time > Operation on VTRun  (1 enfants)
+20:16:35   ✅ [141] Controller Service > Operation on Virtual Time > Operation on VTRun > VT Run
+20:16:36   ✅ [142] (+ parent) File Service
+20:16:36   📂 File Service  (3 enfants)
+20:16:36   ✅ [143] File Service > Get File Service Resources
+20:16:36   ✅ [144] (+ parent) File Service > Operations on Directory Resource
+20:16:36   📂 File Service > Operations on Directory Resource  (6 enfants)
+20:16:36   ✅ [145] File Service > Operations on Directory Resource > Get Directory listing of resources
+20:16:36   ✅ [146] File Service > Operations on Directory Resource > Get Directory Actions
+20:16:36   ✅ [147] File Service > Operations on Directory Resource > Create a directory
+20:16:36   ✅ [148] File Service > Operations on Directory Resource > Rename a directory
+20:16:36   ✅ [149] File Service > Operations on Directory Resource > Copy a directory
+20:16:36   ✅ [150] File Service > Operations on Directory Resource > Delete a directory
+20:16:36   ✅ [151] (+ parent) File Service > Operations on File Resource
+20:16:36   📂 File Service > Operations on File Resource  (7 enfants)
+20:16:36   ✅ [152] File Service > Operations on File Resource > Get a file
+20:16:36   ✅ [153] File Service > Operations on File Resource > Get File Actions
+20:16:36   ✅ [154] File Service > Operations on File Resource > Rename a file
+20:16:36   ✅ [155] File Service > Operations on File Resource > Create a copy of a file
+20:16:36   ✅ [156] File Service > Operations on File Resource > Upload a file
+20:16:37   ✅ [157] File Service > Operations on File Resource > Delete a file
+20:16:37   ✅ [158] File Service > Operations on File Resource > Get file Meta data
+20:16:37   ✅ [159] (+ parent) RobotWare Services
+20:16:37   📂 RobotWare Services  (13 enfants)
+20:16:37   ✅ [160] RobotWare Services > Get RobotWare services
+20:16:37   ✅ [161] (+ parent) RobotWare Services > CFG Service
+20:16:37   📂 RobotWare Services > CFG Service  (9 enfants)
+20:16:37   ✅ [162] RobotWare Services > CFG Service > Get CFG resources
+20:16:37   ✅ [163] RobotWare Services > CFG Service > Get CFG actions
+20:16:37   ✅ [164] RobotWare Services > CFG Service > Validate CFG file
+20:16:37   ✅ [165] RobotWare Services > CFG Service > Load CFG file
+20:16:37   ✅ [166] RobotWare Services > CFG Service > Validate CFG Instance before Delete
+20:16:37   ✅ [167] RobotWare Services > CFG Service > Validate CFG Instances
+20:16:37   ✅ [168] RobotWare Services > CFG Service > Keyless motor ON
+20:16:37   ✅ [169] RobotWare Services > CFG Service > Subscribe on cfg ChangeCount
+20:16:38   ✅ [170] (+ parent) RobotWare Services > CFG Service > Operations on CFG domain
+20:16:38   📂 RobotWare Services > CFG Service > Operations on CFG domain  (5 enfants)
+20:16:38   ✅ [171] RobotWare Services > CFG Service > Operations on CFG domain > Get CFG Domain Types
+20:16:38   ✅ [172] RobotWare Services > CFG Service > Operations on CFG domain > Get Actions on a CFG domain
+20:16:38   ✅ [173] RobotWare Services > CFG Service > Operations on CFG domain > Save CFG domain
+20:16:38   ✅ [174] RobotWare Services > CFG Service > Operations on CFG domain > Reset CFG domain
+20:16:38   ✅ [175] (+ parent) RobotWare Services > CFG Service > Operations on CFG domain > Operations on CFG type
+20:16:38   📂 CFG Service > Operations on CFG domain > Operations on CFG type  (3 enfants)
+20:16:38   ✅ [176] CFG Service > Operations on CFG domain > Operations on CFG type > Get CFG type
+20:16:38   ✅ [177] (+ parent) CFG Service > Operations on CFG domain > Operations on CFG type > Operations on CFG attributes
+20:16:38   📂 Operations on CFG domain > Operations on CFG type > Operations on CFG attributes  (1 enfants)
+20:16:38   ✅ [178] Operations on CFG domain > Operations on CFG type > Operations on CFG attributes > Get all attributes of the given domain type
+20:16:38   ✅ [179] (+ parent) CFG Service > Operations on CFG domain > Operations on CFG type > Operations on CFG instances
+20:16:38   📂 Operations on CFG domain > Operations on CFG type > Operations on CFG instances  (5 enfants)
+20:16:38   ✅ [180] Operations on CFG domain > Operations on CFG type > Operations on CFG instances > Get all instances of the given domain type
+20:16:38   ✅ [181] Operations on CFG domain > Operations on CFG type > Operations on CFG instances > Get actions on CFG instances
+20:16:39   ✅ [182] Operations on CFG domain > Operations on CFG type > Operations on CFG instances > Reset CFG instances
+20:16:39   ✅ [183] Operations on CFG domain > Operations on CFG type > Operations on CFG instances > Create default CFG instance
+20:16:39   ✅ [184] (+ parent) Operations on CFG domain > Operations on CFG type > Operations on CFG instances > Operations on CFG instance
+20:16:39   📂 Operations on CFG type > Operations on CFG instances > Operations on CFG instance  (4 enfants)
+20:16:39   ✅ [185] Operations on CFG type > Operations on CFG instances > Operations on CFG instance > Get CFG instance
+20:16:39   ✅ [186] Operations on CFG type > Operations on CFG instances > Operations on CFG instance > Get CFG instance actions
+20:16:39   ✅ [187] Operations on CFG type > Operations on CFG instances > Operations on CFG instance > Update CFG instance
+20:16:39   ✅ [188] Operations on CFG type > Operations on CFG instances > Operations on CFG instance > Delete CFG instance
+20:16:39   ✅ [189] (+ parent) RobotWare Services > DIPC service
+20:16:39   📂 RobotWare Services > DIPC service  (4 enfants)
+20:16:39   ✅ [190] RobotWare Services > DIPC service > Get DIPC Resources
+20:16:39   ✅ [191] RobotWare Services > DIPC service > Get DIPC Actions
+20:16:39   ✅ [192] RobotWare Services > DIPC service > Create a queue
+20:16:39   ✅ [193] (+ parent) RobotWare Services > DIPC service > Operations on DIPC Queue
+20:16:39   📂 RobotWare Services > DIPC service > Operations on DIPC Queue  (7 enfants)
+20:16:39   ✅ [194] RobotWare Services > DIPC service > Operations on DIPC Queue > Get DIPC Queue
+20:16:40   ✅ [195] RobotWare Services > DIPC service > Operations on DIPC Queue > Get DIPC Queue Actions
+20:16:40   ✅ [196] RobotWare Services > DIPC service > Operations on DIPC Queue > Send message
+20:16:40   ✅ [197] RobotWare Services > DIPC service > Operations on DIPC Queue > Read message
+20:16:40   ✅ [198] RobotWare Services > DIPC service > Operations on DIPC Queue > Delete DIPC Queue
+20:16:40   ✅ [199] RobotWare Services > DIPC service > Operations on DIPC Queue > Subscribe DIPC Queue
+20:16:40   ✅ [200] RobotWare Services > DIPC service > Operations on DIPC Queue > Subscribe DIPC Queue without reading message
+20:16:40   ✅ [201] (+ parent) RobotWare Services > Elog service
+20:16:40   📂 RobotWare Services > Elog service  (5 enfants)
+20:16:40   ✅ [202] RobotWare Services > Elog service > Get Elog Resources
+20:16:40   ✅ [203] RobotWare Services > Elog service > Get Elog Actions
+20:16:40   ✅ [204] RobotWare Services > Elog service > Clear elog messages
+20:16:40   ✅ [205] RobotWare Services > Elog service > Save elog in system dump format
+20:16:40   ✅ [206] (+ parent) RobotWare Services > Elog service > Operations on elog domain
+20:16:40   📂 RobotWare Services > Elog service > Operations on elog domain  (5 enfants)
+20:16:40   ✅ [207] RobotWare Services > Elog service > Operations on elog domain > Get elog messages in domain
+20:16:40   ✅ [208] RobotWare Services > Elog service > Operations on elog domain > Get Actions on elog domain
+20:16:41   ✅ [209] RobotWare Services > Elog service > Operations on elog domain > Clear elog messages
+20:16:41   ✅ [210] RobotWare Services > Elog service > Operations on elog domain > Subscribe on elog domain
+20:16:41   ✅ [211] (+ parent) RobotWare Services > Elog service > Operations on elog domain > Operations on elog domain message
+20:16:41   📂 Elog service > Operations on elog domain > Operations on elog domain message  (1 enfants)
+20:16:41   ✅ [212] Elog service > Operations on elog domain > Operations on elog domain message > Get Elog Message in domain
+20:16:41   ✅ [213] (+ parent) RobotWare Services > IO Service
+20:16:41   📂 RobotWare Services > IO Service  (7 enfants)
+20:16:41   ✅ [214] RobotWare Services > IO Service > Get IO System resources
+20:16:41   ✅ [215] (+ parent) RobotWare Services > IO Service > Operations on IO Networks
+20:16:41   📂 RobotWare Services > IO Service > Operations on IO Networks  (3 enfants)
+20:16:41   ✅ [216] RobotWare Services > IO Service > Operations on IO Networks > Get IO Networks resources
+20:16:41   ✅ [217] RobotWare Services > IO Service > Operations on IO Networks > Get Actions on IO Networks
+20:16:41   ✅ [218] RobotWare Services > IO Service > Operations on IO Networks > Search IO Networks
+20:16:41   ✅ [219] (+ parent) RobotWare Services > IO Service > Operations on IO Network
+20:16:41   📂 RobotWare Services > IO Service > Operations on IO Network  (6 enfants)
+20:16:41   ✅ [220] RobotWare Services > IO Service > Operations on IO Network > Get IO Network
+20:16:42   ✅ [221] RobotWare Services > IO Service > Operations on IO Network > Get IO Network actions
+20:16:42   ✅ [222] RobotWare Services > IO Service > Operations on IO Network > Update IO Network
+20:16:42   ✅ [223] RobotWare Services > IO Service > Operations on IO Network > Subscribe IO Network
+20:16:42   ✅ [224] RobotWare Services > IO Service > Operations on IO Network > Get IO Network Configuration Properties
+20:16:42   ✅ [225] RobotWare Services > IO Service > Operations on IO Network > Update IO Network Configuration Type
+20:16:42   ✅ [226] (+ parent) RobotWare Services > IO Service > Operations on IO Devices
+20:16:42   📂 RobotWare Services > IO Service > Operations on IO Devices  (3 enfants)
+20:16:42   ✅ [227] RobotWare Services > IO Service > Operations on IO Devices > Get IO Devices
+20:16:42   ✅ [228] RobotWare Services > IO Service > Operations on IO Devices > Get Actions IO Devices
+20:16:42   ✅ [229] RobotWare Services > IO Service > Operations on IO Devices > Search IO Devices
+20:16:42   ✅ [230] (+ parent) RobotWare Services > IO Service > Operations on IO Device
+20:16:42   📂 RobotWare Services > IO Service > Operations on IO Device  (9 enfants)
+20:16:42   ✅ [231] RobotWare Services > IO Service > Operations on IO Device > Get IO Device
+20:16:42   ✅ [232] RobotWare Services > IO Service > Operations on IO Device > Get IO Device actions
+20:16:42   ✅ [233] RobotWare Services > IO Service > Operations on IO Device > Update IO Device
+20:16:42   ✅ [234] RobotWare Services > IO Service > Operations on IO Device > Subscribe IO Device
+20:16:42   ✅ [235] RobotWare Services > IO Service > Operations on IO Device > Set input data
+20:16:43   ✅ [236] RobotWare Services > IO Service > Operations on IO Device > Set output data
+20:16:43   ✅ [237] RobotWare Services > IO Service > Operations on IO Device > Get IO Device Configuration Properties
+20:16:43   ✅ [238] (+ parent) RobotWare Services > IO Service > Operations on IO Device > Operations on eio Device
+20:16:43   📂 IO Service > Operations on IO Device > Operations on eio Device  (1 enfants)
+20:16:43   ✅ [239] IO Service > Operations on IO Device > Operations on eio Device > Get eio device status information
+20:16:43   ✅ [240] (+ parent) RobotWare Services > IO Service > Operations on IO Device > Operations on Device Command
+20:16:43   📂 IO Service > Operations on IO Device > Operations on Device Command  (2 enfants)
+20:16:43   ✅ [241] IO Service > Operations on IO Device > Operations on Device Command > Send Device Command
+20:16:43   ✅ [242] IO Service > Operations on IO Device > Operations on Device Command > Send Device Command actions
+20:16:43   ✅ [243] (+ parent) RobotWare Services > IO Service > Operations on IO Signals
+20:16:43   📂 RobotWare Services > IO Service > Operations on IO Signals  (5 enfants)
+20:16:43   ✅ [244] RobotWare Services > IO Service > Operations on IO Signals > Get IO Signals
+20:16:43   ✅ [245] RobotWare Services > IO Service > Operations on IO Signals > Signal Search
+20:16:43   ✅ [246] RobotWare Services > IO Service > Operations on IO Signals > Signal Search Extended
+20:16:43   ✅ [247] RobotWare Services > IO Service > Operations on IO Signals > Unblock Signals
+20:16:43   ✅ [248] RobotWare Services > IO Service > Operations on IO Signals > Get IO Signals actions
+20:16:44   ✅ [249] (+ parent) RobotWare Services > IO Service > Operations on IO Signal
+20:16:44   📂 RobotWare Services > IO Service > Operations on IO Signal  (6 enfants)
+20:16:44   ✅ [250] RobotWare Services > IO Service > Operations on IO Signal > Get an IO Signal
+20:16:44   ✅ [251] RobotWare Services > IO Service > Operations on IO Signal > Get IO Signal actions
+20:16:44   ✅ [252] RobotWare Services > IO Service > Operations on IO Signal > Update IO Signal State
+20:16:44   ✅ [253] RobotWare Services > IO Service > Operations on IO Signal > Update IO Signal Value
+20:16:44   ✅ [254] RobotWare Services > IO Service > Operations on IO Signal > Subscribe IO Signal
+20:16:44   ✅ [255] RobotWare Services > IO Service > Operations on IO Signal > Get IO signal Configuration Properties
+20:16:44   ✅ [256] (+ parent) RobotWare Services > Mastership service
+20:16:44   📂 RobotWare Services > Mastership service  (6 enfants)
+20:16:44   ✅ [257] RobotWare Services > Mastership service > Get Mastership Resources
+20:16:44   ✅ [258] RobotWare Services > Mastership service > Get Mastership Actions
+20:16:44   ✅ [259] RobotWare Services > Mastership service > Mastership request
+20:16:44   ✅ [260] RobotWare Services > Mastership service > Mastership release
+20:16:44   ✅ [261] RobotWare Services > Mastership service > Mastership Subscribe
+20:16:45   ✅ [262] (+ parent) RobotWare Services > Mastership service > Operations on Mastership domains
+20:16:45   📂 RobotWare Services > Mastership service > Operations on Mastership domains  (5 enfants)
+20:16:45   ✅ [263] RobotWare Services > Mastership service > Operations on Mastership domains > Get Mastership Domain
+20:16:45   ✅ [264] RobotWare Services > Mastership service > Operations on Mastership domains > Get Mastership Domain Actions
+20:16:45   ✅ [265] RobotWare Services > Mastership service > Operations on Mastership domains > Mastership domain request
+20:16:45   ✅ [266] RobotWare Services > Mastership service > Operations on Mastership domains > Mastership Domain release
+20:16:45   ✅ [267] RobotWare Services > Mastership service > Operations on Mastership domains > Mastership Domain Subscribe
+20:16:45   ✅ [268] (+ parent) RobotWare Services > Panel service
+20:16:45   📂 RobotWare Services > Panel service  (8 enfants)
+20:16:45   ✅ [269] RobotWare Services > Panel service > Get Panel Resources
+20:16:45   ✅ [270] RobotWare Services > Panel service > Get Panel Actions
+20:16:45   ✅ [271] RobotWare Services > Panel service > Set the language
+20:16:45   ✅ [272] RobotWare Services > Panel service > Restart the Controller
+20:16:45   ✅ [273] (+ parent) RobotWare Services > Panel service > Operations on Controller State Resource
+20:16:45   📂 RobotWare Services > Panel service > Operations on Controller State Resource  (4 enfants)
+20:16:45   ✅ [274] RobotWare Services > Panel service > Operations on Controller State Resource > Get Controller State
+20:16:45   ✅ [275] RobotWare Services > Panel service > Operations on Controller State Resource > Get Controller State Actions
+20:16:46   ✅ [276] RobotWare Services > Panel service > Operations on Controller State Resource > Set Controller State
+20:16:46   ✅ [277] RobotWare Services > Panel service > Operations on Controller State Resource > Subscribe Controller state
+20:16:46   ✅ [278] (+ parent) RobotWare Services > Panel service > Operations on Operation Mode Resource
+20:16:46   📂 RobotWare Services > Panel service > Operations on Operation Mode Resource  (7 enfants)
+20:16:46   ✅ [279] RobotWare Services > Panel service > Operations on Operation Mode Resource > Get Operation Mode
+20:16:46   ✅ [280] RobotWare Services > Panel service > Operations on Operation Mode Resource > Get Operation  Mode Actions
+20:16:46   ✅ [281] RobotWare Services > Panel service > Operations on Operation Mode Resource > Subscribe Operation Mode
+20:16:46   ✅ [282] RobotWare Services > Panel service > Operations on Operation Mode Resource > Acknowledgement for Operation Mode
+20:16:46   ✅ [283] RobotWare Services > Panel service > Operations on Operation Mode Resource > Get Operation Mode Lock Status
+20:16:46   ✅ [284] RobotWare Services > Panel service > Operations on Operation Mode Resource > Lock operation mode selection.
+20:16:46   ✅ [285] RobotWare Services > Panel service > Operations on Operation Mode Resource > Unlock operation mode selection.
+20:16:46   ✅ [286] (+ parent) RobotWare Services > Panel service > Operations on Speed Ratio Resource
+20:16:46   📂 RobotWare Services > Panel service > Operations on Speed Ratio Resource  (4 enfants)
+20:16:46   ✅ [287] RobotWare Services > Panel service > Operations on Speed Ratio Resource > Get Speed Ratio
+20:16:46   ✅ [288] RobotWare Services > Panel service > Operations on Speed Ratio Resource > Get Speed Ratio Actions
+20:16:46   ✅ [289] RobotWare Services > Panel service > Operations on Speed Ratio Resource > Set Speed Ratio
+20:16:46   ✅ [290] RobotWare Services > Panel service > Operations on Speed Ratio Resource > Subscribe Speed Ratio
+20:16:47   ✅ [291] (+ parent) RobotWare Services > Panel service > Operations on Collision Detection State
+20:16:47   📂 RobotWare Services > Panel service > Operations on Collision Detection State  (3 enfants)
+20:16:47   ✅ [292] RobotWare Services > Panel service > Operations on Collision Detection State > Get Collision Detection State
+20:16:47   ✅ [293] RobotWare Services > Panel service > Operations on Collision Detection State > Get Collision Detection State Actions
+20:16:47   ✅ [294] RobotWare Services > Panel service > Operations on Collision Detection State > Subscribe on Collision Detection State
+20:16:47   ✅ [295] (+ parent) RobotWare Services > RAPID Service
+20:16:47   📂 RobotWare Services > RAPID Service  (9 enfants)
+20:16:47   ✅ [296] RobotWare Services > RAPID Service > Get RAPID system resources
+20:16:47   ✅ [297] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID execution
+20:16:47   📂 RobotWare Services > RAPID Service > Operations on RAPID execution  (11 enfants)
+20:16:47   ✅ [298] RobotWare Services > RAPID Service > Operations on RAPID execution > Get RAPID Execution state
+20:16:47   ✅ [299] RobotWare Services > RAPID Service > Operations on RAPID execution > Get RAPID Execution actions
+20:16:47   ✅ [300] RobotWare Services > RAPID Service > Operations on RAPID execution > Start RAPID Execution
+20:16:47   ✅ [301] RobotWare Services > RAPID Service > Operations on RAPID execution > Stop RAPID Execution
+20:16:47   ✅ [302] RobotWare Services > RAPID Service > Operations on RAPID execution > Start RAPID Execution from production entry
+20:16:47   ✅ [303] RobotWare Services > RAPID Service > Operations on RAPID execution > Reset RAPID program pointer to main
+20:16:47   ✅ [304] RobotWare Services > RAPID Service > Operations on RAPID execution > Set number of execution cycles
+20:16:47   ✅ [305] RobotWare Services > RAPID Service > Operations on RAPID execution > Subscribe RAPID Execution
+20:16:48   ✅ [306] RobotWare Services > RAPID Service > Operations on RAPID execution > Subscribe RAPID Execution Cycle
+20:16:48   ✅ [307] RobotWare Services > RAPID Service > Operations on RAPID execution > Subscribe on Hold to Run
+20:16:48   ✅ [308] RobotWare Services > RAPID Service > Operations on RAPID execution > Set Hold to Run Cmd
+20:16:48   ✅ [309] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID modules
+20:16:48   📂 RobotWare Services > RAPID Service > Operations on RAPID modules  (5 enfants)
+20:16:48   ✅ [310] RobotWare Services > RAPID Service > Operations on RAPID modules > Get RAPID modules action
+20:16:48   ✅ [311] RobotWare Services > RAPID Service > Operations on RAPID modules > Get RAPID modules
+20:16:48   ✅ [312] RobotWare Services > RAPID Service > Operations on RAPID modules > Get Mod Possible All
+20:16:48   ✅ [313] RobotWare Services > RAPID Service > Operations on RAPID modules > Set Modify All Positions
+20:16:48   ✅ [314] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID modules > Operations on rapid module
+20:16:48   📂 RAPID Service > Operations on RAPID modules > Operations on rapid module  (20 enfants)
+20:16:48   ✅ [315] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get a specified range of text
+20:16:48   ✅ [316] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get rapid module actions
+20:16:48   ✅ [317] RAPID Service > Operations on RAPID modules > Operations on rapid module > Save rapid module
+20:16:48   ✅ [318] RAPID Service > Operations on RAPID modules > Operations on rapid module > Set Text Range
+20:16:48   ✅ [319] RAPID Service > Operations on RAPID modules > Operations on rapid module > Set Module Text
+20:16:48   ✅ [320] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get RAPID module attributes
+20:16:48   ✅ [321] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get change count
+20:16:49   ✅ [322] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get RulesInstr
+20:16:49   ✅ [323] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get module possible attributes
+20:16:49   ✅ [324] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Search Text
+20:16:49   ✅ [325] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Rapid Object
+20:16:49   ✅ [326] RAPID Service > Operations on RAPID modules > Operations on rapid module > Set SyncPers
+20:16:49   ✅ [327] RAPID Service > Operations on RAPID modules > Operations on rapid module > Set Modify Position
+20:16:49   ✅ [328] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Module Extension
+20:16:49   ✅ [329] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Mod Possible
+20:16:49   ✅ [330] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Object Child
+20:16:49   ✅ [331] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get SyncPers Status
+20:16:49   ✅ [332] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Module Text
+20:16:49   ✅ [333] RAPID Service > Operations on RAPID modules > Operations on rapid module > Get Symbol Information
+20:16:49   ✅ [334] (+ parent) RAPID Service > Operations on RAPID modules > Operations on rapid module > Operations on RAPID Routine
+20:16:49   📂 Operations on RAPID modules > Operations on rapid module > Operations on RAPID Routine  (2 enfants)
+20:16:49   ✅ [335] Operations on RAPID modules > Operations on rapid module > Operations on RAPID Routine > Get Routine information
+20:16:49   ✅ [336] Operations on RAPID modules > Operations on rapid module > Operations on RAPID Routine > Get Routineargs information
+20:16:50   ✅ [337] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID symbols properties
+20:16:50   📂 RobotWare Services > RAPID Service > Operations on RAPID symbols properties  (4 enfants)
+20:16:50   ✅ [338] RobotWare Services > RAPID Service > Operations on RAPID symbols properties > Get RAPID symbols resources
+20:16:50   ✅ [339] RobotWare Services > RAPID Service > Operations on RAPID symbols properties > Get rapid symbols actions
+20:16:50   ✅ [340] RobotWare Services > RAPID Service > Operations on RAPID symbols properties > Search RAPID symbols
+20:16:50   ✅ [341] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID symbols properties > Operations on RAPID symbol object
+20:16:50   📂 RAPID Service > Operations on RAPID symbols properties > Operations on RAPID symbol object  (1 enfants)
+20:16:50   ✅ [342] RAPID Service > Operations on RAPID symbols properties > Operations on RAPID symbol object > Get Object Extension List
+20:16:50   ✅ [343] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID symbol
+20:16:50   📂 RobotWare Services > RAPID Service > Operations on RAPID symbol  (2 enfants)
+20:16:50   ✅ [344] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol properties
+20:16:50   📂 RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol properties  (1 enfants)
+20:16:50   ✅ [345] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol properties > Get RAPID symbol properties
+20:16:50   ✅ [346] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data
+20:16:50   📂 RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data  (6 enfants)
+20:16:50   ✅ [347] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Get rapid symbol data
+20:16:51   ✅ [348] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Get rapid symbol data actions
+20:16:51   ✅ [349] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Update rapid variable current value
+20:16:51   ✅ [350] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Validate rapid variable
+20:16:51   ✅ [351] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Subscribe on RAPID persistent variable
+20:16:51   ✅ [352] RAPID Service > Operations on RAPID symbol > Operations on RAPID symbol data > Update rapid variable Initial Value
+20:16:51   ✅ [353] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID tasks
+20:16:51   📂 RobotWare Services > RAPID Service > Operations on RAPID tasks  (9 enfants)
+20:16:51   ✅ [354] RobotWare Services > RAPID Service > Operations on RAPID tasks > Get RAPID tasks
+20:16:51   ✅ [355] RobotWare Services > RAPID Service > Operations on RAPID tasks > Get rapid Tasks actions
+20:16:51   ✅ [356] RobotWare Services > RAPID Service > Operations on RAPID tasks > Start RAPID Spy Logging
+20:16:51   ✅ [357] RobotWare Services > RAPID Service > Operations on RAPID tasks > Get RAPID Spy Logging status
+20:16:51   ✅ [358] RobotWare Services > RAPID Service > Operations on RAPID tasks > Stop RAPID Spy Logging
+20:16:51   ✅ [359] RobotWare Services > RAPID Service > Operations on RAPID tasks > Activate/Deactivate rapid tasks
+20:16:51   ✅ [360] RobotWare Services > RAPID Service > Operations on RAPID tasks > Get Program/Motion Pointer Sync State for all tasks
+20:16:51   ✅ [361] RobotWare Services > RAPID Service > Operations on RAPID tasks > Subscribe on Build log change
+20:16:52   ✅ [362] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID tasks > Operations on RAPID task
+20:16:52   📂 RAPID Service > Operations on RAPID tasks > Operations on RAPID task  (22 enfants)
+20:16:52   ✅ [363] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get RAPID task state
+20:16:52   ✅ [364] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get rapid task actions
+20:16:52   ✅ [365] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Load RAPID module into a rapid task
+20:16:52   ✅ [366] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Unload module from a rapid task
+20:16:52   ✅ [367] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Abort current execution level
+20:16:52   ✅ [368] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > activate/deactivate rapid task
+20:16:52   ✅ [369] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Activation Record
+20:16:52   ✅ [370] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Structural Change Count
+20:16:52   ✅ [371] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Preferable Data Types
+20:16:52   ✅ [372] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Program Pointer Sync State
+20:16:52   ✅ [373] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Motion Pointer Sync State
+20:16:52   ✅ [374] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Link RAPID Task
+20:16:52   ✅ [375] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Pallet
+20:16:52   ✅ [376] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Get Pallet Head
+20:16:52   ✅ [377] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Subscribe on Rapid Task Change
+20:16:52   ✅ [378] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Subscribe on Rapid PP Sync state change
+20:16:52   ✅ [379] RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Subscribe on Rapid task pgmexecution state change
+20:16:53   ✅ [380] (+ parent) RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion
+20:16:53   📂 Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion  (6 enfants)
+20:16:53   ✅ [381] Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Get rapid motion
+20:16:53   ✅ [382] Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Get RobTarget
+20:16:53   ✅ [383] Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Get Joint Target
+20:16:53   ✅ [384] Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Get mechanical units
+20:16:53   ✅ [385] Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Get external joint states
+20:16:53   ✅ [386] (+ parent) Operations on RAPID tasks > Operations on RAPID task > Operations on rapid motion > Operations on rapid calib
+20:16:53   📂 Operations on RAPID task > Operations on rapid motion > Operations on rapid calib  (2 enfants)
+20:16:53   ✅ [387] Operations on RAPID task > Operations on rapid motion > Operations on rapid calib > Calibration for Displacement
+20:16:53   ✅ [388] Operations on RAPID task > Operations on rapid motion > Operations on rapid calib > Calibration for Tcp
+20:16:53   ✅ [389] (+ parent) RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program
+20:16:53   📂 Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program  (9 enfants)
+20:16:53   ✅ [390] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Get RAPID program resource
+20:16:53   ✅ [391] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Get rapid program actions
+20:16:53   ✅ [392] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Load program into a rapid task
+20:16:53   ✅ [393] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Unload program from a rapid task
+20:16:53   ✅ [394] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Save program
+20:16:54   ✅ [395] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Set program name
+20:16:54   ✅ [396] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Set Entry Point
+20:16:54   ✅ [397] (+ parent) Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Operations on RAPID build errors
+20:16:54   📂 Operations on RAPID task > Operations on RAPID program > Operations on RAPID build errors  (1 enfants)
+20:16:54   ✅ [398] Operations on RAPID task > Operations on RAPID program > Operations on RAPID build errors > Get Build Errors
+20:16:54   ✅ [399] (+ parent) Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program > Operations on RAPID breakpoint
+20:16:54   📂 Operations on RAPID task > Operations on RAPID program > Operations on RAPID breakpoint  (3 enfants)
+20:16:54   ✅ [400] Operations on RAPID task > Operations on RAPID program > Operations on RAPID breakpoint > Get RAPID breakpoint actions
+20:16:54   ✅ [401] Operations on RAPID task > Operations on RAPID program > Operations on RAPID breakpoint > Set break point
+20:16:54   ✅ [402] Operations on RAPID task > Operations on RAPID program > Operations on RAPID breakpoint > Get break points
+20:16:54   ✅ [403] (+ parent) RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP
+20:16:54   📂 Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP  (9 enfants)
+20:16:54   ✅ [404] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Get RAPID task Motion&Program pointer positions
+20:16:54   ✅ [405] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Get RAPID task pcp actions
+20:16:54   ✅ [406] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Set the Program pointer(PP) position to cursor
+20:16:54   ✅ [407] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Set the Program pointer(PP) position to routine
+20:16:54   ✅ [408] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Set the Program pointer(PP) position to routine by URL
+20:16:55   ✅ [409] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Set the Program pointer(PP) position to previous instruction
+20:16:55   ✅ [410] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Set the Program pointer(PP) position to next instruction
+20:16:55   ✅ [411] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Subscribe on Program Pointer
+20:16:55   ✅ [412] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program PCP > Subscribe on Motion Pointer
+20:16:55   ✅ [413] (+ parent) RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID service routine
+20:16:55   📂 Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID service routine  (1 enfants)
+20:16:55   ✅ [414] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID service routine > Get RAPID service routine
+20:16:55   ✅ [415] (+ parent) RAPID Service > Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program counter position
+20:16:55   📂 Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program counter position  (1 enfants)
+20:16:55   ✅ [416] Operations on RAPID tasks > Operations on RAPID task > Operations on RAPID program counter position > Get RAPID Program counter position
+20:16:55   ✅ [417] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID UI instructions
+20:16:55   📂 RobotWare Services > RAPID Service > Operations on RAPID UI instructions  (4 enfants)
+20:16:55   ✅ [418] RobotWare Services > RAPID Service > Operations on RAPID UI instructions > Get UI instruction resource
+20:16:55   ✅ [419] RobotWare Services > RAPID Service > Operations on RAPID UI instructions > Get UI instruction actions
+20:16:55   ✅ [420] RobotWare Services > RAPID Service > Operations on RAPID UI instructions > Subscribe on UI instruction
+20:16:56   ✅ [421] (+ parent) RobotWare Services > RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction
+20:16:56   📂 RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction  (5 enfants)
+20:16:56   ✅ [422] RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction > Get Active UI Instruction
+20:16:56   ✅ [423] RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction > Get Active UI instruction actions
+20:16:56   ✅ [424] RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction > Update an Active UI Instruction Parameter
+20:16:56   ✅ [425] RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction > Get parameter value for an active UI instruction
+20:16:56   ✅ [426] RAPID Service > Operations on RAPID UI instructions > Operations on Active UI Instruction > Get active UI instruction parameters
+20:16:56   ✅ [427] (+ parent) RobotWare Services > RAPID Service > Operations on Rapid taskpanel
+20:16:56   📂 RobotWare Services > RAPID Service > Operations on Rapid taskpanel  (2 enfants)
+20:16:56   ✅ [428] RobotWare Services > RAPID Service > Operations on Rapid taskpanel > Get user modify from taskpanel
+20:16:56   ✅ [429] RobotWare Services > RAPID Service > Operations on Rapid taskpanel > Subscribe on Tasks panel change
+20:16:56   ✅ [430] (+ parent) RobotWare Services > RAPID Service > Operations on Rapid AliasIO
+20:16:56   📂 RobotWare Services > RAPID Service > Operations on Rapid AliasIO  (1 enfants)
+20:16:56   ✅ [431] RobotWare Services > RAPID Service > Operations on Rapid AliasIO > Get AliasIO List
+20:16:57   ✅ [432] (+ parent) RobotWare Services > System service
+20:16:57   📂 RobotWare Services > System service  (6 enfants)
+20:16:57   ✅ [433] RobotWare Services > System service > System Information
+20:16:57   ✅ [434] RobotWare Services > System service > Get robot type
+20:16:57   ✅ [435] (+ parent) RobotWare Services > System service > System Option Resource
+20:16:57   📂 RobotWare Services > System service > System Option Resource  (1 enfants)
+20:16:57   ✅ [436] RobotWare Services > System service > System Option Resource > System Options
+20:16:57   ✅ [437] (+ parent) RobotWare Services > System service > System Energy Resource
+20:16:57   📂 RobotWare Services > System service > System Energy Resource  (5 enfants)
+20:16:57   ✅ [438] RobotWare Services > System service > System Energy Resource > Get System Energy Actions
+20:16:57   ✅ [439] RobotWare Services > System service > System Energy Resource > System Energy Info Change Count
+20:16:57   ✅ [440] RobotWare Services > System service > System Energy Resource > Reset Accumulated Energy
+20:16:57   ✅ [441] RobotWare Services > System service > System Energy Resource > System Energy
+20:16:57   ✅ [442] RobotWare Services > System service > System Energy Resource > Subscribe on System Energy Changes.
+20:16:58   ✅ [443] (+ parent) RobotWare Services > System service > System License Resource
+20:16:58   📂 RobotWare Services > System service > System License Resource  (1 enfants)
+20:16:58   ✅ [444] RobotWare Services > System service > System License Resource > Get System Robotware License
+20:16:58   ✅ [445] (+ parent) RobotWare Services > System service > System Products Resource
+20:16:58   📂 RobotWare Services > System service > System Products Resource  (1 enfants)
+20:16:58   ✅ [446] RobotWare Services > System service > System Products Resource > Get Installed Products
+20:16:58   ✅ [447] (+ parent) RobotWare Services > RobotWare return codes service
+20:16:58   📂 RobotWare Services > RobotWare return codes service  (1 enfants)
+20:16:58   ✅ [448] RobotWare Services > RobotWare return codes service > Get a list of RobotWare return codes
+20:16:58   ✅ [449] (+ parent) RobotWare Services > Devices service
+20:16:58   📂 RobotWare Services > Devices service  (1 enfants)
+20:16:58   ✅ [450] RobotWare Services > Devices service > Devices tree information
+20:16:59   ✅ [451] (+ parent) RobotWare Services > Motion System
+20:16:59   📂 RobotWare Services > Motion System  (14 enfants)
+20:16:59   ✅ [452] RobotWare Services > Motion System > Get Motion System
+20:16:59   ✅ [453] RobotWare Services > Motion System > Get Motion System action
+20:16:59   ✅ [454] RobotWare Services > Motion System > Set Mechunit for jogging
+20:16:59   ✅ [455] RobotWare Services > Motion System > Perform Jogging
+20:16:59   ✅ [456] RobotWare Services > Motion System > Set Robo Target Position
+20:16:59   ✅ [457] RobotWare Services > Motion System > Get check change count
+20:16:59   ✅ [458] RobotWare Services > Motion System > Subscribe on Error EventChange
+20:16:59   ✅ [459] (+ parent) RobotWare Services > Motion System > Operations on Error State
+20:16:59   📂 RobotWare Services > Motion System > Operations on Error State  (1 enfants)
+20:16:59   ✅ [460] RobotWare Services > Motion System > Operations on Error State > Get Error State
+20:16:59   ✅ [461] (+ parent) RobotWare Services > Motion System > Operations on Motion Supervision
+20:16:59   📂 RobotWare Services > Motion System > Operations on Motion Supervision  (6 enfants)
+20:16:59   ✅ [462] RobotWare Services > Motion System > Operations on Motion Supervision > Get Motion Supervision
+20:16:59   ✅ [463] RobotWare Services > Motion System > Operations on Motion Supervision > Get Motion Supervision Actions
+20:16:59   ✅ [464] RobotWare Services > Motion System > Operations on Motion Supervision > Set Motion Supervision Mode (Jog Supervision Mode)
+20:17:00   ✅ [465] RobotWare Services > Motion System > Operations on Motion Supervision > Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
+20:17:00   ✅ [466] RobotWare Services > Motion System > Operations on Motion Supervision > Get Motion Supervision Collision Prediction Mode
+20:17:00   ✅ [467] RobotWare Services > Motion System > Operations on Motion Supervision > Set Motion Supervision Collision Prediction Mode
+20:17:00   ✅ [468] (+ parent) RobotWare Services > Motion System > Operations On Path Supervision
+20:17:00   📂 RobotWare Services > Motion System > Operations On Path Supervision  (4 enfants)
+20:17:00   ✅ [469] RobotWare Services > Motion System > Operations On Path Supervision > Get Path Supervision
+20:17:00   ✅ [470] RobotWare Services > Motion System > Operations On Path Supervision > Get Path Supervision Actions
+20:17:00   ✅ [471] RobotWare Services > Motion System > Operations On Path Supervision > Set Path Supervision Mode
+20:17:00   ✅ [472] RobotWare Services > Motion System > Operations On Path Supervision > Set Path Supervision Level
+20:17:00   ✅ [473] (+ parent) RobotWare Services > Motion System > Operations On NonMotion Execution
+20:17:00   📂 RobotWare Services > Motion System > Operations On NonMotion Execution  (3 enfants)
+20:17:00   ✅ [474] RobotWare Services > Motion System > Operations On NonMotion Execution > Get Non Motion Execution Mode
+20:17:00   ✅ [475] RobotWare Services > Motion System > Operations On NonMotion Execution > Get NonMotion Execution Actions
+20:17:00   ✅ [476] RobotWare Services > Motion System > Operations On NonMotion Execution > Set NonMotion Execution Mode
+20:17:00   ✅ [477] (+ parent) RobotWare Services > Motion System > Operations on Mechunits
+20:17:00   📂 RobotWare Services > Motion System > Operations on Mechunits  (2 enfants)
+20:17:00   ✅ [478] RobotWare Services > Motion System > Operations on Mechunits > Get Mechunits
+20:17:01   ✅ [479] (+ parent) RobotWare Services > Motion System > Operations on Mechunits > Operations on Mechunit
+20:17:01   📂 Motion System > Operations on Mechunits > Operations on Mechunit  (21 enfants)
+20:17:01   ✅ [480] Motion System > Operations on Mechunits > Operations on Mechunit > Get Mechunit
+20:17:01   ✅ [481] Motion System > Operations on Mechunits > Operations on Mechunit > Get Mechunit action
+20:17:01   ✅ [482] Motion System > Operations on Mechunits > Operations on Mechunit > Set Mechunit
+20:17:01   ✅ [483] Motion System > Operations on Mechunits > Operations on Mechunit > Set Compliance Lead Through
+20:17:01   ✅ [484] Motion System > Operations on Mechunits > Operations on Mechunit > Get Compliance Lead Through
+20:17:01   ✅ [485] Motion System > Operations on Mechunits > Operations on Mechunit > Set Fine Calibration
+20:17:01   ✅ [486] Motion System > Operations on Mechunits > Operations on Mechunit > Update (Syncronize) Revolution Counter
+20:17:01   ✅ [487] Motion System > Operations on Mechunits > Operations on Mechunit > Get Physical Joints
+20:17:01   ✅ [488] Motion System > Operations on Mechunits > Operations on Mechunit > Get Cartesian Value
+20:17:01   ✅ [489] Motion System > Operations on Mechunits > Operations on Mechunit > Set Mechanical Unit
+20:17:01   ✅ [490] Motion System > Operations on Mechunits > Operations on Mechunit > Get Robtarget
+20:17:01   ✅ [491] Motion System > Operations on Mechunits > Operations on Mechunit > Get Joint target
+20:17:01   ✅ [492] Motion System > Operations on Mechunits > Operations on Mechunit > Subscribe on Mechunit Mode Change
+20:17:01   ✅ [493] Motion System > Operations on Mechunits > Operations on Mechunit > Get Joints From Position
+20:17:01   ✅ [494] Motion System > Operations on Mechunits > Operations on Mechunit > Get Position From Joints
+20:17:01   ✅ [495] Motion System > Operations on Mechunits > Operations on Mechunit > Get All Joint Solution
+20:17:01   ✅ [496] Motion System > Operations on Mechunits > Operations on Mechunit > Get Joints From Cartesian
+20:17:02   ✅ [497] Motion System > Operations on Mechunits > Operations on Mechunit > Get Calibration Info
+20:17:02   ✅ [498] (+ parent) Motion System > Operations on Mechunits > Operations on Mechunit > Operation on Calib
+20:17:02   📂 Operations on Mechunits > Operations on Mechunit > Operation on Calib  (9 enfants)
+20:17:02   ✅ [499] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for BaseFrame
+20:17:02   ✅ [500] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for BaseFrameMoving
+20:17:02   ✅ [501] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for ExternalRobotNomBaseNew
+20:17:02   ✅ [502] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for RobotAxisRot
+20:17:02   ✅ [503] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for SingleUserRotNew
+20:17:02   ✅ [504] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for RotExtCtrlZdef
+20:17:02   ✅ [505] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for SingleUserLin
+20:17:02   ✅ [506] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for SingleTrack
+20:17:02   ✅ [507] Operations on Mechunits > Operations on Mechunit > Operation on Calib > Calibration for RobotAxisRot2
+20:17:03   ✅ [508] (+ parent) Motion System > Operations on Mechunits > Operations on Mechunit > Operations on Baseframe
+20:17:03   📂 Operations on Mechunits > Operations on Mechunit > Operations on Baseframe  (3 enfants)
+20:17:03   ✅ [509] Operations on Mechunits > Operations on Mechunit > Operations on Baseframe > Get Base Frame
+20:17:03   ✅ [510] Operations on Mechunits > Operations on Mechunit > Operations on Baseframe > Get Base Frame actions
+20:17:03   ✅ [511] Operations on Mechunits > Operations on Mechunit > Operations on Baseframe > Set Base Frame
+20:17:04   ✅ [512] (+ parent) Motion System > Operations on Mechunits > Operations on Mechunit > Operations on Axes
+20:17:04   📂 Operations on Mechunits > Operations on Mechunit > Operations on Axes  (7 enfants)
+20:17:04   ✅ [513] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Get Axes
+20:17:04   ✅ [514] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Get Axis
+20:17:04   ✅ [515] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Get Axis actions
+20:17:04   ✅ [516] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Get Axis pose
+20:17:04   ✅ [517] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Set Axis pose
+20:17:04   ✅ [518] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Update Commutate
+20:17:04   ✅ [519] Operations on Mechunits > Operations on Mechunit > Operations on Axes > Update Sync Revolution Counter
+20:17:04   ✅ [520] (+ parent) RobotWare Services > Motion System > Operations on SMB Data
+20:17:04   📂 RobotWare Services > Motion System > Operations on SMB Data  (4 enfants)
+20:17:04   ✅ [521] RobotWare Services > Motion System > Operations on SMB Data > Set SMB Data
+20:17:04   ✅ [522] RobotWare Services > Motion System > Operations on SMB Data > Clear SMB Data
+20:17:04   ✅ [523] RobotWare Services > Motion System > Operations on SMB Data > Get SMB Data
+20:17:04   ✅ [524] RobotWare Services > Motion System > Operations on SMB Data > Get SMB Data Actions
+20:17:05   ✅ [525] (+ parent) RobotWare Services > Motion System > Operations on Motor Calib
+20:17:05   📂 RobotWare Services > Motion System > Operations on Motor Calib  (1 enfants)
+20:17:05   ✅ [526] RobotWare Services > Motion System > Operations on Motor Calib > Get Motor Calib Names
+20:17:05   ✅ [527] (+ parent) RobotWare Services > Integrated Vision (IV) Service
+20:17:05   📂 RobotWare Services > Integrated Vision (IV) Service  (18 enfants)
+20:17:05   ✅ [528] RobotWare Services > Integrated Vision (IV) Service > Get Vision Manager Resource
+20:17:05   ✅ [529] RobotWare Services > Integrated Vision (IV) Service > Get Number of Cameras of IV
+20:17:05   ✅ [530] RobotWare Services > Integrated Vision (IV) Service > Get IV Camera Validity
+20:17:05   ✅ [531] RobotWare Services > Integrated Vision (IV) Service > Get Vision (camera) Resource Actions
+20:17:05   ✅ [532] RobotWare Services > Integrated Vision (IV) Service > Get Camera Jobname
+20:17:05   ✅ [533] RobotWare Services > Integrated Vision (IV) Service > Restart Camera
+20:17:05   ✅ [534] RobotWare Services > Integrated Vision (IV) Service > Flash LED(s) of Camera
+20:17:05   ✅ [535] RobotWare Services > Integrated Vision (IV) Service > Set Camera State
+20:17:05   ✅ [536] RobotWare Services > Integrated Vision (IV) Service > Refesh the camera(s)
+20:17:05   ✅ [537] RobotWare Services > Integrated Vision (IV) Service > Set Hostname of the Camera
+20:17:05   ✅ [538] RobotWare Services > Integrated Vision (IV) Service > Set camera to be a DHCP client
+20:17:05   ✅ [539] RobotWare Services > Integrated Vision (IV) Service > Set Camera DNS Settings
+20:17:05   ✅ [540] RobotWare Services > Integrated Vision (IV) Service > Get Camera Status
+20:17:06   ✅ [541] RobotWare Services > Integrated Vision (IV) Service > Get Camera Info Using Index of the camera
+20:17:06   ✅ [542] RobotWare Services > Integrated Vision (IV) Service > Set Camera Name
+20:17:06   ✅ [543] RobotWare Services > Integrated Vision (IV) Service > Set Camera User Credentials
+20:17:06   ✅ [544] RobotWare Services > Integrated Vision (IV) Service > Set Camera IP Settings
+20:17:06   ✅ [545] RobotWare Services > Integrated Vision (IV) Service > Get IV Camera Info
+20:17:06   ✅ [546] (+ parent) Operations on IO Profinet Device
+20:17:06   📂 Operations on IO Profinet Device  (9 enfants)
+20:17:06   ✅ [547] Operations on IO Profinet Device > Get profinet I/O device read record implicit data from device in profinet network
+20:17:06   ✅ [548] Operations on IO Profinet Device > Read record implicit data from device in profinet network
+20:17:06   ✅ [549] Operations on IO Profinet Device > Get forms
+20:17:06   ✅ [550] Operations on IO Profinet Device > Get profinet I/O device read record data
+20:17:06   ✅ [551] Operations on IO Profinet Device > Get profinet I/O device read record data
+20:17:06   ✅ [552] Operations on IO Profinet Device > Get Forms
+20:17:06   ✅ [553] Operations on IO Profinet Device > Get profinet device alarms xml response
+20:17:06   ✅ [554] Operations on IO Profinet Device > Clear the alarms
+20:17:06   ✅ [555] Operations on IO Profinet Device > Get Forms
+20:17:06 
+555 routes trouvées
+
+20:17:06 💾 routes_list.json sauvegardé
+
+20:17:06 ============================================================
+20:17:06   PHASE 2 — Parsing + Export
+20:17:06 ============================================================
+20:17:06 📂 routes_list.json trouvé — 555 routes (skip crawl)
+
+20:17:06 [  1/555] ⚙️  Root Resource
+20:17:07 [  2/555] ⚙️  Get Service list
+20:17:07 [  3/555] ⚙️  Logout
+20:17:07 [  4/555] ⚙️  Subscription Service
+20:17:07 [  5/555] ⚙️  Get Subscription Actions
+20:17:08 [  6/555] ⚙️  Subscribe on resources
+20:17:08 [  7/555] ⚙️  Operations on Subscription Group
+20:17:08 [  8/555] ⚙️  Get Subscription Group Actions
+20:17:09 [  9/555] ⚙️  Add new resources, Remove existing Resources or change existing resources priorities.
+20:17:09 [ 10/555] ⚙️  Unsubscribe or remove the subscription group/resources in group.
+20:17:09 [ 11/555] ⚙️  Operations on Subscription Resource
+20:17:09 [ 12/555] ⚙️  Unsubscribe or remove the resource from subscription group.
+20:17:10 [ 13/555] ⚙️  User Service
+20:17:10 [ 14/555] ⚙️  Get User Resources
+20:17:10 [ 15/555] ⚙️  Get User Actions
+20:17:10 [ 16/555] ⚙️  Register the user
+20:17:11 [ 17/555] ⚙️  Impersonate a user
+20:17:11 [ 18/555] ⚙️  Login as Local User
+20:17:11 [ 19/555] ⚙️  Operations on Users grants
+20:17:11 [ 20/555] ⚙️  Get User grants
+20:17:12 [ 21/555] ⚙️  Operations on RMMP
+20:17:12 [ 22/555] ⚙️  Get RMMP state
+20:17:12 [ 23/555] ⚙️  Get RMMP Actions
+20:17:12 [ 24/555] ⚙️  Request RMMP
+20:17:12 [ 25/555] ⚙️  Grant or deny an RMMP request
+20:17:13 [ 26/555] ⚙️  Cancel held or requested RMMP
+20:17:13 [ 27/555] ⚙️  Subscribe on RMMP Request event
+20:17:13 [ 28/555] ⚙️  Poll for RMMP grant status
+20:17:13 [ 29/555] ⚙️  Operations on Remote User
+20:17:14 [ 30/555] ⚙️  Get remote user actions
+20:17:14 [ 31/555] ⚙️  Remote User Logon Request
+20:17:14 [ 32/555] ⚙️  Remote User Logout Request
+20:17:14 [ 33/555] ⚙️  Subscribe on remote user state
+20:17:15 [ 34/555] ⚙️  Controller Service
+20:17:15 [ 35/555] ⚙️  Get Controller Resources
+20:17:15 [ 36/555] ⚙️  Get Controller Actions
+20:17:15 [ 37/555] ⚙️  Get Controller environment variable
+20:17:15 [ 38/555] ⚙️  Restart or Shutdown controller
+20:17:16 [ 39/555] ⚙️  Set Controller language
+20:17:16 [ 40/555] ⚙️  Operations on Clock Resource
+20:17:16 [ 41/555] ⚙️  Get Clock Resource
+20:17:16 [ 42/555] ⚙️  Get Clock Actions
+20:17:17 [ 43/555] ⚙️  Set the Clock of the controller
+20:17:17 [ 44/555] ⚙️  Operations on Timezone Resource
+20:17:17 [ 45/555] ⚙️  Get timezone resource
+20:17:17 [ 46/555] ⚙️  Get timezone actions
+20:17:18 [ 47/555] ⚙️  Set the time zone
+20:17:18 [ 48/555] ⚙️  Operations on Timeserver Resource
+20:17:18 [ 49/555] ⚙️  Get time server resource
+20:17:18 [ 50/555] ⚙️  Get time server actions
+20:17:19 [ 51/555] ⚙️  Set the time server
+20:17:19 [ 52/555] ⚙️  Test Time Server
+20:17:20 [ 53/555] ⚙️  Operations on Identity Resource
+20:17:20 [ 54/555] ⚙️  Get Identity Resource
+20:17:21 [ 55/555] ⚙️  Get Identity Actions
+20:17:21 [ 56/555] ⚙️  Set the Identity of the controller
+20:17:21 [ 57/555] ⚙️  Operations on System Resource
+20:17:21 [ 58/555] ⚙️  Get list of installed systems
+20:17:22 [ 59/555] ⚙️  Get actions on system
+20:17:22 [ 60/555] ⚙️  Set Boot Device
+20:17:22 [ 61/555] ⚙️  Get Boot Device
+20:17:22 [ 62/555] ⚙️  Load Boot Image
+20:17:22 [ 63/555] ⚙️  Unload Boot Image
+20:17:23 [ 64/555] ⚙️  Get selected system name
+20:17:23 [ 65/555] ⚙️  Install deployment package
+20:17:23 [ 66/555] ⚙️  Validate deployment package
+20:17:23 [ 67/555] ⚙️  Get system resource
+20:17:24 [ 68/555] ⚙️  Get actions on a system resource
+20:17:24 [ 69/555] ⚙️  Rename a system
+20:17:24 [ 70/555] ⚙️  Select a system
+20:17:24 [ 71/555] ⚙️  Delete a System
+20:17:25 [ 72/555] ⚙️  Deselect a System
+20:17:25 [ 73/555] ⚙️  Operations on network Resource
+20:17:25 [ 74/555] ⚙️  Get Network Resource
+20:17:25 [ 75/555] ⚙️  Get Network setting actions
+20:17:26 [ 76/555] ⚙️  Set Network configuration
+20:17:26 [ 77/555] ⚙️  Operations on DNS Resource
+20:17:26 [ 78/555] ⚙️  Get DNS Resource
+20:17:26 [ 79/555] ⚙️  Operations on Routing Table Resource
+20:17:26 [ 80/555] ⚙️  Add a route table entry
+20:17:27 [ 81/555] ⚙️  Options to add a route table entry
+20:17:27 [ 82/555] ⚙️  Remove a route table entry
+20:17:27 [ 83/555] ⚙️  Options to remove a route table entry
+20:17:27 [ 84/555] ⚙️  Operations on Backup Resource
+20:17:28 [ 85/555] ⚙️  Get backup resources
+20:17:28 [ 86/555] ⚙️  Get backup actions
+20:17:28 [ 87/555] ⚙️  Create a Backup
+20:17:28 [ 88/555] ⚙️  Restore a backup.
+20:17:29 [ 89/555] ⚙️  Check Restore
+20:17:29 [ 90/555] ⚙️  Get Backup State
+20:17:29 [ 91/555] ⚙️  Subscribe on Backup System Information
+20:17:30 [ 92/555] ⚙️  Operations on backup system information
+20:17:30 [ 93/555] ⚙️  Get backup system information
+20:17:30 [ 94/555] ⚙️  Operations on Compress Resource
+20:17:30 [ 95/555] ⚙️  Get compress resources
+20:17:31 [ 96/555] ⚙️  Get compress actions
+20:17:31 [ 97/555] ⚙️  Compress/Decompress Resource
+20:17:31 [ 98/555] ⚙️  Operations on Diagnostics Resource
+20:17:31 [ 99/555] ⚙️  Get diagnostics resources
+20:17:31 [100/555] ⚙️  Get diagnostics actions
+20:17:32 [101/555] ⚙️  Save system diagnostics
+20:17:32 [102/555] ⚙️  Subscribe on system dump
+20:17:32 [103/555] ⚙️  Subscribe on Diagnostics States (Get System Diagnostics)
+20:17:32 [104/555] ⚙️  Operations on CtrlSafetyResource
+20:17:33 [105/555] ⚙️  Get safety resources
+20:17:33 [106/555] ⚙️  Get Safety actions
+20:17:33 [107/555] ⚙️  Load Safety configuration file to controller
+20:17:33 [108/555] ⚙️  Set Safety Mode of the controller
+20:17:33 [109/555] ⚙️  Get Config status
+20:17:34 [110/555] ⚙️  Get Safety Mode status
+20:17:34 [111/555] ⚙️  Get Safety Cyclic Brake Check status
+20:17:34 [112/555] ⚙️  Get LoadOperation status
+20:17:35 [113/555] ⚙️  Get Safety Configurations
+20:17:35 [114/555] ⚙️  Get Safety Violation Info
+20:17:35 [115/555] ⚙️  Unlock the safety configuration
+20:17:35 [116/555] ⚙️  Software Sync Acknowledgement
+20:17:35 [117/555] ⚙️  Add Validation info
+20:17:36 [118/555] ⚙️  Remove Validation info
+20:17:36 [119/555] ⚙️  Set Reset Safety Controller
+20:17:36 [120/555] ⚙️  Operations on options Resource
+20:17:36 [121/555] ⚙️  Get options resource
+20:17:37 [122/555] ⚙️  Operations on Compatabile Resource
+20:17:37 [123/555] ⚙️  Check Robotware version compatibility with contorller hardware
+20:17:37 [124/555] ⚙️  Operation on Virtual Time
+20:17:37 [125/555] ⚙️  Get Virtual Time resources
+20:17:38 [126/555] ⚙️  Operation on VTTime
+20:17:38 [127/555] ⚙️  Get Virtualtime
+20:17:38 [128/555] ⚙️  Operation on VTTimeslice
+20:17:38 [129/555] ⚙️  Get VTTimeslice Value
+20:17:39 [130/555] ⚙️  Actions on VTTimeslice
+20:17:39 [131/555] ⚙️  Set VTTimeslice Value
+20:17:39 [132/555] ⚙️  Operation on VTSpeed
+20:17:39 [133/555] ⚙️  Get Speed of Virtual Time
+20:17:39 [134/555] ⚙️  Get actions on a VTSpeed
+20:17:40 [135/555] ⚙️  Set Speed of Virtualtime
+20:17:40 [136/555] ⚙️  Operation on VTState
+20:17:40 [137/555] ⚙️  Get State of Virtual Time
+20:17:40 [138/555] ⚙️  Get actions on a VTState
+20:17:41 [139/555] ⚙️  Set State of Virtualtime
+20:17:41 [140/555] ⚙️  Operation on VTRun
+20:17:41 [141/555] ⚙️  VT Run
+20:17:41 [142/555] ⚙️  File Service
+20:17:42 [143/555] ⚙️  Get File Service Resources
+20:17:42 [144/555] ⚙️  Operations on Directory Resource
+20:17:42 [145/555] ⚙️  Get Directory listing of resources
+20:17:42 [146/555] ⚙️  Get Directory Actions
+20:17:42 [147/555] ⚙️  Create a directory
+20:17:43 [148/555] ⚙️  Rename a directory
+20:17:43 [149/555] ⚙️  Copy a directory
+20:17:43 [150/555] ⚙️  Delete a directory
+20:17:43 [151/555] ⚙️  Operations on File Resource
+20:17:44 [152/555] ⚙️  Get a file
+20:17:44 [153/555] ⚙️  Get File Actions
+20:17:44 [154/555] ⚙️  Rename a file
+20:17:44 [155/555] ⚙️  Create a copy of a file
+20:17:44 [156/555] ⚙️  Upload a file
+20:17:45 [157/555] ⚙️  Delete a file
+20:17:45 [158/555] ⚙️  Get file Meta data
+20:17:45 [159/555] ⚙️  RobotWare Services
+20:17:45 [160/555] ⚙️  Get RobotWare services
+20:17:46 [161/555] ⚙️  CFG Service
+20:17:46 [162/555] ⚙️  Get CFG resources
+20:17:46 [163/555] ⚙️  Get CFG actions
+20:17:46 [164/555] ⚙️  Validate CFG file
+20:17:47 [165/555] ⚙️  Load CFG file
+20:17:47 [166/555] ⚙️  Validate CFG Instance before Delete
+20:17:47 [167/555] ⚙️  Validate CFG Instances
+20:17:47 [168/555] ⚙️  Keyless motor ON
+20:17:47 [169/555] ⚙️  Subscribe on cfg ChangeCount
+20:17:48 [170/555] ⚙️  Operations on CFG domain
+20:17:48 [171/555] ⚙️  Get CFG Domain Types
+20:17:48 [172/555] ⚙️  Get Actions on a CFG domain
+20:17:48 [173/555] ⚙️  Save CFG domain
+20:17:49 [174/555] ⚙️  Reset CFG domain
+20:17:49 [175/555] ⚙️  Operations on CFG type
+20:17:49 [176/555] ⚙️  Get CFG type
+20:17:49 [177/555] ⚙️  Operations on CFG attributes
+20:17:50 [178/555] ⚙️  Get all attributes of the given domain type
+20:17:50 [179/555] ⚙️  Operations on CFG instances
+20:17:50 [180/555] ⚙️  Get all instances of the given domain type
+20:17:50 [181/555] ⚙️  Get actions on CFG instances
+20:17:51 [182/555] ⚙️  Reset CFG instances
+20:17:51 [183/555] ⚙️  Create default CFG instance
+20:17:51 [184/555] ⚙️  Operations on CFG instance
+20:17:51 [185/555] ⚙️  Get CFG instance
+20:17:51 [186/555] ⚙️  Get CFG instance actions
+20:17:52 [187/555] ⚙️  Update CFG instance
+20:17:52 [188/555] ⚙️  Delete CFG instance
+20:17:52 [189/555] ⚙️  DIPC service
+20:17:52 [190/555] ⚙️  Get DIPC Resources
+20:17:53 [191/555] ⚙️  Get DIPC Actions
+20:17:53 [192/555] ⚙️  Create a queue
+20:17:53 [193/555] ⚙️  Operations on DIPC Queue
+20:17:53 [194/555] ⚙️  Get DIPC Queue
+20:17:53 [195/555] ⚙️  Get DIPC Queue Actions
+20:17:54 [196/555] ⚙️  Send message
+20:17:54 [197/555] ⚙️  Read message
+20:17:54 [198/555] ⚙️  Delete DIPC Queue
+20:17:54 [199/555] ⚙️  Subscribe DIPC Queue
+20:17:55 [200/555] ⚙️  Subscribe DIPC Queue without reading message
+20:17:55 [201/555] ⚙️  Elog service
+20:17:55 [202/555] ⚙️  Get Elog Resources
+20:17:55 [203/555] ⚙️  Get Elog Actions
+20:17:55 [204/555] ⚙️  Clear elog messages
+20:17:56 [205/555] ⚙️  Save elog in system dump format
+20:17:56 [206/555] ⚙️  Operations on elog domain
+20:17:56 [207/555] ⚙️  Get elog messages in domain
+20:17:56 [208/555] ⚙️  Get Actions on elog domain
+20:17:57 [209/555] ⚙️  Clear elog messages
+20:17:57 [210/555] ⚙️  Subscribe on elog domain
+20:17:57 [211/555] ⚙️  Operations on elog domain message
+20:17:57 [212/555] ⚙️  Get Elog Message in domain
+20:17:58 [213/555] ⚙️  IO Service
+20:17:58 [214/555] ⚙️  Get IO System resources
+20:17:58 [215/555] ⚙️  Operations on IO Networks
+20:17:58 [216/555] ⚙️  Get IO Networks resources
+20:17:59 [217/555] ⚙️  Get Actions on IO Networks
+20:17:59 [218/555] ⚙️  Search IO Networks
+20:17:59 [219/555] ⚙️  Operations on IO Network
+20:17:59 [220/555] ⚙️  Get IO Network
+20:18:00 [221/555] ⚙️  Get IO Network actions
+20:18:00 [222/555] ⚙️  Update IO Network
+20:18:00 [223/555] ⚙️  Subscribe IO Network
+20:18:01 [224/555] ⚙️  Get IO Network Configuration Properties
+20:18:01 [225/555] ⚙️  Update IO Network Configuration Type
+20:18:01 [226/555] ⚙️  Operations on IO Devices
+20:18:01 [227/555] ⚙️  Get IO Devices
+20:18:02 [228/555] ⚙️  Get Actions IO Devices
+20:18:02 [229/555] ⚙️  Search IO Devices
+20:18:02 [230/555] ⚙️  Operations on IO Device
+20:18:02 [231/555] ⚙️  Get IO Device
+20:18:03 [232/555] ⚙️  Get IO Device actions
+20:18:03 [233/555] ⚙️  Update IO Device
+20:18:03 [234/555] ⚙️  Subscribe IO Device
+20:18:04 [235/555] ⚙️  Set input data
+20:18:04 [236/555] ⚙️  Set output data
+20:18:04 [237/555] ⚙️  Get IO Device Configuration Properties
+20:18:05 [238/555] ⚙️  Operations on eio Device
+20:18:05 [239/555] ⚙️  Get eio device status information
+20:18:05 [240/555] ⚙️  Operations on Device Command
+20:18:05 [241/555] ⚙️  Send Device Command
+20:18:06 [242/555] ⚙️  Send Device Command actions
+20:18:06 [243/555] ⚙️  Operations on IO Signals
+20:18:06 [244/555] ⚙️  Get IO Signals
+20:18:07 [245/555] ⚙️  Signal Search
+20:18:07 [246/555] ⚙️  Signal Search Extended
+20:18:07 [247/555] ⚙️  Unblock Signals
+20:18:07 [248/555] ⚙️  Get IO Signals actions
+20:18:08 [249/555] ⚙️  Operations on IO Signal
+20:18:08 [250/555] ⚙️  Get an IO Signal
+20:18:08 [251/555] ⚙️  Get IO Signal actions
+20:18:08 [252/555] ⚙️  Update IO Signal State
+20:18:09 [253/555] ⚙️  Update IO Signal Value
+20:18:09 [254/555] ⚙️  Subscribe IO Signal
+20:18:09 [255/555] ⚙️  Get IO signal Configuration Properties
+20:18:09 [256/555] ⚙️  Mastership service
+20:18:10 [257/555] ⚙️  Get Mastership Resources
+20:18:10 [258/555] ⚙️  Get Mastership Actions
+20:18:10 [259/555] ⚙️  Mastership request
+20:18:11 [260/555] ⚙️  Mastership release
+20:18:11 [261/555] ⚙️  Mastership Subscribe
+20:18:11 [262/555] ⚙️  Operations on Mastership domains
+20:18:11 [263/555] ⚙️  Get Mastership Domain
+20:18:12 [264/555] ⚙️  Get Mastership Domain Actions
+20:18:12 [265/555] ⚙️  Mastership domain request
+20:18:12 [266/555] ⚙️  Mastership Domain release
+20:18:13 [267/555] ⚙️  Mastership Domain Subscribe
+20:18:13 [268/555] ⚙️  Panel service
+20:18:13 [269/555] ⚙️  Get Panel Resources
+20:18:13 [270/555] ⚙️  Get Panel Actions
+20:18:14 [271/555] ⚙️  Set the language
+20:18:14 [272/555] ⚙️  Restart the Controller
+20:18:14 [273/555] ⚙️  Operations on Controller State Resource
+20:18:14 [274/555] ⚙️  Get Controller State
+20:18:15 [275/555] ⚙️  Get Controller State Actions
+20:18:15 [276/555] ⚙️  Set Controller State
+20:18:15 [277/555] ⚙️  Subscribe Controller state
+20:18:16 [278/555] ⚙️  Operations on Operation Mode Resource
+20:18:16 [279/555] ⚙️  Get Operation Mode
+20:18:16 [280/555] ⚙️  Get Operation  Mode Actions
+20:18:16 [281/555] ⚙️  Subscribe Operation Mode
+20:18:17 [282/555] ⚙️  Acknowledgement for Operation Mode
+20:18:17 [283/555] ⚙️  Get Operation Mode Lock Status
+20:18:17 [284/555] ⚙️  Lock operation mode selection.
+20:18:17 [285/555] ⚙️  Unlock operation mode selection.
+20:18:18 [286/555] ⚙️  Operations on Speed Ratio Resource
+20:18:18 [287/555] ⚙️  Get Speed Ratio
+20:18:18 [288/555] ⚙️  Get Speed Ratio Actions
+20:18:18 [289/555] ⚙️  Set Speed Ratio
+20:18:19 [290/555] ⚙️  Subscribe Speed Ratio
+20:18:19 [291/555] ⚙️  Operations on Collision Detection State
+20:18:19 [292/555] ⚙️  Get Collision Detection State
+20:18:20 [293/555] ⚙️  Get Collision Detection State Actions
+20:18:20 [294/555] ⚙️  Subscribe on Collision Detection State
+20:18:20 [295/555] ⚙️  RAPID Service
+20:18:20 [296/555] ⚙️  Get RAPID system resources
+20:18:21 [297/555] ⚙️  Operations on RAPID execution
+20:18:21 [298/555] ⚙️  Get RAPID Execution state
+20:18:21 [299/555] ⚙️  Get RAPID Execution actions
+20:18:21 [300/555] ⚙️  Start RAPID Execution
+20:18:22 [301/555] ⚙️  Stop RAPID Execution
+20:18:22 [302/555] ⚙️  Start RAPID Execution from production entry
+20:18:22 [303/555] ⚙️  Reset RAPID program pointer to main
+20:18:22 [304/555] ⚙️  Set number of execution cycles
+20:18:23 [305/555] ⚙️  Subscribe RAPID Execution
+20:18:23 [306/555] ⚙️  Subscribe RAPID Execution Cycle
+20:18:23 [307/555] ⚙️  Subscribe on Hold to Run
+20:18:23 [308/555] ⚙️  Set Hold to Run Cmd
+20:18:24 [309/555] ⚙️  Operations on RAPID modules
+20:18:24 [310/555] ⚙️  Get RAPID modules action
+20:18:24 [311/555] ⚙️  Get RAPID modules
+20:18:24 [312/555] ⚙️  Get Mod Possible All
+20:18:25 [313/555] ⚙️  Set Modify All Positions
+20:18:25 [314/555] ⚙️  Operations on rapid module
+20:18:25 [315/555] ⚙️  Get a specified range of text
+20:18:25 [316/555] ⚙️  Get rapid module actions
+20:18:26 [317/555] ⚙️  Save rapid module
+20:18:26 [318/555] ⚙️  Set Text Range
+20:18:26 [319/555] ⚙️  Set Module Text
+20:18:27 [320/555] ⚙️  Get RAPID module attributes
+20:18:27 [321/555] ⚙️  Get change count
+20:18:27 [322/555] ⚙️  Get RulesInstr
+20:18:27 [323/555] ⚙️  Get module possible attributes
+20:18:28 [324/555] ⚙️  Get Search Text
+20:18:28 [325/555] ⚙️  Get Rapid Object
+20:18:28 [326/555] ⚙️  Set SyncPers
+20:18:28 [327/555] ⚙️  Set Modify Position
+20:18:29 [328/555] ⚙️  Get Module Extension
+20:18:29 [329/555] ⚙️  Get Mod Possible
+20:18:29 [330/555] ⚙️  Get Object Child
+20:18:29 [331/555] ⚙️  Get SyncPers Status
+20:18:30 [332/555] ⚙️  Get Module Text
+20:18:30 [333/555] ⚙️  Get Symbol Information
+20:18:30 [334/555] ⚙️  Operations on RAPID Routine
+20:18:30 [335/555] ⚙️  Get Routine information
+20:18:31 [336/555] ⚙️  Get Routineargs information
+20:18:31 [337/555] ⚙️  Operations on RAPID symbols properties
+20:18:31 [338/555] ⚙️  Get RAPID symbols resources
+20:18:31 [339/555] ⚙️  Get rapid symbols actions
+20:18:32 [340/555] ⚙️  Search RAPID symbols
+20:18:32 [341/555] ⚙️  Operations on RAPID symbol object
+20:18:32 [342/555] ⚙️  Get Object Extension List
+20:18:32 [343/555] ⚙️  Operations on RAPID symbol
+20:18:33 [344/555] ⚙️  Operations on RAPID symbol properties
+20:18:33 [345/555] ⚙️  Get RAPID symbol properties
+20:18:33 [346/555] ⚙️  Operations on RAPID symbol data
+20:18:34 [347/555] ⚙️  Get rapid symbol data
+20:18:34 [348/555] ⚙️  Get rapid symbol data actions
+20:18:34 [349/555] ⚙️  Update rapid variable current value
+20:18:34 [350/555] ⚙️  Validate rapid variable
+20:18:34 [351/555] ⚙️  Subscribe on RAPID persistent variable
+20:18:35 [352/555] ⚙️  Update rapid variable Initial Value
+20:18:35 [353/555] ⚙️  Operations on RAPID tasks
+20:18:35 [354/555] ⚙️  Get RAPID tasks
+20:18:35 [355/555] ⚙️  Get rapid Tasks actions
+20:18:36 [356/555] ⚙️  Start RAPID Spy Logging
+20:18:36 [357/555] ⚙️  Get RAPID Spy Logging status
+20:18:36 [358/555] ⚙️  Stop RAPID Spy Logging
+20:18:37 [359/555] ⚙️  Activate/Deactivate rapid tasks
+20:18:37 [360/555] ⚙️  Get Program/Motion Pointer Sync State for all tasks
+20:18:37 [361/555] ⚙️  Subscribe on Build log change
+20:18:37 [362/555] ⚙️  Operations on RAPID task
+20:18:38 [363/555] ⚙️  Get RAPID task state
+20:18:38 [364/555] ⚙️  Get rapid task actions
+20:18:38 [365/555] ⚙️  Load RAPID module into a rapid task
+20:18:38 [366/555] ⚙️  Unload module from a rapid task
+20:18:39 [367/555] ⚙️  Abort current execution level
+20:18:39 [368/555] ⚙️  activate/deactivate rapid task
+20:18:39 [369/555] ⚙️  Get Activation Record
+20:18:39 [370/555] ⚙️  Get Structural Change Count
+20:18:40 [371/555] ⚙️  Get Preferable Data Types
+20:18:40 [372/555] ⚙️  Get Program Pointer Sync State
+20:18:40 [373/555] ⚙️  Get Motion Pointer Sync State
+20:18:40 [374/555] ⚙️  Link RAPID Task
+20:18:40 [375/555] ⚙️  Get Pallet
+20:18:41 [376/555] ⚙️  Get Pallet Head
+20:18:41 [377/555] ⚙️  Subscribe on Rapid Task Change
+20:18:41 [378/555] ⚙️  Subscribe on Rapid PP Sync state change
+20:18:41 [379/555] ⚙️  Subscribe on Rapid task pgmexecution state change
+20:18:42 [380/555] ⚙️  Operations on rapid motion
+20:18:42 [381/555] ⚙️  Get rapid motion
+20:18:42 [382/555] ⚙️  Get RobTarget
+20:18:42 [383/555] ⚙️  Get Joint Target
+20:18:43 [384/555] ⚙️  Get mechanical units
+20:18:43 [385/555] ⚙️  Get external joint states
+20:18:43 [386/555] ⚙️  Operations on rapid calib
+20:18:44 [387/555] ⚙️  Calibration for Displacement
+20:18:44 [388/555] ⚙️  Calibration for Tcp
+20:18:44 [389/555] ⚙️  Operations on RAPID program
+20:18:44 [390/555] ⚙️  Get RAPID program resource
+20:18:45 [391/555] ⚙️  Get rapid program actions
+20:18:45 [392/555] ⚙️  Load program into a rapid task
+20:18:45 [393/555] ⚙️  Unload program from a rapid task
+20:18:46 [394/555] ⚙️  Save program
+20:18:46 [395/555] ⚙️  Set program name
+20:18:46 [396/555] ⚙️  Set Entry Point
+20:18:46 [397/555] ⚙️  Operations on RAPID build errors
+20:18:47 [398/555] ⚙️  Get Build Errors
+20:18:47 [399/555] ⚙️  Operations on RAPID breakpoint
+20:18:47 [400/555] ⚙️  Get RAPID breakpoint actions
+20:18:47 [401/555] ⚙️  Set break point
+20:18:48 [402/555] ⚙️  Get break points
+20:18:48 [403/555] ⚙️  Operations on RAPID program PCP
+20:18:48 [404/555] ⚙️  Get RAPID task Motion&Program pointer positions
+20:18:48 [405/555] ⚙️  Get RAPID task pcp actions
+20:18:49 [406/555] ⚙️  Set the Program pointer(PP) position to cursor
+20:18:49 [407/555] ⚙️  Set the Program pointer(PP) position to routine
+20:18:49 [408/555] ⚙️  Set the Program pointer(PP) position to routine by URL
+20:18:49 [409/555] ⚙️  Set the Program pointer(PP) position to previous instruction
+20:18:49 [410/555] ⚙️  Set the Program pointer(PP) position to next instruction
+20:18:50 [411/555] ⚙️  Subscribe on Program Pointer
+20:18:50 [412/555] ⚙️  Subscribe on Motion Pointer
+20:18:50 [413/555] ⚙️  Operations on RAPID service routine
+20:18:50 [414/555] ⚙️  Get RAPID service routine
+20:18:51 [415/555] ⚙️  Operations on RAPID program counter position
+20:18:51 [416/555] ⚙️  Get RAPID Program counter position
+20:18:51 [417/555] ⚙️  Operations on RAPID UI instructions
+20:18:51 [418/555] ⚙️  Get UI instruction resource
+20:18:52 [419/555] ⚙️  Get UI instruction actions
+20:18:52 [420/555] ⚙️  Subscribe on UI instruction
+20:18:52 [421/555] ⚙️  Operations on Active UI Instruction
+20:18:52 [422/555] ⚙️  Get Active UI Instruction
+20:18:53 [423/555] ⚙️  Get Active UI instruction actions
+20:18:53 [424/555] ⚙️  Update an Active UI Instruction Parameter
+20:18:53 [425/555] ⚙️  Get parameter value for an active UI instruction
+20:18:53 [426/555] ⚙️  Get active UI instruction parameters
+20:18:54 [427/555] ⚙️  Operations on Rapid taskpanel
+20:18:54 [428/555] ⚙️  Get user modify from taskpanel
+20:18:54 [429/555] ⚙️  Subscribe on Tasks panel change
+20:18:54 [430/555] ⚙️  Operations on Rapid AliasIO
+20:18:55 [431/555] ⚙️  Get AliasIO List
+20:18:55 [432/555] ⚙️  System service
+20:18:55 [433/555] ⚙️  System Information
+20:18:55 [434/555] ⚙️  Get robot type
+20:18:56 [435/555] ⚙️  System Option Resource
+20:18:56 [436/555] ⚙️  System Options
+20:18:56 [437/555] ⚙️  System Energy Resource
+20:18:57 [438/555] ⚙️  Get System Energy Actions
+20:18:57 [439/555] ⚙️  System Energy Info Change Count
+20:18:57 [440/555] ⚙️  Reset Accumulated Energy
+20:18:57 [441/555] ⚙️  System Energy
+20:18:58 [442/555] ⚙️  Subscribe on System Energy Changes.
+20:18:59 [443/555] ⚙️  System License Resource
+20:18:59 [444/555] ⚙️  Get System Robotware License
+20:18:59 [445/555] ⚙️  System Products Resource
+20:18:59 [446/555] ⚙️  Get Installed Products
+20:18:59 [447/555] ⚙️  RobotWare return codes service
+20:19:00 [448/555] ⚙️  Get a list of RobotWare return codes
+20:19:00 [449/555] ⚙️  Devices service
+20:19:00 [450/555] ⚙️  Devices tree information
+20:19:00 [451/555] ⚙️  Motion System
+20:19:01 [452/555] ⚙️  Get Motion System
+20:19:01 [453/555] ⚙️  Get Motion System action
+20:19:01 [454/555] ⚙️  Set Mechunit for jogging
+20:19:02 [455/555] ⚙️  Perform Jogging
+20:19:03 [456/555] ⚙️  Set Robo Target Position
+20:19:03 [457/555] ⚙️  Get check change count
+20:19:04 [458/555] ⚙️  Subscribe on Error EventChange
+20:19:04 [459/555] ⚙️  Operations on Error State
+20:19:04 [460/555] ⚙️  Get Error State
+20:19:04 [461/555] ⚙️  Operations on Motion Supervision
+20:19:04 [462/555] ⚙️  Get Motion Supervision
+20:19:05 [463/555] ⚙️  Get Motion Supervision Actions
+20:19:05 [464/555] ⚙️  Set Motion Supervision Mode (Jog Supervision Mode)
+20:19:05 [465/555] ⚙️  Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
+20:19:05 [466/555] ⚙️  Get Motion Supervision Collision Prediction Mode
+20:19:06 [467/555] ⚙️  Set Motion Supervision Collision Prediction Mode
+20:19:06 [468/555] ⚙️  Operations On Path Supervision
+20:19:06 [469/555] ⚙️  Get Path Supervision
+20:19:06 [470/555] ⚙️  Get Path Supervision Actions
+20:19:07 [471/555] ⚙️  Set Path Supervision Mode
+20:19:07 [472/555] ⚙️  Set Path Supervision Level
+20:19:07 [473/555] ⚙️  Operations On NonMotion Execution
+20:19:07 [474/555] ⚙️  Get Non Motion Execution Mode
+20:19:07 [475/555] ⚙️  Get NonMotion Execution Actions
+20:19:08 [476/555] ⚙️  Set NonMotion Execution Mode
+20:19:08 [477/555] ⚙️  Operations on Mechunits
+20:19:08 [478/555] ⚙️  Get Mechunits
+20:19:08 [479/555] ⚙️  Operations on Mechunit
+20:19:09 [480/555] ⚙️  Get Mechunit
+20:19:09 [481/555] ⚙️  Get Mechunit action
+20:19:09 [482/555] ⚙️  Set Mechunit
+20:19:09 [483/555] ⚙️  Set Compliance Lead Through
+20:19:09 [484/555] ⚙️  Get Compliance Lead Through
+20:19:10 [485/555] ⚙️  Set Fine Calibration
+20:19:10 [486/555] ⚙️  Update (Syncronize) Revolution Counter
+20:19:10 [487/555] ⚙️  Get Physical Joints
+20:19:10 [488/555] ⚙️  Get Cartesian Value
+20:19:11 [489/555] ⚙️  Set Mechanical Unit
+20:19:11 [490/555] ⚙️  Get Robtarget
+20:19:11 [491/555] ⚙️  Get Joint target
+20:19:11 [492/555] ⚙️  Subscribe on Mechunit Mode Change
+20:19:12 [493/555] ⚙️  Get Joints From Position
+20:19:12 [494/555] ⚙️  Get Position From Joints
+20:19:12 [495/555] ⚙️  Get All Joint Solution
+20:19:12 [496/555] ⚙️  Get Joints From Cartesian
+20:19:12 [497/555] ⚙️  Get Calibration Info
+20:19:13 [498/555] ⚙️  Operation on Calib
+20:19:13 [499/555] ⚙️  Calibration for BaseFrame
+20:19:13 [500/555] ⚙️  Calibration for BaseFrameMoving
+20:19:13 [501/555] ⚙️  Calibration for ExternalRobotNomBaseNew
+20:19:14 [502/555] ⚙️  Calibration for RobotAxisRot
+20:19:14 [503/555] ⚙️  Calibration for SingleUserRotNew
+20:19:14 [504/555] ⚙️  Calibration for RotExtCtrlZdef
+20:19:14 [505/555] ⚙️  Calibration for SingleUserLin
+20:19:15 [506/555] ⚙️  Calibration for SingleTrack
+20:19:15 [507/555] ⚙️  Calibration for RobotAxisRot2
+20:19:15 [508/555] ⚙️  Operations on Baseframe
+20:19:15 [509/555] ⚙️  Get Base Frame
+20:19:16 [510/555] ⚙️  Get Base Frame actions
+20:19:16 [511/555] ⚙️  Set Base Frame
+20:19:16 [512/555] ⚙️  Operations on Axes
+20:19:16 [513/555] ⚙️  Get Axes
+20:19:17 [514/555] ⚙️  Get Axis
+20:19:17 [515/555] ⚙️  Get Axis actions
+20:19:17 [516/555] ⚙️  Get Axis pose
+20:19:17 [517/555] ⚙️  Set Axis pose
+20:19:18 [518/555] ⚙️  Update Commutate
+20:19:18 [519/555] ⚙️  Update Sync Revolution Counter
+20:19:18 [520/555] ⚙️  Operations on SMB Data
+20:19:18 [521/555] ⚙️  Set SMB Data
+20:19:19 [522/555] ⚙️  Clear SMB Data
+20:19:19 [523/555] ⚙️  Get SMB Data
+20:19:19 [524/555] ⚙️  Get SMB Data Actions
+20:19:19 [525/555] ⚙️  Operations on Motor Calib
+20:19:19 [526/555] ⚙️  Get Motor Calib Names
+20:19:20 [527/555] ⚙️  Integrated Vision (IV) Service
+20:19:20 [528/555] ⚙️  Get Vision Manager Resource
+20:19:20 [529/555] ⚙️  Get Number of Cameras of IV
+20:19:20 [530/555] ⚙️  Get IV Camera Validity
+20:19:21 [531/555] ⚙️  Get Vision (camera) Resource Actions
+20:19:21 [532/555] ⚙️  Get Camera Jobname
+20:19:21 [533/555] ⚙️  Restart Camera
+20:19:21 [534/555] ⚙️  Flash LED(s) of Camera
+20:19:22 [535/555] ⚙️  Set Camera State
+20:19:22 [536/555] ⚙️  Refesh the camera(s)
+20:19:22 [537/555] ⚙️  Set Hostname of the Camera
+20:19:22 [538/555] ⚙️  Set camera to be a DHCP client
+20:19:23 [539/555] ⚙️  Set Camera DNS Settings
+20:19:23 [540/555] ⚙️  Get Camera Status
+20:19:23 [541/555] ⚙️  Get Camera Info Using Index of the camera
+20:19:23 [542/555] ⚙️  Set Camera Name
+20:19:24 [543/555] ⚙️  Set Camera User Credentials
+20:19:24 [544/555] ⚙️  Set Camera IP Settings
+20:19:24 [545/555] ⚙️  Get IV Camera Info
+20:19:24 [546/555] ⚙️  Operations on IO Profinet Device
+20:19:25 [547/555] ⚙️  Get profinet I/O device read record implicit data from device in profinet network
+20:19:25 [548/555] ⚙️  Read record implicit data from device in profinet network
+20:19:25 [549/555] ⚙️  Get forms
+20:19:25 [550/555] ⚙️  Get profinet I/O device read record data
+20:19:25 [551/555] ⚙️  Get profinet I/O device read record data
+20:19:26 [552/555] ⚙️  Get Forms
+20:19:26 [553/555] ⚙️  Get profinet device alarms xml response
+20:19:26 [554/555] ⚙️  Clear the alarms
+20:19:26 [555/555] ⚙️  Get Forms
+20:19:27 
+💾 Export en cours...
+20:19:27   📄 JSON  → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\contrib\scraping\abb_rws_api_full.json
+20:19:27   📝 MD    → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\contrib\scraping\abb_rws_api_full.md
+20:19:27 
+✅ Terminé — 555 routes documentées.
