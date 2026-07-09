@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environnements
+.env
+.pixi/
+.venv/
+*.lock   # pixi.lock est versionné — retirer cette ligne pour committer
+
+# Éditeurs
+.vscode/
+.idea/
+.ruff_cache/
+*.swp
+
+
+# Tests & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
