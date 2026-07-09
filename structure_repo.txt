@@ -21,5 +21,4 @@ abb_rws_client_python_rw6
 ├── pixi.toml
 ├── pyproject.toml
 ├── README.md
-├── robot_controller_return_code.xml
-└── spec.md
+└── robot_controller_return_code.txt

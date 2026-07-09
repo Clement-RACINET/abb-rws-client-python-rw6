@@ -439,9 +439,9 @@ autoritaire :
 
 | Fichier               | Contenu                                        |
 | --------------------- | ---------------------------------------------- |
-| `return_codes.html` | Les ~150 codes SYS_CTRL_* ABB avec nom, code   |
+| `robot_controller_return_code.txt` | Les ~150 codes SYS_CTRL_* ABB avec nom, code   |
 |                       | entier et description                          |
-| `routes_tree.txt`   | Arborescence complète des ~560 routes RWS ABB |
+| `architecture_api.txt`| Arborescence complète des ~560 routes RWS ABB |
 |                       | organisées hiérarchiquement                  |
 
 Ces fichiers définissent la **vérité de référence** pour :
@@ -451,9 +451,9 @@ Ces fichiers définissent la **vérité de référence** pour :
 - La liste exhaustive des fonctions à implémenter
 
 Toute décision d'architecture dans `rws/` doit être justifiable
-par une entrée dans `routes_tree.txt`. Toute exception dans
+par une entrée dans `architecture_api.txt`. Toute exception dans
 `_core/exceptions.py` doit être justifiable par une entrée dans
-`return_codes.html`.
+`robot_controller_return_code.txt`.
 
 ---
 
