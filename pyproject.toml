@@ -96,11 +96,15 @@ log_cli_level = "INFO"
 # Coverage
 # ---------------------------------------------------------------------------
 [tool.coverage.run]
-source = ["abb_rws_client"]
+source  = ["abb_rws_client"]
+include = [
+    "abb_rws_client/_core/*.py",
+    "abb_rws_client/rws/**/*.py",
+]
 omit = [
     ".pixi/*",
     "tests/*",
-    "export"
+    "_scrapping_abb_api/*",
 ]
 
 [tool.coverage.report]

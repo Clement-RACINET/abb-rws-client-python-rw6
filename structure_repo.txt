@@ -65,7 +65,7 @@ abb_rws_client_python_rw6
 │   │   ├── routes_list.json
 │   │   ├── scrape.log
 │   │   └── scrape.py
-│   └── README.md
+│   └── export_structure.py
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
@@ -124,7 +124,6 @@ abb_rws_client_python_rw6
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md
-├── export_structure.py
 ├── objectifs.md
 ├── pixi.lock
 ├── pixi.toml
