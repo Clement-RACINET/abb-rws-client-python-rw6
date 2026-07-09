@@ -12,9 +12,9 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from abb_rws_client.exceptions import RWSTimeoutError
-from abb_rws_client.execution import ExecutionState
-from abb_rws_client.helpers import (
+from old_abb_rws_client.exceptions import RWSTimeoutError
+from old_abb_rws_client.execution import ExecutionState
+from old_abb_rws_client.helpers import (
     DEFAULT_POLL_INTERVAL_S,
     DEFAULT_TIMEOUT_S,
     reset_and_start,

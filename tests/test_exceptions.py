@@ -3,7 +3,7 @@
 
 import pytest
 
-from abb_rws_client.exceptions import (
+from old_abb_rws_client.exceptions import (
     MastershipDenied,
     MastershipError,
     MastershipNotHeld,

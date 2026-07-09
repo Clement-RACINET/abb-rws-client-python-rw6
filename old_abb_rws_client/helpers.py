@@ -23,14 +23,14 @@ import asyncio
 import logging
 from typing import TYPE_CHECKING
 
-from abb_rws_client.exceptions import RWSTimeoutError
-from abb_rws_client.execution import get_execution_state, reset_pp, start_execution
-from abb_rws_client.mastership import Mastership
-from abb_rws_client.rapid_variable import RapidValue, get_rapid_var
+from old_abb_rws_client.exceptions import RWSTimeoutError
+from old_abb_rws_client.execution import get_execution_state, reset_pp, start_execution
+from old_abb_rws_client.mastership import Mastership
+from old_abb_rws_client.rapid_variable import RapidValue, get_rapid_var
 
 if TYPE_CHECKING:
-    from abb_rws_client.client import RWSClient
-    from abb_rws_client.execution import CycleMode, ExecMode, RegainMode
+    from old_abb_rws_client.client import RWSClient
+    from old_abb_rws_client.execution import CycleMode, ExecMode, RegainMode
 
 logger = logging.getLogger(__name__)
 

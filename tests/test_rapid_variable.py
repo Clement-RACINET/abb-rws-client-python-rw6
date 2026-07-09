@@ -15,9 +15,9 @@ import json
 import httpx
 import pytest
 
-from abb_rws_client.client import RWSClient
-from abb_rws_client.exceptions import RWSValueError
-from abb_rws_client.rapid_variable import (
+from old_abb_rws_client.client import RWSClient
+from old_abb_rws_client.exceptions import RWSValueError
+from old_abb_rws_client.rapid_variable import (
     DEFAULT_TASK,
     RAPID_TYPES,
     build_symbol_path,
@@ -27,7 +27,7 @@ from abb_rws_client.rapid_variable import (
     serialize_rapid_value,
     set_rapid_var,
 )
-from abb_rws_client.serializers import RobTarget
+from old_abb_rws_client.serializers import RobTarget
 
 # ---------------------------------------------------------------------------
 # Helpers mock

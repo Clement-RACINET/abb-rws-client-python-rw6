@@ -50,8 +50,8 @@ import logging
 from types import TracebackType
 from typing import Self
 
-from abb_rws_client.client import RWSClient
-from abb_rws_client.exceptions import MastershipDenied, MastershipNotHeld
+from old_abb_rws_client.client import RWSClient
+from old_abb_rws_client.exceptions import MastershipDenied, MastershipNotHeld
 
 logger = logging.getLogger(__name__)
 

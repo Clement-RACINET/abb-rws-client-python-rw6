@@ -30,10 +30,10 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Literal
 
-from abb_rws_client.exceptions import RWSValueError
+from old_abb_rws_client.exceptions import RWSValueError
 
 if TYPE_CHECKING:
-    from abb_rws_client.client import RWSClient
+    from old_abb_rws_client.client import RWSClient
 
 logger = logging.getLogger(__name__)
 

@@ -16,9 +16,9 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.client import RWSClient
-from abb_rws_client.exceptions import MastershipDenied, MastershipNotHeld
-from abb_rws_client.mastership import Mastership
+from old_abb_rws_client.client import RWSClient
+from old_abb_rws_client.exceptions import MastershipDenied, MastershipNotHeld
+from old_abb_rws_client.mastership import Mastership
 
 # ---------------------------------------------------------------------------
 # Helpers de mock

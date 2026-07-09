@@ -10,9 +10,9 @@ import json
 import httpx
 import pytest
 
-from abb_rws_client.client import RWSClient
-from abb_rws_client.exceptions import RWSValueError
-from abb_rws_client.execution import (
+from old_abb_rws_client.client import RWSClient
+from old_abb_rws_client.exceptions import RWSValueError
+from old_abb_rws_client.execution import (
     _extract_execution_state,
     get_execution_state,
     is_running,

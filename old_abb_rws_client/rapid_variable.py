@@ -30,15 +30,15 @@ import json as _json
 import logging
 from typing import TYPE_CHECKING
 
-from abb_rws_client.exceptions import RWSValueError
-from abb_rws_client.serializers import (
+from old_abb_rws_client.exceptions import RWSValueError
+from old_abb_rws_client.serializers import (
     RobTarget,
     python_to_rapid_value,
     rapid_value_to_python,
 )
 
 if TYPE_CHECKING:
-    from abb_rws_client.client import RWSClient
+    from old_abb_rws_client.client import RWSClient
 
 logger = logging.getLogger(__name__)
 

@@ -3,9 +3,19 @@ abb_rws_client_python_rw6
 │   ├── envs
 │   │   └── default
 │   │       ├── conda-meta
+│   │       │   ├── anyio-4.14.1-pyhcf101f3_0.json
 │   │       │   ├── bzip2-1.0.8-h0ad9c76_9.json
 │   │       │   ├── ca-certificates-2026.6.17-h4c7d964_0.json
+│   │       │   ├── certifi-2026.6.17-pyhd8ed1ab_0.json
+│   │       │   ├── exceptiongroup-1.3.1-pyhd8ed1ab_0.json
+│   │       │   ├── h11-0.16.0-pyhcf101f3_1.json
+│   │       │   ├── h2-4.3.0-pyhcf101f3_0.json
 │   │       │   ├── history
+│   │       │   ├── hpack-4.2.0-pyhd8ed1ab_0.json
+│   │       │   ├── httpcore-1.0.9-pyh29332c3_0.json
+│   │       │   ├── httpx-0.28.1-pyhd8ed1ab_0.json
+│   │       │   ├── hyperframe-6.1.0-pyhd8ed1ab_0.json
+│   │       │   ├── idna-3.18-pyhcf101f3_0.json
 │   │       │   ├── libexpat-2.8.1-hac47afa_1.json
 │   │       │   ├── libffi-3.5.2-h3d046cb_0.json
 │   │       │   ├── liblzma-5.8.3-hfd05255_0.json
@@ -15,7 +25,9 @@ abb_rws_client_python_rw6
 │   │       │   ├── pixi
 │   │       │   ├── pixi_env_prefix
 │   │       │   ├── python-3.11.15-h0159041_1_cpython.json
+│   │       │   ├── sniffio-1.3.1-pyhd8ed1ab_2.json
 │   │       │   ├── tk-8.6.13-h6ed50ae_3.json
+│   │       │   ├── typing_extensions-4.16.0-pyhcf101f3_0.json
 │   │       │   ├── tzdata-2025c-hc9c84f9_1.json
 │   │       │   ├── ucrt-10.0.26100.0-h57928b3_0.json
 │   │       │   ├── vc-14.5-h1b7c187_39.json
@@ -60,10 +72,87 @@ abb_rws_client_python_rw6
 │   │       │       │   ├── openssl_activate-win.bat
 │   │       │       │   ├── openssl_activate-win.ps1
 │   │       │       │   └── openssl_activate-win.sh
-│   │       │       └── deactivate.d
-│   │       │           ├── openssl_deactivate-win.bat
-│   │       │           ├── openssl_deactivate-win.ps1
-│   │       │           └── openssl_deactivate-win.sh
+│   │       │       ├── deactivate.d
+│   │       │       │   ├── openssl_deactivate-win.bat
+│   │       │       │   ├── openssl_deactivate-win.ps1
+│   │       │       │   └── openssl_deactivate-win.sh
+│   │       │       └── test-files
+│   │       │           ├── anyio
+│   │       │           │   └── 1
+│   │       │           │       ├── tests
+│   │       │           │       │   ├── streams
+│   │       │           │       │   │   ├── __init__.py
+│   │       │           │       │   │   ├── test_buffered.py
+│   │       │           │       │   │   ├── test_file.py
+│   │       │           │       │   │   ├── test_memory.py
+│   │       │           │       │   │   ├── test_stapled.py
+│   │       │           │       │   │   ├── test_text.py
+│   │       │           │       │   │   └── test_tls.py
+│   │       │           │       │   ├── __init__.py
+│   │       │           │       │   ├── conftest.py
+│   │       │           │       │   ├── test_all_attributes.py
+│   │       │           │       │   ├── test_contextmanagers.py
+│   │       │           │       │   ├── test_debugging.py
+│   │       │           │       │   ├── test_deprecations.py
+│   │       │           │       │   ├── test_eventloop.py
+│   │       │           │       │   ├── test_fileio.py
+│   │       │           │       │   ├── test_from_thread.py
+│   │       │           │       │   ├── test_functools.py
+│   │       │           │       │   ├── test_itertools.py
+│   │       │           │       │   ├── test_lowlevel.py
+│   │       │           │       │   ├── test_pytest_plugin.py
+│   │       │           │       │   ├── test_signals.py
+│   │       │           │       │   ├── test_sockets.py
+│   │       │           │       │   ├── test_subprocesses.py
+│   │       │           │       │   ├── test_synchronization.py
+│   │       │           │       │   ├── test_taskgroups.py
+│   │       │           │       │   ├── test_tempfile.py
+│   │       │           │       │   ├── test_to_interpreter.py
+│   │       │           │       │   ├── test_to_process.py
+│   │       │           │       │   ├── test_to_thread.py
+│   │       │           │       │   └── test_typedattr.py
+│   │       │           │       └── pyproject.toml
+│   │       │           ├── h2
+│   │       │           │   └── 1
+│   │       │           │       └── tests
+│   │       │           │           ├── __init__.py
+│   │       │           │           ├── conftest.py
+│   │       │           │           ├── coroutine_tests.py
+│   │       │           │           ├── h2spectest.sh
+│   │       │           │           ├── helpers.py
+│   │       │           │           ├── test_basic_logic.py
+│   │       │           │           ├── test_closed_streams.py
+│   │       │           │           ├── test_complex_logic.py
+│   │       │           │           ├── test_config.py
+│   │       │           │           ├── test_events.py
+│   │       │           │           ├── test_exceptions.py
+│   │       │           │           ├── test_flow_control_window.py
+│   │       │           │           ├── test_h2_upgrade.py
+│   │       │           │           ├── test_head_request.py
+│   │       │           │           ├── test_header_indexing.py
+│   │       │           │           ├── test_informational_responses.py
+│   │       │           │           ├── test_interacting_stacks.py
+│   │       │           │           ├── test_invalid_content_lengths.py
+│   │       │           │           ├── test_invalid_frame_sequences.py
+│   │       │           │           ├── test_invalid_headers.py
+│   │       │           │           ├── test_priority.py
+│   │       │           │           ├── test_related_events.py
+│   │       │           │           ├── test_rfc7838.py
+│   │       │           │           ├── test_rfc8441.py
+│   │       │           │           ├── test_settings.py
+│   │       │           │           ├── test_state_machines.py
+│   │       │           │           ├── test_stream_reset.py
+│   │       │           │           └── test_utility_functions.py
+│   │       │           └── idna
+│   │       │               └── 1
+│   │       │                   └── tests
+│   │       │                       ├── __init__.py
+│   │       │                       ├── test_idna.py
+│   │       │                       ├── test_idna_cli.py
+│   │       │                       ├── test_idna_codec.py
+│   │       │                       ├── test_idna_compat.py
+│   │       │                       ├── test_idna_uts46.py
+│   │       │                       └── test_intranges.py
 │   │       ├── include
 │   │       │   ├── cpython
 │   │       │   │   ├── abstract.h
@@ -2067,6 +2156,7 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── anyio-4.14.1.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── entry_points.txt
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
@@ -2075,47 +2165,6 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── scm_file_list.json
 │   │       │   │   │   ├── scm_version.json
 │   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
-│   │       │   │   ├── attr
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── __init__.pyi
-│   │       │   │   │   ├── _cmp.py
-│   │       │   │   │   ├── _cmp.pyi
-│   │       │   │   │   ├── _compat.py
-│   │       │   │   │   ├── _config.py
-│   │       │   │   │   ├── _funcs.py
-│   │       │   │   │   ├── _make.py
-│   │       │   │   │   ├── _next_gen.py
-│   │       │   │   │   ├── _typing_compat.pyi
-│   │       │   │   │   ├── _version_info.py
-│   │       │   │   │   ├── _version_info.pyi
-│   │       │   │   │   ├── converters.py
-│   │       │   │   │   ├── converters.pyi
-│   │       │   │   │   ├── exceptions.py
-│   │       │   │   │   ├── exceptions.pyi
-│   │       │   │   │   ├── filters.py
-│   │       │   │   │   ├── filters.pyi
-│   │       │   │   │   ├── py.typed
-│   │       │   │   │   ├── setters.py
-│   │       │   │   │   ├── setters.pyi
-│   │       │   │   │   ├── validators.py
-│   │       │   │   │   └── validators.pyi
-│   │       │   │   ├── attrs
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── __init__.pyi
-│   │       │   │   │   ├── converters.py
-│   │       │   │   │   ├── exceptions.py
-│   │       │   │   │   ├── filters.py
-│   │       │   │   │   ├── py.typed
-│   │       │   │   │   ├── setters.py
-│   │       │   │   │   └── validators.py
-│   │       │   │   ├── attrs-26.1.0.dist-info
-│   │       │   │   │   ├── licenses
-│   │       │   │   │   │   └── LICENSE
-│   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
 │   │       │   │   │   └── WHEEL
 │   │       │   │   ├── certifi
 │   │       │   │   │   ├── __pycache__
@@ -2129,42 +2178,9 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── certifi-2026.6.17.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
-│   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
-│   │       │   │   ├── cffi
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── _cffi_errors.h
-│   │       │   │   │   ├── _cffi_gen_src.py
-│   │       │   │   │   ├── _cffi_include.h
-│   │       │   │   │   ├── _embedding.h
-│   │       │   │   │   ├── _imp_emulation.py
-│   │       │   │   │   ├── _shimmed_dist_utils.py
-│   │       │   │   │   ├── api.py
-│   │       │   │   │   ├── backend_ctypes.py
-│   │       │   │   │   ├── cffi_opcode.py
-│   │       │   │   │   ├── commontypes.py
-│   │       │   │   │   ├── cparser.py
-│   │       │   │   │   ├── error.py
-│   │       │   │   │   ├── ffiplatform.py
-│   │       │   │   │   ├── gen_src.py
-│   │       │   │   │   ├── lock.py
-│   │       │   │   │   ├── model.py
-│   │       │   │   │   ├── parse_c_type.h
-│   │       │   │   │   ├── pkgconfig.py
-│   │       │   │   │   ├── recompiler.py
-│   │       │   │   │   ├── setuptools_ext.py
-│   │       │   │   │   ├── vengine_cpy.py
-│   │       │   │   │   ├── vengine_gen.py
-│   │       │   │   │   └── verifier.py
-│   │       │   │   ├── cffi-2.1.0.dist-info
-│   │       │   │   │   ├── licenses
-│   │       │   │   │   │   └── LICENSE
-│   │       │   │   │   ├── entry_points.txt
-│   │       │   │   │   ├── INSTALLER
+│   │       │   │   │   ├── LICENSE
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
 │   │       │   │   │   ├── REQUESTED
@@ -2317,6 +2333,23 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── py.typed
 │   │       │   │   │   ├── variables.py
 │   │       │   │   │   └── version.py
+│   │       │   │   ├── exceptiongroup
+│   │       │   │   │   ├── __init__.py
+│   │       │   │   │   ├── _catch.py
+│   │       │   │   │   ├── _exceptions.py
+│   │       │   │   │   ├── _formatting.py
+│   │       │   │   │   ├── _suppress.py
+│   │       │   │   │   ├── _version.py
+│   │       │   │   │   └── py.typed
+│   │       │   │   ├── exceptiongroup-1.3.1.dist-info
+│   │       │   │   │   ├── licenses
+│   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
+│   │       │   │   │   ├── INSTALLER
+│   │       │   │   │   ├── METADATA
+│   │       │   │   │   ├── RECORD
+│   │       │   │   │   ├── REQUESTED
+│   │       │   │   │   └── WHEEL
 │   │       │   │   ├── h11
 │   │       │   │   │   ├── __pycache__
 │   │       │   │   │   │   ├── __init__.cpython-311.pyc
@@ -2345,6 +2378,50 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── h11-0.16.0.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE.txt
+│   │       │   │   │   ├── direct_url.json
+│   │       │   │   │   ├── INSTALLER
+│   │       │   │   │   ├── METADATA
+│   │       │   │   │   ├── RECORD
+│   │       │   │   │   ├── REQUESTED
+│   │       │   │   │   ├── top_level.txt
+│   │       │   │   │   └── WHEEL
+│   │       │   │   ├── h2
+│   │       │   │   │   ├── __init__.py
+│   │       │   │   │   ├── config.py
+│   │       │   │   │   ├── connection.py
+│   │       │   │   │   ├── errors.py
+│   │       │   │   │   ├── events.py
+│   │       │   │   │   ├── exceptions.py
+│   │       │   │   │   ├── frame_buffer.py
+│   │       │   │   │   ├── py.typed
+│   │       │   │   │   ├── settings.py
+│   │       │   │   │   ├── stream.py
+│   │       │   │   │   ├── utilities.py
+│   │       │   │   │   └── windows.py
+│   │       │   │   ├── h2-4.3.0.dist-info
+│   │       │   │   │   ├── licenses
+│   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
+│   │       │   │   │   ├── INSTALLER
+│   │       │   │   │   ├── METADATA
+│   │       │   │   │   ├── RECORD
+│   │       │   │   │   ├── REQUESTED
+│   │       │   │   │   ├── top_level.txt
+│   │       │   │   │   └── WHEEL
+│   │       │   │   ├── hpack
+│   │       │   │   │   ├── __init__.py
+│   │       │   │   │   ├── exceptions.py
+│   │       │   │   │   ├── hpack.py
+│   │       │   │   │   ├── huffman.py
+│   │       │   │   │   ├── huffman_constants.py
+│   │       │   │   │   ├── huffman_table.py
+│   │       │   │   │   ├── py.typed
+│   │       │   │   │   ├── struct.py
+│   │       │   │   │   └── table.py
+│   │       │   │   ├── hpack-4.2.0.dist-info
+│   │       │   │   │   ├── licenses
+│   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
@@ -2425,6 +2502,7 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── httpcore-1.0.9.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE.md
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
@@ -2484,11 +2562,27 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── httpx-0.28.1.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE.md
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── entry_points.txt
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
 │   │       │   │   │   ├── REQUESTED
+│   │       │   │   │   └── WHEEL
+│   │       │   │   ├── hyperframe
+│   │       │   │   │   ├── __init__.py
+│   │       │   │   │   ├── exceptions.py
+│   │       │   │   │   ├── flags.py
+│   │       │   │   │   ├── frame.py
+│   │       │   │   │   └── py.typed
+│   │       │   │   ├── hyperframe-6.1.0.dist-info
+│   │       │   │   │   ├── direct_url.json
+│   │       │   │   │   ├── INSTALLER
+│   │       │   │   │   ├── LICENSE
+│   │       │   │   │   ├── METADATA
+│   │       │   │   │   ├── RECORD
+│   │       │   │   │   ├── REQUESTED
+│   │       │   │   │   ├── top_level.txt
 │   │       │   │   │   └── WHEEL
 │   │       │   │   ├── idna
 │   │       │   │   │   ├── __pycache__
@@ -2511,6 +2605,7 @@ abb_rws_client_python_rw6
 │   │       │   │   ├── idna-3.18.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE.md
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── entry_points.txt
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
@@ -2531,27 +2626,6 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE
 │   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
-│   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
-│   │       │   │   ├── outcome
-│   │       │   │   │   ├── __pycache__
-│   │       │   │   │   │   ├── __init__.cpython-311.pyc
-│   │       │   │   │   │   ├── _impl.cpython-311.pyc
-│   │       │   │   │   │   ├── _util.cpython-311.pyc
-│   │       │   │   │   │   └── _version.cpython-311.pyc
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── _impl.py
-│   │       │   │   │   ├── _util.py
-│   │       │   │   │   ├── _version.py
-│   │       │   │   │   └── py.typed
-│   │       │   │   ├── outcome-1.3.0.post0.dist-info
-│   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── LICENSE
-│   │       │   │   │   ├── LICENSE.APACHE2
-│   │       │   │   │   ├── LICENSE.MIT
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
 │   │       │   │   │   ├── REQUESTED
@@ -2613,24 +2687,6 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── _warnings.py
 │   │       │   │   │   └── py.typed
 │   │       │   │   ├── pluggy-1.6.0.dist-info
-│   │       │   │   │   ├── licenses
-│   │       │   │   │   │   └── LICENSE
-│   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
-│   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
-│   │       │   │   ├── pycparser
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── _ast_gen.py
-│   │       │   │   │   ├── _c_ast.cfg
-│   │       │   │   │   ├── ast_transforms.py
-│   │       │   │   │   ├── c_ast.py
-│   │       │   │   │   ├── c_generator.py
-│   │       │   │   │   ├── c_lexer.py
-│   │       │   │   │   └── c_parser.py
-│   │       │   │   ├── pycparser-3.0.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE
 │   │       │   │   │   ├── INSTALLER
@@ -3111,6 +3167,11 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── _version.py
 │   │       │   │   │   └── py.typed
 │   │       │   │   ├── sniffio-1.3.1.dist-info
+│   │       │   │   │   ├── licenses
+│   │       │   │   │   │   ├── LICENSE
+│   │       │   │   │   │   ├── LICENSE.APACHE2
+│   │       │   │   │   │   └── LICENSE.MIT
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── LICENSE
 │   │       │   │   │   ├── LICENSE.APACHE2
@@ -3120,259 +3181,15 @@ abb_rws_client_python_rw6
 │   │       │   │   │   ├── REQUESTED
 │   │       │   │   │   ├── top_level.txt
 │   │       │   │   │   └── WHEEL
-│   │       │   │   ├── sortedcontainers
-│   │       │   │   │   ├── __pycache__
-│   │       │   │   │   │   ├── __init__.cpython-311.pyc
-│   │       │   │   │   │   ├── sorteddict.cpython-311.pyc
-│   │       │   │   │   │   ├── sortedlist.cpython-311.pyc
-│   │       │   │   │   │   └── sortedset.cpython-311.pyc
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── sorteddict.py
-│   │       │   │   │   ├── sortedlist.py
-│   │       │   │   │   └── sortedset.py
-│   │       │   │   ├── sortedcontainers-2.4.0.dist-info
-│   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── LICENSE
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
-│   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
-│   │       │   │   ├── trio
-│   │       │   │   │   ├── __pycache__
-│   │       │   │   │   │   ├── __init__.cpython-311.pyc
-│   │       │   │   │   │   ├── _abc.cpython-311.pyc
-│   │       │   │   │   │   ├── _channel.cpython-311.pyc
-│   │       │   │   │   │   ├── _deprecate.cpython-311.pyc
-│   │       │   │   │   │   ├── _dtls.cpython-311.pyc
-│   │       │   │   │   │   ├── _file_io.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_generic.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_open_tcp_listeners.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_open_tcp_stream.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_open_unix_stream.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_serve_listeners.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_socket.cpython-311.pyc
-│   │       │   │   │   │   ├── _highlevel_ssl_helpers.cpython-311.pyc
-│   │       │   │   │   │   ├── _path.cpython-311.pyc
-│   │       │   │   │   │   ├── _signals.cpython-311.pyc
-│   │       │   │   │   │   ├── _socket.cpython-311.pyc
-│   │       │   │   │   │   ├── _ssl.cpython-311.pyc
-│   │       │   │   │   │   ├── _subprocess.cpython-311.pyc
-│   │       │   │   │   │   ├── _sync.cpython-311.pyc
-│   │       │   │   │   │   ├── _threads.cpython-311.pyc
-│   │       │   │   │   │   ├── _timeouts.cpython-311.pyc
-│   │       │   │   │   │   ├── _util.cpython-311.pyc
-│   │       │   │   │   │   ├── _version.cpython-311.pyc
-│   │       │   │   │   │   ├── _wait_for_object.cpython-311.pyc
-│   │       │   │   │   │   ├── _windows_pipes.cpython-311.pyc
-│   │       │   │   │   │   ├── abc.cpython-311.pyc
-│   │       │   │   │   │   ├── from_thread.cpython-311.pyc
-│   │       │   │   │   │   ├── lowlevel.cpython-311.pyc
-│   │       │   │   │   │   ├── socket.cpython-311.pyc
-│   │       │   │   │   │   └── to_thread.cpython-311.pyc
-│   │       │   │   │   ├── _core
-│   │       │   │   │   │   ├── __pycache__
-│   │       │   │   │   │   │   ├── __init__.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _asyncgens.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _concat_tb.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _entry_queue.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _exceptions.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _generated_instrumentation.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _generated_io_windows.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _generated_run.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _generated_windows_ffi.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _instrumentation.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _io_common.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _io_windows.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _ki.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _local.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _mock_clock.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _parking_lot.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _run.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _run_context.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _thread_cache.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _traps.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _unbounded_queue.cpython-311.pyc
-│   │       │   │   │   │   │   ├── _wakeup_socketpair.cpython-311.pyc
-│   │       │   │   │   │   │   └── _windows_cffi.cpython-311.pyc
-│   │       │   │   │   │   ├── _tests
-│   │       │   │   │   │   │   ├── type_tests
-│   │       │   │   │   │   │   │   ├── nursery_start.py
-│   │       │   │   │   │   │   │   └── run.py
-│   │       │   │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   │   ├── test_asyncgen.py
-│   │       │   │   │   │   │   ├── test_cancelled.py
-│   │       │   │   │   │   │   ├── test_exceptiongroup_gc.py
-│   │       │   │   │   │   │   ├── test_guest_mode.py
-│   │       │   │   │   │   │   ├── test_instrumentation.py
-│   │       │   │   │   │   │   ├── test_io.py
-│   │       │   │   │   │   │   ├── test_ki.py
-│   │       │   │   │   │   │   ├── test_local.py
-│   │       │   │   │   │   │   ├── test_mock_clock.py
-│   │       │   │   │   │   │   ├── test_parking_lot.py
-│   │       │   │   │   │   │   ├── test_run.py
-│   │       │   │   │   │   │   ├── test_thread_cache.py
-│   │       │   │   │   │   │   ├── test_tutil.py
-│   │       │   │   │   │   │   ├── test_unbounded_queue.py
-│   │       │   │   │   │   │   ├── test_windows.py
-│   │       │   │   │   │   │   └── tutil.py
-│   │       │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   ├── _asyncgens.py
-│   │       │   │   │   │   ├── _concat_tb.py
-│   │       │   │   │   │   ├── _entry_queue.py
-│   │       │   │   │   │   ├── _exceptions.py
-│   │       │   │   │   │   ├── _generated_instrumentation.py
-│   │       │   │   │   │   ├── _generated_io_epoll.py
-│   │       │   │   │   │   ├── _generated_io_kqueue.py
-│   │       │   │   │   │   ├── _generated_io_windows.py
-│   │       │   │   │   │   ├── _generated_run.py
-│   │       │   │   │   │   ├── _generated_windows_ffi.py
-│   │       │   │   │   │   ├── _instrumentation.py
-│   │       │   │   │   │   ├── _io_common.py
-│   │       │   │   │   │   ├── _io_epoll.py
-│   │       │   │   │   │   ├── _io_kqueue.py
-│   │       │   │   │   │   ├── _io_windows.py
-│   │       │   │   │   │   ├── _ki.py
-│   │       │   │   │   │   ├── _local.py
-│   │       │   │   │   │   ├── _mock_clock.py
-│   │       │   │   │   │   ├── _parking_lot.py
-│   │       │   │   │   │   ├── _run.py
-│   │       │   │   │   │   ├── _run_context.py
-│   │       │   │   │   │   ├── _thread_cache.py
-│   │       │   │   │   │   ├── _traps.py
-│   │       │   │   │   │   ├── _unbounded_queue.py
-│   │       │   │   │   │   ├── _wakeup_socketpair.py
-│   │       │   │   │   │   └── _windows_cffi.py
-│   │       │   │   │   ├── _subprocess_platform
-│   │       │   │   │   │   ├── __pycache__
-│   │       │   │   │   │   │   ├── __init__.cpython-311.pyc
-│   │       │   │   │   │   │   └── windows.cpython-311.pyc
-│   │       │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   ├── kqueue.py
-│   │       │   │   │   │   ├── waitid.py
-│   │       │   │   │   │   └── windows.py
-│   │       │   │   │   ├── _tests
-│   │       │   │   │   │   ├── tools
-│   │       │   │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   │   ├── test_gen_exports.py
-│   │       │   │   │   │   │   ├── test_mypy_annotate.py
-│   │       │   │   │   │   │   └── test_sync_requirements.py
-│   │       │   │   │   │   ├── type_tests
-│   │       │   │   │   │   │   ├── check_wraps.py
-│   │       │   │   │   │   │   ├── open_memory_channel.py
-│   │       │   │   │   │   │   ├── path.py
-│   │       │   │   │   │   │   ├── subprocesses.py
-│   │       │   │   │   │   │   └── task_status.py
-│   │       │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   ├── astrill-codesigning-cert.cer
-│   │       │   │   │   │   ├── check_type_completeness.py
-│   │       │   │   │   │   ├── module_with_deprecations.py
-│   │       │   │   │   │   ├── pytest_plugin.py
-│   │       │   │   │   │   ├── test_abc.py
-│   │       │   │   │   │   ├── test_channel.py
-│   │       │   │   │   │   ├── test_contextvars.py
-│   │       │   │   │   │   ├── test_deprecate.py
-│   │       │   │   │   │   ├── test_deprecate_strict_exception_groups_false.py
-│   │       │   │   │   │   ├── test_dtls.py
-│   │       │   │   │   │   ├── test_exports.py
-│   │       │   │   │   │   ├── test_fakenet.py
-│   │       │   │   │   │   ├── test_file_io.py
-│   │       │   │   │   │   ├── test_highlevel_generic.py
-│   │       │   │   │   │   ├── test_highlevel_open_tcp_listeners.py
-│   │       │   │   │   │   ├── test_highlevel_open_tcp_stream.py
-│   │       │   │   │   │   ├── test_highlevel_open_unix_stream.py
-│   │       │   │   │   │   ├── test_highlevel_serve_listeners.py
-│   │       │   │   │   │   ├── test_highlevel_socket.py
-│   │       │   │   │   │   ├── test_highlevel_ssl_helpers.py
-│   │       │   │   │   │   ├── test_path.py
-│   │       │   │   │   │   ├── test_repl.py
-│   │       │   │   │   │   ├── test_scheduler_determinism.py
-│   │       │   │   │   │   ├── test_signals.py
-│   │       │   │   │   │   ├── test_socket.py
-│   │       │   │   │   │   ├── test_ssl.py
-│   │       │   │   │   │   ├── test_subprocess.py
-│   │       │   │   │   │   ├── test_sync.py
-│   │       │   │   │   │   ├── test_testing.py
-│   │       │   │   │   │   ├── test_testing_raisesgroup.py
-│   │       │   │   │   │   ├── test_threads.py
-│   │       │   │   │   │   ├── test_timeouts.py
-│   │       │   │   │   │   ├── test_tracing.py
-│   │       │   │   │   │   ├── test_trio.py
-│   │       │   │   │   │   ├── test_unix_pipes.py
-│   │       │   │   │   │   ├── test_util.py
-│   │       │   │   │   │   ├── test_wait_for_object.py
-│   │       │   │   │   │   └── test_windows_pipes.py
-│   │       │   │   │   ├── _tools
-│   │       │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   ├── gen_exports.py
-│   │       │   │   │   │   ├── mypy_annotate.py
-│   │       │   │   │   │   ├── sync_requirements.py
-│   │       │   │   │   │   └── windows_ffi_build.py
-│   │       │   │   │   ├── testing
-│   │       │   │   │   │   ├── __init__.py
-│   │       │   │   │   │   ├── _check_streams.py
-│   │       │   │   │   │   ├── _checkpoints.py
-│   │       │   │   │   │   ├── _fake_net.py
-│   │       │   │   │   │   ├── _memory_streams.py
-│   │       │   │   │   │   ├── _network.py
-│   │       │   │   │   │   ├── _raises_group.py
-│   │       │   │   │   │   ├── _sequencer.py
-│   │       │   │   │   │   └── _trio_test.py
-│   │       │   │   │   ├── __init__.py
-│   │       │   │   │   ├── __main__.py
-│   │       │   │   │   ├── _abc.py
-│   │       │   │   │   ├── _channel.py
-│   │       │   │   │   ├── _deprecate.py
-│   │       │   │   │   ├── _dtls.py
-│   │       │   │   │   ├── _file_io.py
-│   │       │   │   │   ├── _highlevel_generic.py
-│   │       │   │   │   ├── _highlevel_open_tcp_listeners.py
-│   │       │   │   │   ├── _highlevel_open_tcp_stream.py
-│   │       │   │   │   ├── _highlevel_open_unix_stream.py
-│   │       │   │   │   ├── _highlevel_serve_listeners.py
-│   │       │   │   │   ├── _highlevel_socket.py
-│   │       │   │   │   ├── _highlevel_ssl_helpers.py
-│   │       │   │   │   ├── _path.py
-│   │       │   │   │   ├── _repl.py
-│   │       │   │   │   ├── _signals.py
-│   │       │   │   │   ├── _socket.py
-│   │       │   │   │   ├── _ssl.py
-│   │       │   │   │   ├── _subprocess.py
-│   │       │   │   │   ├── _sync.py
-│   │       │   │   │   ├── _threads.py
-│   │       │   │   │   ├── _timeouts.py
-│   │       │   │   │   ├── _unix_pipes.py
-│   │       │   │   │   ├── _util.py
-│   │       │   │   │   ├── _version.py
-│   │       │   │   │   ├── _wait_for_object.py
-│   │       │   │   │   ├── _windows_pipes.py
-│   │       │   │   │   ├── abc.py
-│   │       │   │   │   ├── from_thread.py
-│   │       │   │   │   ├── lowlevel.py
-│   │       │   │   │   ├── py.typed
-│   │       │   │   │   ├── socket.py
-│   │       │   │   │   └── to_thread.py
-│   │       │   │   ├── trio-0.33.0.dist-info
-│   │       │   │   │   ├── licenses
-│   │       │   │   │   │   ├── LICENSE
-│   │       │   │   │   │   ├── LICENSE.APACHE2
-│   │       │   │   │   │   └── LICENSE.MIT
-│   │       │   │   │   ├── entry_points.txt
-│   │       │   │   │   ├── INSTALLER
-│   │       │   │   │   ├── METADATA
-│   │       │   │   │   ├── RECORD
-│   │       │   │   │   ├── REQUESTED
-│   │       │   │   │   ├── top_level.txt
-│   │       │   │   │   └── WHEEL
 │   │       │   │   ├── typing_extensions-4.16.0.dist-info
 │   │       │   │   │   ├── licenses
 │   │       │   │   │   │   └── LICENSE
+│   │       │   │   │   ├── direct_url.json
 │   │       │   │   │   ├── INSTALLER
 │   │       │   │   │   ├── METADATA
 │   │       │   │   │   ├── RECORD
 │   │       │   │   │   ├── REQUESTED
 │   │       │   │   │   └── WHEEL
-│   │       │   │   ├── _cffi_backend.cp311-win_amd64.pyd
 │   │       │   │   ├── _editable_impl_abb_rws6_python_client.pth
 │   │       │   │   ├── a1_coverage.pth
 │   │       │   │   ├── py.py
@@ -5326,14 +5143,15 @@ abb_rws_client_python_rw6
 │   │       ├── Scripts
 │   │       │   ├── 2to3-script.py
 │   │       │   ├── 2to3.exe
-│   │       │   ├── cffi-gen-src.exe
 │   │       │   ├── coverage-3.11.exe
 │   │       │   ├── coverage.exe
 │   │       │   ├── coverage3.exe
 │   │       │   ├── dotenv.exe
+│   │       │   ├── httpx-script.py
 │   │       │   ├── httpx.exe
 │   │       │   ├── idle-script.py
 │   │       │   ├── idle.exe
+│   │       │   ├── idna-script.py
 │   │       │   ├── idna.exe
 │   │       │   ├── py.test.exe
 │   │       │   ├── pydoc-script.py
@@ -6247,6 +6065,12 @@ abb_rws_client_python_rw6
 │   ├── .gitignore
 │   └── CACHEDIR.TAG
 ├── abb_rws_client
+│   └── _core
+│       ├── __init__.py
+│       ├── client.py
+│       ├── exceptions.py
+│       └── serializers.py
+├── old_abb_rws_client
 │   ├── __pycache__
 │   │   ├── __init__.cpython-311.pyc
 │   │   ├── client.cpython-311.pyc
@@ -6257,13 +6081,10 @@ abb_rws_client_python_rw6
 │   │   ├── rapid_variable.cpython-311.pyc
 │   │   └── serializers.cpython-311.pyc
 │   ├── __init__.py
-│   ├── client.py
-│   ├── exceptions.py
 │   ├── execution.py
 │   ├── helpers.py
 │   ├── mastership.py
-│   ├── rapid_variable.py
-│   └── serializers.py
+│   └── rapid_variable.py
 ├── tests
 │   ├── __pycache__
 │   │   ├── __init__.cpython-311.pyc
@@ -6289,7 +6110,6 @@ abb_rws_client_python_rw6
 │   ├── test_mastership.py
 │   ├── test_rapid_variable.py
 │   └── test_serializers.py
-├── .coverage
 ├── .env
 ├── .env.example
 ├── .gitignore
