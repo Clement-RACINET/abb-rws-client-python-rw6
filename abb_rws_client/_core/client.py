@@ -358,6 +358,61 @@ class RWSClient:
         """
         return await self._request("DELETE", path, **kwargs)
 
+    async def head(
+        self,
+        path: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        """Envoie une requête HTTP HEAD.
+
+        Route: ``HEAD {path}``
+
+        Args:
+            path: Chemin relatif à la base URL du contrôleur.
+            **kwargs: Paramètres supplémentaires passés à httpx.
+
+        Returns:
+            Réponse HTTP brute.
+
+        Raises:
+            RWSAuthenticationError: Sur HTTP 401.
+            RWSNotFoundError: Sur HTTP 404.
+            RWSHTTPError: Sur tout autre HTTP >= 400.
+            RWSConnectionError: Si le contrôleur est injoignable.
+            RWSTimeoutError: Si la requête dépasse le timeout.
+
+        Example:
+            >>> resp = await client.head("fileservice/$HOME/myfile.txt")
+        """
+        return await self._request("HEAD", path, **kwargs)
+
+    async def options(
+        self,
+        path: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        """Envoie une requête HTTP OPTIONS.
+
+        Route: ``OPTIONS {path}``
+
+        Args:
+            path: Chemin relatif à la base URL du contrôleur.
+            **kwargs: Paramètres supplémentaires passés à httpx.
+
+        Returns:
+            Réponse HTTP brute.
+
+        Raises:
+            RWSAuthenticationError: Sur HTTP 401.
+            RWSNotFoundError: Sur HTTP 404.
+            RWSHTTPError: Sur tout autre HTTP >= 400.
+            RWSConnectionError: Si le contrôleur est injoignable.
+            RWSTimeoutError: Si la requête dépasse le timeout.
+
+        Example:
+            >>> resp = await client.options("ctrl/network/route/add")
+        """
+        return await self._request("OPTIONS", path, **kwargs)
 
 # ---------------------------------------------------------------------------
 # RWSClientSync — wrapper synchrone
@@ -546,3 +601,37 @@ class RWSClientSync:
             Réponse httpx validée.
         """
         return self._request("DELETE", path, **kwargs)
+        
+    def head(self, path: str, **kwargs: Any) -> httpx.Response:
+        """Envoie une requête HTTP HEAD (synchrone).
+
+        Args:
+            path: Chemin relatif à la base URL.
+            **kwargs: Paramètres supplémentaires passés à httpx.
+
+        Returns:
+            Réponse HTTP brute.
+
+        Raises:
+            RWSAuthenticationError: Sur HTTP 401.
+            RWSNotFoundError: Sur HTTP 404.
+            RWSHTTPError: Sur tout autre HTTP >= 400.
+        """
+        return self._request("HEAD", path, **kwargs)
+
+    def options(self, path: str, **kwargs: Any) -> httpx.Response:
+        """Envoie une requête HTTP OPTIONS (synchrone).
+
+        Args:
+            path: Chemin relatif à la base URL.
+            **kwargs: Paramètres supplémentaires passés à httpx.
+
+        Returns:
+            Réponse HTTP brute.
+
+        Raises:
+            RWSAuthenticationError: Sur HTTP 401.
+            RWSNotFoundError: Sur HTTP 404.
+            RWSHTTPError: Sur tout autre HTTP >= 400.
+        """
+        return self._request("OPTIONS", path, **kwargs)

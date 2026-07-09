@@ -5,17 +5,6 @@ abb_rws_client_python_rw6
 │   │   ├── client.py
 │   │   ├── exceptions.py
 │   │   └── serializers.py
-│   ├── rws
-│   │   ├── ctrl
-│   │   ├── iosystem
-│   │   ├── rapid
-│   │   │   ├── __init__.py
-│   │   │   ├── execution.py
-│   │   │   └── symbol.py
-│   │   ├── rw
-│   │   ├── users
-│   │   ├── __init__.py
-│   │   └── mastership.py
 │   └── __init__.py
 ├── contrib
 │   ├── generator
@@ -31,18 +20,11 @@ abb_rws_client_python_rw6
 │   └── README.md
 ├── tests
 │   ├── _core
-│   ├── rws
-│   │   ├── ctrl
-│   │   ├── iosystem
-│   │   ├── rapid
-│   │   ├── rw
-│   │   └── users
-│   ├── __init__.py
-│   ├── test_client.py
-│   ├── test_exceptions.py
-│   ├── test_rws_execution.py
-│   ├── test_rws_mastership.py
-│   └── test_serializers.py
+│   │   ├── __init__.py
+│   │   ├── test_client.py
+│   │   ├── test_exceptions.py
+│   │   └── test_serializers.py
+│   └── __init__.py
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md

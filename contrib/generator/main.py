@@ -724,6 +724,9 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
 def render_test_function(ep: dict) -> list[str]:
     """Génère un test unitaire pytest pour un endpoint.
 
+    Les assertions utilisent ``url.path`` et ``url.params["key"]``
+    plutôt que ``str(url)`` pour être robustes à l'encodage httpx.
+
     Args:
         ep: Dictionnaire d'un endpoint extrait du JSON ABB.
 
@@ -740,6 +743,7 @@ def render_test_function(ep: dict) -> list[str]:
     query_params = parse_query_params(ep.get("url_params") or "")
     body_params = parse_body_params(ep.get("data_params") or "")
 
+    # ── Arguments d'appel ─────────────────────────────────────────────────────
     dummy_path = ", ".join(f'"{p}_test"' for p in path_params)
     dummy_query_req = ", ".join(f'{n}="{n}_val"' for n, req in query_params if req)
     dummy_body_req = ", ".join(f'{n}="{n}_val"' for n, req in body_params if req)
@@ -752,8 +756,18 @@ def render_test_function(ep: dict) -> list[str]:
         call_args.append(all_dummy_kwargs)
     call_str = f"await {func_name}({', '.join(call_args)})"
 
-    url_base = url.split("{")[0].rstrip("/")
+    # ── Chemin URL attendu (avec valeurs de test injectées) ───────────────────
+    # On remplace {param-name} par param_name_test (version sanitisée + _test)
+    expected_path = url
+    for raw_p, py_p in zip(
+        re.findall(r"\{([^}]+)\}", url),
+        path_params,
+    ):
+        expected_path = expected_path.replace(f"{{{raw_p}}}", f"{py_p}_test")
+    if not expected_path.startswith("/"):
+        expected_path = "/" + expected_path
 
+    # ── Génération des lignes ─────────────────────────────────────────────────
     lines: list[str] = [
         "@pytest.mark.asyncio",
         f"async def test_{func_name}() -> None:",
@@ -765,10 +779,15 @@ def render_test_function(ep: dict) -> list[str]:
         "",
         "    assert transport.last_request is not None",
         f'    assert transport.last_request.method == "{method}"',
+        f'    assert transport.last_request.url.path == "{expected_path}"',
     ]
 
-    if url_base:
-        lines.append(f'    assert "{url_base}" in str(transport.last_request.url)')
+    # Assertions sur les query params requis — via .params["key"] (robuste)
+    for n, req in query_params:
+        if req:
+            lines.append(
+                f'    assert transport.last_request.url.params["{n}"] == "{n}_val"'
+            )
 
     lines.append(f"    assert resp.status_code == {status_code}")
 
