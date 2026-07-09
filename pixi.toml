@@ -16,22 +16,27 @@ httpx    = ">=0.28.1,<0.29"
 pathspec = ">=1.1.1,<2"
 
 [pypi-dependencies]
-abb-rws6-python-client = { path = ".", editable = true }  # Package en mode éditable
+abb-rws6-python-client = { path = ".", editable = true }
 httpx         = ">=0.27,<1.0"
 python-dotenv = ">=1.0,<2.0"
 pytest-cov    = ">=7.1.0,<8"
 
 # ── Feature : dev ─────────────────────────────────────────────────────────
 [feature.dev.pypi-dependencies]
-pytest         = ">=8.0,<9.0"
-pytest-asyncio = ">=0.23,<1.0"
-anyio          = { version = ">=4.0", extras = ["trio"] }
-ruff           = ">=0.4,<1.0"
+pytest          = ">=8.0,<9.0"
+pytest-asyncio  = ">=0.23,<1.0"
+anyio           = ">=4.0"
+ruff            = ">=0.4,<1.0"
+mkdocs          = ">=1.6,<2.0"
+mkdocs-material = ">=9.5,<10.0"
+mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 
-[feature.dev.tasks]  # ← une seule fois !
-lint   = "ruff check abb_rws_client tests"
-format = "ruff format abb_rws_client tests"
-test   = "pytest tests/ -v --cov=abb_rws_client --cov-report=term-missing"
+[feature.dev.tasks]
+lint       = "ruff check abb_rws_client tests"
+format     = "ruff format abb_rws_client tests"
+test       = "pytest tests/ -v --cov=abb_rws_client --cov-report=term-missing"
+docs       = "python contrib/docs/run_docs.py"
+docs-build = "python -m mkdocs build"
 
 # ── Feature : scraping ────────────────────────────────────────────────────
 [feature.scraping.pypi-dependencies]
@@ -39,4 +44,4 @@ requests       = ">=2.32,<3.0"
 beautifulsoup4 = ">=4.12,<5.0"
 
 [feature.scraping.tasks]
-scrape = "python _scrapping_abb_api/scrape.py"
+scrape = "python contrib/scraping/scrape.py"
