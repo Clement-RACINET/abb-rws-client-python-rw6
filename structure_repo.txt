@@ -6,10 +6,14 @@ abb_rws_client_python_rw6
 │   │   ├── exceptions.py
 │   │   └── serializers.py
 │   ├── rws
+│   │   ├── ctrl
+│   │   ├── iosystem
 │   │   ├── rapid
 │   │   │   ├── __init__.py
 │   │   │   ├── execution.py
 │   │   │   └── symbol.py
+│   │   ├── rw
+│   │   ├── users
 │   │   ├── __init__.py
 │   │   └── mastership.py
 │   └── __init__.py
@@ -26,6 +30,13 @@ abb_rws_client_python_rw6
 │   │   └── scrape.py
 │   └── README.md
 ├── tests
+│   ├── _core
+│   ├── rws
+│   │   ├── ctrl
+│   │   ├── iosystem
+│   │   ├── rapid
+│   │   ├── rw
+│   │   └── users
 │   ├── __init__.py
 │   ├── test_client.py
 │   ├── test_exceptions.py
