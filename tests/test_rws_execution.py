@@ -23,10 +23,10 @@ from abb_rws_client.rws.rapid.execution import (
     stop_execution,
 )
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _resp(status_code: int, content: bytes = b"{}") -> httpx.Response:
     return httpx.Response(status_code=status_code, content=content)
@@ -54,6 +54,7 @@ def _inject(client: RWSClient, transport: httpx.AsyncBaseTransport) -> RWSClient
 # ---------------------------------------------------------------------------
 # get_execution_state
 # ---------------------------------------------------------------------------
+
 
 class TestGetExecutionState:
     async def test_returns_200(self) -> None:
@@ -95,6 +96,7 @@ class TestGetExecutionState:
 # ---------------------------------------------------------------------------
 # start_execution
 # ---------------------------------------------------------------------------
+
 
 class TestStartExecution:
     async def test_returns_204_on_success(self) -> None:
@@ -149,6 +151,7 @@ class TestStartExecution:
 # stop_execution
 # ---------------------------------------------------------------------------
 
+
 class TestStopExecution:
     async def test_returns_204_on_success(self) -> None:
         transport = _FixedTransport(_resp(204))
@@ -192,6 +195,7 @@ class TestStopExecution:
 # ---------------------------------------------------------------------------
 # reset_program_pointer
 # ---------------------------------------------------------------------------
+
 
 class TestResetProgramPointer:
     async def test_returns_204_on_success(self) -> None:

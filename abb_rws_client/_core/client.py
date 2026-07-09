@@ -242,8 +242,12 @@ class RWSClient:
                     delay = _retry_delay(attempt)
                     logger.warning(
                         "RWSClient %s %s → %s (attempt %d/%d, retry in %.2fs)",
-                        method, path, type(exc).__name__,
-                        attempt + 1, _RETRY_MAX_ATTEMPTS, delay,
+                        method,
+                        path,
+                        type(exc).__name__,
+                        attempt + 1,
+                        _RETRY_MAX_ATTEMPTS,
+                        delay,
                     )
                     await asyncio.sleep(delay)
         # Tous les retries épuisés
@@ -475,15 +479,17 @@ class RWSClientSync:
                     delay = _retry_delay(attempt)
                     logger.warning(
                         "RWSClientSync %s %s → %s (attempt %d/%d, retry in %.2fs)",
-                        method, path, type(exc).__name__,
-                        attempt + 1, _RETRY_MAX_ATTEMPTS, delay,
+                        method,
+                        path,
+                        type(exc).__name__,
+                        attempt + 1,
+                        _RETRY_MAX_ATTEMPTS,
+                        delay,
                     )
                     time.sleep(delay)
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
-            raise RWSConnectionError(
-                f"Cannot connect to {self.base_url}: {last_exc}"
-            ) from last_exc
+            raise RWSConnectionError(f"Cannot connect to {self.base_url}: {last_exc}") from last_exc
         raise RWSTimeoutError(
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
         ) from last_exc

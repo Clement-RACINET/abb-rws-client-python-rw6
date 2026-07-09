@@ -13,7 +13,7 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11"
 authors = [
-    { name = "Ton Nom", email = "ton@email.com" }
+    { name = "Clément RACINET", email = "clement.racinet@ensam.eu" }
 ]
 keywords = ["ABB", "RWS", "robotics", "RAPID", "RobotWare"]
 classifiers = [
@@ -66,7 +66,12 @@ select = [
     "SIM", # flake8-simplify
     "ANN", # annotations (type hints)
 ]
-ignore = []
+ignore = [
+    
+]
+
+[tool.ruff.lint.per-file-ignores] #TODO: Refaire les init propre avec un __all__
+"__init__.py" = ["F401"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["abb_rws_client"]
@@ -79,7 +84,7 @@ indent-style = "space"
 # Pytest
 # ---------------------------------------------------------------------------
 [tool.pytest.ini_options]
-asyncio_mode = "auto"          # tous les tests async sont détectés automatiquement
+asyncio_mode = "auto"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
@@ -107,7 +112,6 @@ exclude_lines = [
 show_missing = true
 skip_covered = false
 
-
 # ---------------------------------------------------------------------------
 # basedpyright — type checker VS Code
 # ---------------------------------------------------------------------------
@@ -121,4 +125,4 @@ typeCheckingMode = "standard"
 # - reportUnusedCallResult   : pattern légitime dans pytest.raises (assignation à _)
 reportImplicitOverride = "none"
 reportUnknownMemberType = "none"
-reportUnusedCallResult = "none"
+reportUnusedCallResult  = "none"

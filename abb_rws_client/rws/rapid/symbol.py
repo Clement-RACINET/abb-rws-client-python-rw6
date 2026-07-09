@@ -38,6 +38,7 @@ from abb_rws_client._core.client import RWSClient
 # Helpers internes
 # ---------------------------------------------------------------------------
 
+
 def _symbol_path(task: str, module: str, symbol: str) -> str:
     """Construit le chemin RWS pour un symbole RAPID.
 
@@ -55,6 +56,7 @@ def _symbol_path(task: str, module: str, symbol: str) -> str:
 # ---------------------------------------------------------------------------
 # Fonctions publiques
 # ---------------------------------------------------------------------------
+
 
 async def get_symbol_data(
     client: RWSClient,

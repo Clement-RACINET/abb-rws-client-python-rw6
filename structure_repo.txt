@@ -1,4 +1,13 @@
 abb_rws_client_python_rw6
+├── _scraping_abb_api
+│   ├── scrap_raw_output
+│   │   ├── abb_rws_api_full.json
+│   │   └── abb_rws_api_full.md
+│   ├── architecture_api.txt
+│   ├── robot_controller_return_code.txt
+│   ├── routes_list.json
+│   ├── scrape.log
+│   └── scrape.py
 ├── abb_rws_client
 │   ├── _core
 │   │   ├── __init__.py
@@ -22,12 +31,10 @@ abb_rws_client_python_rw6
 │   └── test_serializers.py
 ├── .env.example
 ├── .gitignore
-├── architecture_api.txt
 ├── CONTEXT.md
 ├── export_structure.py
 ├── objectifs.md
 ├── pixi.lock
 ├── pixi.toml
 ├── pyproject.toml
-├── README.md
-└── robot_controller_return_code.txt
+└── README.md

@@ -77,9 +77,7 @@ def _parse_floats(raw: str, expected: int, context: str) -> list[float]:
     """Parse une chaîne CSV de floats avec validation du nombre d'éléments."""
     parts = [p.strip() for p in raw.split(",")]
     if len(parts) != expected:
-        raise RWSValueError(
-            f"{context}: expected {expected} values, got {len(parts)} in {raw!r}"
-        )
+        raise RWSValueError(f"{context}: expected {expected} values, got {len(parts)} in {raw!r}")
     try:
         return [float(p) for p in parts]
     except ValueError as exc:
@@ -135,9 +133,17 @@ def rws_to_robtarget(raw: str) -> RobTarget:
     conf = _parse_floats(m.group(3), 4, "conf")
     ext = _parse_floats(m.group(4), 6, "eax")
     return RobTarget(
-        x=trans[0], y=trans[1], z=trans[2],
-        qw=rot[0], qx=rot[1], qy=rot[2], qz=rot[3],
-        cf1=conf[0], cf4=conf[1], cf6=conf[2], cfx=conf[3],
+        x=trans[0],
+        y=trans[1],
+        z=trans[2],
+        qw=rot[0],
+        qx=rot[1],
+        qy=rot[2],
+        qz=rot[3],
+        cf1=conf[0],
+        cf4=conf[1],
+        cf6=conf[2],
+        cfx=conf[3],
         eax=ext,
     )
 
@@ -170,27 +176,19 @@ def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str
     if rapid_type == "num":
         # bool est sous-classe de int — doit être rejeté explicitement
         if isinstance(value, bool) or not isinstance(value, int | float):
-            raise RWSValueError(
-                f"Expected int or float for 'num', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected int or float for 'num', got {type(value).__name__!r}")
         return str(int(value)) if float(value) == int(value) else repr(float(value))
     if rapid_type == "bool":
         if not isinstance(value, bool):
-            raise RWSValueError(
-                f"Expected bool for 'bool', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected bool for 'bool', got {type(value).__name__!r}")
         return "TRUE" if value else "FALSE"
     if rapid_type == "string":
         if not isinstance(value, str):
-            raise RWSValueError(
-                f"Expected str for 'string', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected str for 'string', got {type(value).__name__!r}")
         return value  # ← pas de guillemets : RWS gère l'encodage côté form-data
     if rapid_type == "robtarget":
         if not isinstance(value, RobTarget):
-            raise RWSValueError(
-                f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}")
         return robtarget_to_rws(value)
     raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable, mypy
 

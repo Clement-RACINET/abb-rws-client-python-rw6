@@ -17,10 +17,10 @@ from abb_rws_client._core.client import RWSClient
 from abb_rws_client._core.exceptions import RWSAuthenticationError, RWSHTTPError
 from abb_rws_client.rws.mastership import mastership_release, mastership_request
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _resp(status_code: int, content: bytes = b"") -> httpx.Response:
     return httpx.Response(status_code=status_code, content=content)
@@ -50,6 +50,7 @@ def _inject(client: RWSClient, transport: httpx.AsyncBaseTransport) -> RWSClient
 # ---------------------------------------------------------------------------
 # mastership_request
 # ---------------------------------------------------------------------------
+
 
 class TestMastershipRequest:
     async def test_returns_204_on_success(self) -> None:
@@ -93,6 +94,7 @@ class TestMastershipRequest:
 # ---------------------------------------------------------------------------
 # mastership_release
 # ---------------------------------------------------------------------------
+
 
 class TestMastershipRelease:
     async def test_returns_204_on_success(self) -> None:

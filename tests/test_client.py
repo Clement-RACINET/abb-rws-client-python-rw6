@@ -217,10 +217,12 @@ class TestStatusCodeValidation:
 class TestRetryPolicy:
     async def test_retry_on_connect_error(self) -> None:
         """ConnectError déclenche un retry — succès au 2e essai."""
-        transport = _SequentialTransport([
-            httpx.ConnectError("connection refused"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.ConnectError("connection refused"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200
@@ -228,19 +230,21 @@ class TestRetryPolicy:
 
     async def test_retry_on_read_timeout(self) -> None:
         """ReadTimeout déclenche un retry — succès au 2e essai."""
-        transport = _SequentialTransport([
-            httpx.ReadTimeout("read timeout"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.ReadTimeout("read timeout"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200
 
     async def test_retry_exhausted_connect_error_raises_connection_error(self) -> None:
         """Après épuisement des retries sur ConnectError → RWSConnectionError."""
-        transport = _SequentialTransport([
-            httpx.ConnectError("refused") for _ in range(_RETRY_MAX_ATTEMPTS)
-        ])
+        transport = _SequentialTransport(
+            [httpx.ConnectError("refused") for _ in range(_RETRY_MAX_ATTEMPTS)]
+        )
         client = await _open_client(transport)
         with pytest.raises(RWSConnectionError, match="Connection failed"):
             await client.get("rw/test")
@@ -248,9 +252,9 @@ class TestRetryPolicy:
 
     async def test_retry_exhausted_read_timeout_raises_timeout_error(self) -> None:
         """Après épuisement des retries sur ReadTimeout → RWSTimeoutError."""
-        transport = _SequentialTransport([
-            httpx.ReadTimeout("timeout") for _ in range(_RETRY_MAX_ATTEMPTS)
-        ])
+        transport = _SequentialTransport(
+            [httpx.ReadTimeout("timeout") for _ in range(_RETRY_MAX_ATTEMPTS)]
+        )
         client = await _open_client(transport)
         with pytest.raises(RWSTimeoutError, match="Timeout"):
             await client.get("rw/test")
@@ -274,10 +278,12 @@ class TestRetryPolicy:
 
     async def test_connect_timeout_triggers_retry(self) -> None:
         """ConnectTimeout (distinct de ReadTimeout dans httpx) déclenche aussi un retry."""
-        transport = _SequentialTransport([
-            httpx.ConnectTimeout("connect timeout"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.ConnectTimeout("connect timeout"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200

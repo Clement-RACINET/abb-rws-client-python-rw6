@@ -117,10 +117,7 @@ class TestRwsToRobtarget:
             _ = rws_to_robtarget(bad)
 
     def test_spaces_in_input_tolerated(self) -> None:
-        spaced = (
-            "[ [0, 0, 500], [1, 0, 0, 0], [0, 0, 0, 0],"
-            f" {_ALL_INACTIVE} ]"
-        )
+        spaced = f"[ [0, 0, 500], [1, 0, 0, 0], [0, 0, 0, 0], {_ALL_INACTIVE} ]"
         parsed = rws_to_robtarget(spaced)
         assert parsed.z == 500.0
 
@@ -171,10 +168,19 @@ class TestRapidValueToPython:
         with pytest.raises(RWSValueError, match="Cannot convert"):
             _ = rapid_value_to_python("abc", "num")
 
-    @pytest.mark.parametrize("raw,expected", [
-        ("true", True), ("TRUE", True), ("1", True), ("yes", True),
-        ("false", False), ("FALSE", False), ("0", False), ("no", False),
-    ])
+    @pytest.mark.parametrize(
+        "raw,expected",
+        [
+            ("true", True),
+            ("TRUE", True),
+            ("1", True),
+            ("yes", True),
+            ("false", False),
+            ("FALSE", False),
+            ("0", False),
+            ("no", False),
+        ],
+    )
     def test_bool_variants(self, raw: str, expected: bool) -> None:
         assert rapid_value_to_python(raw, "bool") is expected
 
