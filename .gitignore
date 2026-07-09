@@ -29,3 +29,7 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# Les fichiers "old"
+*old*
+**/*old*
