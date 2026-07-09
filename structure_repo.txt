@@ -5,6 +5,54 @@ abb_rws_client_python_rw6
 │   │   ├── client.py
 │   │   ├── exceptions.py
 │   │   └── serializers.py
+│   ├── rws
+│   │   ├── ctrl
+│   │   │   ├── __init__.py
+│   │   │   ├── backup.py
+│   │   │   ├── clock.py
+│   │   │   ├── ctrl.py
+│   │   │   └── identity.py
+│   │   ├── iosystem
+│   │   │   ├── __init__.py
+│   │   │   ├── devices.py
+│   │   │   ├── iosystem.py
+│   │   │   ├── networks.py
+│   │   │   └── signals.py
+│   │   ├── rapid
+│   │   │   ├── __init__.py
+│   │   │   ├── aliasio.py
+│   │   │   ├── execution.py
+│   │   │   ├── modules.py
+│   │   │   ├── rapid.py
+│   │   │   ├── symbol.py
+│   │   │   ├── symbols.py
+│   │   │   ├── taskpanel.py
+│   │   │   ├── tasks.py
+│   │   │   └── uiinstr.py
+│   │   ├── rw
+│   │   │   ├── __init__.py
+│   │   │   └── misc.py
+│   │   ├── users
+│   │   │   ├── __init__.py
+│   │   │   ├── grants.py
+│   │   │   ├── remote.py
+│   │   │   ├── rmmp.py
+│   │   │   └── users.py
+│   │   ├── __init__.py
+│   │   ├── cfg.py
+│   │   ├── devices.py
+│   │   ├── dipc.py
+│   │   ├── elog.py
+│   │   ├── fileservice.py
+│   │   ├── mastership.py
+│   │   ├── motionsystem.py
+│   │   ├── operations_on_io_profinet_device.py
+│   │   ├── panel.py
+│   │   ├── retcode.py
+│   │   ├── root.py
+│   │   ├── subscription.py
+│   │   ├── system.py
+│   │   └── vision.py
 │   └── __init__.py
 ├── contrib
 │   ├── generator
@@ -24,6 +72,54 @@ abb_rws_client_python_rw6
 │   │   ├── test_client.py
 │   │   ├── test_exceptions.py
 │   │   └── test_serializers.py
+│   ├── rws
+│   │   ├── ctrl
+│   │   │   ├── __init__.py
+│   │   │   ├── test_backup.py
+│   │   │   ├── test_clock.py
+│   │   │   ├── test_ctrl.py
+│   │   │   └── test_identity.py
+│   │   ├── iosystem
+│   │   │   ├── __init__.py
+│   │   │   ├── test_devices.py
+│   │   │   ├── test_iosystem.py
+│   │   │   ├── test_networks.py
+│   │   │   └── test_signals.py
+│   │   ├── rapid
+│   │   │   ├── __init__.py
+│   │   │   ├── test_aliasio.py
+│   │   │   ├── test_execution.py
+│   │   │   ├── test_modules.py
+│   │   │   ├── test_rapid.py
+│   │   │   ├── test_symbol.py
+│   │   │   ├── test_symbols.py
+│   │   │   ├── test_taskpanel.py
+│   │   │   ├── test_tasks.py
+│   │   │   └── test_uiinstr.py
+│   │   ├── rw
+│   │   │   ├── __init__.py
+│   │   │   └── test_misc.py
+│   │   ├── users
+│   │   │   ├── __init__.py
+│   │   │   ├── test_grants.py
+│   │   │   ├── test_remote.py
+│   │   │   ├── test_rmmp.py
+│   │   │   └── test_users.py
+│   │   ├── __init__.py
+│   │   ├── test_cfg.py
+│   │   ├── test_devices.py
+│   │   ├── test_dipc.py
+│   │   ├── test_elog.py
+│   │   ├── test_fileservice.py
+│   │   ├── test_mastership.py
+│   │   ├── test_motionsystem.py
+│   │   ├── test_operations_on_io_profinet_device.py
+│   │   ├── test_panel.py
+│   │   ├── test_retcode.py
+│   │   ├── test_root.py
+│   │   ├── test_subscription.py
+│   │   ├── test_system.py
+│   │   └── test_vision.py
 │   └── __init__.py
 ├── .env.example
 ├── .gitignore
