@@ -6303,4 +6303,5 @@ abb_rws_client_python_rw6
 ├── README.md
 ├── robot_controller_return_code.xml
 ├── RWS.py.old
-└── spec.md
+├── spec.md
+└── structure_repo.txt
