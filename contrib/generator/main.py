@@ -552,23 +552,68 @@ def render_function(ep: dict) -> list[str]:
     # Paramètres de chemin (toujours requis)
     sig_parts += [f"{p}: str" for p in path_params]
     # Requis d'abord, optionnels ensuite
-    query_required = [f"{n}: str" for n, req in query_params if req]
-    query_optional = [f"{n}: str | None = None" for n, req in query_params if not req]
+    # Exclure les params déjà fixés dans le query string de l'URL ABB
+    _url_qs_keys = {
+        pair.split("=")[0].strip()
+        for pair in (url.split("?")[1] if "?" in url else "").split("&")
+        if "=" in pair
+    }
+    query_required = [f"{n}: str" for n, req in query_params if req and n not in _url_qs_keys]
+    query_optional = [f"{n}: str | None = None" for n, req in query_params if not req and n not in _url_qs_keys]
+
     body_required = [f"{n}: str" for n, req in body_params if req]
     body_optional = [f"{n}: str | None = None" for n, req in body_params if not req]
     sig_parts += query_required + body_required + query_optional + body_optional
 
-    # ── URL Python ────────────────────────────────────────────────────────────
-    url_expr = build_url_expr(url)
+    # ── Séparer path et query string de l'URL ABB ─────────────────────────────
+    # Ex: "/ctrl/clock/timezone?action=show"
+    #   → url_path = "/ctrl/clock/timezone"
+    #   → url_qs   = "action=show"
+    url_path = url.split("?")[0]
+    url_qs = url.split("?")[1] if "?" in url else ""
+
+    # ── URL Python (path seul) ────────────────────────────────────────────────
+    url_expr = build_url_expr(url_path)
 
     # ── kwargs httpx ──────────────────────────────────────────────────────────
     httpx_kwargs: list[str] = []
 
-    if query_params:
-        items = ", ".join(f'"{n}": {n}' for n, _ in query_params)
-        httpx_kwargs.append(
-            f"params={{k: v for k, v in {{{items}}}.items() if v is not None}}"
-        )
+    # Construire le dict params en fusionnant :
+    # 1. Les params fixes issus du query string de l'URL ABB (ex: action=show)
+    # 2. Les params dynamiques issus de url_params ABB
+    fixed_qs_pairs: list[tuple[str, str]] = []
+    if url_qs:
+        for pair in url_qs.split("&"):
+            if "=" in pair:
+                k, v = pair.split("=", 1)
+                k, v = k.strip(), v.strip()
+                if k and v:
+                    fixed_qs_pairs.append((k, v))
+
+    # Clés déjà couvertes par le query string fixe de l'URL ABB
+    fixed_qs_keys_func: set[str] = {k for k, _ in fixed_qs_pairs}
+
+    # Params dynamiques : exclure ceux déjà dans le QS fixe
+    dynamic_query_params = [(n, req) for n, req in query_params if n not in fixed_qs_keys_func]
+
+    if fixed_qs_pairs or dynamic_query_params:
+        parts: list[str] = []
+        # Params fixes (valeur littérale)
+        for k, v in fixed_qs_pairs:
+            parts.append(f'"{k}": "{v}"')
+        # Params dynamiques (variable Python)
+        for n, _ in dynamic_query_params:
+            parts.append(f'"{n}": {n}')
+        items_str = ", ".join(parts)
+        if dynamic_query_params:
+            # Filtrer les None pour les params optionnels dynamiques
+            httpx_kwargs.append(
+                f"params={{k: v for k, v in {{{items_str}}}.items() if v is not None}}"
+            )
+        else:
+            # Que des params fixes → dict littéral, pas de filtre None
+            httpx_kwargs.append(f"params={{{items_str}}}")
+
 
     if body_params and method in ("POST", "PUT"):
         items = ", ".join(f'"{n}": {n}' for n, _ in body_params)
@@ -615,7 +660,10 @@ def render_function(ep: dict) -> list[str]:
     for p in path_params:
         lines.append(f"        {p}: Paramètre de chemin URL.")
     # Docstring : même ordre que la signature (requis puis optionnels)
+    # Exclure les params fixes du QS ABB (pas dans la signature)
     for n, req in sorted(query_params, key=lambda x: not x[1]):
+        if n in _url_qs_keys:
+            continue
         req_str = "Requis." if req else "Optionnel."
         lines.append(f"        {n}: Paramètre query. {req_str}")
     for n, req in sorted(body_params, key=lambda x: not x[1]):
@@ -724,8 +772,13 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
 def render_test_function(ep: dict) -> list[str]:
     """Génère un test unitaire pytest pour un endpoint.
 
-    Les assertions utilisent ``url.path`` et ``url.params["key"]``
-    plutôt que ``str(url)`` pour être robustes à l'encodage httpx.
+    Note:
+        Les URLs ABB peuvent contenir un query string directement dans
+        le champ ``url`` (ex: ``/ctrl/clock/timezone?action=show``).
+        Le path et le query string sont séparés avant génération pour
+        que ``url.path`` ne contienne jamais ``?...``.
+        Les params fixes du query string ABB sont vérifiés avec leur
+        valeur littérale ; les params dynamiques avec leur valeur de test.
 
     Args:
         ep: Dictionnaire d'un endpoint extrait du JSON ABB.
@@ -743,9 +796,27 @@ def render_test_function(ep: dict) -> list[str]:
     query_params = parse_query_params(ep.get("url_params") or "")
     body_params = parse_body_params(ep.get("data_params") or "")
 
+    # ── Séparer path et query string de l'URL ABB ─────────────────────────────
+    url_path_only: str = url.split("?")[0]
+    url_qs_only: str = url.split("?")[1] if "?" in url else ""
+
+    # Params fixes issus du query string ABB (ex: action=show)
+    fixed_qs: list[tuple[str, str]] = []
+    if url_qs_only:
+        for pair in url_qs_only.split("&"):
+            if "=" in pair:
+                k, v = pair.split("=", 1)
+                k, v = k.strip(), v.strip()
+                if k and v:
+                    fixed_qs.append((k, v))
+    fixed_qs_keys: set[str] = {k for k, _ in fixed_qs}
+
     # ── Arguments d'appel ─────────────────────────────────────────────────────
     dummy_path = ", ".join(f'"{p}_test"' for p in path_params)
-    dummy_query_req = ", ".join(f'{n}="{n}_val"' for n, req in query_params if req)
+    # Les params fixes du QS ABB ne sont PAS des arguments de la fonction
+    dummy_query_req = ", ".join(
+        f'{n}="{n}_val"' for n, req in query_params if req and n not in fixed_qs_keys
+    )
     dummy_body_req = ", ".join(f'{n}="{n}_val"' for n, req in body_params if req)
     all_dummy_kwargs = ", ".join(filter(None, [dummy_query_req, dummy_body_req]))
 
@@ -756,11 +827,10 @@ def render_test_function(ep: dict) -> list[str]:
         call_args.append(all_dummy_kwargs)
     call_str = f"await {func_name}({', '.join(call_args)})"
 
-    # ── Chemin URL attendu (avec valeurs de test injectées) ───────────────────
-    # On remplace {param-name} par param_name_test (version sanitisée + _test)
-    expected_path = url
+    # ── Chemin attendu (path seul, valeurs de test injectées) ─────────────────
+    expected_path = url_path_only
     for raw_p, py_p in zip(
-        re.findall(r"\{([^}]+)\}", url),
+        re.findall(r"\{([^}]+)\}", url_path_only),
         path_params,
     ):
         expected_path = expected_path.replace(f"{{{raw_p}}}", f"{py_p}_test")
@@ -782,9 +852,15 @@ def render_test_function(ep: dict) -> list[str]:
         f'    assert transport.last_request.url.path == "{expected_path}"',
     ]
 
-    # Assertions sur les query params requis — via .params["key"] (robuste)
+    # ── Assertions query params via .params["key"] ────────────────────────────
+    # 1. Params fixes du QS ABB → valeur littérale exacte
+    for k, v in fixed_qs:
+        lines.append(
+            f'    assert transport.last_request.url.params["{k}"] == "{v}"'
+        )
+    # 2. Params dynamiques requis → valeur de test
     for n, req in query_params:
-        if req:
+        if req and n not in fixed_qs_keys:
             lines.append(
                 f'    assert transport.last_request.url.params["{n}"] == "{n}_val"'
             )
