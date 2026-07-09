@@ -14,13 +14,13 @@ Le code source du projet est hébergé sur GitLab et doit être consulté
 systématiquement pour connaître l'état réel du code avant toute
 génération ou modification.
 
-| Champ        | Valeur                                                          |
-|--------------|-----------------------------------------------------------------|
-| URL          | https://gitlab.ensam.eu/lcfc/abb-rws6-python-client            |
-| Nom du repo  | `abb-rws6-python-client`                                        |
-| Nom du package Python | `abb_rws_client`                                       |
-| Branche principale | `main`                                                   |
-| Visibilité   | Public                                                          |
+| Champ                 | Valeur                                              |
+| --------------------- | --------------------------------------------------- |
+| URL                   | https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6 |
+| Nom du repo           | `abb-rws6-python-client`                          |
+| Nom du package Python | `abb_rws_client`                                  |
+| Branche principale    | `main`                                            |
+| Visibilité           | Public                                              |
 
 Avant de générer du code, l'IA doit accéder au repo pour lire les
 fichiers existants et ne jamais supposer leur contenu.
@@ -50,32 +50,26 @@ applications.
    fonction Python correspondante dans le package `rws/`. La structure
    des dossiers Python reflète l'arborescence des routes RWS.
    Aucun regroupement arbitraire n'est autorisé dans `rws/`.
-
 2. **Aucune valeur métier codée en dur** : aucune constante applicative
    (nom de module RAPID, nom de tâche, valeur de variable) ne doit
    apparaître dans `rws/`. Les paramètres sont toujours explicites.
-
 3. **Séparation stricte rws/ vs highlevel/** :
+
    - `rws/` : fonctions atomiques, 1 fonction = 1 endpoint HTTP.
      Aucune logique composée, aucun polling, aucun appel à une autre
      fonction du package.
    - `highlevel/` : fonctions composées qui appellent plusieurs
      fonctions de `rws/`. Aucun appel HTTP direct.
-
 4. **RobotWare 6 uniquement** : aucune compatibilité RW7/OmniCore
    n'est dans le scope de ce projet.
-
 5. **Zéro test nécessitant un robot physique** : tous les tests
    utilisent des transports HTTP mockés (`httpx.AsyncBaseTransport`)
    ou des mocks de fonctions (`unittest.mock.AsyncMock`).
-
 6. **Typage strict** : syntaxe PEP 604 (`X | Y`) pour toutes les
    unions de types. Compatible Python ≥ 3.11. `mypy --strict` doit
    passer sans erreur.
-
 7. **Couverture 100%** pour tous les modules P0 et P1. Les modules
    P2/P3 sont marqués `# status: untested` en en-tête et exemptés.
-
 8. **Documentation exhaustive** : chaque fonction publique respecte
    le template de docstring défini en §7 de ce document.
 
@@ -216,13 +210,13 @@ Aucune logique métier ne doit être dupliquée entre les deux.
 
 ### 3.3 Règle de frontière stricte
 
-| Couche           | Emplacement          | Responsabilité exclusive                          |
-|------------------|----------------------|---------------------------------------------------|
-| Transport        | `_core/client.py`    | HTTP, auth, retry, cookies ABBCX                  |
-| Miroir RWS       | `rws/**`             | 1 fonction = 1 endpoint, aucune logique composée  |
-| Sérialisation    | `_core/serializers.py` | Conversion types Python ↔ format RWS             |
-| Wrappers         | `highlevel/**`       | Composition de fonctions `rws/`, polling          |
-| Exceptions       | `_core/exceptions.py`| Hiérarchie complète, tous les codes SYS_CTRL_*    |
+| Couche         | Emplacement              | Responsabilité exclusive                         |
+| -------------- | ------------------------ | ------------------------------------------------- |
+| Transport      | `_core/client.py`      | HTTP, auth, retry, cookies ABBCX                  |
+| Miroir RWS     | `rws/**`               | 1 fonction = 1 endpoint, aucune logique composée |
+| Sérialisation | `_core/serializers.py` | Conversion types Python ↔ format RWS             |
+| Wrappers       | `highlevel/**`         | Composition de fonctions`rws/`, polling         |
+| Exceptions     | `_core/exceptions.py`  | Hiérarchie complète, tous les codes SYS_CTRL_*  |
 
 ---
 
@@ -300,19 +294,19 @@ la plus spécifique possible lors du parsing des réponses d'erreur.
 
 ## 6. Standards techniques
 
-| Critère           | Valeur retenue                                    |
-|-------------------|---------------------------------------------------|
-| Python            | ≥ 3.11                                            |
-| HTTP client       | `httpx` (sync + async dans le même paquet)        |
-| Typage            | PEP 604 (`X \| Y`), `mypy --strict`               |
-| Linting           | `ruff`                                            |
-| Tests             | `pytest` + `pytest-asyncio`                       |
-| Couverture        | `pytest-cov`, 100% obligatoire P0/P1              |
-| Gestion des deps  | `pixi`                                            |
-| Versioning        | SemVer (`MAJOR.MINOR.PATCH`)                      |
-| Documentation     | Docstrings Google style + MkDocs + mkdocstrings   |
-| CI/CD             | GitLab CI (lint → test → coverage → docs)         |
-| Publication       | PyPI                                              |
+| Critère         | Valeur retenue                                  |
+| ---------------- | ----------------------------------------------- |
+| Python           | ≥ 3.11                                         |
+| HTTP client      | `httpx` (sync + async dans le même paquet)   |
+| Typage           | PEP 604 (`X \| Y`), `mypy --strict`          |
+| Linting          | `ruff`                                        |
+| Tests            | `pytest` + `pytest-asyncio`                 |
+| Couverture       | `pytest-cov`, 100% obligatoire P0/P1          |
+| Gestion des deps | `pixi`                                        |
+| Versioning       | SemVer (`MAJOR.MINOR.PATCH`)                  |
+| Documentation    | Docstrings Google style + MkDocs + mkdocstrings |
+| CI/CD            | GitLab CI (lint → test → coverage → docs)    |
+| Publication      | PyPI                                            |
 
 ---
 
@@ -320,13 +314,13 @@ la plus spécifique possible lors du parsing des réponses d'erreur.
 
 ### 7.1 Nommage
 
-| Élément               | Convention              | Exemple                         |
-|-----------------------|-------------------------|---------------------------------|
-| Fonctions publiques   | `verbe_nom()`           | `get_execution_state()`         |
-| Dataclasses résultat  | `NomDomaine` + suffixe  | `ExecutionState`, `SignalInfo`  |
-| Constantes de routes  | `_NOM_PATH` (privées)   | `_EXECUTION_BASE`               |
-| Types Literal ABB     | `NomMode`               | `StopMode`, `CycleMode`         |
-| Packages domaine      | Nom RWS en minuscule    | `rapid/`, `iosystem/`           |
+| Élément             | Convention               | Exemple                            |
+| --------------------- | ------------------------ | ---------------------------------- |
+| Fonctions publiques   | `verbe_nom()`          | `get_execution_state()`          |
+| Dataclasses résultat | `NomDomaine` + suffixe | `ExecutionState`, `SignalInfo` |
+| Constantes de routes  | `_NOM_PATH` (privées) | `_EXECUTION_BASE`                |
+| Types Literal ABB     | `NomMode`              | `StopMode`, `CycleMode`        |
+| Packages domaine      | Nom RWS en minuscule     | `rapid/`, `iosystem/`          |
 
 ### 7.2 Template de docstring obligatoire
 
@@ -443,14 +437,15 @@ Les fichiers suivants sont fournis séparément et font partie intégrante
 du contexte de ce projet. L'IA doit les utiliser comme référence
 autoritaire :
 
-| Fichier                  | Contenu                                          |
-|--------------------------|--------------------------------------------------|
-| `return_codes.html`      | Les ~150 codes SYS_CTRL_* ABB avec nom, code     |
-|                          | entier et description                            |
-| `routes_tree.txt`        | Arborescence complète des ~560 routes RWS ABB    |
-|                          | organisées hiérarchiquement                      |
+| Fichier               | Contenu                                        |
+| --------------------- | ---------------------------------------------- |
+| `return_codes.html` | Les ~150 codes SYS_CTRL_* ABB avec nom, code   |
+|                       | entier et description                          |
+| `routes_tree.txt`   | Arborescence complète des ~560 routes RWS ABB |
+|                       | organisées hiérarchiquement                  |
 
 Ces fichiers définissent la **vérité de référence** pour :
+
 - La structure des dossiers dans `rws/`
 - Le contenu du dictionnaire `CTRL_CODES` dans `_core/exceptions.py`
 - La liste exhaustive des fonctions à implémenter
@@ -464,30 +459,23 @@ par une entrée dans `routes_tree.txt`. Toute exception dans
 
 ## 10. Instructions
 
-1. **Consulter le repo** (`https://gitlab.ensam.eu/lcfc/abb-rws6-python-client`)
+1. **Consulter le repo** (`https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6`)
    avant toute génération de code pour connaître l'état réel des
    fichiers existants.
-
 2. **Ne jamais supposer** la structure ou le contenu d'un fichier
    non consulté.
-
 3. **Respecter les contraintes absolues** du §2 sans exception ni
    compromis.
-
 4. **Générer du code complet** : aucun placeholder, aucun `# TODO`,
    aucun `pass` dans le code fonctionnel. Les fonctions non encore
    implémentées sont absentes du fichier, pas présentes avec un corps
    vide.
-
 5. **Générer les tests en même temps que le code** : tout module
    P0/P1 livré sans ses tests est considéré incomplet.
-
 6. **Respecter le template de docstring** §7.2 pour chaque fonction
    publique sans exception.
-
 7. **Ne pas modifier `_core/`** sans instruction explicite : ces
    fichiers sont la fondation partagée par tous les modules.
-
 8. **Utiliser les fichiers de contexte complémentaires** (§9) comme
    référence autoritaire pour les routes et les codes d'erreur.
    En l'absence de ces fichiers dans le contexte de la session,
