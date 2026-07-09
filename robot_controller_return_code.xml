@@ -1,0 +1,1100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Return Codes</title>
+</head>
+<body>
+<div class="state">
+<ul>
+<li class="err-desc-li" title="294912">
+<span class="name">SYS_CTRL_S_OK</span>
+<span class="code">294912</span>
+<span class="severity">Success</span>
+<span class="description">Success.</span>
+</li>
+<li class="err-desc-li" title="294913">
+<span class="name">SYS_CTRL_S_DONE</span>
+<span class="code">294913</span>
+<span class="severity">Success</span>
+<span class="description">The operation is done and has completed successfully.</span>
+</li>
+<li class="err-desc-li" title="294914">
+<span class="name">SYS_CTRL_S_PENDING</span>
+<span class="code">294914</span>
+<span class="severity">Success</span>
+<span class="description">The operation is pending.</span>
+</li>
+<li class="err-desc-li" title="294915">
+<span class="name">SYS_CTRL_S_GRANTED</span>
+<span class="code">294915</span>
+<span class="severity">Success</span>
+<span class="description">The operation is granted.</span>
+</li>
+<li class="err-desc-li" title="294916">
+<span class="name">SYS_CTRL_S_NODATA_IN_EVENT</span>
+<span class="code">294916</span>
+<span class="severity">Success</span>
+<span class="description">Events on subscribed object will be sent without any data.</span>
+</li>
+<li class="err-desc-li" title="294917">
+<span class="name">SYS_CTRL_S_NO_CHANGE</span>
+<span class="code">294917</span>
+<span class="severity">Success</span>
+<span class="description">The operation is completed with no change.</span>
+</li>
+<li class="err-desc-li" title="294918">
+<span class="name">SYS_CTRL_S_NOT_VALID</span>
+<span class="code">294918</span>
+<span class="severity">Success</span>
+<span class="description">Input is not valid.</span>
+</li>
+<li class="err-desc-li" title="294919">
+<span class="name">SYS_CTRL_E_ACCESS_TYPE</span>
+<span class="code">294919</span>
+<span class="severity">Success</span>
+<span class="description">Invalid access type.</span>
+</li>
+<li class="err-desc-li" title="294920">
+<span class="name">SYS_CTRL_E_INVALID_HANDLE</span>
+<span class="code">294920</span>
+<span class="severity">Success</span>
+<span class="description">Invalid handle.</span>
+</li>
+<li class="err-desc-li" title="299008">
+<span class="name">SYS_CTRL_S_RAPID_SYNTAX_ERROR</span>
+<span class="code">299008</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but with syntax error(s).</span>
+</li>
+<li class="err-desc-li" title="299009">
+<span class="name">SYS_CTRL_S_RAPID_SEMANTIC_ERROR</span>
+<span class="code">299009</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but with semantic error(s).</span>
+</li>
+<li class="err-desc-li" title="299010">
+<span class="name">SYS_CTRL_S_MECSTA_NOT_READY</span>
+<span class="code">299010</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but mechanical state not ready.</span>
+</li>
+<li class="err-desc-li" title="299011">
+<span class="name">SYS_CTRL_S_RAPID_UNKNOWN_PROCEDURE</span>
+<span class="code">299011</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but failed to set PP to main procedure.</span>
+</li>
+<li class="err-desc-li" title="299012">
+<span class="name">SYS_CTRL_S_EVENT_ROUTINE_ABORTED</span>
+<span class="code">299012</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but event routine was aborted.</span>
+</li>
+<li class="err-desc-li" title="299013">
+<span class="name">SYS_CTRL_S_ABORTED</span>
+<span class="code">299013</span>
+<span class="severity">Success</span>
+<span class="description">Operation completed but aborted after its main task has been carried out.</span>
+</li>
+<li class="err-desc-li" title="299014">
+<span class="name">SYS_CTRL_S_PREVIOUS_PATH_REMAINS</span>
+<span class="code">299014</span>
+<span class="severity">Success</span>
+<span class="description">Previously planned path remains. Chose to either consume the path, which means the initial movement might be in an 
+unexpected direction, or to clear the path and move directly to next target.</span>
+</li>
+<li class="err-desc-li" title="304129">
+<span class="name">SYS_CTRL_S_CFG_NAME_EXIST</span>
+<span class="code">304129</span>
+<span class="severity">Success</span>
+<span class="description">Duplicate instances were found and ignored.</span>
+</li>
+<li class="err-desc-li" title="-1073445887">
+<span class="name">SYS_CTRL_E_OUTOFMEMORY</span>
+<span class="code">-1073445887</span>
+<span class="severity">Error</span>
+<span class="description">Out of memory.</span>
+</li>
+<li class="err-desc-li" title="-1073445886">
+<span class="name">SYS_CTRL_E_NOTIMPL</span>
+<span class="code">-1073445886</span>
+<span class="severity">Error</span>
+<span class="description">Not yet implemented.</span>
+</li>
+<li class="err-desc-li" title="-1073445885">
+<span class="name">SYS_CTRL_E_SERVICE_NOT_SUPPORTED</span>
+<span class="code">-1073445885</span>
+<span class="severity">Error</span>
+<span class="description">The service is not supported in this version of controller.</span>
+</li>
+<li class="err-desc-li" title="-1073445884">
+<span class="name">SYS_CTRL_E_ACTIVE_SYSTEM</span>
+<span class="code">-1073445884</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed on active system.</span>
+</li>
+<li class="err-desc-li" title="-1073445883">
+<span class="name">SYS_CTRL_E_NO_DATA</span>
+<span class="code">-1073445883</span>
+<span class="severity">Error</span>
+<span class="description">The data requested does not exist.</span>
+</li>
+<li class="err-desc-li" title="-1073445882">
+<span class="name">SYS_CTRL_E_DIR_NOT_COMPLETE</span>
+<span class="code">-1073445882</span>
+<span class="severity">Error</span>
+<span class="description">The directory does not contain all required data to complete the operation.</span>
+</li>
+<li class="err-desc-li" title="-1073445881">
+<span class="name">SYS_CTRL_E_REJECT</span>
+<span class="code">-1073445881</span>
+<span class="severity">Error</span>
+<span class="description">Operation rejected by the controller safety access restriction mechanism.</span>
+</li>
+<li class="err-desc-li" title="-1073445880">
+<span class="name">SYS_CTRL_E_RESOURCE_NOT_HELD</span>
+<span class="code">-1073445880</span>
+<span class="severity">Error</span>
+<span class="description">The resource is not held by caller.</span>
+</li>
+<li class="err-desc-li" title="-1073445879">
+<span class="name">SYS_CTRL_E_INVALIDARG</span>
+<span class="code">-1073445879</span>
+<span class="severity">Error</span>
+<span class="description">An argument specified by the client is not valid for this type of operation.</span>
+</li>
+<li class="err-desc-li" title="-1073445878">
+<span class="name">SYS_CTRL_E_RESTORE_MISMATCH_CONTROLLER_ID</span>
+<span class="code">-1073445878</span>
+<span class="severity">Error</span>
+<span class="description">Mismatch in controller id between backup and current system.</span>
+</li>
+<li class="err-desc-li" title="-1073445877">
+<span class="name">SYS_CTRL_E_RESTORE_MISMATCH_KEY_ID</span>
+<span class="code">-1073445877</span>
+<span class="severity">Error</span>
+<span class="description">Mismatch in key id, i.e., options, languages etc. between backup and current system.</span>
+</li>
+<li class="err-desc-li" title="-1073445876">
+<span class="name">SYS_CTRL_E_RESTORE_MISMATCH_ROBOT_TYPE</span>
+<span class="code">-1073445876</span>
+<span class="severity">Error</span>
+<span class="description">Mismatch in robot type between backup and current system.</span>
+</li>
+<li class="err-desc-li" title="-1073445875">
+<span class="name">SYS_CTRL_E_LOCAL_NOT_ALLOWED</span>
+<span class="code">-1073445875</span>
+<span class="severity">Error</span>
+<span class="description">Client not allowed to log on as local user.</span>
+</li>
+<li class="err-desc-li" title="-1073445873">
+<span class="name">SYS_CTRL_E_NOT_LOGGED_ON</span>
+<span class="code">-1073445873</span>
+<span class="severity">Error</span>
+<span class="description">The client is not logged on as a controller user.</span>
+</li>
+<li class="err-desc-li" title="-1073445872">
+<span class="name">SYS_CTRL_E_RESOURCE_ALREADY_HELD</span>
+<span class="code">-1073445872</span>
+<span class="severity">Error</span>
+<span class="description">The requested resource is already held by caller.</span>
+</li>
+<li class="err-desc-li" title="-1073445871">
+<span class="name">SYS_CTRL_E_MAX_LIMIT_REACHED</span>
+<span class="code">-1073445871</span>
+<span class="severity">Error</span>
+<span class="description">The max number of the requested resource has been reached.</span>
+</li>
+<li class="err-desc-li" title="-1073445870">
+<span class="name">SYS_CTRL_E_NO_SUCH_REQUEST</span>
+<span class="code">-1073445870</span>
+<span class="severity">Error</span>
+<span class="description">No request active for the given user.</span>
+</li>
+<li class="err-desc-li" title="-1073445869">
+<span class="name">SYS_CTRL_E_TIMEOUT</span>
+<span class="code">-1073445869</span>
+<span class="severity">Error</span>
+<span class="description">Operation/request timed out on controller.</span>
+</li>
+<li class="err-desc-li" title="-1073445868">
+<span class="name">SYS_CTRL_E_NO_LOCAL_USER</span>
+<span class="code">-1073445868</span>
+<span class="severity">Error</span>
+<span class="description">No local user is logged on.</span>
+</li>
+<li class="err-desc-li" title="-1073445867">
+<span class="name">SYS_CTRL_E_UAS_REJECT</span>
+<span class="code">-1073445867</span>
+<span class="severity">Error</span>
+<span class="description">The operation was not allowed for the given user.</span>
+</li>
+<li class="err-desc-li" title="-1073445866">
+<span class="name">SYS_CTRL_E_UNRESOLVED_URL</span>
+<span class="code">-1073445866</span>
+<span class="severity">Error</span>
+<span class="description">The URL used to initialize the helper does not resolve to a valid object.</span>
+</li>
+<li class="err-desc-li" title="-1073445865">
+<span class="name">SYS_CTRL_E_BUFFER_OVERFLOW</span>
+<span class="code">-1073445865</span>
+<span class="severity">Error</span>
+<span class="description">The amount of data is to large to fulfill the request.</span>
+</li>
+<li class="err-desc-li" title="-1073445863">
+<span class="name">SYS_CTRL_E_DENIED</span>
+<span class="code">-1073445863</span>
+<span class="severity">Error</span>
+<span class="description">The request was denied.</span>
+</li>
+<li class="err-desc-li" title="-1073445862">
+<span class="name">SYS_CTRL_E_RESOURCE_HELD</span>
+<span class="code">-1073445862</span>
+<span class="severity">Error</span>
+<span class="description">Requested resource is held by someone else.</span>
+</li>
+<li class="err-desc-li" title="-1073445861">
+<span class="name">SYS_CTRL_E_FEATURE_DISABLED</span>
+<span class="code">-1073445861</span>
+<span class="severity">Error</span>
+<span class="description">Requested feature is disabled.</span>
+</li>
+<li class="err-desc-li" title="-1073445860">
+<span class="name">SYS_CTRL_E_MODE_REJECT</span>
+<span class="code">-1073445860</span>
+<span class="severity">Error</span>
+<span class="description">The operation is not allowed in current operation mode. 
+For example, a remote user may not be allowed to perform the operation in manual mode.</span>
+</li>
+<li class="err-desc-li" title="-1073445859">
+<span class="name">SYS_CTRL_E_MASTER_REJECT</span>
+<span class="code">-1073445859</span>
+<span class="severity">Error</span>
+<span class="description">The user does not have required mastership for the operation.</span>
+</li>
+<li class="err-desc-li" title="-1073445858">
+<span class="name">SYS_CTRL_E_BACKUP_IN_PROGRESS</span>
+<span class="code">-1073445858</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed while backup in progress.</span>
+</li>
+<li class="err-desc-li" title="-1073445857">
+<span class="name">SYS_CTRL_E_SYNC_STATE_REJECT</span>
+<span class="code">-1073445857</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed when tasks are in synchronized state.</span>
+</li>
+<li class="err-desc-li" title="-1073445856">
+<span class="name">SYS_CTRL_E_NOT_ACTIVE_REJECT</span>
+<span class="code">-1073445856</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed when task not active in task selection panel.</span>
+</li>
+<li class="err-desc-li" title="-1073445855">
+<span class="name">SYS_CTRL_E_RESTORE_MISMATCH_SYSTEM_ID</span>
+<span class="code">-1073445855</span>
+<span class="severity">Error</span>
+<span class="description">Mismatch in controller id between backup and current system.</span>
+</li>
+<li class="err-desc-li" title="-1073445854">
+<span class="name">SYS_CTRL_E_RESTORE_MISMATCH_TEMPLATE_ID</span>
+<span class="code">-1073445854</span>
+<span class="severity">Error</span>
+<span class="description">Mismatch in controller id between backup and current system.</span>
+</li>
+<li class="err-desc-li" title="-1073445853">
+<span class="name">SYS_CTRL_E_INVALID_CID</span>
+<span class="code">-1073445853</span>
+<span class="severity">Error</span>
+<span class="description">Invalid client id.</span>
+</li>
+<li class="err-desc-li" title="-1073445852">
+<span class="name">SYS_CTRL_E_TASK_SELECTION_PANEL_DISABLED</span>
+<span class="code">-1073445852</span>
+<span class="severity">Error</span>
+<span class="description">Task Selection Panel disabled, could be disabled when running only one task.</span>
+</li>
+<li class="err-desc-li" title="-1073445851">
+<span class="name">SYS_CTRL_E_SYSFAIL_REJECT</span>
+<span class="code">-1073445851</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed in sysfail.</span>
+</li>
+<li class="err-desc-li" title="-1073445850">
+<span class="name">SYS_CTRL_E_SUBNET_MASK</span>
+<span class="code">-1073445850</span>
+<span class="severity">Error</span>
+<span class="description">Invalid subnet mask.</span>
+</li>
+<li class="err-desc-li" title="-1073445849">
+<span class="name">SYS_CTRL_E_IP_ADDRESS</span>
+<span class="code">-1073445849</span>
+<span class="severity">Error</span>
+<span class="description">Invalid IP address.</span>
+</li>
+<li class="err-desc-li" title="-1073445848">
+<span class="name">SYS_CTRL_E_IP_ADDRESS_DUPLICATE</span>
+<span class="code">-1073445848</span>
+<span class="severity">Error</span>
+<span class="description">The IP address does already exist on the network.</span>
+</li>
+<li class="err-desc-li" title="-1073445847">
+<span class="name">SYS_CTRL_E_NO_SUCH_CONDITION</span>
+<span class="code">-1073445847</span>
+<span class="severity">Error</span>
+<span class="description">The condition is not true.</span>
+</li>
+<li class="err-desc-li" title="-1073445846">
+<span class="name">SYS_CTRL_E_PATH_STILL_ACTIVE</span>
+<span class="code">-1073445846</span>
+<span class="severity">Error</span>
+<span class="description">Action not possible when movement has not finished. Step to finish movement.</span>
+</li>
+<li class="err-desc-li" title="-1073445840">
+<span class="name">SYS_CTRL_E_INVALIDSIZE</span>
+<span class="code">-1073445840</span>
+<span class="severity">Error</span>
+<span class="description">Invalid size.</span>
+</li>
+<li class="err-desc-li" title="-1073445839">
+<span class="name">SYS_CTRL_E_NAMEEXIST</span>
+<span class="code">-1073445839</span>
+<span class="severity">Error</span>
+<span class="description">Name already exist.</span>
+</li>
+<li class="err-desc-li" title="-1073445838">
+<span class="name">SYS_CTRL_E_INVALIDMSG</span>
+<span class="code">-1073445838</span>
+<span class="severity">Error</span>
+<span class="description">Invalid message.</span>
+</li>
+<li class="err-desc-li" title="-1073445837">
+<span class="name">SYS_CTRL_E_ABORTED</span>
+<span class="code">-1073445837</span>
+<span class="severity">Error</span>
+<span class="description">Operation aborted.</span>
+</li>
+<li class="err-desc-li" title="-1073445836">
+<span class="name">SYS_CTRL_E_ALREADY_EXISTS</span>
+<span class="code">-1073445836</span>
+<span class="severity">Error</span>
+<span class="description">Device already exists.</span>
+</li>
+<li class="err-desc-li" title="-1073445835">
+<span class="name">SYS_CTRL_E_DEVICE_BUSY</span>
+<span class="code">-1073445835</span>
+<span class="severity">Error</span>
+<span class="description">Device is busy.</span>
+</li>
+<li class="err-desc-li" title="-1073445834">
+<span class="name">SYS_CTRL_E_GATEWAY_ADDRESS</span>
+<span class="code">-1073445834</span>
+<span class="severity">Error</span>
+<span class="description">Invalid gateway address.</span>
+</li>
+<li class="err-desc-li" title="-1073445833">
+<span class="name">SYS_CTRL_E_NETWORK_CONFIGURATION</span>
+<span class="code">-1073445833</span>
+<span class="severity">Error</span>
+<span class="description">Network configuration error.</span>
+</li>
+<li class="err-desc-li" title="-1073445832">
+<span class="name">SYS_CTRL_E_USER_HOOK_REJECT</span>
+<span class="code">-1073445832</span>
+<span class="severity">Error</span>
+<span class="description">Orchestration aborted by user installed hook.</span>
+</li>
+<li class="err-desc-li" title="-1073442816">
+<span class="name">SYS_CTRL_E_NO_SUCH_SYMBOL</span>
+<span class="code">-1073442816</span>
+<span class="severity">Error</span>
+<span class="description">RAPID symbol was not found.</span>
+</li>
+<li class="err-desc-li" title="-1073442815">
+<span class="name">SYS_CTRL_E_SOURCEPOS </span>
+<span class="code">-1073442815</span>
+<span class="severity">Error</span>
+<span class="description">The given source position is illegal for the operation.</span>
+</li>
+<li class="err-desc-li" title="-1073442814">
+<span class="name">SYS_CTRL_E_INVALID_PROGRAMFILE</span>
+<span class="code">-1073442814</span>
+<span class="severity">Error</span>
+<span class="description">The given file was not recognized as a program file. 
+E.g., the XML semantics may be incorrect.</span>
+</li>
+<li class="err-desc-li" title="-1073442813">
+<span class="name">SYS_CTRL_E_MOD_AMBNAME</span>
+<span class="code">-1073442813</span>
+<span class="severity">Error</span>
+<span class="description">Ambiguous module name.</span>
+</li>
+<li class="err-desc-li" title="-1073442812">
+<span class="name">SYS_CTRL_E_NO_PROGRAMNAME</span>
+<span class="code">-1073442812</span>
+<span class="severity">Error</span>
+<span class="description">The RAPID program name is not set.</span>
+</li>
+<li class="err-desc-li" title="-1073442811">
+<span class="name">SYS_CTRL_E_MOD_READ_PROTECTED</span>
+<span class="code">-1073442811</span>
+<span class="severity">Error</span>
+<span class="description">Module is read protected.</span>
+</li>
+<li class="err-desc-li" title="-1073442810">
+<span class="name">SYS_CTRL_E_MOD_WRITE_PROTECTED</span>
+<span class="code">-1073442810</span>
+<span class="severity">Error</span>
+<span class="description">Module is write protected.</span>
+</li>
+<li class="err-desc-li" title="-1073442809">
+<span class="name">SYS_CTRL_E_EXEC_STATE</span>
+<span class="code">-1073442809</span>
+<span class="severity">Error</span>
+<span class="description">Operation is illegal in current execution state.</span>
+</li>
+<li class="err-desc-li" title="-1073442808">
+<span class="name">SYS_CTRL_E_TASK_STATE</span>
+<span class="code">-1073442808</span>
+<span class="severity">Error</span>
+<span class="description">Operation is illegal in current task state.</span>
+</li>
+<li class="err-desc-li" title="-1073442807">
+<span class="name">SYS_CTRL_E_NOT_ON_PATH</span>
+<span class="code">-1073442807</span>
+<span class="severity">Error</span>
+<span class="description">The robot is not on path and is unable to restart. Regain to or clear path.</span>
+</li>
+<li class="err-desc-li" title="-1073442806">
+<span class="name">SYS_CTRL_E_EXEC_LEVEL</span>
+<span class="code">-1073442806</span>
+<span class="severity">Error</span>
+<span class="description">Operation is illegal at current execution level.</span>
+</li>
+<li class="err-desc-li" title="-1073442805">
+<span class="name">SYS_CTRL_E_EXEC_CONTEXT_CONFLICT</span>
+<span class="code">-1073442805</span>
+<span class="severity">Error</span>
+<span class="description">Operation can not be performed without destroying the
+current execution context.</span>
+</li>
+<li class="err-desc-li" title="-1073442804">
+<span class="name">SYS_CTRL_E_RAPID_HEAP_FULL</span>
+<span class="code">-1073442804</span>
+<span class="severity">Error</span>
+<span class="description">The RAPID heap memory is full.</span>
+</li>
+<li class="err-desc-li" title="-1073442803">
+<span class="name">SYS_CTRL_E_RAPID_SYNTAX_ERROR</span>
+<span class="code">-1073442803</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed due to syntax error(s).</span>
+</li>
+<li class="err-desc-li" title="-1073442802">
+<span class="name">SYS_CTRL_E_RAPID_SEMANTIC_ERROR</span>
+<span class="code">-1073442802</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed due to semantic error(s).</span>
+</li>
+<li class="err-desc-li" title="-1073442801">
+<span class="name">SYS_CTRL_E_ILLEGAL_ENTRYPOINT</span>
+<span class="code">-1073442801</span>
+<span class="severity">Error</span>
+<span class="description">Given routine is not a legal entrypoint. Possible resaons are: 
+routine is a function or routine has parameters.</span>
+</li>
+<li class="err-desc-li" title="-1073442800">
+<span class="name">SYS_CTRL_E_ILLEGAL_PCP_MOVE</span>
+<span class="code">-1073442800</span>
+<span class="severity">Error</span>
+<span class="description">Illegal to move PCP to given place</span>
+</li>
+<li class="err-desc-li" title="-1073442799">
+<span class="name">SYS_CTRL_E_MAX_ROBTARGETS_EXCEEDED</span>
+<span class="code">-1073442799</span>
+<span class="severity">Error</span>
+<span class="description">Max number of robtargets exceeded.</span>
+</li>
+<li class="err-desc-li" title="-1073442798">
+<span class="name">SYS_CTRL_E_NOT_MODPOSSIBLE</span>
+<span class="code">-1073442798</span>
+<span class="severity">Error</span>
+<span class="description">Object is not modpossible. Possible reasons are: object is a variable,
+object is a parameter, object is an array.</span>
+</li>
+<li class="err-desc-li" title="-1073442797">
+<span class="name">SYS_CTRL_E_ACTIVE_DISPLACEMENT</span>
+<span class="code">-1073442797</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed with displacement/offset active.</span>
+</li>
+<li class="err-desc-li" title="-1073442796">
+<span class="name">SYS_CTRL_E_NOT_ON_PATH_CLEAR_DENIED</span>
+<span class="code">-1073442796</span>
+<span class="severity">Error</span>
+<span class="description">The robot is not on path and is unable to restart. Regain to path. Clear is not allowed.</span>
+</li>
+<li class="err-desc-li" title="-1073442795">
+<span class="name">SYS_CTRL_E_PREVIOUS_PATH_REMAINS</span>
+<span class="code">-1073442795</span>
+<span class="severity">Error</span>
+<span class="description">Previously planned path remains. Chose to either consume the path, which means the initial movement might be in an 
+unexpected direction, or to clear the path and move directly to next target.</span>
+</li>
+<li class="err-desc-li" title="-1073442794">
+<span class="name">SYS_CTRL_E_CHANGE_EXEC_MODE</span>
+<span class="code">-1073442794</span>
+<span class="severity">Error</span>
+<span class="description">Not allowed to change execution mode for current PC position. For example not allowed to change step direction while 
+executing a Nostepin-routine.</span>
+</li>
+<li class="err-desc-li" title="-1073442793">
+<span class="name">SYS_CTRL_E_EXEC_PAST_BEGINNING</span>
+<span class="code">-1073442793</span>
+<span class="severity">Error</span>
+<span class="description">Not possible to execute backward past beginning of routine.</span>
+</li>
+<li class="err-desc-li" title="-1073442792">
+<span class="name">SYS_CTRL_E_ILLEGAL_TO_MOVE_PCP</span>
+<span class="code">-1073442792</span>
+<span class="severity">Error</span>
+<span class="description">Not possible to move PP from the current RAPID instruction. Probably an error in the instruction. Move PP to main may work.</span>
+</li>
+<li class="err-desc-li" title="-1073442791">
+<span class="name">SYS_CTRL_E_TOO_MANY_USER_LEVELS</span>
+<span class="code">-1073442791</span>
+<span class="severity">Error</span>
+<span class="description">Only allowed to run service routine, i.e., be at user execution level, in one RAPID task.</span>
+</li>
+<li class="err-desc-li" title="-1073442790">
+<span class="name">SYS_CTRL_E_LAST_IN_CALL_CHAIN</span>
+<span class="code">-1073442790</span>
+<span class="severity">Error</span>
+<span class="description">Not possible to step out of the main routine.</span>
+</li>
+<li class="err-desc-li" title="-1073442789">
+<span class="name">SYS_CTRL_E_START_ORDER_BREAK</span>
+<span class="code">-1073442789</span>
+<span class="severity">Error</span>
+<span class="description">The start order was interrupted with a stop before the robot reached its path.</span>
+</li>
+<li class="err-desc-li" title="-1073442788">
+<span class="name">SYS_CTRL_E_CHANGE_EXEC_MODE_TASK_RUNNING</span>
+<span class="code">-1073442788</span>
+<span class="severity">Error</span>
+<span class="description">It is not possible to change execution mode since at least one task is running.</span>
+</li>
+<li class="err-desc-li" title="-1073442787">
+<span class="name">SYS_CTRL_E_BACKWARD</span>
+<span class="code">-1073442787</span>
+<span class="severity">Error</span>
+<span class="description">Not allowed to execute backward.</span>
+</li>
+<li class="err-desc-li" title="-1073442786">
+<span class="name">SYS_CTRL_E_SYMBOL_NOT_PERSISTENT</span>
+<span class="code">-1073442786</span>
+<span class="severity">Error</span>
+<span class="description">Not a persistent rapid symbol.</span>
+</li>
+<li class="err-desc-li" title="-1073442785">
+<span class="name">SYS_CTRL_E_EXEC_STATE_BGTSK</span>
+<span class="code">-1073442785</span>
+<span class="severity">Error</span>
+<span class="description">Operation is illegal in current execution state in background task.</span>
+</li>
+<li class="err-desc-li" title="-1073442784">
+<span class="name">SYS_CTRL_E_UI_INSTRUCTION_NOT_ACTIVE</span>
+<span class="code">-1073442784</span>
+<span class="severity">Error</span>
+<span class="description">No active UI RAPID Instruction.</span>
+</li>
+<li class="err-desc-li" title="-1073442783">
+<span class="name">SYS_CTRL_E_NO_PP</span>
+<span class="code">-1073442783</span>
+<span class="severity">Error</span>
+<span class="description">No program pointer is available.</span>
+</li>
+<li class="err-desc-li" title="-1073442782">
+<span class="name">SYS_CTRL_E_TOO_BIG_MODULE</span>
+<span class="code">-1073442782</span>
+<span class="severity">Error</span>
+<span class="description">The module is too large to be loaded (too many lines).</span>
+</li>
+<li class="err-desc-li" title="-1073438720">
+<span class="name">SYS_CTRL_E_GENERAL_FILE_ERROR</span>
+<span class="code">-1073438720</span>
+<span class="severity">Error</span>
+<span class="description">General file handling error.</span>
+</li>
+<li class="err-desc-li" title="-1073438719">
+<span class="name">SYS_CTRL_E_DEVICE_FULL</span>
+<span class="code">-1073438719</span>
+<span class="severity">Error</span>
+<span class="description">The device is full.</span>
+</li>
+<li class="err-desc-li" title="-1073438718">
+<span class="name">SYS_CTRL_E_WRONG_DISK</span>
+<span class="code">-1073438718</span>
+<span class="severity">Error</span>
+<span class="description">Wrong disk. Change disk and try again.</span>
+</li>
+<li class="err-desc-li" title="-1073438717">
+<span class="name">SYS_CTRL_E_DEVICE_NOT_READY</span>
+<span class="code">-1073438717</span>
+<span class="severity">Error</span>
+<span class="description">The device is not ready.</span>
+</li>
+<li class="err-desc-li" title="-1073438716">
+<span class="name">SYS_CTRL_E_INVALID_PATH</span>
+<span class="code">-1073438716</span>
+<span class="severity">Error</span>
+<span class="description">Invalid path.</span>
+</li>
+<li class="err-desc-li" title="-1073438715">
+<span class="name">SYS_CTRL_E_NO_DEVICE</span>
+<span class="code">-1073438715</span>
+<span class="severity">Error</span>
+<span class="description">Not a valid device.</span>
+</li>
+<li class="err-desc-li" title="-1073438714">
+<span class="name">SYS_CTRL_E_CREATE_DIRECTORY</span>
+<span class="code">-1073438714</span>
+<span class="severity">Error</span>
+<span class="description">Unable to create directory.</span>
+</li>
+<li class="err-desc-li" title="-1073438713">
+<span class="name">SYS_CTRL_E_DIR_NOT_EXIST</span>
+<span class="code">-1073438713</span>
+<span class="severity">Error</span>
+<span class="description">The directory does not exist.</span>
+</li>
+<li class="err-desc-li" title="-1073438712">
+<span class="name">SYS_CTRL_E_DIR_EXIST</span>
+<span class="code">-1073438712</span>
+<span class="severity">Error</span>
+<span class="description">The directory already exist.</span>
+</li>
+<li class="err-desc-li" title="-1073438711">
+<span class="name">SYS_CTRL_E_DIR_NOT_EMPTY</span>
+<span class="code">-1073438711</span>
+<span class="severity">Error</span>
+<span class="description">The directory contain data.</span>
+</li>
+<li class="err-desc-li" title="-1073438709">
+<span class="name">SYS_CTRL_E_CREATE_FILE</span>
+<span class="code">-1073438709</span>
+<span class="severity">Error</span>
+<span class="description">Unable to create file.</span>
+</li>
+<li class="err-desc-li" title="-1073438708">
+<span class="name">SYS_CTRL_E_FILE_NOT_FOUND</span>
+<span class="code">-1073438708</span>
+<span class="severity">Error</span>
+<span class="description">File not found or could not be opened for reading.</span>
+</li>
+<li class="err-desc-li" title="-1073438707">
+<span class="name">SYS_CTRL_E_FILENAME_TOO_LONG</span>
+<span class="code">-1073438707</span>
+<span class="severity">Error</span>
+<span class="description">File name too long.</span>
+</li>
+<li class="err-desc-li" title="-1073438706">
+<span class="name">SYS_CTRL_E_NOT_ENOUGH_SPACE</span>
+<span class="code">-1073438706</span>
+<span class="severity">Error</span>
+<span class="description">Not enough space.</span>
+</li>
+<li class="err-desc-li" title="-1073438705">
+<span class="name">SYS_CTRL_E_PATH_TOO_LONG</span>
+<span class="code">-1073438705</span>
+<span class="severity">Error</span>
+<span class="description">Too long path.</span>
+</li>
+<li class="err-desc-li" title="-1073438208">
+<span class="name">SYS_CTRL_E_IO_UNIT_DISABLE_NOT_ALLOWED</span>
+<span class="code">-1073438208</span>
+<span class="severity">Error</span>
+<span class="description"> Deactivate of I/O device not allowed according to device trustlevel.</span>
+</li>
+<li class="err-desc-li" title="-1073438207">
+<span class="name">SYS_CTRL_E_IO_UNIT_NOT_RUNNING</span>
+<span class="code">-1073438207</span>
+<span class="severity">Error</span>
+<span class="description">Operation on not accessible I/O device.</span>
+</li>
+<li class="err-desc-li" title="-1073438206">
+<span class="name">SYS_CTRL_E_IO_UNBLOCKED_INSIGNAL</span>
+<span class="code">-1073438206</span>
+<span class="severity">Error</span>
+<span class="description">Write of not simulated input signal not allowed.</span>
+</li>
+<li class="err-desc-li" title="-1073438205">
+<span class="name">SYS_CTRL_E_IO_CROSS_RESULTANT</span>
+<span class="code">-1073438205</span>
+<span class="severity">Error</span>
+<span class="description">Operation not allowed on a resultant signal of a cross connection.</span>
+</li>
+<li class="err-desc-li" title="-1073438204">
+<span class="name">SYS_CTRL_E_IO_SET_BY_DEVICE_TRANSFER</span>
+<span class="code">-1073438204</span>
+<span class="severity">Error</span>
+<span class="description">Write of signal set by device transfer operation is not allowed.</span>
+</li>
+<li class="err-desc-li" title="-1073437696">
+<span class="name">SYS_CTRL_E_CFG_DOMAIN_INVALID</span>
+<span class="code">-1073437696</span>
+<span class="severity">Error</span>
+<span class="description">Domain does not exist, or is not used.</span>
+</li>
+<li class="err-desc-li" title="-1073437695">
+<span class="name">SYS_CTRL_E_CFG_TYPE_INVALID</span>
+<span class="code">-1073437695</span>
+<span class="severity">Error</span>
+<span class="description">Type does not exist in domain.</span>
+</li>
+<li class="err-desc-li" title="-1073437694">
+<span class="name">SYS_CTRL_E_CFG_ATTRIBUTE_INVALID</span>
+<span class="code">-1073437694</span>
+<span class="severity">Error</span>
+<span class="description">Attribute does not exist in type.</span>
+</li>
+<li class="err-desc-li" title="-1073437693">
+<span class="name">SYS_CTRL_E_CFG_ATTRIBUTE_OUT_OF_RANGE</span>
+<span class="code">-1073437693</span>
+<span class="severity">Error</span>
+<span class="description">Attempt to set attribute outside of legal range. E.g., name attribute is empty.</span>
+</li>
+<li class="err-desc-li" title="-1073437691">
+<span class="name">SYS_CTRL_E_CFG_INSTANCE_INVALID</span>
+<span class="code">-1073437691</span>
+<span class="severity">Error</span>
+<span class="description">The instance either does not exist, or is write protected or encrypted.</span>
+</li>
+<li class="err-desc-li" title="-1073437689">
+<span class="name">SYS_CTRL_E_CFG_NAME_EXIST</span>
+<span class="code">-1073437689</span>
+<span class="severity">Error</span>
+<span class="description">Name already exists in database (for named instances).</span>
+</li>
+<li class="err-desc-li" title="-1073437688">
+<span class="name">SYS_CTRL_E_CFG_DATA_INCORRECT</span>
+<span class="code">-1073437688</span>
+<span class="severity">Error</span>
+<span class="description">Cfg file contains errors.</span>
+</li>
+<li class="err-desc-li" title="-1073437687">
+<span class="name">SYS_CTRL_E_CFG_STRING_ATTRIBUTE_LENGTH</span>
+<span class="code">-1073437687</span>
+<span class="severity">Error</span>
+<span class="description">String attribute length error.</span>
+</li>
+<li class="err-desc-li" title="-1073437686">
+<span class="name">SYS_CTRL_E_CFG_VERSION</span>
+<span class="code">-1073437686</span>
+<span class="severity">Error</span>
+<span class="description">Invalid cfg domain version or invalid layout of version string.</span>
+</li>
+<li class="err-desc-li" title="-1073437685">
+<span class="name">SYS_CTRL_E_CS_NONEXISTENT</span>
+<span class="code">-1073437685</span>
+<span class="severity">Error</span>
+<span class="description">The backup is lacking a complete Controller settings directory.</span>
+</li>
+<li class="err-desc-li" title="-1073437684">
+<span class="name">SYS_CTRL_E_SS_NONEXISTENT</span>
+<span class="code">-1073437684</span>
+<span class="severity">Error</span>
+<span class="description">The backup is lacking a complete Safety setting.</span>
+</li>
+<li class="err-desc-li" title="-1073436672">
+<span class="name">SYS_CTRL_E_TOOL_ERROR</span>
+<span class="code">-1073436672</span>
+<span class="severity">Error</span>
+<span class="description">Operation could not be performed due to wrong tool.</span>
+</li>
+<li class="err-desc-li" title="-1073436671">
+<span class="name">SYS_CTRL_E_WOBJ_ERROR</span>
+<span class="code">-1073436671</span>
+<span class="severity">Error</span>
+<span class="description">Operation could not be performed due to wrong workobject.</span>
+</li>
+<li class="err-desc-li" title="-1073436670">
+<span class="name">SYS_CTRL_E_MECHUNIT_DEACTIVATED</span>
+<span class="code">-1073436670</span>
+<span class="severity">Error</span>
+<span class="description">At least one axis is deactivated since last modpos.</span>
+</li>
+<li class="err-desc-li" title="-1073436669">
+<span class="name">SYS_CTRL_E_MECHPOS_NOT_IN_LIMIT</span>
+<span class="code">-1073436669</span>
+<span class="severity">Error</span>
+<span class="description">The position of the mechanical unit is not within limits.</span>
+</li>
+<li class="err-desc-li" title="-1073436668">
+<span class="name">SYS_CTRL_E_NO_SUCH_MECHUNIT</span>
+<span class="code">-1073436668</span>
+<span class="severity">Error</span>
+<span class="description">No mechanical unit with the given name was found.</span>
+</li>
+<li class="err-desc-li" title="-1073436667">
+<span class="name">SYS_CTRL_E_MECHUNIT_NOT_SINGLE</span>
+<span class="code">-1073436667</span>
+<span class="severity">Error</span>
+<span class="description">The type of the mechunit is not single.</span>
+</li>
+<li class="err-desc-li" title="-1073436666">
+<span class="name">SYS_CTRL_E_NO_TCPROBOT_ACTIVE</span>
+<span class="code">-1073436666</span>
+<span class="severity">Error</span>
+<span class="description">No TCP robot activated.</span>
+</li>
+<li class="err-desc-li" title="-1073436665">
+<span class="name">SYS_CTRL_E_CALIB_NOT_FULL_RANK</span>
+<span class="code">-1073436665</span>
+<span class="severity">Error</span>
+<span class="description">Calib not full rank.</span>
+</li>
+<li class="err-desc-li" title="-1073436664">
+<span class="name">SYS_CTRL_E_CALIB_TOO_FEW_OR_TOO_MANY_TARGETS</span>
+<span class="code">-1073436664</span>
+<span class="severity">Error</span>
+<span class="description">Calib too few or too many targets.</span>
+</li>
+<li class="err-desc-li" title="-1073436663">
+<span class="name">SYS_CTRL_E_CALIB_BAD_DISPL_RESULT</span>
+<span class="code">-1073436663</span>
+<span class="severity">Error</span>
+<span class="description">Calib bad displacement result.</span>
+</li>
+<li class="err-desc-li" title="-1073436662">
+<span class="name">SYS_CTRL_E_CALIB_COLLAPSED_PLANE</span>
+<span class="code">-1073436662</span>
+<span class="severity">Error</span>
+<span class="description">Calib collapsed plane.</span>
+</li>
+<li class="err-desc-li" title="-1073436661">
+<span class="name">SYS_CTRL_E_CALIB_COLLAPSED_NORMALIZATION</span>
+<span class="code">-1073436661</span>
+<span class="severity">Error</span>
+<span class="description">Calib collapsed normalization.</span>
+</li>
+<li class="err-desc-li" title="-1073436660">
+<span class="name">SYS_CTRL_E_CALIB_ROBOT_TRACK_NOT_IMPLEMENTED</span>
+<span class="code">-1073436660</span>
+<span class="severity">Error</span>
+<span class="description">Calib robot track not implemented.</span>
+</li>
+<li class="err-desc-li" title="-1073436659">
+<span class="name">SYS_CTRL_E_CALIB_UNDEFINED_FRAME_COORDINATION</span>
+<span class="code">-1073436659</span>
+<span class="severity">Error</span>
+<span class="description">Calib undefined frame coordination.</span>
+</li>
+<li class="err-desc-li" title="-1073436658">
+<span class="name">SYS_CTRL_E_POSE_X_AXIS_START_END_TOO_CLOSE</span>
+<span class="code">-1073436658</span>
+<span class="severity">Error</span>
+<span class="description">Pose X-axis start end too close.</span>
+</li>
+<li class="err-desc-li" title="-1073436657">
+<span class="name">SYS_CTRL_E_POSE_DEFINE_COLLAPSED</span>
+<span class="code">-1073436657</span>
+<span class="severity">Error</span>
+<span class="description">Pose define collapsed.</span>
+</li>
+<li class="err-desc-li" title="-1073436656">
+<span class="name">SYS_CTRL_E_POSE_UNKNOWN_ORIGIN_SWITCH</span>
+<span class="code">-1073436656</span>
+<span class="severity">Error</span>
+<span class="description">Pose unknown origin switch.</span>
+</li>
+<li class="err-desc-li" title="-1073436655">
+<span class="name">SYS_CTRL_E_POSE_DEFINE_POINTS_TOO_CLOSE</span>
+<span class="code">-1073436655</span>
+<span class="severity">Error</span>
+<span class="description">Pose define points too close.</span>
+</li>
+<li class="err-desc-li" title="-1073436654">
+<span class="name">SYS_CTRL_E_POSE_OUTSIDE_REACH</span>
+<span class="code">-1073436654</span>
+<span class="severity">Error</span>
+<span class="description">Position outside of reach.</span>
+</li>
+<li class="err-desc-li" title="-1073436653">
+<span class="name">SYS_CTRL_E_POSE_CONFIG_INCOMPATIBLE</span>
+<span class="code">-1073436653</span>
+<span class="severity">Error</span>
+<span class="description">Configuration parameters are incompatible.</span>
+</li>
+<li class="err-desc-li" title="-1073436652">
+<span class="name">SYS_CTRL_E_HPJ_CHANGE_COUNT_MISMATCH</span>
+<span class="code">-1073436652</span>
+<span class="severity">Error</span>
+<span class="description">Change count mismatch.</span>
+</li>
+<li class="err-desc-li" title="-1073436651">
+<span class="name">SYS_CTRL_E_MECHUNIT_NOT_CONNECTED</span>
+<span class="code">-1073436651</span>
+<span class="severity">Error</span>
+<span class="description">The mechanical unit is not connected to a RAPID task. 
+The unit may also not be connected to a motion plannner.</span>
+</li>
+<li class="err-desc-li" title="-1073436650">
+<span class="name">SYS_CTRL_E_MECSTA_NOT_READY</span>
+<span class="code">-1073436650</span>
+<span class="severity">Error</span>
+<span class="description">Mechanical state not ready.</span>
+</li>
+<li class="err-desc-li" title="-1073436649">
+<span class="name">SYS_CTRL_E_NME_ACTIVATION_ERROR</span>
+<span class="code">-1073436649</span>
+<span class="severity">Error</span>
+<span class="description">Non motion execution activation error.</span>
+</li>
+<li class="err-desc-li" title="-1073436648">
+<span class="name">SYS_CTRL_E_POSE_SINGULARITY</span>
+<span class="code">-1073436648</span>
+<span class="severity">Error</span>
+<span class="description">Pose singularity error.</span>
+</li>
+<li class="err-desc-li" title="-1073435904">
+<span class="name">SYS_CTRL_E_INVALIDSLOTID</span>
+<span class="code">-1073435904</span>
+<span class="severity">Error</span>
+<span class="description">Invalid slot id.</span>
+</li>
+<li class="err-desc-li" title="-1073435903">
+<span class="name">SYS_CTRL_E_QUEUEFULL</span>
+<span class="code">-1073435903</span>
+<span class="severity">Error</span>
+<span class="description">Message queue full.</span>
+</li>
+<li class="err-desc-li" title="-1073435902">
+<span class="name">SYS_CTRL_E_POWER_FAIL_IN_PROGRESS</span>
+<span class="code">-1073435902</span>
+<span class="severity">Error</span>
+<span class="description">Power fail in progress.</span>
+</li>
+<li class="err-desc-li" title="-1073435901">
+<span class="name">SYS_CTRL_E_OPTION</span>
+<span class="code">-1073435901</span>
+<span class="severity">Error</span>
+<span class="description">Option missing or not valid.</span>
+</li>
+<li class="err-desc-li" title="-1073435900">
+<span class="name">SYS_CTRL_E_INVALID_ID</span>
+<span class="code">-1073435900</span>
+<span class="severity">Error</span>
+<span class="description">Invalid identity.</span>
+</li>
+<li class="err-desc-li" title="-1073435899">
+<span class="name">SYS_CTRL_E_NOT_VALIDATED</span>
+<span class="code">-1073435899</span>
+<span class="severity">Error</span>
+<span class="description">Configuration has not been validated.</span>
+</li>
+<li class="err-desc-li" title="-1073435898">
+<span class="name">SYS_CTRL_E_INVALID_DATA</span>
+<span class="code">-1073435898</span>
+<span class="severity">Error</span>
+<span class="description">Data invalid, semantic error or corrupt data.</span>
+</li>
+<li class="err-desc-li" title="-1073435897">
+<span class="name">SYS_CTRL_E_SYNCHCHECK</span>
+<span class="code">-1073435897</span>
+<span class="severity">Error</span>
+<span class="description">Synchcheck is missing.</span>
+</li>
+<li class="err-desc-li" title="-1073435896">
+<span class="name">SYS_CTRL_E_CONFIGURATION_LOCKED</span>
+<span class="code">-1073435896</span>
+<span class="severity">Error</span>
+<span class="description">Configuration is locked.</span>
+</li>
+<li class="err-desc-li" title="-1073435895">
+<span class="name">SYS_CTRL_E_NOT_MANUAL_MODE</span>
+<span class="code">-1073435895</span>
+<span class="severity">Error</span>
+<span class="description">Operation is only valid in manual mode.</span>
+</li>
+<li class="err-desc-li" title="-1073435894">
+<span class="name">SYS_CTRL_E_NOT_MOTORS_OFF</span>
+<span class="code">-1073435894</span>
+<span class="severity">Error</span>
+<span class="description">Operation is only valid in motors off.</span>
+</li>
+<li class="err-desc-li" title="-1073435893">
+<span class="name">SYS_CTRL_E_SC_COMMUNICATION_FAILED</span>
+<span class="code">-1073435893</span>
+<span class="severity">Error</span>
+<span class="description">Communication with the Safety Controller failed.</span>
+</li>
+<li class="err-desc-li" title="-1073435892">
+<span class="name">SYS_CTRL_E_SC_LOCK_INFO_MISMATCH</span>
+<span class="code">-1073435892</span>
+<span class="severity">Error</span>
+<span class="description">There is a mismatch between LockInfo in the configuration-file and in the Safety Controller.</span>
+</li>
+<li class="err-desc-li" title="-1073435891">
+<span class="name">SYS_CTRL_E_SERVICE_NOT_READY</span>
+<span class="code">-1073435891</span>
+<span class="severity">Error</span>
+<span class="description">The requested service is not ready.</span>
+</li>
+<li class="err-desc-li" title="-1073435890">
+<span class="name">SYS_CTRL_E_ALREADY_IN_PROGRESS</span>
+<span class="code">-1073435890</span>
+<span class="severity">Error</span>
+<span class="description">The requested operation is already in progress.</span>
+</li>
+<li class="err-desc-li" title="-1073435889">
+<span class="name">SYS_CTRL_E_OPERATION_IS_LOCKED</span>
+<span class="code">-1073435889</span>
+<span class="severity">Error</span>
+<span class="description">Operation is locked.</span>
+</li>
+<li class="err-desc-li" title="-1073435888">
+<span class="name">SYS_CTRL_E_VERSION</span>
+<span class="code">-1073435888</span>
+<span class="severity">Error</span>
+<span class="description">Incorrect version.</span>
+</li>
+<li class="err-desc-li" title="-1073435887">
+<span class="name">SYS_CTRL_E_INVALID_STATE</span>
+<span class="code">-1073435887</span>
+<span class="severity">Error</span>
+<span class="description">The requested action cannot be performed in the current state.</span>
+</li>
+<li class="err-desc-li" title="-1073435886">
+<span class="name">SYS_CTRL_E_OPERATION_IS_UNLOCKED</span>
+<span class="code">-1073435886</span>
+<span class="severity">Error</span>
+<span class="description">Operation is not locked.</span>
+</li>
+<li class="err-desc-li" title="-1073435885">
+<span class="name">SYS_CTRL_E_INVALID_PIN_CODE</span>
+<span class="code">-1073435885</span>
+<span class="severity">Error</span>
+<span class="description">Invalid pin code.</span>
+</li>
+<li class="err-desc-li" title="-1073435884">
+<span class="name">SYS_CTRL_E_OPERATION_FAILED</span>
+<span class="code">-1073435884</span>
+<span class="severity">Error</span>
+<span class="description">Operation for the safety controller failed.</span>
+</li>
+<li class="err-desc-li" title="-1073414146">
+<span class="name">SYS_CTRL_E_FAIL</span>
+<span class="code">-1073414146</span>
+<span class="severity">Error</span>
+<span class="description">Unspecified error.</span>
+</li>
+<li class="err-desc-li" title="-1073414145">
+<span class="name">SYS_CTRL_E_UNEXPECTED</span>
+<span class="code">-1073414145</span>
+<span class="severity">Error</span>
+<span class="description">An error message that has not been successfully been converted to a common return code.</span>
+</li>
+</ul></div>
+</body>
+</html>

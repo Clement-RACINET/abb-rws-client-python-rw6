@@ -1,0 +1,560 @@
+Robot Web Services
+    - Root Resource
+        - Get Service list
+            - Common URL parameters
+            - Robot controller return codes
+        - Logout
+    - Subscription Service
+        - Get Subscription Actions
+        - Subscribe on resources
+        - Operations on Subscription Group
+            - Get Subscription Group Actions
+            - Add new resources, Remove existing Resources or change existing resources priorities.
+            - Unsubscribe or remove the subscription group/resources in group.
+            - Operations on Subscription Resource
+                - Unsubscribe or remove the resource from subscription group.
+    - User Service
+        - Get User Resources
+        - Get User Actions
+        - Register the user
+        - Impersonate a user
+        - Login as Local User
+        - Operations on Users grants
+            - Get User grants
+        - Operations on RMMP
+            - Request RMMP
+            - Poll for RMMP grant status
+            - Get RMMP state
+            - Grant or deny an RMMP request
+            - Cancel held or requested RMMP
+            - Get RMMP Actions
+            - Subscribe on RMMP Request event
+        - Operations on Remote User
+            - Get remote user actions
+            - Remote User Logon Request
+            - Remote User Logout Request
+            - Subscribe on remote user state
+    - Controller Service
+        - Get Controller Resources
+        - Get Controller Actions
+        - Get Controller environment variable
+        - Restart or Shutdown controller
+        - Set Controller language
+        - Operations on Clock Resource
+            - Get Clock Resource
+            - Get Clock Actions
+            - Set the Clock of the controller
+            - Operations on Timezone Resource
+                - Get timezone resource
+                - Get timezone actions
+                - Set the time zone
+            - Operations on Timeserver Resource
+                - Get time server resource
+                - Get time server actions
+                - Set the time server
+                - Test Time Server
+        - Operations on Identity Resource
+            - Get Identity Resource
+            - Get Identity Actions
+            - Set the Identity of the controller
+        - Operations on System Resource
+            - Get list of installed systems
+            - Get actions on system
+            - Set Boot Device
+            - Get Boot Device
+            - Load Boot Image
+            - Unload Boot Image
+            - Get selected system name
+            - Install deployment package
+            - Validate deployment package
+            - Get system resource
+            - Get actions on a system resource
+            - Rename a system
+            - Select a system
+            - Delete a System
+            - Deselect a System
+        - Operations on network Resource
+            - Get Network Resource
+            - Get Network setting actions
+            - Set Network configuration
+            - Operations on DNS Resource
+                - Get DNS Resource
+            - Operations on Routing Table Resource
+                - Add a route table entry
+                - Options to add a route table entry
+                - Remove a route table entry
+                - Options to remove a route table entry
+        - Operations on Backup Resource
+            - Get backup resources
+            - Get backup actions
+            - Create a Backup
+            - Restore a backup.
+            - Check Restore
+            - Get Backup State
+            - Subscribe on Backup System Information
+            - Operations on backup system information
+                - Get backup system information
+                    - RobotWare
+        - Operations on Compress Resource
+            - Get compress resources
+            - Get compress actions
+            - Compress/Decompress Resource
+        - Operations on Diagnostics Resource
+            - Get diagnostics resources
+            - Get diagnostics actions
+            - Save system diagnostics
+            - Subscribe on system dump
+            - Subscribe on Diagnostics States (Get System Diagnostics)
+        - Operations on CtrlSafetyResource
+            - Get safety resources
+            - Get Safety actions
+            - Load Safety configuration file to controller
+            - Set Safety Mode of the controller
+            - Get Config status
+            - Get Safety Mode status
+            - Get Safety Cyclic Brake Check status
+            - Get LoadOperation status
+            - Get Safety Configurations
+            - Get Safety Violation Info
+            - Unlock the safety configuration
+            - Software Sync Acknowledgement
+            - Add Validation info
+            - Remove Validation info
+            - Set Reset Safety Controller
+        - Operations on options Resource
+            - Get options resource
+        - Operations on Compatabile Resource
+            - Check Robotware version compatibility with contorller hardware
+        - Operation on Virtual Time
+            - Get Virtual Time resources
+            - Operation on VTTime
+                - Get Virtualtime
+            - Operation on VTTimeslice
+                - Get VTTimeslice Value
+                - Actions on VTTimeslice
+                - Set VTTimeslice Value
+            - Operation on VTSpeed
+                - Get Speed of Virtual Time
+                - Get actions on a VTSpeed
+                - Set Speed of Virtualtime
+            - Operation on VTState
+                - Get State of Virtual Time
+                - Get actions on a VTState
+                - Set State of Virtualtime
+            - Operation on VTRun
+                - VT Run
+    - File Service
+        - Get File Service Resources
+        - Operations on Directory Resource
+            - Get Directory listing of resources
+            - Get Directory Actions
+            - Create a directory
+            - Rename a directory
+            - Copy a directory
+            - Delete a directory
+        - Operations on File Resource
+            - Get a file
+            - Get File Actions
+            - Rename a file
+            - Create a copy of a file
+            - Upload a file
+            - Delete a file
+            - Get file Meta data
+    - RobotWare Services
+        - Get RobotWare services
+        - CFG Service
+            - Get CFG resources
+            - Get CFG actions
+            - Validate CFG file
+            - Load CFG file
+            - Validate CFG Instance before Delete
+            - Validate CFG Instances
+            - Keyless motor ON
+            - Subscribe on cfg ChangeCount
+            - Operations on CFG domain
+                - Get CFG Domain Types
+                - Get Actions on a CFG domain
+                - Save CFG domain
+                - Reset CFG domain
+                - Operations on CFG type
+                    - Get CFG type
+                    - Operations on CFG attributes
+                        - Get all attributes of the given domain type
+                    - Operations on CFG instances
+                        - Get all instances of the given domain type
+                        - Get actions on CFG instances
+                        - Reset CFG instances
+                        - Create default CFG instance
+                        - Operations on CFG instance
+                            - Get CFG instance
+                            - Get CFG instance actions
+                            - Update CFG instance
+                            - Delete CFG instance
+        - DIPC service
+            - Create a queue
+            - Send message
+            - Read message
+            - Subscribe DIPC Queue
+            - Delete DIPC Queue
+            - Get DIPC Queue
+            - Get DIPC Resources
+            - Get DIPC Actions
+            - Operations on DIPC Queue
+                - Get DIPC Queue Actions
+                - Subscribe DIPC Queue without reading message
+        - Elog service
+            - Get Elog Resources
+            - Get Elog Actions
+            - Clear elog messages
+            - Save elog in system dump format
+            - Operations on elog domain
+                - Get elog messages in domain
+                - Get Actions on elog domain
+                - Clear elog messages
+                - Subscribe on elog domain
+                - Operations on elog domain message
+                    - Get Elog Message in domain
+        - IO Service
+            - Get IO System resources
+            - Operations on IO Networks
+                - Get IO Networks resources
+                - Get Actions on IO Networks
+                - Search IO Networks
+            - Operations on IO Network
+                - Get IO Network
+                - Get IO Network actions
+                - Update IO Network
+                - Subscribe IO Network
+                - Get IO Network Configuration Properties
+                - Update IO Network Configuration Type
+            - Operations on IO Devices
+                - Get IO Devices
+                - Get Actions IO Devices
+                - Search IO Devices
+            - Operations on IO Device
+                - Get IO Device
+                - Get IO Device actions
+                - Update IO Device
+                - Subscribe IO Device
+                - Set input data
+                - Set output data
+                - Get IO Device Configuration Properties
+                - Operations on eio Device
+                    - Get eio device status information
+                - Operations on Device Command
+                    - Send Device Command
+                    - Send Device Command actions
+            - Operations on IO Signals
+                - Get IO Signals
+                - Signal Search
+                - Signal Search Extended
+                - Unblock Signals
+                - Get IO Signals actions
+            - Operations on IO Signal
+                - Get an IO Signal
+                - Get IO Signal actions
+                    - Update IO Signal Value
+                    - Update IO Signal State
+                    - Subscribe IO Signal
+                - Get IO signal Configuration Properties
+        - Mastership service
+            - Get Mastership Resources
+            - Get Mastership Actions
+            - Mastership request
+            - Mastership release
+            - Mastership Subscribe
+            - Operations on Mastership domains
+                - Get Mastership Domain
+                - Get Mastership Domain Actions
+                - Mastership domain request
+                - Mastership Domain release
+                - Mastership Domain Subscribe
+        - Panel service
+            - Get Panel Resources
+            - Get Panel Actions
+            - Set the language
+            - Restart the Controller
+            - Operations on Controller State Resource
+                - Get Controller State
+                - Get Controller State Actions
+                - Set Controller State
+                - Subscribe Controller state
+            - Operations on Operation Mode Resource
+                - Get Operation Mode
+                - Get Operation Mode Actions
+                - Subscribe Operation Mode
+                - Acknowledgement for Operation Mode
+                - Get Operation Mode Lock Status
+                - Lock operation mode selection.
+                - Unlock operation mode selection.
+            - Operations on Speed Ratio Resource
+                - Get Speed Ratio
+                - Get Speed Ratio Actions
+                - Set Speed Ratio
+                - Subscribe Speed Ratio
+            - Operations on Collision Detection State
+                - Get Collision Detection State
+                - Get Collision Detection State Actions
+                - Subscribe on Collision Detection State
+        - RAPID Service
+            - Get RAPID system resources
+            - Operations on RAPID execution
+                - Get RAPID Execution state
+                - Get RAPID Execution actions
+                    - Start RAPID Execution
+                    - Stop RAPID Execution
+                    - Start RAPID Execution from production entry
+                    - Reset RAPID program pointer to main
+                    - Set number of execution cycles
+                    - Subscribe RAPID Execution
+                - Subscribe RAPID Execution Cycle
+                - Subscribe on Hold to Run
+                - Set Hold to Run Cmd
+            - Operations on RAPID modules
+                - Get RAPID modules action
+                - Get RAPID modules
+                - Get Mod Possible All
+                - Set Modify All Positions
+                - Operations on rapid module
+                    - Get a specified range of text
+                    - Get rapid module actions
+                    - Save rapid module
+                    - Set Text Range
+                    - Set Module Text
+                    - Get RAPID module attributes
+                    - Get change count
+                    - Get RulesInstr
+                    - Get module possible attributes
+                    - Get Search Text
+                    - Get Rapid Object
+                    - Set SyncPers
+                    - Set Modify Position
+                    - Get Module Extension
+                    - Get Mod Possible
+                    - Get Object Child
+                    - Get SyncPers Status
+                    - Get Module Text
+                    - Get Symbol Information
+                    - Operations on RAPID Routine
+                        - Get Routine information
+                        - Get Routineargs information
+            - Operations on RAPID symbols properties
+                - Get RAPID symbols resources
+                - Get rapid symbols actions
+                - Search RAPID symbols
+                - Operations on RAPID symbol object
+                    - Get Object Extension List
+            - Operations on RAPID symbol
+                - Operations on RAPID symbol properties
+                    - Get RAPID symbol properties
+                        - Common return codes
+                - Operations on RAPID symbol data
+                    - Get rapid symbol data
+                    - Get rapid symbol data actions
+                        - Update rapid variable current value
+                        - Subscribe on RAPID persistent variable
+                    - Validate rapid variable
+                    - Update rapid variable Initial Value
+            - Operations on RAPID tasks
+                - Get RAPID tasks
+                - Get rapid Tasks actions
+                - Start RAPID Spy Logging
+                - Get RAPID Spy Logging status
+                - Stop RAPID Spy Logging
+                - Activate/Deactivate rapid tasks
+                - Get Program/Motion Pointer Sync State for all tasks
+                - Subscribe on Build log change
+                - Operations on RAPID task
+                    - Get RAPID task state
+                    - Get rapid task actions
+                    - Load RAPID module into a rapid task
+                    - Unload module from a rapid task
+                    - Abort current execution level
+                    - activate/deactivate rapid task
+                    - Get Activation Record
+                    - Get Structural Change Count
+                    - Get Preferable Data Types
+                    - Get Program Pointer Sync State
+                    - Get Motion Pointer Sync State
+                    - Link RAPID Task
+                    - Get Pallet
+                    - Get Pallet Head
+                    - Subscribe on Rapid Task Change
+                    - Subscribe on Rapid PP Sync state change
+                    - Subscribe on Rapid task pgmexecution state change
+                    - Operations on rapid motion
+                        - Get rapid motion
+                        - Get RobTarget
+                        - Get Joint Target
+                        - Get mechanical units
+                        - Get external joint states
+                        - Operations on rapid calib
+                            - Calibration for Displacement
+                            - Calibration for Tcp
+                    - Operations on RAPID program
+                        - Get RAPID program resource
+                        - Get rapid program actions
+                        - Load program into a rapid task
+                        - Unload program from a rapid task
+                        - Save program
+                        - Set program name
+                        - Set Entry Point
+                        - Operations on RAPID build errors
+                            - Get Build Errors
+                        - Operations on RAPID breakpoint
+                            - Get RAPID breakpoint actions
+                            - Set break point
+                            - Get break points
+                    - Operations on RAPID program PCP
+                        - Get RAPID task Motion&Program pointer positions
+                        - Get RAPID task pcp actions
+                        - Set the Program pointer(PP) position to cursor
+                        - Set the Program pointer(PP) position to routine
+                        - Set the Program pointer(PP) position to routine by URL
+                        - Set the Program pointer(PP) position to previous instruction
+                        - Set the Program pointer(PP) position to next instruction
+                        - Subscribe on Program Pointer
+                        - Subscribe on Motion Pointer
+                    - Operations on RAPID service routine
+                        - Get RAPID service routine
+                    - Operations on RAPID program counter position
+                        - Get RAPID Program counter position
+            - Operations on RAPID UI instructions
+                - Get UI instruction resource
+                - Get UI instruction actions
+                    - Subscribe on UI instruction
+                - Operations on Active UI Instruction
+                    - Get Active UI Instruction
+                    - Get Active UI instruction actions
+                        - Update an Active UI Instruction Parameter
+                    - Get parameter value for an active UI instruction
+                    - Get active UI instruction parameters
+            - Operations on Rapid taskpanel
+                - Get user modify from taskpanel
+                - Subscribe on Tasks panel change
+            - Operations on Rapid AliasIO
+                - Get AliasIO List
+        - System service
+            - System Information
+            - Get robot type
+            - System Option Resource
+                - System Options
+            - System Energy Resource
+                - Get System Energy Actions
+                - System Energy Info Change Count
+                - Reset Accumulated Energy
+                - System Energy
+                - Subscribe on System Energy Changes.
+            - System License Resource
+                - Get System Robotware License
+            - System Products Resource
+                - Get Installed Products
+        - RobotWare return codes service
+            - Get a list of RobotWare return codes
+        - Devices service
+            - Devices tree information
+        - Motion System
+            - Get Motion System
+            - Get Motion System action
+            - Set Mechunit for jogging
+            - Perform Jogging
+            - Set Robo Target Position
+            - Get check change count
+            - Subscribe on Error EventChange
+            - Operations on Error State
+                - Get Error State
+            - Operations on Motion Supervision
+                - Get Motion Supervision
+                - Get Motion Supervision Actions
+                - Set Motion Supervision Mode (Jog Supervision Mode)
+                - Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
+                - Get Motion Supervision Collision Prediction Mode
+                - Set Motion Supervision Collision Prediction Mode
+            - Operations On Path Supervision
+                - Get Path Supervision
+                - Get Path Supervision Actions
+                - Set Path Supervision Mode
+                - Set Path Supervision Level
+            - Operations On NonMotion Execution
+                - Get Non Motion Execution Mode
+                - Get NonMotion Execution Actions
+                - Set NonMotion Execution Mode
+            - Operations on Mechunits
+                - Get Mechunits
+                - Operations on Mechunit
+                    - Get Mechunit
+                    - Get Mechunit action
+                    - Set Mechunit
+                    - Set Compliance Lead Through
+                    - Get Compliance Lead Through
+                    - Set Fine Calibration
+                    - Update (Syncronize) Revolution Counter
+                    - Get Physical Joints
+                    - Get Cartesian Value
+                    - Set Mechanical Unit
+                    - Get Robtarget
+                    - Get Joint target
+                    - Subscribe on Mechunit Mode Change
+                    - Get Joints From Position
+                    - Get Position From Joints
+                    - Get All Joint Solution
+                    - Get Joints From Cartesian
+                    - Get Calibration Info
+                    - Operation on Calib
+                        - Calibration for BaseFrame
+                        - Calibration for BaseFrameMoving
+                        - Calibration for ExternalRobotNomBaseNew
+                        - Calibration for RobotAxisRot
+                        - Calibration for SingleUserRotNew
+                        - Calibration for RotExtCtrlZdef
+                        - Calibration for SingleUserLin
+                        - Calibration for SingleTrack
+                        - Calibration for RobotAxisRot2
+                    - Operations on Baseframe
+                        - Get Base Frame
+                        - Get Base Frame actions
+                        - Set Base Frame
+                    - Operations on Axes
+                        - Get Axes
+                        - Get Axis
+                        - Get Axis actions
+                        - Get Axis pose
+                        - Set Axis pose
+                        - Update Commutate
+                        - Update Sync Revolution Counter
+            - Operations on SMB Data
+                - Set SMB Data
+                - Clear SMB Data
+                - Get SMB Data
+                - Get SMB Data Actions
+            - Operations on Motor Calib
+                - Get Motor Calib Names
+        - Integrated Vision (IV) Service
+            - Get Vision Manager Resource
+            - Get Number of Cameras of IV
+            - Get IV Camera Validity
+            - Get Vision (camera) Resource Actions
+            - Get Camera Jobname
+            - Restart Camera
+            - Flash LED(s) of Camera
+            - Set Camera State
+            - Refesh the camera(s)
+            - Set Hostname of the Camera
+            - Set camera to be a DHCP client
+            - Set Camera DNS Settings
+            - Get Camera Status
+            - Get Camera Info Using Index of the camera
+            - Set Camera Name
+            - Set Camera User Credentials
+            - Set Camera IP Settings
+            - Get IV Camera Info
+    - Operations on IO Profinet Device
+        - Get profinet I/O device read record implicit data from device in profinet network
+        - Read record implicit data from device in profinet network
+        - Get forms
+        - Get profinet I/O device read record data
+        - Get profinet I/O device read record data
+        - Get Forms
+        - Get profinet device alarms xml response
+        - Clear the alarms
+        - Get Forms
