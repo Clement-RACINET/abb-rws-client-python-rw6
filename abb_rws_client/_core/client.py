@@ -250,7 +250,7 @@ class RWSClient:
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
             raise RWSConnectionError(
-                f"Cannot connect to {self.base_url}: {last_exc}"
+                f"Connection failed to {self.base_url}: {last_exc}"
             ) from last_exc
         raise RWSTimeoutError(
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
