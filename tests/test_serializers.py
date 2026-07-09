@@ -3,8 +3,8 @@
 
 import pytest
 
-from old_abb_rws_client.exceptions import RWSValueError
-from old_abb_rws_client.serializers import (
+from abb_rws_client._core.exceptions import RWSValueError
+from abb_rws_client._core.serializers import (
     RapidValue,
     RobTarget,
     python_to_rapid_value,

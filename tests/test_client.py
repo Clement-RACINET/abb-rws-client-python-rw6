@@ -16,8 +16,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.client import _RETRY_MAX_ATTEMPTS, RWSClient
-from abb_rws_client.exceptions import (
+from abb_rws_client._core.client import _RETRY_MAX_ATTEMPTS, RWSClient
+from abb_rws_client._core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
     RWSHTTPError,

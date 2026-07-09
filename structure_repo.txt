@@ -10,10 +10,6 @@ abb_rws_client_python_rw6
 │   ├── __init__.py
 │   ├── test_client.py
 │   ├── test_exceptions.py
-│   ├── test_execution.py
-│   ├── test_helpers.py
-│   ├── test_mastership.py
-│   ├── test_rapid_variable.py
 │   └── test_serializers.py
 ├── .env.example
 ├── .gitignore
