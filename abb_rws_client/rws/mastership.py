@@ -35,7 +35,10 @@ async def get_mastership_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/mastership"
+        ```python
+        >>> await get_mastership_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/mastership")
 
@@ -63,7 +66,10 @@ async def get_mastership_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/mastership?action=show"
+        ```python
+        >>> await get_mastership_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/mastership",
@@ -95,7 +101,10 @@ async def post_mastership_request(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Request mastership on all domains
+        ```python
+        >>> await post_mastership_request(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/mastership",
@@ -126,7 +135,10 @@ async def post_mastership_release(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Release mastership on all domains
+        ```python
+        >>> await post_mastership_release(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/mastership",
@@ -159,7 +171,10 @@ async def post_mastership_subscribe(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on mastership state changes
+        ```python
+        >>> await post_mastership_subscribe(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -197,7 +212,10 @@ async def get_mastership_domain(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg"
+        ```python
+        >>> await get_mastership_domain(client, "domain_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/mastership/{domain_name}")
 
@@ -227,8 +245,10 @@ async def get_mastership_domain_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/mastership/cfg?action=show"
+        ```python
+        >>> await get_mastership_domain_actions(client, "domain_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/mastership/{domain_name}",
@@ -262,7 +282,10 @@ async def post_mastership_domain_request(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # Request mastership on cfg domain
+        ```python
+        >>> await post_mastership_domain_request(client, "domain_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/mastership/{domain}",
@@ -295,7 +318,10 @@ async def post_mastership_domain_release(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # Release mastership on cfg domain
+        ```python
+        >>> await post_mastership_domain_release(client, "domain_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/mastership/{domain}",
@@ -328,7 +354,10 @@ async def post_mastership_domain_subscribe(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on cfg domain for changes
+        ```python
+        >>> await post_mastership_domain_subscribe(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",

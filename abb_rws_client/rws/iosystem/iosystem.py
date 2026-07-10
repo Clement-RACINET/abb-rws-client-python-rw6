@@ -35,7 +35,10 @@ async def get_io_system_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem"
+        ```python
+        >>> await get_io_system_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/iosystem")
 
@@ -63,7 +66,10 @@ async def get_io_network(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local"
+        ```python
+        >>> await get_io_network(client, "network_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/iosystem/networks/{network}")
 
@@ -93,8 +99,10 @@ async def get_io_network_actions(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/networks/Local?action=show"
+        ```python
+        >>> await get_io_network_actions(client, "network_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/networks/{network}",
@@ -129,7 +137,10 @@ async def update_io_network(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Set signal value
+        ```python
+        >>> await update_io_network(client, "network_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/networks/{network}",
@@ -163,7 +174,10 @@ async def subscribe_io_network(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Subscribe on IO Network
+        ```python
+        >>> await subscribe_io_network(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -206,8 +220,10 @@ async def get_io_network_configuration_properties(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/networks/Local?resource=config&configtype=1"
+        ```python
+        >>> await get_io_network_configuration_properties(client, "network_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/networks/{network}",
@@ -249,8 +265,10 @@ async def update_io_network_configuration_type(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "config-type=BITS" -X POST
-            "http://localhost/rw/iosystem/networks/Local?acti
+        ```python
+        >>> await update_io_network_configuration_type(client, "network_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/networks/{network}",
@@ -282,8 +300,10 @@ async def get_io_device(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/devices/Local/PANEL"
+        ```python
+        >>> await get_io_device(client, "device_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/iosystem/devices/{device}")
 
@@ -313,8 +333,10 @@ async def get_io_device_actions(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/devices/Local/PANEL?action=show"
+        ```python
+        >>> await get_io_device_actions(client, "device_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/devices/{device}",
@@ -349,7 +371,10 @@ async def update_io_device(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Set signal value
+        ```python
+        >>> await update_io_device(client, "device_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/devices/{device}",
@@ -383,7 +408,10 @@ async def subscribe_io_device(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Subscribe on IO Device
+        ```python
+        >>> await subscribe_io_device(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -432,8 +460,10 @@ async def set_input_data(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255"
-            -X POST "http://localhost/rw/iosys
+        ```python
+        >>> await set_input_data(client, "device_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/devices/{device}",
@@ -484,8 +514,10 @@ async def set_output_data(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255"
-            -X POST "http://localhost/rw/iosys
+        ```python
+        >>> await set_output_data(client, "device_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/devices/{device}",
@@ -530,8 +562,10 @@ async def get_io_device_configuration_properties(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/devices/DeviceNet/DN_Internal_Device?resource=con
+        ```python
+        >>> await get_io_device_configuration_properties(client, "device_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/devices/{device}",
@@ -571,8 +605,10 @@ async def get_eio_device_status_information(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/devices/EtherNetIP/EN_Internal_Device/upgradeinfo
+        ```python
+        >>> await get_eio_device_status_information(client, "network_value", "device_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/iosystem/devices/{network}/{device}/upgradeinfo")
 
@@ -608,8 +644,10 @@ async def post_send_device_command(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "commandName=FIRMWARE_INFO&value=0&valueLength=0&timeout=0" -X POST "http://
+        ```python
+        >>> await post_send_device_command(client, "device_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/devices/{device}/command",
@@ -649,8 +687,10 @@ async def options_send_device_command_actions(
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS
-            "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
+        ```python
+        >>> await options_send_device_command_actions(client, "device_value")
+        <Response [200]>
+        ```
     """
     return await client.options(f"/rw/iosystem/devices/{device}/command")
 
@@ -684,8 +724,10 @@ async def get_an_io_signal(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1"
+        ```python
+        >>> await get_an_io_signal(client, "network_value", "unit_value", "signal_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/iosystem/signals/{network}/{unit}/{signal}")
 
@@ -719,8 +761,10 @@ async def get_io_signal_actions(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=show"
+        ```python
+        >>> await get_io_signal_actions(client, "network_value", "unit_value", "signal_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/signals/{network}/{unit}/{signal}",
@@ -759,7 +803,10 @@ async def update_io_signal_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Set signal value
+        ```python
+        >>> await update_io_signal_state(client, "network_value", "device_value", "signal_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/signals/{network}/{device}/{signal}",
@@ -795,6 +842,12 @@ async def update_io_signal_value(
         RWSNotFoundError: On HTTP 404.
         RWSHTTPError: On any other HTTP >= 400.
         # ABB codes: BAD_REQUEST(400)
+
+    Example:
+        ```python
+        >>> await update_io_signal_value(client, "network_value", "device_value", "signal_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/iosystem/signals/{network}/{device}/{signal}",
@@ -827,8 +880,10 @@ async def subscribe_io_signal(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Subscribe on IO-Signal, it is possible to subscribe with any subscription priority (i.e
-            High,Medium,Low priority) on IO-
+        ```python
+        >>> await subscribe_io_signal(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -875,8 +930,15 @@ async def get_io_signal_configuration_properties(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?resource=config&config
+        ```python
+        >>> await get_io_signal_configuration_properties(
+        ...     client,
+        ...     "network_value",
+        ...     "unit_value",
+        ...     "signal_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/iosystem/signals/{network}/{unit}/{signal}",

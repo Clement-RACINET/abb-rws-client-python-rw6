@@ -34,7 +34,10 @@ async def get_cfg_resources(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_cfg_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/cfg")
 
@@ -62,7 +65,10 @@ async def get_cfg_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Retrieve actions on the CFG resource
+        ```python
+        >>> await get_cfg_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/cfg",
@@ -93,8 +99,10 @@ async def validate_cfg_file(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/
+        ```python
+        >>> await validate_cfg_file(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/cfg",
@@ -125,8 +133,10 @@ async def load_cfg_file(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/
+        ```python
+        >>> await load_cfg_file(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/cfg",
@@ -159,8 +169,10 @@ async def validate_cfg_instance_before_delete(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=abc" -X POST
-            "http://localhost/rw/cfg?action=validate-inst-at-del"
+        ```python
+        >>> await validate_cfg_instance_before_delete(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/cfg",
@@ -202,8 +214,10 @@ async def validate_cfg_instances(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "operation=1&cfgdomain=I/O&cfgtype=DeviceNetDevice&instances=TestingValid1&i
+        ```python
+        >>> await validate_cfg_instances(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/cfg",
@@ -247,8 +261,10 @@ async def post_keyless_motor_on(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "state=run" -X POST
-            "http://localhost/rw/cfg?action=keyless"
+        ```python
+        >>> await post_keyless_motor_on(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/cfg",
@@ -282,7 +298,10 @@ async def subscribe_on_cfg_changecount(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on cfg change count
+        ```python
+        >>> await subscribe_on_cfg_changecount(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -323,7 +342,10 @@ async def get_cfg_domain_types(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/cfg/moc"
+        ```python
+        >>> await get_cfg_domain_types(client, "domain_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/cfg/{domain}",
@@ -357,7 +379,10 @@ async def get_actions_on_cfg_domain(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Get actions supported by a CFG domain
+        ```python
+        >>> await get_actions_on_cfg_domain(client, "domain_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/cfg/{domain}",
@@ -390,7 +415,10 @@ async def save_cfg_domain(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 
     Example:
-        # Save the CFG domain to the given file
+        ```python
+        >>> await save_cfg_domain(client, "domain_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/cfg/{domain}",
@@ -423,7 +451,10 @@ async def reset_cfg_domain(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Remove all external instances in a CFG domain
+        ```python
+        >>> await reset_cfg_domain(client, "domain_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/cfg/{domain}",
@@ -456,8 +487,10 @@ async def get_cfg_type(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK"
+        ```python
+        >>> await get_cfg_type(client, "domain_value", "type_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}")
 
@@ -487,8 +520,10 @@ async def get_all_attributes_of_the_given_domain(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/attributes"
+        ```python
+        >>> await get_all_attributes_of_the_given_domain(client, "domain_value", "type_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/attributes")
 
@@ -518,8 +553,10 @@ async def get_all_instances_of_the_given_domain(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/cfg/eio/EIO_BUS/instances"
+        ```python
+        >>> await get_all_instances_of_the_given_domain(client, "domain_value", "type_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances")
 
@@ -551,8 +588,10 @@ async def get_actions_on_cfg_instances(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=show"
+        ```python
+        >>> await get_actions_on_cfg_instances(client, "domain_value", "type_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/cfg/{domain}/{type}/instances",
@@ -587,7 +626,10 @@ async def reset_cfg_instances(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Reset CFG instances
+        ```python
+        >>> await reset_cfg_instances(client, "domain_value", "type_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/cfg/{domain}/{type}/instances",
@@ -623,7 +665,10 @@ async def create_default_cfg_instance(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Create default CFG instance
+        ```python
+        >>> await create_default_cfg_instance(client, "domain_value", "type_value")
+        <Response [201]>
+        ```
     """
     return await client.post(
         f"/rw/cfg/{domain}/{type}/instances",
@@ -658,7 +703,10 @@ async def get_cfg_instance(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_cfg_instance(client, "domain_value", "type_value", "instance_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances/{instance_name}")
 
@@ -692,7 +740,15 @@ async def get_cfg_instance_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_cfg_instance_actions(
+        ...     client,
+        ...     "domain_value",
+        ...     "type_value",
+        ...     "instance_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/cfg/{domain}/{type}/instances/{instance}",
@@ -731,7 +787,10 @@ async def update_cfg_instance(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # Update one or more attributes
+        ```python
+        >>> await update_cfg_instance(client, "domain_value", "type_value", "instance_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/cfg/{domain}/{type}/instances/{instance}",
@@ -767,6 +826,9 @@ async def delete_cfg_instance(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Delete CFG instance
+        ```python
+        >>> await delete_cfg_instance(client, "domain_value", "type_value", "instance_value")
+        <Response [204]>
+        ```
     """
     return await client.delete(f"/rw/cfg/{domain}/{type}/instances/{instance}")

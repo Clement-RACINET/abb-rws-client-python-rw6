@@ -39,7 +39,10 @@ async def get_rapid_tasks(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks"
+        ```python
+        >>> await get_rapid_tasks(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/tasks",
@@ -70,7 +73,10 @@ async def get_rapid_tasks_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?action=show"
+        ```python
+        >>> await get_rapid_tasks_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/tasks",
@@ -104,8 +110,10 @@ async def start_rapid_spy_logging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST
-            "http://localhost/rw/rapid/tasks?action=start-spy
+        ```python
+        >>> await start_rapid_spy_logging(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/tasks",
@@ -136,8 +144,10 @@ async def get_rapid_spy_logging_status(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/tasks?resource=spy-status"
+        ```python
+        >>> await get_rapid_spy_logging_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/tasks",
@@ -169,8 +179,10 @@ async def stop_rapid_spy_logging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks?action=stop-spy"
+        ```python
+        >>> await stop_rapid_spy_logging(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/tasks",
@@ -202,8 +214,10 @@ async def post_activate_deactivate_rapid_tasks(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks?action=activate"
+        ```python
+        >>> await post_activate_deactivate_rapid_tasks(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/tasks",
@@ -236,8 +250,10 @@ async def get_program_motion_pointer_sync_state_for(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
+        ```python
+        >>> await get_program_motion_pointer_sync_state_for(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/tasks",
@@ -270,7 +286,10 @@ async def subscribe_on_build_log_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID build log change
+        ```python
+        >>> await subscribe_on_build_log_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -310,7 +329,10 @@ async def get_rapid_task_state(
         # ABB codes: NOT_FOUND(404), FORBIDDEN(403)see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_rapid_task_state(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}",
@@ -343,7 +365,10 @@ async def get_rapid_task_actions(
         # ABB codes: BAD REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_task_actions(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}",
@@ -380,8 +405,10 @@ async def load_rapid_module_into_rapid_task(
         # ABB codes: BAD REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod"
-            "http://localhost/rw/rapid/tasks/T_ROB1?action=
+        ```python
+        >>> await load_rapid_module_into_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
@@ -424,8 +451,10 @@ async def post_unload_module_from_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename"
-            "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod
+        ```python
+        >>> await post_unload_module_from_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
@@ -459,8 +488,10 @@ async def post_abort_current_execution_level(
         # ABB codes: BAD REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
+        ```python
+        >>> await post_abort_current_execution_level(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
@@ -493,8 +524,10 @@ async def post_activate_deactivate_rapid_task(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
+        ```python
+        >>> await post_activate_deactivate_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
@@ -529,7 +562,10 @@ async def get_activation_record(
         # ABB codes: NOT_FOUND(404) ,FORBIDDEN(403), BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_activation_record(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -569,7 +605,10 @@ async def get_structural_change_count(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_structural_change_count(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -606,7 +645,10 @@ async def get_preferable_data_types(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_preferable_data_types(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -649,7 +691,10 @@ async def get_program_pointer_sync_state(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_program_pointer_sync_state(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -684,7 +729,10 @@ async def get_motion_pointer_sync_state(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_motion_pointer_sync_state(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -717,8 +765,10 @@ async def post_link_rapid_task(
         # ABB codes: BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
+        ```python
+        >>> await post_link_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
@@ -753,7 +803,10 @@ async def get_pallet(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_pallet(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -795,7 +848,10 @@ async def get_pallet_head(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_pallet_head(client, "task_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
@@ -836,7 +892,10 @@ async def subscribe_on_rapid_task_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID task change
+        ```python
+        >>> await subscribe_on_rapid_task_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -877,7 +936,10 @@ async def subscribe_on_rapid_pp_sync_state_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID task sync state change
+        ```python
+        >>> await subscribe_on_rapid_pp_sync_state_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -918,7 +980,10 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID task sync state change
+        ```python
+        >>> await subscribe_on_rapid_task_pgmexecution_state_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -956,8 +1021,10 @@ async def get_rapid_motion(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
+        ```python
+        >>> await get_rapid_motion(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/tasks/{task}/motion")
 
@@ -991,8 +1058,10 @@ async def get_robtarget(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wo
+        ```python
+        >>> await get_robtarget(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
@@ -1033,8 +1102,10 @@ async def get_joint_target(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
+        ```python
+        >>> await get_joint_target(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
@@ -1067,8 +1138,10 @@ async def get_mechanical_units(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
+        ```python
+        >>> await get_mechanical_units(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
@@ -1101,8 +1174,10 @@ async def get_external_joint_states(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
+        ```python
+        >>> await get_external_joint_states(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
@@ -1152,8 +1227,10 @@ async def post_calibration_for_displacement(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0,
-            0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
+        ```python
+        >>> await post_calibration_for_displacement(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
@@ -1218,8 +1295,10 @@ async def post_calibration_for_tcp(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0,
+        ```python
+        >>> await post_calibration_for_tcp(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
@@ -1267,7 +1346,10 @@ async def get_rapid_program_resource(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_program_resource(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program",
@@ -1300,7 +1382,10 @@ async def get_rapid_program_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_program_actions(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program",
@@ -1337,8 +1422,10 @@ async def load_program_into_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf"
-            "http://localhost:7777/rw/rapid/tasks/T_
+        ```python
+        >>> await load_program_into_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
@@ -1379,8 +1466,10 @@ async def post_unload_program_from_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
+        ```python
+        >>> await post_unload_program_from_rapid_task(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
@@ -1415,8 +1504,10 @@ async def save_program(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
+        ```python
+        >>> await save_program(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
@@ -1452,8 +1543,10 @@ async def set_program_name(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=myprog" -X POST
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action
+        ```python
+        >>> await set_program_name(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
@@ -1489,8 +1582,10 @@ async def set_entry_point(
         # ABB codes: BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
+        ```python
+        >>> await set_entry_point(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
@@ -1528,7 +1623,10 @@ async def get_build_errors(
         # ABB codes: NOT_FOUND(404),BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_build_errors(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program/builderror",
@@ -1561,7 +1659,10 @@ async def get_rapid_breakpoint_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_breakpoint_actions(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
@@ -1600,8 +1701,10 @@ async def set_break_point(
         # ABB codes: HTTP_BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3"
-            "http://127.0.0.1/rw/rapid/tasks
+        ```python
+        >>> await set_break_point(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
@@ -1645,8 +1748,10 @@ async def get_break_points(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
+        ```python
+        >>> await get_break_points(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
@@ -1677,7 +1782,10 @@ async def get_rapid_task_motion_program_pointer_positions(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_rapid_task_motion_program_pointer_positions(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/tasks/{task}/pcp")
 
@@ -1707,7 +1815,10 @@ async def get_rapid_task_pcp_actions(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_task_pcp_actions(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1749,8 +1860,10 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "module=modulename&line=6&column=14&routine=routinename" -X POST "http://loc
+        ```python
+        >>> await set_the_program_pointer_pp_position_to(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1799,8 +1912,10 @@ async def set_the_program_pointer_pp_position_to_2(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "module=modulename&routine=routinename&userlevel=true" -X POST "http://local
+        ```python
+        >>> await set_the_program_pointer_pp_position_to_2(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1846,8 +1961,10 @@ async def set_the_program_pointer_pp_position_to_3(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X
-            POST "http://localhost/rw/rapid/t
+        ```python
+        >>> await set_the_program_pointer_pp_position_to_3(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1881,8 +1998,10 @@ async def set_the_program_pointer_pp_position_to_4(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
+        ```python
+        >>> await set_the_program_pointer_pp_position_to_4(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1915,8 +2034,10 @@ async def set_the_program_pointer_pp_position_to_5(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
+        ```python
+        >>> await set_the_program_pointer_pp_position_to_5(client, "task_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1950,7 +2071,10 @@ async def subscribe_on_program_pointer(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID program pointer
+        ```python
+        >>> await subscribe_on_program_pointer(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -1991,7 +2115,10 @@ async def subscribe_on_motion_pointer(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID motion pointer
+        ```python
+        >>> await subscribe_on_motion_pointer(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -2035,7 +2162,10 @@ async def get_rapid_service_routine(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404) HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics"
+        ```python
+        >>> await get_rapid_service_routine(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/serviceroutine",
@@ -2074,7 +2204,9 @@ async def get_rapid_program_counter_position(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/tasks/T_ROB1/execution"
+        ```python
+        >>> await get_rapid_program_counter_position(client, "task_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/tasks/{task}/execution")

@@ -35,7 +35,10 @@ async def get_controller_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl"
+        ```python
+        >>> await get_controller_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl")
 
@@ -63,7 +66,10 @@ async def get_controller_actions(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl?action=show"
+        ```python
+        >>> await get_controller_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl",
@@ -93,7 +99,10 @@ async def get_controller_environment_variable(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics " http://localhost/ctrl/$TEMP "
+        ```python
+        >>> await get_controller_environment_variable(client, "envname_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/ctrl/${envname}")
 
@@ -117,8 +126,10 @@ async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST
-            "http://localhost/ctrl"
+        ```python
+        >>> await restart_or_shutdown_controller(client)
+        <Response [200]>
+        ```
     """
     return await client.post("/ctrl")
 
@@ -146,7 +157,10 @@ async def set_controller_language(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Set controller language
+        ```python
+        >>> await set_controller_language(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl",
@@ -173,7 +187,10 @@ async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system"
+        ```python
+        >>> await get_list_of_installed_systems(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/system")
 
@@ -201,7 +218,10 @@ async def get_actions_on_system(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?action=show"
+        ```python
+        >>> await get_actions_on_system(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/system",
@@ -232,7 +252,10 @@ async def set_boot_device(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u ""Default User":robotics -d "path={Path}" -X POST "
+        ```python
+        >>> await set_boot_device(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/system",
@@ -263,8 +286,10 @@ async def get_boot_device(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/system?resource=boot-device"
+        ```python
+        >>> await get_boot_device(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/system",
@@ -296,7 +321,10 @@ async def load_boot_image(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u ""Default User":robotics -d -X POST "
+        ```python
+        >>> await load_boot_image(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/ctrl/system",
@@ -327,7 +355,10 @@ async def post_unload_boot_image(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u ""Default User":robotics -d -X POST "
+        ```python
+        >>> await post_unload_boot_image(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/system",
@@ -359,7 +390,10 @@ async def get_selected_system_name(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?type=selected"
+        ```python
+        >>> await get_selected_system_name(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/system",
@@ -389,8 +423,10 @@ async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u ""Default User":robotics -d
-            "ctrl-id=1231&ctrl-name=Ctrlname&system-path=Systems/DeploymentTest&dp-pkg-
+        ```python
+        >>> await post_install_deployment_package(client)
+        <Response [202]>
+        ```
     """
     return await client.post("/ctrl/system/installdpkg")
 
@@ -414,7 +450,10 @@ async def validate_deployment_package(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u ""Default User":robotics -d "path=/hd0a/inbox/TEMP" -X POST "
+        ```python
+        >>> await validate_deployment_package(client)
+        <Response [204]>
+        ```
     """
     return await client.post("/ctrl/system/validatedpkg")
 
@@ -442,7 +481,10 @@ async def get_system_resource(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048"
+        ```python
+        >>> await get_system_resource(client, "system_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/ctrl/system/{system_name}")
 
@@ -472,8 +514,10 @@ async def get_actions_on_system_resource(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/system/RW6_02_048?action=show"
+        ```python
+        >>> await get_actions_on_system_resource(client, "system_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/ctrl/system/{system_name}",
@@ -509,8 +553,10 @@ async def post_rename_system(
         # ABB codes: BAD_REQUEST(400), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "newname=System123" -X POST
-            "http://localhost/ctrl/system/RW6_TEST?action=re
+        ```python
+        >>> await post_rename_system(client, "system_name_value")
+        <Response [201]>
+        ```
     """
     return await client.post(
         f"/ctrl/system/{system_name}",
@@ -545,8 +591,10 @@ async def post_select_system(
         # ABB codes: UNAUTHORIZED(401), BAD_REQUEST(400), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/ctrl/system/RW6_TEST?action=activate"
+        ```python
+        >>> await post_select_system(client, "system_name_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/ctrl/system/{system_name}",
@@ -577,7 +625,10 @@ async def delete_system(
         # ABB codes: BAD_REQUEST(400), UNAUTHORIZED(401)
 
     Example:
-        # Delete a System
+        ```python
+        >>> await delete_system(client, "system_name_value")
+        <Response [204]>
+        ```
     """
     return await client.delete(f"/ctrl/system/{system_name}")
 
@@ -605,8 +656,10 @@ async def post_deselect_system(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/ctrl/system?action=deactivate"
+        ```python
+        >>> await post_deselect_system(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/system",
@@ -632,7 +685,10 @@ async def get_network_resource(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/network"
+        ```python
+        >>> await get_network_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/network")
 
@@ -660,7 +716,10 @@ async def get_network_setting_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/network?action=show"
+        ```python
+        >>> await get_network_setting_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/network",
@@ -692,8 +751,10 @@ async def set_network_configuration(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=fixip&address={IP
-            address}&mask={Mask address}&gateway={Default Gate
+        ```python
+        >>> await set_network_configuration(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/ctrl/network",
@@ -719,7 +780,10 @@ async def get_dns_resource(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/network/dns"
+        ```python
+        >>> await get_dns_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/network/dns")
 
@@ -743,8 +807,10 @@ async def add_route_table_entry(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "destination=192.168.136.0/24&gateway=192.168.126.200" -X POST "http://local
+        ```python
+        >>> await add_route_table_entry(client)
+        <Response [204]>
+        ```
     """
     return await client.post("/ctrl/network/route/add")
 
@@ -768,8 +834,10 @@ async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.R
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS
-            "http://localhost/ctrl/network/route/add"
+        ```python
+        >>> await options_options_to_add_route_table_entry(client)
+        <Response [200]>
+        ```
     """
     return await client.options("/ctrl/network/route/add")
 
@@ -794,8 +862,10 @@ async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24" -X POST
-            "http://localhost/ctrl/network/route/
+        ```python
+        >>> await remove_route_table_entry(client)
+        <Response [202]>
+        ```
     """
     return await client.post("/ctrl/network/route/remove")
 
@@ -819,8 +889,10 @@ async def options_options_to_remove_route_table_entry(client: RWSClient) -> http
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS
-            "http://localhost/ctrl/network/route/remove"
+        ```python
+        >>> await options_options_to_remove_route_table_entry(client)
+        <Response [200]>
+        ```
     """
     return await client.options("/ctrl/network/route/remove")
 
@@ -844,7 +916,10 @@ async def get_compress_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress"
+        ```python
+        >>> await get_compress_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/compress")
 
@@ -872,7 +947,10 @@ async def get_compress_actions(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress?action=show"
+        ```python
+        >>> await get_compress_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/compress",
@@ -906,8 +984,10 @@ async def post_compress_decompress_resource(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST
+        ```python
+        >>> await post_compress_decompress_resource(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/ctrl/compress",
@@ -934,7 +1014,10 @@ async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics"
+        ```python
+        >>> await get_diagnostics_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/diagnostics")
 
@@ -962,8 +1045,10 @@ async def get_diagnostics_actions(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/diagnostics?action=show"
+        ```python
+        >>> await get_diagnostics_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/diagnostics",
@@ -996,8 +1081,10 @@ async def save_system_diagnostics(
         # ABB codes: BAD_REQUEST(400), CONFLICT(409), UNSUPPORTED_MEDIA(415) See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localho
+        ```python
+        >>> await save_system_diagnostics(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/ctrl/diagnostics",
@@ -1033,8 +1120,10 @@ async def subscribe_on_system_dump(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_system_dump(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -1076,8 +1165,10 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_diagnostics_states_get_system_diagnostics(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -1111,7 +1202,10 @@ async def get_safety_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety"
+        ```python
+        >>> await get_safety_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/safety")
 
@@ -1139,7 +1233,10 @@ async def get_safety_actions(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # Retrieve actions on the CFG resource
+        ```python
+        >>> await get_safety_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1170,7 +1267,10 @@ async def load_safety_configuration_file_to_controller(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 
     Example:
-        # Rename a file
+        ```python
+        >>> await load_safety_configuration_file_to_controller(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1203,8 +1303,10 @@ async def set_safety_mode_of_the_controller(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mode=service" -X POST
-            "http://localhost/ctrl/safety?action=set-mode"
+        ```python
+        >>> await set_safety_mode_of_the_controller(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1236,8 +1338,10 @@ async def get_config_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=config-status"
+        ```python
+        >>> await get_config_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1268,8 +1372,10 @@ async def get_safety_mode_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=safety-mode"
+        ```python
+        >>> await get_safety_mode_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1302,8 +1408,10 @@ async def get_safety_cyclic_brake_check_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
+        ```python
+        >>> await get_safety_cyclic_brake_check_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1341,8 +1449,10 @@ async def get_loadoperation_status(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=loadoperation-status"
+        ```python
+        >>> await get_loadoperation_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1372,8 +1482,10 @@ async def get_safety_configurations(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=safety-config"
+        ```python
+        >>> await get_safety_configurations(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1404,8 +1516,10 @@ async def get_safety_violation_info(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/safety?resource=violation-info"
+        ```python
+        >>> await get_safety_violation_info(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/safety",
@@ -1436,7 +1550,10 @@ async def post_unlock_the_safety_configuration(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 
     Example:
-        # Rename a file
+        ```python
+        >>> await post_unlock_the_safety_configuration(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1469,7 +1586,10 @@ async def post_software_sync_acknowledgement(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 
     Example:
-        # Rename a file
+        ```python
+        >>> await post_software_sync_acknowledgement(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1504,8 +1624,10 @@ async def add_validation_info(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403)
 
     Example:
-        # `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST
-            "http://localhost/ctrl/safety?action=validate-cfg
+        ```python
+        >>> await add_validation_info(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1538,8 +1660,10 @@ async def remove_validation_info(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # `curl –digest -u "Default User":robotics POST
-            "http://localhost/ctrl/safety?action=invalidate-cfg"
+        ```python
+        >>> await remove_validation_info(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1570,7 +1694,10 @@ async def set_reset_safety_controller(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?action=reset"
+        ```python
+        >>> await set_reset_safety_controller(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/safety",
@@ -1602,7 +1729,10 @@ async def get_options_resource(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/options/SAFEMOVEPRO"
+        ```python
+        >>> await get_options_resource(client, "option_to_verify_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/ctrl/options/{option_to_verify}")
 
@@ -1630,8 +1760,13 @@ async def get_check_robotware_version_compatibility_with_contorller_hardware(
         # ABB codes: NOT FOUND(404), BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/compatibility/6.03.0101"
+        ```python
+        >>> await get_check_robotware_version_compatibility_with_contorller_hardware(
+        ...     client,
+        ...     "robotware_version_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.get(f"/ctrl/compatibility/{robotware_version}")
 
@@ -1655,7 +1790,10 @@ async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime"
+        ```python
+        >>> await get_virtual_time_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/virtualtime")
 
@@ -1679,7 +1817,10 @@ async def get_virtualtime(client: RWSClient) -> httpx.Response:
         # ABB codes: Not Found(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttime"
+        ```python
+        >>> await get_virtualtime(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/virtualtime/vttime")
 
@@ -1704,8 +1845,10 @@ async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT FOUND(404),
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/virtualtime/vttimeslice"
+        ```python
+        >>> await get_vttimeslice_value(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/virtualtime/vttimeslice")
 
@@ -1734,8 +1877,10 @@ async def get_actions_on_vttimeslice(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/virtualtime/vttimeslice"
+        ```python
+        >>> await get_actions_on_vttimeslice(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/virtualtime/vttimeslice",
@@ -1767,8 +1912,10 @@ async def set_vttimeslice_value(
         # ABB codes: NOT FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST
-            "http://localhost/ctrl/virtualtime/vttimeslice"
+        ```python
+        >>> await set_vttimeslice_value(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/virtualtime/vttimeslice",
@@ -1795,7 +1942,10 @@ async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed"
+        ```python
+        >>> await get_speed_of_virtual_time(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/virtualtime/vtspeed")
 
@@ -1823,8 +1973,10 @@ async def get_actions_on_vtspeed(
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/virtualtime/vtspeed?action=show"
+        ```python
+        >>> await get_actions_on_vtspeed(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/virtualtime/vtspeed",
@@ -1855,8 +2007,10 @@ async def set_speed_of_virtualtime(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST
-            "http://localhost/ctrl/virtualtime/vtspeed"
+        ```python
+        >>> await set_speed_of_virtualtime(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/virtualtime/vtspeed",
@@ -1883,7 +2037,10 @@ async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate"
+        ```python
+        >>> await get_state_of_virtual_time(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/virtualtime/vtstate")
 
@@ -1911,8 +2068,10 @@ async def get_actions_on_vtstate(
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/virtualtime/vtstate?action=show"
+        ```python
+        >>> await get_actions_on_vtstate(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/virtualtime/vtstate",
@@ -1943,8 +2102,10 @@ async def set_state_of_virtualtime(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST
-            "http://localhost/ctrl/virtualtime/vtstate"
+        ```python
+        >>> await set_state_of_virtualtime(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/virtualtime/vtstate",
@@ -1971,7 +2132,9 @@ async def post_vt_run(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/ctrl/virtualtime/vtrun"
+        ```python
+        >>> await post_vt_run(client)
+        <Response [204]>
+        ```
     """
     return await client.post("/ctrl/virtualtime/vtrun")

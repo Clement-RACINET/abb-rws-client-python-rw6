@@ -724,9 +724,9 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
     """Generate the async function code for an ABB endpoint.
 
     Note:
-        The ``notes`` and ``sample_call`` fields from the ABB JSON may
-        contain backslashes. These are replaced by forward slashes before
-        being injected into docstrings to prevent ``SyntaxError``.
+        The ``notes`` field from the ABB JSON may contain backslashes.
+        These are replaced by forward slashes before being injected into
+        docstrings to prevent ``SyntaxError``.
 
         Required parameters are always placed before optional parameters.
 
@@ -751,7 +751,6 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
     notes: str = (ep.get("notes") or "").strip()
     success_raw: str = ep.get("success_response") or ""
     error_raw: str = ep.get("error_response") or ""
-    sample_raw: str = ep.get("sample_call") or ""
 
     path_params = extract_path_params(url)
     query_params = parse_query_params(ep.get("url_params") or "")
@@ -820,8 +819,8 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
             f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}"
         )
 
-    # ── method_lower pour _render_http_call ───────────────────────────────
     method_lower = method.lower()
+    success_code = parse_success_code(success_raw)
 
     # ── Rendering ─────────────────────────────────────────────────────────
     lines: list[str] = []
@@ -834,14 +833,14 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
     else:
         lines.append(f"async def {func_name}({sig_parts[0]}) -> httpx.Response:")
 
-    success_code = parse_success_code(success_raw)
     lines.append('    """')
     lines.append(f"    {title}.")
     lines.append("")
 
-    # Route line — wrapped if needed
+    # Route
     lines.extend(_wrap_doc(f"Route: ``{method} {url}``"))
 
+    # ABB constraints
     if notes:
         notes_clean = notes.replace("\\", "/").replace("\n", " ").strip()
         if len(notes_clean) > 300:
@@ -875,14 +874,40 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
         first_error = error_raw.splitlines()[0].strip().replace("\\", "/")
         lines.extend(_wrap_doc(f"# ABB codes: {first_error}", indent="        "))
 
-    if sample_raw.strip():
-        first_sample = sample_raw.strip().splitlines()[0][:120].replace("\\", "/")
-        lines.append("")
-        lines.append("    Example:")
-        lines.extend(_wrap_doc(f"# {first_sample}", indent="        "))
+    # ── Example ───────────────────────────────────────────────────────────
+    lines.append("")
+    lines.append("    Example:")
+    lines.append("        ```python")
 
+    example_args: list[str] = ["client"]
+    for p in path_params:
+        example_args.append(f'"{p}_value"')
+    for n, req in query_params:
+        if req and n not in _url_qs_keys:
+            example_args.append(f'{n}="{n}_value"')
+    for n, req in body_params:
+        if req:
+            example_args.append(f'{n}="{n}_value"')
+
+    call_example = f"await {func_name}({', '.join(example_args)})"
+
+    if len("        >>> " + call_example) <= _MAX_LINE:
+        lines.append(f"        >>> {call_example}")
+    else:
+        paren_idx = call_example.index("(")
+        func_part = call_example[:paren_idx + 1]
+        ex_args = _split_dict_items(call_example[paren_idx + 1 : -1])
+        lines.append(f"        >>> {func_part}")
+        for i, arg in enumerate(ex_args):
+            comma = "," if i < len(ex_args) - 1 else ""
+            lines.append(f"        ...     {arg}{comma}")
+        lines.append("        ... )")
+
+    lines.append(f"        <Response [{success_code}]>")
+    lines.append("        ```")
     lines.append('    """')
-    # ── return statement multiligne (évite E501 sur params= / data=) ──────
+
+    # ── return statement ──────────────────────────────────────────────────
     lines.extend(_render_http_call(method_lower, url_expr, httpx_kwargs))
 
     return lines

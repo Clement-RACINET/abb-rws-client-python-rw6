@@ -35,7 +35,10 @@ async def get_identity_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/identity"
+        ```python
+        >>> await get_identity_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/identity")
 
@@ -63,7 +66,10 @@ async def get_identity_actions(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/identity?action=show"
+        ```python
+        >>> await get_identity_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/identity",
@@ -90,6 +96,9 @@ async def set_the_identity_of_the_controller(client: RWSClient) -> httpx.Respons
         # ABB codes: UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Set the controller identity
+        ```python
+        >>> await set_the_identity_of_the_controller(client)
+        <Response [204]>
+        ```
     """
     return await client.put("/ctrl/identity")

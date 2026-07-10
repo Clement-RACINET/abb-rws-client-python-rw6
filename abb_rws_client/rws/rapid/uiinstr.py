@@ -35,7 +35,10 @@ async def get_ui_instruction_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr"
+        ```python
+        >>> await get_ui_instruction_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/rapid/uiinstr")
 
@@ -63,8 +66,10 @@ async def get_ui_instruction_actions(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/uiinstr?action=show"
+        ```python
+        >>> await get_ui_instruction_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/uiinstr",
@@ -95,7 +100,10 @@ async def subscribe_on_ui_instruction(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # Subscribe on UI Events
+        ```python
+        >>> await subscribe_on_ui_instruction(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -122,7 +130,10 @@ async def get_active_ui_instruction(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400),NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active"
+        ```python
+        >>> await get_active_ui_instruction(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/rapid/uiinstr/active")
 
@@ -150,8 +161,10 @@ async def get_active_ui_instruction_actions(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/uiinstr/active?action=show"
+        ```python
+        >>> await get_active_ui_instruction_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/uiinstr/active",
@@ -190,8 +203,14 @@ async def update_an_active_ui_instruction_parameter(
         # ABB codes: BAD REQUEST(400),NOT_FOUND(404),FORBIDDEN(403) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "value=0" -X POST
-            "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_RO
+        ```python
+        >>> await update_an_active_ui_instruction_parameter(
+        ...     client,
+        ...     "stackurl_value",
+        ...     "uiparam_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}",
@@ -225,8 +244,10 @@ async def get_parameter_value_for_an_active_ui(
         # ABB codes: BAD_REQUEST(400) , NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%25%2499/Result"
+        ```python
+        >>> await get_parameter_value_for_an_active_ui(client, "stackurl_value", "uiparam_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}")
 
@@ -254,7 +275,9 @@ async def get_active_ui_instruction_parameters(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/uiinstr/active/params/RAPID/T_ROB1/%25%2499"
+        ```python
+        >>> await get_active_ui_instruction_parameters(client, "stackurl_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/uiinstr/active/params/{stackurl}")

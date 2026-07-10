@@ -35,7 +35,10 @@ async def get_panel_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel"
+        ```python
+        >>> await get_panel_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel")
 
@@ -59,7 +62,10 @@ async def get_panel_actions(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel?action=show"
+        ```python
+        >>> await get_panel_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel")
 
@@ -89,7 +95,10 @@ async def set_the_language(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Set the controller language
+        ```python
+        >>> await set_the_language(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel",
@@ -123,7 +132,10 @@ async def restart_the_controller(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Restart the controller
+        ```python
+        >>> await restart_the_controller(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel",
@@ -154,7 +166,10 @@ async def get_controller_state(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate"
+        ```python
+        >>> await get_controller_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel/ctrlstate")
 
@@ -182,8 +197,10 @@ async def get_controller_state_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/panel/ctrlstate?action=show"
+        ```python
+        >>> await get_controller_state_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/panel/ctrlstate",
@@ -216,7 +233,10 @@ async def set_controller_state(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Set controller state
+        ```python
+        >>> await set_controller_state(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel/ctrlstate",
@@ -253,7 +273,10 @@ async def subscribe_controller_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on controller state changes
+        ```python
+        >>> await subscribe_controller_state(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -287,7 +310,10 @@ async def get_operation_mode(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode"
+        ```python
+        >>> await get_operation_mode(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel/opmode")
 
@@ -315,7 +341,10 @@ async def get_operation_mode_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?action=show"
+        ```python
+        >>> await get_operation_mode_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/panel/opmode",
@@ -348,7 +377,10 @@ async def subscribe_operation_mode(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on controller state changes
+        ```python
+        >>> await subscribe_operation_mode(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -389,8 +421,10 @@ async def post_acknowledgement_for_operation_mode(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "opmode=auto" -X POST
-            "http://localhost/rw/panel/opmode?action=acknowledge"
+        ```python
+        >>> await post_acknowledgement_for_operation_mode(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel/opmode",
@@ -422,8 +456,10 @@ async def get_operation_mode_lock_status(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/panel/opmode?resource=lock-state"
+        ```python
+        >>> await get_operation_mode_lock_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/panel/opmode",
@@ -460,8 +496,10 @@ async def post_lock_operation_mode_selection(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "pin=1234&permanent=0" -X POST
-            "http://localhost/rw/panel/opmode?action=lock
+        ```python
+        >>> await post_lock_operation_mode_selection(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel/opmode",
@@ -497,8 +535,10 @@ async def post_unlock_operation_mode_selection(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "pin=1234" -X POST
-            "http://localhost/rw/panel/opmode?action=unlock"
+        ```python
+        >>> await post_unlock_operation_mode_selection(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel/opmode",
@@ -526,7 +566,10 @@ async def get_speed_ratio(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio"
+        ```python
+        >>> await get_speed_ratio(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel/speedratio")
 
@@ -554,8 +597,10 @@ async def get_speed_ratio_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/panel/speedratio?action=show"
+        ```python
+        >>> await get_speed_ratio_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/panel/speedratio",
@@ -588,7 +633,10 @@ async def set_speed_ratio(
         # ABB codes: BAD_REQUEST (400), UNSUPPORTED_MEDIA (415), FORBIDDEN (403)
 
     Example:
-        # Set speed ratio
+        ```python
+        >>> await set_speed_ratio(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/panel/speedratio",
@@ -622,7 +670,10 @@ async def subscribe_speed_ratio(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on controller state changes
+        ```python
+        >>> await subscribe_speed_ratio(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -656,7 +707,10 @@ async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate"
+        ```python
+        >>> await get_collision_detection_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/panel/coldetstate")
 
@@ -684,8 +738,10 @@ async def get_collision_detection_state_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/panel/coldetstate?action=show"
+        ```python
+        >>> await get_collision_detection_state_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/panel/coldetstate",
@@ -718,7 +774,10 @@ async def subscribe_on_collision_detection_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Subscribe on controller state changes
+        ```python
+        >>> await subscribe_on_collision_detection_state(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",

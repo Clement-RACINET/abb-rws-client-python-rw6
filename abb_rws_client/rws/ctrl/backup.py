@@ -34,7 +34,10 @@ async def get_backup_resources(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup"
+        ```python
+        >>> await get_backup_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/backup")
 
@@ -62,7 +65,10 @@ async def get_backup_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=show"
+        ```python
+        >>> await get_backup_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/backup",
@@ -100,8 +106,10 @@ async def create_backup(
         # ABB codes: UNAUTHORIZED(401), FORBIDDEN(403), BAD_REQUEST(400), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X
-            POST "http://localhost/ctrl/back
+        ```python
+        >>> await create_backup(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/ctrl/backup",
@@ -142,8 +150,10 @@ async def post_restore_backup(
         # ABB codes: UNSUPPORTED_MEDIA(415), FORBIDDEN(403), BAD_REQUEST(400)
 
     Example:
-        # `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X
-            POST "http://localhost/ctrl/back
+        ```python
+        >>> await post_restore_backup(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/backup",
@@ -181,8 +191,10 @@ async def get_check_restore(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/
+        ```python
+        >>> await get_check_restore(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/backup",
@@ -219,8 +231,10 @@ async def get_backup_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/backup?action=backupstate"
+        ```python
+        >>> await get_backup_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/backup",
@@ -255,8 +269,10 @@ async def subscribe_on_backup_system_information(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_backup_system_information(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -294,8 +310,10 @@ async def get_backup_system_information(
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/Robot
+        ```python
+        >>> await get_backup_system_information(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/backup/info/",

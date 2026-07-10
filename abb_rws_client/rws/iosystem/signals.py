@@ -35,7 +35,10 @@ async def get_io_signals(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals"
+        ```python
+        >>> await get_io_signals(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/iosystem/signals")
 
@@ -87,8 +90,10 @@ async def post_signal_search(
         # ABB codes: Bad Request(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST
-            "http://localhost/rw/iosystem/signals?acti
+        ```python
+        >>> await post_signal_search(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/iosystem/signals",
@@ -167,8 +172,10 @@ async def post_signal_search_extended(
         # ABB codes: Bad Request(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST
-            "http://localhost/rw/iosystem/signals?acti
+        ```python
+        >>> await post_signal_search_extended(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/iosystem/signals",
@@ -223,8 +230,10 @@ async def post_unblock_signals(
         # ABB codes: Bad Request(400), FORBIDDEN(403), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/iosystem/signals?action=unblock-signal"
+        ```python
+        >>> await post_unblock_signals(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/iosystem/signals",
@@ -255,8 +264,10 @@ async def get_io_signals_actions(
         # ABB codes: Bad Request(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/signals?action=show"
+        ```python
+        >>> await get_io_signals_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/iosystem/signals",

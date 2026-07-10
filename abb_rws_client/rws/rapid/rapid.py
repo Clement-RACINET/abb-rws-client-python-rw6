@@ -34,6 +34,9 @@ async def get_rapid_system_resources(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl –digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_system_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/rapid")

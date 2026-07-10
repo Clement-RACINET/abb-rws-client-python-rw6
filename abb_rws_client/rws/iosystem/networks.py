@@ -35,7 +35,10 @@ async def get_io_networks_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks"
+        ```python
+        >>> await get_io_networks_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/iosystem/networks")
 
@@ -63,8 +66,10 @@ async def get_actions_on_io_networks(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/networks?action=show"
+        ```python
+        >>> await get_actions_on_io_networks(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/iosystem/networks",
@@ -97,7 +102,10 @@ async def post_search_io_networks(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Search IO Networks
+        ```python
+        >>> await post_search_io_networks(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/iosystem/networks",

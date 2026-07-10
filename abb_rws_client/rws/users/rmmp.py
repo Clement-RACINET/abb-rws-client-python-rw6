@@ -34,7 +34,10 @@ async def get_rmmp_state(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # Get RMMP state
+        ```python
+        >>> await get_rmmp_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/users/rmmp")
 
@@ -61,7 +64,10 @@ async def get_rmmp_actions(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/users/rmmp?action=show"
+        ```python
+        >>> await get_rmmp_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/users/rmmp",
@@ -88,7 +94,10 @@ async def request_rmmp(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # Grant RMMP
+        ```python
+        >>> await request_rmmp(client)
+        <Response [202]>
+        ```
     """
     return await client.post("/users/rmmp")
 
@@ -116,7 +125,10 @@ async def grant_or_deny_an_rmmp_request(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # Grant RMMP
+        ```python
+        >>> await grant_or_deny_an_rmmp_request(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/users/rmmp",
@@ -146,7 +158,10 @@ async def cancel_held_or_requested_rmmp(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # Cancel held rmmp
+        ```python
+        >>> await cancel_held_or_requested_rmmp(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/users/rmmp",
@@ -179,8 +194,10 @@ async def subscribe_on_rmmp_request_event(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_rmmp_request_event(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -214,6 +231,9 @@ async def poll_for_rmmp_grant_status(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # poll for rmmp status
+        ```python
+        >>> await poll_for_rmmp_grant_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/users/rmmp/poll")

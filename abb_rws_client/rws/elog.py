@@ -44,7 +44,10 @@ async def get_elog_resources(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/elog"
+        ```python
+        >>> await get_elog_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/elog",
@@ -83,7 +86,10 @@ async def get_elog_actions(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/elog?action=show"
+        ```python
+        >>> await get_elog_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/elog",
@@ -114,7 +120,10 @@ async def post_clear_elog_messages(
         # ABB codes: UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
 
     Example:
-        # Clear all elog messages
+        ```python
+        >>> await post_clear_elog_messages(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/elog",
@@ -149,7 +158,10 @@ async def save_elog_in_system_dump_format(
         # ABB codes: UNSUPPORTED_MEDIA(415), UNAUTHORIZED(401)
 
     Example:
-        # Generate elog in system dump format.
+        ```python
+        >>> await save_elog_in_system_dump_format(client)
+        <Response [202]>
+        ```
     """
     return await client.post(
         "/rw/elog",
@@ -189,7 +201,10 @@ async def get_elog_messages_in_domain(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/elog/0"
+        ```python
+        >>> await get_elog_messages_in_domain(client, "domain_number_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/elog/{domain_number}",
@@ -229,7 +244,10 @@ async def get_actions_on_elog_domain(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?action=show"
+        ```python
+        >>> await get_actions_on_elog_domain(client, "domain_number_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/elog/{domain_number}")
 
@@ -259,7 +277,10 @@ async def post_clear_elog_messages_2(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), NOT_FOUND(404)
 
     Example:
-        # Clear all elog messages
+        ```python
+        >>> await post_clear_elog_messages_2(client, "domain_number_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/elog/{domain_number}",
@@ -292,7 +313,10 @@ async def subscribe_on_elog_domain(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # Subscribe on elog domain 0
+        ```python
+        >>> await subscribe_on_elog_domain(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -336,7 +360,14 @@ async def get_elog_message_in_domain(
         # ABB codes: NOT_FOUND(404), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/elog/0/8?lang=en"
+        ```python
+        >>> await get_elog_message_in_domain(
+        ...     client,
+        ...     "domain_number_value",
+        ...     "sequence_number_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/elog/{domain_number}/{sequence_number}",

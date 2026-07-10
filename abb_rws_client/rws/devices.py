@@ -39,7 +39,10 @@ async def get_devices_tree_information(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/devices"
+        ```python
+        >>> await get_devices_tree_information(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/devices",

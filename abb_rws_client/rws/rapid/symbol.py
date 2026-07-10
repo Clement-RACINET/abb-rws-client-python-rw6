@@ -39,7 +39,10 @@ async def get_rapid_symbol_properties(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
+        ```python
+        >>> await get_rapid_symbol_properties(client, "symbolurl_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/symbol/properties/{symbolurl}")
 
@@ -69,7 +72,10 @@ async def get_rapid_symbol_data(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics
+        ```python
+        >>> await get_rapid_symbol_data(client, "symbolurl_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/symbol/data/{symbolurl}",
@@ -102,7 +108,10 @@ async def get_rapid_symbol_data_actions(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics
+        ```python
+        >>> await get_rapid_symbol_data_actions(client, "symbolurl_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/symbols/{symbolurl}",
@@ -138,7 +147,10 @@ async def update_rapid_variable_current_value(
         # ABB codes: FORBIDDEN(403) BAD REQUEST(400) see
 
     Example:
-        # Update a num:
+        ```python
+        >>> await update_rapid_variable_current_value(client, "symbolurl_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/symbol/data/{symbolurl}",
@@ -170,8 +182,10 @@ async def validate_rapid_variable(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&
+        ```python
+        >>> await validate_rapid_variable(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/symbol/data",
@@ -204,8 +218,10 @@ async def subscribe_on_rapid_persistent_variable(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the
-            form /rw/rapid/symbol/data/{symbol
+        ```python
+        >>> await subscribe_on_rapid_persistent_variable(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -247,7 +263,10 @@ async def update_rapid_variable_initial_value(
         # ABB codes: BAD_REQUEST(400), HTTP Errors, see
 
     Example:
-        # Update a num:
+        ```python
+        >>> await update_rapid_variable_initial_value(client, "symbolurl_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/symbol/data/{symbolurl}",

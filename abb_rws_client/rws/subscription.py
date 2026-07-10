@@ -43,7 +43,10 @@ async def get_subscription_actions(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/subscription?action=show"
+        ```python
+        >>> await get_subscription_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/subscription",
@@ -79,7 +82,10 @@ async def subscribe_on_resources(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415) See
 
     Example:
-        # Low Priority subscription
+        ```python
+        >>> await subscribe_on_resources(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -123,7 +129,10 @@ async def get_subscription_group_actions(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/subscription/1?action=show"
+        ```python
+        >>> await get_subscription_group_actions(client, "group_id_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/subscription/{group_id}",
@@ -161,7 +170,10 @@ async def add_new_resources_remove_existing_resources_or(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
 
     Example:
-        # Update resources in Subscription group.
+        ```python
+        >>> await add_new_resources_remove_existing_resources_or(client, "group_id_value")
+        <Response [200]>
+        ```
     """
     return await client.put(
         f"/subscripion/{group_id}",
@@ -199,7 +211,13 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # Unsubscribe or remove subscription group.
+        ```python
+        >>> await unsubscribe_or_remove_the_subscription_group_resources(
+        ...     client,
+        ...     "group_id_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.delete(f"/subscripion/{group_id}")
 
@@ -229,6 +247,13 @@ async def unsubscribe_or_remove_the_resource_from_subscription(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # Unsubscribe or remove subscription resource from subscription group.
+        ```python
+        >>> await unsubscribe_or_remove_the_resource_from_subscription(
+        ...     client,
+        ...     "group_d_value",
+        ...     "resource_uri_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.delete(f"/subscripion/{group_d}/{resource_uri}")

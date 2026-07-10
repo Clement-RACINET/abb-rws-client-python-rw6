@@ -35,7 +35,10 @@ async def get_system_information(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system"
+        ```python
+        >>> await get_system_information(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/system")
 
@@ -61,7 +64,10 @@ async def get_robot_type(client: RWSClient) -> httpx.Response:
         # ABB codes: Robot controller errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/robottype"
+        ```python
+        >>> await get_robot_type(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/system/robottype")
 
@@ -85,7 +91,10 @@ async def get_system_options(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/options"
+        ```python
+        >>> await get_system_options(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/system/options")
 
@@ -113,8 +122,10 @@ async def get_system_energy_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/system/energy?action=show"
+        ```python
+        >>> await get_system_energy_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/system/energy",
@@ -145,8 +156,10 @@ async def get_system_energy_info_change_count(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/system/energy?resource=change-count"
+        ```python
+        >>> await get_system_energy_info_change_count(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/system/energy",
@@ -177,8 +190,10 @@ async def reset_accumulated_energy(
         # ABB codes: BAD_REQUEST(400),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/system/energy?action=reset"
+        ```python
+        >>> await reset_accumulated_energy(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/system/energy",
@@ -205,7 +220,10 @@ async def get_system_energy(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy"
+        ```python
+        >>> await get_system_energy(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/system/energy")
 
@@ -235,8 +253,10 @@ async def subscribe_on_system_energy_changes(
         # ABB codes: UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_system_energy_changes(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -270,7 +290,10 @@ async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/license"
+        ```python
+        >>> await get_system_robotware_license(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/system/license")
 
@@ -298,7 +321,10 @@ async def get_installed_products(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # `curl –digest -u "Default User":robotics " "
+        ```python
+        >>> await get_installed_products(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/system/products",

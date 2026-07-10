@@ -35,7 +35,10 @@ async def get_dipc_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/dipc"
+        ```python
+        >>> await get_dipc_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/dipc")
 
@@ -59,7 +62,10 @@ async def get_dipc_actions(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/dipc?action=show"
+        ```python
+        >>> await get_dipc_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/dipc")
 
@@ -87,7 +93,10 @@ async def create_queue(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Restart controller with the specified mode
+        ```python
+        >>> await create_queue(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/rw/dipc",
@@ -118,7 +127,10 @@ async def get_dipc_queue(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq"
+        ```python
+        >>> await get_dipc_queue(client, "queue_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/dipc/{queue_name}")
 
@@ -148,8 +160,10 @@ async def get_dipc_queue_actions(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X DELETE
-            "http://localhost/rw/dipc/testq?action=show"
+        ```python
+        >>> await get_dipc_queue_actions(client, "queue_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
@@ -182,7 +196,10 @@ async def post_send_message(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Send message to queue
+        ```python
+        >>> await post_send_message(client, "queue_name_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/dipc/{queue_name}",
@@ -217,8 +234,10 @@ async def get_read_message(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/dipc/testq?action=dipc-read"
+        ```python
+        >>> await get_read_message(client, "queue_name_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
@@ -257,7 +276,10 @@ async def delete_dipc_queue(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Delete a queue
+        ```python
+        >>> await delete_dipc_queue(client, "queue_name_value")
+        <Response [204]>
+        ```
     """
     return await client.delete(f"/rw/dipc/{queue_name}")
 
@@ -287,7 +309,10 @@ async def subscribe_dipc_queue(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Subscribe on queue
+        ```python
+        >>> await subscribe_dipc_queue(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -326,7 +351,10 @@ async def subscribe_dipc_queue_without_reading_message(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # Subscribe on queue
+        ```python
+        >>> await subscribe_dipc_queue_without_reading_message(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",

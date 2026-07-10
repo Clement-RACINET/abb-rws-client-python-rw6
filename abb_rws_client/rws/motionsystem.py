@@ -40,7 +40,10 @@ async def get_motion_system(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem"
+        ```python
+        >>> await get_motion_system(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem",
@@ -77,7 +80,10 @@ async def get_motion_system_action(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem?action=show"
+        ```python
+        >>> await get_motion_system_action(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem",
@@ -109,8 +115,10 @@ async def set_mechunit_for_jogging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1" -X POST
-            "http://localhost/rw/motionsystem?action=set-m
+        ```python
+        >>> await set_mechunit_for_jogging(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem",
@@ -157,8 +165,10 @@ async def post_perform_jogging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "axis1=900&axis2=0&axis3=0&axis4=0&axis5=0&axis6=0&ccount=0&inc-mode=Large"
+        ```python
+        >>> await post_perform_jogging(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem",
@@ -222,8 +232,10 @@ async def set_robo_target_position(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "pos-x=634.609&pos-y=50.7298&pos-z=432.9419&orient-q1=0.4932235&orient-q2=-0
+        ```python
+        >>> await set_robo_target_position(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem",
@@ -269,8 +281,10 @@ async def get_check_change_count(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/checkchangecount?changecount=0"
+        ```python
+        >>> await get_check_change_count(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/checkchangecount",
@@ -304,8 +318,10 @@ async def subscribe_on_error_eventchange(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource**
+        ```python
+        >>> await subscribe_on_error_eventchange(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -337,7 +353,10 @@ async def get_error_state(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/errorstate"
+        ```python
+        >>> await get_error_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/motionsystem/errorstate")
 
@@ -364,8 +383,10 @@ async def get_motion_supervision(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/motionsupervision?mechunit=ROB_1"
+        ```python
+        >>> await get_motion_supervision(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/motionsupervision",
@@ -395,8 +416,10 @@ async def get_motion_supervision_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/motionsupervision?action=show"
+        ```python
+        >>> await get_motion_supervision_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/motionsupervision",
@@ -430,8 +453,10 @@ async def set_motion_supervision_mode_jog_supervision_mode(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&mode=True" - POST
-            "http://localhost/rw/motionsystem/mot
+        ```python
+        >>> await set_motion_supervision_mode_jog_supervision_mode(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/motionsupervision",
@@ -473,8 +498,10 @@ async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&sensitivity=30" - POST
-            "http://localhost/rw/motionsyste
+        ```python
+        >>> await set_motion_supervision_sensitivity_jog_supervision_sensitivity(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/motionsupervision",
@@ -512,8 +539,10 @@ async def get_motion_supervision_collision_prediction_mode(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/motionsupervision?action=collision-prediction
+        ```python
+        >>> await get_motion_supervision_collision_prediction_mode(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/motionsupervision",
@@ -545,8 +574,10 @@ async def set_motion_supervision_collision_prediction_mode(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mode=true" - POST
-            "http://localhost/rw/motionsystem/motionsupervision?actio
+        ```python
+        >>> await set_motion_supervision_collision_prediction_mode(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/motionsupervision",
@@ -577,8 +608,10 @@ async def get_path_supervision(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/pathsupervision?mechunit=ROB_1"
+        ```python
+        >>> await get_path_supervision(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/pathsupervision",
@@ -608,8 +641,10 @@ async def get_path_supervision_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/pathsupervision?action=show"
+        ```python
+        >>> await get_path_supervision_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/pathsupervision",
@@ -643,8 +678,10 @@ async def set_path_supervision_mode(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mechunit=ROB_1&mode=ON" -X POST
-            "http://localhost/rw/motionsystem/pathsuper
+        ```python
+        >>> await set_path_supervision_mode(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/pathsupervision",
@@ -679,8 +716,10 @@ async def set_path_supervision_level(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mechunit=ROB_1&level=90" -X POST
-            "http://localhost/rw/motionsystem/pathsupe
+        ```python
+        >>> await set_path_supervision_level(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/pathsupervision",
@@ -707,8 +746,10 @@ async def get_non_motion_execution_mode(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/nonmotionexecution"
+        ```python
+        >>> await get_non_motion_execution_mode(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/motionsystem/nonmotionexecution")
 
@@ -735,8 +776,10 @@ async def get_nonmotion_execution_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/nonmotionexecution?action=show"
+        ```python
+        >>> await get_nonmotion_execution_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/motionsystem/nonmotionexecution",
@@ -768,8 +811,10 @@ async def set_nonmotion_execution_mode(
         # ABB codes: BAD_REQUEST (400), FORBIDDEN (403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mode=ON" -X POST
-            "http://localhost/rw/motionsystem/nonmotionexecution?actio
+        ```python
+        >>> await set_nonmotion_execution_mode(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/motionsystem/nonmotionexecution",
@@ -796,7 +841,10 @@ async def get_mechunits(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits"
+        ```python
+        >>> await get_mechunits(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/motionsystem/mechunits")
 
@@ -827,7 +875,10 @@ async def get_mechunit(
         # ABB codes: Not Found(404),BAD_REQUEST(400)
 
     Example:
-        # Sample call1:
+        ```python
+        >>> await get_mechunit(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -866,8 +917,10 @@ async def get_mechunit_action(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1?action=show"
+        ```python
+        >>> await get_mechunit_action(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -915,8 +968,10 @@ async def set_mechunit(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "tool=tool1&wobj=wobj2&payload=load2" -X
-            POST "http://localhost/rw/motionsys
+        ```python
+        >>> await set_mechunit(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -970,8 +1025,10 @@ async def set_compliance_lead_through(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "status=active" -X POST
-            "http://localhost/rw/motionsystem/mechunits/ROB_R?ac
+        ```python
+        >>> await set_compliance_lead_through(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1004,8 +1061,10 @@ async def get_compliance_lead_through(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1?resource=lead-through"
+        ```python
+        >>> await get_compliance_lead_through(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1039,8 +1098,10 @@ async def set_fine_calibration(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "axis=3" -X POST
-            "http://localhost/rw/motionsystem/mechunits/ROB_1?action=fi
+        ```python
+        >>> await set_fine_calibration(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1075,8 +1136,10 @@ async def update_syncronize_revolution_counter(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "axis=3" -X POST
-            "http://localhost/rw/motionsystem/mechunits/ROB_1?action=up
+        ```python
+        >>> await update_syncronize_revolution_counter(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1107,8 +1170,10 @@ async def get_physical_joints(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/pjoints"
+        ```python
+        >>> await get_physical_joints(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/pjoints")
 
@@ -1143,8 +1208,10 @@ async def get_cartesian_value(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/cartesian?tool=tool0&wobj=wob
+        ```python
+        >>> await get_cartesian_value(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/cartesian",
@@ -1189,8 +1256,10 @@ async def set_mechanical_unit(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "rob_joint=[18.23,8.45,-13.23,-5.25,13.63,-72.31]&ext_joint=[0,0,0,0,0,0]" -
+        ```python
+        >>> await set_mechanical_unit(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1234,8 +1303,10 @@ async def get_robtarget(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/robtarget?tool=tool0&wobj=wob
+        ```python
+        >>> await get_robtarget(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/robtarget",
@@ -1273,8 +1344,10 @@ async def get_joint_target(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/jointtarget"
+        ```python
+        >>> await get_joint_target(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/jointtarget")
 
@@ -1304,7 +1377,10 @@ async def subscribe_on_mechunit_mode_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID task change
+        ```python
+        >>> await subscribe_on_mechunit_mode_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -1363,8 +1439,10 @@ async def get_joints_from_position(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,
+        ```python
+        >>> await get_joints_from_position(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1424,8 +1502,10 @@ async def get_position_from_joints(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "tool_frame_position=[0,0,0]&tool_frame_orientation=[1.0,0,0,0]&rob_joints=[
+        ```python
+        >>> await get_position_from_joints(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1483,8 +1563,10 @@ async def get_all_joint_solution(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "curr_position=[0.511087716,-0.0101547102,0.665710211]&curr_ext_joints=[0,0,
+        ```python
+        >>> await get_all_joint_solution(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1549,8 +1631,10 @@ async def get_joints_from_cartesian(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,
+        ```python
+        >>> await get_joints_from_cartesian(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
@@ -1596,8 +1680,10 @@ async def get_calibration_info(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/calibrationinfo"
+        ```python
+        >>> await get_calibration_info(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/calibrationinfo")
 
@@ -1644,8 +1730,10 @@ async def post_calibration_for_baseframe(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=BaseFrame&type=ROBOT&reference=[0,0,0]&point1=[349.9289,7.176809,509
+        ```python
+        >>> await post_calibration_for_baseframe(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -1710,8 +1798,10 @@ async def post_calibration_for_baseframemoving(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=BaseFrameMoving&type=ROBOT2&point1=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
+        ```python
+        >>> await post_calibration_for_baseframemoving(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -1776,8 +1866,10 @@ async def post_calibration_for_externalrobotnombasenew(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=ExternalRobotNomBaseNew&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&
+        ```python
+        >>> await post_calibration_for_externalrobotnombasenew(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -1842,8 +1934,10 @@ async def post_calibration_for_robotaxisrot(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=RobotAxisRot&type=SINGLE&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0
+        ```python
+        >>> await post_calibration_for_robotaxisrot(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -1908,8 +2002,10 @@ async def post_calibration_for_singleuserrotnew(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=SingleUserRotNew&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0
+        ```python
+        >>> await post_calibration_for_singleuserrotnew(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -1974,8 +2070,10 @@ async def post_calibration_for_rotextctrlzdef(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=RotExtCtrlZdef&type=SINGLE&tolerance=1&pose=[0, 0, 0, 0, 1, 0, 0]&po
+        ```python
+        >>> await post_calibration_for_rotextctrlzdef(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -2040,8 +2138,10 @@ async def post_calibration_for_singleuserlin(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=SingleUserLin&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0
+        ```python
+        >>> await post_calibration_for_singleuserlin(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -2106,8 +2206,10 @@ async def post_calibration_for_singletrack(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=SingleTrack&type=SINGLE&point1=[0,
-            0, 0, 1, 0, 0, 0, 0]&point2=[0, 0
+        ```python
+        >>> await post_calibration_for_singletrack(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -2172,8 +2274,10 @@ async def post_calibration_for_robotaxisrot2(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "method=RobotAxisRot2&type=SINGLE2&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0,
+        ```python
+        >>> await post_calibration_for_robotaxisrot2(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
@@ -2218,8 +2322,10 @@ async def get_base_frame(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe"
+        ```python
+        >>> await get_base_frame(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/baseframe")
 
@@ -2248,8 +2354,10 @@ async def get_base_frame_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=show"
+        ```python
+        >>> await get_base_frame_actions(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
@@ -2295,8 +2403,10 @@ async def set_base_frame(
         # ABB codes: BAD_REQUEST(400), Forbidden(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "x=1&y=2&z=3&q1=0.1825742&q2=0.3651484&q3=0.5477226&q4=0.7302967" -X POST "h
+        ```python
+        >>> await set_base_frame(client, "mechunit_value")
+        <Response [202]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
@@ -2339,8 +2449,10 @@ async def get_axes(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/axes"
+        ```python
+        >>> await get_axes(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes")
 
@@ -2369,8 +2481,10 @@ async def get_axis(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1"
+        ```python
+        >>> await get_axis(client, "mechunit_value", "axis_num_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}")
 
@@ -2401,7 +2515,10 @@ async def get_axis_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_axis_actions(client, "mechunit_value", "axis_num_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
@@ -2435,8 +2552,10 @@ async def get_axis_pose(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?resource=axis-pose"
+        ```python
+        >>> await get_axis_pose(client, "mechunit_value", "axis_num_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
@@ -2484,8 +2603,10 @@ async def set_axis_pose(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "x=0&y=0&z=0&q1=0&q2=1&q3=0&q4=0" -X POST
-            "http://localhost/rw/motionsystem/
+        ```python
+        >>> await set_axis_pose(client, "mechunit_value", "axis_num_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
@@ -2532,7 +2653,10 @@ async def update_commutate(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await update_commutate(client, "mechunit_value", "axis_num_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
@@ -2568,8 +2692,10 @@ async def update_sync_revolution_counter(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "syncType=1" -X POST
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/
+        ```python
+        >>> await update_sync_revolution_counter(client, "mechunit_value", "axis_num_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
@@ -2603,8 +2729,10 @@ async def set_smb_data(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics -d "type=robot-to-controller" -X POST
-            "http://localhost/rw/motionsystem/mechuni
+        ```python
+        >>> await set_smb_data(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
@@ -2638,8 +2766,10 @@ async def post_clear_smb_data(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics -d "type=robot" -X POST
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/smbda
+        ```python
+        >>> await post_clear_smb_data(client, "mechunit_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
@@ -2669,8 +2799,10 @@ async def get_smb_data(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata"
+        ```python
+        >>> await get_smb_data(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/smbdata")
 
@@ -2699,8 +2831,10 @@ async def get_smb_data_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=show"
+        ```python
+        >>> await get_smb_data_actions(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
@@ -2730,7 +2864,9 @@ async def get_motor_calib_names(
         # ABB codes: NOT_FOUND(404), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/motionsystem/mechunits/ROB_1/motorcalib"
+        ```python
+        >>> await get_motor_calib_names(client, "mechunit_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/motorcalib")

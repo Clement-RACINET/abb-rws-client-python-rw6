@@ -40,7 +40,10 @@ async def get_rapid_execution_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/execution"
+        ```python
+        >>> await get_rapid_execution_state(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/execution",
@@ -71,7 +74,10 @@ async def get_rapid_execution_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_execution_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/execution",
@@ -114,8 +120,10 @@ async def start_rapid_execution(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "regain=continue&execmode=continue&cycle=forever&condition=none&stopatbp=dis
+        ```python
+        >>> await start_rapid_execution(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",
@@ -162,8 +170,10 @@ async def stop_rapid_execution(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/execution?action=stop"
+        ```python
+        >>> await stop_rapid_execution(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",
@@ -202,8 +212,10 @@ async def start_rapid_execution_from_production_entry(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/execution?action=startprodentry"
+        ```python
+        >>> await start_rapid_execution_from_production_entry(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",
@@ -234,8 +246,10 @@ async def reset_rapid_program_pointer_to_main(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/execution?action=resetpp"
+        ```python
+        >>> await reset_rapid_program_pointer_to_main(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",
@@ -268,8 +282,10 @@ async def set_number_of_execution_cycles(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "cycle=once" -X POST
-            "http://localhost/rw/rapid/execution?action=setcycle"
+        ```python
+        >>> await set_number_of_execution_cycles(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",
@@ -305,7 +321,10 @@ async def subscribe_rapid_execution(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID execution state
+        ```python
+        >>> await subscribe_rapid_execution(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -348,7 +367,10 @@ async def subscribe_rapid_execution_cycle(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID execution cycle
+        ```python
+        >>> await subscribe_rapid_execution_cycle(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -389,7 +411,10 @@ async def subscribe_on_hold_to_run(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID hold to run
+        ```python
+        >>> await subscribe_on_hold_to_run(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",
@@ -432,8 +457,10 @@ async def set_hold_to_run_cmd(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "state={press | held | release}"
-            "http://localhost/rw/rapid/executio
+        ```python
+        >>> await set_hold_to_run_cmd(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/execution",

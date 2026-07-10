@@ -13,19 +13,22 @@ Module responsibilities:
 - Implement the retry policy on transport errors
 - Provide RWSClientSync, a synchronous wrapper with no logic duplication
 
-Retry policy (documented here, implemented in _request):
+Retry policy (documented here, implemented in _request)::
+
     - Triggers: ConnectError, ConnectTimeout, ReadTimeout, PoolTimeout only.
       HTTP errors (4xx, 5xx) are never retried.
     - Attempts: 3 total (1 initial attempt + 2 retries)
     - Delay: exponential with ±10% jitter
       base * 2^attempt + jitter  →  ~0.5s, ~1s, ~2s
 
-ABBCX cookie management:
+ABBCX cookie management::
+
     httpx.AsyncClient maintains this cookie natively via its cookiejar.
     On expiry (ABB timeout ~10 min), the controller responds with 401
     and httpx.DigestAuth automatically restarts the handshake.
 
-RWSClientSync:
+RWSClientSync::
+
     Synchronous wrapper based on httpx.Client (httpx native sync).
     Same retry/auth logic, no anyio dependency at runtime.
     All methods are synchronous (no async def).
@@ -88,7 +91,9 @@ def _build_auth(username: str, password: str) -> httpx.DigestAuth:
         Configured ``httpx.DigestAuth`` instance.
 
     Example:
+        ```python
         >>> auth = _build_auth("Default User", "robotics")
+        ```
     """
     return httpx.DigestAuth(username, password)
 
@@ -106,7 +111,9 @@ def _raise_for_status(response: httpx.Response, path: str) -> None:
         RWSHTTPError: On any other status >= 400.
 
     Example:
+        ```python
         >>> _raise_for_status(response, "rw/rapid/execution")
+        ```
     """
     code = response.status_code
     if code == 401:
@@ -130,8 +137,10 @@ def _retry_delay(attempt: int) -> float:
         Delay in seconds (float).
 
     Example:
+        ```python
         >>> delay = _retry_delay(0)  # ~0.5s
         >>> delay = _retry_delay(1)  # ~1.0s
+        ```
     """
     base = _RETRY_BASE_DELAY * (2**attempt)
     jitter = base * _RETRY_JITTER * (2 * random.random() - 1)
@@ -157,8 +166,10 @@ class RWSClient:
         timeout: HTTP timeout in seconds (default: ``10.0``).
 
     Example:
+        ```python
         >>> async with RWSClient(host="192.168.125.1") as client:
         ...     resp = await client.get("rw/rapid/execution")
+        ```
     """
 
     def __init__(
@@ -186,7 +197,9 @@ class RWSClient:
             RWSConnectionError: If the initial connection fails.
 
         Example:
+            ```python
             >>> await client.aopen()
+            ```
         """
         if self._http is not None:
             return
@@ -202,7 +215,9 @@ class RWSClient:
         """Close the HTTP session. Idempotent: no-op if already closed.
 
         Example:
+            ```python
             >>> await client.aclose()
+            ```
         """
         if self._http is None:
             return
@@ -255,8 +270,13 @@ class RWSClient:
             RWSHTTPError: On any other HTTP >= 400.
 
         Example:
-            >>> resp = await client._request("GET", "rw/rapid/execution",
-            ...                              params={"json": "1"})
+            ```python
+            >>> resp = await client._request(
+            ...     "GET",
+            ...     "rw/rapid/execution",
+            ...     params={"json": "1"},
+            ... )
+            ```
         """
         if self._http is None:
             raise RuntimeError(
@@ -315,7 +335,9 @@ class RWSClient:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> resp = await client.get("rw/rapid/execution", params={"json": "1"})
+            ```
         """
         return await self._request("GET", path, **kwargs)
 
@@ -339,7 +361,9 @@ class RWSClient:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> await client.post("rw/mastership", params={"action": "request"})
+            ```
         """
         return await self._request("POST", path, **kwargs)
 
@@ -363,10 +387,12 @@ class RWSClient:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> await client.put(
             ...     "rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR",
             ...     data={"value": "42"},
             ... )
+            ```
         """
         return await self._request("PUT", path, **kwargs)
 
@@ -390,7 +416,9 @@ class RWSClient:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> await client.delete("fileservice/$HOME/old_backup.tar.gz")
+            ```
         """
         return await self._request("DELETE", path, **kwargs)
 
@@ -418,7 +446,9 @@ class RWSClient:
             RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
+            ```python
             >>> resp = await client.head("fileservice/$HOME/myfile.txt")
+            ```
         """
         return await self._request("HEAD", path, **kwargs)
 
@@ -446,7 +476,9 @@ class RWSClient:
             RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
+            ```python
             >>> resp = await client.options("ctrl/network/route/add")
+            ```
         """
         return await self._request("OPTIONS", path, **kwargs)
 
@@ -473,8 +505,10 @@ class RWSClientSync:
         timeout: HTTP timeout in seconds (default: ``10.0``).
 
     Example:
+        ```python
         >>> with RWSClientSync(host="192.168.125.1") as client:
         ...     resp = client.get("rw/rapid/execution")
+        ```
     """
 
     def __init__(
@@ -499,7 +533,9 @@ class RWSClientSync:
         """Open the HTTP session. Idempotent: no-op if already open.
 
         Example:
+            ```python
             >>> client.open()
+            ```
         """
         if self._http is not None:
             return
@@ -515,7 +551,9 @@ class RWSClientSync:
         """Close the HTTP session. Idempotent: no-op if already closed.
 
         Example:
+            ```python
             >>> client.close()
+            ```
         """
         if self._http is None:
             return
@@ -561,8 +599,13 @@ class RWSClientSync:
             RWSHTTPError: On any other HTTP >= 400.
 
         Example:
-            >>> resp = client._request("GET", "rw/rapid/execution",
-            ...                        params={"json": "1"})
+            ```python
+            >>> resp = client._request(
+            ...     "GET",
+            ...     "rw/rapid/execution",
+            ...     params={"json": "1"},
+            ... )
+            ```
         """
         if self._http is None:
             raise RuntimeError(
@@ -594,7 +637,9 @@ class RWSClientSync:
         # All retries exhausted
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
-            raise RWSConnectionError(f"Cannot connect to {self.base_url}: {last_exc}") from last_exc
+            raise RWSConnectionError(
+                f"Cannot connect to {self.base_url}: {last_exc}"
+            ) from last_exc
         raise RWSTimeoutError(
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
         ) from last_exc
@@ -621,7 +666,9 @@ class RWSClientSync:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> resp = client.get("rw/rapid/execution", params={"json": "1"})
+            ```
         """
         return self._request("GET", path, **kwargs)
 
@@ -645,7 +692,9 @@ class RWSClientSync:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
-            >>> await client.post("rw/mastership", params={"action": "request"})
+            ```python
+            >>> client.post("rw/mastership", params={"action": "request"})
+            ```
         """
         return self._request("POST", path, **kwargs)
 
@@ -669,10 +718,12 @@ class RWSClientSync:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> client.put(
             ...     "rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR",
             ...     data={"value": "42"},
             ... )
+            ```
         """
         return self._request("PUT", path, **kwargs)
 
@@ -696,7 +747,9 @@ class RWSClientSync:
             RWSHTTPError: Any other HTTP >= 400.
 
         Example:
+            ```python
             >>> client.delete("fileservice/$HOME/old_backup.tar.gz")
+            ```
         """
         return self._request("DELETE", path, **kwargs)
 
@@ -720,7 +773,9 @@ class RWSClientSync:
             RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
+            ```python
             >>> resp = client.head("fileservice/$HOME/myfile.txt")
+            ```
         """
         return self._request("HEAD", path, **kwargs)
 
@@ -744,6 +799,8 @@ class RWSClientSync:
             RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
+            ```python
             >>> resp = client.options("ctrl/network/route/add")
+            ```
         """
         return self._request("OPTIONS", path, **kwargs)

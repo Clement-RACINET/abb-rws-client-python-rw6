@@ -4,17 +4,20 @@ Custom exceptions for abb-rws6-python-client.
 
 Author: Clément RACINET
 
-Exception hierarchy:
-    RWSError                        ← base class, always catchable with a single except
-    ├── RWSConnectionError          ← unreachable network / TCP timeout
-    ├── RWSTimeoutError             ← HTTP timeout exceeded
-    ├── RWSAuthenticationError      ← persistent 401 after digest handshake
-    ├── RWSHTTPError                ← any HTTP response >= 400 not covered above
-    │   └── RWSNotFoundError        ← 404 (variable / resource not found)
-    ├── MastershipError             ← base class for mastership errors
-    │   ├── MastershipDenied        ← controller refuses mastership acquisition
-    │   └── MastershipNotHeld       ← write attempt without an active mastership
-    └── RWSValueError               ← invalid RAPID value / serialization failure
+Exception hierarchy::
+
+
+    RWSError                   ← base class, always catchable with a single except
+    ├── RWSConnectionError     ← unreachable network / TCP timeout
+    ├── RWSTimeoutError        ← HTTP timeout exceeded
+    ├── RWSAuthenticationError ← persistent 401 after digest handshake
+    ├── RWSHTTPError           ← any HTTP response >= 400 not covered above
+    │   └── RWSNotFoundError   ← 404 (variable / resource not found)
+    ├── MastershipError        ← base class for mastership errors
+    │   ├── MastershipDenied   ← controller refuses mastership acquisition
+    │   └── MastershipNotHeld  ← write attempt without an active mastership
+    └── RWSValueError          ← invalid RAPID value / serialization failure
+
 
 CTRL_CODES:
     Complete dictionary of ABB RobotWare 6 return codes.
@@ -234,10 +237,12 @@ def ctrl_code_name(code: int) -> str:
         ``"UNKNOWN(code)"`` if the code is not registered.
 
     Example:
+        ```python
         >>> ctrl_code_name(-1073445859)
         'SYS_CTRL_E_MASTER_REJECT'
         >>> ctrl_code_name(0)
         'UNKNOWN(0)'
+        ```
     """
     return CTRL_CODES.get(code, f"UNKNOWN({code})")
 
@@ -259,10 +264,12 @@ class RWSError(Exception):
         status_code: Associated HTTP status code, if applicable.
 
     Example:
+        ```python
         >>> try:
         ...     await client.get("rw/rapid/execution")
         ... except RWSError as exc:
         ...     print(exc.message)
+        ```
     """
 
     message: str
@@ -295,10 +302,12 @@ class RWSConnectionError(RWSError):
     after all retries have been exhausted.
 
     Example:
+        ```python
         >>> try:
         ...     await client.get("rw/rapid/execution")
         ... except RWSConnectionError:
         ...     print("Controller unreachable")
+        ```
     """
 
 
@@ -309,10 +318,12 @@ class RWSTimeoutError(RWSError):
     after all retries have been exhausted.
 
     Example:
+        ```python
         >>> try:
         ...     await client.get("rw/rapid/execution")
         ... except RWSTimeoutError:
         ...     print("Request timed out")
+        ```
     """
 
 
@@ -328,10 +339,12 @@ class RWSAuthenticationError(RWSError):
     controller's UAS (User Authorization System).
 
     Example:
+        ```python
         >>> try:
         ...     await client.get("rw/rapid/execution")
         ... except RWSAuthenticationError:
         ...     print("Invalid credentials")
+        ```
     """
 
     def __init__(self, message: str = "Authentication failed (HTTP 401)") -> None:
@@ -347,10 +360,12 @@ class RWSHTTPError(RWSError):
             (e.g. ``"SYS_CTRL_E_EXEC_STATE"``).
 
     Example:
+        ```python
         >>> try:
         ...     await client.post("rw/rapid/execution", params={"action": "start"})
         ... except RWSHTTPError as exc:
         ...     print(exc.ctrl_code_name)
+        ```
     """
 
     ctrl_code: int | None
@@ -385,10 +400,12 @@ class RWSNotFoundError(RWSHTTPError):
         resource: Path of the resource that was not found.
 
     Example:
+        ```python
         >>> try:
         ...     await client.get("rw/rapid/symbol/data/RAPID/T_ROB1/MOD/MISSING")
         ... except RWSNotFoundError as exc:
         ...     print(exc.resource)
+        ```
     """
 
     resource: str
@@ -411,10 +428,12 @@ class MastershipError(RWSError):
     """Base class for RAPID mastership-related errors.
 
     Example:
+        ```python
         >>> try:
         ...     await client.post("rw/mastership", params={"action": "request"})
         ... except MastershipError:
         ...     print("Mastership operation failed")
+        ```
     """
 
 
@@ -422,6 +441,7 @@ class MastershipDenied(MastershipError):
     """The controller refused the mastership acquisition request.
 
     Typical causes:
+
     - The RAPID program is running in automatic mode.
     - Another client already holds mastership.
     - The UAS denies access for this user.
@@ -429,10 +449,12 @@ class MastershipDenied(MastershipError):
     ABB constraint: ``SYS_CTRL_E_MASTER_REJECT`` (code ``-1073445859``).
 
     Example:
+        ```python
         >>> try:
         ...     await client.post("rw/mastership", params={"action": "request"})
         ... except MastershipDenied:
         ...     print("Mastership denied by controller")
+        ```
     """
 
     def __init__(self, message: str = "Mastership request denied by controller") -> None:
@@ -446,10 +468,12 @@ class MastershipNotHeld(MastershipError):
     as a guard against out-of-order calls.
 
     Example:
+        ```python
         >>> try:
         ...     await set_rapid_variable(client, ...)
         ... except MastershipNotHeld:
         ...     print("Acquire mastership first")
+        ```
     """
 
     def __init__(self) -> None:
@@ -469,8 +493,10 @@ class RWSValueError(RWSError):
     be parsed into a Python type.
 
     Example:
+        ```python
         >>> try:
         ...     rws_to_robtarget("not_a_valid_robtarget")
         ... except RWSValueError as exc:
         ...     print(exc.message)
+        ```
     """

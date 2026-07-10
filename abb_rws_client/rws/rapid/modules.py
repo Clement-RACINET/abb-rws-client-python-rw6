@@ -39,7 +39,10 @@ async def get_rapid_modules_action(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_modules_action(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/modules",
@@ -70,8 +73,10 @@ async def get_rapid_modules(
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/modules?task=T_ROB1"
+        ```python
+        >>> await get_rapid_modules(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/modules",
@@ -102,8 +107,10 @@ async def get_mod_possible_all(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://127.0.0.1/rw/rapid/modules?resource=mod-possible-all"
+        ```python
+        >>> await get_mod_possible_all(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/modules",
@@ -139,8 +146,10 @@ async def set_modify_all_positions(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d
-            "checklimit=false&checkdeactaxes=false" "http://localhost/rw/rapid/m
+        ```python
+        >>> await set_modify_all_positions(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/rapid/modules",
@@ -179,8 +188,10 @@ async def get_specified_range_of_text(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&startrow=1&startcol=1&e
+        ```python
+        >>> await get_specified_range_of_text(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/modules/{module}")
 
@@ -210,7 +221,10 @@ async def get_rapid_module_actions(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_module_actions(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -249,8 +263,10 @@ async def save_rapid_module(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=MainModule&path=C:/Users/mymod" -X
-            POST "http://localhost/rw/rapid/mod
+        ```python
+        >>> await save_rapid_module(client, "module_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/modules/{module}",
@@ -300,8 +316,10 @@ async def set_text_range(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "task=T_ROB1&replace-mode=After&query-mode=Force&startrow=8&startcol=8&endro
+        ```python
+        >>> await set_text_range(client, "module_value", query_mode="query_mode_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/modules/{module}",
@@ -352,8 +370,10 @@ async def set_module_text(
         # ABB codes: BAD_REQUEST(400),NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "text=SampleTest" -X POST
-            "http://localhost/rw/rapid/modules/MainMod
+        ```python
+        >>> await set_module_text(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/modules/{module}",
@@ -389,8 +409,10 @@ async def get_rapid_module_attributes(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1"
+        ```python
+        >>> await get_rapid_module_attributes(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -431,8 +453,10 @@ async def get_change_count(
         # ABB codes: Bad Request(400), FORBIDDEN(403), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=change-count&task=T_ROB1
+        ```python
+        >>> await get_change_count(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -474,8 +498,10 @@ async def get_rulesinstr(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=rules-instr&task=T_ROB1&
+        ```python
+        >>> await get_rulesinstr(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -522,8 +548,10 @@ async def get_module_possible_attributes(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&attribute=readonly&attr
+        ```python
+        >>> await get_module_possible_attributes(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -570,8 +598,10 @@ async def get_search_text(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&startrow=1&startcol=1
+        ```python
+        >>> await get_search_text(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -611,8 +641,10 @@ async def get_rapid_object(
         # ABB codes: BAD_REQUEST (400), FORBIDDEN(403), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/BASE?task=T_ROB1&startrow=3&startcol=2&desti
+        ```python
+        >>> await get_rapid_object(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/rw/rapid/modules/{module}")
 
@@ -643,8 +675,10 @@ async def set_syncpers(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/rapid/modules/MainModule?action=set-syncpers&task=
+        ```python
+        >>> await set_syncpers(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/modules/{module}",
@@ -692,8 +726,10 @@ async def set_modify_position(
         # ABB codes: Bad Request(400),
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d
-            "startrow=3&startcol=9&endrow=3&endcol=102&checklimit=false&checkdea
+        ```python
+        >>> await set_modify_position(client, "module_value")
+        <Response [204]>
+        ```
     """
     return await client.post(
         f"/rw/rapid/modules/{module}",
@@ -740,8 +776,10 @@ async def get_module_extension(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=module-extension&task=T_
+        ```python
+        >>> await get_module_extension(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -783,8 +821,10 @@ async def get_mod_possible(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=mod-possible&task=T_ROB1
+        ```python
+        >>> await get_mod_possible(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -837,8 +877,10 @@ async def get_object_child(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost:4444/rw/rapid/modules/base?resource=object-child&task=T_ROB1&
+        ```python
+        >>> await get_object_child(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -883,8 +925,10 @@ async def get_syncpers_status(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/base?resource=syncper-status&task=T_ROB1"
+        ```python
+        >>> await get_syncpers_status(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -918,8 +962,10 @@ async def get_module_text(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=module-text&task=T_ROB1"
+        ```python
+        >>> await get_module_text(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -957,8 +1003,10 @@ async def get_symbol_information(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule?resource=module-symbol&task=T_ROB
+        ```python
+        >>> await get_symbol_information(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
@@ -1004,8 +1052,10 @@ async def get_routine_information(
         # ABB codes: HTTP_BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404),see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule/routine?task=T_ROB1&row=10&column
+        ```python
+        >>> await get_routine_information(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}/routine",
@@ -1059,8 +1109,10 @@ async def get_routineargs_information(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/rapid/modules/MainModule/routine?resource=routine-args&mar
+        ```python
+        >>> await get_routineargs_information(client, "module_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/modules/{module}/routine",

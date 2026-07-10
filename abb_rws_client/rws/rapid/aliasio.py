@@ -41,7 +41,10 @@ async def get_aliasio_list(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_aliasio_list(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/aliasio",

@@ -35,7 +35,10 @@ async def get_io_devices(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices"
+        ```python
+        >>> await get_io_devices(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/iosystem/devices")
 
@@ -63,8 +66,10 @@ async def get_actions_io_devices(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/iosystem/devices?action=show"
+        ```python
+        >>> await get_actions_io_devices(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/iosystem/devices",
@@ -103,7 +108,10 @@ async def post_search_io_devices(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # Search IO Devices
+        ```python
+        >>> await post_search_io_devices(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/iosystem/devices",

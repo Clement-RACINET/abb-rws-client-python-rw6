@@ -37,7 +37,10 @@ async def get_file_service_resources(client: RWSClient) -> httpx.Response:
         # ABB codes: UNAUTHORIZED(401),NOT_FOUND(404)
 
     Example:
-        # Get a list of root resources
+        ```python
+        >>> await get_file_service_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/fileservice")
 
@@ -67,7 +70,14 @@ async def get_directory_listing_of_resources(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400) See
 
     Example:
-        # Directory Listing
+        ```python
+        >>> await get_directory_listing_of_resources(
+        ...     client,
+        ...     "environment_variable_device_value",
+        ...     "directory_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.get(f"/fileservice/{environment_variable_device}/{directory}")
 
@@ -99,7 +109,10 @@ async def get_directory_actions(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # Get actions on directory
+        ```python
+        >>> await get_directory_actions(client, "device_value", "directory_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/fileservice/{device}|{directory}",
@@ -135,7 +148,14 @@ async def create_directory(
         # ABB codes: UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
 
     Example:
-        # Create a new directory
+        ```python
+        >>> await create_directory(
+        ...     client,
+        ...     "device_environment_variable_value",
+        ...     "directory_value"
+        ... )
+        <Response [201]>
+        ```
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
 
@@ -166,7 +186,14 @@ async def post_rename_directory(
             METHOD_NOT_ALLOWED(405)
 
     Example:
-        # Rename a directory
+        ```python
+        >>> await post_rename_directory(
+        ...     client,
+        ...     "device_environment_variable_value",
+        ...     "directory_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
 
@@ -200,7 +227,14 @@ async def post_copy_directory(
             CONFLICT(409)
 
     Example:
-        # Create a copy of a directory
+        ```python
+        >>> await post_copy_directory(
+        ...     client,
+        ...     "device_environment_variable_value",
+        ...     "directory_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
 
@@ -230,7 +264,14 @@ async def delete_directory(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), METHOD_NOT_ALLOWED(405)
 
     Example:
-        # Delate a directory
+        ```python
+        >>> await delete_directory(
+        ...     client,
+        ...     "device_environment_variable_value",
+        ...     "directory_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.delete(f"/fileservice/{device_environment_variable}/{directory}")
 
@@ -262,7 +303,10 @@ async def get_file(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404),
 
     Example:
-        # Get a file.
+        ```python
+        >>> await get_file(client, "device_value", "directory_value", "file_value")
+        <Response [200]>
+        ```
     """
     return await client.get(f"/fileservice/{device}|{directory}/{file}")
 
@@ -296,7 +340,10 @@ async def get_file_actions(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), See
 
     Example:
-        # Get actions on a file.
+        ```python
+        >>> await get_file_actions(client, "device_value", "directory_value", "file_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/fileservice/{device}|{directory}/{file}",
@@ -329,7 +376,14 @@ async def post_rename_file(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Rename a file
+        ```python
+        >>> await post_rename_file(
+        ...     client,
+        ...     "device_environment_variable_directory_value",
+        ...     "file_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.post(f"/fileservice/{device_environment_variable_directory}/{file}")
 
@@ -363,7 +417,14 @@ async def create_copy_of_file(
             CONFLICT(409)
 
     Example:
-        # Create a copy of a file
+        ```python
+        >>> await create_copy_of_file(
+        ...     client,
+        ...     "device_environment_variable_value",
+        ...     "filename_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{filename}")
 
@@ -395,7 +456,14 @@ async def put_upload_file(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(403), BAD_REQUEST(400)
 
     Example:
-        # Upload a file
+        ```python
+        >>> await put_upload_file(
+        ...     client,
+        ...     "device_environment_variable_directory_value",
+        ...     "file_value"
+        ... )
+        <Response [200]>
+        ```
     """
     return await client.put(f"/fileservice/{device_environment_variable_directory}/{file}")
 
@@ -425,7 +493,14 @@ async def delete_file(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400),METHOD_NOT_ALLOWED(405)
 
     Example:
-        # Delete a file
+        ```python
+        >>> await delete_file(
+        ...     client,
+        ...     "device_environment_variable_directory_value",
+        ...     "file_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.delete(f"/fileservice/{device_environment_variable_directory}/{file}")
 
@@ -455,6 +530,13 @@ async def get_file_meta_data(
         # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), See
 
     Example:
-        # Delete a file
+        ```python
+        >>> await get_file_meta_data(
+        ...     client,
+        ...     "device_environment_variable_directory_value",
+        ...     "file_value"
+        ... )
+        <Response [204]>
+        ```
     """
     return await client.head(f"/fileservice/{device_environment_variable_directory}/{file}")

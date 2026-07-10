@@ -34,6 +34,9 @@ async def get_user_grants(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/users/grants"
+        ```python
+        >>> await get_user_grants(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/users/grants")

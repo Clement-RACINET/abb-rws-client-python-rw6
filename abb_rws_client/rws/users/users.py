@@ -38,7 +38,10 @@ async def get_user_resources(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/users"
+        ```python
+        >>> await get_user_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/users",
@@ -69,7 +72,10 @@ async def get_user_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/users?action=show"
+        ```python
+        >>> await get_user_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/users",
@@ -98,7 +104,10 @@ async def register_the_user(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # Register user
+        ```python
+        >>> await register_the_user(client)
+        <Response [201]>
+        ```
     """
     return await client.post("/users")
 
@@ -126,7 +135,10 @@ async def impersonate_user(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # Register user
+        ```python
+        >>> await impersonate_user(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/users",
@@ -160,7 +172,10 @@ async def login_as_local_user(
             and sets the type as remote or local respectively.
 
     Example:
-        # Login as local user
+        ```python
+        >>> await login_as_local_user(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/users",

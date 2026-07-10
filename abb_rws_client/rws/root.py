@@ -35,7 +35,10 @@ async def get_service_list(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/"
+        ```python
+        >>> await get_service_list(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/")
 
@@ -59,6 +62,9 @@ async def logout(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/logout"
+        ```python
+        >>> await logout(client)
+        <Response [204]>
+        ```
     """
     return await client.get("/logout")

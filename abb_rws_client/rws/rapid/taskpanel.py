@@ -35,7 +35,10 @@ async def get_user_modify_from_taskpanel(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD_REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/taskselection"
+        ```python
+        >>> await get_user_modify_from_taskpanel(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/rapid/taskselection")
 
@@ -65,7 +68,10 @@ async def subscribe_on_tasks_panel_change(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 
     Example:
-        # Subscribe on RAPID build log change
+        ```python
+        >>> await subscribe_on_tasks_panel_change(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",

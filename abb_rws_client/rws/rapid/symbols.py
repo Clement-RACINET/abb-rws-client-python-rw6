@@ -34,7 +34,10 @@ async def get_rapid_symbols_resources(client: RWSClient) -> httpx.Response:
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_symbols_resources(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/rapid/symbols")
 
@@ -62,7 +65,10 @@ async def get_rapid_symbols_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_rapid_symbols_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/rapid/symbols",
@@ -113,8 +119,10 @@ async def post_search_rapid_symbols(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "view=block&vartyp=any&blockurl=RAPID/T_ROB1&symtyp=var&recursive=true&datty
+        ```python
+        >>> await post_search_rapid_symbols(client)
+        <Response [200]>
+        ```
     """
     return await client.post(
         "/rw/rapid/symbols",
@@ -173,7 +181,10 @@ async def get_object_extension_list(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics" "
+        ```python
+        >>> await get_object_extension_list(client, "symbol_url_value")
+        <Response [200]>
+        ```
     """
     return await client.get(
         f"/rw/rapid/symbols/{symbol_url}",

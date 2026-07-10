@@ -35,7 +35,10 @@ async def get_clock_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock"
+        ```python
+        >>> await get_clock_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/clock")
 
@@ -63,7 +66,10 @@ async def get_clock_actions(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock?action=show"
+        ```python
+        >>> await get_clock_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/clock",
@@ -90,7 +96,10 @@ async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
         # ABB codes: UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), See
 
     Example:
-        # Set the controller Clock
+        ```python
+        >>> await set_the_clock_of_the_controller(client)
+        <Response [204]>
+        ```
     """
     return await client.put("/ctrl/clock")
 
@@ -114,7 +123,10 @@ async def get_timezone_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone"
+        ```python
+        >>> await get_timezone_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/clock/timezone")
 
@@ -138,8 +150,10 @@ async def get_timezone_actions(client: RWSClient) -> httpx.Response:
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/clock/timezone?action=show"
+        ```python
+        >>> await get_timezone_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/clock/timezone",
@@ -166,7 +180,10 @@ async def set_the_time_zone(client: RWSClient) -> httpx.Response:
         # ABB codes: See
 
     Example:
-        # Set the time zone
+        ```python
+        >>> await set_the_time_zone(client)
+        <Response [204]>
+        ```
     """
     return await client.post("/ctrl/clock/timezone")
 
@@ -190,7 +207,10 @@ async def get_time_server_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver"
+        ```python
+        >>> await get_time_server_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/ctrl/clock/timeserver")
 
@@ -214,8 +234,10 @@ async def get_time_server_actions(client: RWSClient) -> httpx.Response:
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/clock/timeserver?action=show"
+        ```python
+        >>> await get_time_server_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/clock/timeserver",
@@ -246,7 +268,10 @@ async def set_the_time_server(
         # ABB codes: See
 
     Example:
-        # Set the time zone
+        ```python
+        >>> await set_the_time_server(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/ctrl/clock/timeserver",
@@ -279,8 +304,10 @@ async def get_test_time_server(
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/ctrl/clock/timeserver?resource=servertime&server-ip=129.6.15.
+        ```python
+        >>> await get_test_time_server(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/ctrl/clock/timeserver",

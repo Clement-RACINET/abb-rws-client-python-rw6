@@ -39,8 +39,10 @@ async def get_remote_user_actions(
         # ABB codes: BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/users/remoteuser?action=show"
+        ```python
+        >>> await get_remote_user_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/users/remoteuser",
@@ -72,8 +74,10 @@ async def post_remote_user_logon_request(
         # ABB codes: BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/users/remoteuser?action=remotelogin"
+        ```python
+        >>> await post_remote_user_logon_request(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/users/remoteuser",
@@ -104,8 +108,10 @@ async def post_remote_user_logout_request(
         # ABB codes: BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/users/remoteuser?action=remotelogout"
+        ```python
+        >>> await post_remote_user_logout_request(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/users/remoteuser",
@@ -138,8 +144,10 @@ async def subscribe_on_remote_user_state(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
-            on this resource
+        ```python
+        >>> await subscribe_on_remote_user_state(client)
+        <Response [201]>
+        ```
     """
     return await client.post(
         "/subscription",

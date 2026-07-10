@@ -4,7 +4,8 @@ Serialization / deserialization of RAPID types ↔ RWS format.
 
 Author: Clément RACINET
 
-RWS format for a robtarget (compact string, no spaces):
+RWS format for a robtarget (compact string, no spaces)::
+
     [[x,y,z],[q1,q2,q3,q4],[cf1,cf4,cf6,cfx],[eax_a,eax_b,eax_c,eax_d,eax_e,eax_f]]
 
 ABB quaternion convention : [w, x, y, z]  (scalar first)
@@ -58,9 +59,11 @@ class RobTarget:
         RWSValueError: If ``eax`` does not contain exactly 6 values.
 
     Example:
+        ```python
         >>> rt = RobTarget(x=100.0, y=200.0, z=300.0)
         >>> rt.eax
         [9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0]
+        ```
     """
 
     x: float = 0.0
@@ -97,12 +100,14 @@ def _fmt(value: float) -> str:
         Compact string representation suitable for a RWS payload.
 
     Example:
+        ```python
         >>> _fmt(100.0)
         '100'
         >>> _fmt(3.14)
         '3.14'
         >>> _fmt(9e9)
         '9E+9'
+        ```
     """
     if value == _INACTIVE_AXIS:
         return _INACTIVE_AXIS_STR
@@ -128,8 +133,10 @@ def _parse_floats(raw: str, expected: int, context: str) -> list[float]:
             or if any element cannot be converted to float.
 
     Example:
+        ```python
         >>> _parse_floats("0,0,500", 3, "trans")
         [0.0, 0.0, 500.0]
+        ```
     """
     parts = [p.strip() for p in raw.split(",")]
     if len(parts) != expected:
@@ -153,8 +160,10 @@ def robtarget_to_rws(rt: RobTarget) -> str:
         ``"[[100,200,300],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]"``
 
     Example:
+        ```python
         >>> robtarget_to_rws(RobTarget(x=100.0, y=200.0, z=300.0))
         '[[100,200,300],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]'
+        ```
     """
     trans = ",".join(_fmt(v) for v in (rt.x, rt.y, rt.z))
     rot = ",".join(_fmt(v) for v in (rt.qw, rt.qx, rt.qy, rt.qz))
@@ -179,10 +188,12 @@ def rws_to_robtarget(raw: str) -> RobTarget:
             cannot be parsed as a float.
 
     Example:
+        ```python
         >>> rws_to_robtarget(
         ...     "[[0,0,500],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]"
         ... )
         RobTarget(x=0.0, y=0.0, z=500.0, ...)
+        ```
     """
     m = _ROBTARGET_RE.match(raw.strip())
     if not m:
@@ -223,12 +234,14 @@ def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str
             with the requested type.
 
     Example:
+        ```python
         >>> python_to_rapid_value(3.14, "num")
         '3.14'
         >>> python_to_rapid_value(True, "bool")
         'TRUE'
         >>> python_to_rapid_value("hello", "string")
         'hello'
+        ```
     """
     if rapid_type not in _RAPID_TYPES:
         raise RWSValueError(
@@ -269,12 +282,14 @@ def rapid_value_to_python(raw: str, rapid_type: str) -> float | bool | str | Rob
         RWSValueError: Conversion failed or unknown RAPID type.
 
     Example:
+        ```python
         >>> rapid_value_to_python("3.14", "num")
         3.14
         >>> rapid_value_to_python("TRUE", "bool")
         True
         >>> rapid_value_to_python("hello", "string")
         'hello'
+        ```
     """
     if rapid_type not in _RAPID_TYPES:
         raise RWSValueError(

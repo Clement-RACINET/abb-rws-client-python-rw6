@@ -35,7 +35,10 @@ async def get_vision_manager_resource(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision"
+        ```python
+        >>> await get_vision_manager_resource(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw/vision")
 
@@ -63,8 +66,10 @@ async def get_number_of_cameras_of_iv(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=num-of-cameras"
+        ```python
+        >>> await get_number_of_cameras_of_iv(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -97,8 +102,10 @@ async def get_iv_camera_validity(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=camera-validity&name=camera1"
+        ```python
+        >>> await get_iv_camera_validity(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -129,7 +136,10 @@ async def get_vision_camera_resource_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?action=show"
+        ```python
+        >>> await get_vision_camera_resource_actions(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -162,8 +172,10 @@ async def get_camera_jobname(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=camera-job&name=mycamera"
+        ```python
+        >>> await get_camera_jobname(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -196,8 +208,10 @@ async def restart_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
-            "http://localhost/rw/vision?action=restart"
+        ```python
+        >>> await restart_camera(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -231,8 +245,10 @@ async def post_flash_led_of_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
-            "http://localhost/rw/vision?action=flash-led"
+        ```python
+        >>> await post_flash_led_of_camera(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -268,8 +284,10 @@ async def set_camera_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera&state=run" -X POST
-            "http://localhost/rw/vision?action=set-sta
+        ```python
+        >>> await set_camera_state(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -301,8 +319,10 @@ async def post_refesh_the_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST
-            "http://localhost/rw/vision?action=refresh"
+        ```python
+        >>> await post_refesh_the_camera(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -338,8 +358,10 @@ async def set_hostname_of_the_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera&host=hostname" -X POST
-            "http://localhost/rw/vision?action=set
+        ```python
+        >>> await set_hostname_of_the_camera(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -374,8 +396,10 @@ async def set_camera_to_be_dhcp_client(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
-            "http://localhost/rw/vision?action=set-dhcp"
+        ```python
+        >>> await set_camera_to_be_dhcp_client(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -414,8 +438,10 @@ async def set_camera_dns_settings(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d
-            "name=mycamera&dns-server=192.168.125.76&dns-suffix=yourdomain.com" -X POST
+        ```python
+        >>> await set_camera_dns_settings(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -457,8 +483,10 @@ async def get_camera_status(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=camera-status&name=mycamera"
+        ```python
+        >>> await get_camera_status(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -491,8 +519,10 @@ async def get_camera_info_using_index_of_the(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=camera-info-index&index=0"
+        ```python
+        >>> await get_camera_info_using_index_of_the(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",
@@ -534,8 +564,10 @@ async def set_camera_name(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "index=0&name=mycamera" -X POST
-            "http://localhost/rw/vision?action=set-camer
+        ```python
+        >>> await set_camera_name(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -573,8 +605,10 @@ async def set_camera_user_credentials(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "index=0&user=cmycamera&password=123" -X
-            POST "http://localhost/rw/vision?ac
+        ```python
+        >>> await set_camera_user_credentials(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -623,8 +657,10 @@ async def set_camera_ip_settings(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics-d
-            "name=mycamera&address=192.168.125.206&netmask=255.255.255.0&gateway=0.0.0.0"
+        ```python
+        >>> await set_camera_ip_settings(client)
+        <Response [204]>
+        ```
     """
     return await client.post(
         "/rw/vision",
@@ -667,8 +703,10 @@ async def get_iv_camera_info(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics
-            "http://localhost/rw/vision?resource=camera-info&name=myCamera"
+        ```python
+        >>> await get_iv_camera_info(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/vision",

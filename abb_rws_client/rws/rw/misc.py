@@ -35,6 +35,9 @@ async def get_robotware_services(client: RWSClient) -> httpx.Response:
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw"
+        ```python
+        >>> await get_robotware_services(client)
+        <Response [200]>
+        ```
     """
     return await client.get("/rw")

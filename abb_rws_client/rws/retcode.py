@@ -39,7 +39,10 @@ async def get_list_of_robotware_return_codes(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://192.168.8.105/rw/retcode"
+        ```python
+        >>> await get_list_of_robotware_return_codes(client)
+        <Response [200]>
+        ```
     """
     return await client.get(
         "/rw/retcode",
