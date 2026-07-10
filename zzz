@@ -1,0 +1,9 @@
+1. _core/client.py
+2. _core/exceptions.py
+3. _core/serializers.py
+4. tests/test_client.py
+5. tests/test_exceptions.py
+6. tests/test_serializers.py
+7. contrib/generator/main.py
+8. (optionnel) scripts de scraping
+9. (optionnel) scripts de génération de docs

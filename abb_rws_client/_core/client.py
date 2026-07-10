@@ -1,32 +1,34 @@
 # abb_rws_client/_core/client.py
 """
-Session HTTP vers un contrôleur ABB RWS (RobotWare 6).
+HTTP session management for an ABB RWS controller (RobotWare 6).
 
-Responsabilités de ce module :
-- Créer et maintenir un httpx.AsyncClient configuré pour RWS
-- Gérer l'authentification HTTP Digest ABB
-- Maintenir le cookie de session ABBCX
-- Exposer les méthodes HTTP de bas niveau (get, put, post)
-  utilisées par les modules rws/ et highlevel/
-- Implémenter la politique de retry sur erreurs transport
-- Fournir RWSClientSync, wrapper synchrone sans duplication de logique
+Author: Clément RACINET
 
-Politique de retry (documentée ici, implémentée dans _request) :
-    - Déclencheurs : ConnectError, ReadTimeout, PoolTimeout uniquement.
-      Les erreurs HTTP (4xx, 5xx) ne sont jamais retentées.
-    - Tentatives : 3 au total (1 essai initial + 2 retries)
-    - Délai : exponentiel avec jitter ±10%
+Module responsibilities:
+- Create and maintain an httpx.AsyncClient configured for RWS
+- Handle ABB HTTP Digest authentication
+- Maintain the ABBCX session cookie
+- Expose low-level HTTP methods (get, put, post, delete, head, options)
+  used by the rws/ and highlevel/ modules
+- Implement the retry policy on transport errors
+- Provide RWSClientSync, a synchronous wrapper with no logic duplication
+
+Retry policy (documented here, implemented in _request):
+    - Triggers: ConnectError, ConnectTimeout, ReadTimeout, PoolTimeout only.
+      HTTP errors (4xx, 5xx) are never retried.
+    - Attempts: 3 total (1 initial attempt + 2 retries)
+    - Delay: exponential with ±10% jitter
       base * 2^attempt + jitter  →  ~0.5s, ~1s, ~2s
 
-Gestion du cookie ABBCX :
-    httpx.AsyncClient maintient ce cookie nativement via son cookiejar.
-    En cas d'expiration (timeout ABB ~10 min), le contrôleur répond 401
-    et httpx.DigestAuth relance le handshake automatiquement.
+ABBCX cookie management:
+    httpx.AsyncClient maintains this cookie natively via its cookiejar.
+    On expiry (ABB timeout ~10 min), the controller responds with 401
+    and httpx.DigestAuth automatically restarts the handshake.
 
-RWSClientSync :
-    Wrapper synchrone basé sur httpx.Client (sync natif d'httpx).
-    Même logique de retry/auth, aucune dépendance anyio au runtime.
-    Toutes les méthodes sont synchrones (pas de async def).
+RWSClientSync:
+    Synchronous wrapper based on httpx.Client (httpx native sync).
+    Same retry/auth logic, no anyio dependency at runtime.
+    All methods are synchronous (no async def).
 """
 
 from __future__ import annotations
@@ -50,19 +52,19 @@ from abb_rws_client._core.exceptions import (
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Constantes de retry
+# Retry constants
 # ---------------------------------------------------------------------------
 
-#: Nombre total de tentatives (1 essai initial + _RETRY_MAX_ATTEMPTS - 1 retries)
+#: Total number of attempts (1 initial attempt + _RETRY_MAX_ATTEMPTS - 1 retries)
 _RETRY_MAX_ATTEMPTS: int = 3
 
-#: Délai de base en secondes : _RETRY_BASE_DELAY * 2^attempt → 0.5s, 1.0s, 2.0s
+#: Base delay in seconds: _RETRY_BASE_DELAY * 2^attempt → 0.5s, 1.0s, 2.0s
 _RETRY_BASE_DELAY: float = 0.5
 
-#: Amplitude du jitter (fraction du délai calculé) → ±10%
+#: Jitter amplitude (fraction of the computed delay) → ±10%
 _RETRY_JITTER: float = 0.1
 
-#: Types d'exceptions httpx déclenchant un retry (erreurs transport uniquement)
+#: httpx exception types that trigger a retry (transport errors only)
 _RETRYABLE_EXCEPTIONS = (
     httpx.ConnectError,
     httpx.ConnectTimeout,
@@ -71,26 +73,40 @@ _RETRYABLE_EXCEPTIONS = (
 )
 
 # ---------------------------------------------------------------------------
-# Helpers partagés async/sync
+# Shared helpers (async/sync)
 # ---------------------------------------------------------------------------
 
 
 def _build_auth(username: str, password: str) -> httpx.DigestAuth:
-    """Construit l'objet DigestAuth httpx."""
+    """Build the httpx DigestAuth object.
+
+    Args:
+        username: RWS username.
+        password: RWS password.
+
+    Returns:
+        Configured ``httpx.DigestAuth`` instance.
+
+    Example:
+        >>> auth = _build_auth("Default User", "robotics")
+    """
     return httpx.DigestAuth(username, password)
 
 
 def _raise_for_status(response: httpx.Response, path: str) -> None:
-    """Lève l'exception RWS appropriée selon le status HTTP.
+    """Raise the appropriate RWS exception based on the HTTP status code.
 
     Args:
-        response: Réponse httpx reçue.
-        path: Chemin de la requête, pour les messages d'erreur.
+        response: The httpx response received.
+        path: Request path, used in error messages.
 
     Raises:
-        RWSAuthenticationError: Sur HTTP 401.
-        RWSNotFoundError: Sur HTTP 404.
-        RWSHTTPError: Sur tout autre status >= 400.
+        RWSAuthenticationError: On HTTP 401.
+        RWSNotFoundError: On HTTP 404.
+        RWSHTTPError: On any other status >= 400.
+
+    Example:
+        >>> _raise_for_status(response, "rw/rapid/execution")
     """
     code = response.status_code
     if code == 401:
@@ -105,13 +121,17 @@ def _raise_for_status(response: httpx.Response, path: str) -> None:
 
 
 def _retry_delay(attempt: int) -> float:
-    """Calcule le délai avant le prochain retry avec jitter.
+    """Compute the delay before the next retry, with exponential backoff and jitter.
 
     Args:
-        attempt: Numéro de la tentative échouée (0-indexé).
+        attempt: Index of the failed attempt (0-based).
 
     Returns:
-        Délai en secondes (float).
+        Delay in seconds (float).
+
+    Example:
+        >>> delay = _retry_delay(0)  # ~0.5s
+        >>> delay = _retry_delay(1)  # ~1.0s
     """
     base = _RETRY_BASE_DELAY * (2**attempt)
     jitter = base * _RETRY_JITTER * (2 * random.random() - 1)
@@ -124,17 +144,17 @@ def _retry_delay(attempt: int) -> float:
 
 
 class RWSClient:
-    """Client HTTP async pour l'API Robot Web Services (RWS) d'ABB RobotWare 6.
+    """Async HTTP client for the ABB Robot Web Services (RWS) API — RobotWare 6.
 
-    Conçu pour être utilisé comme context manager async, ce qui garantit
-    la fermeture propre de la session HTTP dans tous les cas.
+    Designed to be used as an async context manager, which guarantees
+    proper HTTP session teardown in all cases.
 
     Args:
-        host: Adresse IP ou hostname du contrôleur (ex: ``"192.168.125.1"``).
-        username: Identifiant RWS (défaut ABB : ``"Default User"``).
-        password: Mot de passe RWS (défaut ABB : ``"robotics"``).
-        port: Port HTTP du contrôleur (défaut : ``80``).
-        timeout: Timeout HTTP en secondes (défaut : ``10.0``).
+        host: Controller IP address or hostname (e.g. ``"192.168.125.1"``).
+        username: RWS username (ABB default: ``"Default User"``).
+        password: RWS password (ABB default: ``"robotics"``).
+        port: Controller HTTP port (default: ``80``).
+        timeout: HTTP timeout in seconds (default: ``10.0``).
 
     Example:
         >>> async with RWSClient(host="192.168.125.1") as client:
@@ -157,13 +177,16 @@ class RWSClient:
         self.base_url = f"http://{host}:{port}/"
         self._http: httpx.AsyncClient | None = None
 
-    # ── Cycle de vie ────────────────────────────────────────────────────────
+    # ── Lifecycle ───────────────────────────────────────────────────────────
 
     async def aopen(self) -> None:
-        """Ouvre la session HTTP. Idempotent : sans effet si déjà ouvert.
+        """Open the HTTP session. Idempotent: no-op if already open.
 
         Raises:
-            RWSConnectionError: Si la connexion initiale échoue.
+            RWSConnectionError: If the initial connection fails.
+
+        Example:
+            >>> await client.aopen()
         """
         if self._http is not None:
             return
@@ -176,7 +199,11 @@ class RWSClient:
         logger.debug("RWSClient opened → %s", self.base_url)
 
     async def aclose(self) -> None:
-        """Ferme la session HTTP. Idempotent : sans effet si déjà fermé."""
+        """Close the HTTP session. Idempotent: no-op if already closed.
+
+        Example:
+            >>> await client.aclose()
+        """
         if self._http is None:
             return
         await self._http.aclose()
@@ -199,7 +226,7 @@ class RWSClient:
         state = "open" if self._http is not None else "closed"
         return f"RWSClient(host={self.host!r}, timeout={self.timeout}, state={state!r})"
 
-    # ── Requête interne avec retry ───────────────────────────────────────────
+    # ── Internal request with retry ─────────────────────────────────────────
 
     async def _request(
         self,
@@ -207,23 +234,29 @@ class RWSClient:
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
-        """Exécute une requête HTTP avec politique de retry sur erreurs transport.
+        """Execute an HTTP request with the transport-error retry policy.
 
         Args:
-            method: Méthode HTTP (``"GET"``, ``"POST"``, ``"PUT"``, ``"DELETE"``).
-            path: Chemin relatif à la base URL (ex: ``"rw/rapid/execution"``).
-            **kwargs: Paramètres supplémentaires passés à httpx (params, data, json…).
+            method: HTTP method (``"GET"``, ``"POST"``, ``"PUT"``, ``"DELETE"``).
+            path: Path relative to the base URL (e.g. ``"rw/rapid/execution"``).
+            **kwargs: Additional parameters forwarded to httpx
+                (``params``, ``data``, ``json``, …).
 
         Returns:
-            Réponse httpx (status non vérifié — appeler ``_raise_for_status`` si besoin).
+            httpx response (status not checked — call ``_raise_for_status``
+            if needed, though it is already called internally).
 
         Raises:
-            RuntimeError: Si le client n'est pas ouvert.
-            RWSConnectionError: Après épuisement des retries sur ConnectError.
-            RWSTimeoutError: Après épuisement des retries sur ReadTimeout/PoolTimeout.
-            RWSAuthenticationError: Sur HTTP 401.
-            RWSNotFoundError: Sur HTTP 404.
-            RWSHTTPError: Sur tout autre HTTP >= 400.
+            RuntimeError: If the client is not open.
+            RWSConnectionError: After retries are exhausted on ConnectError.
+            RWSTimeoutError: After retries are exhausted on ReadTimeout/PoolTimeout.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+
+        Example:
+            >>> resp = await client._request("GET", "rw/rapid/execution",
+            ...                              params={"json": "1"})
         """
         if self._http is None:
             raise RuntimeError(
@@ -250,7 +283,7 @@ class RWSClient:
                         delay,
                     )
                     await asyncio.sleep(delay)
-        # Tous les retries épuisés
+        # All retries exhausted
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
             raise RWSConnectionError(
@@ -260,26 +293,26 @@ class RWSClient:
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
         ) from last_exc
 
-    # ── Méthodes HTTP publiques ──────────────────────────────────────────────
+    # ── Public HTTP methods ──────────────────────────────────────────────────
 
     async def get(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Effectue un GET RWS.
+        """Send an HTTP GET request to the RWS controller.
 
-        Route : toute route GET de l'API RWS.
+        Route: ``GET {path}``
 
         Args:
-            path: Chemin relatif (ex: ``"rw/rapid/execution"``).
-            **kwargs: Paramètres httpx (``params``, ``headers``…).
+            path: Path relative to the base URL (e.g. ``"rw/rapid/execution"``).
+            **kwargs: Additional httpx parameters (``params``, ``headers``, …).
 
         Returns:
-            Réponse httpx validée (status < 400).
+            Validated httpx response (status < 400).
 
         Raises:
-            RWSConnectionError: Erreur réseau après retries.
-            RWSTimeoutError: Timeout après retries.
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
             RWSAuthenticationError: HTTP 401.
             RWSNotFoundError: HTTP 404.
-            RWSHTTPError: Autre HTTP >= 400.
+            RWSHTTPError: Any other HTTP >= 400.
 
         Example:
             >>> resp = await client.get("rw/rapid/execution", params={"json": "1"})
@@ -287,23 +320,23 @@ class RWSClient:
         return await self._request("GET", path, **kwargs)
 
     async def post(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Effectue un POST RWS.
+        """Send an HTTP POST request to the RWS controller.
 
-        Route : toute route POST de l'API RWS (actions, mastership…).
+        Route: ``POST {path}``
 
         Args:
-            path: Chemin relatif (ex: ``"rw/mastership"``).
-            **kwargs: Paramètres httpx (``params``, ``data``, ``json``…).
+            path: Path relative to the base URL (e.g. ``"rw/mastership"``).
+            **kwargs: Additional httpx parameters (``params``, ``data``, ``json``, …).
 
         Returns:
-            Réponse httpx validée (status < 400).
+            Validated httpx response (status < 400).
 
         Raises:
-            RWSConnectionError: Erreur réseau après retries.
-            RWSTimeoutError: Timeout après retries.
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
             RWSAuthenticationError: HTTP 401.
             RWSNotFoundError: HTTP 404.
-            RWSHTTPError: Autre HTTP >= 400.
+            RWSHTTPError: Any other HTTP >= 400.
 
         Example:
             >>> await client.post("rw/mastership", params={"action": "request"})
@@ -311,23 +344,23 @@ class RWSClient:
         return await self._request("POST", path, **kwargs)
 
     async def put(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Effectue un PUT RWS.
+        """Send an HTTP PUT request to the RWS controller.
 
-        Route : typiquement PUT /rw/rapid/symbol/data/... pour écrire une variable.
+        Route: ``PUT {path}`` — typically used to write a RAPID variable.
 
         Args:
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx (``data``…).
+            path: Path relative to the base URL.
+            **kwargs: Additional httpx parameters (``data``, …).
 
         Returns:
-            Réponse httpx validée (status < 400).
+            Validated httpx response (status < 400).
 
         Raises:
-            RWSConnectionError: Erreur réseau après retries.
-            RWSTimeoutError: Timeout après retries.
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
             RWSAuthenticationError: HTTP 401.
             RWSNotFoundError: HTTP 404.
-            RWSHTTPError: Autre HTTP >= 400.
+            RWSHTTPError: Any other HTTP >= 400.
 
         Example:
             >>> await client.put(
@@ -338,23 +371,26 @@ class RWSClient:
         return await self._request("PUT", path, **kwargs)
 
     async def delete(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Effectue un DELETE RWS.
+        """Send an HTTP DELETE request to the RWS controller.
 
-        Route : typiquement DELETE /fileservice/... ou DELETE /rw/elog/...
+        Route: ``DELETE {path}`` — typically used for fileservice or elog resources.
 
         Args:
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx.
+            path: Path relative to the base URL.
+            **kwargs: Additional httpx parameters.
 
         Returns:
-            Réponse httpx validée (status < 400).
+            Validated httpx response (status < 400).
 
         Raises:
-            RWSConnectionError: Erreur réseau après retries.
-            RWSTimeoutError: Timeout après retries.
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
             RWSAuthenticationError: HTTP 401.
             RWSNotFoundError: HTTP 404.
-            RWSHTTPError: Autre HTTP >= 400.
+            RWSHTTPError: Any other HTTP >= 400.
+
+        Example:
+            >>> await client.delete("fileservice/$HOME/old_backup.tar.gz")
         """
         return await self._request("DELETE", path, **kwargs)
 
@@ -363,23 +399,23 @@ class RWSClient:
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
-        """Envoie une requête HTTP HEAD.
+        """Send an HTTP HEAD request to the RWS controller.
 
         Route: ``HEAD {path}``
 
         Args:
-            path: Chemin relatif à la base URL du contrôleur.
-            **kwargs: Paramètres supplémentaires passés à httpx.
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
 
         Returns:
-            Réponse HTTP brute.
+            Raw HTTP response (headers only, no body).
 
         Raises:
-            RWSAuthenticationError: Sur HTTP 401.
-            RWSNotFoundError: Sur HTTP 404.
-            RWSHTTPError: Sur tout autre HTTP >= 400.
-            RWSConnectionError: Si le contrôleur est injoignable.
-            RWSTimeoutError: Si la requête dépasse le timeout.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+            RWSConnectionError: If the controller is unreachable.
+            RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
             >>> resp = await client.head("fileservice/$HOME/myfile.txt")
@@ -391,49 +427,50 @@ class RWSClient:
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
-        """Envoie une requête HTTP OPTIONS.
+        """Send an HTTP OPTIONS request to the RWS controller.
 
         Route: ``OPTIONS {path}``
 
         Args:
-            path: Chemin relatif à la base URL du contrôleur.
-            **kwargs: Paramètres supplémentaires passés à httpx.
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
 
         Returns:
-            Réponse HTTP brute.
+            Raw HTTP response.
 
         Raises:
-            RWSAuthenticationError: Sur HTTP 401.
-            RWSNotFoundError: Sur HTTP 404.
-            RWSHTTPError: Sur tout autre HTTP >= 400.
-            RWSConnectionError: Si le contrôleur est injoignable.
-            RWSTimeoutError: Si la requête dépasse le timeout.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+            RWSConnectionError: If the controller is unreachable.
+            RWSTimeoutError: If the request exceeds the timeout.
 
         Example:
             >>> resp = await client.options("ctrl/network/route/add")
         """
         return await self._request("OPTIONS", path, **kwargs)
 
+
 # ---------------------------------------------------------------------------
-# RWSClientSync — wrapper synchrone
+# RWSClientSync — synchronous wrapper
 # ---------------------------------------------------------------------------
 
 
 class RWSClientSync:
-    """Client HTTP synchrone pour l'API RWS ABB RobotWare 6.
+    """Synchronous HTTP client for the ABB RWS API — RobotWare 6.
 
-    Wrapper synchrone de ``RWSClient`` basé sur ``httpx.Client`` natif.
-    Même politique d'auth (DigestAuth), même retry, même gestion d'erreurs.
-    Aucune dépendance ``anyio`` ou ``asyncio`` au runtime.
+    Synchronous wrapper around ``RWSClient``, based on ``httpx.Client`` natively.
+    Same authentication policy (DigestAuth), same retry logic, same error handling.
+    No ``anyio`` or ``asyncio`` dependency at runtime.
 
-    Conçu pour être utilisé comme context manager synchrone.
+    Designed to be used as a synchronous context manager.
 
     Args:
-        host: Adresse IP ou hostname du contrôleur.
-        username: Identifiant RWS (défaut ABB : ``"Default User"``).
-        password: Mot de passe RWS (défaut ABB : ``"robotics"``).
-        port: Port HTTP (défaut : ``80``).
-        timeout: Timeout HTTP en secondes (défaut : ``10.0``).
+        host: Controller IP address or hostname.
+        username: RWS username (ABB default: ``"Default User"``).
+        password: RWS password (ABB default: ``"robotics"``).
+        port: HTTP port (default: ``80``).
+        timeout: HTTP timeout in seconds (default: ``10.0``).
 
     Example:
         >>> with RWSClientSync(host="192.168.125.1") as client:
@@ -456,10 +493,14 @@ class RWSClientSync:
         self.base_url = f"http://{host}:{port}/"
         self._http: httpx.Client | None = None
 
-    # ── Cycle de vie ────────────────────────────────────────────────────────
+    # ── Lifecycle ───────────────────────────────────────────────────────────
 
     def open(self) -> None:
-        """Ouvre la session HTTP. Idempotent : sans effet si déjà ouvert."""
+        """Open the HTTP session. Idempotent: no-op if already open.
+
+        Example:
+            >>> client.open()
+        """
         if self._http is not None:
             return
         self._http = httpx.Client(
@@ -471,7 +512,11 @@ class RWSClientSync:
         logger.debug("RWSClientSync opened → %s", self.base_url)
 
     def close(self) -> None:
-        """Ferme la session HTTP. Idempotent : sans effet si déjà fermé."""
+        """Close the HTTP session. Idempotent: no-op if already closed.
+
+        Example:
+            >>> client.close()
+        """
         if self._http is None:
             return
         self._http.close()
@@ -494,26 +539,30 @@ class RWSClientSync:
         state = "open" if self._http is not None else "closed"
         return f"RWSClientSync(host={self.host!r}, state={state!r})"
 
-    # ── Requête interne avec retry ───────────────────────────────────────────
+    # ── Internal request with retry ─────────────────────────────────────────
 
     def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
-        """Exécute une requête HTTP synchrone avec politique de retry.
+        """Execute a synchronous HTTP request with the transport-error retry policy.
 
         Args:
-            method: Méthode HTTP.
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx.
+            method: HTTP method (``"GET"``, ``"POST"``, ``"PUT"``, ``"DELETE"``).
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
 
         Returns:
-            Réponse httpx validée.
+            Validated httpx response (status < 400).
 
         Raises:
-            RuntimeError: Si le client n'est pas ouvert.
-            RWSConnectionError: Après épuisement des retries.
-            RWSTimeoutError: Après épuisement des retries.
-            RWSAuthenticationError: HTTP 401.
-            RWSNotFoundError: HTTP 404.
-            RWSHTTPError: Autre HTTP >= 400.
+            RuntimeError: If the client is not open.
+            RWSConnectionError: After retries are exhausted on ConnectError.
+            RWSTimeoutError: After retries are exhausted on timeout errors.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+
+        Example:
+            >>> resp = client._request("GET", "rw/rapid/execution",
+            ...                        params={"json": "1"})
         """
         if self._http is None:
             raise RuntimeError(
@@ -542,24 +591,36 @@ class RWSClientSync:
                         delay,
                     )
                     time.sleep(delay)
+        # All retries exhausted
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
-            raise RWSConnectionError(f"Cannot connect to {self.base_url}: {last_exc}") from last_exc
+            raise RWSConnectionError(
+                f"Cannot connect to {self.base_url}: {last_exc}"
+            ) from last_exc
         raise RWSTimeoutError(
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
         ) from last_exc
 
-    # ── Méthodes HTTP publiques ──────────────────────────────────────────────
+    # ── Public HTTP methods ──────────────────────────────────────────────────
 
     def get(self, path: str, **kwargs: Any) -> httpx.Response:
-        """GET synchrone RWS.
+        """Send a synchronous HTTP GET request to the RWS controller.
+
+        Route: ``GET {path}``
 
         Args:
-            path: Chemin relatif (ex: ``"rw/rapid/execution"``).
-            **kwargs: Paramètres httpx (``params``…).
+            path: Path relative to the base URL (e.g. ``"rw/rapid/execution"``).
+            **kwargs: Additional httpx parameters (``params``, …).
 
         Returns:
-            Réponse httpx validée.
+            Validated httpx response (status < 400).
+
+        Raises:
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
+            RWSAuthenticationError: HTTP 401.
+            RWSNotFoundError: HTTP 404.
+            RWSHTTPError: Any other HTTP >= 400.
 
         Example:
             >>> resp = client.get("rw/rapid/execution", params={"json": "1"})
@@ -567,71 +628,124 @@ class RWSClientSync:
         return self._request("GET", path, **kwargs)
 
     def post(self, path: str, **kwargs: Any) -> httpx.Response:
-        """POST synchrone RWS.
+        """Send a synchronous HTTP POST request to the RWS controller.
+
+        Route: ``POST {path}``
 
         Args:
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx (``params``, ``data``…).
+            path: Path relative to the base URL.
+            **kwargs: Additional httpx parameters (``params``, ``data``, …).
 
         Returns:
-            Réponse httpx validée.
+            Validated httpx response (status < 400).
+
+        Raises:
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
+            RWSAuthenticationError: HTTP 401.
+            RWSNotFoundError: HTTP 404.
+            RWSHTTPError: Any other HTTP >= 400.
+
+        Example:
+            >>> await client.post("rw/mastership", params={"action": "request"})
         """
         return self._request("POST", path, **kwargs)
 
     def put(self, path: str, **kwargs: Any) -> httpx.Response:
-        """PUT synchrone RWS.
+        """Send a synchronous HTTP PUT request to the RWS controller.
+
+        Route: ``PUT {path}`` — typically used to write a RAPID variable.
 
         Args:
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx (``data``…).
+            path: Path relative to the base URL.
+            **kwargs: Additional httpx parameters (``data``, …).
 
         Returns:
-            Réponse httpx validée.
+            Validated httpx response (status < 400).
+
+        Raises:
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
+            RWSAuthenticationError: HTTP 401.
+            RWSNotFoundError: HTTP 404.
+            RWSHTTPError: Any other HTTP >= 400.
+
+        Example:
+            >>> client.put(
+            ...     "rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR",
+            ...     data={"value": "42"},
+            ... )
         """
         return self._request("PUT", path, **kwargs)
 
     def delete(self, path: str, **kwargs: Any) -> httpx.Response:
-        """DELETE synchrone RWS.
+        """Send a synchronous HTTP DELETE request to the RWS controller.
+
+        Route: ``DELETE {path}``
 
         Args:
-            path: Chemin relatif.
-            **kwargs: Paramètres httpx.
+            path: Path relative to the base URL.
+            **kwargs: Additional httpx parameters.
 
         Returns:
-            Réponse httpx validée.
-        """
-        return self._request("DELETE", path, **kwargs)
-        
-    def head(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Envoie une requête HTTP HEAD (synchrone).
-
-        Args:
-            path: Chemin relatif à la base URL.
-            **kwargs: Paramètres supplémentaires passés à httpx.
-
-        Returns:
-            Réponse HTTP brute.
+            Validated httpx response (status < 400).
 
         Raises:
-            RWSAuthenticationError: Sur HTTP 401.
-            RWSNotFoundError: Sur HTTP 404.
-            RWSHTTPError: Sur tout autre HTTP >= 400.
+            RWSConnectionError: Network error after retries.
+            RWSTimeoutError: Timeout after retries.
+            RWSAuthenticationError: HTTP 401.
+            RWSNotFoundError: HTTP 404.
+            RWSHTTPError: Any other HTTP >= 400.
+
+        Example:
+            >>> client.delete("fileservice/$HOME/old_backup.tar.gz")
+        """
+        return self._request("DELETE", path, **kwargs)
+
+    def head(self, path: str, **kwargs: Any) -> httpx.Response:
+        """Send a synchronous HTTP HEAD request to the RWS controller.
+
+        Route: ``HEAD {path}``
+
+        Args:
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
+
+        Returns:
+            Raw HTTP response (headers only, no body).
+
+        Raises:
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+            RWSConnectionError: If the controller is unreachable.
+            RWSTimeoutError: If the request exceeds the timeout.
+
+        Example:
+            >>> resp = client.head("fileservice/$HOME/myfile.txt")
         """
         return self._request("HEAD", path, **kwargs)
 
     def options(self, path: str, **kwargs: Any) -> httpx.Response:
-        """Envoie une requête HTTP OPTIONS (synchrone).
+        """Send a synchronous HTTP OPTIONS request to the RWS controller.
+
+        Route: ``OPTIONS {path}``
 
         Args:
-            path: Chemin relatif à la base URL.
-            **kwargs: Paramètres supplémentaires passés à httpx.
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
 
         Returns:
-            Réponse HTTP brute.
+            Raw HTTP response.
 
         Raises:
-            RWSAuthenticationError: Sur HTTP 401.
-            RWSNotFoundError: Sur HTTP 404.
-            RWSHTTPError: Sur tout autre HTTP >= 400.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+            RWSConnectionError: If the controller is unreachable.
+            RWSTimeoutError: If the request exceeds the timeout.
+
+        Example:
+            >>> resp = client.options("ctrl/network/route/add")
         """
         return self._request("OPTIONS", path, **kwargs)

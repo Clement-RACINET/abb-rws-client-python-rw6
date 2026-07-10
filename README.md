@@ -56,5 +56,5 @@ Toutes les options sont lues depuis les variables d'environnement (fichier `.env
 | `RWS_USER` | `Default User` | Utilisateur RWS |
 | `RWS_PASSWORD` | `robotics` | Mot de passe RWS |
 | `RWS_TIMEOUT` | `10` | Timeout HTTP (secondes) |
-| `RWS_RAPID_MODULE` | `TRAJCENTER` | Module RAPID cible |
+| `RWS_RAPID_MODULE` | `TRAJCENTER` | Module RAPID cible | xxx
 | `RWS_RAPID_TASK` | `T_ROB1` | Tâche RAPID cible |
