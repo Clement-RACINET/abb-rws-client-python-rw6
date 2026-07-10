@@ -5,6 +5,9 @@ abb_rws_client_python_rw6
 │   │   ├── client.py
 │   │   ├── exceptions.py
 │   │   └── serializers.py
+│   ├── highlevel
+│   │   ├── __init__.py
+│   │   └── rapid.py
 │   ├── rws
 │   │   ├── ctrl
 │   │   │   ├── __init__.py
@@ -77,6 +80,9 @@ abb_rws_client_python_rw6
 │   │   ├── test_client.py
 │   │   ├── test_exceptions.py
 │   │   └── test_serializers.py
+│   ├── highlevel
+│   │   ├── __init__.py
+│   │   └── test_rapid.py
 │   ├── rws
 │   │   ├── ctrl
 │   │   │   ├── __init__.py

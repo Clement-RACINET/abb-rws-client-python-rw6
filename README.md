@@ -1,4 +1,3 @@
-
 # abb-rws6-python-client
 
 Async Python client library for ABB robot controllers via the
@@ -11,12 +10,12 @@ API under **RobotWare 6**.
 
 ## Features
 
-| Domain            | Operations                                                                 |
-|-------------------|----------------------------------------------------------------------------|
-| Session           | HTTP Digest authentication, ABBCX cookie, automatic retry                 |
-| RAPID Mastership  | Acquire / release (`async with` context manager)                          |
-| RAPID Variables   | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget`             |
-| RAPID Execution   | Read execution state (`running` / `stopped`)                              |
+| Domain           | Operations                                                                   |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Session          | HTTP Digest authentication, ABBCX cookie, automatic retry                    |
+| RAPID Mastership | Acquire / release (`async with` context manager)                           |
+| RAPID Variables  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget` |
+| RAPID Execution  | Read execution state (`running` / `stopped`)                             |
 
 ---
 
