@@ -16,7 +16,7 @@ def _generate_coverage(project_root: Path) -> None:
     Args:
         project_root: Racine absolue du projet.
     """
-    print("\n📊 Génération du rapport coverage...")
+    print("\n Génération du rapport coverage...")
     result = subprocess.run(
         [
             sys.executable, "-m", "pytest",

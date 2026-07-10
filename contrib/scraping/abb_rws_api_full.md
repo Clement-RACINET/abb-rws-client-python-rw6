@@ -1,37 +1,37 @@
 # ABB Robot Web Services — API Reference
 
-> 555 routes documentées
+> 555 documented routes
 
 ---
 
 ## Root Resource
 
-**Chemin :** Root Resource
+**Path:** Root Resource
 
 ---
 
 ## Get Service list
 
-**Chemin :** Root Resource › Get Service list
+**Path:** Root Resource › Get Service list
 
 URL — /
 
-**URL :** `/`  
-**Method :** `GET`
+**URL:** `/`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 srvlst-service-li
 The RobotWare service
@@ -43,76 +43,76 @@ users = users resource
 subscription = subscription resource
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Logout
 
-**Chemin :** Root Resource › Logout
+**Path:** Root Resource › Logout
 
 URL — /logout
 
-**URL :** `/logout`  
-**Method :** `GET`
+**URL:** `/logout`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/logout"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Subscription Service
 
-**Chemin :** Subscription Service
+**Path:** Subscription Service
 
 ---
 
 ## Get Subscription Actions
 
-**Chemin :** Subscription Service › Get Subscription Actions
+**Path:** Subscription Service › Get Subscription Actions
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `GET`
+**URL:** `/subscription`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -121,12 +121,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 subscribe
 resources
@@ -143,20 +143,20 @@ sub-resource
 the subscription resource
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/subscription?action=show"
 ```
 
-**Notes :** The form body is in standard form data format and consists of three name-value pairs per resource.
+**Notes:** The form body is in standard form data format and consists of three name-value pairs per resource.
 1st pair - resources=<identifier> e.g. resources=1
 2nd pair - <identifier>=<subscription-resource> e.g. 1=/rw/iosystem/signals/Virtual1/Board1/do1;state
 3rd pair - <identifier>-p=<0|1|2> 1-p=1
@@ -172,14 +172,14 @@ Not supported in bootserver mode
 
 ## Subscribe on resources
 
-**Chemin :** Subscription Service › Subscribe on resources
+**Path:** Subscription Service › Subscribe on resources
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -193,7 +193,7 @@ Required
  '2' for High priority   (Valid for only 'IOSIGNALS' and 'RAPID Persistent variable value' resources)
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-signalstate-ev
 lstate
@@ -202,13 +202,13 @@ lvalue
 Logical Signal value
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415) See
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Low Priority subscription
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Virtual1/Board1/di1;state&1-p=0&resources=2&2=/rw/iosystem/signals/Virtual1/Board1/di2;state&2-p=0" -X POST "http://localhost/subscription"
@@ -221,7 +221,7 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/rapid/symbol/data/RAPID/T_ROB1/uimsg/PNum;value&1-p=2" "http://localhost/subscription"
 ```
 
-**Notes :** The sequence of steps involved to setup subscription and start listening for events are shown below:
+**Notes:** The sequence of steps involved to setup subscription and start listening for events are shown below:
 Subscribe on resources
 Response to this HTTP request is a list of initial events for the subscribed resources along with the location header.
 Retrieve Location header and use this value to setup web socket connection
@@ -239,20 +239,20 @@ Not supported in bootserver mode
 
 ## Operations on Subscription Group
 
-**Chemin :** Subscription Service › Operations on Subscription Group
+**Path:** Subscription Service › Operations on Subscription Group
 
 ---
 
 ## Get Subscription Group Actions
 
-**Chemin :** Subscription Service › Operations on Subscription Group › Get Subscription Group Actions
+**Path:** Subscription Service › Operations on Subscription Group › Get Subscription Group Actions
 
 URL — /subscription/{group-id}
 
-**URL :** `/subscription/{group-id}`  
-**Method :** `GET`
+**URL:** `/subscription/{group-id}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -261,12 +261,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 unsubscribe-group
 None
@@ -296,18 +296,18 @@ Required
 , the new priority associated with the susbcription resource
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/subscription/1?action=show"
 ```
 
-**Notes :** The form body is in standard form data format and consists of three name-value pairs per resource.
+**Notes:** The form body is in standard form data format and consists of three name-value pairs per resource.
 1st pair - resources=<identifier> e.g. resources=1
 2nd pair - <identifier>=<subscription-resource> e.g. 1=/rw/iosystem/signals/Virtual1/Board1/do1;state
 3rd pair - <identifier>-p=<0|1|2> 1-p=1
@@ -324,19 +324,19 @@ Not supported in bootserver mode
 
 ## Add new resources, Remove existing Resources or change existing resources priorities.
 
-**Chemin :** Subscription Service › Operations on Subscription Group › Add new resources, Remove existing Resources or change existing resources priorities.
+**Path:** Subscription Service › Operations on Subscription Group › Add new resources, Remove existing Resources or change existing resources priorities.
 
 URL — /subscripion/{group-id}
 
-**URL :** `/subscripion/{group-id}`  
-**Method :** `PUT`
+**URL:** `/subscripion/{group-id}`  
+**Method:** `PUT`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 update-resource-priority
 resources
@@ -356,21 +356,21 @@ Required
 Required
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Update resources in Subscription group.
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Virtual1/Board1/di1;state&1-p=0&resources=2&2=/rw/iosystem/signals/Virtual1/Board1/di2;state&2-p=1" -X PUT "http://localhost/subscription/1"
 ```
 
-**Notes :** maximum 1000 resources can be subscribed per group
+**Notes:** maximum 1000 resources can be subscribed per group
 Each client can have maximum 2 groups.
 Low priority subscription(p=0) is allowed on any resource.
 Medium priority subscription(p=1) is allowed on any resource.
@@ -385,32 +385,32 @@ Not supported in bootserver mode
 
 ## Unsubscribe or remove the subscription group/resources in group.
 
-**Chemin :** Subscription Service › Operations on Subscription Group › Unsubscribe or remove the subscription group/resources in group.
+**Path:** Subscription Service › Operations on Subscription Group › Unsubscribe or remove the subscription group/resources in group.
 
 URL — /subscripion/{group-id}
 
-**URL :** `/subscripion/{group-id}`  
-**Method :** `DELETE`
+**URL:** `/subscripion/{group-id}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Unsubscribe or remove subscription group.
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/subscription/1"
@@ -418,69 +418,69 @@ Unsubscribe or remove subscription resource from the group.
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/subscription/1/rw/iosystem/signals/Virtual1/Board1/di1;state"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Subscription Resource
 
-**Chemin :** Subscription Service › Operations on Subscription Group › Operations on Subscription Resource
+**Path:** Subscription Service › Operations on Subscription Group › Operations on Subscription Resource
 
 ---
 
 ## Unsubscribe or remove the resource from subscription group.
 
-**Chemin :** Subscription Service › Operations on Subscription Group › Operations on Subscription Resource › Unsubscribe or remove the resource from subscription group.
+**Path:** Subscription Service › Operations on Subscription Group › Operations on Subscription Resource › Unsubscribe or remove the resource from subscription group.
 
 URL — /subscripion/{group-d}/{resource-uri}
 
-**URL :** `/subscripion/{group-d}/{resource-uri}`  
-**Method :** `DELETE`
+**URL:** `/subscripion/{group-d}/{resource-uri}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Unsubscribe or remove subscription resource from subscription group.
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/subscription/1/rw/iosystem/signals/Virtual1/Board1/di1;state"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## User Service
 
-**Chemin :** User Service
+**Path:** User Service
 
 ---
 
 ## Get User Resources
 
-**Chemin :** User Service › Get User Resources
+**Path:** User Service › Get User Resources
 
 URL — /users
 
-**URL :** `/users`  
-**Method :** `GET`
+**URL:** `/users`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 user-type=self
 Optional
@@ -488,41 +488,41 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 user
 title
 represents name of the user.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get User Actions
 
-**Chemin :** User Service › Get User Actions
+**Path:** User Service › Get User Actions
 
 URL — /users
 
-**URL :** `/users`  
-**Method :** `GET`
+**URL:** `/users`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -530,12 +530,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 register
 application
@@ -556,40 +556,40 @@ Required
 ,
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Register the user
 
-**Chemin :** User Service › Register the user
+**Path:** User Service › Register the user
 
 URL — /users
 
-**URL :** `/users`  
-**Method :** `POST`
+**URL:** `/users`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 username
 = The username to register. It represents user alias name.
@@ -605,21 +605,21 @@ ulocale
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Register user
 curl --digest -u "Default User":robotics -d "username=xyz&application=RobotStudio&location=IN-BLR-XXXX&ulocale=remote" -X POST "http://localhost/users"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Given username, application and location are used only as free-text information.
 User can be registered as local client (ulocale=local) only if the request comes from service port or the TPU port.
 
@@ -627,14 +627,14 @@ User can be registered as local client (ulocale=local) only if the request comes
 
 ## Impersonate a user
 
-**Chemin :** User Service › Impersonate a user
+**Path:** User Service › Impersonate a user
 
 URL — /users
 
-**URL :** `/users`  
-**Method :** `POST`
+**URL:** `/users`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=impersonate
 Required
@@ -642,41 +642,41 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 uid
 = The uas uid of the user to be impersonated.
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Register user
 curl --digest -u "Default User":robotics -d "uid=11" -X POST "http://localhost/users?action=impersonate"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Login as Local User
 
-**Chemin :** User Service › Login as Local User
+**Path:** User Service › Login as Local User
 
 URL — /users
 
-**URL :** `/users`  
-**Method :** `POST`
+**URL:** `/users`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-locale
 Required
@@ -684,102 +684,102 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 type={local|remote}
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** CONFLICT(409) : if the user has already logged in as remote or local client and sets the type as remote or local respectively.
+**Error:** CONFLICT(409) : if the user has already logged in as remote or local client and sets the type as remote or local respectively.
 FORBIDDEN(403) : if the user does not toggle the enabling button within 5 seconds.
 BAD_REQUEST(400) : if the user has sent invalid values for type.
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Login as local user
 curl --digest -u "Default User":robotics -d "type=local" -X POST "http://localhost/users?action=set-locale"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Operations on Users grants
 
-**Chemin :** User Service › Operations on Users grants
+**Path:** User Service › Operations on Users grants
 
 ---
 
 ## Get User grants
 
-**Chemin :** User Service › Operations on Users grants › Get User grants
+**Path:** User Service › Operations on Users grants › Get User grants
 
 URL — /users/grants
 
-**URL :** `/users/grants`  
-**Method :** `GET`
+**URL:** `/users/grants`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 user-grant
 title
 represents name of the usergrant.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/grants"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Operations on RMMP
 
-**Chemin :** User Service › Operations on RMMP
+**Path:** User Service › Operations on RMMP
 
 ---
 
 ## Get RMMP state
 
-**Chemin :** User Service › Operations on RMMP › Get RMMP state
+**Path:** User Service › Operations on RMMP › Get RMMP state
 
 URL — /users/rmmp
 
-**URL :** `/users/rmmp`  
-**Method :** `GET`
+**URL:** `/users/rmmp`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 userid
 User id
@@ -795,30 +795,30 @@ rmmpheldbyme
 {true | false} whether the rmmp request and the current request are mady by same user.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get RMMP state
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Get RMMP Actions
 
-**Chemin :** User Service › Operations on RMMP › Get RMMP Actions
+**Path:** User Service › Operations on RMMP › Get RMMP Actions
 
 URL — /users/rmmp
 
-**URL :** `/users/rmmp`  
-**Method :** `GET`
+**URL:** `/users/rmmp`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -826,70 +826,70 @@ See
 Common URL parameters
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp?action=show"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Request RMMP
 
-**Chemin :** User Service › Operations on RMMP › Request RMMP
+**Path:** User Service › Operations on RMMP › Request RMMP
 
 URL — /users/rmmp
 
-**URL :** `/users/rmmp`  
-**Method :** `POST`
+**URL:** `/users/rmmp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 privilege
 ={modify|exec}
 Required
 ```
 
-**Success :** ACCEPTED(202)
+**Success:** ACCEPTED(202)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Grant RMMP
 curl --digest -u "Default User":robotics -d "privilege=modify" -X POST "http://localhost/users/rmmp"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Grant or deny an RMMP request
 
-**Chemin :** User Service › Operations on RMMP › Grant or deny an RMMP request
+**Path:** User Service › Operations on RMMP › Grant or deny an RMMP request
 
 URL — /users/rmmp
 
-**URL :** `/users/rmmp`  
-**Method :** `POST`
+**URL:** `/users/rmmp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -897,7 +897,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 uid
 = The uas uid of the user who made the request for rmmp
@@ -907,34 +907,34 @@ privilege
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Grant RMMP
 curl --digest -u "Default User":robotics -d "uid=11&privilege=modify" -X POST "http://localhost/users/rmmp?action=set"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Cancel held or requested RMMP
 
-**Chemin :** User Service › Operations on RMMP › Cancel held or requested RMMP
+**Path:** User Service › Operations on RMMP › Cancel held or requested RMMP
 
 URL — /users/rmmp
 
-**URL :** `/users/rmmp`  
-**Method :** `POST`
+**URL:** `/users/rmmp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=cancel
 Required
@@ -942,35 +942,35 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Cancel held rmmp
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/rmmp?action=cancel"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Subscribe on RMMP Request event
 
-**Chemin :** User Service › Operations on RMMP › Subscribe on RMMP Request event
+**Path:** User Service › Operations on RMMP › Subscribe on RMMP Request event
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -981,75 +981,75 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=0" -X POST "http://localhost/subscription"
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Poll for RMMP grant status
 
-**Chemin :** User Service › Operations on RMMP › Poll for RMMP grant status
+**Path:** User Service › Operations on RMMP › Poll for RMMP grant status
 
 URL — /users/rmmp/poll
 
-**URL :** `/users/rmmp/poll`  
-**Method :** `GET`
+**URL:** `/users/rmmp/poll`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 poll for rmmp status
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp/poll"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Operations on Remote User
 
-**Chemin :** User Service › Operations on Remote User
+**Path:** User Service › Operations on Remote User
 
 ---
 
 ## Get remote user actions
 
-**Chemin :** User Service › Operations on Remote User › Get remote user actions
+**Path:** User Service › Operations on Remote User › Get remote user actions
 
 URL — /users/remoteuser
 
-**URL :** `/users/remoteuser`  
-**Method :** `GET`
+**URL:** `/users/remoteuser`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -1057,33 +1057,33 @@ See
 Common URL parameters
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
+**Error:** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/remoteuser?action=show"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Remote User Logon Request
 
-**Chemin :** User Service › Operations on Remote User › Remote User Logon Request
+**Path:** User Service › Operations on Remote User › Remote User Logon Request
 
 URL — /users/remoteuser
 
-**URL :** `/users/remoteuser`  
-**Method :** `POST`
+**URL:** `/users/remoteuser`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=remotelogin
 Required
@@ -1091,39 +1091,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
+**Error:** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogin"
 ```
 
-**Notes :** Not Supported in bootserver mode.
+**Notes:** Not Supported in bootserver mode.
 The UAS grant UAS_REMOTE_LOGIN is required.
 
 ---
 
 ## Remote User Logout Request
 
-**Chemin :** User Service › Operations on Remote User › Remote User Logout Request
+**Path:** User Service › Operations on Remote User › Remote User Logout Request
 
 URL — /users/remoteuser
 
-**URL :** `/users/remoteuser`  
-**Method :** `POST`
+**URL:** `/users/remoteuser`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=remotelogout
 Required
@@ -1131,38 +1131,38 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
+**Error:** BAD REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogout"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Subscribe on remote user state
 
-**Chemin :** User Service › Operations on Remote User › Subscribe on remote user state
+**Path:** User Service › Operations on Remote User › Subscribe on remote user state
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -1173,53 +1173,53 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=0" -X POST "http://localhost/subscription"
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Controller Service
 
-**Chemin :** Controller Service
+**Path:** Controller Service
 
 ---
 
 ## Get Controller Resources
 
-**Chemin :** Controller Service › Get Controller Resources
+**Path:** Controller Service › Get Controller Resources
 
 URL — /ctrl
 
-**URL :** `/ctrl`  
-**Method :** `GET`
+**URL:** `/ctrl`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-clock-info
 datetime
@@ -1231,31 +1231,31 @@ ctrl-name
 Alphanumeric, the name, ID, type (RC or VC), MAC address and level (system or boot level) of the controller.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Controller Actions
 
-**Chemin :** Controller Service › Get Controller Actions
+**Path:** Controller Service › Get Controller Actions
 
 URL — /ctrl
 
-**URL :** `/ctrl`  
-**Method :** `GET`
+**URL:** `/ctrl`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -1263,12 +1263,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 ctrl-restart
 restart-mode
@@ -1289,53 +1289,53 @@ bstart
 - The controller will be restarted and revert to last automatically saved state
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Controller environment variable
 
-**Chemin :** Controller Service › Get Controller environment variable
+**Path:** Controller Service › Get Controller environment variable
 
 URL — /ctrl/${ENVNAME}
 
-**URL :** `/ctrl/${ENVNAME}`  
-**Method :** `GET`
+**URL:** `/ctrl/${ENVNAME}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-env
 The value associated with the specified environment variable.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics " http://localhost/ctrl/$TEMP "
 ```
@@ -1344,20 +1344,20 @@ curl --digest -u "Default User":robotics " http://localhost/ctrl/$TEMP "
 
 ## Restart or Shutdown controller
 
-**Chemin :** Controller Service › Restart or Shutdown controller
+**Path:** Controller Service › Restart or Shutdown controller
 
 URL — /ctrl
 
-**URL :** `/ctrl`  
-**Method :** `POST`
+**URL:** `/ctrl`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 restart-mode
 ={ restart|xstart|shutdown|istart|pstart|bstart }
@@ -1377,33 +1377,33 @@ bstart
 : The controller will be restarted. The last automatically saved system state will be loaded. Should be used to recover from a system crash.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
+**Error:** NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST "http://localhost/ctrl"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Set Controller language
 
-**Chemin :** Controller Service › Set Controller language
+**Path:** Controller Service › Set Controller language
 
 URL — /ctrl
 
-**URL :** `/ctrl`  
-**Method :** `POST`
+**URL:** `/ctrl`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-lang
 Required
@@ -1411,58 +1411,58 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lang
 = {en|de} languages as per RFC 3066. if language is not supported, a bad request is sent as the http status.
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set controller language
 curl --digest -u "Default User":robotics -d "lang=de" -X POST "http://localhost/ctrl?action=set-lang"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Operations on Clock Resource
 
-**Chemin :** Controller Service › Operations on Clock Resource
+**Path:** Controller Service › Operations on Clock Resource
 
 ---
 
 ## Get Clock Resource
 
-**Chemin :** Controller Service › Operations on Clock Resource › Get Clock Resource
+**Path:** Controller Service › Operations on Clock Resource › Get Clock Resource
 
 URL — /ctrl/clock
 
-**URL :** `/ctrl/clock`  
-**Method :** `GET`
+**URL:** `/ctrl/clock`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-clock-info
 datetime
@@ -1475,32 +1475,32 @@ ctrl-timeserver-li
 Time server resource, not supported on virtual controller
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Get Clock Actions
 
-**Chemin :** Controller Service › Operations on Clock Resource › Get Clock Actions
+**Path:** Controller Service › Operations on Clock Resource › Get Clock Actions
 
 URL — /ctrl/clock
 
-**URL :** `/ctrl/clock`  
-**Method :** `GET`
+**URL:** `/ctrl/clock`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -1509,12 +1509,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set-system-clock
 sys-clock-year
@@ -1559,37 +1559,37 @@ and Maximum
 59
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock?action=show"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Set the Clock of the controller
 
-**Chemin :** Controller Service › Operations on Clock Resource › Set the Clock of the controller
+**Path:** Controller Service › Operations on Clock Resource › Set the Clock of the controller
 
 URL — /ctrl/clock
 
-**URL :** `/ctrl/clock`  
-**Method :** `PUT`
+**URL:** `/ctrl/clock`  
+**Method:** `PUT`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 sys-clock-year
 = The year part of datetime
@@ -1611,84 +1611,84 @@ sys-clock-sec
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), See
+**Error:** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set the controller Clock
 curl --digest -u "Default User":robotics -d "sys-clock-year=2014&sys-clock-month=03&sys-clock-day=14&sys-clock-hour=08&sys-clock-min=30&sys-clock-sec=0" -X PUT "http://localhost/ctrl/clock"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not Supported in bootserver mode
 
 ---
 
 ## Operations on Timezone Resource
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timezone Resource
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timezone Resource
 
 ---
 
 ## Get timezone resource
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Get timezone resource
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Get timezone resource
 
 URL — /ctrl/clock/timezone
 
-**URL :** `/ctrl/clock/timezone`  
-**Method :** `GET`
+**URL:** `/ctrl/clock/timezone`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-timezone
 timezone
 The timezone as defined by the tz database (or tzdata)
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Get timezone actions
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Get timezone actions
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Get timezone actions
 
 URL — /ctrl/clock/timezone?action=show
 
-**URL :** `/ctrl/clock/timezone?action=show`  
-**Method :** `GET`
+**URL:** `/ctrl/clock/timezone?action=show`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -1697,133 +1697,133 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set-timezone
 Set timezone, string as defined by the tz database
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone?action=show"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Set the time zone
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Set the time zone
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timezone Resource › Set the time zone
 
 URL — /ctrl/clock/timezone
 
-**URL :** `/ctrl/clock/timezone`  
-**Method :** `POST`
+**URL:** `/ctrl/clock/timezone`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 set-timezone
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 timezone
 = Time zone as defined by the tz database
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set the time zone
 curl --digest -u "Default User":robotics -d "timezone=Europe/Stockholm" -X POST "http://localhost/ctrl/clock/timezone?action=set-timezone"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Operations on Timeserver Resource
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource
 
 ---
 
 ## Get time server resource
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Get time server resource
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Get time server resource
 
 URL — /ctrl/clock/timeserver
 
-**URL :** `/ctrl/clock/timeserver`  
-**Method :** `GET`
+**URL:** `/ctrl/clock/timeserver`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-timeserver
 timeserver
 Address of used time server
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Get time server actions
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Get time server actions
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Get time server actions
 
 URL — /ctrl/clock/timeserver?action=show
 
-**URL :** `/ctrl/clock/timeserver?action=show`  
-**Method :** `GET`
+**URL:** `/ctrl/clock/timeserver?action=show`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -1832,78 +1832,78 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?action=show"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Set the time server
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Set the time server
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Set the time server
 
 URL — /ctrl/clock/timeserver
 
-**URL :** `/ctrl/clock/timeserver`  
-**Method :** `POST`
+**URL:** `/ctrl/clock/timeserver`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-timeserver
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 timeserver
 = Time server
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set the time zone
 curl --digest -u "Default User":robotics -d "timeserver=132.163.4.101" -X POST "http://localhost/ctrl/clock/timeserver?action=set-timeserver"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Test Time Server
 
-**Chemin :** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Test Time Server
+**Path:** Controller Service › Operations on Clock Resource › Operations on Timeserver Resource › Test Time Server
 
 URL — /ctrl/clock/timeserver
 
-**URL :** `/ctrl/clock/timeserver`  
-**Method :** `GET`
+**URL:** `/ctrl/clock/timeserver`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=servertime
 Required
@@ -1913,12 +1913,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-servertimer
 gets the server time
@@ -1926,49 +1926,49 @@ time
 UNIX time
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?resource=servertime&server-ip=129.6.15.28"
 ```
 
-**Notes :** Available only for RC
+**Notes:** Available only for RC
 Not supported in bootserver mode
 
 ---
 
 ## Operations on Identity Resource
 
-**Chemin :** Controller Service › Operations on Identity Resource
+**Path:** Controller Service › Operations on Identity Resource
 
 ---
 
 ## Get Identity Resource
 
-**Chemin :** Controller Service › Operations on Identity Resource › Get Identity Resource
+**Path:** Controller Service › Operations on Identity Resource › Get Identity Resource
 
 URL — /ctrl/identity
 
-**URL :** `/ctrl/identity`  
-**Method :** `GET`
+**URL:** `/ctrl/identity`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-identity-info
 ctrl-name
@@ -1983,31 +1983,31 @@ ctrl-level
 Gives information whether system is in bootserver mode or not.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/identity"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Identity Actions
 
-**Chemin :** Controller Service › Operations on Identity Resource › Get Identity Actions
+**Path:** Controller Service › Operations on Identity Resource › Get Identity Actions
 
 URL — /ctrl/identity
 
-**URL :** `/ctrl/identity`  
-**Method :** `GET`
+**URL:** `/ctrl/identity`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -2016,12 +2016,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set-ctrl-identity
 ctrl-name
@@ -2034,37 +2034,37 @@ Required
 , the controller id
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/identity?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Set the Identity of the controller
 
-**Chemin :** Controller Service › Operations on Identity Resource › Set the Identity of the controller
+**Path:** Controller Service › Operations on Identity Resource › Set the Identity of the controller
 
 URL — /ctrl/identity
 
-**URL :** `/ctrl/identity`  
-**Method :** `PUT`
+**URL:** `/ctrl/identity`  
+**Method:** `PUT`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 ctrl-name
 = The name of the controller
@@ -2073,51 +2073,51 @@ ctrl-id
 Atleast one data param should be present.
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set the controller identity
 curl --digest -u "Default User":robotics -d "ctrl-name=testcontroller&ctrl-id=ZZZZ" -X PUT "http://localhost/ctrl/identity"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Operations on System Resource
 
-**Chemin :** Controller Service › Operations on System Resource
+**Path:** Controller Service › Operations on System Resource
 
 ---
 
 ## Get list of installed systems
 
-**Chemin :** Controller Service › Operations on System Resource › Get list of installed systems
+**Path:** Controller Service › Operations on System Resource › Get list of installed systems
 
 URL — /ctrl/system
 
-**URL :** `/ctrl/system`  
-**Method :** `GET`
+**URL:** `/ctrl/system`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-system-li
 Ctrl-system resource
@@ -2129,31 +2129,31 @@ RW6_safey
 installed system
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get actions on system
 
-**Chemin :** Controller Service › Operations on System Resource › Get actions on system
+**Path:** Controller Service › Operations on System Resource › Get actions on system
 
 URL — /ctrl/system
 
-**URL :** `/ctrl/system`  
-**Method :** `GET`
+**URL:** `/ctrl/system`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -2162,12 +2162,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set-bootdevice
 To set device path
@@ -2177,32 +2177,32 @@ undo-load-bootinage
 Undo the load boot image
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Set Boot Device
 
-**Chemin :** Controller Service › Operations on System Resource › Set Boot Device
+**Path:** Controller Service › Operations on System Resource › Set Boot Device
 
 Description — Sets the device/path that should be used to load boot image
 
-**URL :** `/ctrl/system`  
-**Method :** `POST`
+**URL:** `/ctrl/system`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-bootdevice
 Required
@@ -2210,40 +2210,40 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 path
 Fully qualified path to be used for booting.
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u ""Default User":robotics -d "path={Path}" -X POST "
 http://localhost/ctrl/system?action=set-bootdevice
 "
 ```
 
-**Notes :** Supported in bootserver mode only
+**Notes:** Supported in bootserver mode only
 
 ---
 
 ## Get Boot Device
 
-**Chemin :** Controller Service › Operations on System Resource › Get Boot Device
+**Path:** Controller Service › Operations on System Resource › Get Boot Device
 
 Description — Retrieves the device/path that should be used to load boot image
 
-**URL :** `/ctrl/system`  
-**Method :** `GET`
+**URL:** `/ctrl/system`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=boot-device
 Required
@@ -2251,36 +2251,36 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?resource=boot-device"
 ```
 
-**Notes :** Supported in bootserver mode only
+**Notes:** Supported in bootserver mode only
 
 ---
 
 ## Load Boot Image
 
-**Chemin :** Controller Service › Operations on System Resource › Load Boot Image
+**Path:** Controller Service › Operations on System Resource › Load Boot Image
 
 Description — Load the boot image from the predefined path
 
-**URL :** `/ctrl/system`  
-**Method :** `POST`
+**URL:** `/ctrl/system`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-bootimage
 Required
@@ -2288,26 +2288,26 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** Accepted (202), see
+**Success:** Accepted (202), see
 HTTP Status codes
 Location header: /ctrl?action=show
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u ""Default User":robotics -d -X POST "
 http://localhost/ctrl/system?action=set-bootimage
 "
 ```
 
-**Notes :** Supported in bootserver mode only
+**Notes:** Supported in bootserver mode only
 Controller must be restarted to reflect the changes
 Not supported by VC
 
@@ -2315,14 +2315,14 @@ Not supported by VC
 
 ## Unload Boot Image
 
-**Chemin :** Controller Service › Operations on System Resource › Unload Boot Image
+**Path:** Controller Service › Operations on System Resource › Unload Boot Image
 
 Description — Undo the load boot image
 
-**URL :** `/ctrl/system`  
-**Method :** `POST`
+**URL:** `/ctrl/system`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=undo-bootimage
 Required
@@ -2330,39 +2330,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u ""Default User":robotics -d -X POST "
 http://localhost/ctrl/system?action=undo-bootimage
 "
 ```
 
-**Notes :** Supported in bootserver mode only
+**Notes:** Supported in bootserver mode only
 Not supported by VC
 
 ---
 
 ## Get selected system name
 
-**Chemin :** Controller Service › Operations on System Resource › Get selected system name
+**Path:** Controller Service › Operations on System Resource › Get selected system name
 
 Description — Get the controller active system name.
 
-**URL :** `/ctrl/system`  
-**Method :** `GET`
+**URL:** `/ctrl/system`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 type=selected
 Required
@@ -2370,45 +2370,45 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?type=selected"
 ```
 
-**Notes :** Not supported in VC
+**Notes:** Not supported in VC
 Supported in Bootserver In bootserver, system-name will show as BOOTSERVER, as active system is not applicable in bootserver mode
 
 ---
 
 ## Install deployment package
 
-**Chemin :** Controller Service › Operations on System Resource › Install deployment package
+**Path:** Controller Service › Operations on System Resource › Install deployment package
 
 URL — /ctrl/system/installdpkg
 
-**URL :** `/ctrl/system/installdpkg`  
-**Method :** `POST`
+**URL:** `/ctrl/system/installdpkg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 ctrl-id
 =<ctrl-id>
@@ -2422,114 +2422,114 @@ dp-pkg-path
 Required
 ```
 
-**Success :** ACCEPTED(202)
+**Success:** ACCEPTED(202)
 Location header: dpkginstallationstatus
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u ""Default User":robotics -d "ctrl-id=1231&ctrl-name=Ctrlname&system-path=Systems/DeploymentTest&dp-pkg-path=/hd0a/inbox" -X POST "
 http://localhost/ctrl/system/installdpkg
 "
 ```
 
-**Notes :** Supported in bootserver mode only. Will validate the deployment package internally. To get status of the installation, see location header. System will be restarted after unpacking the files. dp-pkg-path should be inside inbox folder.The installation package and all associated files should be placed in the /hd0a/inbox directory, and it is recommended to use Robot Studio for copying the package.
+**Notes:** Supported in bootserver mode only. Will validate the deployment package internally. To get status of the installation, see location header. System will be restarted after unpacking the files. dp-pkg-path should be inside inbox folder.The installation package and all associated files should be placed in the /hd0a/inbox directory, and it is recommended to use Robot Studio for copying the package.
 
 ---
 
 ## Validate deployment package
 
-**Chemin :** Controller Service › Operations on System Resource › Validate deployment package
+**Path:** Controller Service › Operations on System Resource › Validate deployment package
 
 URL — /ctrl/system/validatedpkg
 
-**URL :** `/ctrl/system/validatedpkg`  
-**Method :** `POST`
+**URL:** `/ctrl/system/validatedpkg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 path
 ={path}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u ""Default User":robotics -d "path=/hd0a/inbox/TEMP" -X POST "
 http://localhost/ctrl/system/validatedpkg
 "
 ```
 
-**Notes :** Supported in bootserver mode only. path should be inside inbox folder.
+**Notes:** Supported in bootserver mode only. path should be inside inbox folder.
 
 ---
 
 ## Get system resource
 
-**Chemin :** Controller Service › Operations on System Resource › Get system resource
+**Path:** Controller Service › Operations on System Resource › Get system resource
 
 URL — /ctrl/system/{system-name}
 
-**URL :** `/ctrl/system/{system-name}`  
-**Method :** `GET`
+**URL:** `/ctrl/system/{system-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get actions on a system resource
 
-**Chemin :** Controller Service › Operations on System Resource › Get actions on a system resource
+**Path:** Controller Service › Operations on System Resource › Get actions on a system resource
 
 URL — /ctrl/system/{system-name}
 
-**URL :** `/ctrl/system/{system-name}`  
-**Method :** `GET`
+**URL:** `/ctrl/system/{system-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -2538,12 +2538,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 rename
 Rename a system
@@ -2551,31 +2551,31 @@ newname
 - The system's new name
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Rename a system
 
-**Chemin :** Controller Service › Operations on System Resource › Rename a system
+**Path:** Controller Service › Operations on System Resource › Rename a system
 
 URL — /ctrl/system/{system-name}
 
-**URL :** `/ctrl/system/{system-name}`  
-**Method :** `POST`
+**URL:** `/ctrl/system/{system-name}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=rename
 Required
@@ -2583,39 +2583,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 newname={new system name}
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNAUTHORIZED(401)
+**Error:** BAD_REQUEST(400), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "newname=System123" -X POST "http://localhost/ctrl/system/RW6_TEST?action=rename"
 ```
 
-**Notes :** Only available for VxWorks in "System-Mode". Not available for VC or Boot-Server.
+**Notes:** Only available for VxWorks in "System-Mode". Not available for VC or Boot-Server.
 
 ---
 
 ## Select a system
 
-**Chemin :** Controller Service › Operations on System Resource › Select a system
+**Path:** Controller Service › Operations on System Resource › Select a system
 
 Description — Select a system to activate. A restart is required after selecting to activate the system.
 
-**URL :** `/ctrl/system/{system-name}`  
-**Method :** `POST`
+**URL:** `/ctrl/system/{system-name}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=activate
 Required
@@ -2623,75 +2623,75 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** UNAUTHORIZED(401), BAD_REQUEST(400), CONFLICT(409)
+**Error:** UNAUTHORIZED(401), BAD_REQUEST(400), CONFLICT(409)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system/RW6_TEST?action=activate"
 ```
 
-**Notes :** status code CONFLICT is returned if trying to select a system that is already active.
+**Notes:** status code CONFLICT is returned if trying to select a system that is already active.
 
 ---
 
 ## Delete a System
 
-**Chemin :** Controller Service › Operations on System Resource › Delete a System
+**Path:** Controller Service › Operations on System Resource › Delete a System
 
 URL — /ctrl/system/{system-name}
 
-**URL :** `/ctrl/system/{system-name}`  
-**Method :** `DELETE`
+**URL:** `/ctrl/system/{system-name}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNAUTHORIZED(401)
+**Error:** BAD_REQUEST(400), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delete a System
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/ctrl/system/RW6_TEST"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 not supported in VC
 
 ---
 
 ## Deselect a System
 
-**Chemin :** Controller Service › Operations on System Resource › Deselect a System
+**Path:** Controller Service › Operations on System Resource › Deselect a System
 
 Description — De-activate an active system. A restart is required after de-activating the system.
 
-**URL :** `/ctrl/system`  
-**Method :** `POST`
+**URL:** `/ctrl/system`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=deactivate
 Required
@@ -2699,52 +2699,52 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 none
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system?action=deactivate"
 ```
 
-**Notes :** Not supported in Virtual Controller
+**Notes:** Not supported in Virtual Controller
 
 ---
 
 ## Operations on network Resource
 
-**Chemin :** Controller Service › Operations on network Resource
+**Path:** Controller Service › Operations on network Resource
 
 ---
 
 ## Get Network Resource
 
-**Chemin :** Controller Service › Operations on network Resource › Get Network Resource
+**Path:** Controller Service › Operations on network Resource › Get Network Resource
 
 URL — /ctrl/network
 
-**URL :** `/ctrl/network`  
-**Method :** `GET`
+**URL:** `/ctrl/network`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-netw
 addr
@@ -2759,29 +2759,29 @@ gateway
 Default gateway of the network interface (if applicable).
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Network setting actions
 
-**Chemin :** Controller Service › Operations on network Resource › Get Network setting actions
+**Path:** Controller Service › Operations on network Resource › Get Network setting actions
 
 Description — Get possible actions with forms on network setting
 
-**URL :** `/ctrl/network`  
-**Method :** `GET`
+**URL:** `/ctrl/network`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -2789,45 +2789,45 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 To set IP configuration for the LAN adaptor
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network?action=show"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Not supported by VC.
 
 ---
 
 ## Set Network configuration
 
-**Chemin :** Controller Service › Operations on network Resource › Set Network configuration
+**Path:** Controller Service › Operations on network Resource › Set Network configuration
 
 URL — /ctrl/network
 
-**URL :** `/ctrl/network`  
-**Method :** `POST`
+**URL:** `/ctrl/network`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -2835,7 +2835,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method
 = {IP config method}, Should be one of
@@ -2853,21 +2853,21 @@ gateway
 ={Default Gateway}, Applicable only for setting fix IP
 ```
 
-**Success :** Accepted (202)
+**Success:** Accepted (202)
 Location header: /ctrl?action=show
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), UNAUTHORIZED(401)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=fixip&address={IP address}&mask={Mask address}&gateway={Default Gateway}" -X POST "http://localhost/ctrl/network?action=set"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Not supported by VC.
 Controller must be restarted to reflect the changes.
 Requires the UAS grant UAS_CONTROLLER_PROPERTIES_WRITE
@@ -2876,30 +2876,30 @@ Requires the UAS grant UAS_CONTROLLER_PROPERTIES_WRITE
 
 ## Operations on DNS Resource
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on DNS Resource
+**Path:** Controller Service › Operations on network Resource › Operations on DNS Resource
 
 ---
 
 ## Get DNS Resource
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on DNS Resource › Get DNS Resource
+**Path:** Controller Service › Operations on network Resource › Operations on DNS Resource › Get DNS Resource
 
 URL — /ctrl/network/dns
 
-**URL :** `/ctrl/network/dns`  
-**Method :** `GET`
+**URL:** `/ctrl/network/dns`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-netw
 name
@@ -2910,41 +2910,41 @@ port
 DNS port number.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network/dns"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 Not supported by VC.
 
 ---
 
 ## Operations on Routing Table Resource
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on Routing Table Resource
+**Path:** Controller Service › Operations on network Resource › Operations on Routing Table Resource
 
 ---
 
 ## Add a route table entry
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Add a route table entry
+**Path:** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Add a route table entry
 
 URL — /ctrl/network/route/add
 
-**URL :** `/ctrl/network/route/add`  
-**Method :** `POST`
+**URL:** `/ctrl/network/route/add`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 destination
 ={destination}, Destination is either a host address or a destination network.
@@ -2954,45 +2954,45 @@ gateway
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24&gateway=192.168.126.200" -X POST "http://localhost/ctrl/network/route/add"
 curl --digest -u "Default User":robotics -d "destination=10.10.10.3&gateway=192.168.125.254" -X POST "http://localhost/ctrl/network/route/add"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Not supported by VC.
 
 ---
 
 ## Options to add a route table entry
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Options to add a route table entry
+**Path:** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Options to add a route table entry
 
 URL — /ctrl/network/route/add
 
-**URL :** `/ctrl/network/route/add`  
-**Method :** `OPTIONS`
+**URL:** `/ctrl/network/route/add`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 addroute
 destination
@@ -3001,58 +3001,58 @@ gateway
 Address used to reach the destination.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/add"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Not supported by VC.
 
 ---
 
 ## Remove a route table entry
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Remove a route table entry
+**Path:** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Remove a route table entry
 
 URL — /ctrl/network/route/remove
 
-**URL :** `/ctrl/network/route/remove`  
-**Method :** `POST`
+**URL:** `/ctrl/network/route/remove`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 destination
 ={destination}, Destination is either a host address or a destination network.
 Required
 ```
 
-**Success :** Accepted(202)
+**Success:** Accepted(202)
 Location header: /ctrl?action=show
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24" -X POST "http://localhost/ctrl/network/route/remove"
 ```
 
-**Notes :** The routing entry will be removed from the network stack routing table after reboot.
+**Notes:** The routing entry will be removed from the network stack routing table after reboot.
 Supported in bootserver mode.
 Not supported by VC.
 
@@ -3060,96 +3060,96 @@ Not supported by VC.
 
 ## Options to remove a route table entry
 
-**Chemin :** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Options to remove a route table entry
+**Path:** Controller Service › Operations on network Resource › Operations on Routing Table Resource › Options to remove a route table entry
 
 URL — /ctrl/network/route/remove
 
-**URL :** `/ctrl/network/route/remove`  
-**Method :** `OPTIONS`
+**URL:** `/ctrl/network/route/remove`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 removeroute
 destination
 The host address or the destination network.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/remove"
 ```
 
-**Notes :** Supported in bootserver mode.
+**Notes:** Supported in bootserver mode.
 Not supported by VC.
 
 ---
 
 ## Operations on Backup Resource
 
-**Chemin :** Controller Service › Operations on Backup Resource
+**Path:** Controller Service › Operations on Backup Resource
 
 ---
 
 ## Get backup resources
 
-**Chemin :** Controller Service › Operations on Backup Resource › Get backup resources
+**Path:** Controller Service › Operations on Backup Resource › Get backup resources
 
 URL — /ctrl/backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `GET`
+**URL:** `/ctrl/backup`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get backup actions
 
-**Chemin :** Controller Service › Operations on Backup Resource › Get backup actions
+**Path:** Controller Service › Operations on Backup Resource › Get backup actions
 
 Description — Get available actions on backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `GET`
+**URL:** `/ctrl/backup`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -3157,39 +3157,39 @@ See
 Common URL parameters
 ```
 
-**Actions :**
+**Actions:**
 ```
 backup
 The file path to store the backup e.g. backup=/fileservice/$syspar/tempfolder
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Create a Backup
 
-**Chemin :** Controller Service › Operations on Backup Resource › Create a Backup
+**Path:** Controller Service › Operations on Backup Resource › Create a Backup
 
 URL — /ctrl/backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `POST`
+**URL:** `/ctrl/backup`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=backup
 Required
@@ -3197,7 +3197,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 backup
 = path where the backup shall be stored. Destination path must be part of the controller file system.
@@ -3206,21 +3206,21 @@ Environment variables such as $TEMP, $SYSTEM shall be possible to have in the pa
 archive=TRUE | FALSE
 ```
 
-**Success :** ACCEPTED(202)
+**Success:** ACCEPTED(202)
 Location header: /progress/{id}
 see
 HTTP Status codes
 
-**Error :** UNAUTHORIZED(401), FORBIDDEN(403), BAD_REQUEST(400), CONFLICT(409)
+**Error:** UNAUTHORIZED(401), FORBIDDEN(403), BAD_REQUEST(400), CONFLICT(409)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/backup?action=backup"
 ```
 
-**Notes :** Requires UAS grant UAS_BACKUP.
+**Notes:** Requires UAS grant UAS_BACKUP.
 It is not possible to create backup with the same path and name as an environment variable directory (SYSTEM, HOME, SYSPAR etc).
 It is not possible create backup under HOME directory.
 Since backup is an asynchronous task, the location header can be subscribed on to get information about the status of the task.
@@ -3230,14 +3230,14 @@ Not supported in bootserver mode
 
 ## Restore a backup.
 
-**Chemin :** Controller Service › Operations on Backup Resource › Restore a backup.
+**Path:** Controller Service › Operations on Backup Resource › Restore a backup.
 
 URL — /ctrl/backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `POST`
+**URL:** `/ctrl/backup`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=restore
 Required
@@ -3245,7 +3245,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 backup
 = {path where the backup is stored}
@@ -3263,36 +3263,36 @@ include
 ={ cfg| modules | all } Indicate if what is to be included in the restore. Defaults to all
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), FORBIDDEN(403), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), FORBIDDEN(403), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/backup?action=restore"
 ```
 
-**Notes :** Requires UAS grant Restore a backup
+**Notes:** Requires UAS grant Restore a backup
 Not supported in bootserver mode
 
 ---
 
 ## Check Restore
 
-**Chemin :** Controller Service › Operations on Backup Resource › Check Restore
+**Path:** Controller Service › Operations on Backup Resource › Check Restore
 
 URL — /ctrl/backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `GET`
+**URL:** `/ctrl/backup`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action
 =check-restore
@@ -3313,44 +3313,44 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 status
 - {Accepted}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/tempfolder"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Backup State
 
-**Chemin :** Controller Service › Operations on Backup Resource › Get Backup State
+**Path:** Controller Service › Operations on Backup Resource › Get Backup State
 
 Description — Get status of backup
 
-**URL :** `/ctrl/backup`  
-**Method :** `GET`
+**URL:** `/ctrl/backup`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=backupstate
 Required
@@ -3358,40 +3358,40 @@ See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 backup state
 - {None | Init State | Backup in Progress | Backup Ready | Error during backup | Invalid}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=backupstate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Backup System Information
 
-**Chemin :** Controller Service › Operations on Backup Resource › Subscribe on Backup System Information
+**Path:** Controller Service › Operations on Backup Resource › Subscribe on Backup System Information
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -3402,19 +3402,19 @@ Required
 Required
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/progress/1;state&1-p=0" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** if the subscription is created during backup creation of the System (backup.log is in progress),the state will be in "pending".
+**Notes:** if the subscription is created during backup creation of the System (backup.log is in progress),the state will be in "pending".
 Not supported in bootserver mode.
 Not supported on virtual controller.
 
@@ -3422,20 +3422,20 @@ Not supported on virtual controller.
 
 ## Operations on backup system information
 
-**Chemin :** Controller Service › Operations on Backup Resource › Operations on backup system information
+**Path:** Controller Service › Operations on Backup Resource › Operations on backup system information
 
 ---
 
 ## Get backup system information
 
-**Chemin :** Controller Service › Operations on Backup Resource › Operations on backup system information › Get backup system information
+**Path:** Controller Service › Operations on Backup Resource › Operations on backup system information › Get backup system information
 
 URL — /ctrl/backup/info/
 
-**URL :** `/ctrl/backup/info/`  
-**Method :** `GET`
+**URL:** `/ctrl/backup/info/`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 backup-path={path to a backup system folder}
 Required
@@ -3443,79 +3443,79 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/RobotStudio/Systems/BACKUP/mybackup"
 ```
 
-**Notes :** Not Supported in bootserver mode
+**Notes:** Not Supported in bootserver mode
 
 ---
 
 ## Operations on Compress Resource
 
-**Chemin :** Controller Service › Operations on Compress Resource
+**Path:** Controller Service › Operations on Compress Resource
 
 ---
 
 ## Get compress resources
 
-**Chemin :** Controller Service › Operations on Compress Resource › Get compress resources
+**Path:** Controller Service › Operations on Compress Resource › Get compress resources
 
 URL — /ctrl/compress
 
-**URL :** `/ctrl/compress`  
-**Method :** `GET`
+**URL:** `/ctrl/compress`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compress"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get compress actions
 
-**Chemin :** Controller Service › Operations on Compress Resource › Get compress actions
+**Path:** Controller Service › Operations on Compress Resource › Get compress actions
 
 URL — /ctrl/compress
 
-**URL :** `/ctrl/compress`  
-**Method :** `GET`
+**URL:** `/ctrl/compress`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -3523,12 +3523,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 comp
 Compress
@@ -3544,31 +3544,31 @@ dstpath
 The destination path where the decompressed files shall be stored.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compress?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Compress/Decompress Resource
 
-**Chemin :** Controller Service › Operations on Compress Resource › Compress/Decompress Resource
+**Path:** Controller Service › Operations on Compress Resource › Compress/Decompress Resource
 
 Description — Enables the user to compress and decompress resources i.e. files or directories.
 
-**URL :** `/ctrl/compress`  
-**Method :** `POST`
+**URL:** `/ctrl/compress`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action={comp|dcomp}
 Required
@@ -3580,7 +3580,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 srcpath
 ={compress/decompress path} File or directory to compress/decompress
@@ -3591,21 +3591,21 @@ Required
 Environment variables such as $TEMP, $SYSTEM shall be possible to have in the path.
 ```
 
-**Success :** ACCEPTED(202)
+**Success:** ACCEPTED(202)
 Location header: /progress/{id}
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST "http://localhost/ctrl/compress?action=comp"
 curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$syspar/Folder1.rzo&dstpath=/fileservice/$syspar/" -X POST "http://localhost/ctrl/compress?action=dcomp"
 ```
 
-**Notes :** Compression of HOME folder, its sub directories, and SYSTEM folder is not allowed.
+**Notes:** Compression of HOME folder, its sub directories, and SYSTEM folder is not allowed.
 While decompressing a compressed file or a folder to a destination path, if a file or a folder with the same name as the compressed file name is already existing, it will be overwritten by the contents of the decompressed file or folder.
 Since compression and decompression of resources are asynchronous tasks, the location header can be subscribed on to get information about the status of the tasks.
 Not supported in bootserver mode.
@@ -3614,57 +3614,57 @@ Not supported in bootserver mode.
 
 ## Operations on Diagnostics Resource
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource
+**Path:** Controller Service › Operations on Diagnostics Resource
 
 ---
 
 ## Get diagnostics resources
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource › Get diagnostics resources
+**Path:** Controller Service › Operations on Diagnostics Resource › Get diagnostics resources
 
 URL — /ctrl/diagnostics
 
-**URL :** `/ctrl/diagnostics`  
-**Method :** `GET`
+**URL:** `/ctrl/diagnostics`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Not supported on Virtual Controller.
 
 ---
 
 ## Get diagnostics actions
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource › Get diagnostics actions
+**Path:** Controller Service › Operations on Diagnostics Resource › Get diagnostics actions
 
 URL — /ctrl/diagnostics
 
-**URL :** `/ctrl/diagnostics`  
-**Method :** `GET`
+**URL:** `/ctrl/diagnostics`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -3673,43 +3673,43 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 save
 Save the system diagnostics
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Not supported on Virtual Controller.
 
 ---
 
 ## Save system diagnostics
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource › Save system diagnostics
+**Path:** Controller Service › Operations on Diagnostics Resource › Save system diagnostics
 
 URL — /ctrl/diagnostics
 
-**URL :** `/ctrl/diagnostics`  
-**Method :** `POST`
+**URL:** `/ctrl/diagnostics`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=save
 Required
@@ -3717,26 +3717,26 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 dstpath
 =Fully qualified file name to save the diagnostic log e.g.fileservice/hd0a/TEMP/sysdump/diagnostics.log. The path can contain environment variables.
 Required
 ```
 
-**Success :** ACCEPTED(202), see
+**Success:** ACCEPTED(202), see
 HTTP Status codes
 Location header: /progress/{id}
 
-**Error :** BAD_REQUEST(400), CONFLICT(409), UNSUPPORTED_MEDIA(415) See
+**Error:** BAD_REQUEST(400), CONFLICT(409), UNSUPPORTED_MEDIA(415) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localhost/ctrl/diagnostics?action=save"
 ```
 
-**Notes :** Since saving a diagnostic log is an asynchronous task, the location header can be subscribed on to get information about the status of the task.
+**Notes:** Since saving a diagnostic log is an asynchronous task, the location header can be subscribed on to get information about the status of the task.
 Not supported in bootserver mode.
 Not supported on Virtual Controller.
 
@@ -3744,14 +3744,14 @@ Not supported on Virtual Controller.
 
 ## Subscribe on system dump
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource › Subscribe on system dump
+**Path:** Controller Service › Operations on Diagnostics Resource › Subscribe on system dump
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -3762,26 +3762,26 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 sysdump:
 to obtain the system dump.
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/ctrl/diagnostics&1-p=0" -X POST "http://localhost/subscription"
 curl --digest -u "Default User":robotics -d "resources=1&1=/ctrl/diagnostics&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** If there is no system dump available in the controller, the initial response will be empty.
+**Notes:** If there is no system dump available in the controller, the initial response will be empty.
 Also, if the subscription is created when a system dump is in progress, the initial response will be empty.
 if an client has already subscribed on the system dump resource(/ctrl/diagnostics), and the existing system dump folder has been deleted or moved, Path sent in the initial response can be invalid for the new client's subscribing on this resource since the folder has been deleted after the dump was created.
 Not supported in bootserver mode.
@@ -3791,14 +3791,14 @@ Not supported on virtual controller.
 
 ## Subscribe on Diagnostics States (Get System Diagnostics)
 
-**Chemin :** Controller Service › Operations on Diagnostics Resource › Subscribe on Diagnostics States (Get System Diagnostics)
+**Path:** Controller Service › Operations on Diagnostics Resource › Subscribe on Diagnostics States (Get System Diagnostics)
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -3809,19 +3809,19 @@ Required
 Required
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/progress/1;state&1-p=0" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** if the subscription is created when save System Diagnostics(diagnostics.log is in progress),the state will be in "pending".
+**Notes:** if the subscription is created when save System Diagnostics(diagnostics.log is in progress),the state will be in "pending".
 Not supported in bootserver mode.
 Not supported on virtual controller.
 
@@ -3829,55 +3829,55 @@ Not supported on virtual controller.
 
 ## Operations on CtrlSafetyResource
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource
+**Path:** Controller Service › Operations on CtrlSafetyResource
 
 ---
 
 ## Get safety resources
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get safety resources
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get safety resources
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) See
+**Error:** NOT_FOUND(404) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Safety actions
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Safety actions
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Safety actions
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
@@ -3886,12 +3886,12 @@ Required
 Returns action forms for this resource
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 load
 - Load a Safety configuration file.
@@ -3905,15 +3905,15 @@ Required
 .
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Retrieve actions on the CFG resource
 curl --digest -u "Default User":robotics" "
@@ -3924,20 +3924,20 @@ curl --digest -u "Default User":robotics -d "filepath=$TEMP/safety.xml" -X POST
 http://localhost/ctrl/safety?action=show
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Load Safety configuration file to controller
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Load Safety configuration file to controller
+**Path:** Controller Service › Operations on CtrlSafetyResource › Load Safety configuration file to controller
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=load
 Required
@@ -3945,39 +3945,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 filepath
 =Safety configuration file path on controller
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "filepath=$home/file.xml" -X POST "http://localhost/ctrl/safety?action=load"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Safety Mode of the controller
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Set Safety Mode of the controller
+**Path:** Controller Service › Operations on CtrlSafetyResource › Set Safety Mode of the controller
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-mode
 Required
@@ -3985,40 +3985,40 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mode= { active | commissioning | service }
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 See
 Robot controller return codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mode=service" -X POST "http://localhost/ctrl/safety?action=set-mode"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Controller shoul be in manual mode
 
 ---
 
 ## Get Config status
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Config status
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Config status
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=config-status
 Required
@@ -4026,55 +4026,55 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 ScorchConfigStatus
 - config status.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=config-status"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Safety Mode status
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Safety Mode status
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Safety Mode status
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=safety-mode
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 userdata
 - User Data.
@@ -4082,31 +4082,31 @@ safetymode
 - safety Mode {SCORCH_SAFETY_MODE_ACTIVE_MODE|SCORCH_SAFETY_MODE_COMMISSIONING_MODE|SCORCH_SAFETY_MODE_SERVICE_MODE}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-mode"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Safety Cyclic Brake Check status
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Safety Cyclic Brake Check status
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Safety Cyclic Brake Check status
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=cbc-status
 Required
@@ -4114,12 +4114,12 @@ drivenum={mech unit drive number}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 time-interval
 - time interval for device brake check
@@ -4129,31 +4129,31 @@ cbc-status
 - Cyclic Brake Check status {CBC_STATUS_OK(ok)|CBC_STATUS_PREWARNING(warning)|CBC_STATUS_REQUIRE_CBC(required)}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get LoadOperation status
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get LoadOperation status
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get LoadOperation status
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=loadoperation-status
 Required
@@ -4161,44 +4161,44 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 scorchloadoperationstatus
 - LoadOperation status {OK|SCORCH_ERR_OPTION_NOT_PRESENT|SCORCH_ERR_NOT_IN_MANUAL_MODE|SCORCH_ERR_NOT_IN_MOTORS_OFF|SCORCH_ERR_CURRENT_CONFIG_LOCKED|SCORCH_ERR_USER_GRANT_IS_MISSING}.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=loadoperation-status"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 User should have Safety services privileges
 
 ---
 
 ## Get Safety Configurations
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Safety Configurations
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Safety Configurations
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=safety-config
 Required
@@ -4206,12 +4206,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 safety-ctrl-configuration
 Ctrl-Safety resource
@@ -4237,28 +4237,28 @@ checksum
 checksum as base64 encoded data
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-config"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Safety Violation Info
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Get Safety Violation Info
+**Path:** Controller Service › Operations on CtrlSafetyResource › Get Safety Violation Info
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `GET`
+**URL:** `/ctrl/safety`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=violation-info
 Required
@@ -4266,12 +4266,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 safety-violationinfo
 violation-type
@@ -4303,33 +4303,33 @@ other
 invalid
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=violation-info"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 User should have Safety services privileges
 
 ---
 
 ## Unlock the safety configuration
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Unlock the safety configuration
+**Path:** Controller Service › Operations on CtrlSafetyResource › Unlock the safety configuration
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=unlock
 Required
@@ -4337,37 +4337,37 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 none
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "index=0" -X POST "http://localhost/ctrl/safety?action=syncack"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Software Sync Acknowledgement
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Software Sync Acknowledgement
+**Path:** Controller Service › Operations on CtrlSafetyResource › Software Sync Acknowledgement
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=syncack
 Required
@@ -4375,38 +4375,38 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 index={0 | 1}
 mandatory
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "index=0" -X POST "http://localhost/ctrl/safety?action=syncack"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Add Validation info
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Add Validation info
+**Path:** Controller Service › Operations on CtrlSafetyResource › Add Validation info
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=validate-cfg
 Required
@@ -4414,40 +4414,40 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 validated-by={name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 See
 Robot controller return codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403)
+**Error:** BAD_REQUEST(400),FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST "http://localhost/ctrl/safety?action=validate-cfg"
 ```
 
-**Notes :** Must have grant UAS_SAFETY_SERVICES for method to succeed
+**Notes:** Must have grant UAS_SAFETY_SERVICES for method to succeed
 Not supported in bootserver mode
 
 ---
 
 ## Remove Validation info
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Remove Validation info
+**Path:** Controller Service › Operations on CtrlSafetyResource › Remove Validation info
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=invalidate-cfg
 Required
@@ -4455,39 +4455,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 See
 Robot controller return codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 `curl –digest -u "Default User":robotics POST "http://localhost/ctrl/safety?action=invalidate-cfg"
 ```
 
-**Notes :** Must have grant UAS_SAFETY_SERVICES for method to succeed
+**Notes:** Must have grant UAS_SAFETY_SERVICES for method to succeed
 Not supported in bootserver mode
 
 ---
 
 ## Set Reset Safety Controller
 
-**Chemin :** Controller Service › Operations on CtrlSafetyResource › Set Reset Safety Controller
+**Path:** Controller Service › Operations on CtrlSafetyResource › Set Reset Safety Controller
 
 URL — /ctrl/safety
 
-**URL :** `/ctrl/safety`  
-**Method :** `POST`
+**URL:** `/ctrl/safety`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=reset
 Required
@@ -4495,141 +4495,141 @@ See
 Common URL parameters
 ```
 
-**Success :** NO_CONTENT(204), See
+**Success:** NO_CONTENT(204), See
 Robot controller return codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?action=reset"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 User should have Safety services privileges
 
 ---
 
 ## Operations on options Resource
 
-**Chemin :** Controller Service › Operations on options Resource
+**Path:** Controller Service › Operations on options Resource
 
 ---
 
 ## Get options resource
 
-**Chemin :** Controller Service › Operations on options Resource › Get options resource
+**Path:** Controller Service › Operations on options Resource › Get options resource
 
 URL — /ctrl/options/{option to verify}
 
-**URL :** `/ctrl/options/{option to verify}`  
-**Method :** `GET`
+**URL:** `/ctrl/options/{option to verify}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), for /ctrl/options/{option to verify}
+**Success:** HTTP_OK(200), for /ctrl/options/{option to verify}
 NO_CONTENT(204), /ctrl/options
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/options/SAFEMOVEPRO"
 ```
 
-**Notes :** The option to be verified is to provided as part of the request url. Also, the url is case sensitive. see example above. Not Supported in bootserver mode
+**Notes:** The option to be verified is to provided as part of the request url. Also, the url is case sensitive. see example above. Not Supported in bootserver mode
 
 ---
 
 ## Operations on Compatabile Resource
 
-**Chemin :** Controller Service › Operations on Compatabile Resource
+**Path:** Controller Service › Operations on Compatabile Resource
 
 ---
 
 ## Check Robotware version compatibility with contorller hardware
 
-**Chemin :** Controller Service › Operations on Compatabile Resource › Check Robotware version compatibility with contorller hardware
+**Path:** Controller Service › Operations on Compatabile Resource › Check Robotware version compatibility with contorller hardware
 
 URL — /ctrl/compatibility/{robotware version}
 
-**URL :** `/ctrl/compatibility/{robotware version}`  
-**Method :** `GET`
+**URL:** `/ctrl/compatibility/{robotware version}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT FOUND(404), BAD REQUEST(400)
+**Error:** NOT FOUND(404), BAD REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compatibility/6.03.0101"
 ```
 
-**Notes :** Supported only in RC.
+**Notes:** Supported only in RC.
 Supported in bootserver mode.
 
 ---
 
 ## Operation on Virtual Time
 
-**Chemin :** Controller Service › Operation on Virtual Time
+**Path:** Controller Service › Operation on Virtual Time
 
 ---
 
 ## Get Virtual Time resources
 
-**Chemin :** Controller Service › Operation on Virtual Time › Get Virtual Time resources
+**Path:** Controller Service › Operation on Virtual Time › Get Virtual Time resources
 
 URL — /ctrl/virtualtime
 
-**URL :** `/ctrl/virtualtime`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 vttimeslice
 get the virtual timeslice value in milliseconds.
@@ -4641,52 +4641,52 @@ vtstate
 get the state of the virtual time server {VTSTOP | VTFREERUN | VTRUNSLICE | VTNEXTEVENT}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404), see
+**Error:** NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Supported only in VC.
 
 ---
 
 ## Operation on VTTime
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTime
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTime
 
 ---
 
 ## Get Virtualtime
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTime › Get Virtualtime
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTime › Get Virtualtime
 
 URL — /ctrl/virtualtime/vttime
 
-**URL :** `/ctrl/virtualtime/vttime`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vttime`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-vttime
 controller virtualtime resource
@@ -4694,63 +4694,63 @@ vtcounter
 virtual time in milliseconds.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** Not Found(404)
+**Error:** Not Found(404)
 see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttime"
 ```
 
-**Notes :** Supported only in VC mode
+**Notes:** Supported only in VC mode
 
 ---
 
 ## Operation on VTTimeslice
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTimeslice
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTimeslice
 
 ---
 
 ## Get VTTimeslice Value
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Get VTTimeslice Value
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Get VTTimeslice Value
 
 URL — /ctrl/virtualtime/vttimeslice
 
-**URL :** `/ctrl/virtualtime/vttimeslice`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vttimeslice`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT FOUND(404),
+**Error:** NOT FOUND(404),
 BAD REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 vttimeslice value is in ms.
 Not supported in bootserver mode.
 
@@ -4758,37 +4758,37 @@ Not supported in bootserver mode.
 
 ## Actions on VTTimeslice
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Actions on VTTimeslice
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Actions on VTTimeslice
 
 URL — /ctrl/virtualtime/vttimeslice
 
-**URL :** `/ctrl/virtualtime/vttimeslice`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vttimeslice`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 vttimeslice value is in ms.
 Not supported in bootserver mode.
 
@@ -4796,38 +4796,38 @@ Not supported in bootserver mode.
 
 ## Set VTTimeslice Value
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Set VTTimeslice Value
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTTimeslice › Set VTTimeslice Value
 
 URL — /ctrl/virtualtime/vttimeslice
 
-**URL :** `/ctrl/virtualtime/vttimeslice`  
-**Method :** `POST`
+**URL:** `/ctrl/virtualtime/vttimeslice`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 vttimeslice={value} in ms
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** NOT FOUND(404)
+**Error:** NOT FOUND(404)
 BAD REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 Value should be in ms.
 For values < 10 ms. vttimeslice will be set to a default value of 10 ms.
 Not supported in bootserver mode.
@@ -4836,32 +4836,32 @@ Not supported in bootserver mode.
 
 ## Operation on VTSpeed
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTSpeed
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTSpeed
 
 ---
 
 ## Get Speed of Virtual Time
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Get Speed of Virtual Time
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Get Speed of Virtual Time
 
 URL — /ctrl/virtualtime/vtspeed
 
-**URL :** `/ctrl/virtualtime/vtspeed`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vtspeed`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-vtspeed
 controller virtualtime resource
@@ -4869,33 +4869,33 @@ vtcurrspeed
 speed of virtual time in percent relative to real time.-1 equals full speed, 0 equals 100 percent.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Supported only in VC.
 
 ---
 
 ## Get actions on a VTSpeed
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Get actions on a VTSpeed
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Get actions on a VTSpeed
 
 URL — /ctrl/virtualtime/vtspeed
 
-**URL :** `/ctrl/virtualtime/vtspeed`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vtspeed`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -4904,101 +4904,101 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 vtspeed
 Sets the speed of virtual time in percent relative to real time
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** HTTP Errors, see
+**Error:** HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Supported only in VC.
 
 ---
 
 ## Set Speed of Virtualtime
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Set Speed of Virtualtime
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTSpeed › Set Speed of Virtualtime
 
 URL — /ctrl/virtualtime/vtspeed
 
-**URL :** `/ctrl/virtualtime/vtspeed`  
-**Method :** `POST`
+**URL:** `/ctrl/virtualtime/vtspeed`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 vtspeed={value}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 UNSUPPORTED_MEDIA(415)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST "http://localhost/ctrl/virtualtime/vtspeed"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 Not supported in bootserver mode.
 
 ---
 
 ## Operation on VTState
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTState
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTState
 
 ---
 
 ## Get State of Virtual Time
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTState › Get State of Virtual Time
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTState › Get State of Virtual Time
 
 URL — /ctrl/virtualtime/vtstate
 
-**URL :** `/ctrl/virtualtime/vtstate`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vtstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrl-vtstate
 controller virtualtime resource
@@ -5006,33 +5006,33 @@ vtcurrstate
 gets the state of the virtual time server {VTSTOP | VTFREERUN | VTRUNSLICE | VTNEXTEVENT}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Supported only in VC.
 
 ---
 
 ## Get actions on a VTState
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTState › Get actions on a VTState
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTState › Get actions on a VTState
 
 URL — /ctrl/virtualtime/vtstate
 
-**URL :** `/ctrl/virtualtime/vtstate`  
-**Method :** `GET`
+**URL:** `/ctrl/virtualtime/vtstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -5041,144 +5041,144 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 vtstate
 sets the state of the virtual time server
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** HTTP Errors, see
+**Error:** HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Supported only in VC.
 
 ---
 
 ## Set State of Virtualtime
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTState › Set State of Virtualtime
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTState › Set State of Virtualtime
 
 URL — /ctrl/virtualtime/vtstate
 
-**URL :** `/ctrl/virtualtime/vtstate`  
-**Method :** `POST`
+**URL:** `/ctrl/virtualtime/vtstate`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 vtstate={state_value}
 Required
 "state_value" will be {VTSTOP | VTFREERUN | VTRUNSLICE | VTNEXTEVENT}
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 UNSUPPORTED_MEDIA(415)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST "http://localhost/ctrl/virtualtime/vtstate"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 Not supported in bootserver mode.
 
 ---
 
 ## Operation on VTRun
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTRun
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTRun
 
 ---
 
 ## VT Run
 
-**Chemin :** Controller Service › Operation on Virtual Time › Operation on VTRun › VT Run
+**Path:** Controller Service › Operation on Virtual Time › Operation on VTRun › VT Run
 
 URL — /ctrl/virtualtime/vtrun
 
-**URL :** `/ctrl/virtualtime/vtrun`  
-**Method :** `POST`
+**URL:** `/ctrl/virtualtime/vtrun`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/virtualtime/vtrun"
 ```
 
-**Notes :** Supported only in VC.
+**Notes:** Supported only in VC.
 Not supported in bootserver mode.
 
 ---
 
 ## File Service
 
-**Chemin :** File Service
+**Path:** File Service
 
 ---
 
 ## Get File Service Resources
 
-**Chemin :** File Service › Get File Service Resources
+**Path:** File Service › Get File Service Resources
 
 URL — /fileservice
 
-**URL :** `/fileservice`  
-**Method :** `GET`
+**URL:** `/fileservice`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 fs-device
 fs-device-type
@@ -5203,19 +5203,19 @@ fs-readonly
 TRUE if read only else FALSE
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** UNAUTHORIZED(401),NOT_FOUND(404)
+**Error:** UNAUTHORIZED(401),NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get a list of root resources
 curl --digest -u "Default User":robotics "http://localhost/fileservice"
 ```
 
-**Notes :** Though root supports environment variables these are not listed in the returned response.
+**Notes:** Though root supports environment variables these are not listed in the returned response.
 Environment variables are only allowed directly under the root URI i.e. /fileservice/$home
 Supported in bootserver mode
 
@@ -5223,31 +5223,31 @@ Supported in bootserver mode
 
 ## Operations on Directory Resource
 
-**Chemin :** File Service › Operations on Directory Resource
+**Path:** File Service › Operations on Directory Resource
 
 ---
 
 ## Get Directory listing of resources
 
-**Chemin :** File Service › Operations on Directory Resource › Get Directory listing of resources
+**Path:** File Service › Operations on Directory Resource › Get Directory listing of resources
 
 URL — /fileservice/{environment_variable|device}/{directory}
 
-**URL :** `/fileservice/{environment_variable|device}/{directory}`  
-**Method :** `GET`
+**URL:** `/fileservice/{environment_variable|device}/{directory}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 fs-dir
 fs-cdate
@@ -5273,31 +5273,31 @@ fs-readonly
 A boolean specifying if a file is read only or not. Possible values are: true and false
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400) See
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Directory Listing
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get Directory Actions
 
-**Chemin :** File Service › Operations on Directory Resource › Get Directory Actions
+**Path:** File Service › Operations on Directory Resource › Get Directory Actions
 
 URL — /fileservice/{device}|{directory}
 
-**URL :** `/fileservice/{device}|{directory}`  
-**Method :** `GET`
+**URL:** `/fileservice/{device}|{directory}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -5306,12 +5306,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 fs-create
 fs-newname
@@ -5333,37 +5333,37 @@ fs-delete
 Delete a directory
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** BAD_REQUEST(400) See
+**Error:** BAD_REQUEST(400) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get actions on directory
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Create a directory
 
-**Chemin :** File Service › Operations on Directory Resource › Create a directory
+**Path:** File Service › Operations on Directory Resource › Create a directory
 
 URL — /fileservice/{device|environment_variable}/{directory}
 
-**URL :** `/fileservice/{device|environment_variable}/{directory}`  
-**Method :** `POST`
+**URL:** `/fileservice/{device|environment_variable}/{directory}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 fs-newname
 =The new directory name. See
@@ -5375,19 +5375,19 @@ fs-action
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 
-**Error :** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
+**Error:** UNAUTHORIZED(401), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Create a new directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=create" -X POST "http://localhost/fileservice/$home/"
 ```
 
-**Notes :** Only relative path are allowed for "*fs-newname*". Absolute paths are not supported
+**Notes:** Only relative path are allowed for "*fs-newname*". Absolute paths are not supported
 The
 fs-newname
 can take nested directory structure e.g.
@@ -5402,20 +5402,20 @@ Supported in bootserver mode
 
 ## Rename a directory
 
-**Chemin :** File Service › Operations on Directory Resource › Rename a directory
+**Path:** File Service › Operations on Directory Resource › Rename a directory
 
 URL — /fileservice/{device|environment_variable}/{directory}
 
-**URL :** `/fileservice/{device|environment_variable}/{directory}`  
-**Method :** `POST`
+**URL:** `/fileservice/{device|environment_variable}/{directory}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 fs-newname
 =The new directory name fs-get-directory-actions
@@ -5425,39 +5425,39 @@ fs-action
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), METHOD_NOT_ALLOWED(405)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), METHOD_NOT_ALLOWED(405)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Rename a directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=rename" -X POST "http://localhost/fileservice/$home/testdir"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Copy a directory
 
-**Chemin :** File Service › Operations on Directory Resource › Copy a directory
+**Path:** File Service › Operations on Directory Resource › Copy a directory
 
 URL — /fileservice/{device|environment_variable}/{directory}
 
-**URL :** `/fileservice/{device|environment_variable}/{directory}`  
-**Method :** `POST`
+**URL:** `/fileservice/{device|environment_variable}/{directory}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 fs-overwrite
 = true|false defaults to false. fs-get-directory-actions
@@ -5472,19 +5472,19 @@ fs-action
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Create a copy of a directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=copy" -X POST "http://localhost/fileservice/$home/testdir"
 ```
 
-**Notes :** The value for
+**Notes:** The value for
 fs-newname
 can either be absolute or relative. It is differentiated based on whether the value has a leading slash (absolute) or not (relative).
 Note: when absolute paths are used, it should start from /fileservice e.g.
@@ -5498,94 +5498,94 @@ Supported in bootserver mode
 
 ## Delete a directory
 
-**Chemin :** File Service › Operations on Directory Resource › Delete a directory
+**Path:** File Service › Operations on Directory Resource › Delete a directory
 
 URL — /fileservice/{device|environment_variable}/{directory}
 
-**URL :** `/fileservice/{device|environment_variable}/{directory}`  
-**Method :** `DELETE`
+**URL:** `/fileservice/{device|environment_variable}/{directory}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), METHOD_NOT_ALLOWED(405)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), METHOD_NOT_ALLOWED(405)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delate a directory
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/fileservice/$home/testdir"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Operations on File Resource
 
-**Chemin :** File Service › Operations on File Resource
+**Path:** File Service › Operations on File Resource
 
 ---
 
 ## Get a file
 
-**Chemin :** File Service › Operations on File Resource › Get a file
+**Path:** File Service › Operations on File Resource › Get a file
 
 URL — /fileservice/{device}|{directory}/{file}
 
-**URL :** `/fileservice/{device}|{directory}/{file}`  
-**Method :** `GET`
+**URL:** `/fileservice/{device}|{directory}/{file}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404),
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404),
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get a file.
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs/test.txt"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get File Actions
 
-**Chemin :** File Service › Operations on File Resource › Get File Actions
+**Path:** File Service › Operations on File Resource › Get File Actions
 
 URL — /fileservice/{device}|{directory}/{file}
 
-**URL :** `/fileservice/{device}|{directory}/{file}`  
-**Method :** `GET`
+**URL:** `/fileservice/{device}|{directory}/{file}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -5594,12 +5594,12 @@ Common URL parameters
 Returns action Forms for this resource
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 fs-rename
 fs-newname
@@ -5621,37 +5621,37 @@ fs-delete
 Delete the file
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), See
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get actions on a file.
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs/test.txt?action=show"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Rename a file
 
-**Chemin :** File Service › Operations on File Resource › Rename a file
+**Path:** File Service › Operations on File Resource › Rename a file
 
 URL — /fileservice/{device|environment_variable|directory}/{file}
 
-**URL :** `/fileservice/{device|environment_variable|directory}/{file}`  
-**Method :** `POST`
+**URL:** `/fileservice/{device|environment_variable|directory}/{file}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 fs-newname
 =The new file name
@@ -5661,38 +5661,38 @@ fs-action
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "fs-newname=newfile.txt&fs-action=rename" -X POST "http://localhost/fileservice/$home/test.txt"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Create a copy of a file
 
-**Chemin :** File Service › Operations on File Resource › Create a copy of a file
+**Path:** File Service › Operations on File Resource › Create a copy of a file
 
 URL — /fileservice/{device|environment_variable}/{filename}
 
-**URL :** `/fileservice/{device|environment_variable}/{filename}`  
-**Method :** `POST`
+**URL:** `/fileservice/{device|environment_variable}/{filename}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 fs-overwrite
 = true|false defaults to false.
@@ -5704,19 +5704,19 @@ fs-action
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Create a copy of a file
 curl --digest -u "Default User":robotics -d "fs-newname=newfile.txt&fs-action=copy" -X POST "http://localhost/fileservice/$home/file.txt"
 ```
 
-**Notes :** The value for
+**Notes:** The value for
 fs-newname
 can either be absolute or relative. It is differentiated based on the whether the value has a leading slash (absolute) or not (relative).
 Note: when absolute paths are used, it should start from /fileservice e.g.
@@ -5731,37 +5731,37 @@ Maximum supported file size is less than 2GB.
 
 ## Upload a file
 
-**Chemin :** File Service › Operations on File Resource › Upload a file
+**Path:** File Service › Operations on File Resource › Upload a file
 
 URL — /fileservice/{device|environment_variable|directory}/{file}
 
-**URL :** `/fileservice/{device|environment_variable|directory}/{file}`  
-**Method :** `PUT`
+**URL:** `/fileservice/{device|environment_variable|directory}/{file}`  
+**Method:** `PUT`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 The file content
 ```
 
-**Success :** HTTP_OK(200), CREATED(201)
+**Success:** HTTP_OK(200), CREATED(201)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(403), BAD_REQUEST(400)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(403), BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Upload a file
 curl --digest -u "Default User":robotics -d -X PUT "http://localhost/fileservice/$home/test.txt"
 ```
 
-**Notes :** If the file exists, the file is overwritten with the specified content else a new file with the given name is created.
+**Notes:** If the file exists, the file is overwritten with the specified content else a new file with the given name is created.
 Supported in bootserver mode
 Maximum supported file size is less than 800MB.
 
@@ -5769,182 +5769,182 @@ Maximum supported file size is less than 800MB.
 
 ## Delete a file
 
-**Chemin :** File Service › Operations on File Resource › Delete a file
+**Path:** File Service › Operations on File Resource › Delete a file
 
 URL — /fileservice/{device|environment_variable|directory}/{file}
 
-**URL :** `/fileservice/{device|environment_variable|directory}/{file}`  
-**Method :** `DELETE`
+**URL:** `/fileservice/{device|environment_variable|directory}/{file}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400),METHOD_NOT_ALLOWED(405)
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400),METHOD_NOT_ALLOWED(405)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delete a file
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/fileservice/$home/test.txt"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## Get file Meta data
 
-**Chemin :** File Service › Operations on File Resource › Get file Meta data
+**Path:** File Service › Operations on File Resource › Get file Meta data
 
 URL — /fileservice/{device|environment_variable|directory}/{file}
 
-**URL :** `/fileservice/{device|environment_variable|directory}/{file}`  
-**Method :** `HEAD`
+**URL:** `/fileservice/{device|environment_variable|directory}/{file}`  
+**Method:** `HEAD`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 
-**Error :** UNAUTHORIZED(401), NOT_FOUND(404), See
+**Error:** UNAUTHORIZED(401), NOT_FOUND(404), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delete a file
 curl --digest -u "Default User":robotics -X HEAD "http://localhost/fileservice/$home/test.txt"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## RobotWare Services
 
-**Chemin :** RobotWare Services
+**Path:** RobotWare Services
 
 ---
 
 ## Get RobotWare services
 
-**Chemin :** RobotWare Services › Get RobotWare services
+**Path:** RobotWare Services › Get RobotWare services
 
 URL — /rw
 
-**URL :** `/rw`  
-**Method :** `GET`
+**URL:** `/rw`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rwservice-li
 - RobotWare service item
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** HTTP Errors, see
+**Error:** HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw"
 ```
 
-**Notes :** Supported in bootserver mode
+**Notes:** Supported in bootserver mode
 
 ---
 
 ## CFG Service
 
-**Chemin :** RobotWare Services › CFG Service
+**Path:** RobotWare Services › CFG Service
 
 ---
 
 ## Get CFG resources
 
-**Chemin :** RobotWare Services › CFG Service › Get CFG resources
+**Path:** RobotWare Services › CFG Service › Get CFG resources
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `GET`
+**URL:** `/rw/cfg`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-domain-li
 Specifies a link to the 'cfg-domain` resource.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get CFG actions
 
-**Chemin :** RobotWare Services › CFG Service › Get CFG actions
+**Path:** RobotWare Services › CFG Service › Get CFG actions
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `GET`
+**URL:** `/rw/cfg`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -5953,12 +5953,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 validate
 - Validate a configuration file before loading. Inspecting a CFG file for any errors that would occur during a load of the file, including checking for duplicate instance-names.
@@ -5990,17 +5990,17 @@ Required
 , Multiple selection. See validate.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Retrieve actions on the CFG resource
 curl --digest -u "Default User":robotics" "
@@ -6012,20 +6012,20 @@ Load CFG file
 curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/rw/cfg?action=load"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Validate CFG file
 
-**Chemin :** RobotWare Services › CFG Service › Validate CFG file
+**Path:** RobotWare Services › CFG Service › Validate CFG file
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `POST`
+**URL:** `/rw/cfg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=validate
 Required
@@ -6033,7 +6033,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 filepath
 File on controller to validate, see
@@ -6043,41 +6043,41 @@ action-type
 Get CFG actions
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-validate
 Validate a configuration file before loading. Inspecting a CFG file for any errors that would occur during a load of the file, including checking for duplicate instance-names.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/rw/cfg?action=validate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Load CFG file
 
-**Chemin :** RobotWare Services › CFG Service › Load CFG file
+**Path:** RobotWare Services › CFG Service › Load CFG file
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `POST`
+**URL:** `/rw/cfg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=load
 Required
@@ -6085,7 +6085,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 filepath
 File on controller to load, see
@@ -6095,77 +6095,77 @@ action-type
 Get CFG actions
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/rw/cfg?action=load"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Validate CFG Instance before Delete
 
-**Chemin :** RobotWare Services › CFG Service › Validate CFG Instance before Delete
+**Path:** RobotWare Services › CFG Service › Validate CFG Instance before Delete
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `POST`
+**URL:** `/rw/cfg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=validate-inst-at-del
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={instance name}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=abc" -X POST "http://localhost/rw/cfg?action=validate-inst-at-del"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Validate CFG Instances
 
-**Chemin :** RobotWare Services › CFG Service › Validate CFG Instances
+**Path:** RobotWare Services › CFG Service › Validate CFG Instances
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `POST`
+**URL:** `/rw/cfg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=validate-instances
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 operation={0 | 1}
 Optional
@@ -6180,74 +6180,74 @@ instancescount={instances count}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "operation=1&cfgdomain=I/O&cfgtype=DeviceNetDevice&instances=TestingValid1&instancescount=1" -X POST "http://localhost/rw/cfg?action=validate-instances"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Keyless motor ON
 
-**Chemin :** RobotWare Services › CFG Service › Keyless motor ON
+**Path:** RobotWare Services › CFG Service › Keyless motor ON
 
 URL — /rw/cfg
 
-**URL :** `/rw/cfg`  
-**Method :** `POST`
+**URL:** `/rw/cfg`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=keyless
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 state=run
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "state=run" -X POST "http://localhost/rw/cfg?action=keyless"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on cfg ChangeCount
 
-**Chemin :** RobotWare Services › CFG Service › Subscribe on cfg ChangeCount
+**Path:** RobotWare Services › CFG Service › Subscribe on cfg ChangeCount
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -6258,24 +6258,24 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-prop-ev
 change-count
 Change count
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on cfg change count
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -6283,26 +6283,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/cfg&1-p=0
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/cfg&1-p=1" "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Operations on CFG domain
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain
 
 ---
 
 ## Get CFG Domain Types
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Get CFG Domain Types
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Get CFG Domain Types
 
 URL — /rw/cfg/{domain}
 
-**URL :** `/rw/cfg/{domain}`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 start={start value} start Page number
 limit={limit value} limit Number of elements to retrieve(maximum/default value of limit is 70)
@@ -6311,12 +6311,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 next
 Link to next page (Will be absent if there is no next page)
@@ -6328,29 +6328,29 @@ cfg-domain-type
 resource.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/moc"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Actions on a CFG domain
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Get Actions on a CFG domain
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Get Actions on a CFG domain
 
 URL — /rw/cfg/{domain}
 
-**URL :** `/rw/cfg/{domain}`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -6359,12 +6359,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 saveas
 - Save the CFG domain to the given file.
@@ -6375,15 +6375,15 @@ reset
 - Remove all external instances in a CFG domain.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Get actions supported by a CFG domain
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/sio?action=show"
@@ -6393,21 +6393,21 @@ Remove all external instances in a CFG domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/cfg/sio?action=reset"
 ```
 
-**Notes :** CFG Mastership is handled internally if not explicit held by the client.
+**Notes:** CFG Mastership is handled internally if not explicit held by the client.
 Not supported in bootserver mode
 
 ---
 
 ## Save CFG domain
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Save CFG domain
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Save CFG domain
 
 URL — /rw/cfg/{domain}
 
-**URL :** `/rw/cfg/{domain}`  
-**Method :** `POST`
+**URL:** `/rw/cfg/{domain}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=saveas
 Required
@@ -6415,7 +6415,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 filepath
 Required
@@ -6425,34 +6425,34 @@ Optional
 {Normal | NormalEx | Internals | Types}
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403), UNAUTHORIZED(401)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Save the CFG domain to the given file
 curl --digest -u "Default User":robotics -d "filepath=/fileservice/$HOME/a.cfg" -X POST "http://localhost/rw/cfg/sio?action=saveas"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Reset CFG domain
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Reset CFG domain
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Reset CFG domain
 
 URL — /rw/cfg/{domain}
 
-**URL :** `/rw/cfg/{domain}`  
-**Method :** `POST`
+**URL:** `/rw/cfg/{domain}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=reset
 Required
@@ -6462,59 +6462,59 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Remove all external instances in a CFG domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/cfg/sio?action=reset"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on CFG type
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type
 
 ---
 
 ## Get CFG type
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Get CFG type
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Get CFG type
 
 URL — /rw/cfg/{domain}/{type}
 
-**URL :** `/rw/cfg/{domain}/{type}`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-dt-attributes-li
 Specifies a link to the 'cfg-domain-type-attributes` resource.
@@ -6528,49 +6528,49 @@ cfg-no-of-instances
 Total number of instances in domain type.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on CFG attributes
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG attributes
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG attributes
 
 ---
 
 ## Get all attributes of the given domain type
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG attributes › Get all attributes of the given domain type
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG attributes › Get all attributes of the given domain type
 
 URL — /rw/cfg/{domain}/{type}/attributes
 
-**URL :** `/rw/cfg/{domain}/{type}/attributes`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}/attributes`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-dt-attribute-li
 name
@@ -6589,51 +6589,51 @@ mandatory
 =[true|false] A boolean indicating if this attribute is mandatory.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/attributes"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on CFG instances
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances
 
 ---
 
 ## Get all instances of the given domain type
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Get all instances of the given domain type
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Get all instances of the given domain type
 
 URL — /rw/cfg/{domain}/{type}/instances
 
-**URL :** `/rw/cfg/{domain}/{type}/instances`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}/instances`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-dt-instance-li
 Cfg instance
@@ -6651,33 +6651,33 @@ title
 Attribute name.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/EIO_BUS/instances"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get actions on CFG instances
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Get actions on CFG instances
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Get actions on CFG instances
 
 URL — /rw/cfg/{domain}/{type}/instances
 
-**URL :** `/rw/cfg/{domain}/{type}/instances`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}/instances`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -6686,12 +6686,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 reset
 - Remove all external (non-readonly) instances of a type
@@ -6699,33 +6699,33 @@ create-default
 - Create an external instance with default values.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Reset CFG instances
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Reset CFG instances
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Reset CFG instances
 
 URL — /rw/cfg/{domain}/{type}/instances
 
-**URL :** `/rw/cfg/{domain}/{type}/instances`  
-**Method :** `POST`
+**URL:** `/rw/cfg/{domain}/{type}/instances`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=reset
 Required
@@ -6733,41 +6733,41 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Reset CFG instances
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=reset"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Create default CFG instance
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Create default CFG instance
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Create default CFG instance
 
 URL — /rw/cfg/{domain}/{type}/instances
 
-**URL :** `/rw/cfg/{domain}/{type}/instances`  
-**Method :** `POST`
+**URL:** `/rw/cfg/{domain}/{type}/instances`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=create-default
 Required
@@ -6775,7 +6775,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name
 name of instance
@@ -6784,7 +6784,7 @@ see
 Get actions on CFG instances
 ```
 
-**Resources :**
+**Resources:**
 ```
 instancename
 Created Instance name.
@@ -6792,56 +6792,56 @@ instancename
 Created Instance Id.
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 Location header: instances/{instancename}
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Create default CFG instance
 curl --digest -u "Default User":robotics -d "name=testinstance" -X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=create-default"
 ```
 
-**Notes :** Use location header to fetch information about newly created resource.
+**Notes:** Use location header to fetch information about newly created resource.
 Not supported in bootserver mode
 
 ---
 
 ## Operations on CFG instance
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance
 
 ---
 
 ## Get CFG instance
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Get CFG instance
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Get CFG instance
 
 URL — /rw/cfg/{domain}/{type}/instances/{instance name}
 
-**URL :** `/rw/cfg/{domain}/{type}/instances/{instance name}`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}/instances/{instance name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cfg-dt-instance-li
 List of attributes for the given type
@@ -6859,35 +6859,35 @@ title
 Name of the attribute
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg/sys/PRESENT_OPTIONS/instances/sis
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get CFG instance actions
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Get CFG instance actions
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Get CFG instance actions
 
 URL — /rw/cfg/{domain}/{type}/instances/{instance}
 
-**URL :** `/rw/cfg/{domain}/{type}/instances/{instance}`  
-**Method :** `GET`
+**URL:** `/rw/cfg/{domain}/{type}/instances/{instance}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -6896,12 +6896,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 - Update one or more attributes
@@ -6911,127 +6911,127 @@ desc
 - Description
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg/eio/eio_bus/instances?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update CFG instance
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Update CFG instance
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Update CFG instance
 
 URL — /rw/cfg/{domain}/{type}/instances/{instance}
 
-**URL :** `/rw/cfg/{domain}/{type}/instances/{instance}`  
-**Method :** `POST`
+**URL:** `/rw/cfg/{domain}/{type}/instances/{instance}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 {attribute name}={attribute value}
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Update one or more attributes
 curl --digest - u "Default User" : robotics -d "Simulated=True" - X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances/testinstance?action=set"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Delete CFG instance
 
-**Chemin :** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Delete CFG instance
+**Path:** RobotWare Services › CFG Service › Operations on CFG domain › Operations on CFG type › Operations on CFG instances › Operations on CFG instance › Delete CFG instance
 
 URL — /rw/cfg/{domain}/{type}/instances/{instance}
 
-**URL :** `/rw/cfg/{domain}/{type}/instances/{instance}`  
-**Method :** `DELETE`
+**URL:** `/rw/cfg/{domain}/{type}/instances/{instance}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delete CFG instance
 curl --digest -u "Default User":robotics - X DELETE "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances/testinstance"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## DIPC service
 
-**Chemin :** RobotWare Services › DIPC service
+**Path:** RobotWare Services › DIPC service
 
 ---
 
 ## Get DIPC Resources
 
-**Chemin :** RobotWare Services › DIPC service › Get DIPC Resources
+**Path:** RobotWare Services › DIPC service › Get DIPC Resources
 
 URL — /rw/dipc
 
-**URL :** `/rw/dipc`  
-**Method :** `GET`
+**URL:** `/rw/dipc`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 dipc-info-li
 max-body-size
@@ -7044,47 +7044,47 @@ dipc-queue
 resource.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get DIPC Actions
 
-**Chemin :** RobotWare Services › DIPC service › Get DIPC Actions
+**Path:** RobotWare Services › DIPC service › Get DIPC Actions
 
 URL — /rw/dipc
 
-**URL :** `/rw/dipc`  
-**Method :** `GET`
+**URL:** `/rw/dipc`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 dipc-create
 dipc-queue-name
@@ -7111,41 +7111,41 @@ selected
 selected
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Create a queue
 
-**Chemin :** RobotWare Services › DIPC service › Create a queue
+**Path:** RobotWare Services › DIPC service › Create a queue
 
 URL — /rw/dipc
 
-**URL :** `/rw/dipc`  
-**Method :** `POST`
+**URL:** `/rw/dipc`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=dipc-create
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 dipc-queue-name
 The name of the queue
@@ -7158,54 +7158,54 @@ The message size supports a minimum value of 1 and maximum value of 444
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Restart controller with the specified mode
 curl --digest -u "Default User":robotics -d "dipc-queue-name=testq&dipc-queue-size=200&dipc-max-msg-size=50" -X POST "http://localhost/rw/dipc?action=dipc-create"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on DIPC Queue
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue
 
 ---
 
 ## Get DIPC Queue
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Get DIPC Queue
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Get DIPC Queue
 
 URL — /rw/dipc/{queue-name}
 
-**URL :** `/rw/dipc/{queue-name}`  
-**Method :** `GET`
+**URL:** `/rw/dipc/{queue-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 dipc-queue
 The operation mode
@@ -7221,35 +7221,35 @@ queue-slot-id
 The queue slot id
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get DIPC Queue Actions
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Get DIPC Queue Actions
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Get DIPC Queue Actions
 
 URL — /rw/dipc/{queue-name}
 
-**URL :** `/rw/dipc/{queue-name}`  
-**Method :** `GET`
+**URL:** `/rw/dipc/{queue-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -7257,12 +7257,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 dipc-send
 Send a message to a queue
@@ -7296,41 +7296,41 @@ dipc-delete
 Delete the queue
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/rw/dipc/testq?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Send message
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Send message
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Send message
 
 URL — /rw/dipc/{queue-name}
 
-**URL :** `/rw/dipc/{queue-name}`  
-**Method :** `POST`
+**URL:** `/rw/dipc/{queue-name}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=dipc-send
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 dipc-src-queue-name
 The source queue name
@@ -7349,36 +7349,36 @@ The data to send
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Send message to queue
 curl --digest -u "Default User":robotics -d "dipc-src-queue-name=testq&dipc-cmd=111&dipc-userdef=222&dipc-msgtype=1&dipc-data=hello" -X POST "http://localhost/rw/dipc/testq?action=dipc-send"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Read message
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Read message
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Read message
 
 URL — /rw/dipc/{queue-name}
 
-**URL :** `/rw/dipc/{queue-name}`  
-**Method :** `GET`
+**URL:** `/rw/dipc/{queue-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=dipc-read
 Required
@@ -7388,12 +7388,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 dipc-read-li
 queue-name
@@ -7414,78 +7414,78 @@ dipc-data
 The queue data
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq?action=dipc-read"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Delete DIPC Queue
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Delete DIPC Queue
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Delete DIPC Queue
 
 URL — /rw/dipc/{queue-name}
 
-**URL :** `/rw/dipc/{queue-name}`  
-**Method :** `DELETE`
+**URL:** `/rw/dipc/{queue-name}`  
+**Method:** `DELETE`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Delete a queue
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/rw/dipc/testq"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 User can delete DIPC queue only if the queue is created by the same user
 
 ---
 
 ## Subscribe DIPC Queue
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Subscribe DIPC Queue
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Subscribe DIPC Queue
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -7496,23 +7496,23 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 dipc-msg-ev
 Message in queue
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on queue
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -7520,25 +7520,25 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/dipc/testq&1-p=0"
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/dipc/testq&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe DIPC Queue without reading message
 
-**Chemin :** RobotWare Services › DIPC service › Operations on DIPC Queue › Subscribe DIPC Queue without reading message
+**Path:** RobotWare Services › DIPC service › Operations on DIPC Queue › Subscribe DIPC Queue without reading message
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -7549,23 +7549,23 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 dipc-msg-ev
 Message in queue
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on queue
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -7581,20 +7581,20 @@ Notes
 
 ## Elog service
 
-**Chemin :** RobotWare Services › Elog service
+**Path:** RobotWare Services › Elog service
 
 ---
 
 ## Get Elog Resources
 
-**Chemin :** RobotWare Services › Elog service › Get Elog Resources
+**Path:** RobotWare Services › Elog service › Get Elog Resources
 
 URL — /rw/elog
 
-**URL :** `/rw/elog`  
-**Method :** `GET`
+**URL:** `/rw/elog`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 lang=[language-code]
 Optional
@@ -7609,12 +7609,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 elog-domain-li
 Specifies a link to the 'elog-domain` resource.
@@ -7626,30 +7626,30 @@ buffsize
 =[numeric] The elog buffer size of elog domain.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog"
 curl --digest -u "Default User":robotics "http://localhost/rw/elog?lang=de"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get Elog Actions
 
-**Chemin :** RobotWare Services › Elog service › Get Elog Actions
+**Path:** RobotWare Services › Elog service › Get Elog Actions
 
 URL — /rw/elog
 
-**URL :** `/rw/elog`  
-**Method :** `GET`
+**URL:** `/rw/elog`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -7657,12 +7657,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 clearall
 Clear elog messages in all elog domains
@@ -7670,112 +7670,112 @@ saveraw
 Dump raw elog messages to a file.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Clear elog messages
 
-**Chemin :** RobotWare Services › Elog service › Clear elog messages
+**Path:** RobotWare Services › Elog service › Clear elog messages
 
 URL — /rw/elog
 
-**URL :** `/rw/elog`  
-**Method :** `POST`
+**URL:** `/rw/elog`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=clearall
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Clear all elog messages
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/elog?action=clearall"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Save elog in system dump format
 
-**Chemin :** RobotWare Services › Elog service › Save elog in system dump format
+**Path:** RobotWare Services › Elog service › Save elog in system dump format
 
 Description — Save event log in sys dump format on controller
 
-**URL :** `/rw/elog`  
-**Method :** `POST`
+**URL:** `/rw/elog`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=saveraw
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 path={path along with file-name which will contain the system dump} Environment variables such as $system, $syspar shall be possible to have in the path.
 ```
 
-**Success :** ACCEPTED (202)
+**Success:** ACCEPTED (202)
 Location header: /progress/{id}
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), UNAUTHORIZED(401)
+**Error:** UNSUPPORTED_MEDIA(415), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Generate elog in system dump format.
 curl --digest -u "Default User":robotics -d "path=/fileservice/$syspar/elog_dump.txt" -X POST "http://localhost/rw/elog?action=saveraw"
 ```
 
-**Notes :** Since saving an elog in system dump format is an asynchronous task, the value of location header can be subscribed on to get information about the status of the task.
+**Notes:** Since saving an elog in system dump format is an asynchronous task, the value of location header can be subscribed on to get information about the status of the task.
 
 ---
 
 ## Operations on elog domain
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain
+**Path:** RobotWare Services › Elog service › Operations on elog domain
 
 ---
 
 ## Get elog messages in domain
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Get elog messages in domain
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Get elog messages in domain
 
 URL — /rw/elog/{domain-number}
 
-**URL :** `/rw/elog/{domain-number}`  
-**Method :** `GET`
+**URL:** `/rw/elog/{domain-number}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
@@ -7810,12 +7810,12 @@ Return the elog messages starting from the specified sequence number
 example: elogseqnum=8
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 elog-message-li
 msg-type
@@ -7865,15 +7865,15 @@ buffsize
 =[numeric] Size of elog buffer for this domain
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0"
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?resource=count"
@@ -7884,32 +7884,32 @@ curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?elogseqnum=
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?resource=info"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Actions on elog domain
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Get Actions on elog domain
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Get Actions on elog domain
 
 URL — /rw/elog/{domain-number}
 
-**URL :** `/rw/elog/{domain-number}`  
-**Method :** `GET`
+**URL:** `/rw/elog/{domain-number}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 clear
 Clear elog messages in this domain
@@ -7917,78 +7917,78 @@ subscribe
 Subscribe on a elog domain
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Clear elog messages
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Clear elog messages
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Clear elog messages
 
 URL — /rw/elog/{domain-number}
 
-**URL :** `/rw/elog/{domain-number}`  
-**Method :** `POST`
+**URL:** `/rw/elog/{domain-number}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=clear
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), NOT_FOUND(404)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Clear all elog messages
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/elog/0?action=clear"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on elog domain
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Subscribe on elog domain
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Subscribe on elog domain
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -7999,7 +7999,7 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 elog-message-ev
 seqnum
@@ -8008,17 +8008,17 @@ href self
 Link to the event string
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on elog domain 0
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -8027,26 +8027,26 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/elog/0&1-p=1" -X 
 The subscription request will return a message similar to the sample response above. To retrieve the elog text must the client do a GET on the link returned in the elog-message-ev.
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on elog domain message
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Operations on elog domain message
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Operations on elog domain message
 
 ---
 
 ## Get Elog Message in domain
 
-**Chemin :** RobotWare Services › Elog service › Operations on elog domain › Operations on elog domain message › Get Elog Message in domain
+**Path:** RobotWare Services › Elog service › Operations on elog domain › Operations on elog domain message › Get Elog Message in domain
 
 URL — /rw/elog/{domain-number}/{sequence-number}
 
-**URL :** `/rw/elog/{domain-number}/{sequence-number}`  
-**Method :** `GET`
+**URL:** `/rw/elog/{domain-number}/{sequence-number}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
@@ -8057,12 +8057,12 @@ This option returns all the elog messages in the specified language.
 example: lang=de
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 elog-message
 Specifies a link to the 'elog-domain` resource.
@@ -8108,53 +8108,53 @@ lang
 parameter is provided
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404), BAD_REQUEST(400)
+**Error:** NOT_FOUND(404), BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0/8?lang=en"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## IO Service
 
-**Chemin :** RobotWare Services › IO Service
+**Path:** RobotWare Services › IO Service
 
 ---
 
 ## Get IO System resources
 
-**Chemin :** RobotWare Services › IO Service › Get IO System resources
+**Path:** RobotWare Services › IO Service › Get IO System resources
 
 URL — /rw/iosystem
 
-**URL :** `/rw/iosystem`  
-**Method :** `GET`
+**URL:** `/rw/iosystem`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-networks-li
 Networks list item
@@ -8164,51 +8164,51 @@ ios-signals-li
 Signals list item
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Networks
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Networks
+**Path:** RobotWare Services › IO Service › Operations on IO Networks
 
 ---
 
 ## Get IO Networks resources
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Networks › Get IO Networks resources
+**Path:** RobotWare Services › IO Service › Operations on IO Networks › Get IO Networks resources
 
 URL — /rw/iosystem/networks
 
-**URL :** `/rw/iosystem/networks`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/networks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-network-li
 name
@@ -8221,33 +8221,33 @@ rel
 devices Link to devices connected to this network
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Actions on IO Networks
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Networks › Get Actions on IO Networks
+**Path:** RobotWare Services › IO Service › Operations on IO Networks › Get Actions on IO Networks
 
 URL — /rw/iosystem/networks
 
-**URL :** `/rw/iosystem/networks`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/networks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -8256,12 +8256,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 search
 Search IO networks based on name or state
@@ -8273,39 +8273,39 @@ lstate
 The logical state of the device
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Search IO Networks
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Networks › Search IO Networks
+**Path:** RobotWare Services › IO Service › Operations on IO Networks › Search IO Networks
 
 URL — /rw/iosystem/networks
 
-**URL :** `/rw/iosystem/networks`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/networks`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=search
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name
 The network name e.g. Virtual or Local
@@ -8316,7 +8316,7 @@ mandatory
 ("name (or) state") . Example: name=local&state=running (or) state=running
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-network-li
 name
@@ -8329,52 +8329,52 @@ rel
 devices Link to devices connected to this network
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Search IO Networks
 curl --digest -u "Default User":robotics -d "name=Local&state=running" -X POST "http://localhost/rw/iosystem/networks?action=search"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Network
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network
+**Path:** RobotWare Services › IO Service › Operations on IO Network
 
 ---
 
 ## Get IO Network
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Get IO Network
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Get IO Network
 
 URL — /rw/iosystem/networks/{network}
 
-**URL :** `/rw/iosystem/networks/{network}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/networks/{network}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-network
 IO network resource
@@ -8386,33 +8386,33 @@ lstate
 Logical state: {started, stopped, unknown}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IO Network actions
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Get IO Network actions
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Get IO Network actions
 
 URL — /rw/iosystem/networks/{network}
 
-**URL :** `/rw/iosystem/networks/{network}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/networks/{network}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -8421,12 +8421,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 Set network state
@@ -8444,39 +8444,39 @@ priority
 priority associated with the resource
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update IO Network
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Update IO Network
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Update IO Network
 
 URL — /rw/iosystem/networks/{network}
 
-**URL :** `/rw/iosystem/networks/{network}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/networks/{network}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lstate = Logical network state
 Required
@@ -8484,39 +8484,39 @@ see
 Get IO Network actions
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=start" -X POST "http://localhost/rw/iosystem/networks/Local?action=set"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe IO Network
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Subscribe IO Network
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Subscribe IO Network
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -8527,7 +8527,7 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-networkstate
 lstate
@@ -8536,15 +8536,15 @@ pstate
 Network physical state
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on IO Network
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -8552,20 +8552,20 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/networks
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/networks/Local;state&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IO Network Configuration Properties
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Get IO Network Configuration Properties
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Get IO Network Configuration Properties
 
 URL — /rw/iosystem/networks/{network}
 
-**URL :** `/rw/iosystem/networks/{network}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/networks/{network}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=config
 Required
@@ -8575,12 +8575,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-network-config-runtime
 IO network resource
@@ -8592,90 +8592,90 @@ networkaddress
 Industrial network address
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?resource=config&configtype=1"
 ```
 
-**Notes :** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration, 3 = both)
+**Notes:** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration, 3 = both)
 Not supported in bootserver mode
 
 ---
 
 ## Update IO Network Configuration Type
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Network › Update IO Network Configuration Type
+**Path:** RobotWare Services › IO Service › Operations on IO Network › Update IO Network Configuration Type
 
 URL — /rw/iosystem/networks/{network}
 
-**URL :** `/rw/iosystem/networks/{network}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/networks/{network}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=config
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 config-type = Network configuration type {BITS,GROUPS,BOTH,SCAN,UNITS}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "config-type=BITS" -X POST "http://localhost/rw/iosystem/networks/Local?action=config"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Devices
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Devices
+**Path:** RobotWare Services › IO Service › Operations on IO Devices
 
 ---
 
 ## Get IO Devices
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Devices › Get IO Devices
+**Path:** RobotWare Services › IO Service › Operations on IO Devices › Get IO Devices
 
 URL — /rw/iosystem/devices
 
-**URL :** `/rw/iosystem/devices`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-device-li
 IO Device list item
@@ -8691,33 +8691,33 @@ address
 device address
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Actions IO Devices
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Devices › Get Actions IO Devices
+**Path:** RobotWare Services › IO Service › Operations on IO Devices › Get Actions IO Devices
 
 URL — /rw/iosystem/devices
 
-**URL :** `/rw/iosystem/devices`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -8726,12 +8726,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 search
 Search devices
@@ -8743,39 +8743,39 @@ lstate
 The logical state of the device
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Search IO Devices
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Devices › Search IO Devices
+**Path:** RobotWare Services › IO Service › Operations on IO Devices › Search IO Devices
 
 URL — /rw/iosystem/devices
 
-**URL :** `/rw/iosystem/devices`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/devices`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=search
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name = The device name e.g. DRV_1
 lstate = The device logical state e.g. enabled
@@ -8785,7 +8785,7 @@ Device name (or) device lstate is needed for search
 example: name=panel&lstate=enabled (or) lstate=enabled
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-device-li
 IO Device list item
@@ -8799,52 +8799,52 @@ address
 device address
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Search IO Devices
 curl --digest -u "Default User":robotics -d "name=DRV_1&lstate=enabled&network=DeviceNet" -X POST "http://localhost/rw/iosystem/devices?action=search"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Device
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device
+**Path:** RobotWare Services › IO Service › Operations on IO Device
 
 ---
 
 ## Get IO Device
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Get IO Device
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Get IO Device
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-device
 IO device resource
@@ -8866,33 +8866,33 @@ outmask
 Out-put mask. Set bit to zero which outdata shall not be set
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/Local/PANEL"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IO Device actions
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Get IO Device actions
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Get IO Device actions
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -8901,12 +8901,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 Set device state
@@ -8928,77 +8928,77 @@ priority
 priority associated with the resource
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/Local/PANEL?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update IO Device
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Update IO Device
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Update IO Device
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lstate = Logical device state
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=enable" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe IO Device
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Subscribe IO Device
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Subscribe IO Device
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -9009,7 +9009,7 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-devicestate-ev
 lstate
@@ -9018,15 +9018,15 @@ pstate
 Device physical state
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on IO Device
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -9034,26 +9034,26 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/devices/
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/devices/Local/PANEL;state&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set input data
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Set input data
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Set input data
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-inputdata
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 startbyte={indexnumber}
 Required
@@ -9063,20 +9063,20 @@ datamask={datamask}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set-inputdata"
 ```
 
-**Notes :** Only supported in Virtual Controller.
+**Notes:** Only supported in Virtual Controller.
 If input data is 4 bytes long, start byte can have values ranging from 0 to 3. Datamask/signal data can have values ranging from 0 to 255 (since it is accessed as 1 byte long). If datamask/signal data is greater than 255 (1 byte long), only first 8 bits is used.
 Not supported in bootserver mode.
 
@@ -9084,20 +9084,20 @@ Not supported in bootserver mode.
 
 ## Set output data
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Set output data
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Set output data
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-outputdata
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 startbyte={indexnumber}
 Required
@@ -9107,20 +9107,20 @@ datamask={datamask}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set-outputdata"
 ```
 
-**Notes :** Only supported in Virtual Controller.
+**Notes:** Only supported in Virtual Controller.
 If input data is 4 bytes long, start byte can have values ranging from 0 to 3. Datamask/signal data can have values ranging from 0 to 255 (since it is accessed as 1 byte long). If datamask/signal data is greater than 255 (1 byte long), only first 8 bits is used.
 Not supported in bootserver mode.
 
@@ -9128,14 +9128,14 @@ Not supported in bootserver mode.
 
 ## Get IO Device Configuration Properties
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Get IO Device Configuration Properties
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Get IO Device Configuration Properties
 
 URL — /rw/iosystem/devices/{device}
 
-**URL :** `/rw/iosystem/devices/{device}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices/{device}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=config
 Required
@@ -9145,12 +9145,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-device-config-runtime
 IO device resource
@@ -9178,52 +9178,52 @@ denydeactivate
 lag indicating if possible to deactivate the I/O device or not
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/DeviceNet/DN_Internal_Device?resource=config&configtype=1"
 ```
 
-**Notes :** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration , 3 = both)
+**Notes:** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration , 3 = both)
 Not supported in bootserver mode
 
 ---
 
 ## Operations on eio Device
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Operations on eio Device
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Operations on eio Device
 
 ---
 
 ## Get eio device status information
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Operations on eio Device › Get eio device status information
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Operations on eio Device › Get eio device status information
 
 URL — /rw/iosystem/devices/{network}/{device}/upgradeinfo
 
-**URL :** `/rw/iosystem/devices/{network}/{device}/upgradeinfo`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/devices/{network}/{device}/upgradeinfo`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 eio-device
 Firmware upgrade info
@@ -9260,47 +9260,47 @@ latest-program-name-available
 Name of the latest installed program
 ```
 
-**Success :** HTTP_OK(200), NO_CONTENT(204)
+**Success:** HTTP_OK(200), NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/EtherNetIP/EN_Internal_Device/upgradeinfo"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Applicable only for RC
 
 ---
 
 ## Operations on Device Command
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command
 
 ---
 
 ## Send Device Command
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command › Send Device Command
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command › Send Device Command
 
 URL — /rw/iosystem/devices/{device}/command
 
-**URL :** `/rw/iosystem/devices/{device}/command`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/devices/{device}/command`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 commandName = Name of the device command
 Required
@@ -9312,44 +9312,44 @@ timeout = Device timeout. Wait on answer from I/O device in maximum Timeout ms
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "commandName=FIRMWARE_INFO&value=0&valueLength=0&timeout=0" -X POST "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
 ```
 
-**Notes :** Applicable only for RC.
+**Notes:** Applicable only for RC.
 Not supported in bootserver mode.
 
 ---
 
 ## Send Device Command actions
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command › Send Device Command actions
+**Path:** RobotWare Services › IO Service › Operations on IO Device › Operations on Device Command › Send Device Command actions
 
 URL — /rw/iosystem/devices/{device}/command
 
-**URL :** `/rw/iosystem/devices/{device}/command`  
-**Method :** `OPTIONS`
+**URL:** `/rw/iosystem/devices/{device}/command`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 devicecommand
 commandName
@@ -9362,49 +9362,49 @@ timeout
 Device timeout. Wait on answer from I/O device in maximum Timeout ms.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Operations on IO Signals
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals
+**Path:** RobotWare Services › IO Service › Operations on IO Signals
 
 ---
 
 ## Get IO Signals
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals › Get IO Signals
+**Path:** RobotWare Services › IO Service › Operations on IO Signals › Get IO Signals
 
 URL — /rw/iosystem/signals
 
-**URL :** `/rw/iosystem/signals`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/signals`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-signal-li
 IO-Signal list item
@@ -9420,33 +9420,33 @@ lstate
 Signals state {simulated | not simulated}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Signal Search
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals › Signal Search
+**Path:** RobotWare Services › IO Service › Operations on IO Signals › Signal Search
 
 URL — /rw/iosystem/signals
 
-**URL :** `/rw/iosystem/signals`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/signals`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=signal-search
 Required
@@ -9456,7 +9456,7 @@ limit={limit_value}
 Optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={signal_name}
 Optional
@@ -9492,7 +9492,7 @@ blocked2=true | false
 Optional
 ```
 
-**Resources :**
+**Resources:**
 ```
 name
 signal name
@@ -9512,33 +9512,33 @@ invert
 Possible to combine two search criteria, where the signal is retrieved only if both are true. One of the criteria should have the invert set to TRUE, otherwise it is functionally identical to single search criteria.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Bad Request(400)
+**Error:** Bad Request(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?action=signal-search"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Signal Search Extended
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals › Signal Search Extended
+**Path:** RobotWare Services › IO Service › Operations on IO Signals › Signal Search Extended
 
 URL — /rw/iosystem/signals
 
-**URL :** `/rw/iosystem/signals`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/signals`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=signal-searchex
 Required
@@ -9547,7 +9547,7 @@ limit={limit_value}
 Optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={signal_name}
 Optional
@@ -9583,7 +9583,7 @@ blocked2=true | false
 Optional
 ```
 
-**Resources :**
+**Resources:**
 ```
 name
 signal name
@@ -9617,70 +9617,70 @@ invert
 Possible to combine two search criteria, where the signal is retrieved only if both are true. One of the criteria should have the invert set to TRUE, otherwise it is functionally identical to single search criteria.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Bad Request(400)
+**Error:** Bad Request(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?action=signal-searchex"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Unblock Signals
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals › Unblock Signals
+**Path:** RobotWare Services › IO Service › Operations on IO Signals › Unblock Signals
 
 URL — /rw/iosystem/signals
 
-**URL :** `/rw/iosystem/signals`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/signals`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=unblock-signal
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** Bad Request(400), FORBIDDEN(403), UNAUTHORIZED(401)
+**Error:** Bad Request(400), FORBIDDEN(403), UNAUTHORIZED(401)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/iosystem/signals?action=unblock-signal"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IO Signals actions
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signals › Get IO Signals actions
+**Path:** RobotWare Services › IO Service › Operations on IO Signals › Get IO Signals actions
 
 URL — /rw/iosystem/signals
 
-**URL :** `/rw/iosystem/signals`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/signals`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -9688,51 +9688,51 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Bad Request(400)
+**Error:** Bad Request(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Signal
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal
+**Path:** RobotWare Services › IO Service › Operations on IO Signal
 
 ---
 
 ## Get an IO Signal
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Get an IO Signal
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Get an IO Signal
 
 URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 
-**URL :** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-signal
 IO-signal resource
@@ -9764,34 +9764,34 @@ quality
 Signal quality
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 /rw/iosystem/signals/{network}/{unit}/{signal};state will return only the IO signal value.
 
 ---
 
 ## Get IO Signal actions
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Get IO Signal actions
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Get IO Signal actions
 
 URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 
-**URL :** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -9800,12 +9800,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 see
@@ -9839,39 +9839,39 @@ resources
 resource
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update IO Signal State
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Update IO Signal State
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Update IO Signal State
 
 URL — /rw/iosystem/signals/{network}/{device}/{signal}
 
-**URL :** `/rw/iosystem/signals/{network}/{device}/{signal}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/signals/{network}/{device}/{signal}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lstate = Logical signal state {simulated | not simulated}
 Required
@@ -9879,40 +9879,40 @@ see
 Get IO Signal actions
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=simulated" -X POST "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=set"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update IO Signal Value
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Update IO Signal Value
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Update IO Signal Value
 
 URL — /rw/iosystem/signals/{network}/{device}/{signal}
 
-**URL :** `/rw/iosystem/signals/{network}/{device}/{signal}`  
-**Method :** `POST`
+**URL:** `/rw/iosystem/signals/{network}/{device}/{signal}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lvalue
 : logical signal value
@@ -9939,33 +9939,33 @@ mandatory
 to give any one data param with its required combination.
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe IO Signal
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Subscribe IO Signal
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Subscribe IO Signal
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -9976,7 +9976,7 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-signalstate-ev
 lvalue
@@ -9985,15 +9985,15 @@ lstate
 Signals state {simulated | not simulated}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on IO-Signal, it is possible to subscribe with any subscription priority (i.e High,Medium,Low priority) on IO-Signals.
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Local/DRV_1/DRV1K1;state&1-p=2" -X POST "http://localhost/subscription"
@@ -10001,20 +10001,20 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Local/DRV_1/DRV1K1;state&1-p=0" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IO signal Configuration Properties
 
-**Chemin :** RobotWare Services › IO Service › Operations on IO Signal › Get IO signal Configuration Properties
+**Path:** RobotWare Services › IO Service › Operations on IO Signal › Get IO signal Configuration Properties
 
 URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 
-**URL :** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
-**Method :** `GET`
+**URL:** `/rw/iosystem/signals/{network}/{unit}/{signal}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=config
 Required
@@ -10024,12 +10024,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ios-signal-config-runtime
 IO-signal resource
@@ -10051,52 +10051,52 @@ setbydevicetransfer
 The bit(s) in this signal is set by a device transfer operation
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?resource=config&configtype=1"
 ```
 
-**Notes :** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration , 3 = both)
+**Notes:** "configtype_value" should be 1 (or) 2 (or) 3 (2= general configuration , 1 = runtime configuration , 3 = both)
 Not supported in bootserver mode
 
 ---
 
 ## Mastership service
 
-**Chemin :** RobotWare Services › Mastership service
+**Path:** RobotWare Services › Mastership service
 
 ---
 
 ## Get Mastership Resources
 
-**Chemin :** RobotWare Services › Mastership service › Get Mastership Resources
+**Path:** RobotWare Services › Mastership service › Get Mastership Resources
 
 URL — /rw/mastership
 
-**URL :** `/rw/mastership`  
-**Method :** `GET`
+**URL:** `/rw/mastership`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 msh-resource-li
 Provides link to the detailed
@@ -10107,34 +10107,34 @@ motion = acquire mastership over motion domain
 rapid = acquire mastership over RAPID domain
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Mastership Actions
 
-**Chemin :** RobotWare Services › Mastership service › Get Mastership Actions
+**Path:** RobotWare Services › Mastership service › Get Mastership Actions
 
 URL — /rw/mastership
 
-**URL :** `/rw/mastership`  
-**Method :** `GET`
+**URL:** `/rw/mastership`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -10143,12 +10143,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 request-mastership
 Request mastership on all resources under mastership i.e. on CFG, MOTION and RAPID domains
@@ -10162,120 +10162,120 @@ e.g:
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership/cfg&1-p=0&resources=2&2=/rw/mastership/rapid&2-p=0&resources=3&3=/rw/mastership/motion&3-p=0" -X POST "http://localhost/subscription"
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Mastership request
 
-**Chemin :** RobotWare Services › Mastership service › Mastership request
+**Path:** RobotWare Services › Mastership service › Mastership request
 
 URL — /rw/mastership
 
-**URL :** `/rw/mastership`  
-**Method :** `POST`
+**URL:** `/rw/mastership`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=request
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Request mastership on all domains
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership?action=request"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 In manual mode, mastership can be gained after getting RMMP.
 
 ---
 
 ## Mastership release
 
-**Chemin :** RobotWare Services › Mastership service › Mastership release
+**Path:** RobotWare Services › Mastership service › Mastership release
 
 URL — /rw/mastership
 
-**URL :** `/rw/mastership`  
-**Method :** `POST`
+**URL:** `/rw/mastership`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=release
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Release mastership on all domains
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership?action=release"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Mastership Subscribe
 
-**Chemin :** RobotWare Services › Mastership service › Mastership Subscribe
+**Path:** RobotWare Services › Mastership service › Mastership Subscribe
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -10286,17 +10286,17 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on mastership state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -10304,38 +10304,38 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership&1-p=0"
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Mastership domains
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains
 
 ---
 
 ## Get Mastership Domain
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains › Get Mastership Domain
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains › Get Mastership Domain
 
 URL — /rw/mastership/{domain-name}
 
-**URL :** `/rw/mastership/{domain-name}`  
-**Method :** `GET`
+**URL:** `/rw/mastership/{domain-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 msh-resource
 The specified mastership resource.
@@ -10352,34 +10352,34 @@ internal - Mastership is held by an internal user (e.g., master of resource Jog 
 mastershipheldbyme = TRUE if the user holding the mastership is the user associated with the given client id (cid), FALSE otherwise.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Mastership Domain Actions
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains › Get Mastership Domain Actions
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains › Get Mastership Domain Actions
 
 URL — /rw/mastership/{domain-name}
 
-**URL :** `/rw/mastership/{domain-name}`  
-**Method :** `GET`
+**URL:** `/rw/mastership/{domain-name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -10388,12 +10388,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 request-mastership
 Request mastership on a particular resource.
@@ -10409,120 +10409,120 @@ e.g:
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership/cfg&1-p=0" -X POST "http://localhost/subscription"
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Mastership domain request
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership domain request
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership domain request
 
 URL — /rw/mastership/{domain}
 
-**URL :** `/rw/mastership/{domain}`  
-**Method :** `POST`
+**URL:** `/rw/mastership/{domain}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=request
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 FORBIDDEN(403)
 BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Request mastership on cfg domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership/cfg?action=request"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 In manual mode, mastership can be gained after getting RMMP.
 
 ---
 
 ## Mastership Domain release
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership Domain release
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership Domain release
 
 URL — /rw/mastership/{domain}
 
-**URL :** `/rw/mastership/{domain}`  
-**Method :** `POST`
+**URL:** `/rw/mastership/{domain}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=release
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 FORBIDDEN(403)
 BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Release mastership on cfg domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership/cfg?action=release"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Mastership Domain Subscribe
 
-**Chemin :** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership Domain Subscribe
+**Path:** RobotWare Services › Mastership service › Operations on Mastership domains › Mastership Domain Subscribe
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -10533,7 +10533,7 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 msh-resource-value
 The mastership information
@@ -10552,17 +10552,17 @@ local - Mastership is held by a local user, e.g., the GTPU.
 internal - Mastership is held by an internal user (e.g., master of resource Jog is held during execution).
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on cfg domain for changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -10570,38 +10570,38 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership/cfg&1-
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/mastership/cfg&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Panel service
 
-**Chemin :** RobotWare Services › Panel service
+**Path:** RobotWare Services › Panel service
 
 ---
 
 ## Get Panel Resources
 
-**Chemin :** RobotWare Services › Panel service › Get Panel Resources
+**Path:** RobotWare Services › Panel service › Get Panel Resources
 
 URL — /rw/panel
 
-**URL :** `/rw/panel`  
-**Method :** `GET`
+**URL:** `/rw/panel`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 pnl-ctrlstate-li
 The controller state resource
@@ -10617,45 +10617,45 @@ speedratio = speedratio in which the controller is operating
 coldetstate = The collision detection states {INIT | TRIGGERED | CONFIRMED | TRIGGERED_ACK}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Panel Actions
 
-**Chemin :** RobotWare Services › Panel service › Get Panel Actions
+**Path:** RobotWare Services › Panel service › Get Panel Actions
 
 URL — /rw/panel
 
-**URL :** `/rw/panel`  
-**Method :** `GET`
+**URL:** `/rw/panel`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 restart
 restart the controller
@@ -10675,39 +10675,39 @@ etc.
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set the language
 
-**Chemin :** RobotWare Services › Panel service › Set the language
+**Path:** RobotWare Services › Panel service › Set the language
 
 URL — /rw/panel
 
-**URL :** `/rw/panel`  
-**Method :** `POST`
+**URL:** `/rw/panel`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setlang
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 lang-code = The langauge code e.g.
 en
@@ -10719,112 +10719,112 @@ etc
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set the controller language
 curl --digest -u "Default User":robotics -d "lang-code=en" -X POST "http://localhost/rw/panel?action=setlang"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Restart the Controller
 
-**Chemin :** RobotWare Services › Panel service › Restart the Controller
+**Path:** RobotWare Services › Panel service › Restart the Controller
 
 URL — /rw/panel
 
-**URL :** `/rw/panel`  
-**Method :** `POST`
+**URL:** `/rw/panel`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=restart
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 restart-mode = restart modes are {restart | istart | pstart | bstart}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Restart the controller
 curl --digest -u "Default User":robotics -d "restart-mode=restart" -X POST "http://localhost/rw/panel?action=restart"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Controller State Resource
 
-**Chemin :** RobotWare Services › Panel service › Operations on Controller State Resource
+**Path:** RobotWare Services › Panel service › Operations on Controller State Resource
 
 ---
 
 ## Get Controller State
 
-**Chemin :** RobotWare Services › Panel service › Operations on Controller State Resource › Get Controller State
+**Path:** RobotWare Services › Panel service › Operations on Controller State Resource › Get Controller State
 
 URL — /rw/panel/ctrlstate
 
-**URL :** `/rw/panel/ctrlstate`  
-**Method :** `GET`
+**URL:** `/rw/panel/ctrlstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 ctrlstate
 The controller state. {init | motoron | motoroff | guardstop | emergencystop | emergencystopreset | sysfail}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate"
 ```
 
-**Notes :** init
+**Notes:** init
 : The robot is starting up. It will shift to state motors off when it has started.
 motoroff
 : The robot is in a standby state where there is no power to the robot's motors. The state has to be shifted to motors on before the robot can move.
@@ -10844,14 +10844,14 @@ Not supported in bootserver mode.
 
 ## Get Controller State Actions
 
-**Chemin :** RobotWare Services › Panel service › Operations on Controller State Resource › Get Controller State Actions
+**Path:** RobotWare Services › Panel service › Operations on Controller State Resource › Get Controller State Actions
 
 URL — /rw/panel/ctrlstate
 
-**URL :** `/rw/panel/ctrlstate`  
-**Method :** `GET`
+**URL:** `/rw/panel/ctrlstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -10859,12 +10859,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 ctrl-state
@@ -10878,77 +10878,77 @@ for more information refer Subscription Service documentation.
 Subscribe on controller state changes.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Controller State
 
-**Chemin :** RobotWare Services › Panel service › Operations on Controller State Resource › Set Controller State
+**Path:** RobotWare Services › Panel service › Operations on Controller State Resource › Set Controller State
 
 URL — /rw/panel/ctrlstate
 
-**URL :** `/rw/panel/ctrlstate`  
-**Method :** `POST`
+**URL:** `/rw/panel/ctrlstate`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setctrlstate
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 ctrl-state = The controller state {motoron | motoroff}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400)
+**Error:** BAD REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set controller state
 curl --digest -u "Default User":robotics -d "ctrl-state=motoron" -X POST "http://localhost/rw/panel/ctrlstate?action=setctrlstate"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Subscribe Controller state
 
-**Chemin :** RobotWare Services › Panel service › Operations on Controller State Resource › Subscribe Controller state
+**Path:** RobotWare Services › Panel service › Operations on Controller State Resource › Subscribe Controller state
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -10959,24 +10959,24 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 pnl-ctrlstate-ev
 ctrlstate
 Controller state {init | motoron | motoroff | guardstop | emergencystop | emergencystopreset | sysfail}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -10984,7 +10984,7 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/ctrlstate&1
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/ctrlstate&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** init
+**Notes:** init
 : The robot is starting up. It will shift to state motors off when it has started.
 motoroff
 : The robot is in a standby state where there is no power to the robot's motors. The state has to be shifted to motors on before the robot can move.
@@ -11004,32 +11004,32 @@ Not supported in bootserver mode
 
 ## Operations on Operation Mode Resource
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource
 
 ---
 
 ## Get Operation Mode
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation Mode
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation Mode
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `GET`
+**URL:** `/rw/panel/opmode`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 opmode
 The operation mode {INIT | AUTO_CH | MANF_CH | MANR | MANF | AUTO | UNDEF}
@@ -11049,33 +11049,33 @@ UNDEF
 : Undefined
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Operation  Mode Actions
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation  Mode Actions
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation  Mode Actions
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `GET`
+**URL:** `/rw/panel/opmode`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -11083,12 +11083,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 set the opmode as { Lock | unlock}
@@ -11097,38 +11097,38 @@ for more information refer Subscription Service documentation.
 Subscribe on controller operation mode.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe Operation Mode
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Subscribe Operation Mode
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Subscribe Operation Mode
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -11139,24 +11139,24 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 pnl-opmode-ev
 opmode
 Controller Operation Mode {INIT | AUTO_CH | MANF_CH | MANR | MANF | AUTO | UNDEF}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -11164,47 +11164,47 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/opmode&1-p=
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/opmode&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Acknowledgement for Operation Mode
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Acknowledgement for Operation Mode
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Acknowledgement for Operation Mode
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `POST`
+**URL:** `/rw/panel/opmode`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=acknowledge
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 opmode={auto | manf | coldet}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 UNSUPPORTED_MEDIA (415)
 FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "opmode=auto" -X POST "http://localhost/rw/panel/opmode?action=acknowledge"
 ```
 
-**Notes :** Client should have Local Client previliges to execute the functionality.
+**Notes:** Client should have Local Client previliges to execute the functionality.
 Auto acknowledgement option should be deactivated.
 Not supported in bootserver mode.
 
@@ -11212,57 +11212,57 @@ Not supported in bootserver mode.
 
 ## Get Operation Mode Lock Status
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation Mode Lock Status
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation Mode Lock Status
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `GET`
+**URL:** `/rw/panel/opmode`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=lock-state
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 lock-state:
 The Mode selector lock state gives { error | unlocked | locked | permlocked | pendpermlocked}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?resource=lock-state"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Lock operation mode selection.
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Lock operation mode selection.
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Lock operation mode selection.
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `POST`
+**URL:** `/rw/panel/opmode`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=lock
 Required
@@ -11270,7 +11270,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 pin=<4-digit-pin>
 Required
@@ -11278,20 +11278,20 @@ permanent=<1|0>
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "pin=1234&permanent=0" -X POST "http://localhost/rw/panel/opmode?action=lock"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 UAS_GRANT "Lock saftey controller config" is needed to lock/unlock.
 For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
 
@@ -11299,14 +11299,14 @@ For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
 
 ## Unlock operation mode selection.
 
-**Chemin :** RobotWare Services › Panel service › Operations on Operation Mode Resource › Unlock operation mode selection.
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Unlock operation mode selection.
 
 URL — /rw/panel/opmode
 
-**URL :** `/rw/panel/opmode`  
-**Method :** `POST`
+**URL:** `/rw/panel/opmode`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=unlock
 Required
@@ -11314,26 +11314,26 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 pin=<4-digit-pin>
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "pin=1234" -X POST "http://localhost/rw/panel/opmode?action=unlock"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 UAS_GRANT "Lock saftey controller config" is needed to lock/unlock.
 For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
 
@@ -11341,64 +11341,64 @@ For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
 
 ## Operations on Speed Ratio Resource
 
-**Chemin :** RobotWare Services › Panel service › Operations on Speed Ratio Resource
+**Path:** RobotWare Services › Panel service › Operations on Speed Ratio Resource
 
 ---
 
 ## Get Speed Ratio
 
-**Chemin :** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Get Speed Ratio
+**Path:** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Get Speed Ratio
 
 URL — /rw/panel/speedratio
 
-**URL :** `/rw/panel/speedratio`  
-**Method :** `GET`
+**URL:** `/rw/panel/speedratio`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 speedratio
 The speed ratio value. {0-100}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Speed Ratio Actions
 
-**Chemin :** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Get Speed Ratio Actions
+**Path:** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Get Speed Ratio Actions
 
 URL — /rw/panel/speedratio
 
-**URL :** `/rw/panel/speedratio`  
-**Method :** `GET`
+**URL:** `/rw/panel/speedratio`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -11406,12 +11406,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 set-speed-ratio
 Set the speed ratio
@@ -11424,78 +11424,78 @@ subscribe
 Subscribe on speed ratio changes.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Speed Ratio
 
-**Chemin :** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Set Speed Ratio
+**Path:** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Set Speed Ratio
 
 URL — /rw/panel/speedratio
 
-**URL :** `/rw/panel/speedratio`  
-**Method :** `POST`
+**URL:** `/rw/panel/speedratio`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setspeedratio
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 speed-ratio = The speed ratio value between 0 and 100
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400), UNSUPPORTED_MEDIA (415), FORBIDDEN (403)
+**Error:** BAD_REQUEST (400), UNSUPPORTED_MEDIA (415), FORBIDDEN (403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Set speed ratio
 curl --digest -u "Default User":robotics -d "speed-ratio=60" -X POST "http://localhost/rw/panel/speedratio?action=setspeedratio"
 ```
 
-**Notes :** Only supported in auto mode.
+**Notes:** Only supported in auto mode.
 Not supported in bootserver mode
 
 ---
 
 ## Subscribe Speed Ratio
 
-**Chemin :** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Subscribe Speed Ratio
+**Path:** RobotWare Services › Panel service › Operations on Speed Ratio Resource › Subscribe Speed Ratio
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -11506,24 +11506,24 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 pnl-speedratio-ev
 speedratio
 The Speed Ratio { 0 - 100 }
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -11531,69 +11531,69 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/speedratio&
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/speedratio&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Collision Detection State
 
-**Chemin :** RobotWare Services › Panel service › Operations on Collision Detection State
+**Path:** RobotWare Services › Panel service › Operations on Collision Detection State
 
 ---
 
 ## Get Collision Detection State
 
-**Chemin :** RobotWare Services › Panel service › Operations on Collision Detection State › Get Collision Detection State
+**Path:** RobotWare Services › Panel service › Operations on Collision Detection State › Get Collision Detection State
 
 URL — /rw/panel/coldetstate
 
-**URL :** `/rw/panel/coldetstate`  
-**Method :** `GET`
+**URL:** `/rw/panel/coldetstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 coldetstate
 The collision detection states {INIT | TRIGGERED | CONFIRMED | TRIGGERED_ACK}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Collision Detection State Actions
 
-**Chemin :** RobotWare Services › Panel service › Operations on Collision Detection State › Get Collision Detection State Actions
+**Path:** RobotWare Services › Panel service › Operations on Collision Detection State › Get Collision Detection State Actions
 
 URL — /rw/panel/coldetstate
 
-**URL :** `/rw/panel/coldetstate`  
-**Method :** `GET`
+**URL:** `/rw/panel/coldetstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -11601,50 +11601,50 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 subscribe
 for more information refer Subscription Service documentation.
 Subscribe on collision detection state changes.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Collision Detection State
 
-**Chemin :** RobotWare Services › Panel service › Operations on Collision Detection State › Subscribe on Collision Detection State
+**Path:** RobotWare Services › Panel service › Operations on Collision Detection State › Subscribe on Collision Detection State
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 <identifier> = An identifier
 Required
@@ -11655,17 +11655,17 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on controller state changes
 only low priority subscription(1-p=0) and medium priority subscription(1-p=1) are allowed on this resource
@@ -11673,38 +11673,38 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/coldetstate
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/panel/coldetstate&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## RAPID Service
 
-**Chemin :** RobotWare Services › RAPID Service
+**Path:** RobotWare Services › RAPID Service
 
 ---
 
 ## Get RAPID system resources
 
-**Chemin :** RobotWare Services › RAPID Service › Get RAPID system resources
+**Path:** RobotWare Services › RAPID Service › Get RAPID system resources
 
 URL — /rw/rapid
 
-**URL :** `/rw/rapid`  
-**Method :** `GET`
+**URL:** `/rw/rapid`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-tasks-li
 Rapid tasks resource list item
@@ -11716,37 +11716,37 @@ rap-uiinstr-li
 Rapid UI instruction list item
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl –digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID execution
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution
 
 ---
 
 ## Get RAPID Execution state
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Get RAPID Execution state
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Get RAPID Execution state
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `GET`
+**URL:** `/rw/rapid/execution`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 Optional
@@ -11755,12 +11755,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-execution
 Rapid execution resource
@@ -11770,36 +11770,36 @@ cycle
 Current run mode { forever | asis | once | oncedone }
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/execution"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Use /rw/rapid/execution;ctrlexecstate to filter ctrlexecstate value.
 
 ---
 
 ## Get RAPID Execution actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Get RAPID Execution actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Get RAPID Execution actions
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `GET`
+**URL:** `/rw/rapid/execution`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -11808,12 +11808,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Actions :**
+**Actions:**
 ```
 rap-execution
 start
@@ -11830,37 +11830,37 @@ subscribe
 Subscribe RAPID Execution
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/execution?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Start RAPID Execution
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Start RAPID Execution
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Start RAPID Execution
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=start
 Required
@@ -11868,7 +11868,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 regain={continue | regain | clear}
 Required
@@ -11886,201 +11886,201 @@ data params form data see
 Get RAPID Execution actions
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "regain=continue&execmode=continue&cycle=forever&condition=none&stopatbp=disabled&alltaskbytsp=false" "http://localhost/rw/rapid/execution?action=start"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Stop RAPID Execution
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Stop RAPID Execution
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Stop RAPID Execution
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=stop
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 stopmode={cycle | instr | stop | qstop} (default: stop)
 usetsp={normal | alltsk} (default: normal)
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=stop"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Start RAPID Execution from production entry
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Start RAPID Execution from production entry
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Start RAPID Execution from production entry
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=startprodentry
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=startprodentry"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Reset RAPID program pointer to main
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Reset RAPID program pointer to main
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Reset RAPID program pointer to main
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=resetpp
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=resetpp"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set number of execution cycles
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Set number of execution cycles
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Set number of execution cycles
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setcycle
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 cycle= {once | forever}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "cycle=once" -X POST "http://localhost/rw/rapid/execution?action=setcycle"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Mastership is required to set cycle.
 
 ---
 
 ## Subscribe RAPID Execution
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe RAPID Execution
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe RAPID Execution
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources={identifier}
 *<identifier>*= The subscription resource URI
@@ -12089,7 +12089,7 @@ Subscription parameters
 Get RAPID Execution actions
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-ctrlexecstate-ev
 Controller rapid execution event resource
@@ -12097,17 +12097,17 @@ ctrlexecstate
 Controller rapid execution state {running | stopped}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID execution state
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12115,26 +12115,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/exe
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/execution;ctrlexecstate&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe RAPID Execution Cycle
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe RAPID Execution Cycle
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe RAPID Execution Cycle
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources={identifier}
 *<identifier>*= The subscription resource URI
@@ -12143,7 +12143,7 @@ Subscription parameters
 Get RAPID Execution actions
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-execcycle-ev
 Controller rapid execution cycle event resource
@@ -12151,17 +12151,17 @@ rapidexeccycle
 Controller rapid execution cycle {PGMRUN_CYCLE_CONTINUOUS | PGMRUN_CYCLE_SINGLE}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID execution cycle
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12169,26 +12169,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/exe
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/execution;rapidexeccycle&1-p=1" "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Hold to Run
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe on Hold to Run
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Subscribe on Hold to Run
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -12196,24 +12196,24 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-hdtr-ev
 hdtr-State
 {HdTREvent WaitEntered|HdTREvent WaitLeft}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID hold to run
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12221,44 +12221,44 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/exe
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/execution;hdtrun&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Hold to Run Cmd
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID execution › Set Hold to Run Cmd
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID execution › Set Hold to Run Cmd
 
 URL — /rw/rapid/execution
 
-**URL :** `/rw/rapid/execution`  
-**Method :** `POST`
+**URL:** `/rw/rapid/execution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=holdtorun-state
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 state={press | held | release}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403)
+**Error:** BAD_REQUEST(400),FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "state={press | held | release}" "http://localhost/rw/rapid/execution?action=holdtorun-state"
 ```
 
-**Notes :** -Not supported in bootserver mode
+**Notes:** -Not supported in bootserver mode
 -Supported in VC only
 -Login as Local Client
 -The Hold-To-Run control prevents RAPID-program execution to start until the holdtorun state is changed to Press.
@@ -12271,20 +12271,20 @@ curl --digest -u "Default User":robotics -X POST -d "state={press | held | relea
 
 ## Operations on RAPID modules
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules
 
 ---
 
 ## Get RAPID modules action
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Get RAPID modules action
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Get RAPID modules action
 
 URL — /rw/rapid/modules
 
-**URL :** `/rw/rapid/modules`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -12293,42 +12293,42 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/modules?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get RAPID modules
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Get RAPID modules
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Get RAPID modules
 
 URL — /rw/rapid/modules
 
-**URL :** `/rw/rapid/modules`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task={task name}
 Required
@@ -12337,12 +12337,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-module-info-li
 Rapid tasks resource list item
@@ -12352,44 +12352,44 @@ type
 Module type {ProgMod | SysMod}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** HTTP Errors, see
+**Error:** HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?task=T_ROB1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Mod Possible All
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Get Mod Possible All
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Get Mod Possible All
 
 URL — /rw/rapid/modules
 
-**URL :** `/rw/rapid/modules`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=mod-possible-all
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 module-name
 Rapid module name
@@ -12405,37 +12405,37 @@ end-col
 End Col
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?resource=mod-possible-all"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Modify All Positions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Set Modify All Positions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Set Modify All Positions
 
 URL — /rw/rapid/modules
 
-**URL :** `/rw/rapid/modules`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=modify-all-position
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 checklimit={true | false}
 Required
@@ -12443,38 +12443,38 @@ checkdeactaxes={true | false}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "checklimit=false&checkdeactaxes=false" "http://localhost/rw/rapid/modules?action=modify-all-position"
 ```
 
-**Notes :** User needs to be local client and mastership is also required
+**Notes:** User needs to be local client and mastership is also required
 Not supported in bootserver mode
 
 ---
 
 ## Operations on rapid module
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module
 
 ---
 
 ## Get a specified range of text
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get a specified range of text
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get a specified range of text
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task
 = {task}
@@ -12490,39 +12490,39 @@ Data Params
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-mod-text
 Provides RAPID module text
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&startrow=1&startcol=1&endrow=20&endcol=-1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get rapid module actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get rapid module actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get rapid module actions
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -12531,40 +12531,40 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/modules/MainModule?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Save rapid module
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Save rapid module
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Save rapid module
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 task={Task Name}
 Required
@@ -12574,7 +12574,7 @@ Required
 Get rapid module actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={module_name} Saved module will be with .mod extension.
 Required
@@ -12582,39 +12582,39 @@ path={file_path} Real path or RobotWare environment variables such as $HOME, $TE
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=MainModule&path=C:\Users\mymod" -X POST "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&action=save"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Text Range
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Text Range
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Text Range
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-text-range
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 task={Task Name}
 Required
@@ -12634,32 +12634,32 @@ text={Input Text}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "task=T_ROB1&replace-mode=After&query-mode=Force&startrow=8&startcol=8&endrow=8&endcol=15&text=SampleTest" -X POST "http://localhost/rw/rapid/modules/MainModule?action=set-text-range"
 ```
 
-**Notes :** Mastership is Required
+**Notes:** Mastership is Required
 Not supported in bootserver mode
 
 ---
 
 ## Set Module Text
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Module Text
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Module Text
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 task={Task Name}
 Required
@@ -12667,37 +12667,37 @@ action=set-module-text
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 text={Input Text}
 Required
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400),NOT_FOUND(404), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "text=SampleTest" -X POST "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&action=set-module-text"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get RAPID module attributes
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get RAPID module attributes
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get RAPID module attributes
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task=T_ROB1
 Required
@@ -12706,12 +12706,12 @@ Optional
 Default value is 0. In case input is 1, the API continues execution even if any error occurs in between.
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-module
 Provides RAPID module attributes
@@ -12723,33 +12723,33 @@ attribute
 {sysmod|encode|noview|nostepin|viewonly|readonly} Module attributes.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get change count
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get change count
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get change count
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=change-count
 Required
@@ -12757,26 +12757,26 @@ task={task_name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-module-changecount
 count changecount.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** Bad Request(400), FORBIDDEN(403), NOT_FOUND(404), see
+**Error:** Bad Request(400), FORBIDDEN(403), NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=change-count&task=T_ROB1"
 ```
@@ -12785,14 +12785,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Get RulesInstr
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get RulesInstr
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get RulesInstr
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=rules-instr
 Required
@@ -12807,12 +12807,12 @@ parnum={parnum_value}
 altnum={altnum_value}
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-module-rulesinstr
 rapid module suggested templete for data type or instruction.
@@ -12856,16 +12856,16 @@ name(url parameter)
 data type or instruction name.
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=rules-instr&task=T_ROB1&name=movej"
 ```
@@ -12874,14 +12874,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Get module possible attributes
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get module possible attributes
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get module possible attributes
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task=T_ROB1
 Required
@@ -12889,12 +12889,12 @@ attribute={attribute-combination}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-mod-text
 Provides RAPID module text
@@ -12902,34 +12902,34 @@ attribute
 Rapid module attribtes(System module, No step in module, Read only module)
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&attribute=readonly&attribute=nostepin"
 ```
 
-**Notes :** -Not supported in bootserver mode
+**Notes:** -Not supported in bootserver mode
 -URL param "attribute" can be provided multiple times
 
 ---
 
 ## Get Search Text
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Search Text
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Search Text
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task={Task Name}
 Required
@@ -12941,44 +12941,44 @@ text={search text}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-text-position
 Row- Row number of Text.
 Column- Column number of Text.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&startrow=1&startcol=1&text=main"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 If the text is not found,the row and column values will be zero.
 
 ---
 
 ## Get Rapid Object
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Rapid Object
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Rapid Object
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task
 = {task}
@@ -12994,12 +12994,12 @@ destination
 Optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-object
 start-row
@@ -13024,33 +13024,33 @@ expression-type
 Expression type.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400), FORBIDDEN(403), NOT_FOUND(404), see
+**Error:** BAD_REQUEST (400), FORBIDDEN(403), NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/BASE?task=T_ROB1&startrow=3&startcol=2&destination=Inner"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set SyncPers
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set SyncPers
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set SyncPers
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-syncpers
 Required
@@ -13058,21 +13058,21 @@ task={task_name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/modules/MainModule?action=set-syncpers&task=T_ROB1"
 ```
@@ -13081,14 +13081,14 @@ curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/modu
 
 ## Set Modify Position
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Modify Position
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Set Modify Position
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=modify-position
 Required
@@ -13096,7 +13096,7 @@ task={Task Name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 startrow={start Row Number}
 Required
@@ -13114,15 +13114,15 @@ allowdeact={false | true}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** Bad Request(400),
+**Error:** Bad Request(400),
 FORBIDDEN(403),
 NOT_FOUND(404) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "startrow=3&startcol=9&endrow=3&endcol=102&checklimit=false&checkdeactaxes=false&allowdeact=false" "http://localhost:2222/rw/rapid/modules/MainModule?action=modify-position&task=T_ROB1"
 ```
@@ -13131,14 +13131,14 @@ curl --digest -u "Default User":robotics -X POST -d "startrow=3&startcol=9&endro
 
 ## Get Module Extension
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Module Extension
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Module Extension
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=module-extension
 Required
@@ -13146,12 +13146,12 @@ task={task_name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 num-of-lines:
 Number of rows in RAPID module
@@ -13161,13 +13161,13 @@ count:
 Change Count
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-extension&task=T_ROB1"
 ```
@@ -13176,14 +13176,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Get Mod Possible
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Mod Possible
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Mod Possible
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=mod-possible
 Required
@@ -13199,12 +13199,12 @@ endcol = {End Column Number}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 no_lines_modifiable
 Number of modifiable motion instructions
@@ -13218,13 +13218,13 @@ end_col
 End Col
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=mod-possible&task=T_ROB1&startrow=19&startcol=1&endrow=21&endcol=1"
 ```
@@ -13233,14 +13233,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Get Object Child
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Object Child
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Object Child
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=object-child
 Required
@@ -13259,12 +13259,12 @@ endline & endcolumn: referes to the end of object extent
 choose the entire extent of the object, to obtain the details(children) of the object
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 object-type:
 type of the object for which extent details are obtained.
@@ -13274,13 +13274,13 @@ output varies with the object type under consideration
 object type examples : module, procedure declaration, data declaration, function declaration etc.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost:4444/rw/rapid/modules/base?resource=object-child&task=T_ROB1&startline=1&startcolumn=1&endline=16&endcolumn=9"
 ```
@@ -13289,14 +13289,14 @@ curl --digest -u "Default User":robotics "http://localhost:4444/rw/rapid/modules
 
 ## Get SyncPers Status
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get SyncPers Status
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get SyncPers Status
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=syncper-status
 Required
@@ -13304,24 +13304,24 @@ task={task_name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 syncperstatus:
 status from Persistent variable {1 - TRUE|0 - FALSE}
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/base?resource=syncper-status&task=T_ROB1"
 ```
@@ -13330,14 +13330,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/base
 
 ## Get Module Text
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Module Text
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Module Text
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=module-text
 Required
@@ -13345,12 +13345,12 @@ task={task_name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 change-count:
 System configuration change count number
@@ -13360,13 +13360,13 @@ module-length:
 maximum length of module
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-text&task=T_ROB1"
 ```
@@ -13375,14 +13375,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Get Symbol Information
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Symbol Information
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Get Symbol Information
 
 URL — /rw/rapid/modules/{module}
 
-**URL :** `/rw/rapid/modules/{module}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=module-symbol
 Required
@@ -13394,12 +13394,12 @@ col={col number}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 version:
 version number
@@ -13427,13 +13427,13 @@ refcount:
 Reference count
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-symbol&task=T_ROB1&row=5&col=9"
 ```
@@ -13442,20 +13442,20 @@ curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/Main
 
 ## Operations on RAPID Routine
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine
 
 ---
 
 ## Get Routine information
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine › Get Routine information
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine › Get Routine information
 
 URL — /rw/rapid/modules/{module}/routine
 
-**URL :** `/rw/rapid/modules/{module}/routine`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}/routine`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 task={task}
 Required
@@ -13467,12 +13467,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-routine-prop
 name
@@ -13487,33 +13487,33 @@ npar
 Number of routine parameters, -1 if parameter list not linked
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** HTTP_BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404),see
+**Error:** HTTP_BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404),see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?task=T_ROB1&row=10&column=9"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Routineargs information
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine › Get Routineargs information
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID modules › Operations on rapid module › Operations on RAPID Routine › Get Routineargs information
 
 URL — /rw/rapid/modules/{module}/routine
 
-**URL :** `/rw/rapid/modules/{module}/routine`  
-**Method :** `GET`
+**URL:** `/rw/rapid/modules/{module}/routine`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=routine-args
 Required
@@ -13529,12 +13529,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 next
 Link to next page (Will be absent if there is no next page)
@@ -13562,21 +13562,21 @@ list-len
 Total number of arguments
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400),FORBIDDEN(403), NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?resource=routine-args&mark=3&limit=3&task=T_ROB1&row=4&column=9"
 ```
 
-**Notes :** Routineargs will show a list of arguments based on the mark and limit.
+**Notes:** Routineargs will show a list of arguments based on the mark and limit.
 Default value of mark is 0.
 Absence of next link indicates last page.
 You will get routine argument information only on lines having proceure call.
@@ -13586,61 +13586,61 @@ Not supported in bootserver mode.
 
 ## Operations on RAPID symbols properties
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties
 
 ---
 
 ## Get RAPID symbols resources
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Get RAPID symbols resources
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Get RAPID symbols resources
 
 URL — /rw/rapid/symbols
 
-**URL :** `/rw/rapid/symbols`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbols`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 None*
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get rapid symbols actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Get rapid symbols actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Get rapid symbols actions
 
 URL — /rw/rapid/symbols
 
-**URL :** `/rw/rapid/symbols`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbols`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -13649,12 +13649,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 search-symbols
 view
@@ -13696,43 +13696,43 @@ tsk Task
 any Any type
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Search RAPID symbols
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Search RAPID symbols
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Search RAPID symbols
 
 URL — /rw/rapid/symbols
 
-**URL :** `/rw/rapid/symbols`  
-**Method :** `POST`
+**URL:** `/rw/rapid/symbols`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=search-symbol
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 At least one data parameter should be provided.
 view = {block | scope | stack }. For both scope and stack you must use blockurl with task, for stack even program pointer should be set.
@@ -13765,7 +13765,7 @@ any any of the above symbol type
 dattyp = {string}.,Datatype which has to be filtered.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-sympropvar-li
 Rapid-Symbol resource
@@ -13793,39 +13793,39 @@ typurl
 URL to type symbol
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) see
+**Error:** BAD REQUEST(400) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "view=block&vartyp=any&blockurl=RAPID/T_ROB1&symtyp=var&recursive=true&dattyp=num&skipshared=TRUE&onlyused=TRUE&stack=0&posl=0&posc=0" "http://127.0.0.1/rw/rapid/symbols?action=search-symbols"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID symbol object
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Operations on RAPID symbol object
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Operations on RAPID symbol object
 
 ---
 
 ## Get Object Extension List
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Operations on RAPID symbol object › Get Object Extension List
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbols properties › Operations on RAPID symbol object › Get Object Extension List
 
 URL — /rw/rapid/symbols/{symbol URL}
 
-**URL :** `/rw/rapid/symbols/{symbol URL}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbols/{symbol URL}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 info=object-list-ext
 type={Statements | BackwardStmts | ErrorStmts | UndoStmts | TypeDecls | DataDecls | ParDecls | RtnDecls | Attribs}
@@ -13842,12 +13842,12 @@ RtnDecls = Routine Declarations
 Attribs = Attributes
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 ext-begin-line
 Begin line number of the object extension list
@@ -13875,53 +13875,53 @@ ext-last-end-column
 End column number of the last object in the list
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols/RAPID/T_ROB1/mainmodule?info=object-list-ext&type=DataDecls
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID symbol
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol
 
 ---
 
 ## Operations on RAPID symbol properties
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol properties
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol properties
 
 ---
 
 ## Get RAPID symbol properties
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol properties › Get RAPID symbol properties
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol properties › Get RAPID symbol properties
 
 URL — /rw/rapid/symbol/properties/{symbolurl}
 
-**URL :** `/rw/rapid/symbol/properties/{symbolurl}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbol/properties/{symbolurl}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-sympropvar
 symburl
@@ -13952,51 +13952,51 @@ typurl
 URL to type symbol
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Common return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics
 http://192.168.8.105/rw/rapid/symbol/properties/RAPID/T_ROB1/user/reg1
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID symbol data
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data
 
 ---
 
 ## Get rapid symbol data
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Get rapid symbol data
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Get rapid symbol data
 
 URL — /rw/rapid/symbol/data/{symbolurl}
 
-**URL :** `/rw/rapid/symbol/data/{symbolurl}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbol/data/{symbolurl}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 value=raw* Returns a non stringify json value.
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-data
 rapid data
@@ -14022,34 +14022,34 @@ end-coloumn
 end column number
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) see
+**Error:** BAD REQUEST(400) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics
 http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get rapid symbol data actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Get rapid symbol data actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Get rapid symbol data actions
 
 URL — /rw/rapid/symbols/{symbolurl}
 
-**URL :** `/rw/rapid/symbols/{symbolurl}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/symbols/{symbolurl}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -14058,12 +14058,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 sub-value
 sub value
@@ -14073,7 +14073,7 @@ selected
 selected value
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 Update RAPID data
@@ -14083,33 +14083,33 @@ It is possible to subscribe on persistent RAPID variables
 Subscribe on RAPID persistent variable
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) see
+**Error:** BAD REQUEST(400) see
 HTTP Status codes
 Robot controller errors, see common_return_code
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics
 http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=show
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update rapid variable current value
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Update rapid variable current value
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Update rapid variable current value
 
 URL — /rw/rapid/symbol/data/{symbolurl}
 
-**URL :** `/rw/rapid/symbol/data/{symbolurl}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/symbol/data/{symbolurl}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -14117,21 +14117,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 value = {value_num}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** FORBIDDEN(403) BAD REQUEST(400) see
+**Error:** FORBIDDEN(403) BAD REQUEST(400) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Update a num:
 curl --digest -u "Default User":robotics -d "value=10" "http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set"
@@ -14140,21 +14140,21 @@ http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/MyMod/SStr?action=set
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Client needs RAPID mastership in AUTO mode. Client needs RMMP Privilege and RAPID mastership in MANUAL mode.
 
 ---
 
 ## Validate rapid variable
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Validate rapid variable
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Validate rapid variable
 
 URL — /rw/rapid/symbol/data
 
-**URL :** `/rw/rapid/symbol/data`  
-**Method :** `POST`
+**URL:** `/rw/rapid/symbol/data`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=validate
 Required
@@ -14162,7 +14162,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 task
 Task name
@@ -14175,40 +14175,40 @@ Data type
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&datatype=tooldata" "http://localhost/rw/rapid/symbol/data?action=validate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on RAPID persistent variable
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Subscribe on RAPID persistent variable
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Subscribe on RAPID persistent variable
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None*
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = {resource_value}
@@ -14217,21 +14217,21 @@ Get rapid symbol data actions
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-value-ev
 rapid value event resource
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the form /rw/rapid/symbol/data/{symbolurl};value.
 It is possible to possible to subscribe with any subscription priority (i.e High, Medium, Low priority) for RAPID persistent variables value.
@@ -14240,20 +14240,20 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/sym
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/symbol/data/RAPID/T_ROB1/uimsg/PNum2;value&1-p=0" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update rapid variable Initial Value
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Update rapid variable Initial Value
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID symbol › Operations on RAPID symbol data › Update rapid variable Initial Value
 
 URL — /rw/rapid/symbol/data/{symbolurl}
 
-**URL :** `/rw/rapid/symbol/data/{symbolurl}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/symbol/data/{symbolurl}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setInitValue
 Required
@@ -14261,59 +14261,59 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 value={some_value} form data see
 Get rapid symbol data actions
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), HTTP Errors, see
+**Error:** BAD_REQUEST(400), HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Update a num:
 curl --digest -u "Default User":robotics -d value=10 "http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=setInitValue"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID tasks
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks
 
 ---
 
 ## Get RAPID tasks
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get RAPID tasks
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get RAPID tasks
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 Optional
 Default value is 0. In case input is 1, the API continues execution even if any error occurs in between.
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-task-li
 RAPID tasks resource list item
@@ -14331,65 +14331,65 @@ motiontask
 motion state of task.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get rapid Tasks actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get rapid Tasks actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get rapid Tasks actions
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Start RAPID Spy Logging
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Start RAPID Spy Logging
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Start RAPID Spy Logging
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=start-spy
 Required
@@ -14397,39 +14397,39 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 log-file={file-path}
 Required
 ```
 
-**Success :** NO_CONTENT (204), see
+**Success:** NO_CONTENT (204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
+**Error:** BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST "http://localhost/rw/rapid/tasks?action=start-spy"
 ```
 
-**Notes :** Will request mastership internally (No need to ask explicitly). By default, log file will be created in HOME folder. Not supported in bootserver mode.
+**Notes:** Will request mastership internally (No need to ask explicitly). By default, log file will be created in HOME folder. Not supported in bootserver mode.
 
 ---
 
 ## Get RAPID Spy Logging status
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get RAPID Spy Logging status
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get RAPID Spy Logging status
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=spy-status
 Required
@@ -14437,36 +14437,36 @@ See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-spy-status
 status
 Rapid spy logging status {Logging|Not Logging}
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=spy-status"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Stop RAPID Spy Logging
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Stop RAPID Spy Logging
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Stop RAPID Spy Logging
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=stop-spy
 Required
@@ -14474,76 +14474,76 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT (204), see
+**Success:** NO_CONTENT (204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
+**Error:** BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=stop-spy"
 ```
 
-**Notes :** Will request mastership internally (No need to ask explicitly). Not supported in bootserver mode.
+**Notes:** Will request mastership internally (No need to ask explicitly). Not supported in bootserver mode.
 
 ---
 
 ## Activate/Deactivate rapid tasks
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Activate/Deactivate rapid tasks
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Activate/Deactivate rapid tasks
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=activate | deactivate
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=activate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Mastership is taken internally if not taken explicitly by client.
 
 ---
 
 ## Get Program/Motion Pointer Sync State for all tasks
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get Program/Motion Pointer Sync State for all tasks
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Get Program/Motion Pointer Sync State for all tasks
 
 URL — /rw/rapid/tasks
 
-**URL :** `/rw/rapid/tasks`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=sync-state
 Required
@@ -14553,42 +14553,42 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Build log change
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Subscribe on Build log change
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Subscribe on Build log change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -14596,7 +14596,7 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-rap-buildlog-ev
 task-name
@@ -14607,17 +14607,17 @@ build-log-change
 {SYS_CTRL_S_RAPID_SEMANTIC_ERROR|SYS_CTRL_S_RAPID_SYNTAX_ERROR|SYS_CTRL_S_OK}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID build log change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -14625,38 +14625,38 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks;buildlogchange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task
 
 ---
 
 ## Get RAPID task state
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get RAPID task state
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get RAPID task state
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 Optional
 Default value is 0. In case input is 1, the API continues execution even if any error occurs in between.
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-task
 Rapid task resource
@@ -14694,35 +14694,35 @@ task_in_forgnd
 : Is this task running as foreground task? [True, False]
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404), FORBIDDEN(403)see
+**Error:** NOT_FOUND(404), FORBIDDEN(403)see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1
 ```
 
-**Notes :** Retcode is provided if API fails.
+**Notes:** Retcode is provided if API fails.
 Not supported in bootserver mode
 
 ---
 
 ## Get rapid task actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get rapid task actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get rapid task actions
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -14731,12 +14731,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Actions :**
+**Actions:**
 ```
 loadmod
 Load RAPID module
@@ -14754,35 +14754,35 @@ build
 Build RAPID module
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), see
+**Error:** BAD REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Load RAPID module into a rapid task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Load RAPID module into a rapid task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Load RAPID module into a rapid task
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=loadmod
 Required
@@ -14790,7 +14790,7 @@ Required
 Get rapid task actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 modulepath = {module_path}
 Required
@@ -14799,34 +14799,34 @@ Optional
 Default value is false
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), see
+**Error:** BAD REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod" "http://localhost/rw/rapid/tasks/T_ROB1?action=loadmod"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Rapid Mastership Required
 
 ---
 
 ## Unload module from a rapid task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Unload module from a rapid task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Unload module from a rapid task
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=unloadmod
 Required
@@ -14834,80 +14834,80 @@ Required
 Get rapid task actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 module={modulename}
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 NOT_FOUND(404)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename" "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Rapid Mastership Required
 
 ---
 
 ## Abort current execution level
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Abort current execution level
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Abort current execution level
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=abortexeclevel
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400), see
+**Error:** BAD REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Rapid Mastership Required
 
 ---
 
 ## activate/deactivate rapid task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › activate/deactivate rapid task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › activate/deactivate rapid task
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=activate | deactivate
 Required
@@ -14915,33 +14915,33 @@ Required
 Get rapid task actions
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) see
+**Error:** BAD REQUEST(400) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Activation Record
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Activation Record
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Activation Record
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=activation-record
 stackframe={stack frame} The stack frame is a number starting with 1 for the current activation record, i.e., the activation record containing the user program pointer. The stack frame increases with one for each previous activation record until the entry point is reached.
@@ -14949,12 +14949,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-stackframe
 Rapid-Symbol resource
@@ -14974,19 +14974,19 @@ routine-url
 Routine URL
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404) ,FORBIDDEN(403), BAD_REQUEST(400) see
+**Error:** NOT_FOUND(404) ,FORBIDDEN(403), BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=activation-record&stackframe=1
 ```
 
-**Notes :** Motors on
+**Notes:** Motors on
 Load Rapid program
 Run program
 
@@ -14994,25 +14994,25 @@ Run program
 
 ## Get Structural Change Count
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Structural Change Count
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Structural Change Count
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=task-struc-change-count See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 task-struc-change-count
 Structural Change Count resource
@@ -15022,32 +15022,32 @@ struc-change-count
 : Load, Unload and renaming of modules. A rename is considered to be an unload/load, from the structural point of view.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-struc-change-count
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Preferable Data Types
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Preferable Data Types
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Preferable Data Types
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=pref-data-types
 Required
@@ -15059,12 +15059,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 task-pref-data-types
 Get Preferable Data Types resources
@@ -15074,32 +15074,32 @@ type-prefdattype
 : data type of signal
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=pref-data-types&instruction=AliasIO&parameter=FromSignal
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Program Pointer Sync State
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Program Pointer Sync State
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Program Pointer Sync State
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=task-sync-state
 Required
@@ -15107,12 +15107,12 @@ type=program-pointer
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-sync-state
 Rapid-sync-State resource
@@ -15122,32 +15122,32 @@ Motion-Pointer-State
 Motion pointer state
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404), see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-sync-state&type=program-pointer
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Motion Pointer Sync State
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Motion Pointer Sync State
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Motion Pointer Sync State
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=task-sync-state
 Required
@@ -15155,37 +15155,37 @@ type=motion-pointer
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK, see
+**Success:** HTTP_OK, see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-sync-state&type=motion-pointer
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Link RAPID Task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Link RAPID Task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Link RAPID Task
 
 URL — /rw/rapid/tasks/{task}
 
-**URL :** `/rw/rapid/tasks/{task}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=build
 Required
@@ -15193,39 +15193,39 @@ Required
 Get rapid task actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204) see
+**Success:** NO_CONTENT(204) see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
+**Error:** BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 RAPID Mastership Required
 
 ---
 
 ## Get Pallet
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Pallet
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Pallet
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource={pallet}&number={pallet_no}
 Required
@@ -15234,12 +15234,12 @@ optional
 pallet_no. 1 - Common, pallet_no. 2 - Prog.Flow, pallet_no. 3 - Various, pallet_no. 4 - Settings, pallet_no. 5 - Motion&Proc., pallet_no. 6 - I/O, pallet_no. 7 - Communicate, pallet_no. 8 - Interrupts, pallet_no. 9 - Error Rec., pallet_no. 10 - System&Time, pallet_no. 11 - Mathematics, pallet_no. 12 - M.C 1, pallet_no. 13 - M.C 2, pallet_no. 14 - M.C 3, pallet_no. 15 - MotionSetAdv, pallet_no. 16 - Motion Adv., pallet_no. 17 - Ext.Computer, pallet_no. 18 - MultiTasking&MultiMove, pallet_no. 19 - RAPIDsupport, pallet_no. 20 - Calib&Service,
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-pallet
 RAPID Pallet
@@ -15255,32 +15255,32 @@ Keyword
 Pallet keyword
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost:7777/rw/rapid/tasks/T_ROB1?resource=pallet&number=9&start=1&limit=3
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Pallet Head
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Pallet Head
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Get Pallet Head
 
 URL — /rw/rapid/tasks/{task_name}
 
-**URL :** `/rw/rapid/tasks/{task_name}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task_name}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource={pallet-head}
 Required
@@ -15288,12 +15288,12 @@ Required
 optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-pallet-head
 RAPID Pallet head
@@ -15303,38 +15303,38 @@ Number
 Pallet number
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) see
+**Error:** BAD_REQUEST(400) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost:7777/rw/rapid/tasks/T_ROB1?resource=pallet-head&start=1&limit=5
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Rapid Task Change
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid Task Change
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid Task Change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -15342,7 +15342,7 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-task-ev
 change-count
@@ -15357,17 +15357,17 @@ changetype
 {module|struc|program load|program name}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID task change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15375,26 +15375,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks/T_ROB1;taskchange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated. Not supported in bootserver mode.
+**Notes:** On subscription an empty initial event will be generated. Not supported in bootserver mode.
 
 ---
 
 ## Subscribe on Rapid PP Sync state change
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid PP Sync state change
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid PP Sync state change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -15402,24 +15402,24 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-syncstate-ev
 sync-state
 {on|off}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID task sync state change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15427,26 +15427,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks/T_ROB1;syncstatechange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
+**Notes:** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
 
 ---
 
 ## Subscribe on Rapid task pgmexecution state change
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid task pgmexecution state change
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Subscribe on Rapid task pgmexecution state change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -15454,24 +15454,24 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-execstate-ev
 pgmtaskexec-state
 {ready|started|stopped|initiated}
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID task sync state change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15479,36 +15479,36 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks/T_ROB1;excstate&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
+**Notes:** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
 
 ---
 
 ## Operations on rapid motion
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion
 
 ---
 
 ## Get rapid motion
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get rapid motion
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get rapid motion
 
 URL — /rw/rapid/tasks/{task}/motion
 
-**URL :** `/rw/rapid/tasks/{task}/motion`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/motion`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 robtarget
 The target position from the home position.
@@ -15520,31 +15520,31 @@ mechunit
 The unit in which robtarget, jointtarget and extjoint applies.
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get RobTarget
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get RobTarget
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get RobTarget
 
 URL — /rw/rapid/tasks/{task}/motion
 
-**URL :** `/rw/rapid/tasks/{task}/motion`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/motion`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=robtarget
 Required
@@ -15554,12 +15554,12 @@ wobj={wobj_name}
 Optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 robtarget
 The target position from the home position.
@@ -15569,42 +15569,42 @@ The target position from the home position.
 (ej1-ej6) extjoints.
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wobj=wobj1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Joint Target
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get Joint Target
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get Joint Target
 
 URL — /rw/rapid/tasks/{task}/motion
 
-**URL :** `/rw/rapid/tasks/{task}/motion`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/motion`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=jointtarget
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 jointtarget
 The target position of the joint.
@@ -15612,42 +15612,42 @@ The target position of the joint.
 (ej1-ej6) Target positions.
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get mechanical units
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get mechanical units
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get mechanical units
 
 URL — /rw/rapid/tasks/{task}/motion
 
-**URL :** `/rw/rapid/tasks/{task}/motion`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/motion`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=mechunit
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rapid-mechunit
 The Unit in which robtarget, jointtarget and extjoint applies.
@@ -15659,84 +15659,84 @@ type
 type of mechnical unit.
 ```
 
-**Success :** OK (200), see
+**Success:** OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get external joint states
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get external joint states
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Get external joint states
 
 URL — /rw/rapid/tasks/{task}/motion
 
-**URL :** `/rw/rapid/tasks/{task}/motion`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/motion`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=extjointstate
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rapid-extjointstate
 If any ext mechnical unit is attached than provide the extjoints.
 (j1-j6) Joints 1-6 {linear|not_active|no_position|rotating}
 ```
 
-**Success :** OK (200), see
+**Success:** OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), See
+**Error:** BAD_REQUEST(400), See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on rapid calib
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib
 
 ---
 
 ## Calibration for Displacement
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib › Calibration for Displacement
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib › Calibration for Displacement
 
 URL — /rw/rapid/tasks/{task}/motion/calib
 
-**URL :** `/rw/rapid/tasks/{task}/motion/calib`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/motion/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=Displacement
 Required
@@ -15754,7 +15754,7 @@ point9=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}, {x2}, {y2}, {z2}, {q2_1}, {q2_2},
 point10=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}, {x2}, {y2}, {z2}, {q2_1}, {q2_2}, {q2_3}, {q2_4}]
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -15768,13 +15768,13 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]&point2=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]&point3=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion/calib"
 ```
@@ -15783,19 +15783,19 @@ curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&poin
 
 ## Calibration for Tcp
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib › Calibration for Tcp
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on rapid motion › Operations on rapid calib › Calibration for Tcp
 
 URL — /rw/rapid/tasks/{task}/motion/calib
 
-**URL :** `/rw/rapid/tasks/{task}/motion/calib`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/motion/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=TCP
 Required
@@ -15815,7 +15815,7 @@ point9=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}]
 point10=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}]
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -15829,13 +15829,13 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK (200), see
+**Success:** HTTP_OK (200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0]" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion/calib"
 ```
@@ -15844,20 +15844,20 @@ curl --digest -u "Default User":robotics -d "method=TCP&type=POSE&tolerance=0&po
 
 ## Operations on RAPID program
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program
 
 ---
 
 ## Get RAPID program resource
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Get RAPID program resource
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Get RAPID program resource
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 Optional
@@ -15866,12 +15866,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-program
 Rapid program resource
@@ -15885,32 +15885,32 @@ rap-builderrs-li
 Rapid program builderrors resource
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get rapid program actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Get rapid program actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Get rapid program actions
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -15919,12 +15919,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 loadprog
 Load RAPID program into a task
@@ -15940,37 +15940,37 @@ Set program name
 name Program name.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Load program into a rapid task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Load program into a rapid task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Load program into a rapid task
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=loadprog
 Required
@@ -15978,160 +15978,160 @@ Required
 Get rapid program actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 progpath={program path}
 Required
 loadmode={add | replace}
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf" "http://localhost:7777/rw/rapid/tasks/T_ROB2/program?action=loadprog"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Unload program from a rapid task
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Unload program from a rapid task
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Unload program from a rapid task
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=unloadprog
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Save program
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Save program
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Save program
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=save
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 path={program_path}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=save"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Set program name
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Set program name
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Set program name
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=setname
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={program_name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=setname"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Set Entry Point
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Set Entry Point
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Set Entry Point
 
 URL — /rw/rapid/tasks/{task}/program
 
-**URL :** `/rw/rapid/tasks/{task}/program`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-entrypoint
 Required
@@ -16139,46 +16139,46 @@ Required
 Get rapid task actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 routine= {routine-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
+**Error:** BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=set-entrypoint"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Rapid mastership is required
 
 ---
 
 ## Operations on RAPID build errors
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID build errors
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID build errors
 
 ---
 
 ## Get Build Errors
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID build errors › Get Build Errors
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID build errors › Get Build Errors
 
 URL — /rw/rapid/tasks/{task}/program/builderror
 
-**URL :** `/rw/rapid/tasks/{task}/program/builderror`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/program/builderror`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 limit={limit_value}
 Optional
@@ -16188,12 +16188,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 start
 Reference to where the retrieval of build errors should start. Set to 1 to start from the beginning. The value returned can be used in the next call.
@@ -16214,22 +16214,22 @@ error
 RAPID build error
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404),BAD_REQUEST(400), see
+**Error:** NOT_FOUND(404),BAD_REQUEST(400), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/builderror?start=1&limit=2
 "
 ```
 
-**Notes :** Default value of start is 1 and maximum value of limit is 30(maximum supported by RAPID).
+**Notes:** Default value of start is 1 and maximum value of limit is 30(maximum supported by RAPID).
 Absence of prev and next link indicates first and last page respectively.
 Not supported in bootserver mode.
 
@@ -16237,20 +16237,20 @@ Not supported in bootserver mode.
 
 ## Operations on RAPID breakpoint
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint
 
 ---
 
 ## Get RAPID breakpoint actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Get RAPID breakpoint actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Get RAPID breakpoint actions
 
 URL — /rw/rapid/tasks/{task}/program/breakpoint
 
-**URL :** `/rw/rapid/tasks/{task}/program/breakpoint`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/program/breakpoint`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -16259,48 +16259,48 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1/program/breakpoint?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set break point
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Set break point
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Set break point
 
 URL — /rw/rapid/tasks/{task}/program/breakpoint
 
-**URL :** `/rw/rapid/tasks/{task}/program/breakpoint`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/program/breakpoint`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 module={module-name}
 Required
@@ -16310,46 +16310,46 @@ column={col_no}
 Required
 ```
 
-**Success :** NO_CONTENT(204) , see
+**Success:** NO_CONTENT(204) , see
 HTTP Status codes
 
-**Error :** HTTP_BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404) see
+**Error:** HTTP_BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3" "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?action=set"
 ```
 
-**Notes :** Mastership is required
+**Notes:** Mastership is required
 Not supported in bootserver mode
 
 ---
 
 ## Get break points
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Get break points
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program › Operations on RAPID breakpoint › Get break points
 
 URL — /rw/rapid/tasks/{task}/program/breakpoint
 
-**URL :** `/rw/rapid/tasks/{task}/program/breakpoint`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/program/breakpoint`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 start={start_value}
 limit={limit_value}, See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-program-breakpoint
 module-name
@@ -16364,51 +16364,51 @@ end-col
 End col number
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 BAD_REQUEST(400)
 see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID program PCP
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP
 
 ---
 
 ## Get RAPID task Motion&Program pointer positions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Get RAPID task Motion&Program pointer positions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Get RAPID task Motion&Program pointer positions
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None*
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 pcp-info
 Rapid task pcp resource
@@ -16426,34 +16426,34 @@ endposition
 end position of programe poionter.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1/pcp
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get RAPID task pcp actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Get RAPID task pcp actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Get RAPID task pcp actions
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -16462,12 +16462,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Actions :**
+**Actions:**
 ```
 setPPtocursor
 Set the ProgramPointer(PP) to cursor
@@ -16489,35 +16489,35 @@ set-pp-next-inst
 Set the ProgramPointer(PP) to next instruction
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=show
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set the Program pointer(PP) position to cursor
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to cursor
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to cursor
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-pp-cursor
 Required
@@ -16525,7 +16525,7 @@ Required
 Get RAPID task pcp actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 module= {module name}
 Required
@@ -16537,20 +16537,20 @@ column= {column_number name}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&line=6&column=14&routine=routinename" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-cursor"
 ```
 
-**Notes :** Line number and Column number should be in given routine range.**
+**Notes:** Line number and Column number should be in given routine range.**
 Not supported in bootserver mode
 Rapid Mastership Required
 
@@ -16558,14 +16558,14 @@ Rapid Mastership Required
 
 ## Set the Program pointer(PP) position to routine
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to routine
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to routine
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-pp-routine
 Required
@@ -16573,7 +16573,7 @@ Required
 Get RAPID task pcp actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 module= {module name}
 Required
@@ -16582,34 +16582,34 @@ Required
 userlevel= {true | false}
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename&userlevel=true" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-routine"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Controller needs to be in auto mode.
 
 ---
 
 ## Set the Program pointer(PP) position to routine by URL
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to routine by URL
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to routine by URL
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-pp-routine-from-url
 Required
@@ -16617,7 +16617,7 @@ Required
 Get RAPID task pcp actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 module= {module name}
 Required
@@ -16625,34 +16625,34 @@ routine= {routine name}
 Required
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-routine-from-url"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Controller needs to be in auto mode.
 
 ---
 
 ## Set the Program pointer(PP) position to previous instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to previous instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to previous instruction
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-pp-prev-inst
 Required
@@ -16660,39 +16660,39 @@ Required
 Get RAPID task pcp actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Controller needs to be in auto mode.
 
 ---
 
 ## Set the Program pointer(PP) position to next instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to next instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Set the Program pointer(PP) position to next instruction
 
 URL — /rw/rapid/tasks/{task}/pcp
 
-**URL :** `/rw/rapid/tasks/{task}/pcp`  
-**Method :** `POST`
+**URL:** `/rw/rapid/tasks/{task}/pcp`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-pp-next-inst
 Required
@@ -16700,45 +16700,45 @@ Required
 Get RAPID task pcp actions
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400) , see
+**Error:** BAD REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Controller needs to be in auto mode.
 
 ---
 
 ## Subscribe on Program Pointer
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Subscribe on Program Pointer
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Subscribe on Program Pointer
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -16746,7 +16746,7 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-pcp-ev
 module-nam
@@ -16763,17 +16763,17 @@ EndPosCol
 Ending Column number of the current PCP
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID program pointer
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -16781,26 +16781,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks/T_ROB1/pcp;programpointerchange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
+**Notes:** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Motion Pointer
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Subscribe on Motion Pointer
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program PCP › Subscribe on Motion Pointer
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -16808,7 +16808,7 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-pcp-ev
 module-nam
@@ -16825,17 +16825,17 @@ EndPosCol
 Ending Column number of the current PCP
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID motion pointer
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -16843,26 +16843,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tasks/T_ROB1/pcp;motionpointerchange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
+**Notes:** On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID service routine
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID service routine
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID service routine
 
 ---
 
 ## Get RAPID service routine
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID service routine › Get RAPID service routine
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID service routine › Get RAPID service routine
 
 URL — /rw/rapid/tasks/{task}/serviceroutine
 
-**URL :** `/rw/rapid/tasks/{task}/serviceroutine`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/serviceroutine`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 start={PageNumber}
 Optional
@@ -16874,12 +16874,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-task-routine
 Rapid task serviceroutine
@@ -16888,125 +16888,125 @@ URL_to_Routine: URL to Routine
 service-routine: TRUE: service routine, FALSE: normal routine
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404) HTTP Errors, see
+**Error:** BAD_REQUEST(400), NOT_FOUND(404) HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1/serviceroutine
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID program counter position
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program counter position
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program counter position
 
 ---
 
 ## Get RAPID Program counter position
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program counter position › Get RAPID Program counter position
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID tasks › Operations on RAPID task › Operations on RAPID program counter position › Get RAPID Program counter position
 
 URL — /rw/rapid/tasks/{task}/execution
 
-**URL :** `/rw/rapid/tasks/{task}/execution`  
-**Method :** `GET`
+**URL:** `/rw/rapid/tasks/{task}/execution`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks/T_ROB1/execution"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on RAPID UI instructions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions
 
 ---
 
 ## Get UI instruction resource
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Get UI instruction resource
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Get UI instruction resource
 
 URL — /rw/rapid/uiinstr
 
-**URL :** `/rw/rapid/uiinstr`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-active-li
 Active UI instruction resource list
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT FOUND(404), see
+**Error:** NOT FOUND(404), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get UI instruction actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Get UI instruction actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Get UI instruction actions
 
 URL — /rw/rapid/uiinstr
 
-**URL :** `/rw/rapid/uiinstr`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -17015,12 +17015,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 sub-uievent
 resources
@@ -17033,50 +17033,50 @@ selected
 selected UI instruction.
 ```
 
-**Actions :**
+**Actions:**
 ```
 subscribe
 Subscribe on UI instruction
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on UI instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Subscribe on UI instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Subscribe on UI instruction
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources=1&1=/rw/rapid/uiinstr;uievent&1-p=0
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-ui-ev
 UI instruction event
@@ -17092,15 +17092,15 @@ msg
 - Line of text
 ```
 
-**Success :** CREATED(201), see
+**Success:** CREATED(201), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), see
+**Error:** BAD_REQUEST(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on UI Events
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -17108,37 +17108,37 @@ curl --digest -u "Default User":robotics -d "resources=1&1=/rw/rapid/uiinstr;uie
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/rapid/uiinstr;uievent&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Active UI Instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction
 
 ---
 
 ## Get Active UI Instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get Active UI Instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get Active UI Instruction
 
 URL — /rw/rapid/uiinstr/active
 
-**URL :** `/rw/rapid/uiinstr/active`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr/active`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-uiactive-li
 The pending UI instruction resource
@@ -17158,32 +17158,32 @@ param
 - Link to UI message parameter.
 ```
 
-**Success :** HTTP_OK(200), if there is an active UI instruction.
+**Success:** HTTP_OK(200), if there is an active UI instruction.
 
-**Error :** BAD REQUEST(400),NOT_FOUND(404) see
+**Error:** BAD REQUEST(400),NOT_FOUND(404) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Active UI instruction actions
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get Active UI instruction actions
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get Active UI instruction actions
 
 URL — /rw/rapid/uiinstr/active
 
-**URL :** `/rw/rapid/uiinstr/active`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr/active`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -17192,53 +17192,53 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 set
 value
 value of UI param
 ```
 
-**Actions :**
+**Actions:**
 ```
 set
 see
 Update an Active UI Instruction Parameter
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Bad Request(400), see
+**Error:** Bad Request(400), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/uiinstr/active?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Update an Active UI Instruction Parameter
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Update an Active UI Instruction Parameter
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Update an Active UI Instruction Parameter
 
 URL — /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}
 
-**URL :** `/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}`  
-**Method :** `POST`
+**URL:** `/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -17248,7 +17248,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 value={value}
 For example, TPFK3 can accept a value like
@@ -17257,21 +17257,21 @@ and TPCompleted can accept a value like
 TRUE
 ```
 
-**Success :** NO_CONTENT(204), see
+**Success:** NO_CONTENT(204), see
 HTTP Status codes
 
-**Error :** BAD REQUEST(400),NOT_FOUND(404),FORBIDDEN(403) see
+**Error:** BAD REQUEST(400),NOT_FOUND(404),FORBIDDEN(403) see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "value=0" -X POST "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%$104/TPFK3?action=set"
 curl --digest -u "Default User":robotics -d "value=TRUE" X POST "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%$104/TPCompleted?action=set"
 ```
 
-**Notes :** -Not supported in bootserver mode
+**Notes:** -Not supported in bootserver mode
 -{stackurl} ends with a variable number, which can be obtained from "Get Active UI Instruction" API.
 -RAPID program should be running
 -Example of {uiparam} are TPFK1, TPFK2, TPFK3, TPCompleted etc
@@ -17280,25 +17280,25 @@ curl --digest -u "Default User":robotics -d "value=TRUE" X POST "http://127.0.0.
 
 ## Get parameter value for an active UI instruction
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get parameter value for an active UI instruction
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get parameter value for an active UI instruction
 
 URL — /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}
 
-**URL :** `/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-uiparam
 UI param
@@ -17306,43 +17306,43 @@ value
 Requested UI parameter value
 ```
 
-**Success :** HTTP_OK(200), if there is an active UI instruction.
+**Success:** HTTP_OK(200), if there is an active UI instruction.
 
-**Error :** BAD_REQUEST(400) , NOT_FOUND(404) see
+**Error:** BAD_REQUEST(400) , NOT_FOUND(404) see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%25%2499/Result"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get active UI instruction parameters
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get active UI instruction parameters
+**Path:** RobotWare Services › RAPID Service › Operations on RAPID UI instructions › Operations on Active UI Instruction › Get active UI instruction parameters
 
 URL — /rw/rapid/uiinstr/active/params/{stackurl}
 
-**URL :** `/rw/rapid/uiinstr/active/params/{stackurl}`  
-**Method :** `GET`
+**URL:** `/rw/rapid/uiinstr/active/params/{stackurl}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-uiparam-li
 UI instruction parameter
@@ -17352,86 +17352,86 @@ value
 Parameter value
 ```
 
-**Success :** HTTP_OK(200), if there is an active UI instruction.
+**Success:** HTTP_OK(200), if there is an active UI instruction.
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), see
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/params/RAPID/T_ROB1/%25%2499"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Rapid taskpanel
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on Rapid taskpanel
+**Path:** RobotWare Services › RAPID Service › Operations on Rapid taskpanel
 
 ---
 
 ## Get user modify from taskpanel
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on Rapid taskpanel › Get user modify from taskpanel
+**Path:** RobotWare Services › RAPID Service › Operations on Rapid taskpanel › Get user modify from taskpanel
 
 URL — /rw/rapid/taskselection
 
-**URL :** `/rw/rapid/taskselection`  
-**Method :** `GET`
+**URL:** `/rw/rapid/taskselection`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-taskselection
 Rapid tasks user modify flag.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400) , see
+**Error:** BAD_REQUEST(400) , see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/taskselection"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on Tasks panel change
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on Rapid taskpanel › Subscribe on Tasks panel change
+**Path:** RobotWare Services › RAPID Service › Operations on Rapid taskpanel › Subscribe on Tasks panel change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -17439,24 +17439,24 @@ resources
 *<identifier>-p*=The priority associated with the subscription resource.
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-taskpanel-ev
 change-count
 number of times the changes occured
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID build log change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -17464,26 +17464,26 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/tas
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/rapid/taskselection;taskpanelchange&1-p=1" "http://127.0.0.1/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on Rapid AliasIO
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on Rapid AliasIO
+**Path:** RobotWare Services › RAPID Service › Operations on Rapid AliasIO
 
 ---
 
 ## Get AliasIO List
 
-**Chemin :** RobotWare Services › RAPID Service › Operations on Rapid AliasIO › Get AliasIO List
+**Path:** RobotWare Services › RAPID Service › Operations on Rapid AliasIO › Get AliasIO List
 
 URL — /rw/rapid/aliasio
 
-**URL :** `/rw/rapid/aliasio`  
-**Method :** `GET`
+**URL:** `/rw/rapid/aliasio`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 start={start position}
 Optional
@@ -17491,12 +17491,12 @@ limit={number of aliasios}
 Optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None*
 ```
 
-**Resources :**
+**Resources:**
 ```
 rap-alias-io
 Rapid AliasIO resource
@@ -17508,52 +17508,52 @@ type
 IO signal type {DI/ DO/ AI/ AO/ GI/ GO}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/aliasio?start=0
 "
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## System service
 
-**Chemin :** RobotWare Services › System service
+**Path:** RobotWare Services › System service
 
 ---
 
 ## System Information
 
-**Chemin :** RobotWare Services › System service › System Information
+**Path:** RobotWare Services › System service › System Information
 
 URL — /rw/system
 
-**URL :** `/rw/system`  
-**Method :** `GET`
+**URL:** `/rw/system`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 sys-system-li
 below system information tags are valid only for RC, not VC
@@ -17600,61 +17600,61 @@ products
 Returns Installed Products.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get robot type
 
-**Chemin :** RobotWare Services › System service › Get robot type
+**Path:** RobotWare Services › System service › Get robot type
 
 URL — /rw/system/robottype
 
-**URL :** `/rw/system/robottype`  
-**Method :** `GET`
+**URL:** `/rw/system/robottype`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 robottype
 type of robot.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Robot controller errors, see
+**Error:** Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/robottype"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 The API supports only ABB standard robots. Positioners, track motion etc. are not supported.
 In case, there is no ABB standard robots, NO_CONTENT will be returned.
 
@@ -17662,71 +17662,71 @@ In case, there is no ABB standard robots, NO_CONTENT will be returned.
 
 ## System Option Resource
 
-**Chemin :** RobotWare Services › System service › System Option Resource
+**Path:** RobotWare Services › System service › System Option Resource
 
 ---
 
 ## System Options
 
-**Chemin :** RobotWare Services › System service › System Option Resource › System Options
+**Path:** RobotWare Services › System service › System Option Resource › System Options
 
 URL — /rw/system/options
 
-**URL :** `/rw/system/options`  
-**Method :** `GET`
+**URL:** `/rw/system/options`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 sys-options-li
 option
 Option
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/options"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## System Energy Resource
 
-**Chemin :** RobotWare Services › System service › System Energy Resource
+**Path:** RobotWare Services › System service › System Energy Resource
 
 ---
 
 ## Get System Energy Actions
 
-**Chemin :** RobotWare Services › System service › System Energy Resource › Get System Energy Actions
+**Path:** RobotWare Services › System service › System Energy Resource › Get System Energy Actions
 
 URL — /rw/system/energy
 
-**URL :** `/rw/system/energy`  
-**Method :** `GET`
+**URL:** `/rw/system/energy`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -17735,12 +17735,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 subscribe
 subscribe to system energy information.
@@ -17748,35 +17748,35 @@ reset-accumulated-energy
 Resets System Accumulated Energy.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## System Energy Info Change Count
 
-**Chemin :** RobotWare Services › System service › System Energy Resource › System Energy Info Change Count
+**Path:** RobotWare Services › System service › System Energy Resource › System Energy Info Change Count
 
 URL — /rw/system/energy
 
-**URL :** `/rw/system/energy`  
-**Method :** `GET`
+**URL:** `/rw/system/energy`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource = change-count
 Required
@@ -17784,45 +17784,45 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 sys-energy-changecount-li
 change-count
 Returns the change count of the measurement. The value is increased when a new measurement is available.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?resource=change-count"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Reset Accumulated Energy
 
-**Chemin :** RobotWare Services › System service › System Energy Resource › Reset Accumulated Energy
+**Path:** RobotWare Services › System service › System Energy Resource › Reset Accumulated Energy
 
 URL — /rw/system/energy
 
-**URL :** `/rw/system/energy`  
-**Method :** `POST`
+**URL:** `/rw/system/energy`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=reset
 Required
@@ -17830,52 +17830,52 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),NOT_FOUND(404)
+**Error:** BAD_REQUEST(400),NOT_FOUND(404)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=reset"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## System Energy
 
-**Chemin :** RobotWare Services › System service › System Energy Resource › System Energy
+**Path:** RobotWare Services › System service › System Energy Resource › System Energy
 
 URL — /rw/system/energy
 
-**URL :** `/rw/system/energy`  
-**Method :** `GET`
+**URL:** `/rw/system/energy`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 sys-energy-state-li
 state
@@ -17904,40 +17904,40 @@ interval-energy
 energy value of the axis for current interval.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Subscribe on System Energy Changes.
 
-**Chemin :** RobotWare Services › System service › System Energy Resource › Subscribe on System Energy Changes.
+**Path:** RobotWare Services › System service › System Energy Resource › Subscribe on System Energy Changes.
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 = An identifier
@@ -17948,104 +17948,104 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
+**Error:** UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/system/energy&1-p=0" -X POST "http://localhost/subscription"
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/system/energy&1-p=1" -X POST "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## System License Resource
 
-**Chemin :** RobotWare Services › System service › System License Resource
+**Path:** RobotWare Services › System service › System License Resource
 
 ---
 
 ## Get System Robotware License
 
-**Chemin :** RobotWare Services › System service › System License Resource › Get System Robotware License
+**Path:** RobotWare Services › System service › System License Resource › Get System Robotware License
 
 URL — /rw/system/license
 
-**URL :** `/rw/system/license`  
-**Method :** `GET`
+**URL:** `/rw/system/license`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 license
 System robotware license.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/license"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## System Products Resource
 
-**Chemin :** RobotWare Services › System service › System Products Resource
+**Path:** RobotWare Services › System service › System Products Resource
 
 ---
 
 ## Get Installed Products
 
-**Chemin :** RobotWare Services › System service › System Products Resource › Get Installed Products
+**Path:** RobotWare Services › System service › System Products Resource › Get Installed Products
 
 URL — /rw/system/products
 
-**URL :** `/rw/system/products`  
-**Method :** `GET`
+**URL:** `/rw/system/products`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 name={product-name}
 optional
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 title
 RobotWare system product title
@@ -18053,45 +18053,45 @@ version-name
 RobotWare system product version name
 ```
 
-**Success :** HTTP_OK(200), NO_CONTENT(204)
+**Success:** HTTP_OK(200), NO_CONTENT(204)
 See
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 `curl –digest -u "Default User":robotics " "
 http://localhost:7777/rw/system/products/
 "
 ```
 
-**Notes :** In case, there is no products, NO_CONTENT(204) will be returned.
+**Notes:** In case, there is no products, NO_CONTENT(204) will be returned.
 
 ---
 
 ## RobotWare return codes service
 
-**Chemin :** RobotWare Services › RobotWare return codes service
+**Path:** RobotWare Services › RobotWare return codes service
 
 Example — Update a RAPID variable without required master ship.
 
-**URL :** `/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set.`  
+**URL:** `/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set.`  
 ---
 
 ## Get a list of RobotWare return codes
 
-**Chemin :** RobotWare Services › RobotWare return codes service › Get a list of RobotWare return codes
+**Path:** RobotWare Services › RobotWare return codes service › Get a list of RobotWare return codes
 
 URL — /rw/retcode
 
-**URL :** `/rw/retcode`  
-**Method :** `GET`
+**URL:** `/rw/retcode`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 code={code}
 optional
@@ -18099,12 +18099,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 err-descr-li
 title
@@ -18119,36 +18119,36 @@ description
 Short description of the error code
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://192.168.8.105/rw/retcode"
 ```
 
-**Notes :** Error description are only available in English and XML is the only supported format.
+**Notes:** Error description are only available in English and XML is the only supported format.
 Not supported in bootserver mode
 
 ---
 
 ## Devices service
 
-**Chemin :** RobotWare Services › Devices service
+**Path:** RobotWare Services › Devices service
 
 ---
 
 ## Devices tree information
 
-**Chemin :** RobotWare Services › Devices service › Devices tree information
+**Path:** RobotWare Services › Devices service › Devices tree information
 
 URL — /rw/devices
 
-**URL :** `/rw/devices`  
-**Method :** `GET`
+**URL:** `/rw/devices`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 Lang={lang}
 Optional
@@ -18156,12 +18156,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 dev-id-li
 name
@@ -18187,42 +18187,42 @@ value
 value is of type textID, i.e. provides the status of resource. ex: OK, ENABLED etc
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404)
 HTTP Errors, see
 HTTP Status codes
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/devices"
 curl --digest -u "Default User":robotics "http://localhost/rw/devices/hw_devices/CONTROLLER/COMPUTER_SYSTEM/SERIAL_PORTS/COM1_PORT"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Motion System
 
-**Chemin :** RobotWare Services › Motion System
+**Path:** RobotWare Services › Motion System
 
 ---
 
 ## Get Motion System
 
-**Chemin :** RobotWare Services › Motion System › Get Motion System
+**Path:** RobotWare Services › Motion System › Get Motion System
 
 URL — /rw/motionsystem
 
-**URL :** `/rw/motionsystem`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 Continues the execution even if any error occurs and default value is 0
@@ -18231,12 +18231,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 motionsystem = domain name
 change-count = counter to keep count for every change in the motion system(domain)
@@ -18249,14 +18249,14 @@ absacc-active = absolute accuracy active
 mechunit, motionsupervision, jogdata, incstepsizes = different functionalities which come under the motionsystem root resource. Refer individual documents for more information.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem"
 ```
@@ -18265,14 +18265,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem"
 
 ## Get Motion System action
 
-**Chemin :** RobotWare Services › Motion System › Get Motion System action
+**Path:** RobotWare Services › Motion System › Get Motion System action
 
 URL — /rw/motionsystem
 
-**URL :** `/rw/motionsystem`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -18280,19 +18280,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem?action=show"
 ```
@@ -18301,14 +18301,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem?actio
 
 ## Set Mechunit for jogging
 
-**Chemin :** RobotWare Services › Motion System › Set Mechunit for jogging
+**Path:** RobotWare Services › Motion System › Set Mechunit for jogging
 
 URL — /rw/motionsystem
 
-**URL :** `/rw/motionsystem`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-mechunit
 Required
@@ -18316,21 +18316,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mechunit-name={mechunit}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1" -X POST "http://localhost/rw/motionsystem?action=set-mechunit"
 ```
@@ -18339,14 +18339,14 @@ curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1" -X POST "http:
 
 ## Perform Jogging
 
-**Chemin :** RobotWare Services › Motion System › Perform Jogging
+**Path:** RobotWare Services › Motion System › Perform Jogging
 
 URL — /rw/motionsystem
 
-**URL :** `/rw/motionsystem`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=jog
 Required
@@ -18354,7 +18354,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 axis1={axis1}
 Required
@@ -18373,14 +18373,14 @@ Required
 inc-mode={User | Medium | Small | Large} (default value = no increment)
 ```
 
-**Success :** NO_CONTENT(204) see
+**Success:** NO_CONTENT(204) see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "axis1=900&axis2=0&axis3=0&axis4=0&axis5=0&axis6=0&ccount=0&inc-mode=Large" -X POST "http://localhost/rw/motionsystem?action=jog"
 ```
@@ -18389,14 +18389,14 @@ curl --digest -u "Default User":robotics -d "axis1=900&axis2=0&axis3=0&axis4=0&a
 
 ## Set Robo Target Position
 
-**Chemin :** RobotWare Services › Motion System › Set Robo Target Position
+**Path:** RobotWare Services › Motion System › Set Robo Target Position
 
 URL — /rw/motionsystem
 
-**URL :** `/rw/motionsystem`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=positiontarget
 Required
@@ -18404,7 +18404,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 pos-x={value of x}
 Required
@@ -18442,15 +18442,15 @@ extjoint-6={value of ej6}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "pos-x=634.609&pos-y=50.7298&pos-z=432.9419&orient-q1=0.4932235&orient-q2=-0.03467758&orient-q3=0.8689883&orient-q4=0.01968242&config-j1=0&config-j4=0&config-j6=0&config-jx=0&extjoint-1=0&extjoint-2=8.999999&extjoint-3=8.999999&extjoint-4=8.999999&extjoint-5=8.999999&extjoint-6=8.999999" -X POST "http://localhost/rw/motionsystem?action=positiontarget"
 ```
@@ -18459,14 +18459,14 @@ curl --digest -u "Default User":robotics -d "pos-x=634.609&pos-y=50.7298&pos-z=4
 
 ## Get check change count
 
-**Chemin :** RobotWare Services › Motion System › Get check change count
+**Path:** RobotWare Services › Motion System › Get check change count
 
 URL — /rw/motionsystem/checkchangecount
 
-**URL :** `/rw/motionsystem/checkchangecount`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/checkchangecount`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 changecount={changecount}
 Required
@@ -18474,25 +18474,25 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 changestate
 changecount changed or not, {TRUE|FALSE}
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/checkchangecount?changecount=0"
 ```
@@ -18501,14 +18501,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/check
 
 ## Subscribe on Error EventChange
 
-**Chemin :** RobotWare Services › Motion System › Subscribe on Error EventChange
+**Path:** RobotWare Services › Motion System › Subscribe on Error EventChange
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -18519,50 +18519,50 @@ Required
 Required
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource**
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/motionsystem/errorstate;erroreventchange&1-p=0" "http://localhost/subscription"
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/motionsystem/errorstate;erroreventchange&1-p=1" "http://localhost/subscription"
 ```
 
-**Notes :** On subscription an empty initial event will be generated. Not supported in bootserver mode.
+**Notes:** On subscription an empty initial event will be generated. Not supported in bootserver mode.
 
 ---
 
 ## Operations on Error State
 
-**Chemin :** RobotWare Services › Motion System › Operations on Error State
+**Path:** RobotWare Services › Motion System › Operations on Error State
 
 ---
 
 ## Get Error State
 
-**Chemin :** RobotWare Services › Motion System › Operations on Error State › Get Error State
+**Path:** RobotWare Services › Motion System › Operations on Error State › Get Error State
 
 URL — /rw/motionsystem/errorstate
 
-**URL :** `/rw/motionsystem/errorstate`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/errorstate`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Resources :**
+**Resources:**
 ```
 ms-errorstate
 err-state
@@ -18586,11 +18586,11 @@ err-count
 Error count (If a new error occurs, count will be incremented.)
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/errorstate"
 ```
@@ -18599,20 +18599,20 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/error
 
 ## Operations on Motion Supervision
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision
 
 ---
 
 ## Get Motion Supervision
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 mechunit={mechunit name}
 Required
@@ -18620,20 +18620,20 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?mechunit=ROB_1"
 ```
@@ -18642,14 +18642,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motio
 
 ## Get Motion Supervision Actions
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision Actions
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision Actions
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -18657,19 +18657,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=show"
 ```
@@ -18678,14 +18678,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motio
 
 ## Set Motion Supervision Mode (Jog Supervision Mode)
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Mode (Jog Supervision Mode)
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Mode (Jog Supervision Mode)
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-mode
 Required
@@ -18693,7 +18693,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mechunit-name={mechanical unit name}
 Required
@@ -18701,15 +18701,15 @@ mode={True | False}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&mode=True" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-mode"
 ```
@@ -18718,14 +18718,14 @@ curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&mode=True" - PO
 
 ## Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Sensitivity (Jog Supervision Sensitivity)
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-level
 Required
@@ -18733,7 +18733,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mechunit-name= {mechunit}
 Required
@@ -18741,15 +18741,15 @@ sensitivity={value}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&sensitivity=30" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-level"
 ```
@@ -18758,32 +18758,32 @@ curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&sensitivity=30"
 
 ## Get Motion Supervision Collision Prediction Mode
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision Collision Prediction Mode
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Get Motion Supervision Collision Prediction Mode
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=collision-prediction-mode
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=collision-prediction-mode"
 ```
@@ -18792,32 +18792,32 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motio
 
 ## Set Motion Supervision Collision Prediction Mode
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Collision Prediction Mode
+**Path:** RobotWare Services › Motion System › Operations on Motion Supervision › Set Motion Supervision Collision Prediction Mode
 
 URL — /rw/motionsystem/motionsupervision
 
-**URL :** `/rw/motionsystem/motionsupervision`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/motionsupervision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-colpred-mode
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mode={true | false}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mode=true" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-colpred-mode"
 ```
@@ -18826,20 +18826,20 @@ curl --digest -u "Default User":robotics -d "mode=true" - POST "http://localhost
 
 ## Operations On Path Supervision
 
-**Chemin :** RobotWare Services › Motion System › Operations On Path Supervision
+**Path:** RobotWare Services › Motion System › Operations On Path Supervision
 
 ---
 
 ## Get Path Supervision
 
-**Chemin :** RobotWare Services › Motion System › Operations On Path Supervision › Get Path Supervision
+**Path:** RobotWare Services › Motion System › Operations On Path Supervision › Get Path Supervision
 
 URL — /rw/motionsystem/pathsupervision
 
-**URL :** `/rw/motionsystem/pathsupervision`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/pathsupervision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 mechunit={mechunit}
 Required
@@ -18847,12 +18847,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 mode
 Path supervision mode
@@ -18860,15 +18860,15 @@ level
 Path supervision level
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?mechunit=ROB_1"
 ```
@@ -18877,14 +18877,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/paths
 
 ## Get Path Supervision Actions
 
-**Chemin :** RobotWare Services › Motion System › Operations On Path Supervision › Get Path Supervision Actions
+**Path:** RobotWare Services › Motion System › Operations On Path Supervision › Get Path Supervision Actions
 
 URL — /rw/motionsystem/pathsupervision
 
-**URL :** `/rw/motionsystem/pathsupervision`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/pathsupervision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -18892,12 +18892,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 mode
 Path supervision mode
@@ -18905,15 +18905,15 @@ level
 Path supervision level
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?action=show"
 ```
@@ -18922,14 +18922,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/paths
 
 ## Set Path Supervision Mode
 
-**Chemin :** RobotWare Services › Motion System › Operations On Path Supervision › Set Path Supervision Mode
+**Path:** RobotWare Services › Motion System › Operations On Path Supervision › Set Path Supervision Mode
 
 URL — /rw/motionsystem/pathsupervision
 
-**URL :** `/rw/motionsystem/pathsupervision`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/pathsupervision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-mode
 Required
@@ -18937,7 +18937,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mechunit={mechunit}
 Required
@@ -18945,15 +18945,15 @@ mode={ON|OFF}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit=ROB_1&mode=ON" -X POST "http://localhost/rw/motionsystem/pathsupervision?action=set-mode"
 ```
@@ -18962,14 +18962,14 @@ curl --digest -u "Default User":robotics -d "mechunit=ROB_1&mode=ON" -X POST "ht
 
 ## Set Path Supervision Level
 
-**Chemin :** RobotWare Services › Motion System › Operations On Path Supervision › Set Path Supervision Level
+**Path:** RobotWare Services › Motion System › Operations On Path Supervision › Set Path Supervision Level
 
 URL — /rw/motionsystem/pathsupervision
 
-**URL :** `/rw/motionsystem/pathsupervision`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/pathsupervision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-level
 Required
@@ -18977,7 +18977,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mechunit={mechunit}
 Required
@@ -18985,15 +18985,15 @@ level={level}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit=ROB_1&level=90" -X POST "http://localhost/rw/motionsystem/pathsupervision?action=set-level"
 ```
@@ -19002,46 +19002,46 @@ curl --digest -u "Default User":robotics -d "mechunit=ROB_1&level=90" -X POST "h
 
 ## Operations On NonMotion Execution
 
-**Chemin :** RobotWare Services › Motion System › Operations On NonMotion Execution
+**Path:** RobotWare Services › Motion System › Operations On NonMotion Execution
 
 ---
 
 ## Get Non Motion Execution Mode
 
-**Chemin :** RobotWare Services › Motion System › Operations On NonMotion Execution › Get Non Motion Execution Mode
+**Path:** RobotWare Services › Motion System › Operations On NonMotion Execution › Get Non Motion Execution Mode
 
 URL — /rw/motionsystem/nonmotionexecution
 
-**URL :** `/rw/motionsystem/nonmotionexecution`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/nonmotionexecution`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 mode
 {ON|OFF} Nonmotion Execution mode
 ```
 
-**Success :** HTTP_OK (200)
+**Success:** HTTP_OK (200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution"
 ```
@@ -19050,14 +19050,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmo
 
 ## Get NonMotion Execution Actions
 
-**Chemin :** RobotWare Services › Motion System › Operations On NonMotion Execution › Get NonMotion Execution Actions
+**Path:** RobotWare Services › Motion System › Operations On NonMotion Execution › Get NonMotion Execution Actions
 
 URL — /rw/motionsystem/nonmotionexecution
 
-**URL :** `/rw/motionsystem/nonmotionexecution`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/nonmotionexecution`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -19065,25 +19065,25 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 mode
 NonMotion Execution mode
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution?action=show"
 ```
@@ -19092,14 +19092,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmo
 
 ## Set NonMotion Execution Mode
 
-**Chemin :** RobotWare Services › Motion System › Operations On NonMotion Execution › Set NonMotion Execution Mode
+**Path:** RobotWare Services › Motion System › Operations On NonMotion Execution › Set NonMotion Execution Mode
 
 URL — /rw/motionsystem/nonmotionexecution
 
-**URL :** `/rw/motionsystem/nonmotionexecution`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/nonmotionexecution`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-mode
 Required
@@ -19107,21 +19107,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 mode={ON|OFF}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400), FORBIDDEN (403)
+**Error:** BAD_REQUEST (400), FORBIDDEN (403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "mode=ON" -X POST "http://localhost/rw/motionsystem/nonmotionexecution?action=set-mode"
 ```
@@ -19130,32 +19130,32 @@ curl --digest -u "Default User":robotics -d "mode=ON" -X POST "http://localhost/
 
 ## Operations on Mechunits
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits
+**Path:** RobotWare Services › Motion System › Operations on Mechunits
 
 ---
 
 ## Get Mechunits
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Get Mechunits
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Get Mechunits
 
 URL — /rw/motionsystem/mechunits
 
-**URL :** `/rw/motionsystem/mechunits`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 Gives the information regarding the different mechanical units and the mechanical unit parameters.
 title = name of the mechanical unit
@@ -19164,15 +19164,15 @@ activation-allowed = {true | false} true, if mechanical unit can be activated
 drive-module = information if a drive module is associated with the mechanical unit.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits"
 ```
@@ -19181,20 +19181,20 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Operations on Mechunit
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit
 
 ---
 
 ## Get Mechunit
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Mechunit
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Mechunit
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 continue-on-err={1|0}
 resource={static | dynamic | tool | wobj | payload | total-payload | status | mode | jog-mode | type | task | coord-system | axes | axes-total | is-integrated | has-integrated}
@@ -19206,12 +19206,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 resource=static
 It gives mechanical unit static(task, type, axes, axes-total, is-integrated, has-integrated) properties info
@@ -19243,15 +19243,15 @@ has-integrated-unit = Name of the mechanical unit which is integrated with this 
 pjoints, robtarget, jointtarget, cartesian, axes are the different resources under mechunit/{mechunit-name} resource. For more information, refer the documentation for the same.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Not Found(404),BAD_REQUEST(400)
+**Error:** Not Found(404),BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Sample call1:
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?continue-on-err=1"
@@ -19265,34 +19265,34 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Mechunit action
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Mechunit action
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Mechunit action
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?action=show"
 ```
@@ -19301,14 +19301,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Set Mechunit
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Mechunit
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Mechunit
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -19317,7 +19317,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 tool={tool_name}
 wobj={wobj_name}
@@ -19329,15 +19329,15 @@ coord-system={Wobj|Base|Tool|Word}
 At least one data parameter should be provided.
 ```
 
-**Success :** NO_CONTENT (204): If all APIs are successful
+**Success:** NO_CONTENT (204): If all APIs are successful
 HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "tool=tool1&wobj=wobj2&payload=load2" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=set&continue-on-err=1"
 ```
@@ -19346,14 +19346,14 @@ curl --digest -u "Default User":robotics -d "tool=tool1&wobj=wobj2&payload=load2
 
 ## Set Compliance Lead Through
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Compliance Lead Through
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Compliance Lead Through
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-lead-through
 Required
@@ -19361,21 +19361,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 status={active|inactive}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "status=active" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_R?action=set-lead-through"
 ```
@@ -19384,39 +19384,39 @@ curl --digest -u "Default User":robotics -d "status=active" -X POST "http://loca
 
 ## Get Compliance Lead Through
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Compliance Lead Through
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Compliance Lead Through
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=lead-through
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 status = {active | Inactive}, active if complianceleadthrough functionality is opted for.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?resource=lead-through"
 ```
@@ -19425,14 +19425,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Set Fine Calibration
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Fine Calibration
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Fine Calibration
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=fine-calibrate
 Required
@@ -19440,21 +19440,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 axis={axis-value}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=fine-calibrate"
 ```
@@ -19463,14 +19463,14 @@ curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/r
 
 ## Update (Syncronize) Revolution Counter
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Update (Syncronize) Revolution Counter
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Update (Syncronize) Revolution Counter
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=update-revcounter
 Required
@@ -19478,21 +19478,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 axis={axis-value}
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=update-revcounter"
 ```
@@ -19501,34 +19501,34 @@ curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/r
 
 ## Get Physical Joints
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Physical Joints
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Physical Joints
 
 URL — /rw/motionsystem/mechunits/{mechunit}/pjoints
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/pjoints`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/pjoints`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/pjoints"
 ```
@@ -19537,14 +19537,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Cartesian Value
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Cartesian Value
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Cartesian Value
 
 URL — /rw/motionsystem/mechunits/{mechunit}/cartesian
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/cartesian`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/cartesian`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 tool={tool_name} By default, active tool configured for the mechunit will be taken.
 wobj={wobj_name} By default, active wobj configured for the mechunit will be taken.
@@ -19555,19 +19555,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/cartesian?tool=tool0&wobj=wobj1&coordinate=Base&elog-at-err=1"
 ```
@@ -19576,14 +19576,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Set Mechanical Unit
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Mechanical Unit
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Set Mechanical Unit
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=mechunit-position
 Required
@@ -19591,7 +19591,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 rob_joint=[rob_joint1-value,rob_joint1-value,rob_joint3-value,rob_joint4-value,rob_joint5-value,rob_joint6-value]
 Required
@@ -19599,15 +19599,15 @@ ext_joint=[ext_joint1-value,ext_joint2-value,ext_joint3-value,ext_joint4-value,e
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "rob_joint=[18.23,8.45,-13.23,-5.25,13.63,-72.31]&ext_joint=[0,0,0,0,0,0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=mechunit-position"
 ```
@@ -19616,14 +19616,14 @@ curl --digest -u "Default User":robotics -d "rob_joint=[18.23,8.45,-13.23,-5.25,
 
 ## Get Robtarget
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Robtarget
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Robtarget
 
 URL — /rw/motionsystem/mechunits/{mechunit}/robtarget
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/robtarget`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/robtarget`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 tool={tool_name} By default, active tool configured for the mechunit will be taken.
 wobj={wobj_name} By default, active wobj configured for the mechunit will be taken.
@@ -19633,19 +19633,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/robtarget?tool=tool0&wobj=wobj0&coordinate=Base"
 ```
@@ -19654,14 +19654,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Joint target
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joint target
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joint target
 
 URL — /rw/motionsystem/mechunits/{mechunit}/jointtarget
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/jointtarget`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/jointtarget`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 ignore
 =1 if present will get joint target always.
@@ -19669,19 +19669,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/jointtarget"
 ```
@@ -19690,21 +19690,21 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Subscribe on Mechunit Mode Change
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Subscribe on Mechunit Mode Change
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Subscribe on Mechunit Mode Change
 
 URL — /subscription
 
-**URL :** `/subscription`  
-**Method :** `POST`
+**URL:** `/subscription`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 resources
 =An identifier
@@ -19715,24 +19715,24 @@ Required
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 motionsystem-ev
 change-count
 Change count
 ```
 
-**Success :** CREATED(201)
+**Success:** CREATED(201)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 HTTP Errors, see
 HTTP Status codes
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 Subscribe on RAPID task change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -19740,27 +19740,27 @@ curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/motionsys
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/motionsystem/mechunits;mechunitmodechangecount&1-p=1" "http://localhost/subscription"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get Joints From Position
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joints From Position
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joints From Position
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=CalcJointsFromPose
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 curr_position = [x,y,z]
 Required
@@ -19784,7 +19784,7 @@ elog_at_error = {TRUE|FALSE}
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 robotjoint
 Robot joints
@@ -19792,15 +19792,15 @@ extjoint
 Robot external joints
 ```
 
-**Success :** HTTP_OK(200):
+**Success:** HTTP_OK(200):
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.184474304,-0.599885881,-0.00642657699,-0.778501570]&tool_frame_orientation=[1.0,0,0,0]&old_rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&old_ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,0,0]&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=CalcJointsFromPose"
 ```
@@ -19809,21 +19809,21 @@ curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.01015
 
 ## Get Position From Joints
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Position From Joints
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Position From Joints
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=CalcPoseFromJoints
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 tool_frame_position = [x, y, z]
 Required
@@ -19839,7 +19839,7 @@ elog_at_error = TRUE|FALSE
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 position-(x-z)
 Current Position
@@ -19853,15 +19853,15 @@ quarter_rev_j
 Robot configuration
 ```
 
-**Success :** HTTP_OK(200):
+**Success:** HTTP_OK(200):
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "tool_frame_position=[0,0,0]&tool_frame_orientation=[1.0,0,0,0]&rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=CalcPoseFromJoints"
 ```
@@ -19870,21 +19870,21 @@ curl --digest -u "Default User":robotics -d "tool_frame_position=[0,0,0]&tool_fr
 
 ## Get All Joint Solution
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get All Joint Solution
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get All Joint Solution
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=AllJointSolutions
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 curr_position = [x,y,z]
 Required
@@ -19902,7 +19902,7 @@ robot_configuration = [quarter_rev_j1, quarter_rev_j4, quarter_rev_j6, quarter_r
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 robotjoint
 Robot joints
@@ -19912,15 +19912,15 @@ quarter_rev_j
 Robot configuration
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547102,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.675245225,-0.425338209,-0.423074305,-0.429114610]&tool_frame_orientation=[1.0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,1,0]" "http://localhost/rw/motionsystem/mechunits/ROB_R?action=AllJointSolutions"
 ```
@@ -19929,21 +19929,21 @@ curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.01015
 
 ## Get Joints From Cartesian
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joints From Cartesian
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Joints From Cartesian
 
 URL — /rw/motionsystem/mechunits/{mechunit}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=JointsFromCartesian
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 curr_position = [x,y,z]
 Required
@@ -19967,7 +19967,7 @@ elog_at_error = TRUE|FALSE
 Required
 ```
 
-**Resources :**
+**Resources:**
 ```
 robotjoint
 Robot joints
@@ -19975,15 +19975,15 @@ extjoint
 Robot external joints
 ```
 
-**Success :** HTTP_OK(200):
+**Success:** HTTP_OK(200):
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.184474304,-0.599885881,-0.00642657699,-0.778501570]&tool_frame_orientation=[1.0,0,0,0]&old_rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&old_ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,0,0]&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=JointsFromCartesian"
 ```
@@ -19992,26 +19992,26 @@ curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.01015
 
 ## Get Calibration Info
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Calibration Info
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Get Calibration Info
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calibrationinfo
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calibrationinfo`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calibrationinfo`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 usecalibrationwindowtype
 calibration window count
@@ -20031,14 +20031,14 @@ currentcalibrationmethod
 current calibration method name
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/calibrationinfo"
 ```
@@ -20047,25 +20047,25 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Operation on Calib
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib
 
 ---
 
 ## Calibration for BaseFrame
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for BaseFrame
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for BaseFrame
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=BaseFrame
 Required
@@ -20086,7 +20086,7 @@ point10=[x, y, z, q1, q2, q3, q4, j1, j4, j6, jx]
 At least 3 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20100,15 +20100,15 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=BaseFrame&type=ROBOT&reference=[0,0,0]&point1=[349.9289,7.176809,509.6597,0.5466173,-0.008585534,0.8373197,0.005604791,0,0,0,0]&point2=[285.9633,106.211,689.8639,0.7294637,-0.1187442,0.6607552,0.1310918,0,0,0,0]&point3=[269.1732,143.5324,689.8639,0.7190274,-0.1627988,0.6513019,0.1797274,0,0,0,0]&point4=[270.8943,144.4501,659.9161,0.6966563,-0.1687667,0.6751775,0.1741356,0,0,0,0]&point5=[304.7093,37.4411,659.9161,0.7167487,-0.04251764,0.6946503,0.04387021,0,0,0,0]&point6=[229.2431,28.16821,705.6543,0.7913748,-0.0372306,0.6082709,0.04843788,0,0,0,0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20117,19 +20117,19 @@ curl --digest -u "Default User":robotics -d "method=BaseFrame&type=ROBOT&referen
 
 ## Calibration for BaseFrameMoving
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for BaseFrameMoving
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for BaseFrameMoving
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=BaseFrameMoving
 Required
@@ -20148,7 +20148,7 @@ point10=[x, y, z, q1, q2, q3, q4, x2, y2, z2, q2_1, q2_2, q2_3, q2_4, j1, j4, j6
 At least 3 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20162,13 +20162,13 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=BaseFrameMoving&type=ROBOT2&point1=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]&point2=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]&point3=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20177,19 +20177,19 @@ curl --digest -u "Default User":robotics -d "method=BaseFrameMoving&type=ROBOT2&
 
 ## Calibration for ExternalRobotNomBaseNew
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for ExternalRobotNomBaseNew
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for ExternalRobotNomBaseNew
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=ExternalRobotNomBaseNew
 Required
@@ -20208,7 +20208,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 3 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20222,15 +20222,15 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=ExternalRobotNomBaseNew&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20239,19 +20239,19 @@ curl --digest -u "Default User":robotics -d "method=ExternalRobotNomBaseNew&type
 
 ## Calibration for RobotAxisRot
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RobotAxisRot
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RobotAxisRot
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=RobotAxisRot
 Required
@@ -20274,7 +20274,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 4 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20288,15 +20288,15 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400)
+**Error:** BAD_REQUEST (400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=RobotAxisRot&type=SINGLE&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20305,19 +20305,19 @@ curl --digest -u "Default User":robotics -d "method=RobotAxisRot&type=SINGLE&tol
 
 ## Calibration for SingleUserRotNew
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleUserRotNew
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleUserRotNew
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=SingleUserRotNew
 Required
@@ -20338,7 +20338,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 4 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20352,14 +20352,14 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleUserRotNew&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20368,19 +20368,19 @@ curl --digest -u "Default User":robotics -d "method=SingleUserRotNew&type=SINGLE
 
 ## Calibration for RotExtCtrlZdef
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RotExtCtrlZdef
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RotExtCtrlZdef
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=RotExtCtrlZdef
 Required
@@ -20403,7 +20403,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 4 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20417,15 +20417,15 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=RotExtCtrlZdef&type=SINGLE&tolerance=1&pose=[0, 0, 0, 0, 1, 0, 0]&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20434,19 +20434,19 @@ curl --digest -u "Default User":robotics -d "method=RotExtCtrlZdef&type=SINGLE&t
 
 ## Calibration for SingleUserLin
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleUserLin
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleUserLin
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=SingleUserLin
 Required
@@ -20467,7 +20467,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 3 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20481,14 +20481,14 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleUserLin&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20497,19 +20497,19 @@ curl --digest -u "Default User":robotics -d "method=SingleUserLin&type=SINGLE&to
 
 ## Calibration for SingleTrack
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleTrack
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for SingleTrack
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=SingleTrack
 Required
@@ -20528,7 +20528,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 3 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20542,14 +20542,14 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST (400) ,See
+**Error:** BAD_REQUEST (400) ,See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleTrack&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20558,19 +20558,19 @@ curl --digest -u "Default User":robotics -d "method=SingleTrack&type=SINGLE&poin
 
 ## Calibration for RobotAxisRot2
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RobotAxisRot2
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operation on Calib › Calibration for RobotAxisRot2
 
 URL — /rw/motionsystem/mechunits/{mechunit}/calib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/calib`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/calib`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 method=RobotAxisRot2
 Required
@@ -20593,7 +20593,7 @@ point10=[x, y, z, q1, q2, q3, q4, axis_value]
 At least 4 points are required.
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents base frame position
@@ -20607,15 +20607,15 @@ mean-err
 Represents the accuracy of the robot positioning against the tip
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "method=RobotAxisRot2&type=SINGLE2&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20624,39 +20624,39 @@ curl --digest -u "Default User":robotics -d "method=RobotAxisRot2&type=SINGLE2&t
 
 ## Operations on Baseframe
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe
 
 ---
 
 ## Get Base Frame
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Get Base Frame
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Get Base Frame
 
 URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
+**Error:** BAD_REQUEST(400), UNSUPPORTED_MEDIA(415)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe"
 ```
@@ -20665,14 +20665,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Base Frame actions
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Get Base Frame actions
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Get Base Frame actions
 
 URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -20680,20 +20680,20 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=show"
 ```
@@ -20702,14 +20702,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Set Base Frame
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Set Base Frame
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Baseframe › Set Base Frame
 
 URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/baseframe`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -20717,7 +20717,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 x={x-cordinate}
 y={y-cordinate}
@@ -20728,15 +20728,15 @@ q3={quaternion angle 3}
 q4={quaternion angle 4}
 ```
 
-**Success :** ACCEPTED(202)
+**Success:** ACCEPTED(202)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), Forbidden(403)
+**Error:** BAD_REQUEST(400), Forbidden(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "x=1&y=2&z=3&q1=0.1825742&q2=0.3651484&q3=0.5477226&q4=0.7302967" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=set"
 ```
@@ -20745,44 +20745,44 @@ curl --digest -u "Default User":robotics -d "x=1&y=2&z=3&q1=0.1825742&q2=0.36514
 
 ## Operations on Axes
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes
 
 ---
 
 ## Get Axes
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axes
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axes
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 This API provides the number of joints of the mechanical unit under consideration.
 title = axes, provides the number of joints on the mechanical unit.
 title = axis, provides the details of the specific joint in the mechanical unit.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes"
 ```
@@ -20791,24 +20791,24 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Axis
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 This API provides the details of the specific axis of the mechanical unit.
 axisstatus
@@ -20828,14 +20828,14 @@ logicalaxis
 : The logical joint number of the mechanical unit axis.
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1"
 ```
@@ -20844,14 +20844,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get Axis actions
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis actions
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis actions
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -20859,26 +20859,26 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z = 3D co-ordinates of the position of the mechanical unit.
 q1, q2, q3, q4 = angles of rotation
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=show
@@ -20889,26 +20889,26 @@ http://http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=show
 
 ## Get Axis pose
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis pose
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Get Axis pose
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=axis-pose
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 x, y, z
 Represents axis pose position
@@ -20916,14 +20916,14 @@ q1, q2, q3, q4
 Represents axis pose orientation
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?resource=axis-pose"
 ```
@@ -20932,14 +20932,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Set Axis pose
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Set Axis pose
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Set Axis pose
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-axispose
 Required
@@ -20947,7 +20947,7 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 x={x_position}
 y={y_position}
@@ -20958,14 +20958,14 @@ q3={q3_value}
 q4={q4_value}
 ```
 
-**Success :** NO_CONTENT (204), see
+**Success:** NO_CONTENT (204), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
+**Error:** BAD_REQUEST(400), NOT_FOUND(404), FORBIDDEN(403)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "x=0&y=0&z=0&q1=0&q2=1&q3=0&q4=0" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=set-axispose"
 ```
@@ -20974,14 +20974,14 @@ curl --digest -u "Default User":robotics -d "x=0&y=0&z=0&q1=0&q2=1&q3=0&q4=0" -X
 
 ## Update Commutate
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Update Commutate
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Update Commutate
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=update-commutate
 Required
@@ -20989,20 +20989,20 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=update-commutate
@@ -21013,14 +21013,14 @@ http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=update-commutate
 
 ## Update Sync Revolution Counter
 
-**Chemin :** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Update Sync Revolution Counter
+**Path:** RobotWare Services › Motion System › Operations on Mechunits › Operations on Mechunit › Operations on Axes › Update Sync Revolution Counter
 
 URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=update-syncrevcounter
 Required
@@ -21028,21 +21028,21 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 syncType=1
 Required
 ```
 
-**Success :** NO_CONTENT (204)
+**Success:** NO_CONTENT (204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "syncType=1" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=update-syncrevcounter"
 ```
@@ -21051,20 +21051,20 @@ curl --digest -u "Default User":robotics -d "syncType=1" -X POST "http://localho
 
 ## Operations on SMB Data
 
-**Chemin :** RobotWare Services › Motion System › Operations on SMB Data
+**Path:** RobotWare Services › Motion System › Operations on SMB Data
 
 ---
 
 ## Set SMB Data
 
-**Chemin :** RobotWare Services › Motion System › Operations on SMB Data › Set SMB Data
+**Path:** RobotWare Services › Motion System › Operations on SMB Data › Set SMB Data
 
 URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set
 Required
@@ -21072,15 +21072,15 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 type=robot-to-controller | controller-to-robot
 ```
 
-**Success :** NO_CONTENT (204) see
+**Success:** NO_CONTENT (204) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "type=robot-to-controller" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=set"
 ```
@@ -21089,14 +21089,14 @@ curl --digest -u "Default User":robotics -d "type=robot-to-controller" -X POST "
 
 ## Clear SMB Data
 
-**Chemin :** RobotWare Services › Motion System › Operations on SMB Data › Clear SMB Data
+**Path:** RobotWare Services › Motion System › Operations on SMB Data › Clear SMB Data
 
 URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
-**Method :** `POST`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=clear
 Required
@@ -21104,15 +21104,15 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 type={robot|controller}
 ```
 
-**Success :** NO_CONTENT (204) see
+**Success:** NO_CONTENT (204) see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "type=robot" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=clear"
 ```
@@ -21121,26 +21121,26 @@ curl --digest -u "Default User":robotics -d "type=robot" -X POST "http://localho
 
 ## Get SMB Data
 
-**Chemin :** RobotWare Services › Motion System › Operations on SMB Data › Get SMB Data
+**Path:** RobotWare Services › Motion System › Operations on SMB Data › Get SMB Data
 
 URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 cabinet_sis_data_status
 = {0|1|2|3}, where 0 is SMB_VALID, 1 is SMB_VALID_NOT_EQUAL, 2 is SMB_NOT_VALID and 3 is SMB_NOT_USED
@@ -21160,11 +21160,11 @@ sensor_memory_axis_cal_data_status
 = {0|1|2|3}, where 0 is SMB_VALID, 1 is SMB_VALID_NOT_EQUAL, 2 is SMB_NOT_VALID and 3 is SMB_NOT_USED
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata"
 ```
@@ -21173,14 +21173,14 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Get SMB Data Actions
 
-**Chemin :** RobotWare Services › Motion System › Operations on SMB Data › Get SMB Data Actions
+**Path:** RobotWare Services › Motion System › Operations on SMB Data › Get SMB Data Actions
 
 URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/smbdata`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -21188,19 +21188,19 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=show"
 ```
@@ -21209,39 +21209,39 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Operations on Motor Calib
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motor Calib
+**Path:** RobotWare Services › Motion System › Operations on Motor Calib
 
 ---
 
 ## Get Motor Calib Names
 
-**Chemin :** RobotWare Services › Motion System › Operations on Motor Calib › Get Motor Calib Names
+**Path:** RobotWare Services › Motion System › Operations on Motor Calib › Get Motor Calib Names
 
 URL — /rw/motionsystem/mechunits/{mechunit}/motorcalib
 
-**URL :** `/rw/motionsystem/mechunits/{mechunit}/motorcalib`  
-**Method :** `GET`
+**URL:** `/rw/motionsystem/mechunits/{mechunit}/motorcalib`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200), see
+**Success:** HTTP_OK(200), see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404), BAD_REQUEST(400)
+**Error:** NOT_FOUND(404), BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/motorcalib"
 ```
@@ -21250,56 +21250,56 @@ curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechu
 
 ## Integrated Vision (IV) Service
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service
+**Path:** RobotWare Services › Integrated Vision (IV) Service
 
 ---
 
 ## Get Vision Manager Resource
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Vision Manager Resource
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Vision Manager Resource
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** NOT_FOUND(404)
+**Error:** NOT_FOUND(404)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Number of Cameras of IV
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Number of Cameras of IV
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Number of Cameras of IV
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=num-of-cameras
 Required
@@ -21307,44 +21307,44 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 number-of-cameras:
 Number of cameras present in Integrated Vision Device
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=num-of-cameras"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get IV Camera Validity
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get IV Camera Validity
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get IV Camera Validity
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=camera-validity
 Required
@@ -21354,44 +21354,44 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 is-valid-camera-name:
 Given camera Name is valid or not
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-validity&name=camera1"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Vision (camera) Resource Actions
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Vision (camera) Resource Actions
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Vision (camera) Resource Actions
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 action=show
 Required
@@ -21399,12 +21399,12 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 restart:
 Restart the Camera.
@@ -21418,33 +21418,33 @@ set-hostname:
 Set the hostname for the camera.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?action=show"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Camera Jobname
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Camera Jobname
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Camera Jobname
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=camera-job
 Required
@@ -21452,128 +21452,128 @@ name={camera-name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 jobname:
 name of the job on the camera
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-job&name=mycamera"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Restart Camera
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Restart Camera
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Restart Camera
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=restart
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=restart"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Flash LED(s) of Camera
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Flash LED(s) of Camera
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Flash LED(s) of Camera
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=flash-led
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=flash-led"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Camera State
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Camera State
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Camera State
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-state
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
@@ -21581,77 +21581,77 @@ state={standby | run}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&state=run" -X POST "http://localhost/rw/vision?action=set-state"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Refesh the camera(s)
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Refesh the camera(s)
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Refesh the camera(s)
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=refresh
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/vision?action=refresh"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Hostname of the Camera
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Hostname of the Camera
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Hostname of the Camera
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-hostname
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
@@ -21659,80 +21659,80 @@ host={host-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&host=hostname" -X POST "http://localhost/rw/vision?action=set-hostname"
 ```
 
-**Notes :** A restart for the camera module is needed for the change to be visible. Switch Off and switch On the camera modeule.
+**Notes:** A restart for the camera module is needed for the change to be visible. Switch Off and switch On the camera modeule.
 Not supported in bootserver mode
 
 ---
 
 ## Set camera to be a DHCP client
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set camera to be a DHCP client
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set camera to be a DHCP client
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-dhcp
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
+**Error:** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=set-dhcp"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Camera restart is required after DHCP settings
 
 ---
 
 ## Set Camera DNS Settings
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Camera DNS Settings
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Camera DNS Settings
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-dns-settings
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={camera-name}
 Required
@@ -21742,34 +21742,34 @@ dns-suffix={dns-suffix-name}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
+**Error:** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&dns-server=192.168.125.76&dns-suffix=yourdomain.com" -X POST "http://localhost/rw/vision?action=set-dns-settings"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Camera restart is required after DNS settings
 
 ---
 
 ## Get Camera Status
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Camera Status
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Camera Status
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=camera-status
 Required
@@ -21777,44 +21777,44 @@ name={camera-name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 camera-status:
 status of the camera {Disconnected | Program | Running | Unconfigured}
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-status&name=mycamera"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get Camera Info Using Index of the camera
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get Camera Info Using Index of the camera
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get Camera Info Using Index of the camera
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=camera-info-index
 Required
@@ -21824,50 +21824,50 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 camera-info-using-index:
 Gives all information about camera
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info-index&index=0"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Set Camera Name
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Camera Name
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Camera Name
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-cameraname
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 index={camera-index}
 Required
@@ -21875,41 +21875,41 @@ name={cameraname}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 FORBIDDEN(403)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "index=0&name=mycamera" -X POST "http://localhost/rw/vision?action=set-cameraname"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Restart the controller to aplly changes
 
 ---
 
 ## Set Camera User Credentials
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Camera User Credentials
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Camera User Credentials
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-user-credential
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 index={camera-index}
 Required
@@ -21919,40 +21919,40 @@ password={password}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "index=0&user=cmycamera&password=123" -X POST "http://localhost/rw/vision?action=set-user-credential"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 Restart is required to be activated
 
 ---
 
 ## Set Camera IP Settings
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Set Camera IP Settings
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Set Camera IP Settings
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `POST`
+**URL:** `/rw/vision`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 action=set-ip-settings
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 name={cameraname}
 Required
@@ -21964,34 +21964,34 @@ gateway={gateway value}
 Required
 ```
 
-**Success :** NO_CONTENT(204)
+**Success:** NO_CONTENT(204)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
+**Error:** BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics-d "name=mycamera&address=192.168.125.206&netmask=255.255.255.0&gateway=0.0.0.0" -X POST "http://localhost/rw/vision?action=set-ip-settings"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 Restart the controller to apply IP settings.
 
 ---
 
 ## Get IV Camera Info
 
-**Chemin :** RobotWare Services › Integrated Vision (IV) Service › Get IV Camera Info
+**Path:** RobotWare Services › Integrated Vision (IV) Service › Get IV Camera Info
 
 URL — /rw/vision
 
-**URL :** `/rw/vision`  
-**Method :** `GET`
+**URL:** `/rw/vision`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 resource=camera-info
 Required
@@ -21999,50 +21999,50 @@ name = {camera-name}
 Required
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 camera-info:
 Gives all information about camera
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** BAD_REQUEST(400)
+**Error:** BAD_REQUEST(400)
 Robot controller errors, see
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info&name=myCamera"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Operations on IO Profinet Device
 
-**Chemin :** Operations on IO Profinet Device
+**Path:** Operations on IO Profinet Device
 
 ---
 
 ## Get profinet I/O device read record implicit data from device in profinet network
 
-**Chemin :** Operations on IO Profinet Device › Get profinet I/O device read record implicit data from device in profinet network
+**Path:** Operations on IO Profinet Device › Get profinet I/O device read record implicit data from device in profinet network
 
 URL — rw/iosystem/devices/{network}/{device}/implicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/implicitdata`  
-**Method :** `GET`
+**URL:** `rw/iosystem/devices/{network}/{device}/implicitdata`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 slot = Device slot number
 Required
@@ -22062,43 +22062,43 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 see
 HTTP Status codes
 
-**Error :** Bad Request(406)
+**Error:** Bad Request(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Read record implicit data from device in profinet network
 
-**Chemin :** Operations on IO Profinet Device › Read record implicit data from device in profinet network
+**Path:** Operations on IO Profinet Device › Read record implicit data from device in profinet network
 
 URL — rw/iosystem/devices/{network}/{device}/implicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/implicitdata`  
-**Method :** `POST`
+**URL:** `rw/iosystem/devices/{network}/{device}/implicitdata`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 slot = Device slot number
 Required
@@ -22116,73 +22116,73 @@ ip = Profinet device IP Address
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406)
+**Error:** NOT_ACCEPTABLE(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60&vendorid=42&deviceid=787&ip=127.1.1.0" -X POST "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get forms
 
-**Chemin :** Operations on IO Profinet Device › Get forms
+**Path:** Operations on IO Profinet Device › Get forms
 
 URL — rw/iosystem/devices/{network}/{device}/implicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/implicitdata`  
-**Method :** `OPTIONS`
+**URL:** `rw/iosystem/devices/{network}/{device}/implicitdata`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406) See
+**Error:** NOT_ACCEPTABLE(406) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/implicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get profinet I/O device read record data
 
-**Chemin :** Operations on IO Profinet Device › Get profinet I/O device read record data
+**Path:** Operations on IO Profinet Device › Get profinet I/O device read record data
 
 URL — rw/iosystem/devices/{network}/{device}/explicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/explicitdata`  
-**Method :** `GET`
+**URL:** `rw/iosystem/devices/{network}/{device}/explicitdata`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 slot = Device slot number
 Required
@@ -22196,43 +22196,43 @@ See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406)
+**Error:** NOT_ACCEPTABLE(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Get profinet I/O device read record data
 
-**Chemin :** Operations on IO Profinet Device › Get profinet I/O device read record data
+**Path:** Operations on IO Profinet Device › Get profinet I/O device read record data
 
 URL — rw/iosystem/devices/{network}/{device}/explicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/explicitdata`  
-**Method :** `POST`
+**URL:** `rw/iosystem/devices/{network}/{device}/explicitdata`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 slot = Device slot number
 Required
@@ -22244,85 +22244,85 @@ datalength = Represents the maximum amount of data in bytes to be read. If the p
 Required
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406)
+**Error:** NOT_ACCEPTABLE(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60" -X POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get Forms
 
-**Chemin :** Operations on IO Profinet Device › Get Forms
+**Path:** Operations on IO Profinet Device › Get Forms
 
 URL — rw/iosystem/devices/{network}/{device}/explicitdata
 
-**URL :** `rw/iosystem/devices/{network}/{device}/explicitdata`  
-**Method :** `OPTIONS`
+**URL:** `rw/iosystem/devices/{network}/{device}/explicitdata`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** See
+**Error:** See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get profinet device alarms xml response
 
-**Chemin :** Operations on IO Profinet Device › Get profinet device alarms xml response
+**Path:** Operations on IO Profinet Device › Get profinet device alarms xml response
 
 URL — rw/iosystem/devices/{network}/{device}/alarms
 
-**URL :** `rw/iosystem/devices/{network}/{device}/alarms`  
-**Method :** `GET`
+**URL:** `rw/iosystem/devices/{network}/{device}/alarms`  
+**Method:** `GET`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 See
 Common URL parameters
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Resources :**
+**Resources:**
 ```
 nrofretrievedalarms
 Total number of received PROFINET alarms since system start.
@@ -22362,96 +22362,96 @@ time-ms
 Microseconds lapsed for each seconds.
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406)
+**Error:** NOT_ACCEPTABLE(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms"
 ```
 
-**Notes :** Not supported in bootserver mode
+**Notes:** Not supported in bootserver mode
 
 ---
 
 ## Clear the alarms
 
-**Chemin :** Operations on IO Profinet Device › Clear the alarms
+**Path:** Operations on IO Profinet Device › Clear the alarms
 
 URL — rw/iosystem/devices/{network}/{device}/alarms/clear
 
-**URL :** `rw/iosystem/devices/{network}/{device}/alarms/clear`  
-**Method :** `POST`
+**URL:** `rw/iosystem/devices/{network}/{device}/alarms/clear`  
+**Method:** `POST`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(20)
+**Success:** HTTP_OK(20)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406)
+**Error:** NOT_ACCEPTABLE(406)
 See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -d POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms/clear"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
 ## Get Forms
 
-**Chemin :** Operations on IO Profinet Device › Get Forms
+**Path:** Operations on IO Profinet Device › Get Forms
 
 URL — rw/iosystem/devices/{network}/{device}/alarms/clear
 
-**URL :** `rw/iosystem/devices/{network}/{device}/alarms/clear`  
-**Method :** `OPTIONS`
+**URL:** `rw/iosystem/devices/{network}/{device}/alarms/clear`  
+**Method:** `OPTIONS`
 
-**URL Params :**
+**URL Params:**
 ```
 None
 ```
 
-**Data Params :**
+**Data Params:**
 ```
 None
 ```
 
-**Actions :**
+**Actions:**
 ```
 None
 ```
 
-**Success :** HTTP_OK(200)
+**Success:** HTTP_OK(200)
 See
 HTTP Status codes
 
-**Error :** NOT_ACCEPTABLE(406) See
+**Error:** NOT_ACCEPTABLE(406) See
 Robot controller return codes
 
-**Sample Call :**
+**Sample Call:**
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms/clear"
 ```
 
-**Notes :** Not supported in bootserver mode.
+**Notes:** Not supported in bootserver mode.
 
 ---
 
