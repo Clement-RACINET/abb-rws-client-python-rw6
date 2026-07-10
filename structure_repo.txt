@@ -71,6 +71,7 @@ abb_rws_client_python_rw6
 │   │   ├── scrape.log
 │   │   └── scrape.py
 │   ├── export_structure.py
+│   ├── README.fr.md
 │   └── README.md
 ├── docs
 │   ├── api
@@ -452,5 +453,6 @@ abb_rws_client_python_rw6
 ├── pixi.lock
 ├── pixi.toml
 ├── pyproject.toml
+├── README.fr.md
 ├── README.md
 └── zzz

@@ -1,76 +1,93 @@
-# Dossier `contrib/` — Outils de développement interne
 
-Ce dossier contient les outils utilisés pour **construire et maintenir**
-la bibliothèque `abb_rws_client`. Il ne fait **pas** partie du package
-publié (exclu via `pyproject.toml → [tool.hatch.build.targets.wheel]`).
+# `contrib/` — Internal development tools
+
+This directory contains the tools used to **build and maintain**
+the `abb_rws_client` library. It is **not** part of the published package
+(excluded via `pyproject.toml → [tool.hatch.build.targets.wheel]`).
 
 ---
 
 ## Structure
 
 ```
+
 contrib/
+├── docs/
+│   ├── config.py          # Centralised MkDocs pipeline configuration
+│   ├── generate_api.py    # Markdown page generator + mkdocs.yml injection
+│   ├── hooks.py           # MkDocs post-build hook (copies htmlcov/)
+│   └── run_docs.py        # Pipeline orchestrator (API + coverage + serve)
 ├── generator/
-│   └── main.py          # Générateur de code source rws/ et tests/rws/
-└── scraping/
-│   ├── scrape.py         # Scraper du Developer Center ABB
-│   ├── abb_rws_api_full.json  # Source de vérité : 542 endpoints ABB RWS6
-│   ├── abb_rws_api_full.md    # Version lisible du JSON
-│   ├── architecture_api.txt   # Vue arborescente de l'API ABB
-│   ├── routes_list.json       # Liste brute des routes
-│   ├── robot_controller_return_code.txt  # Codes retour ABB
-│   └── scrape.log             # Journal du dernier scraping
-└── export_structure.py        # Export la structure du repo dans un fichier txt
+│   └── main.py            # Source code generator for rws/ and tests/rws/
+├── scraping/
+│   ├── scrape.py                        # ABB Developer Center scraper
+│   ├── abb_rws_api_full.json            # Source of truth: 542 ABB RWS6 endpoints
+│   ├── abb_rws_api_full.md              # Human-readable version of the JSON
+│   ├── architecture_api.txt             # Tree view of the ABB API
+│   ├── routes_list.json                 # Raw route list (crawl cache)
+│   ├── robot_controller_return_code.txt # ABB return codes reference
+│   └── scrape.log                       # Log of the last scraping run
+└── export_structure.py    # Exports the repository tree to a .txt file
+
 ```
 
 ---
 
 ## Workflow
 
-### 1. Scraping (rare — uniquement si l'API ABB évolue)
+### 1. Scraping *(rare — only if the ABB API changes)*
 
 ```bash
 pixi run python contrib/scraping/scrape.py
 ```
 
-Produit `abb_rws_api_full.json` en scrapant le Developer Center ABB.
-**Ne pas lancer sans raison** — le site ABB peut bloquer les requêtes répétées.
+Produces `abb_rws_api_full.json` by scraping the ABB Developer Center.
+**Do not run without a reason** — the ABB website may block repeated requests.
 
-### 2. Génération du code (après modification du JSON ou du générateur)
+### 2. Code generation *(after modifying the JSON or the generator)*
 
 ```bash
-# Supprimer les fichiers générés existants
-rmdir /s /q abb_rws_client\rws
-rmdir /s /q tests\rws
+# Delete existing generated files
+rm -rf abb_rws_client/rws tests/rws          # Linux / macOS
+rmdir /s /q abb_rws_client\rws tests\rws     # Windows
 
-# Régénérer tout
+# Regenerate everything
 pixi run python contrib/generator/main.py
 
-# Vérifier
+# Verify
 pixi run python -m pytest tests/ -v
 ```
 
-Options disponibles :
+Available options:
 
-| Option | Description |
-|---|---|
-| `--dry-run` | Affiche ce qui serait généré sans écrire |
-| `--only <module>` | Ne génère qu'un module (ex: `rapid/execution`) |
+| Option              | Description                                             |
+| ------------------- | ------------------------------------------------------- |
+| `--dry-run`       | Show what would be generated without writing any file   |
+| `--only <module>` | Generate a single module only (e.g.`rapid/execution`) |
+
+### 3. Documentation *(after modifying docstrings or the API)*
+
+```bash
+pixi run python contrib/docs/run_docs.py
+```
+
+Generates API Markdown pages, produces the coverage report, and starts
+`mkdocs serve`.
 
 ---
 
-## Architecture du générateur (`generator/main.py`)
+## Generator architecture (`generator/main.py`)
 
-Le générateur lit `abb_rws_api_full.json` et produit :
+The generator reads `abb_rws_api_full.json` and produces:
 
-- **`abb_rws_client/rws/**/*.py`** — fonctions atomiques, 1 fonction = 1 endpoint HTTP
-- **`tests/rws/**/*.py`** — tests unitaires avec mock `httpx.AsyncBaseTransport`
+- **`abb_rws_client/rws/**/*.py`** — atomic functions, 1 function = 1 HTTP endpoint
+- **`tests/rws/**/*.py`** — unit tests with `httpx.AsyncBaseTransport` mocks
 
-### Principe de routage
+### Routing principle
 
-Chaque endpoint ABB possède un `breadcrumb` (ex: `["Controller Service",
-"Operations on Clock Resource", "Get timezone actions"]`).
-La `_ROUTING_TABLE` mappe ces breadcrumbs vers des chemins de modules Python :
+Each ABB endpoint has a `breadcrumb`
+(e.g. `["Controller Service", "Operations on Clock Resource", "Get timezone actions"]`).
+The `_ROUTING_TABLE` maps these breadcrumbs to Python module paths:
 
 ```
 ["Controller Service", "Operations on Clock Resource", ...]
@@ -78,24 +95,22 @@ La `_ROUTING_TABLE` mappe ces breadcrumbs vers des chemins de modules Python :
     → tests/rws/ctrl/test_clock.py
 ```
 
-### Cas particulier : URLs avec query string fixe
+### Special case: URLs with a fixed query string
 
-Certaines URLs ABB contiennent un query string dans le champ `url` lui-même
-(ex: `/ctrl/clock/timezone?action=show`). Le générateur les traite
-correctement :
-- Le path et le query string sont **séparés avant génération**
-- Les params fixes (`action=show`) sont injectés dans `params={...}` côté code
-- Ils ne sont **pas** exposés comme arguments de la fonction Python
-- Les tests vérifient `url.path` et `url.params["action"]` séparément
+Some ABB URLs contain a query string in the `url` field itself
+(e.g. `/ctrl/clock/timezone?action=show`). The generator handles these correctly:
+
+- The path and query string are **split before code generation**
+- Fixed params (`action=show`) are injected into `params={...}` in the generated code
+- They are **not** exposed as Python function arguments
+- Tests verify `url.path` and `url.params["action"]` separately
 
 ---
 
-## Règles à respecter
+## Rules
 
-1. **Ne jamais modifier `abb_rws_client/rws/` manuellement** — tout sera
-   écrasé à la prochaine génération.
-2. **Ne jamais modifier `tests/rws/` manuellement** — idem.
-3. Les modifications métier vont dans `abb_rws_client/highlevel/`.
-4. Les corrections de mapping vont dans `_ROUTING_TABLE` de `main.py`.
-5. Les corrections de parsing vont dans `parse_query_params()` ou
-   `parse_body_params()` de `main.py`.
+1. **Never edit `abb_rws_client/rws/` manually** — it will be overwritten on the next generation run.
+2. **Never edit `tests/rws/` manually** — same reason.
+3. Business logic belongs in `abb_rws_client/highlevel/`.
+4. Routing fixes belong in `_ROUTING_TABLE` inside `main.py`.
+5. Parsing fixes belong in `parse_query_params()` or `parse_body_params()` inside `main.py`.
