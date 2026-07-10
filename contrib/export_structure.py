@@ -43,7 +43,7 @@ EXTRA_IGNORE: set[str] = {
 }
 
 # ---------------------------------------------------------------------------
-# Minimal .gitignore parser (no pathspec dependency)
+# Minimal .gitignore parser
 # ---------------------------------------------------------------------------
 
 
