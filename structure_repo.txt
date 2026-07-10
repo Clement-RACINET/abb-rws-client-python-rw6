@@ -124,8 +124,7 @@ abb_rws_client_python_rw6
 │   │   ├── test_subscription.py
 │   │   ├── test_system.py
 │   │   └── test_vision.py
-│   ├── __init__.py
-│   └── coverage.xml
+│   └── __init__.py
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md

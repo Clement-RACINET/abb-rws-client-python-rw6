@@ -19,11 +19,14 @@ build/
 .ruff_cache/
 *.swp
 
-
 # Tests & coverage
 .pytest_cache/
 .coverage
 htmlcov/
+coverage.xml  
+
+# Docs
+site/ 
 
 # OS
 .DS_Store
