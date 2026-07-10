@@ -8,7 +8,6 @@ RWS module: User Service → Get User Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -42,9 +41,9 @@ async def get_user_resources(
         # curl --digest -u "Default User":robotics "http://localhost/users"
     """
     return await client.get(
-        "/users", params={k: v for k, v in {"user_type": user_type}.items() if v is not None}
+        "/users",
+        params={k: v for k, v in {"user_type": user_type}.items() if v is not None},
     )
-
 
 async def get_user_actions(
     client: RWSClient,
@@ -73,16 +72,18 @@ async def get_user_actions(
         # curl --digest -u "Default User":robotics "http://localhost/users?action=show"
     """
     return await client.get(
-        "/users", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/users",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def register_the_user(client: RWSClient) -> httpx.Response:
     """
     Register the user.
 
     Route: ``POST /users``
-    ABB constraints: Supported in bootserver mode. Given username, application and location are used only as free-text information. User can be registered as local client (ulocale=local) only if the request comes from service port or the TPU port.
+    ABB constraints: Supported in bootserver mode. Given username, application and location are
+        used only as free-text information. User can be registered as local client
+        (ulocale=local) only if the request comes from service port or the TPU port.
 
     Args:
         client: Open RWSClient instance.
@@ -100,7 +101,6 @@ async def register_the_user(client: RWSClient) -> httpx.Response:
         # Register user
     """
     return await client.post("/users")
-
 
 async def impersonate_user(
     client: RWSClient,
@@ -129,9 +129,9 @@ async def impersonate_user(
         # Register user
     """
     return await client.post(
-        "/users", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/users",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def login_as_local_user(
     client: RWSClient,
@@ -156,7 +156,8 @@ async def login_as_local_user(
         RWSAuthenticationError: On HTTP 401.
         RWSNotFoundError: On HTTP 404.
         RWSHTTPError: On any other HTTP >= 400.
-        # ABB codes: CONFLICT(409) : if the user has already logged in as remote or local client and sets the type as remote or local respectively.
+        # ABB codes: CONFLICT(409) : if the user has already logged in as remote or local client
+            and sets the type as remote or local respectively.
 
     Example:
         # Login as local user

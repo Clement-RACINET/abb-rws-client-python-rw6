@@ -38,7 +38,7 @@ from bs4 import BeautifulSoup, Tag
 # ============================================================
 
 SCRIPT_DIR = Path(__file__).parent 
-OUTPUT_DIR = SCRIPT_DIR / "output"
+OUTPUT_DIR = SCRIPT_DIR
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 ROUTES_FILE = SCRIPT_DIR / "routes_list.json"

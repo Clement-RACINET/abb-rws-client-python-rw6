@@ -8,7 +8,6 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID UI inst
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_ui_instruction_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/rapid/uiinstr")
 
-
 async def get_ui_instruction_actions(
     client: RWSClient,
     action: str | None = None,
@@ -65,12 +63,13 @@ async def get_ui_instruction_actions(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/uiinstr?action=show"
     """
     return await client.get(
-        "/rw/rapid/uiinstr", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/rapid/uiinstr",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_ui_instruction(
     client: RWSClient,
@@ -99,9 +98,9 @@ async def subscribe_on_ui_instruction(
         # Subscribe on UI Events
     """
     return await client.post(
-        "/subscription", data={k: v for k, v in {"resources": resources}.items() if v is not None}
+        "/subscription",
+        data={k: v for k, v in {"resources": resources}.items() if v is not None},
     )
-
 
 async def get_active_ui_instruction(client: RWSClient) -> httpx.Response:
     """
@@ -127,7 +126,6 @@ async def get_active_ui_instruction(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/rapid/uiinstr/active")
 
-
 async def get_active_ui_instruction_actions(
     client: RWSClient,
     action: str | None = None,
@@ -152,13 +150,13 @@ async def get_active_ui_instruction_actions(
         # ABB codes: Bad Request(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/uiinstr/active?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/rapid/uiinstr/active?action=show"
     """
     return await client.get(
         "/rw/rapid/uiinstr/active",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def update_an_active_ui_instruction_parameter(
     client: RWSClient,
@@ -171,7 +169,9 @@ async def update_an_active_ui_instruction_parameter(
     Update an Active UI Instruction Parameter.
 
     Route: ``POST /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}``
-    ABB constraints: -Not supported in bootserver mode -{stackurl} ends with a variable number, which can be obtained from "Get Active UI Instruction" API. -RAPID program should be running -Example of {uiparam} are TPFK1, TPFK2, TPFK3, TPCompleted etc
+    ABB constraints: -Not supported in bootserver mode -{stackurl} ends with a variable number,
+        which can be obtained from "Get Active UI Instruction" API. -RAPID program should be
+        running -Example of {uiparam} are TPFK1, TPFK2, TPFK3, TPCompleted etc
 
     Args:
         client: Open RWSClient instance.
@@ -190,14 +190,14 @@ async def update_an_active_ui_instruction_parameter(
         # ABB codes: BAD REQUEST(400),NOT_FOUND(404),FORBIDDEN(403) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "value=0" -X POST "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_RO
+        # curl --digest -u "Default User":robotics -d "value=0" -X POST
+            "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_RO
     """
     return await client.post(
         f"/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"value": value}.items() if v is not None},
     )
-
 
 async def get_parameter_value_for_an_active_ui(
     client: RWSClient,
@@ -225,10 +225,10 @@ async def get_parameter_value_for_an_active_ui(
         # ABB codes: BAD_REQUEST(400) , NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%25%2499/Result"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%25%2499/Result"
     """
     return await client.get(f"/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}")
-
 
 async def get_active_ui_instruction_parameters(
     client: RWSClient,
@@ -254,6 +254,7 @@ async def get_active_ui_instruction_parameters(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/params/RAPID/T_ROB1/%25%2499"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/uiinstr/active/params/RAPID/T_ROB1/%25%2499"
     """
     return await client.get(f"/rw/rapid/uiinstr/active/params/{stackurl}")

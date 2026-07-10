@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/taskpanel."""
-
 from __future__ import annotations
 
 import httpx
@@ -41,7 +40,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_user_modify_from_taskpanel() -> None:
-    """Verify that get_user_modify_from_taskpanel sends GET /rw/rapid/taskselection."""
+    """
+    Verify that get_user_modify_from_taskpanel sends GET /rw/rapid/taskselection.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -52,10 +53,11 @@ async def test_get_user_modify_from_taskpanel() -> None:
     assert transport.last_request.url.path == "/rw/rapid/taskselection"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_tasks_panel_change() -> None:
-    """Verify that subscribe_on_tasks_panel_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_tasks_panel_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 

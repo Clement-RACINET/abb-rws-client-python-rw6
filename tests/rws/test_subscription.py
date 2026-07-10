@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/subscription."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,12 +9,12 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.subscription import (
-    add_new_resources_remove_existing_resources_or,
     get_subscription_actions,
-    get_subscription_group_actions,
     subscribe_on_resources,
-    unsubscribe_or_remove_the_resource_from_subscription,
+    get_subscription_group_actions,
+    add_new_resources_remove_existing_resources_or,
     unsubscribe_or_remove_the_subscription_group_resources,
+    unsubscribe_or_remove_the_resource_from_subscription,
 )
 
 
@@ -45,7 +44,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_subscription_actions() -> None:
-    """Verify that get_subscription_actions sends GET /subscription."""
+    """
+    Verify that get_subscription_actions sends GET /subscription.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -56,10 +57,11 @@ async def test_get_subscription_actions() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_resources() -> None:
-    """Verify that subscribe_on_resources sends POST /subscription."""
+    """
+    Verify that subscribe_on_resources sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -70,10 +72,11 @@ async def test_subscribe_on_resources() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_subscription_group_actions() -> None:
-    """Verify that get_subscription_group_actions sends GET /subscription/{group-id}."""
+    """
+    Verify that get_subscription_group_actions sends GET /subscription/{group-id}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -84,10 +87,11 @@ async def test_get_subscription_group_actions() -> None:
     assert transport.last_request.url.path == "/subscription/group_id_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_add_new_resources_remove_existing_resources_or() -> None:
-    """Verify that add_new_resources_remove_existing_resources_or sends PUT /subscripion/{group-id}."""
+    """
+    Verify that add_new_resources_remove_existing_resources_or sends PUT /subscripion/{group-id}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -98,10 +102,12 @@ async def test_add_new_resources_remove_existing_resources_or() -> None:
     assert transport.last_request.url.path == "/subscripion/group_id_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_unsubscribe_or_remove_the_subscription_group_resources() -> None:
-    """Verify that unsubscribe_or_remove_the_subscription_group_resources sends DELETE /subscripion/{group-id}."""
+    """
+    Verify that unsubscribe_or_remove_the_subscription_group_resources sends DELETE
+        /subscripion/{group-id}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -112,16 +118,16 @@ async def test_unsubscribe_or_remove_the_subscription_group_resources() -> None:
     assert transport.last_request.url.path == "/subscripion/group_id_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_unsubscribe_or_remove_the_resource_from_subscription() -> None:
-    """Verify that unsubscribe_or_remove_the_resource_from_subscription sends DELETE /subscripion/{group-d}/{resource-uri}."""
+    """
+    Verify that unsubscribe_or_remove_the_resource_from_subscription sends DELETE
+        /subscripion/{group-d}/{resource-uri}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await unsubscribe_or_remove_the_resource_from_subscription(
-        client, "group_d_test", "resource_uri_test"
-    )
+    resp = await unsubscribe_or_remove_the_resource_from_subscription(client, "group_d_test", "resource_uri_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"

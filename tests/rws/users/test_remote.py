@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/remote."""
-
 from __future__ import annotations
 
 import httpx
@@ -43,7 +42,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_remote_user_actions() -> None:
-    """Verify that get_remote_user_actions sends GET /users/remoteuser."""
+    """
+    Verify that get_remote_user_actions sends GET /users/remoteuser.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -54,10 +55,11 @@ async def test_get_remote_user_actions() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_remote_user_logon_request() -> None:
-    """Verify that post_remote_user_logon_request sends POST /users/remoteuser."""
+    """
+    Verify that post_remote_user_logon_request sends POST /users/remoteuser.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -68,10 +70,11 @@ async def test_post_remote_user_logon_request() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_remote_user_logout_request() -> None:
-    """Verify that post_remote_user_logout_request sends POST /users/remoteuser."""
+    """
+    Verify that post_remote_user_logout_request sends POST /users/remoteuser.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -82,10 +85,11 @@ async def test_post_remote_user_logout_request() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_remote_user_state() -> None:
-    """Verify that subscribe_on_remote_user_state sends POST /subscription."""
+    """
+    Verify that subscribe_on_remote_user_state sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 

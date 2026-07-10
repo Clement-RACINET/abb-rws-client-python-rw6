@@ -8,7 +8,6 @@ RWS module: RobotWare Services → DIPC service → Get DIPC Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_dipc_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/dipc")
 
-
 async def get_dipc_actions(client: RWSClient) -> httpx.Response:
     """
     Get DIPC Actions.
@@ -64,7 +62,6 @@ async def get_dipc_actions(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/dipc?action=show"
     """
     return await client.get("/rw/dipc")
-
 
 async def create_queue(
     client: RWSClient,
@@ -93,9 +90,9 @@ async def create_queue(
         # Restart controller with the specified mode
     """
     return await client.post(
-        "/rw/dipc", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/dipc",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_dipc_queue(
     client: RWSClient,
@@ -125,7 +122,6 @@ async def get_dipc_queue(
     """
     return await client.get(f"/rw/dipc/{queue_name}")
 
-
 async def get_dipc_queue_actions(
     client: RWSClient,
     queue_name: str,
@@ -152,13 +148,13 @@ async def get_dipc_queue_actions(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X DELETE "http://localhost/rw/dipc/testq?action=show"
+        # curl --digest -u "Default User":robotics -X DELETE
+            "http://localhost/rw/dipc/testq?action=show"
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_send_message(
     client: RWSClient,
@@ -193,7 +189,6 @@ async def post_send_message(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def get_read_message(
     client: RWSClient,
     queue_name: str,
@@ -222,13 +217,13 @@ async def get_read_message(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq?action=dipc-read"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/dipc/testq?action=dipc-read"
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
         params={k: v for k, v in {"action": action, "timeout": timeout}.items() if v is not None},
     )
-
 
 async def delete_dipc_queue(
     client: RWSClient,
@@ -238,7 +233,8 @@ async def delete_dipc_queue(
     Delete DIPC Queue.
 
     Route: ``DELETE /rw/dipc/{queue-name}``
-    ABB constraints: Not supported in bootserver mode User can delete DIPC queue only if the queue is created by the same user
+    ABB constraints: Not supported in bootserver mode User can delete DIPC queue only if the
+        queue is created by the same user
 
     Args:
         client: Open RWSClient instance.
@@ -257,7 +253,6 @@ async def delete_dipc_queue(
         # Delete a queue
     """
     return await client.delete(f"/rw/dipc/{queue_name}")
-
 
 async def subscribe_dipc_queue(
     client: RWSClient,
@@ -289,13 +284,8 @@ async def subscribe_dipc_queue(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def subscribe_dipc_queue_without_reading_message(
     client: RWSClient,
@@ -326,9 +316,5 @@ async def subscribe_dipc_queue_without_reading_message(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )

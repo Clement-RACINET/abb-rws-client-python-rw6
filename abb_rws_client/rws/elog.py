@@ -8,7 +8,6 @@ RWS module: RobotWare Services → Elog service → Get Elog Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -49,18 +48,8 @@ async def get_elog_resources(
     """
     return await client.get(
         "/rw/elog",
-        params={
-            k: v
-            for k, v in {
-                "lang": lang,
-                "example_lang": example_lang,
-                "resource": resource,
-                "example_resource": example_resource,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"lang": lang, "example_lang": example_lang, "resource": resource, "example_resource": example_resource}.items() if v is not None},
     )
-
 
 async def get_elog_actions(
     client: RWSClient,
@@ -88,9 +77,9 @@ async def get_elog_actions(
         # curl --digest -u "Default User":robotics "http://localhost/rw/elog?action=show"
     """
     return await client.get(
-        "/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/elog",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_clear_elog_messages(
     client: RWSClient,
@@ -119,9 +108,9 @@ async def post_clear_elog_messages(
         # Clear all elog messages
     """
     return await client.post(
-        "/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/elog",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def save_elog_in_system_dump_format(
     client: RWSClient,
@@ -132,7 +121,9 @@ async def save_elog_in_system_dump_format(
     Save elog in system dump format.
 
     Route: ``POST /rw/elog``
-    ABB constraints: Since saving an elog in system dump format is an asynchronous task, the value of location header can be subscribed on to get information about the status of the task.
+    ABB constraints: Since saving an elog in system dump format is an asynchronous task, the
+        value of location header can be subscribed on to get information about the status of the
+        task.
 
     Args:
         client: Open RWSClient instance.
@@ -156,7 +147,6 @@ async def save_elog_in_system_dump_format(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"path": path}.items() if v is not None},
     )
-
 
 async def get_elog_messages_in_domain(
     client: RWSClient,
@@ -194,18 +184,8 @@ async def get_elog_messages_in_domain(
     """
     return await client.get(
         f"/rw/elog/{domain_number}",
-        params={
-            k: v
-            for k, v in {
-                "example_lang": example_lang,
-                "example_resource": example_resource,
-                "example_order": example_order,
-                "example_elogseqnum": example_elogseqnum,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"example_lang": example_lang, "example_resource": example_resource, "example_order": example_order, "example_elogseqnum": example_elogseqnum}.items() if v is not None},
     )
-
 
 async def get_actions_on_elog_domain(
     client: RWSClient,
@@ -235,8 +215,7 @@ async def get_actions_on_elog_domain(
     """
     return await client.get(f"/rw/elog/{domain_number}")
 
-
-async def post_clear_elog_messages(
+async def post_clear_elog_messages_2(
     client: RWSClient,
     domain_number: str,
     action: str | None = None,
@@ -269,7 +248,6 @@ async def post_clear_elog_messages(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def subscribe_on_elog_domain(
     client: RWSClient,
     identifier: str | None = None,
@@ -300,13 +278,8 @@ async def subscribe_on_elog_domain(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_elog_message_in_domain(
     client: RWSClient,
@@ -342,7 +315,5 @@ async def get_elog_message_in_domain(
     """
     return await client.get(
         f"/rw/elog/{domain_number}/{sequence_number}",
-        params={
-            k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None
-        },
+        params={k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None},
     )

@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/identity."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,8 +9,8 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.identity import (
-    get_identity_actions,
     get_identity_resource,
+    get_identity_actions,
     set_the_identity_of_the_controller,
 )
 
@@ -42,7 +41,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_identity_resource() -> None:
-    """Verify that get_identity_resource sends GET /ctrl/identity."""
+    """
+    Verify that get_identity_resource sends GET /ctrl/identity.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -53,10 +54,11 @@ async def test_get_identity_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/identity"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_identity_actions() -> None:
-    """Verify that get_identity_actions sends GET /ctrl/identity."""
+    """
+    Verify that get_identity_actions sends GET /ctrl/identity.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -67,10 +69,11 @@ async def test_get_identity_actions() -> None:
     assert transport.last_request.url.path == "/ctrl/identity"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_identity_of_the_controller() -> None:
-    """Verify that set_the_identity_of_the_controller sends PUT /ctrl/identity."""
+    """
+    Verify that set_the_identity_of_the_controller sends PUT /ctrl/identity.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 

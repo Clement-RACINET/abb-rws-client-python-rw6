@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/backup."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,14 +9,14 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.backup import (
-    create_backup,
-    get_backup_actions,
     get_backup_resources,
-    get_backup_state,
-    get_backup_system_information,
-    get_check_restore,
+    get_backup_actions,
+    create_backup,
     post_restore_backup,
+    get_check_restore,
+    get_backup_state,
     subscribe_on_backup_system_information,
+    get_backup_system_information,
 )
 
 
@@ -47,7 +46,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_backup_resources() -> None:
-    """Verify that get_backup_resources sends GET /ctrl/backup."""
+    """
+    Verify that get_backup_resources sends GET /ctrl/backup.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -58,10 +59,11 @@ async def test_get_backup_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_backup_actions() -> None:
-    """Verify that get_backup_actions sends GET /ctrl/backup."""
+    """
+    Verify that get_backup_actions sends GET /ctrl/backup.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -72,10 +74,11 @@ async def test_get_backup_actions() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_create_backup() -> None:
-    """Verify that create_backup sends POST /ctrl/backup."""
+    """
+    Verify that create_backup sends POST /ctrl/backup.
+    """
     transport = _MockTransport(status_code=202)
     client = _make_client(transport)
 
@@ -86,10 +89,11 @@ async def test_create_backup() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 202
 
-
 @pytest.mark.asyncio
 async def test_post_restore_backup() -> None:
-    """Verify that post_restore_backup sends POST /ctrl/backup."""
+    """
+    Verify that post_restore_backup sends POST /ctrl/backup.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -100,10 +104,11 @@ async def test_post_restore_backup() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_check_restore() -> None:
-    """Verify that get_check_restore sends GET /ctrl/backup."""
+    """
+    Verify that get_check_restore sends GET /ctrl/backup.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -114,10 +119,11 @@ async def test_get_check_restore() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_backup_state() -> None:
-    """Verify that get_backup_state sends GET /ctrl/backup."""
+    """
+    Verify that get_backup_state sends GET /ctrl/backup.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -128,10 +134,11 @@ async def test_get_backup_state() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_backup_system_information() -> None:
-    """Verify that subscribe_on_backup_system_information sends POST /subscription."""
+    """
+    Verify that subscribe_on_backup_system_information sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -142,10 +149,11 @@ async def test_subscribe_on_backup_system_information() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_backup_system_information() -> None:
-    """Verify that get_backup_system_information sends GET /ctrl/backup/info/."""
+    """
+    Verify that get_backup_system_information sends GET /ctrl/backup/info/.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

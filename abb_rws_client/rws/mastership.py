@@ -8,7 +8,6 @@ RWS module: RobotWare Services → Mastership service → Get Mastership Resourc
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_mastership_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/mastership")
 
-
 async def get_mastership_actions(
     client: RWSClient,
     action: str | None = None,
@@ -68,9 +66,9 @@ async def get_mastership_actions(
         # curl --digest -u "Default User":robotics "http://localhost/rw/mastership?action=show"
     """
     return await client.get(
-        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/mastership",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_mastership_request(
     client: RWSClient,
@@ -80,7 +78,8 @@ async def post_mastership_request(
     Mastership request.
 
     Route: ``POST /rw/mastership``
-    ABB constraints: Not supported in bootserver mode In manual mode, mastership can be gained after getting RMMP.
+    ABB constraints: Not supported in bootserver mode In manual mode, mastership can be gained
+        after getting RMMP.
 
     Args:
         client: Open RWSClient instance.
@@ -99,9 +98,9 @@ async def post_mastership_request(
         # Request mastership on all domains
     """
     return await client.post(
-        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/mastership",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_mastership_release(
     client: RWSClient,
@@ -130,9 +129,9 @@ async def post_mastership_release(
         # Release mastership on all domains
     """
     return await client.post(
-        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/mastership",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_mastership_subscribe(
     client: RWSClient,
@@ -164,13 +163,8 @@ async def post_mastership_subscribe(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_mastership_domain(
     client: RWSClient,
@@ -200,7 +194,6 @@ async def get_mastership_domain(
     """
     return await client.get(f"/rw/mastership/{domain_name}")
 
-
 async def get_mastership_domain_actions(
     client: RWSClient,
     domain_name: str,
@@ -227,13 +220,13 @@ async def get_mastership_domain_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/mastership/cfg?action=show"
     """
     return await client.get(
         f"/rw/mastership/{domain_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_mastership_domain_request(
     client: RWSClient,
@@ -244,7 +237,8 @@ async def post_mastership_domain_request(
     Mastership domain request.
 
     Route: ``POST /rw/mastership/{domain}``
-    ABB constraints: Not supported in bootserver mode In manual mode, mastership can be gained after getting RMMP.
+    ABB constraints: Not supported in bootserver mode In manual mode, mastership can be gained
+        after getting RMMP.
 
     Args:
         client: Open RWSClient instance.
@@ -267,7 +261,6 @@ async def post_mastership_domain_request(
         f"/rw/mastership/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_mastership_domain_release(
     client: RWSClient,
@@ -302,7 +295,6 @@ async def post_mastership_domain_release(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def post_mastership_domain_subscribe(
     client: RWSClient,
     identifier: str | None = None,
@@ -333,9 +325,5 @@ async def post_mastership_domain_subscribe(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )

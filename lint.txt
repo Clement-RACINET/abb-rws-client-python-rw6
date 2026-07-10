@@ -1,0 +1,2694 @@
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:235:19
+    |
+233 |         method: str,
+234 |         path: str,
+235 |         **kwargs: Any,
+    |                   ^^^
+236 |     ) -> httpx.Response:
+237 |         """Execute an HTTP request with the transport-error retry policy.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:298:46
+    |
+296 |     # ── Public HTTP methods ──────────────────────────────────────────────────
+297 |
+298 |     async def get(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                              ^^^
+299 |         """Send an HTTP GET request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:322:47
+    |
+320 |         return await self._request("GET", path, **kwargs)
+321 |
+322 |     async def post(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                               ^^^
+323 |         """Send an HTTP POST request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:346:46
+    |
+344 |         return await self._request("POST", path, **kwargs)
+345 |
+346 |     async def put(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                              ^^^
+347 |         """Send an HTTP PUT request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:373:49
+    |
+371 |         return await self._request("PUT", path, **kwargs)
+372 |
+373 |     async def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                                 ^^^
+374 |         """Send an HTTP DELETE request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:400:19
+    |
+398 |         self,
+399 |         path: str,
+400 |         **kwargs: Any,
+    |                   ^^^
+401 |     ) -> httpx.Response:
+402 |         """Send an HTTP HEAD request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:428:19
+    |
+426 |         self,
+427 |         path: str,
+428 |         **kwargs: Any,
+    |                   ^^^
+429 |     ) -> httpx.Response:
+430 |         """Send an HTTP OPTIONS request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:544:58
+    |
+542 |     # ── Internal request with retry ─────────────────────────────────────────
+543 |
+544 |     def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
+    |                                                          ^^^
+545 |         """Execute a synchronous HTTP request with the transport-error retry policy.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:604:40
+    |
+602 |     # ── Public HTTP methods ──────────────────────────────────────────────────
+603 |
+604 |     def get(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                        ^^^
+605 |         """Send a synchronous HTTP GET request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:628:41
+    |
+626 |         return self._request("GET", path, **kwargs)
+627 |
+628 |     def post(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                         ^^^
+629 |         """Send a synchronous HTTP POST request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:652:40
+    |
+650 |         return self._request("POST", path, **kwargs)
+651 |
+652 |     def put(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                        ^^^
+653 |         """Send a synchronous HTTP PUT request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:679:43
+    |
+677 |         return self._request("PUT", path, **kwargs)
+678 |
+679 |     def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                           ^^^
+680 |         """Send a synchronous HTTP DELETE request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:703:41
+    |
+701 |         return self._request("DELETE", path, **kwargs)
+702 |
+703 |     def head(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                         ^^^
+704 |         """Send a synchronous HTTP HEAD request to the RWS controller.
+    |
+
+ANN401 Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
+   --> abb_rws_client\_core\client.py:727:44
+    |
+725 |         return self._request("HEAD", path, **kwargs)
+726 |
+727 |     def options(self, path: str, **kwargs: Any) -> httpx.Response:
+    |                                            ^^^
+728 |         """Send a synchronous HTTP OPTIONS request to the RWS controller.
+    |
+
+E501 Line too long (184 > 100)
+   --> abb_rws_client\rws\cfg.py:211:101
+    |
+209 | …
+210 | …},
+211 | …in, "cfgtype": cfgtype, "instances": instances, "instancescount": instancescount}.items() if v is not None},
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+212 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\cfg.py:279:101
+    |
+277 |     return await client.post(
+278 |         "/subscription",
+279 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+280 |     )
+    |
+
+E501 Line too long (167 > 100)
+  --> abb_rws_client\rws\ctrl\backup.py:75:101
+   |
+73 | …
+74 | …
+75 | …have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str | None = None,
+   |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+76 | …
+77 | …
+   |
+
+E501 Line too long (370 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:110:101
+    |
+108 | …
+109 | …
+110 | …_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup, "archive": archive}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+111 | …
+    |
+
+E501 Line too long (166 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:116:101
+    |
+114 | …
+115 | …
+116 | …iables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+117 | …
+118 | …
+    |
+
+E501 Line too long (348 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:146:101
+    |
+144 | …
+145 | …
+146 | …riables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+147 | …
+    |
+
+E501 Line too long (166 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:151:101
+    |
+149 | …
+150 | …
+151 | …iables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+152 | …
+153 | …
+    |
+
+E501 Line too long (350 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:179:101
+    |
+177 | …
+178 | …
+179 | …variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+180 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\ctrl\backup.py:247:101
+    |
+245 |     return await client.post(
+246 |         "/subscription",
+247 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+248 |     )
+    |
+
+E501 Line too long (106 > 100)
+   --> abb_rws_client\rws\ctrl\clock.py:287:101
+    |
+285 |     return await client.get(
+286 |         "/ctrl/clock/timeserver",
+287 |         params={k: v for k, v in {"resource": resource, "server_ip": server_ip}.items() if v is not None},
+    |                                                                                                     ^^^^^^
+288 |     )
+    |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\ctrl\ctrl.py:1041:101
+     |
+1039 |     return await client.post(
+1040 |         "/subscription",
+1041 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1042 |     )
+     |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\ctrl\ctrl.py:1077:101
+     |
+1075 |     return await client.post(
+1076 |         "/subscription",
+1077 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1078 |     )
+     |
+
+E501 Line too long (104 > 100)
+    --> abb_rws_client\rws\ctrl\ctrl.py:1296:101
+     |
+1294 |     return await client.get(
+1295 |         "/ctrl/safety",
+1296 |         params={k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None},
+     |                                                                                                     ^^^^
+1297 |     )
+     |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\dipc.py:287:101
+    |
+285 |     return await client.post(
+286 |         "/subscription",
+287 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+288 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\dipc.py:319:101
+    |
+317 |     return await client.post(
+318 |         "/subscription",
+319 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+320 |     )
+    |
+
+E501 Line too long (164 > 100)
+  --> abb_rws_client\rws\elog.py:51:101
+   |
+49 | …
+50 | …
+51 | …ample_lang, "resource": resource, "example_resource": example_resource}.items() if v is not None},
+   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+52 | …
+   |
+
+E501 Line too long (202 > 100)
+   --> abb_rws_client\rws\elog.py:187:101
+    |
+185 | …
+186 | …
+187 | …xample_resource, "example_order": example_order, "example_elogseqnum": example_elogseqnum}.items() if v is not None},
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+188 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\elog.py:281:101
+    |
+279 |     return await client.post(
+280 |         "/subscription",
+281 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+282 |     )
+    |
+
+E501 Line too long (104 > 100)
+   --> abb_rws_client\rws\elog.py:318:101
+    |
+316 |     return await client.get(
+317 |         f"/rw/elog/{domain_number}/{sequence_number}",
+318 |         params={k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None},
+    |                                                                                                     ^^^^
+319 |     )
+    |
+
+E501 Line too long (140 > 100)
+   --> abb_rws_client\rws\iosystem\devices.py:111:101
+    |
+109 | …
+110 | …ems() if v is not None},
+111 | …: lstate, "network": network, "example_name": example_name}.items() if v is not None},
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+112 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:170:101
+    |
+168 |     return await client.post(
+169 |         "/subscription",
+170 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+171 |     )
+    |
+
+E501 Line too long (108 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:207:101
+    |
+205 |     return await client.get(
+206 |         f"/rw/iosystem/networks/{network}",
+207 |         params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^
+208 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:376:101
+    |
+374 |     return await client.post(
+375 |         "/subscription",
+376 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+377 |     )
+    |
+
+E501 Line too long (130 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:420:101
+    |
+418 |         f"/rw/iosystem/devices/{device}",
+419 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+420 |         data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+421 |     )
+    |
+
+E501 Line too long (130 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:464:101
+    |
+462 |         f"/rw/iosystem/devices/{device}",
+463 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+464 |         data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+465 |     )
+    |
+
+E501 Line too long (108 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:501:101
+    |
+499 |     return await client.get(
+500 |         f"/rw/iosystem/devices/{device}",
+501 |         params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^
+502 |     )
+    |
+
+E501 Line too long (150 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:572:101
+    |
+570 | …
+571 | …
+572 | … "value": value, "valuelength": valuelength, "timeout": timeout}.items() if v is not None},
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+573 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:782:101
+    |
+780 |     return await client.post(
+781 |         "/subscription",
+782 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+783 |     )
+    |
+
+E501 Line too long (108 > 100)
+   --> abb_rws_client\rws\iosystem\iosystem.py:823:101
+    |
+821 |     return await client.get(
+822 |         f"/rw/iosystem/signals/{network}/{unit}/{signal}",
+823 |         params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^
+824 |     )
+    |
+
+E501 Line too long (116 > 100)
+   --> abb_rws_client\rws\iosystem\networks.py:105:101
+    |
+103 |         "/rw/iosystem/networks",
+104 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+105 |         data={k: v for k, v in {"name_or_state_example_name": name_or_state_example_name}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^
+106 |     )
+    |
+
+E501 Line too long (110 > 100)
+  --> abb_rws_client\rws\iosystem\signals.py:95:101
+   |
+93 |     return await client.post(
+94 |         "/rw/iosystem/signals",
+95 |         params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None},
+   |                                                                                                     ^^^^^^^^^^
+96 |         data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_pon…
+97 |     )
+   |
+
+E501 Line too long (250 > 100)
+  --> abb_rws_client\rws\iosystem\signals.py:96:101
+   |
+94 | …
+95 | …v is not None},
+96 | … category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None},
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+97 | …
+   |
+
+E501 Line too long (110 > 100)
+   --> abb_rws_client\rws\iosystem\signals.py:152:101
+    |
+150 |     return await client.post(
+151 |         "/rw/iosystem/signals",
+152 |         params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^
+153 |         data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_po…
+154 |     )
+    |
+
+E501 Line too long (250 > 100)
+   --> abb_rws_client\rws\iosystem\signals.py:153:101
+    |
+151 | …
+152 | …v is not None},
+153 | … category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+154 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\mastership.py:166:101
+    |
+164 |     return await client.post(
+165 |         "/subscription",
+166 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+167 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\mastership.py:328:101
+    |
+326 |     return await client.post(
+327 |         "/subscription",
+328 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+329 |     )
+    |
+
+E501 Line too long (118 > 100)
+  --> abb_rws_client\rws\motionsystem.py:47:101
+   |
+45 |     return await client.get(
+46 |         "/rw/motionsystem",
+47 |         params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None},
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^
+48 |     )
+   |
+
+E501 Line too long (194 > 100)
+   --> abb_rws_client\rws\motionsystem.py:159:101
+    |
+157 | …
+158 | …
+159 | …axis4": axis4, "axis5": axis5, "axis6": axis6, "ccount": ccount, "inc_mode": inc_mode}.items() if v is not None},
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+160 | …
+    |
+
+E501 Line too long (274 > 100)
+   --> abb_rws_client\rws\motionsystem.py:211:101
+    |
+209 | …
+210 | …
+211 | …ient_q1, "orient_q2": orient_q2, "orient_q3": orient_q3, "orient_q4": orient_q4, "config_j1": config_j1, "config_j4": config_j4, "config_j6": config_j6}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+212 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\motionsystem.py:277:101
+    |
+275 |     return await client.post(
+276 |         "/subscription",
+277 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+278 |     )
+    |
+
+E501 Line too long (104 > 100)
+   --> abb_rws_client\rws\motionsystem.py:397:101
+    |
+395 |         "/rw/motionsystem/motionsupervision",
+396 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+397 |         data={k: v for k, v in {"mechunit_name": mechunit_name, "mode": mode}.items() if v is not None},
+    |                                                                                                     ^^^^
+398 |     )
+    |
+
+E501 Line too long (118 > 100)
+   --> abb_rws_client\rws\motionsystem.py:433:101
+    |
+431 |         "/rw/motionsystem/motionsupervision",
+432 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+433 |         data={k: v for k, v in {"mechunit_name": mechunit_name, "sensitivity": sensitivity}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+434 |     )
+    |
+
+E501 Line too long (118 > 100)
+   --> abb_rws_client\rws\motionsystem.py:778:101
+    |
+776 |     return await client.get(
+777 |         f"/rw/motionsystem/mechunits/{mechunit}",
+778 |         params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+779 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\motionsystem.py:860:101
+    |
+858 |     return await client.post(
+859 |         f"/rw/motionsystem/mechunits/{mechunit}",
+860 |         params={k: v for k, v in {"action": action, "continue_on_err": continue_on_err}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+861 |         data={k: v for k, v in {"tool": tool, "wobj": wobj, "payload": payload, "total_payload": total_payload, "mode": mode, "jog_mo…
+862 |     )
+    |
+
+E501 Line too long (204 > 100)
+   --> abb_rws_client\rws\motionsystem.py:861:101
+    |
+859 | …
+860 | …}.items() if v is not None},
+861 | …_payload": total_payload, "mode": mode, "jog_mode": jog_mode, "coord_system": coord_system}.items() if v is not None},
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+862 | …
+    |
+
+E501 Line too long (142 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1069:101
+     |
+1067 | …
+1068 | …n",
+1069 | …wobj, "coordinate": coordinate, "elog_at_err": elog_at_err}.items() if v is not None},
+     |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1070 | …
+     |
+
+E501 Line too long (106 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1107:101
+     |
+1105 |         f"/rw/motionsystem/mechunits/{mechunit}",
+1106 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+1107 |         data={k: v for k, v in {"rob_joint": rob_joint, "ext_joint": ext_joint}.items() if v is not None},
+     |                                                                                                     ^^^^^^
+1108 |     )
+     |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1144:101
+     |
+1142 |     return await client.get(
+1143 |         f"/rw/motionsystem/mechunits/{mechunit}/robtarget",
+1144 |         params={k: v for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1145 |     )
+     |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1205:101
+     |
+1203 |     return await client.post(
+1204 |         "/subscription",
+1205 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1206 |     )
+     |
+
+E501 Line too long (444 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1259:101
+     |
+1257 | …
+1258 | …
+1259 | …nts, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1260 | …
+     |
+
+E501 Line too long (278 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1305:101
+     |
+1303 | …
+1304 | …
+1305 | …tion": tool_frame_orientation, "rob_joints": rob_joints, "ext_joints": ext_joints, "robot_fixed_object": robot_fixed_object, "elog_at_error": elog_at_error}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1306 | …
+     |
+
+E501 Line too long (344 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1353:101
+     |
+1351 | …
+1352 | …
+1353 | …nts, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1354 | …
+     |
+
+E501 Line too long (444 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1407:101
+     |
+1405 | …
+1406 | …
+1407 | …nts, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1408 | …
+     |
+
+E501 Line too long (240 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1486:101
+     |
+1484 | …
+1485 | …
+1486 | …": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1487 | …
+     |
+
+E501 Line too long (234 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1537:101
+     |
+1535 | …
+1536 | …
+1537 | …nt2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1538 | …
+     |
+
+E501 Line too long (234 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1588:101
+     |
+1586 | …
+1587 | …
+1588 | …nt2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1589 | …
+     |
+
+E501 Line too long (236 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1639:101
+     |
+1637 | …
+1638 | …
+1639 | … axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1640 | …
+     |
+
+E501 Line too long (240 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1690:101
+     |
+1688 | …
+1689 | …
+1690 | …": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1691 | …
+     |
+
+E501 Line too long (236 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1741:101
+     |
+1739 | …
+1740 | …
+1741 | … pose, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1742 | …
+     |
+
+E501 Line too long (240 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1792:101
+     |
+1790 | …
+1791 | …
+1792 | …": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1793 | …
+     |
+
+E501 Line too long (234 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1843:101
+     |
+1841 | …
+1842 | …
+1843 | …nt2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1844 | …
+     |
+
+E501 Line too long (236 > 100)
+    --> abb_rws_client\rws\motionsystem.py:1894:101
+     |
+1892 | …
+1893 | …
+1894 | … axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1895 | …
+     |
+
+E501 Line too long (122 > 100)
+    --> abb_rws_client\rws\motionsystem.py:2003:101
+     |
+2001 |         f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
+2002 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+2003 |         data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^
+2004 |     )
+     |
+
+E501 Line too long (122 > 100)
+    --> abb_rws_client\rws\motionsystem.py:2180:101
+     |
+2178 |         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+2179 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+2180 |         data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^
+2181 |     )
+     |
+
+E501 Line too long (128 > 100)
+ --> abb_rws_client\rws\operations_on_io_profinet_device.py:5:101
+  |
+3 | #  Generator author: Clément RACINET
+4 | """
+5 | RWS module: Operations on IO Profinet Device → Get profinet I/O device read record implicit data from device in profinet network
+  |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6 |
+7 | 1:1 mirror of the ABB RobotWare 6 REST API.
+  |
+
+E501 Line too long (180 > 100)
+  --> abb_rws_client\rws\operations_on_io_profinet_device.py:61:101
+   |
+59 | …
+60 | …
+61 | …": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid}.items() if v is not None},
+   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+62 | …
+   |
+
+E501 Line too long (188 > 100)
+   --> abb_rws_client\rws\operations_on_io_profinet_device.py:109:101
+    |
+107 | …
+108 | …
+109 | …ex, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid, "ip": ip}.items() if v is not None},
+    |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+110 | …
+    |
+
+E501 Line too long (136 > 100)
+   --> abb_rws_client\rws\operations_on_io_profinet_device.py:182:101
+    |
+180 | …
+181 | …licitdata",
+182 | …slot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+183 | …
+    |
+
+E501 Line too long (134 > 100)
+   --> abb_rws_client\rws\operations_on_io_profinet_device.py:224:101
+    |
+222 |     return await client.post(
+223 |         f"rw/iosystem/devices/{network}/{device}/explicitdata",
+224 |         data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+225 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\panel.py:260:101
+    |
+258 |     return await client.post(
+259 |         "/subscription",
+260 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+261 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\panel.py:348:101
+    |
+346 |     return await client.post(
+347 |         "/subscription",
+348 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+349 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\panel.py:615:101
+    |
+613 |     return await client.post(
+614 |         "/subscription",
+615 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+616 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\panel.py:704:101
+    |
+702 |     return await client.post(
+703 |         "/subscription",
+704 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+705 |     )
+    |
+
+E501 Line too long (190 > 100)
+   --> abb_rws_client\rws\rapid\execution.py:123:101
+    |
+121 | …
+122 | …
+123 | …: cycle, "condition": condition, "stopatbp": stopatbp, "alltaskbytsp": alltaskbytsp}.items() if v is not None},
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+124 | …
+    |
+
+E501 Line too long (138 > 100)
+   --> abb_rws_client\rws\rapid\execution.py:294:101
+    |
+292 | …
+293 | …
+294 | …s, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+295 | …
+    |
+
+E501 Line too long (138 > 100)
+   --> abb_rws_client\rws\rapid\execution.py:329:101
+    |
+327 | …
+328 | …
+329 | …s, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+330 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\execution.py:362:101
+    |
+360 |     return await client.post(
+361 |         "/subscription",
+362 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+363 |     )
+    |
+
+E501 Line too long (118 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:148:101
+    |
+146 |         "/rw/rapid/modules",
+147 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+148 |         data={k: v for k, v in {"checklimit": checklimit, "checkdeactaxes": checkdeactaxes}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+149 |     )
+    |
+
+E501 Line too long (222 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:302:101
+    |
+300 | …
+301 | …
+302 | …_mode, "startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol, "text": text}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+303 | …
+    |
+
+E501 Line too long (110 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:377:101
+    |
+375 |     return await client.get(
+376 |         f"/rw/rapid/modules/{module}",
+377 |         params={k: v for k, v in {"task": task, "continue_on_err": continue_on_err}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^
+378 |     )
+    |
+
+E501 Line too long (160 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:455:101
+    |
+453 | …
+454 | …
+455 | …task, "name": name, "data_type": data_type, "line": line, "col": col}.items() if v is not None},
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+456 | …
+    |
+
+E501 Line too long (132 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:533:101
+    |
+531 |     return await client.get(
+532 |         f"/rw/rapid/modules/{module}",
+533 |         params={k: v for k, v in {"task": task, "startrow": startrow, "startcol": startcol, "text": text}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+534 |     )
+    |
+
+E501 Line too long (224 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:647:101
+    |
+645 | …
+646 | …
+647 | …endcol": endcol, "checklimit": checklimit, "checkdeactaxes": checkdeactaxes, "allowdeact": allowdeact}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+648 | …
+    |
+
+E501 Line too long (176 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:725:101
+    |
+723 | …
+724 | …
+725 | …tartrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol}.items() if v is not None},
+    |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+726 | …
+    |
+
+E501 Line too long (192 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:768:101
+    |
+766 | …
+767 | …
+768 | …": startline, "startcolumn": startcolumn, "endline": endline, "endcolumn": endcolumn}.items() if v is not None},
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+769 | …
+    |
+
+E501 Line too long (120 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:877:101
+    |
+875 |     return await client.get(
+876 |         f"/rw/rapid/modules/{module}",
+877 |         params={k: v for k, v in {"resource": resource, "task": task, "row": row, "col": col}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+878 |     )
+    |
+
+E501 Line too long (104 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:915:101
+    |
+913 |     return await client.get(
+914 |         f"/rw/rapid/modules/{module}/routine",
+915 |         params={k: v for k, v in {"task": task, "row": row, "column": column}.items() if v is not None},
+    |                                                                                                     ^^^^
+916 |     )
+    |
+
+E501 Line too long (156 > 100)
+   --> abb_rws_client\rws\rapid\modules.py:962:101
+    |
+960 | …
+961 | …
+962 | …: mark, "limit": limit, "task": task, "row": row, "column": column}.items() if v is not None},
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+963 | …
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\symbol.py:212:101
+    |
+210 |     return await client.post(
+211 |         "/subscription",
+212 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+213 |     )
+    |
+
+E501 Line too long (246 > 100)
+   --> abb_rws_client\rws\rapid\symbols.py:122:101
+    |
+120 | …
+121 | …
+122 | …e": recursive, "posl": posl, "posc": posc, "stack": stack, "onlyused": onlyused, "skipshared": skipshared, "regexp": regexp}.items() if v is not None},
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+123 | …
+    |
+
+E501 Line too long (194 > 100)
+   --> abb_rws_client\rws\rapid\symbols.py:165:101
+    |
+163 | …
+164 | …
+165 | …ments, "backwardstmts": backwardstmts, "undostmts": undostmts, "typedecls": typedecls}.items() if v is not None},
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+166 | …
+    |
+
+E501 Line too long (114 > 100)
+  --> abb_rws_client\rws\rapid\taskpanel.py:72:101
+   |
+70 |     return await client.post(
+71 |         "/subscription",
+72 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+   |                                                                                                     ^^^^^^^^^^^^^^
+73 |     )
+   |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:277:101
+    |
+275 |     return await client.post(
+276 |         "/subscription",
+277 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+278 |     )
+    |
+
+E501 Line too long (104 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:382:101
+    |
+380 |         f"/rw/rapid/tasks/{task}",
+381 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+382 |         data={k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None},
+    |                                                                                                     ^^^^
+383 |     )
+    |
+
+E501 Line too long (108 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:522:101
+    |
+520 |     return await client.get(
+521 |         f"/rw/rapid/tasks/{task_name}",
+522 |         params={k: v for k, v in {"resource": resource, "stackframe": stackframe}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^
+523 |     )
+    |
+
+E501 Line too long (134 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:592:101
+    |
+590 |     return await client.get(
+591 |         f"/rw/rapid/tasks/{task_name}",
+592 |         params={k: v for k, v in {"resource": resource, "instruction": instruction, "parameter": parameter}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+593 |     )
+    |
+
+E501 Line too long (126 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:731:101
+    |
+729 |     return await client.get(
+730 |         f"/rw/rapid/tasks/{task_name}",
+731 |         params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+732 |     )
+    |
+
+E501 Line too long (126 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:766:101
+    |
+764 |     return await client.get(
+765 |         f"/rw/rapid/tasks/{task_name}",
+766 |         params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+767 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:800:101
+    |
+798 |     return await client.post(
+799 |         "/subscription",
+800 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+801 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:834:101
+    |
+832 |     return await client.post(
+833 |         "/subscription",
+834 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+835 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:868:101
+    |
+866 |     return await client.post(
+867 |         "/subscription",
+868 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+869 |     )
+    |
+
+E501 Line too long (110 > 100)
+   --> abb_rws_client\rws\rapid\tasks.py:935:101
+    |
+933 |     return await client.get(
+934 |         f"/rw/rapid/tasks/{task}/motion",
+935 |         params={k: v for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^
+936 |     )
+    |
+
+E501 Line too long (234 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1088:101
+     |
+1086 | …
+1087 | …
+1088 | …nt2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1089 | …
+     |
+
+E501 Line too long (240 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1139:101
+     |
+1137 | …
+1138 | …
+1139 | …": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1140 | …
+     |
+
+E501 Line too long (102 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1244:101
+     |
+1242 |         f"/rw/rapid/tasks/{task}/program",
+1243 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+1244 |         data={k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None},
+     |                                                                                                     ^^
+1245 |     )
+     |
+
+E501 Line too long (106 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1500:101
+     |
+1498 |         f"/rw/rapid/tasks/{task}/program/breakpoint",
+1499 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+1500 |         data={k: v for k, v in {"module": module, "row": row, "column": column}.items() if v is not None},
+     |                                                                                                     ^^^^^^
+1501 |     )
+     |
+
+E501 Line too long (128 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1641:101
+     |
+1639 |         f"/rw/rapid/tasks/{task}/pcp",
+1640 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+1641 |         data={k: v for k, v in {"module": module, "routine": routine, "line": line, "column": column}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1642 |     )
+     |
+
+E501 Line too long (120 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1682:101
+     |
+1680 |         f"/rw/rapid/tasks/{task}/pcp",
+1681 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+1682 |         data={k: v for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+1683 |     )
+     |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1823:101
+     |
+1821 |     return await client.post(
+1822 |         "/subscription",
+1823 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1824 |     )
+     |
+
+E501 Line too long (114 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1857:101
+     |
+1855 |     return await client.post(
+1856 |         "/subscription",
+1857 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^^^
+1858 |     )
+     |
+
+E501 Line too long (112 > 100)
+    --> abb_rws_client\rws\rapid\tasks.py:1894:101
+     |
+1892 |     return await client.get(
+1893 |         f"/rw/rapid/tasks/{task}/serviceroutine",
+1894 |         params={k: v for k, v in {"start": start, "limit": limit, "allread": allread}.items() if v is not None},
+     |                                                                                                     ^^^^^^^^^^^^
+1895 |     )
+     |
+
+E501 Line too long (102 > 100)
+ --> abb_rws_client\rws\retcode.py:5:101
+  |
+3 | #  Generator author: Clément RACINET
+4 | """
+5 | RWS module: RobotWare Services → RobotWare return codes service → Get a list of RobotWare return codes
+  |                                                                                                     ^^
+6 |
+7 | 1:1 mirror of the ABB RobotWare 6 REST API.
+  |
+
+E501 Line too long (114 > 100)
+  --> abb_rws_client\rws\subscription.py:86:101
+   |
+84 |     return await client.post(
+85 |         "/subscription",
+86 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+   |                                                                                                     ^^^^^^^^^^^^^^
+87 |     )
+   |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\subscription.py:161:101
+    |
+159 |     return await client.put(
+160 |         f"/subscripion/{group_id}",
+161 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+162 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\system.py:243:101
+    |
+241 |     return await client.post(
+242 |         "/subscription",
+243 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+244 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\users\remote.py:146:101
+    |
+144 |     return await client.post(
+145 |         "/subscription",
+146 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+147 |     )
+    |
+
+E501 Line too long (114 > 100)
+   --> abb_rws_client\rws\users\rmmp.py:187:101
+    |
+185 |     return await client.post(
+186 |         "/subscription",
+187 |         data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^
+188 |     )
+    |
+
+E501 Line too long (124 > 100)
+   --> abb_rws_client\rws\vision.py:423:101
+    |
+421 |         "/rw/vision",
+422 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+423 |         data={k: v for k, v in {"name": name, "dns_server": dns_server, "dns_suffix": dns_suffix}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+424 |     )
+    |
+
+E501 Line too long (110 > 100)
+   --> abb_rws_client\rws\vision.py:567:101
+    |
+565 |         "/rw/vision",
+566 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+567 |         data={k: v for k, v in {"index": index, "user": user, "password": password}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^
+568 |     )
+    |
+
+E501 Line too long (132 > 100)
+   --> abb_rws_client\rws\vision.py:609:101
+    |
+607 |         "/rw/vision",
+608 |         params={k: v for k, v in {"action": action}.items() if v is not None},
+609 |         data={k: v for k, v in {"name": name, "address": address, "netmask": netmask, "gateway": gateway}.items() if v is not None},
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+610 |     )
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\ctrl\test_backup.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/ctrl/backup."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.ctrl.backup import (
+12 | |     get_backup_resources,
+13 | |     get_backup_actions,
+14 | |     create_backup,
+15 | |     post_restore_backup,
+16 | |     get_check_restore,
+17 | |     get_backup_state,
+18 | |     subscribe_on_backup_system_information,
+19 | |     get_backup_system_information,
+20 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\ctrl\test_clock.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/ctrl/clock."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.ctrl.clock import (
+12 | |     get_clock_resource,
+13 | |     get_clock_actions,
+14 | |     set_the_clock_of_the_controller,
+15 | |     get_timezone_resource,
+16 | |     get_timezone_actions,
+17 | |     set_the_time_zone,
+18 | |     get_time_server_resource,
+19 | |     get_time_server_actions,
+20 | |     set_the_time_server,
+21 | |     get_test_time_server,
+22 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\ctrl\test_ctrl.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/ctrl/ctrl."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.ctrl.ctrl import (
+12 | |     get_controller_resources,
+13 | |     get_controller_actions,
+14 | |     get_controller_environment_variable,
+15 | |     restart_or_shutdown_controller,
+16 | |     set_controller_language,
+17 | |     get_list_of_installed_systems,
+18 | |     get_actions_on_system,
+19 | |     set_boot_device,
+20 | |     get_boot_device,
+21 | |     load_boot_image,
+22 | |     post_unload_boot_image,
+23 | |     get_selected_system_name,
+24 | |     post_install_deployment_package,
+25 | |     validate_deployment_package,
+26 | |     get_system_resource,
+27 | |     get_actions_on_system_resource,
+28 | |     post_rename_system,
+29 | |     post_select_system,
+30 | |     delete_system,
+31 | |     post_deselect_system,
+32 | |     get_network_resource,
+33 | |     get_network_setting_actions,
+34 | |     set_network_configuration,
+35 | |     get_dns_resource,
+36 | |     add_route_table_entry,
+37 | |     options_options_to_add_route_table_entry,
+38 | |     remove_route_table_entry,
+39 | |     options_options_to_remove_route_table_entry,
+40 | |     get_compress_resources,
+41 | |     get_compress_actions,
+42 | |     post_compress_decompress_resource,
+43 | |     get_diagnostics_resources,
+44 | |     get_diagnostics_actions,
+45 | |     save_system_diagnostics,
+46 | |     subscribe_on_system_dump,
+47 | |     subscribe_on_diagnostics_states_get_system_diagnostics,
+48 | |     get_safety_resources,
+49 | |     get_safety_actions,
+50 | |     load_safety_configuration_file_to_controller,
+51 | |     set_safety_mode_of_the_controller,
+52 | |     get_config_status,
+53 | |     get_safety_mode_status,
+54 | |     get_safety_cyclic_brake_check_status,
+55 | |     get_loadoperation_status,
+56 | |     get_safety_configurations,
+57 | |     get_safety_violation_info,
+58 | |     post_unlock_the_safety_configuration,
+59 | |     post_software_sync_acknowledgement,
+60 | |     add_validation_info,
+61 | |     remove_validation_info,
+62 | |     set_reset_safety_controller,
+63 | |     get_options_resource,
+64 | |     get_check_robotware_version_compatibility_with_contorller_hardware,
+65 | |     get_virtual_time_resources,
+66 | |     get_virtualtime,
+67 | |     get_vttimeslice_value,
+68 | |     get_actions_on_vttimeslice,
+69 | |     set_vttimeslice_value,
+70 | |     get_speed_of_virtual_time,
+71 | |     get_actions_on_vtspeed,
+72 | |     set_speed_of_virtualtime,
+73 | |     get_state_of_virtual_time,
+74 | |     get_actions_on_vtstate,
+75 | |     set_state_of_virtualtime,
+76 | |     post_vt_run,
+77 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (117 > 100)
+   --> tests\rws\ctrl\test_ctrl.py:894:101
+    |
+892 |     client = _make_client(transport)
+893 |
+894 |     resp = await get_check_robotware_version_compatibility_with_contorller_hardware(client, "robotware_version_test")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^
+895 |
+896 |     assert transport.last_request is not None
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\ctrl\test_identity.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/ctrl/identity."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.ctrl.identity import (
+12 | |     get_identity_resource,
+13 | |     get_identity_actions,
+14 | |     set_the_identity_of_the_controller,
+15 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\iosystem\test_devices.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/iosystem/devices."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.iosystem.devices import (
+12 | |     get_io_devices,
+13 | |     get_actions_io_devices,
+14 | |     post_search_io_devices,
+15 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\iosystem\test_iosystem.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/iosystem/iosystem."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.iosystem.iosystem import (
+12 | |     get_io_system_resources,
+13 | |     get_io_network,
+14 | |     get_io_network_actions,
+15 | |     update_io_network,
+16 | |     subscribe_io_network,
+17 | |     get_io_network_configuration_properties,
+18 | |     update_io_network_configuration_type,
+19 | |     get_io_device,
+20 | |     get_io_device_actions,
+21 | |     update_io_device,
+22 | |     subscribe_io_device,
+23 | |     set_input_data,
+24 | |     set_output_data,
+25 | |     get_io_device_configuration_properties,
+26 | |     get_eio_device_status_information,
+27 | |     post_send_device_command,
+28 | |     options_send_device_command_actions,
+29 | |     get_an_io_signal,
+30 | |     get_io_signal_actions,
+31 | |     update_io_signal_state,
+32 | |     update_io_signal_value,
+33 | |     subscribe_io_signal,
+34 | |     get_io_signal_configuration_properties,
+35 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (105 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:286:101
+    |
+284 |     assert transport.last_request is not None
+285 |     assert transport.last_request.method == "GET"
+286 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/upgradeinfo"
+    |                                                                                                     ^^^^^
+287 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (103 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:332:101
+    |
+330 |     assert transport.last_request is not None
+331 |     assert transport.last_request.method == "GET"
+332 |     assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    |                                                                                                     ^^^
+333 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (103 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:347:101
+    |
+345 |     assert transport.last_request is not None
+346 |     assert transport.last_request.method == "GET"
+347 |     assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    |                                                                                                     ^^^
+348 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (105 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:363:101
+    |
+361 |     assert transport.last_request is not None
+362 |     assert transport.last_request.method == "POST"
+363 |     assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    |                                                                                                     ^^^^^
+364 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (105 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:379:101
+    |
+377 |     assert transport.last_request is not None
+378 |     assert transport.last_request.method == "POST"
+379 |     assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    |                                                                                                     ^^^^^
+380 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:406:101
+    |
+404 |     client = _make_client(transport)
+405 |
+406 |     resp = await get_io_signal_configuration_properties(client, "network_test", "unit_test", "signal_test")
+    |                                                                                                     ^^^^^^^
+407 |
+408 |     assert transport.last_request is not None
+    |
+
+E501 Line too long (103 > 100)
+   --> tests\rws\iosystem\test_iosystem.py:410:101
+    |
+408 |     assert transport.last_request is not None
+409 |     assert transport.last_request.method == "GET"
+410 |     assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    |                                                                                                     ^^^
+411 |     assert resp.status_code == 200
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\iosystem\test_networks.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/iosystem/networks."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.iosystem.networks import (
+12 | |     get_io_networks_resources,
+13 | |     get_actions_on_io_networks,
+14 | |     post_search_io_networks,
+15 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\iosystem\test_signals.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/iosystem/signals."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.iosystem.signals import (
+12 | |     get_io_signals,
+13 | |     post_signal_search,
+14 | |     post_signal_search_extended,
+15 | |     post_unblock_signals,
+16 | |     get_io_signals_actions,
+17 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_execution.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/execution."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.execution import (
+12 | |     get_rapid_execution_state,
+13 | |     get_rapid_execution_actions,
+14 | |     start_rapid_execution,
+15 | |     stop_rapid_execution,
+16 | |     start_rapid_execution_from_production_entry,
+17 | |     reset_rapid_program_pointer_to_main,
+18 | |     set_number_of_execution_cycles,
+19 | |     subscribe_rapid_execution,
+20 | |     subscribe_rapid_execution_cycle,
+21 | |     subscribe_on_hold_to_run,
+22 | |     set_hold_to_run_cmd,
+23 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_modules.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/modules."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.modules import (
+12 | |     get_rapid_modules_action,
+13 | |     get_rapid_modules,
+14 | |     get_mod_possible_all,
+15 | |     set_modify_all_positions,
+16 | |     get_specified_range_of_text,
+17 | |     get_rapid_module_actions,
+18 | |     save_rapid_module,
+19 | |     set_text_range,
+20 | |     set_module_text,
+21 | |     get_rapid_module_attributes,
+22 | |     get_change_count,
+23 | |     get_rulesinstr,
+24 | |     get_module_possible_attributes,
+25 | |     get_search_text,
+26 | |     get_rapid_object,
+27 | |     set_syncpers,
+28 | |     set_modify_position,
+29 | |     get_module_extension,
+30 | |     get_mod_possible,
+31 | |     get_object_child,
+32 | |     get_syncpers_status,
+33 | |     get_module_text,
+34 | |     get_symbol_information,
+35 | |     get_routine_information,
+36 | |     get_routineargs_information,
+37 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_symbol.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/symbol."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.symbol import (
+12 | |     get_rapid_symbol_properties,
+13 | |     get_rapid_symbol_data,
+14 | |     get_rapid_symbol_data_actions,
+15 | |     update_rapid_variable_current_value,
+16 | |     validate_rapid_variable,
+17 | |     subscribe_on_rapid_persistent_variable,
+18 | |     update_rapid_variable_initial_value,
+19 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_symbols.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/symbols."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.symbols import (
+12 | |     get_rapid_symbols_resources,
+13 | |     get_rapid_symbols_actions,
+14 | |     post_search_rapid_symbols,
+15 | |     get_object_extension_list,
+16 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_tasks.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/tasks."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.tasks import (
+12 | |     get_rapid_tasks,
+13 | |     get_rapid_tasks_actions,
+14 | |     start_rapid_spy_logging,
+15 | |     get_rapid_spy_logging_status,
+16 | |     stop_rapid_spy_logging,
+17 | |     post_activate_deactivate_rapid_tasks,
+18 | |     get_program_motion_pointer_sync_state_for,
+19 | |     subscribe_on_build_log_change,
+20 | |     get_rapid_task_state,
+21 | |     get_rapid_task_actions,
+22 | |     load_rapid_module_into_rapid_task,
+23 | |     post_unload_module_from_rapid_task,
+24 | |     post_abort_current_execution_level,
+25 | |     post_activate_deactivate_rapid_task,
+26 | |     get_activation_record,
+27 | |     get_structural_change_count,
+28 | |     get_preferable_data_types,
+29 | |     get_program_pointer_sync_state,
+30 | |     get_motion_pointer_sync_state,
+31 | |     post_link_rapid_task,
+32 | |     get_pallet,
+33 | |     get_pallet_head,
+34 | |     subscribe_on_rapid_task_change,
+35 | |     subscribe_on_rapid_pp_sync_state_change,
+36 | |     subscribe_on_rapid_task_pgmexecution_state_change,
+37 | |     get_rapid_motion,
+38 | |     get_robtarget,
+39 | |     get_joint_target,
+40 | |     get_mechanical_units,
+41 | |     get_external_joint_states,
+42 | |     post_calibration_for_displacement,
+43 | |     post_calibration_for_tcp,
+44 | |     get_rapid_program_resource,
+45 | |     get_rapid_program_actions,
+46 | |     load_program_into_rapid_task,
+47 | |     post_unload_program_from_rapid_task,
+48 | |     save_program,
+49 | |     set_program_name,
+50 | |     set_entry_point,
+51 | |     get_build_errors,
+52 | |     get_rapid_breakpoint_actions,
+53 | |     set_break_point,
+54 | |     get_break_points,
+55 | |     get_rapid_task_motion_program_pointer_positions,
+56 | |     get_rapid_task_pcp_actions,
+57 | |     set_the_program_pointer_pp_position_to,
+58 | |     set_the_program_pointer_pp_position_to_2,
+59 | |     set_the_program_pointer_pp_position_to_3,
+60 | |     set_the_program_pointer_pp_position_to_4,
+61 | |     set_the_program_pointer_pp_position_to_5,
+62 | |     subscribe_on_program_pointer,
+63 | |     subscribe_on_motion_pointer,
+64 | |     get_rapid_service_routine,
+65 | |     get_rapid_program_counter_position,
+66 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\rapid\test_uiinstr.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/rapid/uiinstr."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.rapid.uiinstr import (
+12 | |     get_ui_instruction_resource,
+13 | |     get_ui_instruction_actions,
+14 | |     subscribe_on_ui_instruction,
+15 | |     get_active_ui_instruction,
+16 | |     get_active_ui_instruction_actions,
+17 | |     update_an_active_ui_instruction_parameter,
+18 | |     get_parameter_value_for_an_active_ui,
+19 | |     get_active_ui_instruction_parameters,
+20 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (105 > 100)
+   --> tests\rws\rapid\test_uiinstr.py:135:101
+    |
+133 |     assert transport.last_request is not None
+134 |     assert transport.last_request.method == "POST"
+135 |     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    |                                                                                                     ^^^^^
+136 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (105 > 100)
+   --> tests\rws\rapid\test_uiinstr.py:151:101
+    |
+149 |     assert transport.last_request is not None
+150 |     assert transport.last_request.method == "GET"
+151 |     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    |                                                                                                     ^^^^^
+152 |     assert resp.status_code == 200
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_cfg.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/cfg."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.cfg import (
+12 | |     get_cfg_resources,
+13 | |     get_cfg_actions,
+14 | |     validate_cfg_file,
+15 | |     load_cfg_file,
+16 | |     validate_cfg_instance_before_delete,
+17 | |     validate_cfg_instances,
+18 | |     post_keyless_motor_on,
+19 | |     subscribe_on_cfg_changecount,
+20 | |     get_cfg_domain_types,
+21 | |     get_actions_on_cfg_domain,
+22 | |     save_cfg_domain,
+23 | |     reset_cfg_domain,
+24 | |     get_cfg_type,
+25 | |     get_all_attributes_of_the_given_domain,
+26 | |     get_all_instances_of_the_given_domain,
+27 | |     get_actions_on_cfg_instances,
+28 | |     reset_cfg_instances,
+29 | |     create_default_cfg_instance,
+30 | |     get_cfg_instance,
+31 | |     get_cfg_instance_actions,
+32 | |     update_cfg_instance,
+33 | |     delete_cfg_instance,
+34 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_cfg.py:345:101
+    |
+343 |     assert transport.last_request is not None
+344 |     assert transport.last_request.method == "GET"
+345 |     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_name_test"
+    |                                                                                                     ^^^^^^
+346 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (101 > 100)
+   --> tests\rws\test_cfg.py:360:101
+    |
+358 |     assert transport.last_request is not None
+359 |     assert transport.last_request.method == "GET"
+360 |     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    |                                                                                                     ^
+361 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (101 > 100)
+   --> tests\rws\test_cfg.py:375:101
+    |
+373 |     assert transport.last_request is not None
+374 |     assert transport.last_request.method == "POST"
+375 |     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    |                                                                                                     ^
+376 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (101 > 100)
+   --> tests\rws\test_cfg.py:390:101
+    |
+388 |     assert transport.last_request is not None
+389 |     assert transport.last_request.method == "DELETE"
+390 |     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    |                                                                                                     ^
+391 |     assert resp.status_code == 204
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_dipc.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/dipc."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.dipc import (
+12 | |     get_dipc_resources,
+13 | |     get_dipc_actions,
+14 | |     create_queue,
+15 | |     get_dipc_queue,
+16 | |     get_dipc_queue_actions,
+17 | |     post_send_message,
+18 | |     get_read_message,
+19 | |     delete_dipc_queue,
+20 | |     subscribe_dipc_queue,
+21 | |     subscribe_dipc_queue_without_reading_message,
+22 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_elog.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/elog."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.elog import (
+12 | |     get_elog_resources,
+13 | |     get_elog_actions,
+14 | |     post_clear_elog_messages,
+15 | |     save_elog_in_system_dump_format,
+16 | |     get_elog_messages_in_domain,
+17 | |     get_actions_on_elog_domain,
+18 | |     post_clear_elog_messages_2,
+19 | |     subscribe_on_elog_domain,
+20 | |     get_elog_message_in_domain,
+21 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_fileservice.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/fileservice."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.fileservice import (
+12 | |     get_file_service_resources,
+13 | |     get_directory_listing_of_resources,
+14 | |     get_directory_actions,
+15 | |     create_directory,
+16 | |     post_rename_directory,
+17 | |     post_copy_directory,
+18 | |     delete_directory,
+19 | |     get_file,
+20 | |     get_file_actions,
+21 | |     post_rename_file,
+22 | |     create_copy_of_file,
+23 | |     put_upload_file,
+24 | |     delete_file,
+25 | |     get_file_meta_data,
+26 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (113 > 100)
+  --> tests\rws\test_fileservice.py:77:101
+   |
+75 |     client = _make_client(transport)
+76 |
+77 |     resp = await get_directory_listing_of_resources(client, "environment_variable_device_test", "directory_test")
+   |                                                                                                     ^^^^^^^^^^^^^
+78 |
+79 |     assert transport.last_request is not None
+   |
+
+E501 Line too long (108 > 100)
+  --> tests\rws\test_fileservice.py:81:101
+   |
+79 |     assert transport.last_request is not None
+80 |     assert transport.last_request.method == "GET"
+81 |     assert transport.last_request.url.path == "/fileservice/environment_variable_device_test/directory_test"
+   |                                                                                                     ^^^^^^^^
+82 |     assert resp.status_code == 200
+   |
+
+E501 Line too long (108 > 100)
+   --> tests\rws\test_fileservice.py:112:101
+    |
+110 |     assert transport.last_request is not None
+111 |     assert transport.last_request.method == "POST"
+112 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
+    |                                                                                                     ^^^^^^^^
+113 |     assert resp.status_code == 201
+    |
+
+E501 Line too long (108 > 100)
+   --> tests\rws\test_fileservice.py:128:101
+    |
+126 |     assert transport.last_request is not None
+127 |     assert transport.last_request.method == "POST"
+128 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
+    |                                                                                                     ^^^^^^^^
+129 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (108 > 100)
+   --> tests\rws\test_fileservice.py:144:101
+    |
+142 |     assert transport.last_request is not None
+143 |     assert transport.last_request.method == "POST"
+144 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
+    |                                                                                                     ^^^^^^^^
+145 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (108 > 100)
+   --> tests\rws\test_fileservice.py:160:101
+    |
+158 |     assert transport.last_request is not None
+159 |     assert transport.last_request.method == "DELETE"
+160 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
+    |                                                                                                     ^^^^^^^^
+161 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (113 > 100)
+   --> tests\rws\test_fileservice.py:206:101
+    |
+204 |     assert transport.last_request is not None
+205 |     assert transport.last_request.method == "POST"
+206 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
+    |                                                                                                     ^^^^^^^^^^^^^
+207 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_fileservice.py:222:101
+    |
+220 |     assert transport.last_request is not None
+221 |     assert transport.last_request.method == "POST"
+222 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/filename_test"
+    |                                                                                                     ^^^^^^^
+223 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (113 > 100)
+   --> tests\rws\test_fileservice.py:238:101
+    |
+236 |     assert transport.last_request is not None
+237 |     assert transport.last_request.method == "PUT"
+238 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
+    |                                                                                                     ^^^^^^^^^^^^^
+239 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (113 > 100)
+   --> tests\rws\test_fileservice.py:254:101
+    |
+252 |     assert transport.last_request is not None
+253 |     assert transport.last_request.method == "DELETE"
+254 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
+    |                                                                                                     ^^^^^^^^^^^^^
+255 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (102 > 100)
+   --> tests\rws\test_fileservice.py:266:101
+    |
+264 |     client = _make_client(transport)
+265 |
+266 |     resp = await get_file_meta_data(client, "device_environment_variable_directory_test", "file_test")
+    |                                                                                                     ^^
+267 |
+268 |     assert transport.last_request is not None
+    |
+
+E501 Line too long (113 > 100)
+   --> tests\rws\test_fileservice.py:270:101
+    |
+268 |     assert transport.last_request is not None
+269 |     assert transport.last_request.method == "HEAD"
+270 |     assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
+    |                                                                                                     ^^^^^^^^^^^^^
+271 |     assert resp.status_code == 204
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_mastership.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/mastership."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.mastership import (
+12 | |     get_mastership_resources,
+13 | |     get_mastership_actions,
+14 | |     post_mastership_request,
+15 | |     post_mastership_release,
+16 | |     post_mastership_subscribe,
+17 | |     get_mastership_domain,
+18 | |     get_mastership_domain_actions,
+19 | |     post_mastership_domain_request,
+20 | |     post_mastership_domain_release,
+21 | |     post_mastership_domain_subscribe,
+22 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_motionsystem.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/motionsystem."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.motionsystem import (
+12 | |     get_motion_system,
+13 | |     get_motion_system_action,
+14 | |     set_mechunit_for_jogging,
+15 | |     post_perform_jogging,
+16 | |     set_robo_target_position,
+17 | |     get_check_change_count,
+18 | |     subscribe_on_error_eventchange,
+19 | |     get_error_state,
+20 | |     get_motion_supervision,
+21 | |     get_motion_supervision_actions,
+22 | |     set_motion_supervision_mode_jog_supervision_mode,
+23 | |     set_motion_supervision_sensitivity_jog_supervision_sensitivity,
+24 | |     get_motion_supervision_collision_prediction_mode,
+25 | |     set_motion_supervision_collision_prediction_mode,
+26 | |     get_path_supervision,
+27 | |     get_path_supervision_actions,
+28 | |     set_path_supervision_mode,
+29 | |     set_path_supervision_level,
+30 | |     get_non_motion_execution_mode,
+31 | |     get_nonmotion_execution_actions,
+32 | |     set_nonmotion_execution_mode,
+33 | |     get_mechunits,
+34 | |     get_mechunit,
+35 | |     get_mechunit_action,
+36 | |     set_mechunit,
+37 | |     set_compliance_lead_through,
+38 | |     get_compliance_lead_through,
+39 | |     set_fine_calibration,
+40 | |     update_syncronize_revolution_counter,
+41 | |     get_physical_joints,
+42 | |     get_cartesian_value,
+43 | |     set_mechanical_unit,
+44 | |     get_robtarget,
+45 | |     get_joint_target,
+46 | |     subscribe_on_mechunit_mode_change,
+47 | |     get_joints_from_position,
+48 | |     get_position_from_joints,
+49 | |     get_all_joint_solution,
+50 | |     get_joints_from_cartesian,
+51 | |     get_calibration_info,
+52 | |     post_calibration_for_baseframe,
+53 | |     post_calibration_for_baseframemoving,
+54 | |     post_calibration_for_externalrobotnombasenew,
+55 | |     post_calibration_for_robotaxisrot,
+56 | |     post_calibration_for_singleuserrotnew,
+57 | |     post_calibration_for_rotextctrlzdef,
+58 | |     post_calibration_for_singleuserlin,
+59 | |     post_calibration_for_singletrack,
+60 | |     post_calibration_for_robotaxisrot2,
+61 | |     get_base_frame,
+62 | |     get_base_frame_actions,
+63 | |     set_base_frame,
+64 | |     get_axes,
+65 | |     get_axis,
+66 | |     get_axis_actions,
+67 | |     get_axis_pose,
+68 | |     set_axis_pose,
+69 | |     update_commutate,
+70 | |     update_sync_revolution_counter,
+71 | |     set_smb_data,
+72 | |     post_clear_smb_data,
+73 | |     get_smb_data,
+74 | |     get_smb_data_actions,
+75 | |     get_motor_calib_names,
+76 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (104 > 100)
+   --> tests\rws\test_motionsystem.py:706:101
+    |
+704 |     assert transport.last_request is not None
+705 |     assert transport.last_request.method == "GET"
+706 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
+    |                                                                                                     ^^^^
+707 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_motionsystem.py:925:101
+    |
+923 |     assert transport.last_request is not None
+924 |     assert transport.last_request.method == "GET"
+925 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    |                                                                                                     ^^^^^^^
+926 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_motionsystem.py:940:101
+    |
+938 |     assert transport.last_request is not None
+939 |     assert transport.last_request.method == "GET"
+940 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    |                                                                                                     ^^^^^^^
+941 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_motionsystem.py:955:101
+    |
+953 |     assert transport.last_request is not None
+954 |     assert transport.last_request.method == "GET"
+955 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    |                                                                                                     ^^^^^^^
+956 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_motionsystem.py:970:101
+    |
+968 |     assert transport.last_request is not None
+969 |     assert transport.last_request.method == "POST"
+970 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    |                                                                                                     ^^^^^^^
+971 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (107 > 100)
+   --> tests\rws\test_motionsystem.py:986:101
+    |
+984 |     assert transport.last_request is not None
+985 |     assert transport.last_request.method == "POST"
+986 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    |                                                                                                     ^^^^^^^
+987 |     assert resp.status_code == 204
+    |
+
+E501 Line too long (107 > 100)
+    --> tests\rws\test_motionsystem.py:1002:101
+     |
+1000 |     assert transport.last_request is not None
+1001 |     assert transport.last_request.method == "POST"
+1002 |     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+     |                                                                                                     ^^^^^^^
+1003 |     assert resp.status_code == 204
+     |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_operations_on_io_profinet_device.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/operations_on_io_profinet_device."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.operations_on_io_profinet_device import (
+12 | |     get_profinet_device_read_record_implicit_data,
+13 | |     post_read_record_implicit_data_from_device_in,
+14 | |     get_forms,
+15 | |     get_profinet_device_read_record_data,
+16 | |     get_profinet_device_read_record_data_2,
+17 | |     get_forms_2,
+18 | |     get_profinet_device_alarms_xml_response,
+19 | |     post_clear_the_alarms,
+20 | |     get_forms_3,
+21 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (101 > 100)
+  --> tests\rws\test_operations_on_io_profinet_device.py:57:101
+   |
+55 |     client = _make_client(transport)
+56 |
+57 |     resp = await get_profinet_device_read_record_implicit_data(client, "network_test", "device_test")
+   |                                                                                                     ^
+58 |
+59 |     assert transport.last_request is not None
+   |
+
+E501 Line too long (106 > 100)
+  --> tests\rws\test_operations_on_io_profinet_device.py:61:101
+   |
+59 |     assert transport.last_request is not None
+60 |     assert transport.last_request.method == "GET"
+61 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+   |                                                                                                     ^^^^^^
+62 |     assert resp.status_code == 200
+   |
+
+E501 Line too long (101 > 100)
+  --> tests\rws\test_operations_on_io_profinet_device.py:73:101
+   |
+71 |     client = _make_client(transport)
+72 |
+73 |     resp = await post_read_record_implicit_data_from_device_in(client, "network_test", "device_test")
+   |                                                                                                     ^
+74 |
+75 |     assert transport.last_request is not None
+   |
+
+E501 Line too long (106 > 100)
+  --> tests\rws\test_operations_on_io_profinet_device.py:77:101
+   |
+75 |     assert transport.last_request is not None
+76 |     assert transport.last_request.method == "POST"
+77 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+   |                                                                                                     ^^^^^^
+78 |     assert resp.status_code == 200
+   |
+
+E501 Line too long (106 > 100)
+  --> tests\rws\test_operations_on_io_profinet_device.py:92:101
+   |
+90 |     assert transport.last_request is not None
+91 |     assert transport.last_request.method == "OPTIONS"
+92 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+   |                                                                                                     ^^^^^^
+93 |     assert resp.status_code == 200
+   |
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_operations_on_io_profinet_device.py:108:101
+    |
+106 |     assert transport.last_request is not None
+107 |     assert transport.last_request.method == "GET"
+108 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    |                                                                                                     ^^^^^^
+109 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_operations_on_io_profinet_device.py:124:101
+    |
+122 |     assert transport.last_request is not None
+123 |     assert transport.last_request.method == "POST"
+124 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    |                                                                                                     ^^^^^^
+125 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_operations_on_io_profinet_device.py:139:101
+    |
+137 |     assert transport.last_request is not None
+138 |     assert transport.last_request.method == "OPTIONS"
+139 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    |                                                                                                     ^^^^^^
+140 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_operations_on_io_profinet_device.py:171:101
+    |
+169 |     assert transport.last_request is not None
+170 |     assert transport.last_request.method == "POST"
+171 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    |                                                                                                     ^^^^^^
+172 |     assert resp.status_code == 200
+    |
+
+E501 Line too long (106 > 100)
+   --> tests\rws\test_operations_on_io_profinet_device.py:186:101
+    |
+184 |     assert transport.last_request is not None
+185 |     assert transport.last_request.method == "OPTIONS"
+186 |     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    |                                                                                                     ^^^^^^
+187 |     assert resp.status_code == 200
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_panel.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/panel."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.panel import (
+12 | |     get_panel_resources,
+13 | |     get_panel_actions,
+14 | |     set_the_language,
+15 | |     restart_the_controller,
+16 | |     get_controller_state,
+17 | |     get_controller_state_actions,
+18 | |     set_controller_state,
+19 | |     subscribe_controller_state,
+20 | |     get_operation_mode,
+21 | |     get_operation_mode_actions,
+22 | |     subscribe_operation_mode,
+23 | |     post_acknowledgement_for_operation_mode,
+24 | |     get_operation_mode_lock_status,
+25 | |     post_lock_operation_mode_selection,
+26 | |     post_unlock_operation_mode_selection,
+27 | |     get_speed_ratio,
+28 | |     get_speed_ratio_actions,
+29 | |     set_speed_ratio,
+30 | |     subscribe_speed_ratio,
+31 | |     get_collision_detection_state,
+32 | |     get_collision_detection_state_actions,
+33 | |     subscribe_on_collision_detection_state,
+34 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_subscription.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/subscription."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.subscription import (
+12 | |     get_subscription_actions,
+13 | |     subscribe_on_resources,
+14 | |     get_subscription_group_actions,
+15 | |     add_new_resources_remove_existing_resources_or,
+16 | |     unsubscribe_or_remove_the_subscription_group_resources,
+17 | |     unsubscribe_or_remove_the_resource_from_subscription,
+18 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (114 > 100)
+   --> tests\rws\test_subscription.py:130:101
+    |
+128 |     client = _make_client(transport)
+129 |
+130 |     resp = await unsubscribe_or_remove_the_resource_from_subscription(client, "group_d_test", "resource_uri_test")
+    |                                                                                                     ^^^^^^^^^^^^^^
+131 |
+132 |     assert transport.last_request is not None
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_system.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/system."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.system import (
+12 | |     get_system_information,
+13 | |     get_robot_type,
+14 | |     get_system_options,
+15 | |     get_system_energy_actions,
+16 | |     get_system_energy_info_change_count,
+17 | |     reset_accumulated_energy,
+18 | |     get_system_energy,
+19 | |     subscribe_on_system_energy_changes,
+20 | |     get_system_robotware_license,
+21 | |     get_installed_products,
+22 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\test_vision.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/vision."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.vision import (
+12 | |     get_vision_manager_resource,
+13 | |     get_number_of_cameras_of_iv,
+14 | |     get_iv_camera_validity,
+15 | |     get_vision_camera_resource_actions,
+16 | |     get_camera_jobname,
+17 | |     restart_camera,
+18 | |     post_flash_led_of_camera,
+19 | |     set_camera_state,
+20 | |     post_refesh_the_camera,
+21 | |     set_hostname_of_the_camera,
+22 | |     set_camera_to_be_dhcp_client,
+23 | |     set_camera_dns_settings,
+24 | |     get_camera_status,
+25 | |     get_camera_info_using_index_of_the,
+26 | |     set_camera_name,
+27 | |     set_camera_user_credentials,
+28 | |     set_camera_ip_settings,
+29 | |     get_iv_camera_info,
+30 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\users\test_rmmp.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/users/rmmp."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.users.rmmp import (
+12 | |     get_rmmp_state,
+13 | |     get_rmmp_actions,
+14 | |     request_rmmp,
+15 | |     grant_or_deny_an_rmmp_request,
+16 | |     cancel_held_or_requested_rmmp,
+17 | |     subscribe_on_rmmp_request_event,
+18 | |     poll_for_rmmp_grant_status,
+19 | | )
+   | |_^
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\rws\users\test_users.py:5:1
+   |
+ 3 |   #  Generator author: Clément RACINET
+ 4 |   """Auto-generated unit tests for rws/users/users."""
+ 5 | / from __future__ import annotations
+ 6 | |
+ 7 | | import httpx
+ 8 | | import pytest
+ 9 | |
+10 | | from abb_rws_client._core.client import RWSClient
+11 | | from abb_rws_client.rws.users.users import (
+12 | |     get_user_resources,
+13 | |     get_user_actions,
+14 | |     register_the_user,
+15 | |     impersonate_user,
+16 | |     login_as_local_user,
+17 | | )
+   | |_^
+   |
+help: Organize imports
+
+Found 205 errors.
+[*] 27 fixable with the `--fix` option.

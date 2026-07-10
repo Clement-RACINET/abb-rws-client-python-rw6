@@ -58,12 +58,11 @@ abb_rws_client_python_rw6
 │   ├── generator
 │   │   └── main.py
 │   ├── scraping
-│   │   ├── input
+│   │   ├── manual
 │   │   │   ├── architecture_api.txt
 │   │   │   └── robot_controller_return_code.txt
-│   │   ├── output
-│   │   │   ├── abb_rws_api_full.json
-│   │   │   └── abb_rws_api_full.md
+│   │   ├── abb_rws_api_full.json
+│   │   ├── abb_rws_api_full.md
 │   │   ├── routes_list.json
 │   │   ├── scrape.log
 │   │   └── scrape.py
@@ -131,6 +130,7 @@ abb_rws_client_python_rw6
 ├── .gitignore
 ├── CONTEXT.md
 ├── coverage.xml
+├── lint.txt
 ├── mkdocs.yml
 ├── objectifs.md
 ├── pixi.lock

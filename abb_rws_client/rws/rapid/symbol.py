@@ -8,7 +8,6 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID symbol
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -44,7 +43,6 @@ async def get_rapid_symbol_properties(
     """
     return await client.get(f"/rw/rapid/symbol/properties/{symbolurl}")
 
-
 async def get_rapid_symbol_data(
     client: RWSClient,
     symbolurl: str,
@@ -77,7 +75,6 @@ async def get_rapid_symbol_data(
         f"/rw/rapid/symbol/data/{symbolurl}",
         params={k: v for k, v in {"value": value}.items() if v is not None},
     )
-
 
 async def get_rapid_symbol_data_actions(
     client: RWSClient,
@@ -112,7 +109,6 @@ async def get_rapid_symbol_data_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def update_rapid_variable_current_value(
     client: RWSClient,
     symbolurl: str,
@@ -123,7 +119,8 @@ async def update_rapid_variable_current_value(
     Update rapid variable current value.
 
     Route: ``POST /rw/rapid/symbol/data/{symbolurl}``
-    ABB constraints: Not supported in bootserver mode Client needs RAPID mastership in AUTO mode. Client needs RMMP Privilege and RAPID mastership in MANUAL mode.
+    ABB constraints: Not supported in bootserver mode Client needs RAPID mastership in AUTO mode.
+        Client needs RMMP Privilege and RAPID mastership in MANUAL mode.
 
     Args:
         client: Open RWSClient instance.
@@ -149,7 +146,6 @@ async def update_rapid_variable_current_value(
         data={k: v for k, v in {"value": value}.items() if v is not None},
     )
 
-
 async def validate_rapid_variable(
     client: RWSClient,
     action: str | None = None,
@@ -174,13 +170,13 @@ async def validate_rapid_variable(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&
+        # curl --digest -u "Default User":robotics -d
+            "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&
     """
     return await client.post(
         "/rw/rapid/symbol/data",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_rapid_persistent_variable(
     client: RWSClient,
@@ -208,17 +204,13 @@ async def subscribe_on_rapid_persistent_variable(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the form /rw/rapid/symbol/data/{symbol
+        # Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the
+            form /rw/rapid/symbol/data/{symbol
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def update_rapid_variable_initial_value(
     client: RWSClient,

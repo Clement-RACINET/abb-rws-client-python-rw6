@@ -8,7 +8,6 @@ RWS module: RobotWare Services → Panel service → Get Panel Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_panel_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/panel")
 
-
 async def get_panel_actions(client: RWSClient) -> httpx.Response:
     """
     Get Panel Actions.
@@ -64,7 +62,6 @@ async def get_panel_actions(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/panel?action=show"
     """
     return await client.get("/rw/panel")
-
 
 async def set_the_language(
     client: RWSClient,
@@ -100,7 +97,6 @@ async def set_the_language(
         data={k: v for k, v in {"lang_code": lang_code}.items() if v is not None},
     )
 
-
 async def restart_the_controller(
     client: RWSClient,
     action: str | None = None,
@@ -135,13 +131,15 @@ async def restart_the_controller(
         data={k: v for k, v in {"restart_mode": restart_mode}.items() if v is not None},
     )
 
-
 async def get_controller_state(client: RWSClient) -> httpx.Response:
     """
     Get Controller State.
 
     Route: ``GET /rw/panel/ctrlstate``
-    ABB constraints: init : The robot is starting up. It will shift to state motors off when it has started. motoroff : The robot is in a standby state where there is no power to the robot's motors. The state has to be shifted to motors on before the robot can move. motoron : The robot is ready to move, either by jog...
+    ABB constraints: init : The robot is starting up. It will shift to state motors off when it
+        has started. motoroff : The robot is in a standby state where there is no power to the
+        robot's motors. The state has to be shifted to motors on before the robot can move.
+        motoron : The robot is ready to move, either by jog...
 
     Args:
         client: Open RWSClient instance.
@@ -159,7 +157,6 @@ async def get_controller_state(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate"
     """
     return await client.get("/rw/panel/ctrlstate")
-
 
 async def get_controller_state_actions(
     client: RWSClient,
@@ -185,12 +182,13 @@ async def get_controller_state_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/panel/ctrlstate?action=show"
     """
     return await client.get(
-        "/rw/panel/ctrlstate", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/panel/ctrlstate",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_controller_state(
     client: RWSClient,
@@ -226,7 +224,6 @@ async def set_controller_state(
         data={k: v for k, v in {"ctrl_state": ctrl_state}.items() if v is not None},
     )
 
-
 async def subscribe_controller_state(
     client: RWSClient,
     identifier: str | None = None,
@@ -236,7 +233,10 @@ async def subscribe_controller_state(
     Subscribe Controller state.
 
     Route: ``POST /subscription``
-    ABB constraints: init : The robot is starting up. It will shift to state motors off when it has started. motoroff : The robot is in a standby state where there is no power to the robot's motors. The state has to be shifted to motors on before the robot can move. motoron : The robot is ready to move, either by jog...
+    ABB constraints: init : The robot is starting up. It will shift to state motors off when it
+        has started. motoroff : The robot is in a standby state where there is no power to the
+        robot's motors. The state has to be shifted to motors on before the robot can move.
+        motoron : The robot is ready to move, either by jog...
 
     Args:
         client: Open RWSClient instance.
@@ -257,13 +257,8 @@ async def subscribe_controller_state(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_operation_mode(client: RWSClient) -> httpx.Response:
     """
@@ -288,7 +283,6 @@ async def get_operation_mode(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode"
     """
     return await client.get("/rw/panel/opmode")
-
 
 async def get_operation_mode_actions(
     client: RWSClient,
@@ -317,9 +311,9 @@ async def get_operation_mode_actions(
         # curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?action=show"
     """
     return await client.get(
-        "/rw/panel/opmode", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/panel/opmode",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_operation_mode(
     client: RWSClient,
@@ -351,13 +345,8 @@ async def subscribe_operation_mode(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def post_acknowledgement_for_operation_mode(
     client: RWSClient,
@@ -368,7 +357,8 @@ async def post_acknowledgement_for_operation_mode(
     Acknowledgement for Operation Mode.
 
     Route: ``POST /rw/panel/opmode``
-    ABB constraints: Client should have Local Client previliges to execute the functionality. Auto acknowledgement option should be deactivated. Not supported in bootserver mode.
+    ABB constraints: Client should have Local Client previliges to execute the functionality.
+        Auto acknowledgement option should be deactivated. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -385,14 +375,14 @@ async def post_acknowledgement_for_operation_mode(
         # ABB codes: BAD_REQUEST (400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "opmode=auto" -X POST "http://localhost/rw/panel/opmode?action=acknowledge"
+        # curl --digest -u "Default User":robotics -d "opmode=auto" -X POST
+            "http://localhost/rw/panel/opmode?action=acknowledge"
     """
     return await client.post(
         "/rw/panel/opmode",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"opmode": opmode}.items() if v is not None},
     )
-
 
 async def get_operation_mode_lock_status(
     client: RWSClient,
@@ -418,13 +408,13 @@ async def get_operation_mode_lock_status(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?resource=lock-state"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/panel/opmode?resource=lock-state"
     """
     return await client.get(
         "/rw/panel/opmode",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def post_lock_operation_mode_selection(
     client: RWSClient,
@@ -436,7 +426,9 @@ async def post_lock_operation_mode_selection(
     Lock operation mode selection..
 
     Route: ``POST /rw/panel/opmode``
-    ABB constraints: Not supported in bootserver mode. UAS_GRANT "Lock saftey controller config" is needed to lock/unlock. For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
+    ABB constraints: Not supported in bootserver mode. UAS_GRANT "Lock saftey controller config"
+        is needed to lock/unlock. For permenant lock/unlock "Key-less mode selector" UAS_GRANT is
+        needed.
 
     Args:
         client: Open RWSClient instance.
@@ -454,14 +446,14 @@ async def post_lock_operation_mode_selection(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "pin=1234&permanent=0" -X POST "http://localhost/rw/panel/opmode?action=lock
+        # curl --digest -u "Default User":robotics -d "pin=1234&permanent=0" -X POST
+            "http://localhost/rw/panel/opmode?action=lock
     """
     return await client.post(
         "/rw/panel/opmode",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"pin": pin, "permanent": permanent}.items() if v is not None},
     )
-
 
 async def post_unlock_operation_mode_selection(
     client: RWSClient,
@@ -472,7 +464,9 @@ async def post_unlock_operation_mode_selection(
     Unlock operation mode selection..
 
     Route: ``POST /rw/panel/opmode``
-    ABB constraints: Not supported in bootserver mode. UAS_GRANT "Lock saftey controller config" is needed to lock/unlock. For permenant lock/unlock "Key-less mode selector" UAS_GRANT is needed.
+    ABB constraints: Not supported in bootserver mode. UAS_GRANT "Lock saftey controller config"
+        is needed to lock/unlock. For permenant lock/unlock "Key-less mode selector" UAS_GRANT is
+        needed.
 
     Args:
         client: Open RWSClient instance.
@@ -489,14 +483,14 @@ async def post_unlock_operation_mode_selection(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "pin=1234" -X POST "http://localhost/rw/panel/opmode?action=unlock"
+        # curl --digest -u "Default User":robotics -d "pin=1234" -X POST
+            "http://localhost/rw/panel/opmode?action=unlock"
     """
     return await client.post(
         "/rw/panel/opmode",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"pin": pin}.items() if v is not None},
     )
-
 
 async def get_speed_ratio(client: RWSClient) -> httpx.Response:
     """
@@ -522,7 +516,6 @@ async def get_speed_ratio(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/panel/speedratio")
 
-
 async def get_speed_ratio_actions(
     client: RWSClient,
     action: str | None = None,
@@ -547,13 +540,13 @@ async def get_speed_ratio_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/panel/speedratio?action=show"
     """
     return await client.get(
         "/rw/panel/speedratio",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_speed_ratio(
     client: RWSClient,
@@ -589,7 +582,6 @@ async def set_speed_ratio(
         data={k: v for k, v in {"speed_ratio": speed_ratio}.items() if v is not None},
     )
 
-
 async def subscribe_speed_ratio(
     client: RWSClient,
     identifier: str | None = None,
@@ -620,13 +612,8 @@ async def subscribe_speed_ratio(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
     """
@@ -652,7 +639,6 @@ async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/panel/coldetstate")
 
-
 async def get_collision_detection_state_actions(
     client: RWSClient,
     action: str | None = None,
@@ -677,13 +663,13 @@ async def get_collision_detection_state_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/panel/coldetstate?action=show"
     """
     return await client.get(
         "/rw/panel/coldetstate",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_collision_detection_state(
     client: RWSClient,
@@ -715,9 +701,5 @@ async def subscribe_on_collision_detection_state(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )

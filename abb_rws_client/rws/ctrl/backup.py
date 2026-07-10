@@ -8,7 +8,6 @@ RWS module: Controller Service → Operations on Backup Resource → Get backup 
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -39,7 +38,6 @@ async def get_backup_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/backup")
 
-
 async def get_backup_actions(
     client: RWSClient,
     action: str | None = None,
@@ -67,27 +65,30 @@ async def get_backup_actions(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=show"
     """
     return await client.get(
-        "/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/backup",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def create_backup(
     client: RWSClient,
     action: str | None = None,
-    environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str
-    | None = None,
+    environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str | None = None,
     archive: str | None = None,
 ) -> httpx.Response:
     """
     Create a Backup.
 
     Route: ``POST /ctrl/backup``
-    ABB constraints: Requires UAS grant UAS_BACKUP. It is not possible to create backup with the same path and name as an environment variable directory (SYSTEM, HOME, SYSPAR etc). It is not possible create backup under HOME directory. Since backup is an asynchronous task, the location header can be subscribed on to ...
+    ABB constraints: Requires UAS grant UAS_BACKUP. It is not possible to create backup with the
+        same path and name as an environment variable directory (SYSTEM, HOME, SYSPAR etc). It is
+        not possible create backup under HOME directory. Since backup is an asynchronous task,
+        the location header can be subscribed on to ...
 
     Args:
         client: Open RWSClient instance.
         action: Query parameter. Optional.
-        environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: Body parameter. Optional.
+        environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_
+            directory_cannot_be_used_as_backup_path_example_backup: Body parameter. Optional.
         archive: Body parameter. Optional.
 
     Returns:
@@ -100,27 +101,19 @@ async def create_backup(
         # ABB codes: UNAUTHORIZED(401), FORBIDDEN(403), BAD_REQUEST(400), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/back
+        # curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X
+            POST "http://localhost/ctrl/back
     """
     return await client.post(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup,
-                "archive": archive,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup, "archive": archive}.items() if v is not None},
     )
-
 
 async def post_restore_backup(
     client: RWSClient,
     action: str | None = None,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str
-    | None = None,
+    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
 ) -> httpx.Response:
     """
     Restore a backup..
@@ -131,7 +124,8 @@ async def post_restore_backup(
     Args:
         client: Open RWSClient instance.
         action: Query parameter. Optional.
-        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: Body parameter. Optional.
+        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system
+            _shall_be_possible_to_have_in_the_path_example_backup: Body parameter. Optional.
 
     Returns:
         Raw HTTP response. Expected success: HTTP 204.
@@ -143,25 +137,18 @@ async def post_restore_backup(
         # ABB codes: UNSUPPORTED_MEDIA(415), FORBIDDEN(403), BAD_REQUEST(400)
 
     Example:
-        # `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/back
+        # `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X
+            POST "http://localhost/ctrl/back
     """
     return await client.post(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
     )
-
 
 async def get_check_restore(
     client: RWSClient,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str
-    | None = None,
+    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
 ) -> httpx.Response:
     """
     Check Restore.
@@ -171,7 +158,8 @@ async def get_check_restore(
 
     Args:
         client: Open RWSClient instance.
-        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: Query parameter. Optional.
+        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system
+            _shall_be_possible_to_have_in_the_path_example_backup: Query parameter. Optional.
 
     Returns:
         Raw HTTP response. Expected success: HTTP 200.
@@ -183,19 +171,13 @@ async def get_check_restore(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/
     """
     return await client.get(
         "/ctrl/backup",
-        params={
-            k: v
-            for k, v in {
-                "path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
     )
-
 
 async def get_backup_state(
     client: RWSClient,
@@ -221,12 +203,13 @@ async def get_backup_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=backupstate"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/backup?action=backupstate"
     """
     return await client.get(
-        "/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/backup",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_backup_system_information(
     client: RWSClient,
@@ -237,7 +220,9 @@ async def subscribe_on_backup_system_information(
     Subscribe on Backup System Information.
 
     Route: ``POST /subscription``
-    ABB constraints: if the subscription is created during backup creation of the System (backup.log is in progress),the state will be in "pending". Not supported in bootserver mode. Not supported on virtual controller.
+    ABB constraints: if the subscription is created during backup creation of the System
+        (backup.log is in progress),the state will be in "pending". Not supported in bootserver
+        mode. Not supported on virtual controller.
 
     Args:
         client: Open RWSClient instance.
@@ -254,17 +239,13 @@ async def subscribe_on_backup_system_information(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
+        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
+            on this resource
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_backup_system_information(
     client: RWSClient,
@@ -290,7 +271,8 @@ async def get_backup_system_information(
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/Robot
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/Robot
     """
     return await client.get(
         "/ctrl/backup/info/",

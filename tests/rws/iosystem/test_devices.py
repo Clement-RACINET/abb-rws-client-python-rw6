@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/iosystem/devices."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,8 +9,8 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.devices import (
-    get_actions_io_devices,
     get_io_devices,
+    get_actions_io_devices,
     post_search_io_devices,
 )
 
@@ -42,7 +41,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_io_devices() -> None:
-    """Verify that get_io_devices sends GET /rw/iosystem/devices."""
+    """
+    Verify that get_io_devices sends GET /rw/iosystem/devices.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -53,10 +54,11 @@ async def test_get_io_devices() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_actions_io_devices() -> None:
-    """Verify that get_actions_io_devices sends GET /rw/iosystem/devices."""
+    """
+    Verify that get_actions_io_devices sends GET /rw/iosystem/devices.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -67,10 +69,11 @@ async def test_get_actions_io_devices() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_search_io_devices() -> None:
-    """Verify that post_search_io_devices sends POST /rw/iosystem/devices."""
+    """
+    Verify that post_search_io_devices sends POST /rw/iosystem/devices.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

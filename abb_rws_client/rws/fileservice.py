@@ -8,7 +8,6 @@ RWS module: File Service → Get File Service Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -21,7 +20,9 @@ async def get_file_service_resources(client: RWSClient) -> httpx.Response:
     Get File Service Resources.
 
     Route: ``GET /fileservice``
-    ABB constraints: Though root supports environment variables these are not listed in the returned response. Environment variables are only allowed directly under the root URI i.e. /fileservice/$home Supported in bootserver mode
+    ABB constraints: Though root supports environment variables these are not listed in the
+        returned response. Environment variables are only allowed directly under the root URI
+        i.e. /fileservice/$home Supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -39,7 +40,6 @@ async def get_file_service_resources(client: RWSClient) -> httpx.Response:
         # Get a list of root resources
     """
     return await client.get("/fileservice")
-
 
 async def get_directory_listing_of_resources(
     client: RWSClient,
@@ -70,7 +70,6 @@ async def get_directory_listing_of_resources(
         # Directory Listing
     """
     return await client.get(f"/fileservice/{environment_variable_device}/{directory}")
-
 
 async def get_directory_actions(
     client: RWSClient,
@@ -107,7 +106,6 @@ async def get_directory_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def create_directory(
     client: RWSClient,
     device_environment_variable: str,
@@ -117,7 +115,10 @@ async def create_directory(
     Create a directory.
 
     Route: ``POST /fileservice/{device|environment_variable}/{directory}``
-    ABB constraints: Only relative path are allowed for "*fs-newname*". Absolute paths are not supported The fs-newname can take nested directory structure e.g. fs-newname=parentdir/subdir will create both the directories if they don't exist i.e. subdir under parentdir Supported in bootserver mode
+    ABB constraints: Only relative path are allowed for "*fs-newname*". Absolute paths are not
+        supported The fs-newname can take nested directory structure e.g.
+        fs-newname=parentdir/subdir will create both the directories if they don't exist i.e.
+        subdir under parentdir Supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -137,7 +138,6 @@ async def create_directory(
         # Create a new directory
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
-
 
 async def post_rename_directory(
     client: RWSClient,
@@ -162,13 +162,13 @@ async def post_rename_directory(
         RWSAuthenticationError: On HTTP 401.
         RWSNotFoundError: On HTTP 404.
         RWSHTTPError: On any other HTTP >= 400.
-        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), METHOD_NOT_ALLOWED(405)
+        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
+            METHOD_NOT_ALLOWED(405)
 
     Example:
         # Rename a directory
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
-
 
 async def post_copy_directory(
     client: RWSClient,
@@ -179,7 +179,10 @@ async def post_copy_directory(
     Copy a directory.
 
     Route: ``POST /fileservice/{device|environment_variable}/{directory}``
-    ABB constraints: The value for fs-newname can either be absolute or relative. It is differentiated based on whether the value has a leading slash (absolute) or not (relative). Note: when absolute paths are used, it should start from /fileservice e.g. Absolute path : fs-newname=/fileservice/$home/copydir2 Relative...
+    ABB constraints: The value for fs-newname can either be absolute or relative. It is
+        differentiated based on whether the value has a leading slash (absolute) or not
+        (relative). Note: when absolute paths are used, it should start from /fileservice e.g.
+        Absolute path : fs-newname=/fileservice/$home/copydir2 Relative...
 
     Args:
         client: Open RWSClient instance.
@@ -193,13 +196,13 @@ async def post_copy_directory(
         RWSAuthenticationError: On HTTP 401.
         RWSNotFoundError: On HTTP 404.
         RWSHTTPError: On any other HTTP >= 400.
-        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
+        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
+            CONFLICT(409)
 
     Example:
         # Create a copy of a directory
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
-
 
 async def delete_directory(
     client: RWSClient,
@@ -230,7 +233,6 @@ async def delete_directory(
         # Delate a directory
     """
     return await client.delete(f"/fileservice/{device_environment_variable}/{directory}")
-
 
 async def get_file(
     client: RWSClient,
@@ -263,7 +265,6 @@ async def get_file(
         # Get a file.
     """
     return await client.get(f"/fileservice/{device}|{directory}/{file}")
-
 
 async def get_file_actions(
     client: RWSClient,
@@ -302,7 +303,6 @@ async def get_file_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def post_rename_file(
     client: RWSClient,
     device_environment_variable_directory: str,
@@ -333,7 +333,6 @@ async def post_rename_file(
     """
     return await client.post(f"/fileservice/{device_environment_variable_directory}/{file}")
 
-
 async def create_copy_of_file(
     client: RWSClient,
     device_environment_variable: str,
@@ -343,7 +342,10 @@ async def create_copy_of_file(
     Create a copy of a file.
 
     Route: ``POST /fileservice/{device|environment_variable}/{filename}``
-    ABB constraints: The value for fs-newname can either be absolute or relative. It is differentiated based on the whether the value has a leading slash (absolute) or not (relative). Note: when absolute paths are used, it should start from /fileservice e.g. Absolute path : fs-newname=/fileservice/$home/copyfile2.txt...
+    ABB constraints: The value for fs-newname can either be absolute or relative. It is
+        differentiated based on the whether the value has a leading slash (absolute) or not
+        (relative). Note: when absolute paths are used, it should start from /fileservice e.g.
+        Absolute path : fs-newname=/fileservice/$home/copyfile2.txt...
 
     Args:
         client: Open RWSClient instance.
@@ -357,13 +359,13 @@ async def create_copy_of_file(
         RWSAuthenticationError: On HTTP 401.
         RWSNotFoundError: On HTTP 404.
         RWSHTTPError: On any other HTTP >= 400.
-        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
+        # ABB codes: UNAUTHORIZED(401), NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415),
+            CONFLICT(409)
 
     Example:
         # Create a copy of a file
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{filename}")
-
 
 async def put_upload_file(
     client: RWSClient,
@@ -374,7 +376,9 @@ async def put_upload_file(
     Upload a file.
 
     Route: ``PUT /fileservice/{device|environment_variable|directory}/{file}``
-    ABB constraints: If the file exists, the file is overwritten with the specified content else a new file with the given name is created. Supported in bootserver mode Maximum supported file size is less than 800MB.
+    ABB constraints: If the file exists, the file is overwritten with the specified content else
+        a new file with the given name is created. Supported in bootserver mode Maximum supported
+        file size is less than 800MB.
 
     Args:
         client: Open RWSClient instance.
@@ -394,7 +398,6 @@ async def put_upload_file(
         # Upload a file
     """
     return await client.put(f"/fileservice/{device_environment_variable_directory}/{file}")
-
 
 async def delete_file(
     client: RWSClient,
@@ -425,7 +428,6 @@ async def delete_file(
         # Delete a file
     """
     return await client.delete(f"/fileservice/{device_environment_variable_directory}/{file}")
-
 
 async def get_file_meta_data(
     client: RWSClient,

@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/rmmp."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,13 +9,13 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.rmmp import (
-    cancel_held_or_requested_rmmp,
-    get_rmmp_actions,
     get_rmmp_state,
-    grant_or_deny_an_rmmp_request,
-    poll_for_rmmp_grant_status,
+    get_rmmp_actions,
     request_rmmp,
+    grant_or_deny_an_rmmp_request,
+    cancel_held_or_requested_rmmp,
     subscribe_on_rmmp_request_event,
+    poll_for_rmmp_grant_status,
 )
 
 
@@ -46,7 +45,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_rmmp_state() -> None:
-    """Verify that get_rmmp_state sends GET /users/rmmp."""
+    """
+    Verify that get_rmmp_state sends GET /users/rmmp.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -57,10 +58,11 @@ async def test_get_rmmp_state() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rmmp_actions() -> None:
-    """Verify that get_rmmp_actions sends GET /users/rmmp."""
+    """
+    Verify that get_rmmp_actions sends GET /users/rmmp.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -71,10 +73,11 @@ async def test_get_rmmp_actions() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_request_rmmp() -> None:
-    """Verify that request_rmmp sends POST /users/rmmp."""
+    """
+    Verify that request_rmmp sends POST /users/rmmp.
+    """
     transport = _MockTransport(status_code=202)
     client = _make_client(transport)
 
@@ -85,10 +88,11 @@ async def test_request_rmmp() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 202
 
-
 @pytest.mark.asyncio
 async def test_grant_or_deny_an_rmmp_request() -> None:
-    """Verify that grant_or_deny_an_rmmp_request sends POST /users/rmmp."""
+    """
+    Verify that grant_or_deny_an_rmmp_request sends POST /users/rmmp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -99,10 +103,11 @@ async def test_grant_or_deny_an_rmmp_request() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_cancel_held_or_requested_rmmp() -> None:
-    """Verify that cancel_held_or_requested_rmmp sends POST /users/rmmp."""
+    """
+    Verify that cancel_held_or_requested_rmmp sends POST /users/rmmp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -113,10 +118,11 @@ async def test_cancel_held_or_requested_rmmp() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_rmmp_request_event() -> None:
-    """Verify that subscribe_on_rmmp_request_event sends POST /subscription."""
+    """
+    Verify that subscribe_on_rmmp_request_event sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -127,10 +133,11 @@ async def test_subscribe_on_rmmp_request_event() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_poll_for_rmmp_grant_status() -> None:
-    """Verify that poll_for_rmmp_grant_status sends GET /users/rmmp/poll."""
+    """
+    Verify that poll_for_rmmp_grant_status sends GET /users/rmmp/poll.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

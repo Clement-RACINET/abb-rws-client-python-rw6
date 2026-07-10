@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/fileservice."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,20 +9,20 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.fileservice import (
-    create_copy_of_file,
-    create_directory,
-    delete_directory,
-    delete_file,
-    get_directory_actions,
+    get_file_service_resources,
     get_directory_listing_of_resources,
+    get_directory_actions,
+    create_directory,
+    post_rename_directory,
+    post_copy_directory,
+    delete_directory,
     get_file,
     get_file_actions,
-    get_file_meta_data,
-    get_file_service_resources,
-    post_copy_directory,
-    post_rename_directory,
     post_rename_file,
+    create_copy_of_file,
     put_upload_file,
+    delete_file,
+    get_file_meta_data,
 )
 
 
@@ -53,7 +52,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_file_service_resources() -> None:
-    """Verify that get_file_service_resources sends GET /fileservice."""
+    """
+    Verify that get_file_service_resources sends GET /fileservice.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -64,29 +65,27 @@ async def test_get_file_service_resources() -> None:
     assert transport.last_request.url.path == "/fileservice"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_directory_listing_of_resources() -> None:
-    """Verify that get_directory_listing_of_resources sends GET /fileservice/{environment_variable|device}/{directory}."""
+    """
+    Verify that get_directory_listing_of_resources sends GET
+        /fileservice/{environment_variable|device}/{directory}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await get_directory_listing_of_resources(
-        client, "environment_variable_device_test", "directory_test"
-    )
+    resp = await get_directory_listing_of_resources(client, "environment_variable_device_test", "directory_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/environment_variable_device_test/directory_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/environment_variable_device_test/directory_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_get_directory_actions() -> None:
-    """Verify that get_directory_actions sends GET /fileservice/{device}|{directory}."""
+    """
+    Verify that get_directory_actions sends GET /fileservice/{device}|{directory}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -97,10 +96,12 @@ async def test_get_directory_actions() -> None:
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_create_directory() -> None:
-    """Verify that create_directory sends POST /fileservice/{device|environment_variable}/{directory}."""
+    """
+    Verify that create_directory sends POST
+        /fileservice/{device|environment_variable}/{directory}.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -108,16 +109,15 @@ async def test_create_directory() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_test/directory_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
     assert resp.status_code == 201
-
 
 @pytest.mark.asyncio
 async def test_post_rename_directory() -> None:
-    """Verify that post_rename_directory sends POST /fileservice/{device|environment_variable}/{directory}."""
+    """
+    Verify that post_rename_directory sends POST
+        /fileservice/{device|environment_variable}/{directory}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -125,16 +125,15 @@ async def test_post_rename_directory() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_test/directory_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_post_copy_directory() -> None:
-    """Verify that post_copy_directory sends POST /fileservice/{device|environment_variable}/{directory}."""
+    """
+    Verify that post_copy_directory sends POST
+        /fileservice/{device|environment_variable}/{directory}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -142,16 +141,15 @@ async def test_post_copy_directory() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_test/directory_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_delete_directory() -> None:
-    """Verify that delete_directory sends DELETE /fileservice/{device|environment_variable}/{directory}."""
+    """
+    Verify that delete_directory sends DELETE
+        /fileservice/{device|environment_variable}/{directory}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -159,16 +157,14 @@ async def test_delete_directory() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_test/directory_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/directory_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_get_file() -> None:
-    """Verify that get_file sends GET /fileservice/{device}|{directory}/{file}."""
+    """
+    Verify that get_file sends GET /fileservice/{device}|{directory}/{file}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -179,10 +175,11 @@ async def test_get_file() -> None:
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test/file_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_file_actions() -> None:
-    """Verify that get_file_actions sends GET /fileservice/{device}|{directory}/{file}."""
+    """
+    Verify that get_file_actions sends GET /fileservice/{device}|{directory}/{file}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -193,10 +190,12 @@ async def test_get_file_actions() -> None:
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test/file_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_rename_file() -> None:
-    """Verify that post_rename_file sends POST /fileservice/{device|environment_variable|directory}/{file}."""
+    """
+    Verify that post_rename_file sends POST
+        /fileservice/{device|environment_variable|directory}/{file}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -204,16 +203,15 @@ async def test_post_rename_file() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_directory_test/file_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_create_copy_of_file() -> None:
-    """Verify that create_copy_of_file sends POST /fileservice/{device|environment_variable}/{filename}."""
+    """
+    Verify that create_copy_of_file sends POST
+        /fileservice/{device|environment_variable}/{filename}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -221,16 +219,15 @@ async def test_create_copy_of_file() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_test/filename_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_test/filename_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_put_upload_file() -> None:
-    """Verify that put_upload_file sends PUT /fileservice/{device|environment_variable|directory}/{file}."""
+    """
+    Verify that put_upload_file sends PUT
+        /fileservice/{device|environment_variable|directory}/{file}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -238,16 +235,15 @@ async def test_put_upload_file() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "PUT"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_directory_test/file_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_delete_file() -> None:
-    """Verify that delete_file sends DELETE /fileservice/{device|environment_variable|directory}/{file}."""
+    """
+    Verify that delete_file sends DELETE
+        /fileservice/{device|environment_variable|directory}/{file}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -255,27 +251,21 @@ async def test_delete_file() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_directory_test/file_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_get_file_meta_data() -> None:
-    """Verify that get_file_meta_data sends HEAD /fileservice/{device|environment_variable|directory}/{file}."""
+    """
+    Verify that get_file_meta_data sends HEAD
+        /fileservice/{device|environment_variable|directory}/{file}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await get_file_meta_data(
-        client, "device_environment_variable_directory_test", "file_test"
-    )
+    resp = await get_file_meta_data(client, "device_environment_variable_directory_test", "file_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "HEAD"
-    assert (
-        transport.last_request.url.path
-        == "/fileservice/device_environment_variable_directory_test/file_test"
-    )
+    assert transport.last_request.url.path == "/fileservice/device_environment_variable_directory_test/file_test"
     assert resp.status_code == 204

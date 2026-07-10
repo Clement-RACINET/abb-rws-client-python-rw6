@@ -8,7 +8,6 @@ RWS module: RobotWare Services → Integrated Vision (IV) Service → Get Vision
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_vision_manager_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/vision")
 
-
 async def get_number_of_cameras_of_iv(
     client: RWSClient,
     resource: str | None = None,
@@ -65,12 +63,13 @@ async def get_number_of_cameras_of_iv(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=num-of-cameras"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=num-of-cameras"
     """
     return await client.get(
-        "/rw/vision", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/rw/vision",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_iv_camera_validity(
     client: RWSClient,
@@ -98,13 +97,13 @@ async def get_iv_camera_validity(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-validity&name=camera1"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=camera-validity&name=camera1"
     """
     return await client.get(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
-
 
 async def get_vision_camera_resource_actions(
     client: RWSClient,
@@ -133,9 +132,9 @@ async def get_vision_camera_resource_actions(
         # curl --digest -u "Default User":robotics "http://localhost/rw/vision?action=show"
     """
     return await client.get(
-        "/rw/vision", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/vision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_camera_jobname(
     client: RWSClient,
@@ -163,13 +162,13 @@ async def get_camera_jobname(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-job&name=mycamera"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=camera-job&name=mycamera"
     """
     return await client.get(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
-
 
 async def restart_camera(
     client: RWSClient,
@@ -197,14 +196,14 @@ async def restart_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=restart"
+        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
+            "http://localhost/rw/vision?action=restart"
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
-
 
 async def post_flash_led_of_camera(
     client: RWSClient,
@@ -232,14 +231,14 @@ async def post_flash_led_of_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=flash-led"
+        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
+            "http://localhost/rw/vision?action=flash-led"
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
-
 
 async def set_camera_state(
     client: RWSClient,
@@ -269,14 +268,14 @@ async def set_camera_state(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera&state=run" -X POST "http://localhost/rw/vision?action=set-sta
+        # curl --digest -u "Default User":robotics -d "name=mycamera&state=run" -X POST
+            "http://localhost/rw/vision?action=set-sta
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name, "state": state}.items() if v is not None},
     )
-
 
 async def post_refesh_the_camera(
     client: RWSClient,
@@ -302,12 +301,13 @@ async def post_refesh_the_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/vision?action=refresh"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/vision?action=refresh"
     """
     return await client.post(
-        "/rw/vision", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/vision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_hostname_of_the_camera(
     client: RWSClient,
@@ -319,7 +319,8 @@ async def set_hostname_of_the_camera(
     Set Hostname of the Camera.
 
     Route: ``POST /rw/vision``
-    ABB constraints: A restart for the camera module is needed for the change to be visible. Switch Off and switch On the camera modeule. Not supported in bootserver mode
+    ABB constraints: A restart for the camera module is needed for the change to be visible.
+        Switch Off and switch On the camera modeule. Not supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -337,14 +338,14 @@ async def set_hostname_of_the_camera(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera&host=hostname" -X POST "http://localhost/rw/vision?action=set
+        # curl --digest -u "Default User":robotics -d "name=mycamera&host=hostname" -X POST
+            "http://localhost/rw/vision?action=set
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name, "host": host}.items() if v is not None},
     )
-
 
 async def set_camera_to_be_dhcp_client(
     client: RWSClient,
@@ -355,7 +356,8 @@ async def set_camera_to_be_dhcp_client(
     Set camera to be a DHCP client.
 
     Route: ``POST /rw/vision``
-    ABB constraints: Not supported in bootserver mode Camera restart is required after DHCP settings
+    ABB constraints: Not supported in bootserver mode Camera restart is required after DHCP
+        settings
 
     Args:
         client: Open RWSClient instance.
@@ -372,14 +374,14 @@ async def set_camera_to_be_dhcp_client(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=set-dhcp"
+        # curl --digest -u "Default User":robotics -d "name=mycamera" -X POST
+            "http://localhost/rw/vision?action=set-dhcp"
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
-
 
 async def set_camera_dns_settings(
     client: RWSClient,
@@ -392,7 +394,8 @@ async def set_camera_dns_settings(
     Set Camera DNS Settings.
 
     Route: ``POST /rw/vision``
-    ABB constraints: Not supported in bootserver mode Camera restart is required after DNS settings
+    ABB constraints: Not supported in bootserver mode Camera restart is required after DNS
+        settings
 
     Args:
         client: Open RWSClient instance.
@@ -411,18 +414,14 @@ async def set_camera_dns_settings(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=mycamera&dns-server=192.168.125.76&dns-suffix=yourdomain.com" -X POST
+        # curl --digest -u "Default User":robotics -d
+            "name=mycamera&dns-server=192.168.125.76&dns-suffix=yourdomain.com" -X POST
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {"name": name, "dns_server": dns_server, "dns_suffix": dns_suffix}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"name": name, "dns_server": dns_server, "dns_suffix": dns_suffix}.items() if v is not None},
     )
-
 
 async def get_camera_status(
     client: RWSClient,
@@ -450,13 +449,13 @@ async def get_camera_status(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-status&name=mycamera"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=camera-status&name=mycamera"
     """
     return await client.get(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
-
 
 async def get_camera_info_using_index_of_the(
     client: RWSClient,
@@ -484,13 +483,13 @@ async def get_camera_info_using_index_of_the(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info-index&index=0"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=camera-info-index&index=0"
     """
     return await client.get(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource, "index": index}.items() if v is not None},
     )
-
 
 async def set_camera_name(
     client: RWSClient,
@@ -520,14 +519,14 @@ async def set_camera_name(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "index=0&name=mycamera" -X POST "http://localhost/rw/vision?action=set-camer
+        # curl --digest -u "Default User":robotics -d "index=0&name=mycamera" -X POST
+            "http://localhost/rw/vision?action=set-camer
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"index": index, "name": name}.items() if v is not None},
     )
-
 
 async def set_camera_user_credentials(
     client: RWSClient,
@@ -559,18 +558,14 @@ async def set_camera_user_credentials(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "index=0&user=cmycamera&password=123" -X POST "http://localhost/rw/vision?ac
+        # curl --digest -u "Default User":robotics -d "index=0&user=cmycamera&password=123" -X
+            POST "http://localhost/rw/vision?ac
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {"index": index, "user": user, "password": password}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"index": index, "user": user, "password": password}.items() if v is not None},
     )
-
 
 async def set_camera_ip_settings(
     client: RWSClient,
@@ -584,7 +579,8 @@ async def set_camera_ip_settings(
     Set Camera IP Settings.
 
     Route: ``POST /rw/vision``
-    ABB constraints: Not supported in bootserver mode. Restart the controller to apply IP settings.
+    ABB constraints: Not supported in bootserver mode. Restart the controller to apply IP
+        settings.
 
     Args:
         client: Open RWSClient instance.
@@ -604,23 +600,14 @@ async def set_camera_ip_settings(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics-d "name=mycamera&address=192.168.125.206&netmask=255.255.255.0&gateway=0.0.0.0"
+        # curl --digest -u "Default User":robotics-d
+            "name=mycamera&address=192.168.125.206&netmask=255.255.255.0&gateway=0.0.0.0"
     """
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "name": name,
-                "address": address,
-                "netmask": netmask,
-                "gateway": gateway,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"name": name, "address": address, "netmask": netmask, "gateway": gateway}.items() if v is not None},
     )
-
 
 async def get_iv_camera_info(
     client: RWSClient,
@@ -648,7 +635,8 @@ async def get_iv_camera_info(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info&name=myCamera"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/vision?resource=camera-info&name=myCamera"
     """
     return await client.get(
         "/rw/vision",

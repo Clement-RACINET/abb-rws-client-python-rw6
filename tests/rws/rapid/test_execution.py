@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/execution."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,17 +9,17 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.execution import (
-    get_rapid_execution_actions,
     get_rapid_execution_state,
-    reset_rapid_program_pointer_to_main,
-    set_hold_to_run_cmd,
-    set_number_of_execution_cycles,
+    get_rapid_execution_actions,
     start_rapid_execution,
-    start_rapid_execution_from_production_entry,
     stop_rapid_execution,
-    subscribe_on_hold_to_run,
+    start_rapid_execution_from_production_entry,
+    reset_rapid_program_pointer_to_main,
+    set_number_of_execution_cycles,
     subscribe_rapid_execution,
     subscribe_rapid_execution_cycle,
+    subscribe_on_hold_to_run,
+    set_hold_to_run_cmd,
 )
 
 
@@ -50,7 +49,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_rapid_execution_state() -> None:
-    """Verify that get_rapid_execution_state sends GET /rw/rapid/execution."""
+    """
+    Verify that get_rapid_execution_state sends GET /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -61,10 +62,11 @@ async def test_get_rapid_execution_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_execution_actions() -> None:
-    """Verify that get_rapid_execution_actions sends GET /rw/rapid/execution."""
+    """
+    Verify that get_rapid_execution_actions sends GET /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -75,10 +77,11 @@ async def test_get_rapid_execution_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_start_rapid_execution() -> None:
-    """Verify that start_rapid_execution sends POST /rw/rapid/execution."""
+    """
+    Verify that start_rapid_execution sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -89,10 +92,11 @@ async def test_start_rapid_execution() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_stop_rapid_execution() -> None:
-    """Verify that stop_rapid_execution sends POST /rw/rapid/execution."""
+    """
+    Verify that stop_rapid_execution sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -103,10 +107,11 @@ async def test_stop_rapid_execution() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_start_rapid_execution_from_production_entry() -> None:
-    """Verify that start_rapid_execution_from_production_entry sends POST /rw/rapid/execution."""
+    """
+    Verify that start_rapid_execution_from_production_entry sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -117,10 +122,11 @@ async def test_start_rapid_execution_from_production_entry() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_reset_rapid_program_pointer_to_main() -> None:
-    """Verify that reset_rapid_program_pointer_to_main sends POST /rw/rapid/execution."""
+    """
+    Verify that reset_rapid_program_pointer_to_main sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -131,10 +137,11 @@ async def test_reset_rapid_program_pointer_to_main() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_number_of_execution_cycles() -> None:
-    """Verify that set_number_of_execution_cycles sends POST /rw/rapid/execution."""
+    """
+    Verify that set_number_of_execution_cycles sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -145,10 +152,11 @@ async def test_set_number_of_execution_cycles() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_rapid_execution() -> None:
-    """Verify that subscribe_rapid_execution sends POST /subscription."""
+    """
+    Verify that subscribe_rapid_execution sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -159,10 +167,11 @@ async def test_subscribe_rapid_execution() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_subscribe_rapid_execution_cycle() -> None:
-    """Verify that subscribe_rapid_execution_cycle sends POST /subscription."""
+    """
+    Verify that subscribe_rapid_execution_cycle sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -173,10 +182,11 @@ async def test_subscribe_rapid_execution_cycle() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_hold_to_run() -> None:
-    """Verify that subscribe_on_hold_to_run sends POST /subscription."""
+    """
+    Verify that subscribe_on_hold_to_run sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -187,10 +197,11 @@ async def test_subscribe_on_hold_to_run() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_set_hold_to_run_cmd() -> None:
-    """Verify that set_hold_to_run_cmd sends POST /rw/rapid/execution."""
+    """
+    Verify that set_hold_to_run_cmd sends POST /rw/rapid/execution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 

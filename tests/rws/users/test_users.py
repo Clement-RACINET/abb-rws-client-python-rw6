@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/users."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,11 +9,11 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.users import (
-    get_user_actions,
     get_user_resources,
+    get_user_actions,
+    register_the_user,
     impersonate_user,
     login_as_local_user,
-    register_the_user,
 )
 
 
@@ -44,7 +43,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_user_resources() -> None:
-    """Verify that get_user_resources sends GET /users."""
+    """
+    Verify that get_user_resources sends GET /users.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -55,10 +56,11 @@ async def test_get_user_resources() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_user_actions() -> None:
-    """Verify that get_user_actions sends GET /users."""
+    """
+    Verify that get_user_actions sends GET /users.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -69,10 +71,11 @@ async def test_get_user_actions() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_register_the_user() -> None:
-    """Verify that register_the_user sends POST /users."""
+    """
+    Verify that register_the_user sends POST /users.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -83,10 +86,11 @@ async def test_register_the_user() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_impersonate_user() -> None:
-    """Verify that impersonate_user sends POST /users."""
+    """
+    Verify that impersonate_user sends POST /users.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -97,10 +101,11 @@ async def test_impersonate_user() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_login_as_local_user() -> None:
-    """Verify that login_as_local_user sends POST /users."""
+    """
+    Verify that login_as_local_user sends POST /users.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

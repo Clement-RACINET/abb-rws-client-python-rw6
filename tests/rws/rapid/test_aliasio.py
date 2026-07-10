@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/aliasio."""
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_aliasio_list() -> None:
-    """Verify that get_aliasio_list sends GET /rw/rapid/aliasio."""
+    """
+    Verify that get_aliasio_list sends GET /rw/rapid/aliasio.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

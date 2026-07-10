@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/grants."""
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_user_grants() -> None:
-    """Verify that get_user_grants sends GET /users/grants."""
+    """
+    Verify that get_user_grants sends GET /users/grants.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/cfg."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,28 +9,28 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.cfg import (
-    create_default_cfg_instance,
-    delete_cfg_instance,
-    get_actions_on_cfg_domain,
-    get_actions_on_cfg_instances,
-    get_all_attributes_of_the_given_domain,
-    get_all_instances_of_the_given_domain,
-    get_cfg_actions,
-    get_cfg_domain_types,
-    get_cfg_instance,
-    get_cfg_instance_actions,
     get_cfg_resources,
-    get_cfg_type,
-    load_cfg_file,
-    post_keyless_motor_on,
-    reset_cfg_domain,
-    reset_cfg_instances,
-    save_cfg_domain,
-    subscribe_on_cfg_changecount,
-    update_cfg_instance,
+    get_cfg_actions,
     validate_cfg_file,
+    load_cfg_file,
     validate_cfg_instance_before_delete,
     validate_cfg_instances,
+    post_keyless_motor_on,
+    subscribe_on_cfg_changecount,
+    get_cfg_domain_types,
+    get_actions_on_cfg_domain,
+    save_cfg_domain,
+    reset_cfg_domain,
+    get_cfg_type,
+    get_all_attributes_of_the_given_domain,
+    get_all_instances_of_the_given_domain,
+    get_actions_on_cfg_instances,
+    reset_cfg_instances,
+    create_default_cfg_instance,
+    get_cfg_instance,
+    get_cfg_instance_actions,
+    update_cfg_instance,
+    delete_cfg_instance,
 )
 
 
@@ -61,7 +60,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_cfg_resources() -> None:
-    """Verify that get_cfg_resources sends GET /rw/cfg."""
+    """
+    Verify that get_cfg_resources sends GET /rw/cfg.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -72,10 +73,11 @@ async def test_get_cfg_resources() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_cfg_actions() -> None:
-    """Verify that get_cfg_actions sends GET /rw/cfg."""
+    """
+    Verify that get_cfg_actions sends GET /rw/cfg.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -86,10 +88,11 @@ async def test_get_cfg_actions() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_validate_cfg_file() -> None:
-    """Verify that validate_cfg_file sends POST /rw/cfg."""
+    """
+    Verify that validate_cfg_file sends POST /rw/cfg.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -100,10 +103,11 @@ async def test_validate_cfg_file() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_load_cfg_file() -> None:
-    """Verify that load_cfg_file sends POST /rw/cfg."""
+    """
+    Verify that load_cfg_file sends POST /rw/cfg.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -114,10 +118,11 @@ async def test_load_cfg_file() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_validate_cfg_instance_before_delete() -> None:
-    """Verify that validate_cfg_instance_before_delete sends POST /rw/cfg."""
+    """
+    Verify that validate_cfg_instance_before_delete sends POST /rw/cfg.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -128,10 +133,11 @@ async def test_validate_cfg_instance_before_delete() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_validate_cfg_instances() -> None:
-    """Verify that validate_cfg_instances sends POST /rw/cfg."""
+    """
+    Verify that validate_cfg_instances sends POST /rw/cfg.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -142,10 +148,11 @@ async def test_validate_cfg_instances() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_keyless_motor_on() -> None:
-    """Verify that post_keyless_motor_on sends POST /rw/cfg."""
+    """
+    Verify that post_keyless_motor_on sends POST /rw/cfg.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -156,10 +163,11 @@ async def test_post_keyless_motor_on() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_cfg_changecount() -> None:
-    """Verify that subscribe_on_cfg_changecount sends POST /subscription."""
+    """
+    Verify that subscribe_on_cfg_changecount sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -170,10 +178,11 @@ async def test_subscribe_on_cfg_changecount() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_cfg_domain_types() -> None:
-    """Verify that get_cfg_domain_types sends GET /rw/cfg/{domain}."""
+    """
+    Verify that get_cfg_domain_types sends GET /rw/cfg/{domain}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -184,10 +193,11 @@ async def test_get_cfg_domain_types() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_actions_on_cfg_domain() -> None:
-    """Verify that get_actions_on_cfg_domain sends GET /rw/cfg/{domain}."""
+    """
+    Verify that get_actions_on_cfg_domain sends GET /rw/cfg/{domain}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -198,10 +208,11 @@ async def test_get_actions_on_cfg_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_save_cfg_domain() -> None:
-    """Verify that save_cfg_domain sends POST /rw/cfg/{domain}."""
+    """
+    Verify that save_cfg_domain sends POST /rw/cfg/{domain}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -212,10 +223,11 @@ async def test_save_cfg_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_reset_cfg_domain() -> None:
-    """Verify that reset_cfg_domain sends POST /rw/cfg/{domain}."""
+    """
+    Verify that reset_cfg_domain sends POST /rw/cfg/{domain}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -226,10 +238,11 @@ async def test_reset_cfg_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_cfg_type() -> None:
-    """Verify that get_cfg_type sends GET /rw/cfg/{domain}/{type}."""
+    """
+    Verify that get_cfg_type sends GET /rw/cfg/{domain}/{type}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -240,10 +253,12 @@ async def test_get_cfg_type() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_all_attributes_of_the_given_domain() -> None:
-    """Verify that get_all_attributes_of_the_given_domain sends GET /rw/cfg/{domain}/{type}/attributes."""
+    """
+    Verify that get_all_attributes_of_the_given_domain sends GET
+        /rw/cfg/{domain}/{type}/attributes.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -254,10 +269,12 @@ async def test_get_all_attributes_of_the_given_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/attributes"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_all_instances_of_the_given_domain() -> None:
-    """Verify that get_all_instances_of_the_given_domain sends GET /rw/cfg/{domain}/{type}/instances."""
+    """
+    Verify that get_all_instances_of_the_given_domain sends GET
+        /rw/cfg/{domain}/{type}/instances.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -268,10 +285,11 @@ async def test_get_all_instances_of_the_given_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_actions_on_cfg_instances() -> None:
-    """Verify that get_actions_on_cfg_instances sends GET /rw/cfg/{domain}/{type}/instances."""
+    """
+    Verify that get_actions_on_cfg_instances sends GET /rw/cfg/{domain}/{type}/instances.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -282,10 +300,11 @@ async def test_get_actions_on_cfg_instances() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_reset_cfg_instances() -> None:
-    """Verify that reset_cfg_instances sends POST /rw/cfg/{domain}/{type}/instances."""
+    """
+    Verify that reset_cfg_instances sends POST /rw/cfg/{domain}/{type}/instances.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -296,10 +315,11 @@ async def test_reset_cfg_instances() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_create_default_cfg_instance() -> None:
-    """Verify that create_default_cfg_instance sends POST /rw/cfg/{domain}/{type}/instances."""
+    """
+    Verify that create_default_cfg_instance sends POST /rw/cfg/{domain}/{type}/instances.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -310,10 +330,11 @@ async def test_create_default_cfg_instance() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_cfg_instance() -> None:
-    """Verify that get_cfg_instance sends GET /rw/cfg/{domain}/{type}/instances/{instance name}."""
+    """
+    Verify that get_cfg_instance sends GET /rw/cfg/{domain}/{type}/instances/{instance name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -321,16 +342,14 @@ async def test_get_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/cfg/domain_test/type_test/instances/instance_name_test"
-    )
+    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_name_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_get_cfg_instance_actions() -> None:
-    """Verify that get_cfg_instance_actions sends GET /rw/cfg/{domain}/{type}/instances/{instance}."""
+    """
+    Verify that get_cfg_instance_actions sends GET /rw/cfg/{domain}/{type}/instances/{instance}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -338,15 +357,14 @@ async def test_get_cfg_instance_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
-    )
+    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_update_cfg_instance() -> None:
-    """Verify that update_cfg_instance sends POST /rw/cfg/{domain}/{type}/instances/{instance}."""
+    """
+    Verify that update_cfg_instance sends POST /rw/cfg/{domain}/{type}/instances/{instance}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -354,15 +372,14 @@ async def test_update_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
-    )
+    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_delete_cfg_instance() -> None:
-    """Verify that delete_cfg_instance sends DELETE /rw/cfg/{domain}/{type}/instances/{instance}."""
+    """
+    Verify that delete_cfg_instance sends DELETE /rw/cfg/{domain}/{type}/instances/{instance}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -370,7 +387,5 @@ async def test_delete_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"
-    assert (
-        transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
-    )
+    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
     assert resp.status_code == 204

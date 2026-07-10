@@ -8,7 +8,6 @@ RWS module: Subscription Service → Get Subscription Actions
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -24,7 +23,11 @@ async def get_subscription_actions(
     Get Subscription Actions.
 
     Route: ``GET /subscription``
-    ABB constraints: The form body is in standard form data format and consists of three name-value pairs per resource. 1st pair - resources=<identifier> e.g. resources=1 2nd pair - <identifier>=<subscription-resource> e.g. 1=/rw/iosystem/signals/Virtual1/Board1/do1;state 3rd pair - <identifier>-p=<0|1|2> 1-p=1 In th...
+    ABB constraints: The form body is in standard form data format and consists of three
+        name-value pairs per resource. 1st pair - resources=<identifier> e.g. resources=1 2nd
+        pair - <identifier>=<subscription-resource> e.g.
+        1=/rw/iosystem/signals/Virtual1/Board1/do1;state 3rd pair - <identifier>-p=<0|1|2> 1-p=1
+        In th...
 
     Args:
         client: Open RWSClient instance.
@@ -43,9 +46,9 @@ async def get_subscription_actions(
         # curl --digest -u "Default User":robotics "http://localhost/subscription?action=show"
     """
     return await client.get(
-        "/subscription", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/subscription",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_resources(
     client: RWSClient,
@@ -56,7 +59,10 @@ async def subscribe_on_resources(
     Subscribe on resources.
 
     Route: ``POST /subscription``
-    ABB constraints: The sequence of steps involved to setup subscription and start listening for events are shown below: Subscribe on resources Response to this HTTP request is a list of initial events for the subscribed resources along with the location header. Retrieve Location header and use this value to setup w...
+    ABB constraints: The sequence of steps involved to setup subscription and start listening for
+        events are shown below: Subscribe on resources Response to this HTTP request is a list of
+        initial events for the subscribed resources along with the location header. Retrieve
+        Location header and use this value to setup w...
 
     Args:
         client: Open RWSClient instance.
@@ -77,13 +83,8 @@ async def subscribe_on_resources(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_subscription_group_actions(
     client: RWSClient,
@@ -94,7 +95,11 @@ async def get_subscription_group_actions(
     Get Subscription Group Actions.
 
     Route: ``GET /subscription/{group-id}``
-    ABB constraints: The form body is in standard form data format and consists of three name-value pairs per resource. 1st pair - resources=<identifier> e.g. resources=1 2nd pair - <identifier>=<subscription-resource> e.g. 1=/rw/iosystem/signals/Virtual1/Board1/do1;state 3rd pair - <identifier>-p=<0|1|2> 1-p=1 In th...
+    ABB constraints: The form body is in standard form data format and consists of three
+        name-value pairs per resource. 1st pair - resources=<identifier> e.g. resources=1 2nd
+        pair - <identifier>=<subscription-resource> e.g.
+        1=/rw/iosystem/signals/Virtual1/Board1/do1;state 3rd pair - <identifier>-p=<0|1|2> 1-p=1
+        In th...
 
     Args:
         client: Open RWSClient instance.
@@ -118,7 +123,6 @@ async def get_subscription_group_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def add_new_resources_remove_existing_resources_or(
     client: RWSClient,
     group_id: str,
@@ -129,7 +133,10 @@ async def add_new_resources_remove_existing_resources_or(
     Add new resources, Remove existing Resources or change existing resources priorities..
 
     Route: ``PUT /subscripion/{group-id}``
-    ABB constraints: maximum 1000 resources can be subscribed per group Each client can have maximum 2 groups. Low priority subscription(p=0) is allowed on any resource. Medium priority subscription(p=1) is allowed on any resource. RobotWebservice clients can subscribe maximum of 64 resources with High priority (p=2)...
+    ABB constraints: maximum 1000 resources can be subscribed per group Each client can have
+        maximum 2 groups. Low priority subscription(p=0) is allowed on any resource. Medium
+        priority subscription(p=1) is allowed on any resource. RobotWebservice clients can
+        subscribe maximum of 64 resources with High priority (p=2)...
 
     Args:
         client: Open RWSClient instance.
@@ -151,13 +158,8 @@ async def add_new_resources_remove_existing_resources_or(
     """
     return await client.put(
         f"/subscripion/{group_id}",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def unsubscribe_or_remove_the_subscription_group_resources(
     client: RWSClient,
@@ -186,7 +188,6 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
         # Unsubscribe or remove subscription group.
     """
     return await client.delete(f"/subscripion/{group_id}")
-
 
 async def unsubscribe_or_remove_the_resource_from_subscription(
     client: RWSClient,

@@ -8,7 +8,6 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID tasks
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -47,7 +46,6 @@ async def get_rapid_tasks(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
-
 async def get_rapid_tasks_actions(
     client: RWSClient,
     action: str | None = None,
@@ -75,9 +73,9 @@ async def get_rapid_tasks_actions(
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?action=show"
     """
     return await client.get(
-        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def start_rapid_spy_logging(
     client: RWSClient,
@@ -88,7 +86,8 @@ async def start_rapid_spy_logging(
     Start RAPID Spy Logging.
 
     Route: ``POST /rw/rapid/tasks``
-    ABB constraints: Will request mastership internally (No need to ask explicitly). By default, log file will be created in HOME folder. Not supported in bootserver mode.
+    ABB constraints: Will request mastership internally (No need to ask explicitly). By default,
+        log file will be created in HOME folder. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -105,14 +104,14 @@ async def start_rapid_spy_logging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST "http://localhost/rw/rapid/tasks?action=start-spy
+        # curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST
+            "http://localhost/rw/rapid/tasks?action=start-spy
     """
     return await client.post(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"log_file": log_file}.items() if v is not None},
     )
-
 
 async def get_rapid_spy_logging_status(
     client: RWSClient,
@@ -137,12 +136,13 @@ async def get_rapid_spy_logging_status(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=spy-status"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/rapid/tasks?resource=spy-status"
     """
     return await client.get(
-        "/rw/rapid/tasks", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def stop_rapid_spy_logging(
     client: RWSClient,
@@ -152,7 +152,8 @@ async def stop_rapid_spy_logging(
     Stop RAPID Spy Logging.
 
     Route: ``POST /rw/rapid/tasks``
-    ABB constraints: Will request mastership internally (No need to ask explicitly). Not supported in bootserver mode.
+    ABB constraints: Will request mastership internally (No need to ask explicitly). Not
+        supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -168,12 +169,13 @@ async def stop_rapid_spy_logging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403), UNSUPPORTED_MEDIA (415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=stop-spy"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks?action=stop-spy"
     """
     return await client.post(
-        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_activate_deactivate_rapid_tasks(
     client: RWSClient,
@@ -183,7 +185,8 @@ async def post_activate_deactivate_rapid_tasks(
     Activate/Deactivate rapid tasks.
 
     Route: ``POST /rw/rapid/tasks``
-    ABB constraints: Not supported in bootserver mode Mastership is taken internally if not taken explicitly by client.
+    ABB constraints: Not supported in bootserver mode Mastership is taken internally if not taken
+        explicitly by client.
 
     Args:
         client: Open RWSClient instance.
@@ -199,12 +202,13 @@ async def post_activate_deactivate_rapid_tasks(
         # ABB codes: BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=activate"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks?action=activate"
     """
     return await client.post(
-        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_program_motion_pointer_sync_state_for(
     client: RWSClient,
@@ -232,13 +236,13 @@ async def get_program_motion_pointer_sync_state_for(
         # ABB codes: BAD_REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
     """
     return await client.get(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
-
 
 async def subscribe_on_build_log_change(
     client: RWSClient,
@@ -270,13 +274,8 @@ async def subscribe_on_build_log_change(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_rapid_task_state(
     client: RWSClient,
@@ -311,7 +310,6 @@ async def get_rapid_task_state(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
-
 async def get_rapid_task_actions(
     client: RWSClient,
     task: str,
@@ -345,7 +343,6 @@ async def get_rapid_task_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def load_rapid_module_into_rapid_task(
     client: RWSClient,
     task: str,
@@ -376,16 +373,14 @@ async def load_rapid_module_into_rapid_task(
         # ABB codes: BAD REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod" "http://localhost/rw/rapid/tasks/T_ROB1?action=
+        # curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod"
+            "http://localhost/rw/rapid/tasks/T_ROB1?action=
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None
-        },
+        data={k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None},
     )
-
 
 async def post_unload_module_from_rapid_task(
     client: RWSClient,
@@ -415,14 +410,14 @@ async def post_unload_module_from_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename" "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod
+        # curl --digest -u "Default User":robotics -d "module=modulename"
+            "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"module": module}.items() if v is not None},
     )
-
 
 async def post_abort_current_execution_level(
     client: RWSClient,
@@ -450,13 +445,13 @@ async def post_abort_current_execution_level(
         # ABB codes: BAD REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_activate_deactivate_rapid_task(
     client: RWSClient,
@@ -484,13 +479,13 @@ async def post_activate_deactivate_rapid_task(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_activation_record(
     client: RWSClient,
@@ -524,13 +519,8 @@ async def get_activation_record(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={
-            k: v
-            for k, v in {"resource": resource, "stackframe": stackframe}.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "stackframe": stackframe}.items() if v is not None},
     )
-
 
 async def get_structural_change_count(
     client: RWSClient,
@@ -564,7 +554,6 @@ async def get_structural_change_count(
         f"/rw/rapid/tasks/{task_name}",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_preferable_data_types(
     client: RWSClient,
@@ -600,17 +589,8 @@ async def get_preferable_data_types(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={
-            k: v
-            for k, v in {
-                "resource": resource,
-                "instruction": instruction,
-                "parameter": parameter,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "instruction": instruction, "parameter": parameter}.items() if v is not None},
     )
-
 
 async def get_program_pointer_sync_state(
     client: RWSClient,
@@ -647,7 +627,6 @@ async def get_program_pointer_sync_state(
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
 
-
 async def get_motion_pointer_sync_state(
     client: RWSClient,
     task_name: str,
@@ -683,7 +662,6 @@ async def get_motion_pointer_sync_state(
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
 
-
 async def post_link_rapid_task(
     client: RWSClient,
     task: str,
@@ -710,13 +688,13 @@ async def post_link_rapid_task(
         # ABB codes: BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_pallet(
     client: RWSClient,
@@ -750,13 +728,8 @@ async def get_pallet(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={
-            k: v
-            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
     )
-
 
 async def get_pallet_head(
     client: RWSClient,
@@ -790,13 +763,8 @@ async def get_pallet_head(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={
-            k: v
-            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
     )
-
 
 async def subscribe_on_rapid_task_change(
     client: RWSClient,
@@ -807,7 +775,8 @@ async def subscribe_on_rapid_task_change(
     Subscribe on Rapid Task Change.
 
     Route: ``POST /subscription``
-    ABB constraints: On subscription an empty initial event will be generated. Not supported in bootserver mode.
+    ABB constraints: On subscription an empty initial event will be generated. Not supported in
+        bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -828,13 +797,8 @@ async def subscribe_on_rapid_task_change(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def subscribe_on_rapid_pp_sync_state_change(
     client: RWSClient,
@@ -845,7 +809,8 @@ async def subscribe_on_rapid_pp_sync_state_change(
     Subscribe on Rapid PP Sync state change.
 
     Route: ``POST /subscription``
-    ABB constraints: On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
+    ABB constraints: On subscription an empty initial event will be generated followed by the
+        current value. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -866,13 +831,8 @@ async def subscribe_on_rapid_pp_sync_state_change(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def subscribe_on_rapid_task_pgmexecution_state_change(
     client: RWSClient,
@@ -883,7 +843,8 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
     Subscribe on Rapid task pgmexecution state change.
 
     Route: ``POST /subscription``
-    ABB constraints: On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode.
+    ABB constraints: On subscription an empty initial event will be generated followed by the
+        current value. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -904,13 +865,8 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_rapid_motion(
     client: RWSClient,
@@ -936,10 +892,10 @@ async def get_rapid_motion(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
     """
     return await client.get(f"/rw/rapid/tasks/{task}/motion")
-
 
 async def get_robtarget(
     client: RWSClient,
@@ -971,17 +927,13 @@ async def get_robtarget(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wo
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wo
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
-        params={
-            k: v
-            for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items() if v is not None},
     )
-
 
 async def get_joint_target(
     client: RWSClient,
@@ -1009,13 +961,13 @@ async def get_joint_target(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_mechanical_units(
     client: RWSClient,
@@ -1043,13 +995,13 @@ async def get_mechanical_units(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_external_joint_states(
     client: RWSClient,
@@ -1077,13 +1029,13 @@ async def get_external_joint_states(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def post_calibration_for_displacement(
     client: RWSClient,
@@ -1128,28 +1080,13 @@ async def post_calibration_for_displacement(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
+        # curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0,
+            0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
-        data={
-            k: v
-            for k, v in {
-                "method": method,
-                "type": type,
-                "point1": point1,
-                "point2": point2,
-                "point3": point3,
-                "point4": point4,
-                "point5": point5,
-                "point6": point6,
-                "point7": point7,
-                "point8": point8,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
     )
-
 
 async def post_calibration_for_tcp(
     client: RWSClient,
@@ -1194,28 +1131,13 @@ async def post_calibration_for_tcp(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0,
+        # curl --digest -u "Default User":robotics -d
+            "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0,
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
-        data={
-            k: v
-            for k, v in {
-                "method": method,
-                "type": type,
-                "tolerance": tolerance,
-                "point1": point1,
-                "point2": point2,
-                "point3": point3,
-                "point4": point4,
-                "point5": point5,
-                "point6": point6,
-                "point7": point7,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
     )
-
 
 async def get_rapid_program_resource(
     client: RWSClient,
@@ -1250,7 +1172,6 @@ async def get_rapid_program_resource(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
-
 async def get_rapid_program_actions(
     client: RWSClient,
     task: str,
@@ -1284,7 +1205,6 @@ async def get_rapid_program_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def load_program_into_rapid_task(
     client: RWSClient,
     task: str,
@@ -1315,16 +1235,14 @@ async def load_program_into_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf" "http://localhost:7777/rw/rapid/tasks/T_
+        # curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf"
+            "http://localhost:7777/rw/rapid/tasks/T_
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None
-        },
+        data={k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None},
     )
-
 
 async def post_unload_program_from_rapid_task(
     client: RWSClient,
@@ -1352,13 +1270,13 @@ async def post_unload_program_from_rapid_task(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def save_program(
     client: RWSClient,
@@ -1388,14 +1306,14 @@ async def save_program(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
+        # curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"path": path}.items() if v is not None},
     )
-
 
 async def set_program_name(
     client: RWSClient,
@@ -1425,14 +1343,14 @@ async def set_program_name(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "name=myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action
+        # curl --digest -u "Default User":robotics -d "name=myprog" -X POST
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
-
 
 async def set_entry_point(
     client: RWSClient,
@@ -1462,14 +1380,14 @@ async def set_entry_point(
         # ABB codes: BAD REQUEST(400),FORBIDDEN(403),NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
+        # curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"routine": routine}.items() if v is not None},
     )
-
 
 async def get_build_errors(
     client: RWSClient,
@@ -1481,7 +1399,9 @@ async def get_build_errors(
     Get Build Errors.
 
     Route: ``GET /rw/rapid/tasks/{task}/program/builderror``
-    ABB constraints: Default value of start is 1 and maximum value of limit is 30(maximum supported by RAPID). Absence of prev and next link indicates first and last page respectively. Not supported in bootserver mode.
+    ABB constraints: Default value of start is 1 and maximum value of limit is 30(maximum
+        supported by RAPID). Absence of prev and next link indicates first and last page
+        respectively. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -1505,7 +1425,6 @@ async def get_build_errors(
         f"/rw/rapid/tasks/{task}/program/builderror",
         params={k: v for k, v in {"limit": limit, "start": start}.items() if v is not None},
     )
-
 
 async def get_rapid_breakpoint_actions(
     client: RWSClient,
@@ -1540,7 +1459,6 @@ async def get_rapid_breakpoint_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def set_break_point(
     client: RWSClient,
     task: str,
@@ -1573,18 +1491,14 @@ async def set_break_point(
         # ABB codes: HTTP_BAD_REQUEST(400), FORBIDDEN(403), NOT_FOUND(404) see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3" "http://127.0.0.1/rw/rapid/tasks
+        # curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3"
+            "http://127.0.0.1/rw/rapid/tasks
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {"module": module, "row": row, "column": column}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"module": module, "row": row, "column": column}.items() if v is not None},
     )
-
 
 async def get_break_points(
     client: RWSClient,
@@ -1614,13 +1528,13 @@ async def get_break_points(
         # ABB codes: NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
+        # curl --digest -u "Default User":robotics
+            "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
         params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
     )
-
 
 async def get_rapid_task_motion_program_pointer_positions(
     client: RWSClient,
@@ -1649,7 +1563,6 @@ async def get_rapid_task_motion_program_pointer_positions(
         # curl --digest -u "Default User":robotics"
     """
     return await client.get(f"/rw/rapid/tasks/{task}/pcp")
-
 
 async def get_rapid_task_pcp_actions(
     client: RWSClient,
@@ -1684,7 +1597,6 @@ async def get_rapid_task_pcp_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
     task: str,
@@ -1698,7 +1610,8 @@ async def set_the_program_pointer_pp_position_to(
     Set the Program pointer(PP) position to cursor.
 
     Route: ``POST /rw/rapid/tasks/{task}/pcp``
-    ABB constraints: Line number and Column number should be in given routine range.** Not supported in bootserver mode Rapid Mastership Required
+    ABB constraints: Line number and Column number should be in given routine range.** Not
+        supported in bootserver mode Rapid Mastership Required
 
     Args:
         client: Open RWSClient instance.
@@ -1719,25 +1632,16 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename&line=6&column=14&routine=routinename" -X POST "http://loc
+        # curl --digest -u "Default User":robotics -d
+            "module=modulename&line=6&column=14&routine=routinename" -X POST "http://loc
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "module": module,
-                "routine": routine,
-                "line": line,
-                "column": column,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"module": module, "routine": routine, "line": line, "column": column}.items() if v is not None},
     )
 
-
-async def set_the_program_pointer_pp_position_to(
+async def set_the_program_pointer_pp_position_to_2(
     client: RWSClient,
     task: str,
     action: str | None = None,
@@ -1769,20 +1673,16 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename&userlevel=true" -X POST "http://local
+        # curl --digest -u "Default User":robotics -d
+            "module=modulename&routine=routinename&userlevel=true" -X POST "http://local
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items() if v is not None},
     )
 
-
-async def set_the_program_pointer_pp_position_to(
+async def set_the_program_pointer_pp_position_to_3(
     client: RWSClient,
     task: str,
     action: str | None = None,
@@ -1812,7 +1712,8 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X POST "http://localhost/rw/rapid/t
+        # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X
+            POST "http://localhost/rw/rapid/t
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
@@ -1820,8 +1721,7 @@ async def set_the_program_pointer_pp_position_to(
         data={k: v for k, v in {"module": module, "routine": routine}.items() if v is not None},
     )
 
-
-async def set_the_program_pointer_pp_position_to(
+async def set_the_program_pointer_pp_position_to_4(
     client: RWSClient,
     task: str,
     action: str | None = None,
@@ -1847,15 +1747,15 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
-async def set_the_program_pointer_pp_position_to(
+async def set_the_program_pointer_pp_position_to_5(
     client: RWSClient,
     task: str,
     action: str | None = None,
@@ -1881,13 +1781,13 @@ async def set_the_program_pointer_pp_position_to(
         # ABB codes: BAD REQUEST(400) , see
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_program_pointer(
     client: RWSClient,
@@ -1898,7 +1798,8 @@ async def subscribe_on_program_pointer(
     Subscribe on Program Pointer.
 
     Route: ``POST /subscription``
-    ABB constraints: On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
+    ABB constraints: On subscription an empty initial event will be generated followed by the
+        current value. Not supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -1919,13 +1820,8 @@ async def subscribe_on_program_pointer(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def subscribe_on_motion_pointer(
     client: RWSClient,
@@ -1936,7 +1832,8 @@ async def subscribe_on_motion_pointer(
     Subscribe on Motion Pointer.
 
     Route: ``POST /subscription``
-    ABB constraints: On subscription an empty initial event will be generated followed by the current value. Not supported in bootserver mode
+    ABB constraints: On subscription an empty initial event will be generated followed by the
+        current value. Not supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -1957,13 +1854,8 @@ async def subscribe_on_motion_pointer(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_rapid_service_routine(
     client: RWSClient,
@@ -1999,13 +1891,8 @@ async def get_rapid_service_routine(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/serviceroutine",
-        params={
-            k: v
-            for k, v in {"start": start, "limit": limit, "allread": allread}.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"start": start, "limit": limit, "allread": allread}.items() if v is not None},
     )
-
 
 async def get_rapid_program_counter_position(
     client: RWSClient,
@@ -2031,6 +1918,7 @@ async def get_rapid_program_counter_position(
         # ABB codes: BAD_REQUEST(400), NOT_FOUND(404), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks/T_ROB1/execution"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/rapid/tasks/T_ROB1/execution"
     """
     return await client.get(f"/rw/rapid/tasks/{task}/execution")

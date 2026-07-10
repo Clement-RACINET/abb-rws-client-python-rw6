@@ -8,7 +8,6 @@ RWS module: User Service → Operations on RMMP → Get RMMP state
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -39,7 +38,6 @@ async def get_rmmp_state(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/users/rmmp")
 
-
 async def get_rmmp_actions(
     client: RWSClient,
     action: str | None = None,
@@ -66,9 +64,9 @@ async def get_rmmp_actions(
         # curl --digest -u "Default User":robotics "http://localhost/users/rmmp?action=show"
     """
     return await client.get(
-        "/users/rmmp", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/users/rmmp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def request_rmmp(client: RWSClient) -> httpx.Response:
     """
@@ -93,7 +91,6 @@ async def request_rmmp(client: RWSClient) -> httpx.Response:
         # Grant RMMP
     """
     return await client.post("/users/rmmp")
-
 
 async def grant_or_deny_an_rmmp_request(
     client: RWSClient,
@@ -122,9 +119,9 @@ async def grant_or_deny_an_rmmp_request(
         # Grant RMMP
     """
     return await client.post(
-        "/users/rmmp", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/users/rmmp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def cancel_held_or_requested_rmmp(
     client: RWSClient,
@@ -152,9 +149,9 @@ async def cancel_held_or_requested_rmmp(
         # Cancel held rmmp
     """
     return await client.post(
-        "/users/rmmp", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/users/rmmp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_rmmp_request_event(
     client: RWSClient,
@@ -182,17 +179,13 @@ async def subscribe_on_rmmp_request_event(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
+        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
+            on this resource
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def poll_for_rmmp_grant_status(client: RWSClient) -> httpx.Response:
     """

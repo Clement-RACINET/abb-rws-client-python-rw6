@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/clock."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,16 +9,16 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.clock import (
-    get_clock_actions,
     get_clock_resource,
-    get_test_time_server,
-    get_time_server_actions,
-    get_time_server_resource,
-    get_timezone_actions,
-    get_timezone_resource,
+    get_clock_actions,
     set_the_clock_of_the_controller,
-    set_the_time_server,
+    get_timezone_resource,
+    get_timezone_actions,
     set_the_time_zone,
+    get_time_server_resource,
+    get_time_server_actions,
+    set_the_time_server,
+    get_test_time_server,
 )
 
 
@@ -49,7 +48,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_clock_resource() -> None:
-    """Verify that get_clock_resource sends GET /ctrl/clock."""
+    """
+    Verify that get_clock_resource sends GET /ctrl/clock.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -60,10 +61,11 @@ async def test_get_clock_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_clock_actions() -> None:
-    """Verify that get_clock_actions sends GET /ctrl/clock."""
+    """
+    Verify that get_clock_actions sends GET /ctrl/clock.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -74,10 +76,11 @@ async def test_get_clock_actions() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_clock_of_the_controller() -> None:
-    """Verify that set_the_clock_of_the_controller sends PUT /ctrl/clock."""
+    """
+    Verify that set_the_clock_of_the_controller sends PUT /ctrl/clock.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -88,10 +91,11 @@ async def test_set_the_clock_of_the_controller() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_timezone_resource() -> None:
-    """Verify that get_timezone_resource sends GET /ctrl/clock/timezone."""
+    """
+    Verify that get_timezone_resource sends GET /ctrl/clock/timezone.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -102,10 +106,11 @@ async def test_get_timezone_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_timezone_actions() -> None:
-    """Verify that get_timezone_actions sends GET /ctrl/clock/timezone?action=show."""
+    """
+    Verify that get_timezone_actions sends GET /ctrl/clock/timezone?action=show.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -117,10 +122,11 @@ async def test_get_timezone_actions() -> None:
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_time_zone() -> None:
-    """Verify that set_the_time_zone sends POST /ctrl/clock/timezone."""
+    """
+    Verify that set_the_time_zone sends POST /ctrl/clock/timezone.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -131,10 +137,11 @@ async def test_set_the_time_zone() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_time_server_resource() -> None:
-    """Verify that get_time_server_resource sends GET /ctrl/clock/timeserver."""
+    """
+    Verify that get_time_server_resource sends GET /ctrl/clock/timeserver.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -145,10 +152,11 @@ async def test_get_time_server_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_time_server_actions() -> None:
-    """Verify that get_time_server_actions sends GET /ctrl/clock/timeserver?action=show."""
+    """
+    Verify that get_time_server_actions sends GET /ctrl/clock/timeserver?action=show.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -160,10 +168,11 @@ async def test_get_time_server_actions() -> None:
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_time_server() -> None:
-    """Verify that set_the_time_server sends POST /ctrl/clock/timeserver."""
+    """
+    Verify that set_the_time_server sends POST /ctrl/clock/timeserver.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -174,10 +183,11 @@ async def test_set_the_time_server() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_test_time_server() -> None:
-    """Verify that get_test_time_server sends GET /ctrl/clock/timeserver."""
+    """
+    Verify that get_test_time_server sends GET /ctrl/clock/timeserver.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

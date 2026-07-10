@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/motionsystem."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,70 +9,70 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.motionsystem import (
-    get_all_joint_solution,
-    get_axes,
-    get_axis,
-    get_axis_actions,
-    get_axis_pose,
-    get_base_frame,
-    get_base_frame_actions,
-    get_calibration_info,
-    get_cartesian_value,
-    get_check_change_count,
-    get_compliance_lead_through,
-    get_error_state,
-    get_joint_target,
-    get_joints_from_cartesian,
-    get_joints_from_position,
-    get_mechunit,
-    get_mechunit_action,
-    get_mechunits,
-    get_motion_supervision,
-    get_motion_supervision_actions,
-    get_motion_supervision_collision_prediction_mode,
     get_motion_system,
     get_motion_system_action,
-    get_motor_calib_names,
-    get_non_motion_execution_mode,
-    get_nonmotion_execution_actions,
+    set_mechunit_for_jogging,
+    post_perform_jogging,
+    set_robo_target_position,
+    get_check_change_count,
+    subscribe_on_error_eventchange,
+    get_error_state,
+    get_motion_supervision,
+    get_motion_supervision_actions,
+    set_motion_supervision_mode_jog_supervision_mode,
+    set_motion_supervision_sensitivity_jog_supervision_sensitivity,
+    get_motion_supervision_collision_prediction_mode,
+    set_motion_supervision_collision_prediction_mode,
     get_path_supervision,
     get_path_supervision_actions,
+    set_path_supervision_mode,
+    set_path_supervision_level,
+    get_non_motion_execution_mode,
+    get_nonmotion_execution_actions,
+    set_nonmotion_execution_mode,
+    get_mechunits,
+    get_mechunit,
+    get_mechunit_action,
+    set_mechunit,
+    set_compliance_lead_through,
+    get_compliance_lead_through,
+    set_fine_calibration,
+    update_syncronize_revolution_counter,
     get_physical_joints,
-    get_position_from_joints,
+    get_cartesian_value,
+    set_mechanical_unit,
     get_robtarget,
-    get_smb_data,
-    get_smb_data_actions,
+    get_joint_target,
+    subscribe_on_mechunit_mode_change,
+    get_joints_from_position,
+    get_position_from_joints,
+    get_all_joint_solution,
+    get_joints_from_cartesian,
+    get_calibration_info,
     post_calibration_for_baseframe,
     post_calibration_for_baseframemoving,
     post_calibration_for_externalrobotnombasenew,
     post_calibration_for_robotaxisrot,
-    post_calibration_for_robotaxisrot2,
-    post_calibration_for_rotextctrlzdef,
-    post_calibration_for_singletrack,
-    post_calibration_for_singleuserlin,
     post_calibration_for_singleuserrotnew,
-    post_clear_smb_data,
-    post_perform_jogging,
-    set_axis_pose,
+    post_calibration_for_rotextctrlzdef,
+    post_calibration_for_singleuserlin,
+    post_calibration_for_singletrack,
+    post_calibration_for_robotaxisrot2,
+    get_base_frame,
+    get_base_frame_actions,
     set_base_frame,
-    set_compliance_lead_through,
-    set_fine_calibration,
-    set_mechanical_unit,
-    set_mechunit,
-    set_mechunit_for_jogging,
-    set_motion_supervision_collision_prediction_mode,
-    set_motion_supervision_mode_jog_supervision_mode,
-    set_motion_supervision_sensitivity_jog_supervision_sensitivity,
-    set_nonmotion_execution_mode,
-    set_path_supervision_level,
-    set_path_supervision_mode,
-    set_robo_target_position,
-    set_smb_data,
-    subscribe_on_error_eventchange,
-    subscribe_on_mechunit_mode_change,
+    get_axes,
+    get_axis,
+    get_axis_actions,
+    get_axis_pose,
+    set_axis_pose,
     update_commutate,
     update_sync_revolution_counter,
-    update_syncronize_revolution_counter,
+    set_smb_data,
+    post_clear_smb_data,
+    get_smb_data,
+    get_smb_data_actions,
+    get_motor_calib_names,
 )
 
 
@@ -103,7 +102,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_motion_system() -> None:
-    """Verify that get_motion_system sends GET /rw/motionsystem."""
+    """
+    Verify that get_motion_system sends GET /rw/motionsystem.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -114,10 +115,11 @@ async def test_get_motion_system() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_motion_system_action() -> None:
-    """Verify that get_motion_system_action sends GET /rw/motionsystem."""
+    """
+    Verify that get_motion_system_action sends GET /rw/motionsystem.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -128,10 +130,11 @@ async def test_get_motion_system_action() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_mechunit_for_jogging() -> None:
-    """Verify that set_mechunit_for_jogging sends POST /rw/motionsystem."""
+    """
+    Verify that set_mechunit_for_jogging sends POST /rw/motionsystem.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -142,10 +145,11 @@ async def test_set_mechunit_for_jogging() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_perform_jogging() -> None:
-    """Verify that post_perform_jogging sends POST /rw/motionsystem."""
+    """
+    Verify that post_perform_jogging sends POST /rw/motionsystem.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -156,10 +160,11 @@ async def test_post_perform_jogging() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_robo_target_position() -> None:
-    """Verify that set_robo_target_position sends POST /rw/motionsystem."""
+    """
+    Verify that set_robo_target_position sends POST /rw/motionsystem.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -170,10 +175,11 @@ async def test_set_robo_target_position() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_check_change_count() -> None:
-    """Verify that get_check_change_count sends GET /rw/motionsystem/checkchangecount."""
+    """
+    Verify that get_check_change_count sends GET /rw/motionsystem/checkchangecount.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -184,10 +190,11 @@ async def test_get_check_change_count() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/checkchangecount"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_error_eventchange() -> None:
-    """Verify that subscribe_on_error_eventchange sends POST /subscription."""
+    """
+    Verify that subscribe_on_error_eventchange sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -198,10 +205,11 @@ async def test_subscribe_on_error_eventchange() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_error_state() -> None:
-    """Verify that get_error_state sends GET /rw/motionsystem/errorstate."""
+    """
+    Verify that get_error_state sends GET /rw/motionsystem/errorstate.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -212,10 +220,11 @@ async def test_get_error_state() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/errorstate"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_motion_supervision() -> None:
-    """Verify that get_motion_supervision sends GET /rw/motionsystem/motionsupervision."""
+    """
+    Verify that get_motion_supervision sends GET /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -226,10 +235,11 @@ async def test_get_motion_supervision() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_motion_supervision_actions() -> None:
-    """Verify that get_motion_supervision_actions sends GET /rw/motionsystem/motionsupervision."""
+    """
+    Verify that get_motion_supervision_actions sends GET /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -240,10 +250,12 @@ async def test_get_motion_supervision_actions() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_motion_supervision_mode_jog_supervision_mode() -> None:
-    """Verify that set_motion_supervision_mode_jog_supervision_mode sends POST /rw/motionsystem/motionsupervision."""
+    """
+    Verify that set_motion_supervision_mode_jog_supervision_mode sends POST
+        /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -254,10 +266,12 @@ async def test_set_motion_supervision_mode_jog_supervision_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_motion_supervision_sensitivity_jog_supervision_sensitivity() -> None:
-    """Verify that set_motion_supervision_sensitivity_jog_supervision_sensitivity sends POST /rw/motionsystem/motionsupervision."""
+    """
+    Verify that set_motion_supervision_sensitivity_jog_supervision_sensitivity sends POST
+        /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -268,10 +282,12 @@ async def test_set_motion_supervision_sensitivity_jog_supervision_sensitivity() 
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_motion_supervision_collision_prediction_mode() -> None:
-    """Verify that get_motion_supervision_collision_prediction_mode sends GET /rw/motionsystem/motionsupervision."""
+    """
+    Verify that get_motion_supervision_collision_prediction_mode sends GET
+        /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -282,10 +298,12 @@ async def test_get_motion_supervision_collision_prediction_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_motion_supervision_collision_prediction_mode() -> None:
-    """Verify that set_motion_supervision_collision_prediction_mode sends POST /rw/motionsystem/motionsupervision."""
+    """
+    Verify that set_motion_supervision_collision_prediction_mode sends POST
+        /rw/motionsystem/motionsupervision.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -296,10 +314,11 @@ async def test_set_motion_supervision_collision_prediction_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_path_supervision() -> None:
-    """Verify that get_path_supervision sends GET /rw/motionsystem/pathsupervision."""
+    """
+    Verify that get_path_supervision sends GET /rw/motionsystem/pathsupervision.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -310,10 +329,11 @@ async def test_get_path_supervision() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_path_supervision_actions() -> None:
-    """Verify that get_path_supervision_actions sends GET /rw/motionsystem/pathsupervision."""
+    """
+    Verify that get_path_supervision_actions sends GET /rw/motionsystem/pathsupervision.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -324,10 +344,11 @@ async def test_get_path_supervision_actions() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_path_supervision_mode() -> None:
-    """Verify that set_path_supervision_mode sends POST /rw/motionsystem/pathsupervision."""
+    """
+    Verify that set_path_supervision_mode sends POST /rw/motionsystem/pathsupervision.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -338,10 +359,11 @@ async def test_set_path_supervision_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_path_supervision_level() -> None:
-    """Verify that set_path_supervision_level sends POST /rw/motionsystem/pathsupervision."""
+    """
+    Verify that set_path_supervision_level sends POST /rw/motionsystem/pathsupervision.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -352,10 +374,11 @@ async def test_set_path_supervision_level() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_non_motion_execution_mode() -> None:
-    """Verify that get_non_motion_execution_mode sends GET /rw/motionsystem/nonmotionexecution."""
+    """
+    Verify that get_non_motion_execution_mode sends GET /rw/motionsystem/nonmotionexecution.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -366,10 +389,11 @@ async def test_get_non_motion_execution_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/nonmotionexecution"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_nonmotion_execution_actions() -> None:
-    """Verify that get_nonmotion_execution_actions sends GET /rw/motionsystem/nonmotionexecution."""
+    """
+    Verify that get_nonmotion_execution_actions sends GET /rw/motionsystem/nonmotionexecution.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -380,10 +404,11 @@ async def test_get_nonmotion_execution_actions() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/nonmotionexecution"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_nonmotion_execution_mode() -> None:
-    """Verify that set_nonmotion_execution_mode sends POST /rw/motionsystem/nonmotionexecution."""
+    """
+    Verify that set_nonmotion_execution_mode sends POST /rw/motionsystem/nonmotionexecution.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -394,10 +419,11 @@ async def test_set_nonmotion_execution_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/nonmotionexecution"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_mechunits() -> None:
-    """Verify that get_mechunits sends GET /rw/motionsystem/mechunits."""
+    """
+    Verify that get_mechunits sends GET /rw/motionsystem/mechunits.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -408,10 +434,11 @@ async def test_get_mechunits() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_mechunit() -> None:
-    """Verify that get_mechunit sends GET /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_mechunit sends GET /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -422,10 +449,11 @@ async def test_get_mechunit() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_mechunit_action() -> None:
-    """Verify that get_mechunit_action sends GET /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_mechunit_action sends GET /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -436,10 +464,11 @@ async def test_get_mechunit_action() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_mechunit() -> None:
-    """Verify that set_mechunit sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that set_mechunit sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -450,10 +479,11 @@ async def test_set_mechunit() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_compliance_lead_through() -> None:
-    """Verify that set_compliance_lead_through sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that set_compliance_lead_through sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -464,10 +494,11 @@ async def test_set_compliance_lead_through() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_compliance_lead_through() -> None:
-    """Verify that get_compliance_lead_through sends GET /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_compliance_lead_through sends GET /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -478,10 +509,11 @@ async def test_get_compliance_lead_through() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_fine_calibration() -> None:
-    """Verify that set_fine_calibration sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that set_fine_calibration sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -492,10 +524,12 @@ async def test_set_fine_calibration() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_update_syncronize_revolution_counter() -> None:
-    """Verify that update_syncronize_revolution_counter sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that update_syncronize_revolution_counter sends POST
+        /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -506,10 +540,11 @@ async def test_update_syncronize_revolution_counter() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_physical_joints() -> None:
-    """Verify that get_physical_joints sends GET /rw/motionsystem/mechunits/{mechunit}/pjoints."""
+    """
+    Verify that get_physical_joints sends GET /rw/motionsystem/mechunits/{mechunit}/pjoints.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -520,10 +555,11 @@ async def test_get_physical_joints() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/pjoints"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_cartesian_value() -> None:
-    """Verify that get_cartesian_value sends GET /rw/motionsystem/mechunits/{mechunit}/cartesian."""
+    """
+    Verify that get_cartesian_value sends GET /rw/motionsystem/mechunits/{mechunit}/cartesian.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -534,10 +570,11 @@ async def test_get_cartesian_value() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/cartesian"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_mechanical_unit() -> None:
-    """Verify that set_mechanical_unit sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that set_mechanical_unit sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -548,10 +585,11 @@ async def test_set_mechanical_unit() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_robtarget() -> None:
-    """Verify that get_robtarget sends GET /rw/motionsystem/mechunits/{mechunit}/robtarget."""
+    """
+    Verify that get_robtarget sends GET /rw/motionsystem/mechunits/{mechunit}/robtarget.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -562,10 +600,11 @@ async def test_get_robtarget() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/robtarget"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_joint_target() -> None:
-    """Verify that get_joint_target sends GET /rw/motionsystem/mechunits/{mechunit}/jointtarget."""
+    """
+    Verify that get_joint_target sends GET /rw/motionsystem/mechunits/{mechunit}/jointtarget.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -576,10 +615,11 @@ async def test_get_joint_target() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/jointtarget"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_mechunit_mode_change() -> None:
-    """Verify that subscribe_on_mechunit_mode_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_mechunit_mode_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -590,10 +630,11 @@ async def test_subscribe_on_mechunit_mode_change() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_joints_from_position() -> None:
-    """Verify that get_joints_from_position sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_joints_from_position sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -604,10 +645,11 @@ async def test_get_joints_from_position() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_position_from_joints() -> None:
-    """Verify that get_position_from_joints sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_position_from_joints sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -618,10 +660,11 @@ async def test_get_position_from_joints() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_all_joint_solution() -> None:
-    """Verify that get_all_joint_solution sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_all_joint_solution sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -632,10 +675,11 @@ async def test_get_all_joint_solution() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_joints_from_cartesian() -> None:
-    """Verify that get_joints_from_cartesian sends POST /rw/motionsystem/mechunits/{mechunit}."""
+    """
+    Verify that get_joints_from_cartesian sends POST /rw/motionsystem/mechunits/{mechunit}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -646,10 +690,12 @@ async def test_get_joints_from_cartesian() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_calibration_info() -> None:
-    """Verify that get_calibration_info sends GET /rw/motionsystem/mechunits/{mechunit}/calibrationinfo."""
+    """
+    Verify that get_calibration_info sends GET
+        /rw/motionsystem/mechunits/{mechunit}/calibrationinfo.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -657,16 +703,15 @@ async def test_get_calibration_info() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_baseframe() -> None:
-    """Verify that post_calibration_for_baseframe sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_baseframe sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -677,10 +722,12 @@ async def test_post_calibration_for_baseframe() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_baseframemoving() -> None:
-    """Verify that post_calibration_for_baseframemoving sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_baseframemoving sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -691,10 +738,12 @@ async def test_post_calibration_for_baseframemoving() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_externalrobotnombasenew() -> None:
-    """Verify that post_calibration_for_externalrobotnombasenew sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_externalrobotnombasenew sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -705,10 +754,12 @@ async def test_post_calibration_for_externalrobotnombasenew() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_robotaxisrot() -> None:
-    """Verify that post_calibration_for_robotaxisrot sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_robotaxisrot sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -719,10 +770,12 @@ async def test_post_calibration_for_robotaxisrot() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_singleuserrotnew() -> None:
-    """Verify that post_calibration_for_singleuserrotnew sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_singleuserrotnew sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -733,10 +786,12 @@ async def test_post_calibration_for_singleuserrotnew() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_rotextctrlzdef() -> None:
-    """Verify that post_calibration_for_rotextctrlzdef sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_rotextctrlzdef sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -747,10 +802,12 @@ async def test_post_calibration_for_rotextctrlzdef() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_singleuserlin() -> None:
-    """Verify that post_calibration_for_singleuserlin sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_singleuserlin sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -761,10 +818,12 @@ async def test_post_calibration_for_singleuserlin() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_singletrack() -> None:
-    """Verify that post_calibration_for_singletrack sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_singletrack sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -775,10 +834,12 @@ async def test_post_calibration_for_singletrack() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_robotaxisrot2() -> None:
-    """Verify that post_calibration_for_robotaxisrot2 sends POST /rw/motionsystem/mechunits/{mechunit}/calib."""
+    """
+    Verify that post_calibration_for_robotaxisrot2 sends POST
+        /rw/motionsystem/mechunits/{mechunit}/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -789,10 +850,11 @@ async def test_post_calibration_for_robotaxisrot2() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_base_frame() -> None:
-    """Verify that get_base_frame sends GET /rw/motionsystem/mechunits/{mechunit}/baseframe."""
+    """
+    Verify that get_base_frame sends GET /rw/motionsystem/mechunits/{mechunit}/baseframe.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -803,10 +865,11 @@ async def test_get_base_frame() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_base_frame_actions() -> None:
-    """Verify that get_base_frame_actions sends GET /rw/motionsystem/mechunits/{mechunit}/baseframe."""
+    """
+    Verify that get_base_frame_actions sends GET /rw/motionsystem/mechunits/{mechunit}/baseframe.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -817,10 +880,11 @@ async def test_get_base_frame_actions() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_base_frame() -> None:
-    """Verify that set_base_frame sends POST /rw/motionsystem/mechunits/{mechunit}/baseframe."""
+    """
+    Verify that set_base_frame sends POST /rw/motionsystem/mechunits/{mechunit}/baseframe.
+    """
     transport = _MockTransport(status_code=202)
     client = _make_client(transport)
 
@@ -831,10 +895,11 @@ async def test_set_base_frame() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
     assert resp.status_code == 202
 
-
 @pytest.mark.asyncio
 async def test_get_axes() -> None:
-    """Verify that get_axes sends GET /rw/motionsystem/mechunits/{mechunit}/axes."""
+    """
+    Verify that get_axes sends GET /rw/motionsystem/mechunits/{mechunit}/axes.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -845,10 +910,11 @@ async def test_get_axes() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_axis() -> None:
-    """Verify that get_axis sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that get_axis sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -856,16 +922,14 @@ async def test_get_axis() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_get_axis_actions() -> None:
-    """Verify that get_axis_actions sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that get_axis_actions sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -873,16 +937,14 @@ async def test_get_axis_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_get_axis_pose() -> None:
-    """Verify that get_axis_pose sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that get_axis_pose sends GET /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -890,16 +952,14 @@ async def test_get_axis_pose() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_set_axis_pose() -> None:
-    """Verify that set_axis_pose sends POST /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that set_axis_pose sends POST /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -907,16 +967,15 @@ async def test_set_axis_pose() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_update_commutate() -> None:
-    """Verify that update_commutate sends POST /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that update_commutate sends POST
+        /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -924,16 +983,15 @@ async def test_update_commutate() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_update_sync_revolution_counter() -> None:
-    """Verify that update_sync_revolution_counter sends POST /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}."""
+    """
+    Verify that update_sync_revolution_counter sends POST
+        /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -941,16 +999,14 @@ async def test_update_sync_revolution_counter() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
-    )
+    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_set_smb_data() -> None:
-    """Verify that set_smb_data sends POST /rw/motionsystem/mechunits/{mechunit}/smbdata."""
+    """
+    Verify that set_smb_data sends POST /rw/motionsystem/mechunits/{mechunit}/smbdata.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -961,10 +1017,11 @@ async def test_set_smb_data() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_clear_smb_data() -> None:
-    """Verify that post_clear_smb_data sends POST /rw/motionsystem/mechunits/{mechunit}/smbdata."""
+    """
+    Verify that post_clear_smb_data sends POST /rw/motionsystem/mechunits/{mechunit}/smbdata.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -975,10 +1032,11 @@ async def test_post_clear_smb_data() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_smb_data() -> None:
-    """Verify that get_smb_data sends GET /rw/motionsystem/mechunits/{mechunit}/smbdata."""
+    """
+    Verify that get_smb_data sends GET /rw/motionsystem/mechunits/{mechunit}/smbdata.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -989,10 +1047,11 @@ async def test_get_smb_data() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_smb_data_actions() -> None:
-    """Verify that get_smb_data_actions sends GET /rw/motionsystem/mechunits/{mechunit}/smbdata."""
+    """
+    Verify that get_smb_data_actions sends GET /rw/motionsystem/mechunits/{mechunit}/smbdata.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -1003,10 +1062,11 @@ async def test_get_smb_data_actions() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_motor_calib_names() -> None:
-    """Verify that get_motor_calib_names sends GET /rw/motionsystem/mechunits/{mechunit}/motorcalib."""
+    """
+    Verify that get_motor_calib_names sends GET /rw/motionsystem/mechunits/{mechunit}/motorcalib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

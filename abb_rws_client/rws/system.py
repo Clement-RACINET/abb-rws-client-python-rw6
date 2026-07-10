@@ -8,7 +8,6 @@ RWS module: RobotWare Services → System service → System Information
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,13 +39,14 @@ async def get_system_information(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system")
 
-
 async def get_robot_type(client: RWSClient) -> httpx.Response:
     """
     Get robot type.
 
     Route: ``GET /rw/system/robottype``
-    ABB constraints: Not supported in bootserver mode. The API supports only ABB standard robots. Positioners, track motion etc. are not supported. In case, there is no ABB standard robots, NO_CONTENT will be returned.
+    ABB constraints: Not supported in bootserver mode. The API supports only ABB standard robots.
+        Positioners, track motion etc. are not supported. In case, there is no ABB standard
+        robots, NO_CONTENT will be returned.
 
     Args:
         client: Open RWSClient instance.
@@ -64,7 +64,6 @@ async def get_robot_type(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/robottype"
     """
     return await client.get("/rw/system/robottype")
-
 
 async def get_system_options(client: RWSClient) -> httpx.Response:
     """
@@ -90,7 +89,6 @@ async def get_system_options(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system/options")
 
-
 async def get_system_energy_actions(
     client: RWSClient,
     action: str | None = None,
@@ -115,12 +113,13 @@ async def get_system_energy_actions(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/system/energy?action=show"
     """
     return await client.get(
-        "/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/system/energy",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_system_energy_info_change_count(
     client: RWSClient,
@@ -146,13 +145,13 @@ async def get_system_energy_info_change_count(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?resource=change-count"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/system/energy?resource=change-count"
     """
     return await client.get(
         "/rw/system/energy",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def reset_accumulated_energy(
     client: RWSClient,
@@ -178,12 +177,13 @@ async def reset_accumulated_energy(
         # ABB codes: BAD_REQUEST(400),NOT_FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=reset"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/system/energy?action=reset"
     """
     return await client.post(
-        "/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/system/energy",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_system_energy(client: RWSClient) -> httpx.Response:
     """
@@ -208,7 +208,6 @@ async def get_system_energy(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy"
     """
     return await client.get("/rw/system/energy")
-
 
 async def subscribe_on_system_energy_changes(
     client: RWSClient,
@@ -236,17 +235,13 @@ async def subscribe_on_system_energy_changes(
         # ABB codes: UNSUPPORTED_MEDIA(415),BAD_REQUEST(400)
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
+        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
+            on this resource
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
     """
@@ -271,7 +266,6 @@ async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/license"
     """
     return await client.get("/rw/system/license")
-
 
 async def get_installed_products(
     client: RWSClient,
@@ -300,5 +294,6 @@ async def get_installed_products(
         # `curl –digest -u "Default User":robotics " "
     """
     return await client.get(
-        "/rw/system/products", params={k: v for k, v in {"name": name}.items() if v is not None}
+        "/rw/system/products",
+        params={k: v for k, v in {"name": name}.items() if v is not None},
     )

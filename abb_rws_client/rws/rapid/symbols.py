@@ -8,7 +8,6 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID symbols
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -39,7 +38,6 @@ async def get_rapid_symbols_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/rapid/symbols")
 
-
 async def get_rapid_symbols_actions(
     client: RWSClient,
     action: str | None = None,
@@ -67,9 +65,9 @@ async def get_rapid_symbols_actions(
         # curl --digest -u "Default User":robotics" "
     """
     return await client.get(
-        "/rw/rapid/symbols", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/rw/rapid/symbols",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_search_rapid_symbols(
     client: RWSClient,
@@ -115,29 +113,14 @@ async def post_search_rapid_symbols(
         # ABB codes: BAD REQUEST(400) see
 
     Example:
-        # curl --digest -u "Default User":robotics -d "view=block&vartyp=any&blockurl=RAPID/T_ROB1&symtyp=var&recursive=true&datty
+        # curl --digest -u "Default User":robotics -d
+            "view=block&vartyp=any&blockurl=RAPID/T_ROB1&symtyp=var&recursive=true&datty
     """
     return await client.post(
         "/rw/rapid/symbols",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "view": view,
-                "vartyp": vartyp,
-                "blockurl": blockurl,
-                "recursive": recursive,
-                "posl": posl,
-                "posc": posc,
-                "stack": stack,
-                "onlyused": onlyused,
-                "skipshared": skipshared,
-                "regexp": regexp,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"view": view, "vartyp": vartyp, "blockurl": blockurl, "recursive": recursive, "posl": posl, "posc": posc, "stack": stack, "onlyused": onlyused, "skipshared": skipshared, "regexp": regexp}.items() if v is not None},
     )
-
 
 async def get_object_extension_list(
     client: RWSClient,
@@ -179,16 +162,5 @@ async def get_object_extension_list(
     """
     return await client.get(
         f"/rw/rapid/symbols/{symbol_url}",
-        params={
-            k: v
-            for k, v in {
-                "info": info,
-                "type": type,
-                "statements": statements,
-                "backwardstmts": backwardstmts,
-                "undostmts": undostmts,
-                "typedecls": typedecls,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"info": info, "type": type, "statements": statements, "backwardstmts": backwardstmts, "undostmts": undostmts, "typedecls": typedecls}.items() if v is not None},
     )

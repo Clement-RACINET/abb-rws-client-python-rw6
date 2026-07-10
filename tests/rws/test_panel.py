@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/panel."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,28 +9,28 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.panel import (
-    get_collision_detection_state,
-    get_collision_detection_state_actions,
+    get_panel_resources,
+    get_panel_actions,
+    set_the_language,
+    restart_the_controller,
     get_controller_state,
     get_controller_state_actions,
+    set_controller_state,
+    subscribe_controller_state,
     get_operation_mode,
     get_operation_mode_actions,
-    get_operation_mode_lock_status,
-    get_panel_actions,
-    get_panel_resources,
-    get_speed_ratio,
-    get_speed_ratio_actions,
+    subscribe_operation_mode,
     post_acknowledgement_for_operation_mode,
+    get_operation_mode_lock_status,
     post_lock_operation_mode_selection,
     post_unlock_operation_mode_selection,
-    restart_the_controller,
-    set_controller_state,
+    get_speed_ratio,
+    get_speed_ratio_actions,
     set_speed_ratio,
-    set_the_language,
-    subscribe_controller_state,
-    subscribe_on_collision_detection_state,
-    subscribe_operation_mode,
     subscribe_speed_ratio,
+    get_collision_detection_state,
+    get_collision_detection_state_actions,
+    subscribe_on_collision_detection_state,
 )
 
 
@@ -61,7 +60,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_panel_resources() -> None:
-    """Verify that get_panel_resources sends GET /rw/panel."""
+    """
+    Verify that get_panel_resources sends GET /rw/panel.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -72,10 +73,11 @@ async def test_get_panel_resources() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_panel_actions() -> None:
-    """Verify that get_panel_actions sends GET /rw/panel."""
+    """
+    Verify that get_panel_actions sends GET /rw/panel.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -86,10 +88,11 @@ async def test_get_panel_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_language() -> None:
-    """Verify that set_the_language sends POST /rw/panel."""
+    """
+    Verify that set_the_language sends POST /rw/panel.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -100,10 +103,11 @@ async def test_set_the_language() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_restart_the_controller() -> None:
-    """Verify that restart_the_controller sends POST /rw/panel."""
+    """
+    Verify that restart_the_controller sends POST /rw/panel.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -114,10 +118,11 @@ async def test_restart_the_controller() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_controller_state() -> None:
-    """Verify that get_controller_state sends GET /rw/panel/ctrlstate."""
+    """
+    Verify that get_controller_state sends GET /rw/panel/ctrlstate.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -128,10 +133,11 @@ async def test_get_controller_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_controller_state_actions() -> None:
-    """Verify that get_controller_state_actions sends GET /rw/panel/ctrlstate."""
+    """
+    Verify that get_controller_state_actions sends GET /rw/panel/ctrlstate.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -142,10 +148,11 @@ async def test_get_controller_state_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_controller_state() -> None:
-    """Verify that set_controller_state sends POST /rw/panel/ctrlstate."""
+    """
+    Verify that set_controller_state sends POST /rw/panel/ctrlstate.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -156,10 +163,11 @@ async def test_set_controller_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_controller_state() -> None:
-    """Verify that subscribe_controller_state sends POST /subscription."""
+    """
+    Verify that subscribe_controller_state sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -170,10 +178,11 @@ async def test_subscribe_controller_state() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_operation_mode() -> None:
-    """Verify that get_operation_mode sends GET /rw/panel/opmode."""
+    """
+    Verify that get_operation_mode sends GET /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -184,10 +193,11 @@ async def test_get_operation_mode() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_operation_mode_actions() -> None:
-    """Verify that get_operation_mode_actions sends GET /rw/panel/opmode."""
+    """
+    Verify that get_operation_mode_actions sends GET /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -198,10 +208,11 @@ async def test_get_operation_mode_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_operation_mode() -> None:
-    """Verify that subscribe_operation_mode sends POST /subscription."""
+    """
+    Verify that subscribe_operation_mode sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -212,10 +223,11 @@ async def test_subscribe_operation_mode() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_post_acknowledgement_for_operation_mode() -> None:
-    """Verify that post_acknowledgement_for_operation_mode sends POST /rw/panel/opmode."""
+    """
+    Verify that post_acknowledgement_for_operation_mode sends POST /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -226,10 +238,11 @@ async def test_post_acknowledgement_for_operation_mode() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_operation_mode_lock_status() -> None:
-    """Verify that get_operation_mode_lock_status sends GET /rw/panel/opmode."""
+    """
+    Verify that get_operation_mode_lock_status sends GET /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -240,10 +253,11 @@ async def test_get_operation_mode_lock_status() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_lock_operation_mode_selection() -> None:
-    """Verify that post_lock_operation_mode_selection sends POST /rw/panel/opmode."""
+    """
+    Verify that post_lock_operation_mode_selection sends POST /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -254,10 +268,11 @@ async def test_post_lock_operation_mode_selection() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_unlock_operation_mode_selection() -> None:
-    """Verify that post_unlock_operation_mode_selection sends POST /rw/panel/opmode."""
+    """
+    Verify that post_unlock_operation_mode_selection sends POST /rw/panel/opmode.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -268,10 +283,11 @@ async def test_post_unlock_operation_mode_selection() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_speed_ratio() -> None:
-    """Verify that get_speed_ratio sends GET /rw/panel/speedratio."""
+    """
+    Verify that get_speed_ratio sends GET /rw/panel/speedratio.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -282,10 +298,11 @@ async def test_get_speed_ratio() -> None:
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_speed_ratio_actions() -> None:
-    """Verify that get_speed_ratio_actions sends GET /rw/panel/speedratio."""
+    """
+    Verify that get_speed_ratio_actions sends GET /rw/panel/speedratio.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -296,10 +313,11 @@ async def test_get_speed_ratio_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_speed_ratio() -> None:
-    """Verify that set_speed_ratio sends POST /rw/panel/speedratio."""
+    """
+    Verify that set_speed_ratio sends POST /rw/panel/speedratio.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -310,10 +328,11 @@ async def test_set_speed_ratio() -> None:
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_speed_ratio() -> None:
-    """Verify that subscribe_speed_ratio sends POST /subscription."""
+    """
+    Verify that subscribe_speed_ratio sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -324,10 +343,11 @@ async def test_subscribe_speed_ratio() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_collision_detection_state() -> None:
-    """Verify that get_collision_detection_state sends GET /rw/panel/coldetstate."""
+    """
+    Verify that get_collision_detection_state sends GET /rw/panel/coldetstate.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -338,10 +358,11 @@ async def test_get_collision_detection_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_collision_detection_state_actions() -> None:
-    """Verify that get_collision_detection_state_actions sends GET /rw/panel/coldetstate."""
+    """
+    Verify that get_collision_detection_state_actions sends GET /rw/panel/coldetstate.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -352,10 +373,11 @@ async def test_get_collision_detection_state_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_collision_detection_state() -> None:
-    """Verify that subscribe_on_collision_detection_state sends POST /subscription."""
+    """
+    Verify that subscribe_on_collision_detection_state sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 

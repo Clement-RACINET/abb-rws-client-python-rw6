@@ -8,7 +8,6 @@ RWS module: RobotWare Services → RAPID Service → Operations on Rapid taskpan
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_user_modify_from_taskpanel(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/rapid/taskselection")
 
-
 async def subscribe_on_tasks_panel_change(
     client: RWSClient,
     identifier: str | None = None,
@@ -71,9 +69,5 @@ async def subscribe_on_tasks_panel_change(
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )

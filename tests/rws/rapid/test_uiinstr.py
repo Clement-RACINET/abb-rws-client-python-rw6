@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/uiinstr."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,14 +9,14 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.uiinstr import (
+    get_ui_instruction_resource,
+    get_ui_instruction_actions,
+    subscribe_on_ui_instruction,
     get_active_ui_instruction,
     get_active_ui_instruction_actions,
-    get_active_ui_instruction_parameters,
-    get_parameter_value_for_an_active_ui,
-    get_ui_instruction_actions,
-    get_ui_instruction_resource,
-    subscribe_on_ui_instruction,
     update_an_active_ui_instruction_parameter,
+    get_parameter_value_for_an_active_ui,
+    get_active_ui_instruction_parameters,
 )
 
 
@@ -47,7 +46,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_ui_instruction_resource() -> None:
-    """Verify that get_ui_instruction_resource sends GET /rw/rapid/uiinstr."""
+    """
+    Verify that get_ui_instruction_resource sends GET /rw/rapid/uiinstr.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -58,10 +59,11 @@ async def test_get_ui_instruction_resource() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_ui_instruction_actions() -> None:
-    """Verify that get_ui_instruction_actions sends GET /rw/rapid/uiinstr."""
+    """
+    Verify that get_ui_instruction_actions sends GET /rw/rapid/uiinstr.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -72,10 +74,11 @@ async def test_get_ui_instruction_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_ui_instruction() -> None:
-    """Verify that subscribe_on_ui_instruction sends POST /subscription."""
+    """
+    Verify that subscribe_on_ui_instruction sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -86,10 +89,11 @@ async def test_subscribe_on_ui_instruction() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction() -> None:
-    """Verify that get_active_ui_instruction sends GET /rw/rapid/uiinstr/active."""
+    """
+    Verify that get_active_ui_instruction sends GET /rw/rapid/uiinstr/active.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -100,10 +104,11 @@ async def test_get_active_ui_instruction() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction_actions() -> None:
-    """Verify that get_active_ui_instruction_actions sends GET /rw/rapid/uiinstr/active."""
+    """
+    Verify that get_active_ui_instruction_actions sends GET /rw/rapid/uiinstr/active.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -114,10 +119,12 @@ async def test_get_active_ui_instruction_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_update_an_active_ui_instruction_parameter() -> None:
-    """Verify that update_an_active_ui_instruction_parameter sends POST /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}."""
+    """
+    Verify that update_an_active_ui_instruction_parameter sends POST
+        /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -125,16 +132,15 @@ async def test_update_an_active_ui_instruction_parameter() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert (
-        transport.last_request.url.path
-        == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
-    )
+    assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_get_parameter_value_for_an_active_ui() -> None:
-    """Verify that get_parameter_value_for_an_active_ui sends GET /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}."""
+    """
+    Verify that get_parameter_value_for_an_active_ui sends GET
+        /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -142,16 +148,15 @@ async def test_get_parameter_value_for_an_active_ui() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert (
-        transport.last_request.url.path
-        == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
-    )
+    assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
     assert resp.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction_parameters() -> None:
-    """Verify that get_active_ui_instruction_parameters sends GET /rw/rapid/uiinstr/active/params/{stackurl}."""
+    """
+    Verify that get_active_ui_instruction_parameters sends GET
+        /rw/rapid/uiinstr/active/params/{stackurl}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

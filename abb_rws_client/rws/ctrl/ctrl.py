@@ -8,7 +8,6 @@ RWS module: Controller Service → Get Controller Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_controller_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl")
 
-
 async def get_controller_actions(
     client: RWSClient,
     action: str | None = None,
@@ -68,9 +66,9 @@ async def get_controller_actions(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl?action=show"
     """
     return await client.get(
-        "/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_controller_environment_variable(
     client: RWSClient,
@@ -99,7 +97,6 @@ async def get_controller_environment_variable(
     """
     return await client.get(f"/ctrl/${envname}")
 
-
 async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
     """
     Restart or Shutdown controller.
@@ -120,10 +117,10 @@ async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT_FOUND(404), BAD_REQUEST(400), UNSUPPORTED_MEDIA(415), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST "http://localhost/ctrl"
+        # curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST
+            "http://localhost/ctrl"
     """
     return await client.post("/ctrl")
-
 
 async def set_controller_language(
     client: RWSClient,
@@ -152,9 +149,9 @@ async def set_controller_language(
         # Set controller language
     """
     return await client.post(
-        "/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
     """
@@ -179,7 +176,6 @@ async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system"
     """
     return await client.get("/ctrl/system")
-
 
 async def get_actions_on_system(
     client: RWSClient,
@@ -208,9 +204,9 @@ async def get_actions_on_system(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?action=show"
     """
     return await client.get(
-        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_boot_device(
     client: RWSClient,
@@ -239,9 +235,9 @@ async def set_boot_device(
         # curl --digest -u ""Default User":robotics -d "path={Path}" -X POST "
     """
     return await client.post(
-        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_boot_device(
     client: RWSClient,
@@ -267,12 +263,13 @@ async def get_boot_device(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?resource=boot-device"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/system?resource=boot-device"
     """
     return await client.get(
-        "/ctrl/system", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def load_boot_image(
     client: RWSClient,
@@ -282,7 +279,8 @@ async def load_boot_image(
     Load Boot Image.
 
     Route: ``POST /ctrl/system``
-    ABB constraints: Supported in bootserver mode only Controller must be restarted to reflect the changes Not supported by VC
+    ABB constraints: Supported in bootserver mode only Controller must be restarted to reflect
+        the changes Not supported by VC
 
     Args:
         client: Open RWSClient instance.
@@ -301,9 +299,9 @@ async def load_boot_image(
         # curl --digest -u ""Default User":robotics -d -X POST "
     """
     return await client.post(
-        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_unload_boot_image(
     client: RWSClient,
@@ -332,9 +330,9 @@ async def post_unload_boot_image(
         # curl --digest -u ""Default User":robotics -d -X POST "
     """
     return await client.post(
-        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_selected_system_name(
     client: RWSClient,
@@ -344,7 +342,8 @@ async def get_selected_system_name(
     Get selected system name.
 
     Route: ``GET /ctrl/system``
-    ABB constraints: Not supported in VC Supported in Bootserver In bootserver, system-name will show as BOOTSERVER, as active system is not applicable in bootserver mode
+    ABB constraints: Not supported in VC Supported in Bootserver In bootserver, system-name will
+        show as BOOTSERVER, as active system is not applicable in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -363,16 +362,19 @@ async def get_selected_system_name(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?type=selected"
     """
     return await client.get(
-        "/ctrl/system", params={k: v for k, v in {"type": type}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"type": type}.items() if v is not None},
     )
-
 
 async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
     """
     Install deployment package.
 
     Route: ``POST /ctrl/system/installdpkg``
-    ABB constraints: Supported in bootserver mode only. Will validate the deployment package internally. To get status of the installation, see location header. System will be restarted after unpacking the files. dp-pkg-path should be inside inbox folder.The installation package and all associated files should be pla...
+    ABB constraints: Supported in bootserver mode only. Will validate the deployment package
+        internally. To get status of the installation, see location header. System will be
+        restarted after unpacking the files. dp-pkg-path should be inside inbox folder.The
+        installation package and all associated files should be pla...
 
     Args:
         client: Open RWSClient instance.
@@ -387,10 +389,10 @@ async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u ""Default User":robotics -d "ctrl-id=1231&ctrl-name=Ctrlname&system-path=Systems/DeploymentTest&dp-pkg-
+        # curl --digest -u ""Default User":robotics -d
+            "ctrl-id=1231&ctrl-name=Ctrlname&system-path=Systems/DeploymentTest&dp-pkg-
     """
     return await client.post("/ctrl/system/installdpkg")
-
 
 async def validate_deployment_package(client: RWSClient) -> httpx.Response:
     """
@@ -415,7 +417,6 @@ async def validate_deployment_package(client: RWSClient) -> httpx.Response:
         # curl --digest -u ""Default User":robotics -d "path=/hd0a/inbox/TEMP" -X POST "
     """
     return await client.post("/ctrl/system/validatedpkg")
-
 
 async def get_system_resource(
     client: RWSClient,
@@ -445,7 +446,6 @@ async def get_system_resource(
     """
     return await client.get(f"/ctrl/system/{system_name}")
 
-
 async def get_actions_on_system_resource(
     client: RWSClient,
     system_name: str,
@@ -472,13 +472,13 @@ async def get_actions_on_system_resource(
         # ABB codes: NOT_FOUND(404) See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/system/RW6_02_048?action=show"
     """
     return await client.get(
         f"/ctrl/system/{system_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_rename_system(
     client: RWSClient,
@@ -490,7 +490,8 @@ async def post_rename_system(
     Rename a system.
 
     Route: ``POST /ctrl/system/{system-name}``
-    ABB constraints: Only available for VxWorks in "System-Mode". Not available for VC or Boot-Server.
+    ABB constraints: Only available for VxWorks in "System-Mode". Not available for VC or
+        Boot-Server.
 
     Args:
         client: Open RWSClient instance.
@@ -508,14 +509,14 @@ async def post_rename_system(
         # ABB codes: BAD_REQUEST(400), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "newname=System123" -X POST "http://localhost/ctrl/system/RW6_TEST?action=re
+        # curl --digest -u "Default User":robotics -d "newname=System123" -X POST
+            "http://localhost/ctrl/system/RW6_TEST?action=re
     """
     return await client.post(
         f"/ctrl/system/{system_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"newname": newname}.items() if v is not None},
     )
-
 
 async def post_select_system(
     client: RWSClient,
@@ -526,7 +527,8 @@ async def post_select_system(
     Select a system.
 
     Route: ``POST /ctrl/system/{system-name}``
-    ABB constraints: status code CONFLICT is returned if trying to select a system that is already active.
+    ABB constraints: status code CONFLICT is returned if trying to select a system that is
+        already active.
 
     Args:
         client: Open RWSClient instance.
@@ -543,13 +545,13 @@ async def post_select_system(
         # ABB codes: UNAUTHORIZED(401), BAD_REQUEST(400), CONFLICT(409)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system/RW6_TEST?action=activate"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/ctrl/system/RW6_TEST?action=activate"
     """
     return await client.post(
         f"/ctrl/system/{system_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def delete_system(
     client: RWSClient,
@@ -579,7 +581,6 @@ async def delete_system(
     """
     return await client.delete(f"/ctrl/system/{system_name}")
 
-
 async def post_deselect_system(
     client: RWSClient,
     action: str | None = None,
@@ -604,12 +605,13 @@ async def post_deselect_system(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system?action=deactivate"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/ctrl/system?action=deactivate"
     """
     return await client.post(
-        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/system",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_network_resource(client: RWSClient) -> httpx.Response:
     """
@@ -633,7 +635,6 @@ async def get_network_resource(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/network"
     """
     return await client.get("/ctrl/network")
-
 
 async def get_network_setting_actions(
     client: RWSClient,
@@ -662,9 +663,9 @@ async def get_network_setting_actions(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/network?action=show"
     """
     return await client.get(
-        "/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/network",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_network_configuration(
     client: RWSClient,
@@ -674,7 +675,8 @@ async def set_network_configuration(
     Set Network configuration.
 
     Route: ``POST /ctrl/network``
-    ABB constraints: Supported in bootserver mode. Not supported by VC. Controller must be restarted to reflect the changes. Requires the UAS grant UAS_CONTROLLER_PROPERTIES_WRITE
+    ABB constraints: Supported in bootserver mode. Not supported by VC. Controller must be
+        restarted to reflect the changes. Requires the UAS grant UAS_CONTROLLER_PROPERTIES_WRITE
 
     Args:
         client: Open RWSClient instance.
@@ -690,12 +692,13 @@ async def set_network_configuration(
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400), UNAUTHORIZED(401)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=fixip&address={IP address}&mask={Mask address}&gateway={Default Gate
+        # curl --digest -u "Default User":robotics -d "method=fixip&address={IP
+            address}&mask={Mask address}&gateway={Default Gate
     """
     return await client.post(
-        "/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/network",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_dns_resource(client: RWSClient) -> httpx.Response:
     """
@@ -720,7 +723,6 @@ async def get_dns_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/network/dns")
 
-
 async def add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Add a route table entry.
@@ -741,10 +743,10 @@ async def add_route_table_entry(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24&gateway=192.168.126.200" -X POST "http://local
+        # curl --digest -u "Default User":robotics -d
+            "destination=192.168.136.0/24&gateway=192.168.126.200" -X POST "http://local
     """
     return await client.post("/ctrl/network/route/add")
-
 
 async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -766,17 +768,18 @@ async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.R
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/add"
+        # curl --digest -u "Default User":robotics -X OPTIONS
+            "http://localhost/ctrl/network/route/add"
     """
     return await client.options("/ctrl/network/route/add")
-
 
 async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Remove a route table entry.
 
     Route: ``POST /ctrl/network/route/remove``
-    ABB constraints: The routing entry will be removed from the network stack routing table after reboot. Supported in bootserver mode. Not supported by VC.
+    ABB constraints: The routing entry will be removed from the network stack routing table after
+        reboot. Supported in bootserver mode. Not supported by VC.
 
     Args:
         client: Open RWSClient instance.
@@ -791,10 +794,10 @@ async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
         # ABB codes: UNSUPPORTED_MEDIA(415), BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24" -X POST "http://localhost/ctrl/network/route/
+        # curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24" -X POST
+            "http://localhost/ctrl/network/route/
     """
     return await client.post("/ctrl/network/route/remove")
-
 
 async def options_options_to_remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -816,10 +819,10 @@ async def options_options_to_remove_route_table_entry(client: RWSClient) -> http
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/remove"
+        # curl --digest -u "Default User":robotics -X OPTIONS
+            "http://localhost/ctrl/network/route/remove"
     """
     return await client.options("/ctrl/network/route/remove")
-
 
 async def get_compress_resources(client: RWSClient) -> httpx.Response:
     """
@@ -844,7 +847,6 @@ async def get_compress_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress"
     """
     return await client.get("/ctrl/compress")
-
 
 async def get_compress_actions(
     client: RWSClient,
@@ -873,9 +875,9 @@ async def get_compress_actions(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress?action=show"
     """
     return await client.get(
-        "/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/compress",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_compress_decompress_resource(
     client: RWSClient,
@@ -885,7 +887,10 @@ async def post_compress_decompress_resource(
     Compress/Decompress Resource.
 
     Route: ``POST /ctrl/compress``
-    ABB constraints: Compression of HOME folder, its sub directories, and SYSTEM folder is not allowed. While decompressing a compressed file or a folder to a destination path, if a file or a folder with the same name as the compressed file name is already existing, it will be overwritten by the contents of the decom...
+    ABB constraints: Compression of HOME folder, its sub directories, and SYSTEM folder is not
+        allowed. While decompressing a compressed file or a folder to a destination path, if a
+        file or a folder with the same name as the compressed file name is already existing, it
+        will be overwritten by the contents of the decom...
 
     Args:
         client: Open RWSClient instance.
@@ -901,12 +906,13 @@ async def post_compress_decompress_resource(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST
+        # curl --digest -u "Default User":robotics -d
+            "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST
     """
     return await client.post(
-        "/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/compress",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
     """
@@ -932,7 +938,6 @@ async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/diagnostics")
 
-
 async def get_diagnostics_actions(
     client: RWSClient,
     action: str | None = None,
@@ -957,12 +962,13 @@ async def get_diagnostics_actions(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/diagnostics?action=show"
     """
     return await client.get(
-        "/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/diagnostics",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def save_system_diagnostics(
     client: RWSClient,
@@ -972,7 +978,9 @@ async def save_system_diagnostics(
     Save system diagnostics.
 
     Route: ``POST /ctrl/diagnostics``
-    ABB constraints: Since saving a diagnostic log is an asynchronous task, the location header can be subscribed on to get information about the status of the task. Not supported in bootserver mode. Not supported on Virtual Controller.
+    ABB constraints: Since saving a diagnostic log is an asynchronous task, the location header
+        can be subscribed on to get information about the status of the task. Not supported in
+        bootserver mode. Not supported on Virtual Controller.
 
     Args:
         client: Open RWSClient instance.
@@ -988,12 +996,13 @@ async def save_system_diagnostics(
         # ABB codes: BAD_REQUEST(400), CONFLICT(409), UNSUPPORTED_MEDIA(415) See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localho
+        # curl --digest -u "Default User":robotics -d
+            "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localho
     """
     return await client.post(
-        "/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/diagnostics",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def subscribe_on_system_dump(
     client: RWSClient,
@@ -1004,7 +1013,10 @@ async def subscribe_on_system_dump(
     Subscribe on system dump.
 
     Route: ``POST /subscription``
-    ABB constraints: If there is no system dump available in the controller, the initial response will be empty. Also, if the subscription is created when a system dump is in progress, the initial response will be empty. if an client has already subscribed on the system dump resource(/ctrl/diagnostics), and the exist...
+    ABB constraints: If there is no system dump available in the controller, the initial response
+        will be empty. Also, if the subscription is created when a system dump is in progress,
+        the initial response will be empty. if an client has already subscribed on the system
+        dump resource(/ctrl/diagnostics), and the exist...
 
     Args:
         client: Open RWSClient instance.
@@ -1021,17 +1033,13 @@ async def subscribe_on_system_dump(
         # ABB codes: BAD_REQUEST(400), See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
+        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
+            on this resource
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def subscribe_on_diagnostics_states_get_system_diagnostics(
     client: RWSClient,
@@ -1042,7 +1050,9 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
     Subscribe on Diagnostics States (Get System Diagnostics).
 
     Route: ``POST /subscription``
-    ABB constraints: if the subscription is created when save System Diagnostics(diagnostics.log is in progress),the state will be in "pending". Not supported in bootserver mode. Not supported on virtual controller.
+    ABB constraints: if the subscription is created when save System Diagnostics(diagnostics.log
+        is in progress),the state will be in "pending". Not supported in bootserver mode. Not
+        supported on virtual controller.
 
     Args:
         client: Open RWSClient instance.
@@ -1059,17 +1069,13 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
         # ABB codes: BAD_REQUEST(400) See
 
     Example:
-        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
+        # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed
+            on this resource
     """
     return await client.post(
         "/subscription",
-        data={
-            k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
     )
-
 
 async def get_safety_resources(client: RWSClient) -> httpx.Response:
     """
@@ -1094,7 +1100,6 @@ async def get_safety_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety"
     """
     return await client.get("/ctrl/safety")
-
 
 async def get_safety_actions(
     client: RWSClient,
@@ -1123,9 +1128,9 @@ async def get_safety_actions(
         # Retrieve actions on the CFG resource
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def load_safety_configuration_file_to_controller(
     client: RWSClient,
@@ -1154,9 +1159,9 @@ async def load_safety_configuration_file_to_controller(
         # Rename a file
     """
     return await client.post(
-        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_safety_mode_of_the_controller(
     client: RWSClient,
@@ -1184,14 +1189,14 @@ async def set_safety_mode_of_the_controller(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "mode=service" -X POST "http://localhost/ctrl/safety?action=set-mode"
+        # curl --digest -u "Default User":robotics -d "mode=service" -X POST
+            "http://localhost/ctrl/safety?action=set-mode"
     """
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"mode": mode}.items() if v is not None},
     )
-
 
 async def get_config_status(
     client: RWSClient,
@@ -1217,12 +1222,13 @@ async def get_config_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=config-status"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=config-status"
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_safety_mode_status(
     client: RWSClient,
@@ -1248,12 +1254,13 @@ async def get_safety_mode_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-mode"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=safety-mode"
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_safety_cyclic_brake_check_status(
     client: RWSClient,
@@ -1281,15 +1288,13 @@ async def get_safety_cyclic_brake_check_status(
         # ABB codes: BAD_REQUEST(400), see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
     """
     return await client.get(
         "/ctrl/safety",
-        params={
-            k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None},
     )
-
 
 async def get_loadoperation_status(
     client: RWSClient,
@@ -1315,12 +1320,13 @@ async def get_loadoperation_status(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=loadoperation-status"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=loadoperation-status"
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_safety_configurations(
     client: RWSClient,
@@ -1345,12 +1351,13 @@ async def get_safety_configurations(
         RWSHTTPError: On any other HTTP >= 400.
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-config"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=safety-config"
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def get_safety_violation_info(
     client: RWSClient,
@@ -1376,12 +1383,13 @@ async def get_safety_violation_info(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=violation-info"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/safety?resource=violation-info"
     """
     return await client.get(
-        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
-
 
 async def post_unlock_the_safety_configuration(
     client: RWSClient,
@@ -1410,9 +1418,9 @@ async def post_unlock_the_safety_configuration(
         # Rename a file
     """
     return await client.post(
-        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_software_sync_acknowledgement(
     client: RWSClient,
@@ -1448,7 +1456,6 @@ async def post_software_sync_acknowledgement(
         data={k: v for k, v in {"index": index}.items() if v is not None},
     )
 
-
 async def add_validation_info(
     client: RWSClient,
     action: str | None = None,
@@ -1458,7 +1465,8 @@ async def add_validation_info(
     Add Validation info.
 
     Route: ``POST /ctrl/safety``
-    ABB constraints: Must have grant UAS_SAFETY_SERVICES for method to succeed Not supported in bootserver mode
+    ABB constraints: Must have grant UAS_SAFETY_SERVICES for method to succeed Not supported in
+        bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -1475,14 +1483,14 @@ async def add_validation_info(
         # ABB codes: BAD_REQUEST(400),FORBIDDEN(403)
 
     Example:
-        # `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST "http://localhost/ctrl/safety?action=validate-cfg
+        # `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST
+            "http://localhost/ctrl/safety?action=validate-cfg
     """
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"validated_by": validated_by}.items() if v is not None},
     )
-
 
 async def remove_validation_info(
     client: RWSClient,
@@ -1492,7 +1500,8 @@ async def remove_validation_info(
     Remove Validation info.
 
     Route: ``POST /ctrl/safety``
-    ABB constraints: Must have grant UAS_SAFETY_SERVICES for method to succeed Not supported in bootserver mode
+    ABB constraints: Must have grant UAS_SAFETY_SERVICES for method to succeed Not supported in
+        bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -1508,12 +1517,13 @@ async def remove_validation_info(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # `curl –digest -u "Default User":robotics POST "http://localhost/ctrl/safety?action=invalidate-cfg"
+        # `curl –digest -u "Default User":robotics POST
+            "http://localhost/ctrl/safety?action=invalidate-cfg"
     """
     return await client.post(
-        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_reset_safety_controller(
     client: RWSClient,
@@ -1542,9 +1552,9 @@ async def set_reset_safety_controller(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?action=reset"
     """
     return await client.post(
-        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def get_options_resource(
     client: RWSClient,
@@ -1554,7 +1564,8 @@ async def get_options_resource(
     Get options resource.
 
     Route: ``GET /ctrl/options/{option to verify}``
-    ABB constraints: The option to be verified is to provided as part of the request url. Also, the url is case sensitive. see example above. Not Supported in bootserver mode
+    ABB constraints: The option to be verified is to provided as part of the request url. Also,
+        the url is case sensitive. see example above. Not Supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
@@ -1573,7 +1584,6 @@ async def get_options_resource(
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/options/SAFEMOVEPRO"
     """
     return await client.get(f"/ctrl/options/{option_to_verify}")
-
 
 async def get_check_robotware_version_compatibility_with_contorller_hardware(
     client: RWSClient,
@@ -1599,10 +1609,10 @@ async def get_check_robotware_version_compatibility_with_contorller_hardware(
         # ABB codes: NOT FOUND(404), BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/compatibility/6.03.0101"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/compatibility/6.03.0101"
     """
     return await client.get(f"/ctrl/compatibility/{robotware_version}")
-
 
 async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
     """
@@ -1628,7 +1638,6 @@ async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime")
 
-
 async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
     Get Virtualtime.
@@ -1653,13 +1662,13 @@ async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime/vttime")
 
-
 async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
     """
     Get VTTimeslice Value.
 
     Route: ``GET /ctrl/virtualtime/vttimeslice``
-    ABB constraints: Supported only in VC. vttimeslice value is in ms. Not supported in bootserver mode.
+    ABB constraints: Supported only in VC. vttimeslice value is in ms. Not supported in
+        bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -1674,10 +1683,10 @@ async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
         # ABB codes: NOT FOUND(404),
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/virtualtime/vttimeslice"
     """
     return await client.get("/ctrl/virtualtime/vttimeslice")
-
 
 async def get_actions_on_vttimeslice(
     client: RWSClient,
@@ -1687,7 +1696,8 @@ async def get_actions_on_vttimeslice(
     Actions on VTTimeslice.
 
     Route: ``GET /ctrl/virtualtime/vttimeslice``
-    ABB constraints: Supported only in VC. vttimeslice value is in ms. Not supported in bootserver mode.
+    ABB constraints: Supported only in VC. vttimeslice value is in ms. Not supported in
+        bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -1703,13 +1713,13 @@ async def get_actions_on_vttimeslice(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/virtualtime/vttimeslice"
     """
     return await client.get(
         "/ctrl/virtualtime/vttimeslice",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_vttimeslice_value(
     client: RWSClient,
@@ -1719,7 +1729,8 @@ async def set_vttimeslice_value(
     Set VTTimeslice Value.
 
     Route: ``POST /ctrl/virtualtime/vttimeslice``
-    ABB constraints: Supported only in VC. Value should be in ms. For values < 10 ms. vttimeslice will be set to a default value of 10 ms. Not supported in bootserver mode.
+    ABB constraints: Supported only in VC. Value should be in ms. For values < 10 ms. vttimeslice
+        will be set to a default value of 10 ms. Not supported in bootserver mode.
 
     Args:
         client: Open RWSClient instance.
@@ -1735,13 +1746,13 @@ async def set_vttimeslice_value(
         # ABB codes: NOT FOUND(404)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST "http://localhost/ctrl/virtualtime/vttimeslice"
+        # curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST
+            "http://localhost/ctrl/virtualtime/vttimeslice"
     """
     return await client.post(
         "/ctrl/virtualtime/vttimeslice",
         data={k: v for k, v in {"vttimeslice": vttimeslice}.items() if v is not None},
     )
-
 
 async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
@@ -1767,7 +1778,6 @@ async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime/vtspeed")
 
-
 async def get_actions_on_vtspeed(
     client: RWSClient,
     action: str | None = None,
@@ -1792,13 +1802,13 @@ async def get_actions_on_vtspeed(
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/virtualtime/vtspeed?action=show"
     """
     return await client.get(
         "/ctrl/virtualtime/vtspeed",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_speed_of_virtualtime(
     client: RWSClient,
@@ -1824,13 +1834,13 @@ async def set_speed_of_virtualtime(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST "http://localhost/ctrl/virtualtime/vtspeed"
+        # curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST
+            "http://localhost/ctrl/virtualtime/vtspeed"
     """
     return await client.post(
         "/ctrl/virtualtime/vtspeed",
         data={k: v for k, v in {"vtspeed": vtspeed}.items() if v is not None},
     )
-
 
 async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
@@ -1856,7 +1866,6 @@ async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime/vtstate")
 
-
 async def get_actions_on_vtstate(
     client: RWSClient,
     action: str | None = None,
@@ -1881,13 +1890,13 @@ async def get_actions_on_vtstate(
         # ABB codes: HTTP Errors, see
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/ctrl/virtualtime/vtstate?action=show"
     """
     return await client.get(
         "/ctrl/virtualtime/vtstate",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def set_state_of_virtualtime(
     client: RWSClient,
@@ -1913,13 +1922,13 @@ async def set_state_of_virtualtime(
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST "http://localhost/ctrl/virtualtime/vtstate"
+        # curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST
+            "http://localhost/ctrl/virtualtime/vtstate"
     """
     return await client.post(
         "/ctrl/virtualtime/vtstate",
         data={k: v for k, v in {"vtstate": vtstate}.items() if v is not None},
     )
-
 
 async def post_vt_run(client: RWSClient) -> httpx.Response:
     """
@@ -1941,6 +1950,7 @@ async def post_vt_run(client: RWSClient) -> httpx.Response:
         # ABB codes: BAD REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/virtualtime/vtrun"
+        # curl --digest -u "Default User":robotics -X POST
+            "http://localhost/ctrl/virtualtime/vtrun"
     """
     return await client.post("/ctrl/virtualtime/vtrun")

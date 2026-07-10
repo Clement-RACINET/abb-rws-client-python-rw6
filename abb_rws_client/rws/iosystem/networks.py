@@ -8,7 +8,6 @@ RWS module: RobotWare Services → IO Service → Operations on IO Networks
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -40,7 +39,6 @@ async def get_io_networks_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/iosystem/networks")
 
-
 async def get_actions_on_io_networks(
     client: RWSClient,
     action: str | None = None,
@@ -65,13 +63,13 @@ async def get_actions_on_io_networks(
         # ABB codes: BAD_REQUEST(400)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks?action=show"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/iosystem/networks?action=show"
     """
     return await client.get(
         "/rw/iosystem/networks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
-
 
 async def post_search_io_networks(
     client: RWSClient,
@@ -104,9 +102,5 @@ async def post_search_io_networks(
     return await client.post(
         "/rw/iosystem/networks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {"name_or_state_example_name": name_or_state_example_name}.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"name_or_state_example_name": name_or_state_example_name}.items() if v is not None},
     )

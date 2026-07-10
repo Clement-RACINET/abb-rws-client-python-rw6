@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/system."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,16 +9,16 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.system import (
-    get_installed_products,
+    get_system_information,
     get_robot_type,
-    get_system_energy,
+    get_system_options,
     get_system_energy_actions,
     get_system_energy_info_change_count,
-    get_system_information,
-    get_system_options,
-    get_system_robotware_license,
     reset_accumulated_energy,
+    get_system_energy,
     subscribe_on_system_energy_changes,
+    get_system_robotware_license,
+    get_installed_products,
 )
 
 
@@ -49,7 +48,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_system_information() -> None:
-    """Verify that get_system_information sends GET /rw/system."""
+    """
+    Verify that get_system_information sends GET /rw/system.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -60,10 +61,11 @@ async def test_get_system_information() -> None:
     assert transport.last_request.url.path == "/rw/system"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_robot_type() -> None:
-    """Verify that get_robot_type sends GET /rw/system/robottype."""
+    """
+    Verify that get_robot_type sends GET /rw/system/robottype.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -74,10 +76,11 @@ async def test_get_robot_type() -> None:
     assert transport.last_request.url.path == "/rw/system/robottype"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_system_options() -> None:
-    """Verify that get_system_options sends GET /rw/system/options."""
+    """
+    Verify that get_system_options sends GET /rw/system/options.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -88,10 +91,11 @@ async def test_get_system_options() -> None:
     assert transport.last_request.url.path == "/rw/system/options"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_system_energy_actions() -> None:
-    """Verify that get_system_energy_actions sends GET /rw/system/energy."""
+    """
+    Verify that get_system_energy_actions sends GET /rw/system/energy.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -102,10 +106,11 @@ async def test_get_system_energy_actions() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_system_energy_info_change_count() -> None:
-    """Verify that get_system_energy_info_change_count sends GET /rw/system/energy."""
+    """
+    Verify that get_system_energy_info_change_count sends GET /rw/system/energy.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -116,10 +121,11 @@ async def test_get_system_energy_info_change_count() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_reset_accumulated_energy() -> None:
-    """Verify that reset_accumulated_energy sends POST /rw/system/energy."""
+    """
+    Verify that reset_accumulated_energy sends POST /rw/system/energy.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -130,10 +136,11 @@ async def test_reset_accumulated_energy() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_system_energy() -> None:
-    """Verify that get_system_energy sends GET /rw/system/energy."""
+    """
+    Verify that get_system_energy sends GET /rw/system/energy.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -144,10 +151,11 @@ async def test_get_system_energy() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_system_energy_changes() -> None:
-    """Verify that subscribe_on_system_energy_changes sends POST /subscription."""
+    """
+    Verify that subscribe_on_system_energy_changes sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -158,10 +166,11 @@ async def test_subscribe_on_system_energy_changes() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_system_robotware_license() -> None:
-    """Verify that get_system_robotware_license sends GET /rw/system/license."""
+    """
+    Verify that get_system_robotware_license sends GET /rw/system/license.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -172,10 +181,11 @@ async def test_get_system_robotware_license() -> None:
     assert transport.last_request.url.path == "/rw/system/license"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_installed_products() -> None:
-    """Verify that get_installed_products sends GET /rw/system/products."""
+    """
+    Verify that get_installed_products sends GET /rw/system/products.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

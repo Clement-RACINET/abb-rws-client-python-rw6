@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/tasks."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,56 +9,60 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.tasks import (
-    get_activation_record,
-    get_break_points,
-    get_build_errors,
-    get_external_joint_states,
-    get_joint_target,
-    get_mechanical_units,
-    get_motion_pointer_sync_state,
-    get_pallet,
-    get_pallet_head,
-    get_preferable_data_types,
-    get_program_motion_pointer_sync_state_for,
-    get_program_pointer_sync_state,
-    get_rapid_breakpoint_actions,
-    get_rapid_motion,
-    get_rapid_program_actions,
-    get_rapid_program_counter_position,
-    get_rapid_program_resource,
-    get_rapid_service_routine,
-    get_rapid_spy_logging_status,
-    get_rapid_task_actions,
-    get_rapid_task_motion_program_pointer_positions,
-    get_rapid_task_pcp_actions,
-    get_rapid_task_state,
     get_rapid_tasks,
     get_rapid_tasks_actions,
-    get_robtarget,
-    get_structural_change_count,
-    load_program_into_rapid_task,
+    start_rapid_spy_logging,
+    get_rapid_spy_logging_status,
+    stop_rapid_spy_logging,
+    post_activate_deactivate_rapid_tasks,
+    get_program_motion_pointer_sync_state_for,
+    subscribe_on_build_log_change,
+    get_rapid_task_state,
+    get_rapid_task_actions,
     load_rapid_module_into_rapid_task,
+    post_unload_module_from_rapid_task,
     post_abort_current_execution_level,
     post_activate_deactivate_rapid_task,
-    post_activate_deactivate_rapid_tasks,
+    get_activation_record,
+    get_structural_change_count,
+    get_preferable_data_types,
+    get_program_pointer_sync_state,
+    get_motion_pointer_sync_state,
+    post_link_rapid_task,
+    get_pallet,
+    get_pallet_head,
+    subscribe_on_rapid_task_change,
+    subscribe_on_rapid_pp_sync_state_change,
+    subscribe_on_rapid_task_pgmexecution_state_change,
+    get_rapid_motion,
+    get_robtarget,
+    get_joint_target,
+    get_mechanical_units,
+    get_external_joint_states,
     post_calibration_for_displacement,
     post_calibration_for_tcp,
-    post_link_rapid_task,
-    post_unload_module_from_rapid_task,
+    get_rapid_program_resource,
+    get_rapid_program_actions,
+    load_program_into_rapid_task,
     post_unload_program_from_rapid_task,
     save_program,
-    set_break_point,
-    set_entry_point,
     set_program_name,
+    set_entry_point,
+    get_build_errors,
+    get_rapid_breakpoint_actions,
+    set_break_point,
+    get_break_points,
+    get_rapid_task_motion_program_pointer_positions,
+    get_rapid_task_pcp_actions,
     set_the_program_pointer_pp_position_to,
-    start_rapid_spy_logging,
-    stop_rapid_spy_logging,
-    subscribe_on_build_log_change,
-    subscribe_on_motion_pointer,
+    set_the_program_pointer_pp_position_to_2,
+    set_the_program_pointer_pp_position_to_3,
+    set_the_program_pointer_pp_position_to_4,
+    set_the_program_pointer_pp_position_to_5,
     subscribe_on_program_pointer,
-    subscribe_on_rapid_pp_sync_state_change,
-    subscribe_on_rapid_task_change,
-    subscribe_on_rapid_task_pgmexecution_state_change,
+    subscribe_on_motion_pointer,
+    get_rapid_service_routine,
+    get_rapid_program_counter_position,
 )
 
 
@@ -89,7 +92,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_rapid_tasks() -> None:
-    """Verify that get_rapid_tasks sends GET /rw/rapid/tasks."""
+    """
+    Verify that get_rapid_tasks sends GET /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -100,10 +105,11 @@ async def test_get_rapid_tasks() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_tasks_actions() -> None:
-    """Verify that get_rapid_tasks_actions sends GET /rw/rapid/tasks."""
+    """
+    Verify that get_rapid_tasks_actions sends GET /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -114,10 +120,11 @@ async def test_get_rapid_tasks_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_start_rapid_spy_logging() -> None:
-    """Verify that start_rapid_spy_logging sends POST /rw/rapid/tasks."""
+    """
+    Verify that start_rapid_spy_logging sends POST /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -128,10 +135,11 @@ async def test_start_rapid_spy_logging() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_spy_logging_status() -> None:
-    """Verify that get_rapid_spy_logging_status sends GET /rw/rapid/tasks."""
+    """
+    Verify that get_rapid_spy_logging_status sends GET /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -142,10 +150,11 @@ async def test_get_rapid_spy_logging_status() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_stop_rapid_spy_logging() -> None:
-    """Verify that stop_rapid_spy_logging sends POST /rw/rapid/tasks."""
+    """
+    Verify that stop_rapid_spy_logging sends POST /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -156,10 +165,11 @@ async def test_stop_rapid_spy_logging() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_activate_deactivate_rapid_tasks() -> None:
-    """Verify that post_activate_deactivate_rapid_tasks sends POST /rw/rapid/tasks."""
+    """
+    Verify that post_activate_deactivate_rapid_tasks sends POST /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -170,10 +180,11 @@ async def test_post_activate_deactivate_rapid_tasks() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_program_motion_pointer_sync_state_for() -> None:
-    """Verify that get_program_motion_pointer_sync_state_for sends GET /rw/rapid/tasks."""
+    """
+    Verify that get_program_motion_pointer_sync_state_for sends GET /rw/rapid/tasks.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -184,10 +195,11 @@ async def test_get_program_motion_pointer_sync_state_for() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_build_log_change() -> None:
-    """Verify that subscribe_on_build_log_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_build_log_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -198,10 +210,11 @@ async def test_subscribe_on_build_log_change() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_task_state() -> None:
-    """Verify that get_rapid_task_state sends GET /rw/rapid/tasks/{task}."""
+    """
+    Verify that get_rapid_task_state sends GET /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -212,10 +225,11 @@ async def test_get_rapid_task_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_task_actions() -> None:
-    """Verify that get_rapid_task_actions sends GET /rw/rapid/tasks/{task}."""
+    """
+    Verify that get_rapid_task_actions sends GET /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -226,10 +240,11 @@ async def test_get_rapid_task_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_load_rapid_module_into_rapid_task() -> None:
-    """Verify that load_rapid_module_into_rapid_task sends POST /rw/rapid/tasks/{task}."""
+    """
+    Verify that load_rapid_module_into_rapid_task sends POST /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -240,10 +255,11 @@ async def test_load_rapid_module_into_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_unload_module_from_rapid_task() -> None:
-    """Verify that post_unload_module_from_rapid_task sends POST /rw/rapid/tasks/{task}."""
+    """
+    Verify that post_unload_module_from_rapid_task sends POST /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -254,10 +270,11 @@ async def test_post_unload_module_from_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_abort_current_execution_level() -> None:
-    """Verify that post_abort_current_execution_level sends POST /rw/rapid/tasks/{task}."""
+    """
+    Verify that post_abort_current_execution_level sends POST /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -268,10 +285,11 @@ async def test_post_abort_current_execution_level() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_activate_deactivate_rapid_task() -> None:
-    """Verify that post_activate_deactivate_rapid_task sends POST /rw/rapid/tasks/{task}."""
+    """
+    Verify that post_activate_deactivate_rapid_task sends POST /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -282,10 +300,11 @@ async def test_post_activate_deactivate_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_activation_record() -> None:
-    """Verify that get_activation_record sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_activation_record sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -296,10 +315,11 @@ async def test_get_activation_record() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_structural_change_count() -> None:
-    """Verify that get_structural_change_count sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_structural_change_count sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -310,10 +330,11 @@ async def test_get_structural_change_count() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_preferable_data_types() -> None:
-    """Verify that get_preferable_data_types sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_preferable_data_types sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -324,10 +345,11 @@ async def test_get_preferable_data_types() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_program_pointer_sync_state() -> None:
-    """Verify that get_program_pointer_sync_state sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_program_pointer_sync_state sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -338,10 +360,11 @@ async def test_get_program_pointer_sync_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_motion_pointer_sync_state() -> None:
-    """Verify that get_motion_pointer_sync_state sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_motion_pointer_sync_state sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -352,10 +375,11 @@ async def test_get_motion_pointer_sync_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_link_rapid_task() -> None:
-    """Verify that post_link_rapid_task sends POST /rw/rapid/tasks/{task}."""
+    """
+    Verify that post_link_rapid_task sends POST /rw/rapid/tasks/{task}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -366,10 +390,11 @@ async def test_post_link_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_pallet() -> None:
-    """Verify that get_pallet sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_pallet sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -380,10 +405,11 @@ async def test_get_pallet() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_pallet_head() -> None:
-    """Verify that get_pallet_head sends GET /rw/rapid/tasks/{task_name}."""
+    """
+    Verify that get_pallet_head sends GET /rw/rapid/tasks/{task_name}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -394,10 +420,11 @@ async def test_get_pallet_head() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_task_change() -> None:
-    """Verify that subscribe_on_rapid_task_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_rapid_task_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -408,10 +435,11 @@ async def test_subscribe_on_rapid_task_change() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_pp_sync_state_change() -> None:
-    """Verify that subscribe_on_rapid_pp_sync_state_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_rapid_pp_sync_state_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -422,10 +450,11 @@ async def test_subscribe_on_rapid_pp_sync_state_change() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_task_pgmexecution_state_change() -> None:
-    """Verify that subscribe_on_rapid_task_pgmexecution_state_change sends POST /subscription."""
+    """
+    Verify that subscribe_on_rapid_task_pgmexecution_state_change sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -436,10 +465,11 @@ async def test_subscribe_on_rapid_task_pgmexecution_state_change() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_motion() -> None:
-    """Verify that get_rapid_motion sends GET /rw/rapid/tasks/{task}/motion."""
+    """
+    Verify that get_rapid_motion sends GET /rw/rapid/tasks/{task}/motion.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -450,10 +480,11 @@ async def test_get_rapid_motion() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_robtarget() -> None:
-    """Verify that get_robtarget sends GET /rw/rapid/tasks/{task}/motion."""
+    """
+    Verify that get_robtarget sends GET /rw/rapid/tasks/{task}/motion.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -464,10 +495,11 @@ async def test_get_robtarget() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_joint_target() -> None:
-    """Verify that get_joint_target sends GET /rw/rapid/tasks/{task}/motion."""
+    """
+    Verify that get_joint_target sends GET /rw/rapid/tasks/{task}/motion.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -478,10 +510,11 @@ async def test_get_joint_target() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_mechanical_units() -> None:
-    """Verify that get_mechanical_units sends GET /rw/rapid/tasks/{task}/motion."""
+    """
+    Verify that get_mechanical_units sends GET /rw/rapid/tasks/{task}/motion.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -492,10 +525,11 @@ async def test_get_mechanical_units() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_external_joint_states() -> None:
-    """Verify that get_external_joint_states sends GET /rw/rapid/tasks/{task}/motion."""
+    """
+    Verify that get_external_joint_states sends GET /rw/rapid/tasks/{task}/motion.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -506,10 +540,11 @@ async def test_get_external_joint_states() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_displacement() -> None:
-    """Verify that post_calibration_for_displacement sends POST /rw/rapid/tasks/{task}/motion/calib."""
+    """
+    Verify that post_calibration_for_displacement sends POST /rw/rapid/tasks/{task}/motion/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -520,10 +555,11 @@ async def test_post_calibration_for_displacement() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_calibration_for_tcp() -> None:
-    """Verify that post_calibration_for_tcp sends POST /rw/rapid/tasks/{task}/motion/calib."""
+    """
+    Verify that post_calibration_for_tcp sends POST /rw/rapid/tasks/{task}/motion/calib.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -534,10 +570,11 @@ async def test_post_calibration_for_tcp() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion/calib"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_program_resource() -> None:
-    """Verify that get_rapid_program_resource sends GET /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that get_rapid_program_resource sends GET /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -548,10 +585,11 @@ async def test_get_rapid_program_resource() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_program_actions() -> None:
-    """Verify that get_rapid_program_actions sends GET /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that get_rapid_program_actions sends GET /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -562,10 +600,11 @@ async def test_get_rapid_program_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_load_program_into_rapid_task() -> None:
-    """Verify that load_program_into_rapid_task sends POST /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that load_program_into_rapid_task sends POST /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -576,10 +615,11 @@ async def test_load_program_into_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_post_unload_program_from_rapid_task() -> None:
-    """Verify that post_unload_program_from_rapid_task sends POST /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that post_unload_program_from_rapid_task sends POST /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -590,10 +630,11 @@ async def test_post_unload_program_from_rapid_task() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_save_program() -> None:
-    """Verify that save_program sends POST /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that save_program sends POST /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -604,10 +645,11 @@ async def test_save_program() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_program_name() -> None:
-    """Verify that set_program_name sends POST /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that set_program_name sends POST /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -618,10 +660,11 @@ async def test_set_program_name() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_set_entry_point() -> None:
-    """Verify that set_entry_point sends POST /rw/rapid/tasks/{task}/program."""
+    """
+    Verify that set_entry_point sends POST /rw/rapid/tasks/{task}/program.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -632,10 +675,11 @@ async def test_set_entry_point() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_build_errors() -> None:
-    """Verify that get_build_errors sends GET /rw/rapid/tasks/{task}/program/builderror."""
+    """
+    Verify that get_build_errors sends GET /rw/rapid/tasks/{task}/program/builderror.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -646,10 +690,11 @@ async def test_get_build_errors() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/builderror"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_breakpoint_actions() -> None:
-    """Verify that get_rapid_breakpoint_actions sends GET /rw/rapid/tasks/{task}/program/breakpoint."""
+    """
+    Verify that get_rapid_breakpoint_actions sends GET /rw/rapid/tasks/{task}/program/breakpoint.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -660,10 +705,11 @@ async def test_get_rapid_breakpoint_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/breakpoint"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_break_point() -> None:
-    """Verify that set_break_point sends POST /rw/rapid/tasks/{task}/program/breakpoint."""
+    """
+    Verify that set_break_point sends POST /rw/rapid/tasks/{task}/program/breakpoint.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -674,10 +720,11 @@ async def test_set_break_point() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/breakpoint"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_get_break_points() -> None:
-    """Verify that get_break_points sends GET /rw/rapid/tasks/{task}/program/breakpoint."""
+    """
+    Verify that get_break_points sends GET /rw/rapid/tasks/{task}/program/breakpoint.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -688,10 +735,12 @@ async def test_get_break_points() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/breakpoint"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_task_motion_program_pointer_positions() -> None:
-    """Verify that get_rapid_task_motion_program_pointer_positions sends GET /rw/rapid/tasks/{task}/pcp."""
+    """
+    Verify that get_rapid_task_motion_program_pointer_positions sends GET
+        /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -702,10 +751,11 @@ async def test_get_rapid_task_motion_program_pointer_positions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_task_pcp_actions() -> None:
-    """Verify that get_rapid_task_pcp_actions sends GET /rw/rapid/tasks/{task}/pcp."""
+    """
+    Verify that get_rapid_task_pcp_actions sends GET /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -716,10 +766,11 @@ async def test_get_rapid_task_pcp_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to() -> None:
-    """Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp."""
+    """
+    Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -730,66 +781,71 @@ async def test_set_the_program_pointer_pp_position_to() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
-async def test_set_the_program_pointer_pp_position_to() -> None:
-    """Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp."""
+async def test_set_the_program_pointer_pp_position_to_2() -> None:
+    """
+    Verify that set_the_program_pointer_pp_position_to_2 sends POST /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await set_the_program_pointer_pp_position_to(client, "task_test")
+    resp = await set_the_program_pointer_pp_position_to_2(client, "task_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
-async def test_set_the_program_pointer_pp_position_to() -> None:
-    """Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp."""
+async def test_set_the_program_pointer_pp_position_to_3() -> None:
+    """
+    Verify that set_the_program_pointer_pp_position_to_3 sends POST /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await set_the_program_pointer_pp_position_to(client, "task_test")
+    resp = await set_the_program_pointer_pp_position_to_3(client, "task_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
-async def test_set_the_program_pointer_pp_position_to() -> None:
-    """Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp."""
+async def test_set_the_program_pointer_pp_position_to_4() -> None:
+    """
+    Verify that set_the_program_pointer_pp_position_to_4 sends POST /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await set_the_program_pointer_pp_position_to(client, "task_test")
+    resp = await set_the_program_pointer_pp_position_to_4(client, "task_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
-async def test_set_the_program_pointer_pp_position_to() -> None:
-    """Verify that set_the_program_pointer_pp_position_to sends POST /rw/rapid/tasks/{task}/pcp."""
+async def test_set_the_program_pointer_pp_position_to_5() -> None:
+    """
+    Verify that set_the_program_pointer_pp_position_to_5 sends POST /rw/rapid/tasks/{task}/pcp.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await set_the_program_pointer_pp_position_to(client, "task_test")
+    resp = await set_the_program_pointer_pp_position_to_5(client, "task_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 204
-
 
 @pytest.mark.asyncio
 async def test_subscribe_on_program_pointer() -> None:
-    """Verify that subscribe_on_program_pointer sends POST /subscription."""
+    """
+    Verify that subscribe_on_program_pointer sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -800,10 +856,11 @@ async def test_subscribe_on_program_pointer() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_motion_pointer() -> None:
-    """Verify that subscribe_on_motion_pointer sends POST /subscription."""
+    """
+    Verify that subscribe_on_motion_pointer sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -814,10 +871,11 @@ async def test_subscribe_on_motion_pointer() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_service_routine() -> None:
-    """Verify that get_rapid_service_routine sends GET /rw/rapid/tasks/{task}/serviceroutine."""
+    """
+    Verify that get_rapid_service_routine sends GET /rw/rapid/tasks/{task}/serviceroutine.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -828,10 +886,11 @@ async def test_get_rapid_service_routine() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/serviceroutine"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_program_counter_position() -> None:
-    """Verify that get_rapid_program_counter_position sends GET /rw/rapid/tasks/{task}/execution."""
+    """
+    Verify that get_rapid_program_counter_position sends GET /rw/rapid/tasks/{task}/execution.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

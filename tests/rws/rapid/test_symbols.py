@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/symbols."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,10 +9,10 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.symbols import (
-    get_object_extension_list,
-    get_rapid_symbols_actions,
     get_rapid_symbols_resources,
+    get_rapid_symbols_actions,
     post_search_rapid_symbols,
+    get_object_extension_list,
 )
 
 
@@ -43,7 +42,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_rapid_symbols_resources() -> None:
-    """Verify that get_rapid_symbols_resources sends GET /rw/rapid/symbols."""
+    """
+    Verify that get_rapid_symbols_resources sends GET /rw/rapid/symbols.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -54,10 +55,11 @@ async def test_get_rapid_symbols_resources() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_symbols_actions() -> None:
-    """Verify that get_rapid_symbols_actions sends GET /rw/rapid/symbols."""
+    """
+    Verify that get_rapid_symbols_actions sends GET /rw/rapid/symbols.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -68,10 +70,11 @@ async def test_get_rapid_symbols_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_post_search_rapid_symbols() -> None:
-    """Verify that post_search_rapid_symbols sends POST /rw/rapid/symbols."""
+    """
+    Verify that post_search_rapid_symbols sends POST /rw/rapid/symbols.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -82,10 +85,11 @@ async def test_post_search_rapid_symbols() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_object_extension_list() -> None:
-    """Verify that get_object_extension_list sends GET /rw/rapid/symbols/{symbol URL}."""
+    """
+    Verify that get_object_extension_list sends GET /rw/rapid/symbols/{symbol URL}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 

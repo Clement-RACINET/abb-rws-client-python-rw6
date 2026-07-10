@@ -2,7 +2,6 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/symbol."""
-
 from __future__ import annotations
 
 import httpx
@@ -10,13 +9,13 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.symbol import (
+    get_rapid_symbol_properties,
     get_rapid_symbol_data,
     get_rapid_symbol_data_actions,
-    get_rapid_symbol_properties,
-    subscribe_on_rapid_persistent_variable,
     update_rapid_variable_current_value,
-    update_rapid_variable_initial_value,
     validate_rapid_variable,
+    subscribe_on_rapid_persistent_variable,
+    update_rapid_variable_initial_value,
 )
 
 
@@ -46,7 +45,9 @@ def _make_client(transport: _MockTransport) -> RWSClient:
 
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_properties() -> None:
-    """Verify that get_rapid_symbol_properties sends GET /rw/rapid/symbol/properties/{symbolurl}."""
+    """
+    Verify that get_rapid_symbol_properties sends GET /rw/rapid/symbol/properties/{symbolurl}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -57,10 +58,11 @@ async def test_get_rapid_symbol_properties() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/properties/symbolurl_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data() -> None:
-    """Verify that get_rapid_symbol_data sends GET /rw/rapid/symbol/data/{symbolurl}."""
+    """
+    Verify that get_rapid_symbol_data sends GET /rw/rapid/symbol/data/{symbolurl}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -71,10 +73,11 @@ async def test_get_rapid_symbol_data() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data_actions() -> None:
-    """Verify that get_rapid_symbol_data_actions sends GET /rw/rapid/symbols/{symbolurl}."""
+    """
+    Verify that get_rapid_symbol_data_actions sends GET /rw/rapid/symbols/{symbolurl}.
+    """
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
@@ -85,10 +88,11 @@ async def test_get_rapid_symbol_data_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols/symbolurl_test"
     assert resp.status_code == 200
 
-
 @pytest.mark.asyncio
 async def test_update_rapid_variable_current_value() -> None:
-    """Verify that update_rapid_variable_current_value sends POST /rw/rapid/symbol/data/{symbolurl}."""
+    """
+    Verify that update_rapid_variable_current_value sends POST /rw/rapid/symbol/data/{symbolurl}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -99,10 +103,11 @@ async def test_update_rapid_variable_current_value() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_validate_rapid_variable() -> None:
-    """Verify that validate_rapid_variable sends POST /rw/rapid/symbol/data."""
+    """
+    Verify that validate_rapid_variable sends POST /rw/rapid/symbol/data.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
@@ -113,10 +118,11 @@ async def test_validate_rapid_variable() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/data"
     assert resp.status_code == 204
 
-
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_persistent_variable() -> None:
-    """Verify that subscribe_on_rapid_persistent_variable sends POST /subscription."""
+    """
+    Verify that subscribe_on_rapid_persistent_variable sends POST /subscription.
+    """
     transport = _MockTransport(status_code=201)
     client = _make_client(transport)
 
@@ -127,10 +133,11 @@ async def test_subscribe_on_rapid_persistent_variable() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
-
 @pytest.mark.asyncio
 async def test_update_rapid_variable_initial_value() -> None:
-    """Verify that update_rapid_variable_initial_value sends POST /rw/rapid/symbol/data/{symbolurl}."""
+    """
+    Verify that update_rapid_variable_initial_value sends POST /rw/rapid/symbol/data/{symbolurl}.
+    """
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 

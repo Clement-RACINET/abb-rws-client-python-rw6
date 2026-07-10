@@ -25,6 +25,7 @@ import argparse
 import json
 import re
 import sys
+import textwrap
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -36,39 +37,16 @@ API_JSON = REPO_ROOT / "contrib" / "scraping" / "abb_rws_api_full.json"
 RWS_OUT = REPO_ROOT / "abb_rws_client" / "rws"
 TESTS_OUT = REPO_ROOT / "tests" / "rws"
 
+# Maximum line length (matches ruff line-length = 100, with 3 chars margin)
+_MAX_LINE = 97
+
 # ---------------------------------------------------------------------------
-# Breadcrumb → Python module path mapping
-#
-# Principle: each level of the ABB breadcrumb is mapped to a Python file
-# path relative to rws/.
-#
-# Examples:
-#   ["Root Resource", "Get Service list"]
-#       → rws/root.py                    tests/rws/test_root.py
-#
-#   ["RobotWare Services", "Mastership service", "..."]
-#       → rws/mastership.py              tests/rws/test_mastership.py
-#
-#   ["RobotWare Services", "RAPID Service", "Operations on RAPID execution", "..."]
-#       → rws/rapid/execution.py         tests/rws/rapid/test_execution.py
-#
-#   ["RobotWare Services", "IO Service", "Operations on IO Signals", "..."]
-#       → rws/iosystem/signals.py        tests/rws/iosystem/test_signals.py
-#
-#   ["Controller Service", "Operations on Clock Resource", "..."]
-#       → rws/ctrl/clock.py              tests/rws/ctrl/test_clock.py
-#
-#   ["User Service", "Operations on RMMP", "..."]
-#       → rws/users/rmmp.py              tests/rws/users/test_rmmp.py
+# Breadcrumb → Python module path mapping  (inchangé)
 # ---------------------------------------------------------------------------
 
 _ROUTING_TABLE: dict[str, str | dict] = {
-
-    # ── Flat services ─────────────────────────────────────────────────────────
     "Root Resource": "root",
     "Subscription Service": "subscription",
-
-    # ── User Service → rws/users/ ─────────────────────────────────────────────
     "User Service": {
         "__default__": "users/misc",
         "Get User Resources": "users/users",
@@ -92,8 +70,6 @@ _ROUTING_TABLE: dict[str, str | dict] = {
         "Remote User Logout Request": "users/remote",
         "Subscribe on remote user state": "users/remote",
     },
-
-    # ── Controller Service → rws/ctrl/ ────────────────────────────────────────
     "Controller Service": {
         "__default__": "ctrl/ctrl",
         "Get Controller Resources": "ctrl/ctrl",
@@ -119,11 +95,7 @@ _ROUTING_TABLE: dict[str, str | dict] = {
         "Create Backup": "ctrl/backup",
         "Restore Backup": "ctrl/backup",
     },
-
-    # ── File Service → rws/fileservice.py (flat) ──────────────────────────────
     "File Service": "fileservice",
-
-    # ── RobotWare Services → sub-folders per service ──────────────────────────
     "RobotWare Services": {
         "__default__": "rw/misc",
         "CFG Service": "cfg",
@@ -188,22 +160,18 @@ def resolve_module_path(breadcrumb: list[str]) -> str | None:
 
     if node is None:
         return _slugify(level0)
-
     if isinstance(node, str):
         return node
 
-    # node is a dict → look up breadcrumb[1]
     level1 = breadcrumb[1]
     sub: str | dict | None = node.get(level1)  # type: ignore[union-attr]
 
     if sub is None:
         default: str = node.get("__default__", _slugify(level0))  # type: ignore[assignment]
         return default
-
     if isinstance(sub, str):
         return sub
 
-    # sub is a dict → look up breadcrumb[2]
     if len(breadcrumb) < 3:
         default2: str = sub.get("__default__", f"{_slugify(level0)}/{_slugify(level1)}")  # type: ignore[assignment]
         return default2
@@ -281,19 +249,24 @@ def group_by_module(endpoints: list[dict]) -> dict[str, list[dict]]:
 # ---------------------------------------------------------------------------
 
 
-def _sanitize_param_name(raw: str) -> str:
+
+def _sanitize_param_name(raw: str, max_len: int = 40) -> str:
     """Convert an ABB parameter name to a valid Python identifier.
 
-    ABB names may contain hyphens (e.g. ``domain-name``).
+    Truncates to ``max_len`` characters to prevent excessively long
+    parameter names from generating ``E501`` violations in function
+    signatures.
 
     Args:
         raw: Raw ABB name (e.g. ``"domain-name"``).
+        max_len: Maximum length of the returned identifier. Default: 40.
 
     Returns:
-        Valid Python identifier (e.g. ``"domain_name"``).
+        Valid Python identifier, at most ``max_len`` characters long.
     """
     name = re.sub(r"[^a-z0-9_]", "_", raw.lower())
-    return re.sub(r"_+", "_", name).strip("_")
+    name = re.sub(r"_+", "_", name).strip("_")
+    return name[:max_len]
 
 
 def extract_path_params(url: str) -> list[str]:
@@ -310,9 +283,6 @@ def extract_path_params(url: str) -> list[str]:
 
 def build_url_expr(url: str) -> str:
     """Build the Python expression for a URL (string literal or f-string).
-
-    Replaces ABB placeholders ``{domain-name}`` with sanitised Python
-    identifiers ``{domain_name}``.
 
     Args:
         url: Raw ABB URL (e.g. ``"/rw/mastership/{domain-name}"``).
@@ -422,7 +392,7 @@ def parse_body_params(data_params_raw: str) -> list[tuple[str, bool]]:
 
 
 # ---------------------------------------------------------------------------
-# Function naming
+# Function naming  ← CORRIGÉ : déduplication F811
 # ---------------------------------------------------------------------------
 
 _VERB_PREFIXES = frozenset({
@@ -434,17 +404,24 @@ _VERB_PREFIXES = frozenset({
 })
 
 
-def endpoint_to_func_name(ep: dict) -> str:
-    """Convert an endpoint to a snake_case Python function name.
+def endpoint_to_func_name(ep: dict, _counter: dict[str, int] | None = None) -> str:
+    """Convert an endpoint to a unique snake_case Python function name.
 
     Uses the ABB ``title`` field. Prefixes with the HTTP method if the
     title does not already start with a recognised verb.
+    Appends a numeric suffix (``_2``, ``_3``...) when the same base name
+    is generated for multiple endpoints in the same module, preventing
+    ``F811`` redefinition errors.
 
     Args:
         ep: Endpoint dictionary extracted from the ABB JSON.
+        _counter: Mutable name-counter shared across a module's endpoints.
+            Pass a fresh ``{}`` at the start of each module to enable
+            per-module deduplication. If ``None``, no deduplication is
+            applied (legacy behaviour, kept for backward compatibility).
 
     Returns:
-        Valid Python function name (e.g. ``"get_execution_state"``).
+        Valid, unique Python function name (e.g. ``"get_execution_state_2"``).
     """
     title: str = ep.get("title", "unknown")
     method: str = ep.get("method", "get").lower()
@@ -461,21 +438,98 @@ def endpoint_to_func_name(ep: dict) -> str:
     if first_word not in _VERB_PREFIXES:
         func = f"{method}_{func}"
 
+    # ── Déduplication par suffixe numérique ───────────────────────────────
+    if _counter is not None:
+        count = _counter.get(func, 0) + 1
+        _counter[func] = count
+        if count > 1:
+            func = f"{func}_{count}"
+
     return func
+
+
+# ---------------------------------------------------------------------------
+# Docstring line wrapping  ← NOUVEAU : corrige E501
+# ---------------------------------------------------------------------------
+
+
+def _wrap_doc(text: str, indent: str = "    ", max_width: int = _MAX_LINE) -> list[str]:
+    """Wrap a docstring text block to fit within ``max_width`` total characters.
+
+    Args:
+        text: Raw text to wrap (without leading indent).
+        indent: Indentation prefix applied to every output line.
+        max_width: Maximum total line width (indent + text).
+
+    Returns:
+        List of indented, wrapped lines. Never empty: returns
+        ``[indent + text]`` unchanged if wrapping is impossible.
+    """
+    available = max_width - len(indent)
+    if available <= 0:
+        return [f"{indent}{text}"]
+    wrapped = textwrap.wrap(
+        text,
+        width=available,
+        break_long_words=True,
+        break_on_hyphens=False,
+        subsequent_indent="    ",  # continuation indent inside the docstring block
+    )
+    return [f"{indent}{line}" for line in wrapped] if wrapped else [f"{indent}{text}"]
 
 
 # ---------------------------------------------------------------------------
 # rws/ module generation
 # ---------------------------------------------------------------------------
 
+def _render_http_call(
+    method_lower: str,
+    url_expr: str,
+    httpx_kwargs: list[str],
+) -> list[str]:
+    """Render the ``return await client.X(...)`` statement as multiple lines.
+
+    Always uses the multi-line form to prevent ``E501`` on long
+    ``params=`` / ``data=`` expressions.
+
+    Args:
+        method_lower: HTTP method in lowercase (e.g. ``"get"``).
+        url_expr: Python URL expression (e.g. ``'"/rw/cfg"'``).
+        httpx_kwargs: List of keyword argument strings
+            (e.g. ``['params={...}', 'data={...}']``).
+
+    Returns:
+        List of Python source lines.
+    """
+    if not httpx_kwargs:
+        return [f"    return await client.{method_lower}({url_expr})"]
+
+    lines = [f"    return await client.{method_lower}("]
+    lines.append(f"        {url_expr},")
+    for kwarg in httpx_kwargs:
+        lines.append(f"        {kwarg},")
+    lines.append("    )")
+    return lines
+
+def _compute_func_names(endpoints: list[dict]) -> list[str]:
+    """Pre-compute unique function names for a list of endpoints.
+
+    Uses a shared counter so that both ``render_module`` and
+    ``render_tests`` produce identical names for the same endpoints.
+
+    Args:
+        endpoints: Ordered list of endpoint dicts for one module.
+
+    Returns:
+        List of unique function names, same length and order as
+        ``endpoints``.
+    """
+    counter: dict[str, int] = {}
+    return [endpoint_to_func_name(ep, _counter=counter) for ep in endpoints]
+
 
 def render_module(module_path: str, endpoints: list[dict]) -> str:
     """Generate the full content of an rws/ module file.
-
-    Note:
-        The title extracted from the ABB breadcrumb is stripped of
-        backslashes to prevent invalid escape sequences in the generated
-        module docstring.
 
     Args:
         module_path: Relative path (e.g. ``"rapid/execution"``).
@@ -486,8 +540,9 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
     """
     first_bc = endpoints[0].get("breadcrumb", []) if endpoints else []
     title = " → ".join(first_bc[:3]) if first_bc else module_path
-    # Strip any backslashes from ABB titles
     title = title.replace("\\", "/")
+
+    func_names = _compute_func_names(endpoints)
 
     lines: list[str] = [
         "# This file is AUTO-GENERATED by contrib/generator/main.py",
@@ -509,35 +564,38 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep in endpoints:
-        lines.extend(render_function(ep))
+    for ep, func_name in zip(endpoints, func_names):
+        lines.extend(render_function(ep, func_name=func_name))
         lines.append("")
 
     return "\n".join(lines)
 
 
-def render_function(ep: dict) -> list[str]:
+def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
     """Generate the async function code for an ABB endpoint.
 
     Note:
         The ``notes`` and ``sample_call`` fields from the ABB JSON may
-        contain backslashes (Windows paths, escaped URLs). These would be
-        interpreted as Unicode escape sequences in the generated Python
-        docstrings (e.g. ``\\U``, ``\\r``, ``\\t``) and cause a
-        ``SyntaxError`` at import time. They are systematically replaced
-        by forward slashes before being injected into the docstring.
+        contain backslashes. These are replaced by forward slashes before
+        being injected into docstrings to prevent ``SyntaxError``.
 
-        Required parameters are always placed before optional parameters
-        in the signature to comply with the Python rule
-        (non-default argument follows default argument).
+        Required parameters are always placed before optional parameters.
+
+        All docstring lines are wrapped to ``_MAX_LINE`` characters to
+        satisfy ``E501``.
 
     Args:
         ep: Endpoint dictionary extracted from the ABB JSON.
+        func_name: Pre-computed unique function name. If ``None``,
+            ``endpoint_to_func_name`` is called without deduplication
+            (backward-compatible fallback).
 
     Returns:
-        List of Python lines (no trailing ``\\n``).
+        List of Python lines (no trailing newline).
     """
-    func_name = endpoint_to_func_name(ep)
+    if func_name is None:
+        func_name = endpoint_to_func_name(ep)
+
     url: str = ep.get("url", "")
     method: str = ep.get("method", "GET").upper()
     title: str = ep.get("title", "")
@@ -550,41 +608,35 @@ def render_function(ep: dict) -> list[str]:
     query_params = parse_query_params(ep.get("url_params") or "")
     body_params = parse_body_params(ep.get("data_params") or "")
 
-    # ── Signature ─────────────────────────────────────────────────────────────
-    # Python rule: parameters without defaults before parameters with defaults.
+    # ── Signature ─────────────────────────────────────────────────────────
     sig_parts: list[str] = ["client: RWSClient"]
-    # Path parameters (always required)
     sig_parts += [f"{p}: str" for p in path_params]
-    # Required first, optional second
-    # Exclude params already fixed in the ABB URL query string
+
     _url_qs_keys = {
         pair.split("=")[0].strip()
         for pair in (url.split("?")[1] if "?" in url else "").split("&")
         if "=" in pair
     }
-    query_required = [f"{n}: str" for n, req in query_params if req and n not in _url_qs_keys]
-    query_optional = [f"{n}: str | None = None" for n, req in query_params if not req and n not in _url_qs_keys]
-
+    query_required = [
+        f"{n}: str" for n, req in query_params if req and n not in _url_qs_keys
+    ]
+    query_optional = [
+        f"{n}: str | None = None"
+        for n, req in query_params
+        if not req and n not in _url_qs_keys
+    ]
     body_required = [f"{n}: str" for n, req in body_params if req]
     body_optional = [f"{n}: str | None = None" for n, req in body_params if not req]
     sig_parts += query_required + body_required + query_optional + body_optional
 
-    # ── Split ABB URL path from query string ──────────────────────────────────
-    # e.g. "/ctrl/clock/timezone?action=show"
-    #   → url_path = "/ctrl/clock/timezone"
-    #   → url_qs   = "action=show"
+    # ── URL split ─────────────────────────────────────────────────────────
     url_path = url.split("?")[0]
     url_qs = url.split("?")[1] if "?" in url else ""
-
-    # ── Python URL expression (path only) ─────────────────────────────────────
     url_expr = build_url_expr(url_path)
 
-    # ── httpx kwargs ──────────────────────────────────────────────────────────
+    # ── httpx kwargs ──────────────────────────────────────────────────────
     httpx_kwargs: list[str] = []
 
-    # Build the params dict by merging:
-    # 1. Fixed params from the ABB URL query string (e.g. action=show)
-    # 2. Dynamic params from the ABB url_params field
     fixed_qs_pairs: list[tuple[str, str]] = []
     if url_qs:
         for pair in url_qs.split("&"):
@@ -594,28 +646,23 @@ def render_function(ep: dict) -> list[str]:
                 if k and v:
                     fixed_qs_pairs.append((k, v))
 
-    # Keys already covered by the fixed ABB URL query string
     fixed_qs_keys_func: set[str] = {k for k, _ in fixed_qs_pairs}
-
-    # Dynamic params: exclude those already in the fixed QS
-    dynamic_query_params = [(n, req) for n, req in query_params if n not in fixed_qs_keys_func]
+    dynamic_query_params = [
+        (n, req) for n, req in query_params if n not in fixed_qs_keys_func
+    ]
 
     if fixed_qs_pairs or dynamic_query_params:
         parts: list[str] = []
-        # Fixed params (literal value)
         for k, v in fixed_qs_pairs:
             parts.append(f'"{k}": "{v}"')
-        # Dynamic params (Python variable)
         for n, _ in dynamic_query_params:
             parts.append(f'"{n}": {n}')
         items_str = ", ".join(parts)
         if dynamic_query_params:
-            # Filter out None values for optional dynamic params
             httpx_kwargs.append(
                 f"params={{k: v for k, v in {{{items_str}}}.items() if v is not None}}"
             )
         else:
-            # Only fixed params → literal dict, no None filter needed
             httpx_kwargs.append(f"params={{{items_str}}}")
 
     if body_params and method in ("POST", "PUT"):
@@ -624,15 +671,10 @@ def render_function(ep: dict) -> list[str]:
             f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}"
         )
 
-    kwargs_str = ", ".join(httpx_kwargs)
+    # ── method_lower pour _render_http_call ───────────────────────────────
     method_lower = method.lower()
-    http_call = (
-        f"await client.{method_lower}({url_expr}, {kwargs_str})"
-        if kwargs_str
-        else f"await client.{method_lower}({url_expr})"
-    )
 
-    # ── Rendering ─────────────────────────────────────────────────────────────
+    # ── Rendering ─────────────────────────────────────────────────────────
     lines: list[str] = []
 
     if len(sig_parts) > 1:
@@ -647,31 +689,29 @@ def render_function(ep: dict) -> list[str]:
     lines.append('    """')
     lines.append(f"    {title}.")
     lines.append("")
-    lines.append(f"    Route: ``{method} {url}``")
+
+    # Route line — wrapped if needed
+    lines.extend(_wrap_doc(f"Route: ``{method} {url}``"))
 
     if notes:
-        # Mandatory cleanup: backslashes in raw ABB data break Python docstrings
-        # (\U, \r, \t → SyntaxError at import time).
         notes_clean = notes.replace("\\", "/").replace("\n", " ").strip()
         if len(notes_clean) > 300:
             notes_clean = notes_clean[:297] + "..."
-        lines.append(f"    ABB constraints: {notes_clean}")
+        lines.extend(_wrap_doc(f"ABB constraints: {notes_clean}"))
 
     lines.append("")
     lines.append("    Args:")
     lines.append("        client: Open RWSClient instance.")
     for p in path_params:
         lines.append(f"        {p}: URL path parameter.")
-    # Docstring: same order as signature (required then optional)
-    # Exclude fixed QS params from ABB (not part of the function signature)
     for n, req in sorted(query_params, key=lambda x: not x[1]):
         if n in _url_qs_keys:
             continue
         req_str = "Required." if req else "Optional."
-        lines.append(f"        {n}: Query parameter. {req_str}")
+        lines.extend(_wrap_doc(f"{n}: Query parameter. {req_str}", indent="        "))
     for n, req in sorted(body_params, key=lambda x: not x[1]):
         req_str = "Required." if req else "Optional."
-        lines.append(f"        {n}: Body parameter. {req_str}")
+        lines.extend(_wrap_doc(f"{n}: Body parameter. {req_str}", indent="        "))
 
     lines.append("")
     lines.append("    Returns:")
@@ -683,19 +723,18 @@ def render_function(ep: dict) -> list[str]:
     lines.append("        RWSHTTPError: On any other HTTP >= 400.")
 
     if error_raw.strip():
-        first_error = error_raw.splitlines()[0].strip()
-        first_error = first_error.replace("\\", "/")
-        lines.append(f"        # ABB codes: {first_error}")
+        first_error = error_raw.splitlines()[0].strip().replace("\\", "/")
+        lines.extend(_wrap_doc(f"# ABB codes: {first_error}", indent="        "))
 
     if sample_raw.strip():
-        first_sample = sample_raw.strip().splitlines()[0][:120]
-        first_sample = first_sample.replace("\\", "/")
+        first_sample = sample_raw.strip().splitlines()[0][:120].replace("\\", "/")
         lines.append("")
         lines.append("    Example:")
-        lines.append(f"        # {first_sample}")
+        lines.extend(_wrap_doc(f"# {first_sample}", indent="        "))
 
     lines.append('    """')
-    lines.append(f"    return {http_call}")
+    # ── return statement multiligne (évite E501 sur params= / data=) ──────
+    lines.extend(_render_http_call(method_lower, url_expr, httpx_kwargs))
 
     return lines
 
@@ -708,9 +747,6 @@ def render_function(ep: dict) -> list[str]:
 def render_tests(module_path: str, endpoints: list[dict]) -> str:
     """Generate the full content of a test file for an rws/ module.
 
-    The test file path mirrors rws/:
-    ``rws/rapid/execution.py`` → ``tests/rws/rapid/test_execution.py``
-
     Args:
         module_path: Relative path (e.g. ``"rapid/execution"``).
         endpoints: List of endpoints for this module.
@@ -719,7 +755,8 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         Python test file content as a string.
     """
     module_import = module_path.replace("/", ".")
-    func_names = [endpoint_to_func_name(ep) for ep in endpoints]
+    # Utilise le même compteur que render_module → noms identiques
+    func_names = _compute_func_names(endpoints)
 
     lines: list[str] = [
         "# This file is AUTO-GENERATED by contrib/generator/main.py",
@@ -728,8 +765,8 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         f'"""Auto-generated unit tests for rws/{module_path}."""',
         "from __future__ import annotations",
         "",
-        "import pytest",
         "import httpx",
+        "import pytest",
         "",
         "from abb_rws_client._core.client import RWSClient",
         f"from abb_rws_client.rws.{module_import} import (",
@@ -766,31 +803,27 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep in endpoints:
-        lines.extend(render_test_function(ep))
+    for ep, func_name in zip(endpoints, func_names):
+        lines.extend(render_test_function(ep, func_name=func_name))
         lines.append("")
 
     return "\n".join(lines)
 
 
-def render_test_function(ep: dict) -> list[str]:
+def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]:
     """Generate a pytest unit test for a single endpoint.
-
-    Note:
-        ABB URLs may embed a query string directly in the ``url`` field
-        (e.g. ``/ctrl/clock/timezone?action=show``). The path and query
-        string are split before generation so that ``url.path`` never
-        contains ``?...``.
-        Fixed query string params from the ABB URL are asserted with their
-        literal value; dynamic params are asserted with their test value.
 
     Args:
         ep: Endpoint dictionary extracted from the ABB JSON.
+        func_name: Pre-computed unique function name. If ``None``,
+            ``endpoint_to_func_name`` is called without deduplication.
 
     Returns:
         List of Python lines.
     """
-    func_name = endpoint_to_func_name(ep)
+    if func_name is None:
+        func_name = endpoint_to_func_name(ep)
+
     url: str = ep.get("url", "")
     method: str = ep.get("method", "GET").upper()
     success_raw: str = ep.get("success_response") or ""
@@ -800,11 +833,9 @@ def render_test_function(ep: dict) -> list[str]:
     query_params = parse_query_params(ep.get("url_params") or "")
     body_params = parse_body_params(ep.get("data_params") or "")
 
-    # ── Split ABB URL path from query string ──────────────────────────────────
     url_path_only: str = url.split("?")[0]
     url_qs_only: str = url.split("?")[1] if "?" in url else ""
 
-    # Fixed params from the ABB query string (e.g. action=show)
     fixed_qs: list[tuple[str, str]] = []
     if url_qs_only:
         for pair in url_qs_only.split("&"):
@@ -815,9 +846,7 @@ def render_test_function(ep: dict) -> list[str]:
                     fixed_qs.append((k, v))
     fixed_qs_keys: set[str] = {k for k, _ in fixed_qs}
 
-    # ── Call arguments ────────────────────────────────────────────────────────
     dummy_path = ", ".join(f'"{p}_test"' for p in path_params)
-    # Fixed ABB QS params are NOT function arguments
     dummy_query_req = ", ".join(
         f'{n}="{n}_val"' for n, req in query_params if req and n not in fixed_qs_keys
     )
@@ -831,7 +860,6 @@ def render_test_function(ep: dict) -> list[str]:
         call_args.append(all_dummy_kwargs)
     call_str = f"await {func_name}({', '.join(call_args)})"
 
-    # ── Expected path (path only, test values injected) ───────────────────────
     expected_path = url_path_only
     for raw_p, py_p in zip(
         re.findall(r"\{([^}]+)\}", url_path_only),
@@ -841,11 +869,18 @@ def render_test_function(ep: dict) -> list[str]:
     if not expected_path.startswith("/"):
         expected_path = "/" + expected_path
 
-    # ── Line generation ───────────────────────────────────────────────────────
+    # Docstring de test wrappée pour E501
+    doc_text = f"Verify that {func_name} sends {method} {url}."
+    doc_lines = _wrap_doc(doc_text, indent="    ")
+
     lines: list[str] = [
         "@pytest.mark.asyncio",
         f"async def test_{func_name}() -> None:",
-        f'    """Verify that {func_name} sends {method} {url}."""',
+    ]
+    lines.append('    """')
+    lines.extend(doc_lines)
+    lines.append('    """')
+    lines += [
         f"    transport = _MockTransport(status_code={status_code})",
         "    client = _make_client(transport)",
         "",
@@ -856,13 +891,8 @@ def render_test_function(ep: dict) -> list[str]:
         f'    assert transport.last_request.url.path == "{expected_path}"',
     ]
 
-    # ── Query param assertions via .params["key"] ─────────────────────────────
-    # 1. Fixed ABB QS params → exact literal value
     for k, v in fixed_qs:
-        lines.append(
-            f'    assert transport.last_request.url.params["{k}"] == "{v}"'
-        )
-    # 2. Required dynamic params → test value
+        lines.append(f'    assert transport.last_request.url.params["{k}"] == "{v}"')
     for n, req in query_params:
         if req and n not in fixed_qs_keys:
             lines.append(
@@ -875,20 +905,12 @@ def render_test_function(ep: dict) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# __init__.py management
+# __init__.py management  (inchangé)
 # ---------------------------------------------------------------------------
 
 
 def ensure_inits(modules: dict[str, list[dict]], dry_run: bool) -> None:
     """Create any missing ``__init__.py`` files in rws/ and tests/rws/.
-
-    Walks all intermediate directories that are required.
-
-    Note:
-        Paths are normalised to forward slashes (``/``) to prevent Windows
-        path separators (``\\``) from being interpreted as Unicode escape
-        sequences in generated docstrings
-        (e.g. ``tests\\users`` → ``\\u`` → ``SyntaxError``).
 
     Args:
         modules: Dictionary ``{module_path: endpoints}``.
@@ -906,10 +928,6 @@ def ensure_inits(modules: dict[str, list[dict]], dry_run: bool) -> None:
         init = d / "__init__.py"
         if not init.exists():
             rel = d.relative_to(REPO_ROOT)
-            # Mandatory normalisation on Windows:
-            # Path.relative_to() returns "tests\rws\users" with backslashes.
-            # In a Python docstring, \u, \r, \t are escape sequences
-            # → SyntaxError at import time. Force forward slashes.
             rel_str = str(rel).replace("\\", "/")
             content = f'"""RWS sub-package: {rel_str}."""\n'
             if dry_run:
@@ -921,7 +939,7 @@ def ensure_inits(modules: dict[str, list[dict]], dry_run: bool) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Entry point
+# Entry point  (inchangé)
 # ---------------------------------------------------------------------------
 
 
@@ -934,69 +952,40 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Generate abb_rws_client/rws/ from contrib/scraping/abb_rws_api_full.json"
     )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Print what would be generated without writing any files.",
-    )
-    parser.add_argument(
-        "--only",
-        metavar="MODULE",
-        default=None,
-        help="Only generate this module (e.g. rapid/execution).",
-    )
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--only", metavar="MODULE", default=None)
     args = parser.parse_args(argv)
 
-    # ── Read JSON ─────────────────────────────────────────────────────────────
     if not API_JSON.exists():
         print(f"[ERROR] File not found: {API_JSON}", file=sys.stderr)
-        print(
-            "        Run contrib/scraping/scrape.py first to generate this file.",
-            file=sys.stderr,
-        )
         sys.exit(1)
 
     raw: list[dict] = json.loads(API_JSON.read_text(encoding="utf-8"))
     print(f"[INFO] {len(raw)} entries read from {API_JSON.relative_to(REPO_ROOT)}")
 
-    # ── Grouping ──────────────────────────────────────────────────────────────
     modules = group_by_module(raw)
 
     if args.only:
         if args.only not in modules:
             available = "\n  ".join(sorted(modules))
-            print(
-                f"[ERROR] Module '{args.only}' not found.\n"
-                f"Available modules:\n  {available}",
-                file=sys.stderr,
-            )
+            print(f"[ERROR] Module '{args.only}' not found.\nAvailable:\n  {available}",
+                  file=sys.stderr)
             sys.exit(1)
         modules = {args.only: modules[args.only]}
 
-    # ── Generation ────────────────────────────────────────────────────────────
     ensure_inits(modules, dry_run=args.dry_run)
 
     for module_path, eps in sorted(modules.items()):
-        # ── rws/ module ───────────────────────────────────────────────────────
         rws_file = RWS_OUT / f"{module_path}.py"
         module_content = render_module(module_path, eps)
 
         if args.dry_run:
-            print(
-                f"  [DRY]  would write {rws_file.relative_to(REPO_ROOT)}"
-                f" ({len(eps)} endpoints)"
-            )
+            print(f"  [DRY]  would write {rws_file.relative_to(REPO_ROOT)} ({len(eps)} endpoints)")
         else:
             rws_file.parent.mkdir(parents=True, exist_ok=True)
             rws_file.write_text(module_content, encoding="utf-8")
-            print(
-                f"  [GEN]  {rws_file.relative_to(REPO_ROOT)}"
-                f" ({len(eps)} endpoints)"
-            )
+            print(f"  [GEN]  {rws_file.relative_to(REPO_ROOT)} ({len(eps)} endpoints)")
 
-        # ── Tests: mirror of rws/ ─────────────────────────────────────────────
-        # rws/rapid/execution.py  →  tests/rws/rapid/test_execution.py
-        # rws/mastership.py       →  tests/rws/test_mastership.py
         module_parts = module_path.split("/")
         test_filename = f"test_{module_parts[-1]}.py"
         test_file = (
@@ -1013,10 +1002,7 @@ def main(argv: list[str] | None = None) -> None:
             test_file.write_text(test_content, encoding="utf-8")
             print(f"  [TEST] {test_file.relative_to(REPO_ROOT)}")
 
-    print(
-        f"\n[OK] {'Dry run' if args.dry_run else 'Generation'} complete — "
-        f"{len(modules)} modules."
-    )
+    print(f"\n[OK] {'Dry run' if args.dry_run else 'Generation'} complete — {len(modules)} modules.")
 
 
 if __name__ == "__main__":

@@ -8,7 +8,6 @@ RWS module: Operations on IO Profinet Device → Get profinet I/O device read re
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -54,24 +53,13 @@ async def get_profinet_device_read_record_implicit_data(
         # ABB codes: Bad Request(406)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
     """
     return await client.get(
         f"rw/iosystem/devices/{network}/{device}/implicitdata",
-        params={
-            k: v
-            for k, v in {
-                "slot": slot,
-                "subslot": subslot,
-                "index": index,
-                "datalength": datalength,
-                "vendorid": vendorid,
-                "deviceid": deviceid,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid}.items() if v is not None},
     )
-
 
 async def post_read_record_implicit_data_from_device_in(
     client: RWSClient,
@@ -113,25 +101,13 @@ async def post_read_record_implicit_data_from_device_in(
         # ABB codes: NOT_ACCEPTABLE(406)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60&vendorid=42&deviceid=787&ip=127.1.1.
+        # curl --digest -u "Default User":robotics -d
+            "slot=1&subslot=2&index=2&datalength=60&vendorid=42&deviceid=787&ip=127.1.1.
     """
     return await client.post(
         f"rw/iosystem/devices/{network}/{device}/implicitdata",
-        data={
-            k: v
-            for k, v in {
-                "slot": slot,
-                "subslot": subslot,
-                "index": index,
-                "datalength": datalength,
-                "vendorid": vendorid,
-                "deviceid": deviceid,
-                "ip": ip,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid, "ip": ip}.items() if v is not None},
     )
-
 
 async def get_forms(
     client: RWSClient,
@@ -159,10 +135,10 @@ async def get_forms(
         # ABB codes: NOT_ACCEPTABLE(406) See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/im
+        # curl --digest -u "Default User":robotics -X OPTIONS
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/im
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/implicitdata")
-
 
 async def get_profinet_device_read_record_data(
     client: RWSClient,
@@ -198,24 +174,15 @@ async def get_profinet_device_read_record_data(
         # ABB codes: NOT_ACCEPTABLE(406)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
     """
     return await client.get(
         f"rw/iosystem/devices/{network}/{device}/explicitdata",
-        params={
-            k: v
-            for k, v in {
-                "slot": slot,
-                "subslot": subslot,
-                "index": index,
-                "datalength": datalength,
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
     )
 
-
-async def get_profinet_device_read_record_data(
+async def get_profinet_device_read_record_data_2(
     client: RWSClient,
     network: str,
     device: str,
@@ -249,24 +216,15 @@ async def get_profinet_device_read_record_data(
         # ABB codes: NOT_ACCEPTABLE(406)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60" -X POST "http://localhost/rw/iosyst
+        # curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60" -X
+            POST "http://localhost/rw/iosyst
     """
     return await client.post(
         f"rw/iosystem/devices/{network}/{device}/explicitdata",
-        data={
-            k: v
-            for k, v in {
-                "slot": slot,
-                "subslot": subslot,
-                "index": index,
-                "datalength": datalength,
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
     )
 
-
-async def get_forms(
+async def get_forms_2(
     client: RWSClient,
     network: str,
     device: str,
@@ -292,10 +250,10 @@ async def get_forms(
         # ABB codes: See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/ex
+        # curl --digest -u "Default User":robotics -X OPTIONS
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/ex
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/explicitdata")
-
 
 async def get_profinet_device_alarms_xml_response(
     client: RWSClient,
@@ -323,10 +281,10 @@ async def get_profinet_device_alarms_xml_response(
         # ABB codes: NOT_ACCEPTABLE(406)
 
     Example:
-        # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms"
+        # curl --digest -u "Default User":robotics
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms"
     """
     return await client.get(f"rw/iosystem/devices/{network}/{device}/alarms")
-
 
 async def post_clear_the_alarms(
     client: RWSClient,
@@ -354,12 +312,12 @@ async def post_clear_the_alarms(
         # ABB codes: NOT_ACCEPTABLE(406)
 
     Example:
-        # curl --digest -u "Default User":robotics -d POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarm
+        # curl --digest -u "Default User":robotics -d POST
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarm
     """
     return await client.post(f"rw/iosystem/devices/{network}/{device}/alarms/clear")
 
-
-async def get_forms(
+async def get_forms_3(
     client: RWSClient,
     network: str,
     device: str,
@@ -385,6 +343,7 @@ async def get_forms(
         # ABB codes: NOT_ACCEPTABLE(406) See
 
     Example:
-        # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/al
+        # curl --digest -u "Default User":robotics -X OPTIONS
+            "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/al
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/alarms/clear")
