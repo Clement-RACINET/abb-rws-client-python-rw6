@@ -125,12 +125,11 @@ abb_rws_client_python_rw6
 │   │   ├── test_system.py
 │   │   └── test_vision.py
 │   ├── __init__.py
-│   └── conftest.py
+│   ├── conftest.py
+│   └── coverage.xml
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md
-├── coverage.xml
-├── lint.txt
 ├── mkdocs.yml
 ├── objectifs.md
 ├── pixi.lock

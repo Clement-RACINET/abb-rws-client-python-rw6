@@ -100,7 +100,7 @@ addopts = [
     "--cov-branch",
     "--cov-report=term-missing",
     "--cov-report=html:docs/coverage",
-    "--cov-report=xml:coverage.xml",
+    "--cov-report=xml:tests/coverage.xml",
 ]
 
 # ---------------------------------------------------------------------------
