@@ -9,14 +9,14 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.uiinstr import (
-    get_ui_instruction_resource,
-    get_ui_instruction_actions,
-    subscribe_on_ui_instruction,
     get_active_ui_instruction,
     get_active_ui_instruction_actions,
-    update_an_active_ui_instruction_parameter,
-    get_parameter_value_for_an_active_ui,
     get_active_ui_instruction_parameters,
+    get_parameter_value_for_an_active_ui,
+    get_ui_instruction_actions,
+    get_ui_instruction_resource,
+    subscribe_on_ui_instruction,
+    update_an_active_ui_instruction_parameter,
 )
 
 
@@ -128,11 +128,16 @@ async def test_update_an_active_ui_instruction_parameter() -> None:
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await update_an_active_ui_instruction_parameter(client, "stackurl_test", "uiparam_test")
+    resp = await update_an_active_ui_instruction_parameter(
+        client,
+        "stackurl_test",
+        "uiparam_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    expected_path = "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -148,7 +153,8 @@ async def test_get_parameter_value_for_an_active_ui() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    expected_path = "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio

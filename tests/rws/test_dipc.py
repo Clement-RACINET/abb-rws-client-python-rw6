@@ -9,14 +9,14 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.dipc import (
-    get_dipc_resources,
-    get_dipc_actions,
     create_queue,
+    delete_dipc_queue,
+    get_dipc_actions,
     get_dipc_queue,
     get_dipc_queue_actions,
-    post_send_message,
+    get_dipc_resources,
     get_read_message,
-    delete_dipc_queue,
+    post_send_message,
     subscribe_dipc_queue,
     subscribe_dipc_queue_without_reading_message,
 )

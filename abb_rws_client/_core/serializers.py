@@ -13,8 +13,8 @@ Inactive external axis     : 9E+9
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
+import re
 from typing import TypeAlias
 
 from abb_rws_client._core.exceptions import RWSValueError

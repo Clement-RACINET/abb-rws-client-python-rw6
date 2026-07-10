@@ -9,10 +9,10 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.symbols import (
-    get_rapid_symbols_resources,
-    get_rapid_symbols_actions,
-    post_search_rapid_symbols,
     get_object_extension_list,
+    get_rapid_symbols_actions,
+    get_rapid_symbols_resources,
+    post_search_rapid_symbols,
 )
 
 

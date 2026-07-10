@@ -10,10 +10,10 @@ import pytest
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.signals import (
     get_io_signals,
+    get_io_signals_actions,
     post_signal_search,
     post_signal_search_extended,
     post_unblock_signals,
-    get_io_signals_actions,
 )
 
 

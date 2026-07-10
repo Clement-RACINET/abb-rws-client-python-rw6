@@ -68,14 +68,15 @@ select = [
     "SIM", # flake8-simplify
     "ANN", # annotations (type hints)
 ]
-ignore = [
-    
+ignore = [  
+
 ]
 
-[tool.ruff.lint.per-file-ignores] #TODO: Refaire les init propre avec un __all__
-"__init__.py" = ["F401"]
+[tool.ruff.lint.per-file-ignores]
+"abb_rws_client/_core/client.py" = ["ANN401"]  # **kwargs: Any forwarded to httpx
 
 [tool.ruff.lint.isort]
+force-sort-within-sections = true
 known-first-party = ["abb_rws_client"]
 
 [tool.ruff.format]

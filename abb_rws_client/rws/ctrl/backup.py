@@ -72,7 +72,7 @@ async def get_backup_actions(
 async def create_backup(
     client: RWSClient,
     action: str | None = None,
-    environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str | None = None,
+    environment_variables_such_as_temp_sys: str | None = None,
     archive: str | None = None,
 ) -> httpx.Response:
     """
@@ -87,8 +87,7 @@ async def create_backup(
     Args:
         client: Open RWSClient instance.
         action: Query parameter. Optional.
-        environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_
-            directory_cannot_be_used_as_backup_path_example_backup: Body parameter. Optional.
+        environment_variables_such_as_temp_sys: Body parameter. Optional.
         archive: Body parameter. Optional.
 
     Returns:
@@ -107,13 +106,20 @@ async def create_backup(
     return await client.post(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup, "archive": archive}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "environment_variables_such_as_temp_sys": environment_variables_such_as_temp_sys,
+                "archive": archive
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_restore_backup(
     client: RWSClient,
     action: str | None = None,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    path_must_be_part_of_the_controller_fi: str | None = None,
 ) -> httpx.Response:
     """
     Restore a backup..
@@ -124,8 +130,7 @@ async def post_restore_backup(
     Args:
         client: Open RWSClient instance.
         action: Query parameter. Optional.
-        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system
-            _shall_be_possible_to_have_in_the_path_example_backup: Body parameter. Optional.
+        path_must_be_part_of_the_controller_fi: Body parameter. Optional.
 
     Returns:
         Raw HTTP response. Expected success: HTTP 204.
@@ -143,12 +148,18 @@ async def post_restore_backup(
     return await client.post(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "path_must_be_part_of_the_controller_fi": path_must_be_part_of_the_controller_fi
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_check_restore(
     client: RWSClient,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    path_must_be_part_of_the_controller_fi: str | None = None,
 ) -> httpx.Response:
     """
     Check Restore.
@@ -158,8 +169,7 @@ async def get_check_restore(
 
     Args:
         client: Open RWSClient instance.
-        path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system
-            _shall_be_possible_to_have_in_the_path_example_backup: Query parameter. Optional.
+        path_must_be_part_of_the_controller_fi: Query parameter. Optional.
 
     Returns:
         Raw HTTP response. Expected success: HTTP 200.
@@ -176,7 +186,13 @@ async def get_check_restore(
     """
     return await client.get(
         "/ctrl/backup",
-        params={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "path_must_be_part_of_the_controller_fi": path_must_be_part_of_the_controller_fi
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_backup_state(
@@ -244,7 +260,14 @@ async def subscribe_on_backup_system_information(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_backup_system_information(

@@ -9,17 +9,17 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.execution import (
-    get_rapid_execution_state,
     get_rapid_execution_actions,
-    start_rapid_execution,
-    stop_rapid_execution,
-    start_rapid_execution_from_production_entry,
+    get_rapid_execution_state,
     reset_rapid_program_pointer_to_main,
+    set_hold_to_run_cmd,
     set_number_of_execution_cycles,
+    start_rapid_execution,
+    start_rapid_execution_from_production_entry,
+    stop_rapid_execution,
+    subscribe_on_hold_to_run,
     subscribe_rapid_execution,
     subscribe_rapid_execution_cycle,
-    subscribe_on_hold_to_run,
-    set_hold_to_run_cmd,
 )
 
 

@@ -9,8 +9,8 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.networks import (
-    get_io_networks_resources,
     get_actions_on_io_networks,
+    get_io_networks_resources,
     post_search_io_networks,
 )
 

@@ -257,7 +257,14 @@ async def subscribe_controller_state(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_operation_mode(client: RWSClient) -> httpx.Response:
@@ -345,7 +352,14 @@ async def subscribe_operation_mode(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_acknowledgement_for_operation_mode(
@@ -612,7 +626,14 @@ async def subscribe_speed_ratio(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
@@ -701,5 +722,12 @@ async def subscribe_on_collision_detection_state(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )

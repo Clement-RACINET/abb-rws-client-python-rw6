@@ -240,7 +240,14 @@ async def subscribe_on_system_energy_changes(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_system_robotware_license(client: RWSClient) -> httpx.Response:

@@ -184,7 +184,14 @@ async def subscribe_on_rmmp_request_event(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def poll_for_rmmp_grant_status(client: RWSClient) -> httpx.Response:

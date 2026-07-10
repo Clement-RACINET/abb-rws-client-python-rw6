@@ -163,7 +163,14 @@ async def post_mastership_subscribe(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_mastership_domain(
@@ -325,5 +332,12 @@ async def post_mastership_domain_subscribe(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )

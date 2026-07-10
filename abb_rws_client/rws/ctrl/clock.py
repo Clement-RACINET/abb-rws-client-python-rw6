@@ -284,5 +284,12 @@ async def get_test_time_server(
     """
     return await client.get(
         "/ctrl/clock/timeserver",
-        params={k: v for k, v in {"resource": resource, "server_ip": server_ip}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "server_ip": server_ip
+            }.items()
+            if v is not None
+        },
     )

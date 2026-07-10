@@ -108,5 +108,14 @@ async def post_search_io_devices(
     return await client.post(
         "/rw/iosystem/devices",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"name": name, "lstate": lstate, "network": network, "example_name": example_name}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "lstate": lstate,
+                "network": network,
+                "example_name": example_name
+            }.items()
+            if v is not None
+        },
     )

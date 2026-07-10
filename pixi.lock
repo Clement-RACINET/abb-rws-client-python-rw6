@@ -374,7 +374,7 @@ packages:
 - pypi: ./
   name: abb-rws6-python-client
   version: 0.1.0
-  sha256: b039020948117003f9cbe65aa4535addf2ba688e36e9a9ee1a8a8f825d0bd0ef
+  sha256: 814c956b16807eb0901c95ec1333f0d60401d04ba4df40c78fd3f1083c8f79d2
   requires_dist:
   - httpx>=0.27,<1.0
   - python-dotenv>=1.0,<2.0

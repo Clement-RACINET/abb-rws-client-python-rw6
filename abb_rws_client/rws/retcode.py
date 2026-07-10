@@ -2,7 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """
-RWS module: RobotWare Services → RobotWare return codes service → Get a list of RobotWare return codes
+RWS module: RobotWare Services → RobotWare return codes service → Get a list of RobotWare retu...
 
 1:1 mirror of the ABB RobotWare 6 REST API.
 Each function maps to exactly one HTTP endpoint.

@@ -92,8 +92,31 @@ async def post_signal_search(
     """
     return await client.post(
         "/rw/iosystem/signals",
-        params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None},
-        data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "action": action,
+                "start": start,
+                "limit": limit
+            }.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "device": device,
+                "network": network,
+                "category": category,
+                "category_pon": category_pon,
+                "type": type,
+                "invert": invert,
+                "blocked": blocked,
+                "name2": name2,
+                "device2": device2
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_signal_search_extended(
@@ -149,8 +172,31 @@ async def post_signal_search_extended(
     """
     return await client.post(
         "/rw/iosystem/signals",
-        params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None},
-        data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "action": action,
+                "start": start,
+                "limit": limit
+            }.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "device": device,
+                "network": network,
+                "category": category,
+                "category_pon": category_pon,
+                "type": type,
+                "invert": invert,
+                "blocked": blocked,
+                "name2": name2,
+                "device2": device2
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_unblock_signals(

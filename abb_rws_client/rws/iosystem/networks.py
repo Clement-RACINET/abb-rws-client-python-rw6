@@ -102,5 +102,11 @@ async def post_search_io_networks(
     return await client.post(
         "/rw/iosystem/networks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"name_or_state_example_name": name_or_state_example_name}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "name_or_state_example_name": name_or_state_example_name
+            }.items()
+            if v is not None
+        },
     )

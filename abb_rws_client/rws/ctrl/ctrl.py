@@ -1038,7 +1038,14 @@ async def subscribe_on_system_dump(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_diagnostics_states_get_system_diagnostics(
@@ -1074,7 +1081,14 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_safety_resources(client: RWSClient) -> httpx.Response:
@@ -1293,7 +1307,14 @@ async def get_safety_cyclic_brake_check_status(
     """
     return await client.get(
         "/ctrl/safety",
-        params={k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "drivenum": drivenum
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_loadoperation_status(

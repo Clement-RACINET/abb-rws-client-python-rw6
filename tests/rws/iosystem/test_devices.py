@@ -9,8 +9,8 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.devices import (
-    get_io_devices,
     get_actions_io_devices,
+    get_io_devices,
     post_search_io_devices,
 )
 

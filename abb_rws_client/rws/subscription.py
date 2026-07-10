@@ -83,7 +83,14 @@ async def subscribe_on_resources(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_subscription_group_actions(
@@ -158,7 +165,14 @@ async def add_new_resources_remove_existing_resources_or(
     """
     return await client.put(
         f"/subscripion/{group_id}",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def unsubscribe_or_remove_the_subscription_group_resources(

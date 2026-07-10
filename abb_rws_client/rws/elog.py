@@ -48,7 +48,16 @@ async def get_elog_resources(
     """
     return await client.get(
         "/rw/elog",
-        params={k: v for k, v in {"lang": lang, "example_lang": example_lang, "resource": resource, "example_resource": example_resource}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "lang": lang,
+                "example_lang": example_lang,
+                "resource": resource,
+                "example_resource": example_resource
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_elog_actions(
@@ -184,7 +193,16 @@ async def get_elog_messages_in_domain(
     """
     return await client.get(
         f"/rw/elog/{domain_number}",
-        params={k: v for k, v in {"example_lang": example_lang, "example_resource": example_resource, "example_order": example_order, "example_elogseqnum": example_elogseqnum}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "example_lang": example_lang,
+                "example_resource": example_resource,
+                "example_order": example_order,
+                "example_elogseqnum": example_elogseqnum
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_actions_on_elog_domain(
@@ -278,7 +296,14 @@ async def subscribe_on_elog_domain(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_elog_message_in_domain(
@@ -315,5 +340,12 @@ async def get_elog_message_in_domain(
     """
     return await client.get(
         f"/rw/elog/{domain_number}/{sequence_number}",
-        params={k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "lang": lang,
+                "example_lang": example_lang
+            }.items()
+            if v is not None
+        },
     )

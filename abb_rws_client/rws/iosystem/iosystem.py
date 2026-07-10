@@ -167,7 +167,14 @@ async def subscribe_io_network(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_io_network_configuration_properties(
@@ -204,7 +211,14 @@ async def get_io_network_configuration_properties(
     """
     return await client.get(
         f"/rw/iosystem/networks/{network}",
-        params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "configtype": configtype
+            }.items()
+            if v is not None
+        },
     )
 
 async def update_io_network_configuration_type(
@@ -373,7 +387,14 @@ async def subscribe_io_device(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_input_data(
@@ -417,7 +438,15 @@ async def set_input_data(
     return await client.post(
         f"/rw/iosystem/devices/{device}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startbyte": startbyte,
+                "signaldata": signaldata,
+                "datamask": datamask
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_output_data(
@@ -461,7 +490,15 @@ async def set_output_data(
     return await client.post(
         f"/rw/iosystem/devices/{device}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startbyte": startbyte,
+                "signaldata": signaldata,
+                "datamask": datamask
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_io_device_configuration_properties(
@@ -498,7 +535,14 @@ async def get_io_device_configuration_properties(
     """
     return await client.get(
         f"/rw/iosystem/devices/{device}",
-        params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "configtype": configtype
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_eio_device_status_information(
@@ -569,7 +613,16 @@ async def post_send_device_command(
     """
     return await client.post(
         f"/rw/iosystem/devices/{device}/command",
-        data={k: v for k, v in {"commandname": commandname, "value": value, "valuelength": valuelength, "timeout": timeout}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "commandname": commandname,
+                "value": value,
+                "valuelength": valuelength,
+                "timeout": timeout
+            }.items()
+            if v is not None
+        },
     )
 
 async def options_send_device_command_actions(
@@ -779,7 +832,14 @@ async def subscribe_io_signal(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_io_signal_configuration_properties(
@@ -820,5 +880,12 @@ async def get_io_signal_configuration_properties(
     """
     return await client.get(
         f"/rw/iosystem/signals/{network}/{unit}/{signal}",
-        params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "configtype": configtype
+            }.items()
+            if v is not None
+        },
     )

@@ -9,8 +9,8 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.identity import (
-    get_identity_resource,
     get_identity_actions,
+    get_identity_resource,
     set_the_identity_of_the_controller,
 )
 

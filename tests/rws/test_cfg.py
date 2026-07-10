@@ -9,28 +9,28 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.cfg import (
-    get_cfg_resources,
-    get_cfg_actions,
-    validate_cfg_file,
-    load_cfg_file,
-    validate_cfg_instance_before_delete,
-    validate_cfg_instances,
-    post_keyless_motor_on,
-    subscribe_on_cfg_changecount,
-    get_cfg_domain_types,
+    create_default_cfg_instance,
+    delete_cfg_instance,
     get_actions_on_cfg_domain,
-    save_cfg_domain,
-    reset_cfg_domain,
-    get_cfg_type,
+    get_actions_on_cfg_instances,
     get_all_attributes_of_the_given_domain,
     get_all_instances_of_the_given_domain,
-    get_actions_on_cfg_instances,
-    reset_cfg_instances,
-    create_default_cfg_instance,
+    get_cfg_actions,
+    get_cfg_domain_types,
     get_cfg_instance,
     get_cfg_instance_actions,
+    get_cfg_resources,
+    get_cfg_type,
+    load_cfg_file,
+    post_keyless_motor_on,
+    reset_cfg_domain,
+    reset_cfg_instances,
+    save_cfg_domain,
+    subscribe_on_cfg_changecount,
     update_cfg_instance,
-    delete_cfg_instance,
+    validate_cfg_file,
+    validate_cfg_instance_before_delete,
+    validate_cfg_instances,
 )
 
 
@@ -342,7 +342,8 @@ async def test_get_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_name_test"
+    expected_path = "/rw/cfg/domain_test/type_test/instances/instance_name_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -357,7 +358,8 @@ async def test_get_cfg_instance_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    expected_path = "/rw/cfg/domain_test/type_test/instances/instance_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -372,7 +374,8 @@ async def test_update_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    expected_path = "/rw/cfg/domain_test/type_test/instances/instance_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -387,5 +390,6 @@ async def test_delete_cfg_instance() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"
-    assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances/instance_test"
+    expected_path = "/rw/cfg/domain_test/type_test/instances/instance_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204

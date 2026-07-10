@@ -222,7 +222,14 @@ async def get_read_message(
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
-        params={k: v for k, v in {"action": action, "timeout": timeout}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "action": action,
+                "timeout": timeout
+            }.items()
+            if v is not None
+        },
     )
 
 async def delete_dipc_queue(
@@ -284,7 +291,14 @@ async def subscribe_dipc_queue(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_dipc_queue_without_reading_message(
@@ -316,5 +330,12 @@ async def subscribe_dipc_queue_without_reading_message(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )

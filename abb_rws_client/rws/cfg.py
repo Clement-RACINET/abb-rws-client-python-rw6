@@ -208,7 +208,17 @@ async def validate_cfg_instances(
     return await client.post(
         "/rw/cfg",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"operation": operation, "cfgdomain": cfgdomain, "cfgtype": cfgtype, "instances": instances, "instancescount": instancescount}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "operation": operation,
+                "cfgdomain": cfgdomain,
+                "cfgtype": cfgtype,
+                "instances": instances,
+                "instancescount": instancescount
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_keyless_motor_on(
@@ -276,7 +286,14 @@ async def subscribe_on_cfg_changecount(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_cfg_domain_types(

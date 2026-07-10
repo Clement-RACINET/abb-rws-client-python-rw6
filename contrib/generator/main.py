@@ -250,16 +250,21 @@ def group_by_module(endpoints: list[dict]) -> dict[str, list[dict]]:
 
 
 
-def _sanitize_param_name(raw: str, max_len: int = 40) -> str:
+def _sanitize_param_name(raw: str, max_len: int = 38) -> str:  # ← 40 → 38
     """Convert an ABB parameter name to a valid Python identifier.
 
     Truncates to ``max_len`` characters to prevent excessively long
     parameter names from generating ``E501`` violations in function
-    signatures.
+    signatures and generated dict comprehensions.
+
+    The default of 38 ensures that even in the most deeply indented
+    context (16 spaces for dict items inside ``_render_kwarg``), the
+    generated line stays within the 100-character limit:
+    ``16 + 1 + 38 + 1 + 2 + 38 + 1 = 97 ≤ 100``.
 
     Args:
         raw: Raw ABB name (e.g. ``"domain-name"``).
-        max_len: Maximum length of the returned identifier. Default: 40.
+        max_len: Maximum length of the returned identifier. Default: 38.
 
     Returns:
         Valid Python identifier, at most ``max_len`` characters long.
@@ -342,8 +347,7 @@ def parse_query_params(url_params_raw: str) -> list[tuple[str, bool]]:
             continue
 
         raw_name = line.split("=", 1)[0].strip().strip("*[]").strip()
-        py_name = re.sub(r"[^a-z0-9_]", "_", raw_name.lower())
-        py_name = re.sub(r"_+", "_", py_name).strip("_")
+        py_name = _sanitize_param_name(raw_name)  # ← max_len=40 appliqué
 
         if not py_name or py_name in seen:
             continue
@@ -378,8 +382,7 @@ def parse_body_params(data_params_raw: str) -> list[tuple[str, bool]]:
             continue
 
         raw_name = line.split("=", 1)[0].strip().strip("*[]'\"").strip()
-        py_name = re.sub(r"[^a-z0-9_]", "_", raw_name.lower())
-        py_name = re.sub(r"_+", "_", py_name).strip("_")
+        py_name = _sanitize_param_name(raw_name)  # ← max_len=40 appliqué
 
         if not py_name or py_name in seen:
             continue
@@ -477,10 +480,102 @@ def _wrap_doc(text: str, indent: str = "    ", max_width: int = _MAX_LINE) -> li
     )
     return [f"{indent}{line}" for line in wrapped] if wrapped else [f"{indent}{text}"]
 
+# ---------------------------------------------------------------------------
+# Helpers de rendu HTTP
+# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# rws/ module generation
-# ---------------------------------------------------------------------------
+def _split_dict_items(items_str: str) -> list[str]:
+    """Split a comma-separated dict items string respecting nesting depth.
+
+    Args:
+        items_str: Raw items string (e.g. ``'"a": x, "b": y'``).
+
+    Returns:
+        List of individual item strings (e.g. ``['"a": x', '"b": y']``).
+    """
+    items: list[str] = []
+    depth = 0
+    current: list[str] = []
+    for ch in items_str:
+        if ch in ('{', '[', '('):
+            depth += 1
+            current.append(ch)
+        elif ch in ('}', ']', ')'):
+            depth -= 1
+            current.append(ch)
+        elif ch == ',' and depth == 0:
+            item = ''.join(current).strip()
+            if item:
+                items.append(item)
+            current = []
+        else:
+            current.append(ch)
+    item = ''.join(current).strip()
+    if item:
+        items.append(item)
+    return items
+
+
+def _render_kwarg(kwarg: str, indent: str = "        ") -> list[str]:
+    """Render a single httpx keyword argument, splitting long dict literals.
+
+    When a ``params={...}`` or ``data={...}`` comprehension would produce a
+    line longer than ``_MAX_LINE`` characters, the source dict items are
+    each placed on their own line inside the comprehension.
+
+    Args:
+        kwarg: Full kwarg string
+            (e.g. ``'params={k: v for k, v in {"a": a}.items() if v is not None}'``).
+        indent: Indentation prefix for the output lines.
+
+    Returns:
+        One or more lines rendering the kwarg, always ending with a comma.
+    """
+    full_line = f"{indent}{kwarg},"
+    if len(full_line) <= _MAX_LINE:
+        return [full_line]
+
+    # Pattern: params={k: v for k, v in {ITEMS}.items() if v is not None}
+    match = re.match(
+        r'^(params|data)=\{k: v for k, v in \{(.+)\}\.items\(\) if v is not None\}$',
+        kwarg,
+        re.DOTALL,
+    )
+    if not match:
+        # Fixed params dict (no comprehension) — split on comma+space boundary
+        # e.g. params={"action": "show", "type": "selected"}
+        kv_match = re.match(r'^(params|data)=\{(.+)\}$', kwarg, re.DOTALL)
+        if kv_match:
+            kw_name = kv_match.group(1)
+            raw_items = _split_dict_items(kv_match.group(2))
+            inner = indent + "    "
+            result = [f"{indent}{kw_name}={{"]
+            for i, item in enumerate(raw_items):
+                comma = "," if i < len(raw_items) - 1 else ""
+                result.append(f"{inner}{item}{comma}")
+            result.append(f"{indent}}},")
+            return result
+        # Unrecognised pattern — keep as-is, accept the E501
+        return [full_line]
+
+    kw_name = match.group(1)    # "params" or "data"
+    items_str = match.group(2)  # '"key1": var1, "key2": var2, ...'
+    raw_items = _split_dict_items(items_str)
+
+    inner = indent + "    "
+    dict_inner = inner + "    "
+
+    result = [f"{indent}{kw_name}={{"]
+    result.append(f"{inner}k: v")
+    result.append(f"{inner}for k, v in {{")
+    for i, item in enumerate(raw_items):
+        comma = "," if i < len(raw_items) - 1 else ""
+        result.append(f"{dict_inner}{item}{comma}")
+    result.append(f"{inner}}}.items()")
+    result.append(f"{inner}if v is not None")
+    result.append(f"{indent}}},")
+    return result
+
 
 def _render_http_call(
     method_lower: str,
@@ -489,14 +584,13 @@ def _render_http_call(
 ) -> list[str]:
     """Render the ``return await client.X(...)`` statement as multiple lines.
 
-    Always uses the multi-line form to prevent ``E501`` on long
-    ``params=`` / ``data=`` expressions.
+    Always uses the multi-line form. Each kwarg is further split by
+    ``_render_kwarg`` when it would exceed ``_MAX_LINE`` characters.
 
     Args:
         method_lower: HTTP method in lowercase (e.g. ``"get"``).
         url_expr: Python URL expression (e.g. ``'"/rw/cfg"'``).
-        httpx_kwargs: List of keyword argument strings
-            (e.g. ``['params={...}', 'data={...}']``).
+        httpx_kwargs: List of keyword argument strings.
 
     Returns:
         List of Python source lines.
@@ -507,9 +601,58 @@ def _render_http_call(
     lines = [f"    return await client.{method_lower}("]
     lines.append(f"        {url_expr},")
     for kwarg in httpx_kwargs:
-        lines.append(f"        {kwarg},")
+        lines.extend(_render_kwarg(kwarg))
     lines.append("    )")
     return lines
+
+
+def _render_path_assert(expected_path: str) -> list[str]:
+    """Render the ``url.path`` assertion, using a variable if too long.
+
+    Args:
+        expected_path: The expected URL path string.
+
+    Returns:
+        One line (direct assert) or two lines (variable + assert).
+    """
+    direct = f'    assert transport.last_request.url.path == "{expected_path}"'
+    if len(direct) <= _MAX_LINE:
+        return [direct]
+    return [
+        f'    expected_path = "{expected_path}"',
+        "    assert transport.last_request.url.path == expected_path",
+    ]
+
+
+def _render_call_line(call_str: str) -> list[str]:
+    """Render ``resp = await func(...)`` splitting args if the line is too long.
+
+    Args:
+        call_str: The full call expression (e.g. ``'await f(client, "x")'``).
+
+    Returns:
+        One or more lines.
+    """
+    line = f"    resp = {call_str}"
+    if len(line) <= _MAX_LINE:
+        return [line]
+
+    paren_idx = call_str.index("(")
+    func_part = call_str[:paren_idx + 1]
+    args_str = call_str[paren_idx + 1:-1]
+    args = _split_dict_items(args_str)  # réutilise le splitter depth-aware
+
+    result = [f"    resp = {func_part}"]
+    for i, arg in enumerate(args):
+        comma = "," if i < len(args) - 1 else ""
+        result.append(f"        {arg}{comma}")
+    result.append("    )")
+    return result
+
+# ---------------------------------------------------------------------------
+# rws/ module generation
+# ---------------------------------------------------------------------------
+
 
 def _compute_func_names(endpoints: list[dict]) -> list[str]:
     """Pre-compute unique function names for a list of endpoints.
@@ -542,6 +685,12 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
     title = " → ".join(first_bc[:3]) if first_bc else module_path
     title = title.replace("\\", "/")
 
+    # Tronquer le titre pour que "RWS module: {title}" ne dépasse pas _MAX_LINE
+    prefix = "RWS module: "
+    max_title_len = _MAX_LINE - len(prefix)
+    if len(title) > max_title_len:
+        title = title[:max_title_len - 3] + "..."
+
     func_names = _compute_func_names(endpoints)
 
     lines: list[str] = [
@@ -549,7 +698,7 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
         "# DO NOT EDIT MANUALLY — run the generator to regenerate.",
         "#  Generator author: Clément RACINET",
         '"""',
-        f"RWS module: {title}",
+        f"{prefix}{title}",
         "",
         "1:1 mirror of the ABB RobotWare 6 REST API.",
         "Each function maps to exactly one HTTP endpoint.",
@@ -771,7 +920,7 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "from abb_rws_client._core.client import RWSClient",
         f"from abb_rws_client.rws.{module_import} import (",
     ]
-    for fn in func_names:
+    for fn in sorted(func_names):   # trié alphabétiquement
         lines.append(f"    {fn},")
     lines.append(")")
     lines.append("")
@@ -869,27 +1018,28 @@ def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]
     if not expected_path.startswith("/"):
         expected_path = "/" + expected_path
 
-    # Docstring de test wrappée pour E501
     doc_text = f"Verify that {func_name} sends {method} {url}."
     doc_lines = _wrap_doc(doc_text, indent="    ")
 
     lines: list[str] = [
         "@pytest.mark.asyncio",
         f"async def test_{func_name}() -> None:",
+        '    """',
     ]
-    lines.append('    """')
     lines.extend(doc_lines)
     lines.append('    """')
     lines += [
         f"    transport = _MockTransport(status_code={status_code})",
         "    client = _make_client(transport)",
         "",
-        f"    resp = {call_str}",
+    ]
+    lines.extend(_render_call_line(call_str))
+    lines += [
         "",
         "    assert transport.last_request is not None",
         f'    assert transport.last_request.method == "{method}"',
-        f'    assert transport.last_request.url.path == "{expected_path}"',
     ]
+    lines.extend(_render_path_assert(expected_path))
 
     for k, v in fixed_qs:
         lines.append(f'    assert transport.last_request.url.params["{k}"] == "{v}"')

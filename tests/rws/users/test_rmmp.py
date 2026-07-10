@@ -9,13 +9,13 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.rmmp import (
-    get_rmmp_state,
-    get_rmmp_actions,
-    request_rmmp,
-    grant_or_deny_an_rmmp_request,
     cancel_held_or_requested_rmmp,
-    subscribe_on_rmmp_request_event,
+    get_rmmp_actions,
+    get_rmmp_state,
+    grant_or_deny_an_rmmp_request,
     poll_for_rmmp_grant_status,
+    request_rmmp,
+    subscribe_on_rmmp_request_event,
 )
 
 

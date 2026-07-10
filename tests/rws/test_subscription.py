@@ -9,12 +9,12 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.subscription import (
-    get_subscription_actions,
-    subscribe_on_resources,
-    get_subscription_group_actions,
     add_new_resources_remove_existing_resources_or,
-    unsubscribe_or_remove_the_subscription_group_resources,
+    get_subscription_actions,
+    get_subscription_group_actions,
+    subscribe_on_resources,
     unsubscribe_or_remove_the_resource_from_subscription,
+    unsubscribe_or_remove_the_subscription_group_resources,
 )
 
 
@@ -127,7 +127,11 @@ async def test_unsubscribe_or_remove_the_resource_from_subscription() -> None:
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await unsubscribe_or_remove_the_resource_from_subscription(client, "group_d_test", "resource_uri_test")
+    resp = await unsubscribe_or_remove_the_resource_from_subscription(
+        client,
+        "group_d_test",
+        "resource_uri_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "DELETE"

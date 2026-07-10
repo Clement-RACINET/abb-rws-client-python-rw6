@@ -9,16 +9,16 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.mastership import (
-    get_mastership_resources,
     get_mastership_actions,
-    post_mastership_request,
-    post_mastership_release,
-    post_mastership_subscribe,
     get_mastership_domain,
     get_mastership_domain_actions,
-    post_mastership_domain_request,
+    get_mastership_resources,
     post_mastership_domain_release,
+    post_mastership_domain_request,
     post_mastership_domain_subscribe,
+    post_mastership_release,
+    post_mastership_request,
+    post_mastership_subscribe,
 )
 
 

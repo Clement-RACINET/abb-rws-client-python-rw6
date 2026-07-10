@@ -119,7 +119,22 @@ async def post_search_rapid_symbols(
     return await client.post(
         "/rw/rapid/symbols",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"view": view, "vartyp": vartyp, "blockurl": blockurl, "recursive": recursive, "posl": posl, "posc": posc, "stack": stack, "onlyused": onlyused, "skipshared": skipshared, "regexp": regexp}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "view": view,
+                "vartyp": vartyp,
+                "blockurl": blockurl,
+                "recursive": recursive,
+                "posl": posl,
+                "posc": posc,
+                "stack": stack,
+                "onlyused": onlyused,
+                "skipshared": skipshared,
+                "regexp": regexp
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_object_extension_list(
@@ -162,5 +177,16 @@ async def get_object_extension_list(
     """
     return await client.get(
         f"/rw/rapid/symbols/{symbol_url}",
-        params={k: v for k, v in {"info": info, "type": type, "statements": statements, "backwardstmts": backwardstmts, "undostmts": undostmts, "typedecls": typedecls}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "info": info,
+                "type": type,
+                "statements": statements,
+                "backwardstmts": backwardstmts,
+                "undostmts": undostmts,
+                "typedecls": typedecls
+            }.items()
+            if v is not None
+        },
     )

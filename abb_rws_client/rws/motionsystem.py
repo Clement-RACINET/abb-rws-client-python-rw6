@@ -44,7 +44,14 @@ async def get_motion_system(
     """
     return await client.get(
         "/rw/motionsystem",
-        params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "continue_on_err": continue_on_err,
+                "resource": resource
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_motion_system_action(
@@ -156,7 +163,20 @@ async def post_perform_jogging(
     return await client.post(
         "/rw/motionsystem",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"axis1": axis1, "axis2": axis2, "axis3": axis3, "axis4": axis4, "axis5": axis5, "axis6": axis6, "ccount": ccount, "inc_mode": inc_mode}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "axis1": axis1,
+                "axis2": axis2,
+                "axis3": axis3,
+                "axis4": axis4,
+                "axis5": axis5,
+                "axis6": axis6,
+                "ccount": ccount,
+                "inc_mode": inc_mode
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_robo_target_position(
@@ -208,7 +228,22 @@ async def set_robo_target_position(
     return await client.post(
         "/rw/motionsystem",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"pos_x": pos_x, "pos_y": pos_y, "pos_z": pos_z, "orient_q1": orient_q1, "orient_q2": orient_q2, "orient_q3": orient_q3, "orient_q4": orient_q4, "config_j1": config_j1, "config_j4": config_j4, "config_j6": config_j6}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "pos_x": pos_x,
+                "pos_y": pos_y,
+                "pos_z": pos_z,
+                "orient_q1": orient_q1,
+                "orient_q2": orient_q2,
+                "orient_q3": orient_q3,
+                "orient_q4": orient_q4,
+                "config_j1": config_j1,
+                "config_j4": config_j4,
+                "config_j6": config_j6
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_check_change_count(
@@ -274,7 +309,14 @@ async def subscribe_on_error_eventchange(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_error_state(client: RWSClient) -> httpx.Response:
@@ -394,7 +436,14 @@ async def set_motion_supervision_mode_jog_supervision_mode(
     return await client.post(
         "/rw/motionsystem/motionsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"mechunit_name": mechunit_name, "mode": mode}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "mechunit_name": mechunit_name,
+                "mode": mode
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
@@ -430,7 +479,14 @@ async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
     return await client.post(
         "/rw/motionsystem/motionsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"mechunit_name": mechunit_name, "sensitivity": sensitivity}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "mechunit_name": mechunit_name,
+                "sensitivity": sensitivity
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_motion_supervision_collision_prediction_mode(
@@ -775,7 +831,14 @@ async def get_mechunit(
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}",
-        params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "continue_on_err": continue_on_err,
+                "resource": resource
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_mechunit_action(
@@ -857,8 +920,27 @@ async def set_mechunit(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
-        params={k: v for k, v in {"action": action, "continue_on_err": continue_on_err}.items() if v is not None},
-        data={k: v for k, v in {"tool": tool, "wobj": wobj, "payload": payload, "total_payload": total_payload, "mode": mode, "jog_mode": jog_mode, "coord_system": coord_system}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "action": action,
+                "continue_on_err": continue_on_err
+            }.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "tool": tool,
+                "wobj": wobj,
+                "payload": payload,
+                "total_payload": total_payload,
+                "mode": mode,
+                "jog_mode": jog_mode,
+                "coord_system": coord_system
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_compliance_lead_through(
@@ -1066,7 +1148,16 @@ async def get_cartesian_value(
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/cartesian",
-        params={k: v for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate, "elog_at_err": elog_at_err}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "tool": tool,
+                "wobj": wobj,
+                "coordinate": coordinate,
+                "elog_at_err": elog_at_err
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_mechanical_unit(
@@ -1104,7 +1195,14 @@ async def set_mechanical_unit(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"rob_joint": rob_joint, "ext_joint": ext_joint}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "rob_joint": rob_joint,
+                "ext_joint": ext_joint
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_robtarget(
@@ -1141,7 +1239,15 @@ async def get_robtarget(
     """
     return await client.get(
         f"/rw/motionsystem/mechunits/{mechunit}/robtarget",
-        params={k: v for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "tool": tool,
+                "wobj": wobj,
+                "coordinate": coordinate
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_joint_target(
@@ -1202,7 +1308,14 @@ async def subscribe_on_mechunit_mode_change(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_joints_from_position(
@@ -1256,7 +1369,22 @@ async def get_joints_from_position(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "old_rob_joints": old_rob_joints,
+                "old_ext_joints": old_ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration,
+                "elog_at_error": elog_at_error
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_position_from_joints(
@@ -1302,7 +1430,18 @@ async def get_position_from_joints(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"tool_frame_position": tool_frame_position, "tool_frame_orientation": tool_frame_orientation, "rob_joints": rob_joints, "ext_joints": ext_joints, "robot_fixed_object": robot_fixed_object, "elog_at_error": elog_at_error}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "tool_frame_position": tool_frame_position,
+                "tool_frame_orientation": tool_frame_orientation,
+                "rob_joints": rob_joints,
+                "ext_joints": ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "elog_at_error": elog_at_error
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_all_joint_solution(
@@ -1350,7 +1489,19 @@ async def get_all_joint_solution(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_joints_from_cartesian(
@@ -1404,7 +1555,22 @@ async def get_joints_from_cartesian(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "old_rob_joints": old_rob_joints,
+                "old_ext_joints": old_ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration,
+                "elog_at_error": elog_at_error
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_calibration_info(
@@ -1483,7 +1649,22 @@ async def post_calibration_for_baseframe(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "reference": reference, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "reference": reference,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_baseframemoving(
@@ -1534,7 +1715,22 @@ async def post_calibration_for_baseframemoving(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_externalrobotnombasenew(
@@ -1585,7 +1781,22 @@ async def post_calibration_for_externalrobotnombasenew(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_robotaxisrot(
@@ -1636,7 +1847,22 @@ async def post_calibration_for_robotaxisrot(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "axis": axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "axis": axis,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_singleuserrotnew(
@@ -1687,7 +1913,22 @@ async def post_calibration_for_singleuserrotnew(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_rotextctrlzdef(
@@ -1738,7 +1979,22 @@ async def post_calibration_for_rotextctrlzdef(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "pose": pose, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "pose": pose,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_singleuserlin(
@@ -1789,7 +2045,22 @@ async def post_calibration_for_singleuserlin(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_singletrack(
@@ -1840,7 +2111,22 @@ async def post_calibration_for_singletrack(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_robotaxisrot2(
@@ -1891,7 +2177,22 @@ async def post_calibration_for_robotaxisrot2(
     """
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "axis": axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "axis": axis,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_base_frame(
@@ -2000,7 +2301,19 @@ async def set_base_frame(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "x": x,
+                "y": y,
+                "z": z,
+                "q1": q1,
+                "q2": q2,
+                "q3": q3,
+                "q4": q4
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_axes(
@@ -2177,7 +2490,19 @@ async def set_axis_pose(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "x": x,
+                "y": y,
+                "z": z,
+                "q1": q1,
+                "q2": q2,
+                "q3": q3,
+                "q4": q4
+            }.items()
+            if v is not None
+        },
     )
 
 async def update_commutate(

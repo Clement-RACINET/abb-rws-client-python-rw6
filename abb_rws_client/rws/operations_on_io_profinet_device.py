@@ -2,7 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """
-RWS module: Operations on IO Profinet Device → Get profinet I/O device read record implicit data from device in profinet network
+RWS module: Operations on IO Profinet Device → Get profinet I/O device read record implicit da...
 
 1:1 mirror of the ABB RobotWare 6 REST API.
 Each function maps to exactly one HTTP endpoint.
@@ -58,7 +58,18 @@ async def get_profinet_device_read_record_implicit_data(
     """
     return await client.get(
         f"rw/iosystem/devices/{network}/{device}/implicitdata",
-        params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+                "vendorid": vendorid,
+                "deviceid": deviceid
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_read_record_implicit_data_from_device_in(
@@ -106,7 +117,19 @@ async def post_read_record_implicit_data_from_device_in(
     """
     return await client.post(
         f"rw/iosystem/devices/{network}/{device}/implicitdata",
-        data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid, "ip": ip}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+                "vendorid": vendorid,
+                "deviceid": deviceid,
+                "ip": ip
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_forms(
@@ -179,7 +202,16 @@ async def get_profinet_device_read_record_data(
     """
     return await client.get(
         f"rw/iosystem/devices/{network}/{device}/explicitdata",
-        params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_profinet_device_read_record_data_2(
@@ -221,7 +253,16 @@ async def get_profinet_device_read_record_data_2(
     """
     return await client.post(
         f"rw/iosystem/devices/{network}/{device}/explicitdata",
-        data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_forms_2(

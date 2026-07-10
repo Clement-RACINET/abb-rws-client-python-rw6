@@ -420,7 +420,15 @@ async def set_camera_dns_settings(
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"name": name, "dns_server": dns_server, "dns_suffix": dns_suffix}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "dns_server": dns_server,
+                "dns_suffix": dns_suffix
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_camera_status(
@@ -488,7 +496,14 @@ async def get_camera_info_using_index_of_the(
     """
     return await client.get(
         "/rw/vision",
-        params={k: v for k, v in {"resource": resource, "index": index}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "index": index
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_camera_name(
@@ -564,7 +579,15 @@ async def set_camera_user_credentials(
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"index": index, "user": user, "password": password}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "index": index,
+                "user": user,
+                "password": password
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_camera_ip_settings(
@@ -606,7 +629,16 @@ async def set_camera_ip_settings(
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"name": name, "address": address, "netmask": netmask, "gateway": gateway}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "address": address,
+                "netmask": netmask,
+                "gateway": gateway
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_iv_camera_info(

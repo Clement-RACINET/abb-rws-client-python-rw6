@@ -9,14 +9,14 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.backup import (
-    get_backup_resources,
-    get_backup_actions,
     create_backup,
-    post_restore_backup,
-    get_check_restore,
+    get_backup_actions,
+    get_backup_resources,
     get_backup_state,
-    subscribe_on_backup_system_information,
     get_backup_system_information,
+    get_check_restore,
+    post_restore_backup,
+    subscribe_on_backup_system_information,
 )
 
 

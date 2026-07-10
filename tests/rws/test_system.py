@@ -9,16 +9,16 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.system import (
-    get_system_information,
+    get_installed_products,
     get_robot_type,
-    get_system_options,
+    get_system_energy,
     get_system_energy_actions,
     get_system_energy_info_change_count,
-    reset_accumulated_energy,
-    get_system_energy,
-    subscribe_on_system_energy_changes,
+    get_system_information,
+    get_system_options,
     get_system_robotware_license,
-    get_installed_products,
+    reset_accumulated_energy,
+    subscribe_on_system_energy_changes,
 )
 
 

@@ -9,16 +9,16 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.clock import (
-    get_clock_resource,
     get_clock_actions,
-    set_the_clock_of_the_controller,
-    get_timezone_resource,
-    get_timezone_actions,
-    set_the_time_zone,
-    get_time_server_resource,
-    get_time_server_actions,
-    set_the_time_server,
+    get_clock_resource,
     get_test_time_server,
+    get_time_server_actions,
+    get_time_server_resource,
+    get_timezone_actions,
+    get_timezone_resource,
+    set_the_clock_of_the_controller,
+    set_the_time_server,
+    set_the_time_zone,
 )
 
 

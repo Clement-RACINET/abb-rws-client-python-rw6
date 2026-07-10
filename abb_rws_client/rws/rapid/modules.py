@@ -145,7 +145,14 @@ async def set_modify_all_positions(
     return await client.post(
         "/rw/rapid/modules",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"checklimit": checklimit, "checkdeactaxes": checkdeactaxes}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "checklimit": checklimit,
+                "checkdeactaxes": checkdeactaxes
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_specified_range_of_text(
@@ -299,7 +306,20 @@ async def set_text_range(
     return await client.post(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"task": task, "replace_mode": replace_mode, "query_mode": query_mode, "startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol, "text": text}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "task": task,
+                "replace_mode": replace_mode,
+                "query_mode": query_mode,
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol,
+                "text": text
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_module_text(
@@ -374,7 +394,14 @@ async def get_rapid_module_attributes(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"task": task, "continue_on_err": continue_on_err}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "task": task,
+                "continue_on_err": continue_on_err
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_change_count(
@@ -452,7 +479,18 @@ async def get_rulesinstr(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"resource": resource, "task": task, "name": name, "data_type": data_type, "line": line, "col": col}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "name": name,
+                "data_type": data_type,
+                "line": line,
+                "col": col
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_module_possible_attributes(
@@ -489,7 +527,14 @@ async def get_module_possible_attributes(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"task": task, "attribute": attribute}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "task": task,
+                "attribute": attribute
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_search_text(
@@ -530,7 +575,16 @@ async def get_search_text(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"task": task, "startrow": startrow, "startcol": startcol, "text": text}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "task": task,
+                "startrow": startrow,
+                "startcol": startcol,
+                "text": text
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_object(
@@ -644,7 +698,19 @@ async def set_modify_position(
     return await client.post(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"action": action, "task": task}.items() if v is not None},
-        data={k: v for k, v in {"startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol, "checklimit": checklimit, "checkdeactaxes": checkdeactaxes, "allowdeact": allowdeact}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol,
+                "checklimit": checklimit,
+                "checkdeactaxes": checkdeactaxes,
+                "allowdeact": allowdeact
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_module_extension(
@@ -722,7 +788,18 @@ async def get_mod_possible(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"resource": resource, "task": task, "startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_object_child(
@@ -765,7 +842,18 @@ async def get_object_child(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"resource": resource, "task": task, "startline": startline, "startcolumn": startcolumn, "endline": endline, "endcolumn": endcolumn}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "startline": startline,
+                "startcolumn": startcolumn,
+                "endline": endline,
+                "endcolumn": endcolumn
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_syncpers_status(
@@ -874,7 +962,16 @@ async def get_symbol_information(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={k: v for k, v in {"resource": resource, "task": task, "row": row, "col": col}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "row": row,
+                "col": col
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_routine_information(
@@ -912,7 +1009,15 @@ async def get_routine_information(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}/routine",
-        params={k: v for k, v in {"task": task, "row": row, "column": column}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "task": task,
+                "row": row,
+                "column": column
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_routineargs_information(
@@ -959,5 +1064,16 @@ async def get_routineargs_information(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}/routine",
-        params={k: v for k, v in {"resource": resource, "mark": mark, "limit": limit, "task": task, "row": row, "column": column}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "mark": mark,
+                "limit": limit,
+                "task": task,
+                "row": row,
+                "column": column
+            }.items()
+            if v is not None
+        },
     )

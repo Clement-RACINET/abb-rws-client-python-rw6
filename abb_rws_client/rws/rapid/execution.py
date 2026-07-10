@@ -120,7 +120,18 @@ async def start_rapid_execution(
     return await client.post(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"regain": regain, "execmode": execmode, "cycle": cycle, "condition": condition, "stopatbp": stopatbp, "alltaskbytsp": alltaskbytsp}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "regain": regain,
+                "execmode": execmode,
+                "cycle": cycle,
+                "condition": condition,
+                "stopatbp": stopatbp,
+                "alltaskbytsp": alltaskbytsp
+            }.items()
+            if v is not None
+        },
     )
 
 async def stop_rapid_execution(
@@ -157,7 +168,14 @@ async def stop_rapid_execution(
     return await client.post(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"stopmode": stopmode, "usetsp": usetsp}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "stopmode": stopmode,
+                "usetsp": usetsp
+            }.items()
+            if v is not None
+        },
     )
 
 async def start_rapid_execution_from_production_entry(
@@ -291,7 +309,15 @@ async def subscribe_rapid_execution(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"resources": resources, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "resources": resources,
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_rapid_execution_cycle(
@@ -326,7 +352,15 @@ async def subscribe_rapid_execution_cycle(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"resources": resources, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "resources": resources,
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_hold_to_run(
@@ -359,7 +393,14 @@ async def subscribe_on_hold_to_run(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_hold_to_run_cmd(

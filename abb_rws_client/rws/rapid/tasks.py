@@ -274,7 +274,14 @@ async def subscribe_on_build_log_change(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_task_state(
@@ -379,7 +386,14 @@ async def load_rapid_module_into_rapid_task(
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "modulepath": modulepath,
+                "replace": replace
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_unload_module_from_rapid_task(
@@ -519,7 +533,14 @@ async def get_activation_record(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={k: v for k, v in {"resource": resource, "stackframe": stackframe}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "stackframe": stackframe
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_structural_change_count(
@@ -589,7 +610,15 @@ async def get_preferable_data_types(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={k: v for k, v in {"resource": resource, "instruction": instruction, "parameter": parameter}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "instruction": instruction,
+                "parameter": parameter
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_program_pointer_sync_state(
@@ -728,7 +757,14 @@ async def get_pallet(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "start_page_no_limit": start_page_no_limit
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_pallet_head(
@@ -763,7 +799,14 @@ async def get_pallet_head(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task_name}",
-        params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "start_page_no_limit": start_page_no_limit
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_rapid_task_change(
@@ -797,7 +840,14 @@ async def subscribe_on_rapid_task_change(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_rapid_pp_sync_state_change(
@@ -831,7 +881,14 @@ async def subscribe_on_rapid_pp_sync_state_change(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_rapid_task_pgmexecution_state_change(
@@ -865,7 +922,14 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_motion(
@@ -932,7 +996,15 @@ async def get_robtarget(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/motion",
-        params={k: v for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "tool": tool,
+                "wobj": wobj
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_joint_target(
@@ -1085,7 +1157,22 @@ async def post_calibration_for_displacement(
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
-        data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_calibration_for_tcp(
@@ -1136,7 +1223,22 @@ async def post_calibration_for_tcp(
     """
     return await client.post(
         f"/rw/rapid/tasks/{task}/motion/calib",
-        data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_program_resource(
@@ -1241,7 +1343,14 @@ async def load_program_into_rapid_task(
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "progpath": progpath,
+                "loadmode": loadmode
+            }.items()
+            if v is not None
+        },
     )
 
 async def post_unload_program_from_rapid_task(
@@ -1497,7 +1606,15 @@ async def set_break_point(
     return await client.post(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"module": module, "row": row, "column": column}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "module": module,
+                "row": row,
+                "column": column
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_break_points(
@@ -1638,7 +1755,16 @@ async def set_the_program_pointer_pp_position_to(
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"module": module, "routine": routine, "line": line, "column": column}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "module": module,
+                "routine": routine,
+                "line": line,
+                "column": column
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_the_program_pointer_pp_position_to_2(
@@ -1679,7 +1805,15 @@ async def set_the_program_pointer_pp_position_to_2(
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={k: v for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "module": module,
+                "routine": routine,
+                "userlevel": userlevel
+            }.items()
+            if v is not None
+        },
     )
 
 async def set_the_program_pointer_pp_position_to_3(
@@ -1820,7 +1954,14 @@ async def subscribe_on_program_pointer(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def subscribe_on_motion_pointer(
@@ -1854,7 +1995,14 @@ async def subscribe_on_motion_pointer(
     """
     return await client.post(
         "/subscription",
-        data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_service_routine(
@@ -1891,7 +2039,15 @@ async def get_rapid_service_routine(
     """
     return await client.get(
         f"/rw/rapid/tasks/{task}/serviceroutine",
-        params={k: v for k, v in {"start": start, "limit": limit, "allread": allread}.items() if v is not None},
+        params={
+            k: v
+            for k, v in {
+                "start": start,
+                "limit": limit,
+                "allread": allread
+            }.items()
+            if v is not None
+        },
     )
 
 async def get_rapid_program_counter_position(

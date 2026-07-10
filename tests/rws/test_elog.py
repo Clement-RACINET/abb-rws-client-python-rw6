@@ -9,15 +9,15 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.elog import (
-    get_elog_resources,
-    get_elog_actions,
-    post_clear_elog_messages,
-    save_elog_in_system_dump_format,
-    get_elog_messages_in_domain,
     get_actions_on_elog_domain,
-    post_clear_elog_messages_2,
-    subscribe_on_elog_domain,
+    get_elog_actions,
     get_elog_message_in_domain,
+    get_elog_messages_in_domain,
+    get_elog_resources,
+    post_clear_elog_messages,
+    post_clear_elog_messages_2,
+    save_elog_in_system_dump_format,
+    subscribe_on_elog_domain,
 )
 
 

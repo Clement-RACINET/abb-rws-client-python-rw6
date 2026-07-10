@@ -9,11 +9,11 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.users import (
-    get_user_resources,
     get_user_actions,
-    register_the_user,
+    get_user_resources,
     impersonate_user,
     login_as_local_user,
+    register_the_user,
 )
 
 

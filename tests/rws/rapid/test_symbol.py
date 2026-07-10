@@ -9,13 +9,13 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.symbol import (
-    get_rapid_symbol_properties,
     get_rapid_symbol_data,
     get_rapid_symbol_data_actions,
-    update_rapid_variable_current_value,
-    validate_rapid_variable,
+    get_rapid_symbol_properties,
     subscribe_on_rapid_persistent_variable,
+    update_rapid_variable_current_value,
     update_rapid_variable_initial_value,
+    validate_rapid_variable,
 )
 
 

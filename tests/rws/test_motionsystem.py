@@ -9,70 +9,70 @@ import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.motionsystem import (
-    get_motion_system,
-    get_motion_system_action,
-    set_mechunit_for_jogging,
-    post_perform_jogging,
-    set_robo_target_position,
-    get_check_change_count,
-    subscribe_on_error_eventchange,
-    get_error_state,
-    get_motion_supervision,
-    get_motion_supervision_actions,
-    set_motion_supervision_mode_jog_supervision_mode,
-    set_motion_supervision_sensitivity_jog_supervision_sensitivity,
-    get_motion_supervision_collision_prediction_mode,
-    set_motion_supervision_collision_prediction_mode,
-    get_path_supervision,
-    get_path_supervision_actions,
-    set_path_supervision_mode,
-    set_path_supervision_level,
-    get_non_motion_execution_mode,
-    get_nonmotion_execution_actions,
-    set_nonmotion_execution_mode,
-    get_mechunits,
-    get_mechunit,
-    get_mechunit_action,
-    set_mechunit,
-    set_compliance_lead_through,
-    get_compliance_lead_through,
-    set_fine_calibration,
-    update_syncronize_revolution_counter,
-    get_physical_joints,
-    get_cartesian_value,
-    set_mechanical_unit,
-    get_robtarget,
-    get_joint_target,
-    subscribe_on_mechunit_mode_change,
-    get_joints_from_position,
-    get_position_from_joints,
     get_all_joint_solution,
-    get_joints_from_cartesian,
-    get_calibration_info,
-    post_calibration_for_baseframe,
-    post_calibration_for_baseframemoving,
-    post_calibration_for_externalrobotnombasenew,
-    post_calibration_for_robotaxisrot,
-    post_calibration_for_singleuserrotnew,
-    post_calibration_for_rotextctrlzdef,
-    post_calibration_for_singleuserlin,
-    post_calibration_for_singletrack,
-    post_calibration_for_robotaxisrot2,
-    get_base_frame,
-    get_base_frame_actions,
-    set_base_frame,
     get_axes,
     get_axis,
     get_axis_actions,
     get_axis_pose,
-    set_axis_pose,
-    update_commutate,
-    update_sync_revolution_counter,
-    set_smb_data,
-    post_clear_smb_data,
+    get_base_frame,
+    get_base_frame_actions,
+    get_calibration_info,
+    get_cartesian_value,
+    get_check_change_count,
+    get_compliance_lead_through,
+    get_error_state,
+    get_joint_target,
+    get_joints_from_cartesian,
+    get_joints_from_position,
+    get_mechunit,
+    get_mechunit_action,
+    get_mechunits,
+    get_motion_supervision,
+    get_motion_supervision_actions,
+    get_motion_supervision_collision_prediction_mode,
+    get_motion_system,
+    get_motion_system_action,
+    get_motor_calib_names,
+    get_non_motion_execution_mode,
+    get_nonmotion_execution_actions,
+    get_path_supervision,
+    get_path_supervision_actions,
+    get_physical_joints,
+    get_position_from_joints,
+    get_robtarget,
     get_smb_data,
     get_smb_data_actions,
-    get_motor_calib_names,
+    post_calibration_for_baseframe,
+    post_calibration_for_baseframemoving,
+    post_calibration_for_externalrobotnombasenew,
+    post_calibration_for_robotaxisrot,
+    post_calibration_for_robotaxisrot2,
+    post_calibration_for_rotextctrlzdef,
+    post_calibration_for_singletrack,
+    post_calibration_for_singleuserlin,
+    post_calibration_for_singleuserrotnew,
+    post_clear_smb_data,
+    post_perform_jogging,
+    set_axis_pose,
+    set_base_frame,
+    set_compliance_lead_through,
+    set_fine_calibration,
+    set_mechanical_unit,
+    set_mechunit,
+    set_mechunit_for_jogging,
+    set_motion_supervision_collision_prediction_mode,
+    set_motion_supervision_mode_jog_supervision_mode,
+    set_motion_supervision_sensitivity_jog_supervision_sensitivity,
+    set_nonmotion_execution_mode,
+    set_path_supervision_level,
+    set_path_supervision_mode,
+    set_robo_target_position,
+    set_smb_data,
+    subscribe_on_error_eventchange,
+    subscribe_on_mechunit_mode_change,
+    update_commutate,
+    update_sync_revolution_counter,
+    update_syncronize_revolution_counter,
 )
 
 
@@ -567,7 +567,8 @@ async def test_get_cartesian_value() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/cartesian"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/cartesian"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -597,7 +598,8 @@ async def test_get_robtarget() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/robtarget"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/robtarget"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -612,7 +614,8 @@ async def test_get_joint_target() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/jointtarget"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/jointtarget"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -703,7 +706,8 @@ async def test_get_calibration_info() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -862,7 +866,8 @@ async def test_get_base_frame() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -877,7 +882,8 @@ async def test_get_base_frame_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -892,7 +898,8 @@ async def test_set_base_frame() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/baseframe"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 202
 
 @pytest.mark.asyncio
@@ -922,7 +929,8 @@ async def test_get_axis() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -937,7 +945,8 @@ async def test_get_axis_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -952,7 +961,8 @@ async def test_get_axis_pose() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -967,7 +977,8 @@ async def test_set_axis_pose() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -983,7 +994,8 @@ async def test_update_commutate() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -999,7 +1011,8 @@ async def test_update_sync_revolution_counter() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -1074,5 +1087,6 @@ async def test_get_motor_calib_names() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/motorcalib"
+    expected_path = "/rw/motionsystem/mechunits/mechunit_test/motorcalib"
+    assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
