@@ -103,7 +103,9 @@ include = [
 omit = [
     ".pixi/*",
     "tests/*",
-    "_scrapping_abb_api/*",
+    "contrib/*",
+    "site/*",
+    "docs/*",
 ]
 
 [tool.coverage.report]

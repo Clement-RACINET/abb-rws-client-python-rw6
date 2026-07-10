@@ -32,9 +32,10 @@ mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 
 [feature.dev.tasks]
-lint       = "ruff check abb_rws_client tests"
-format     = "ruff format abb_rws_client tests"
-test       = "python pytest tests/ -v" 
+lint    = "ruff check abb_rws_client tests contrib"
+format  = "ruff format abb_rws_client tests contrib"
+test    = "pytest tests/ -v"
+fix-init = "python contrib/fix_init.py"
 docs       = "python contrib/docs/run_docs.py"
 docs-build = "python -m mkdocs build"
 

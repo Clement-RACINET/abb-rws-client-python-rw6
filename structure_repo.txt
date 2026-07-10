@@ -58,14 +58,17 @@ abb_rws_client_python_rw6
 │   ├── generator
 │   │   └── main.py
 │   ├── scraping
-│   │   ├── abb_rws_api_full.json
-│   │   ├── abb_rws_api_full.md
-│   │   ├── architecture_api.txt
-│   │   ├── robot_controller_return_code.txt
+│   │   ├── input
+│   │   │   ├── architecture_api.txt
+│   │   │   └── robot_controller_return_code.txt
+│   │   ├── output
+│   │   │   ├── abb_rws_api_full.json
+│   │   │   └── abb_rws_api_full.md
 │   │   ├── routes_list.json
 │   │   ├── scrape.log
 │   │   └── scrape.py
 │   ├── export_structure.py
+│   ├── fix_init.py
 │   ├── README.fr.md
 │   └── README.md
 ├── tests
