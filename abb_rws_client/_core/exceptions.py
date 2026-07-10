@@ -1,35 +1,37 @@
 # abb_rws_client/_core/exceptions.py
 """
-Exceptions custom pour abb-rws6-python-client.
+Custom exceptions for abb-rws6-python-client.
 
-Hiérarchie :
-    RWSError                        ← racine, toujours catchable en un seul except
-    ├── RWSConnectionError          ← réseau inaccessible / timeout TCP
-    ├── RWSTimeoutError             ← timeout HTTP dépassé
-    ├── RWSAuthenticationError      ← 401 persistant après digest
-    ├── RWSHTTPError                ← toute réponse HTTP >= 400 non couverte ci-dessus
-    │   └── RWSNotFoundError        ← 404 (variable / ressource inexistante)
-    ├── MastershipError             ← racine des erreurs mastership
-    │   ├── MastershipDenied        ← contrôleur refuse l'acquisition
-    │   └── MastershipNotHeld       ← tentative d'écriture sans mastership actif
-    └── RWSValueError               ← valeur RAPID invalide / sérialisation échouée
+Author: Clément RACINET
 
-CTRL_CODES :
-    Dictionnaire complet des codes de retour ABB RobotWare 6.
-    Source : robot_controller_return_code.xml (RWS API documentation).
-    Clé   : code entier (positif = succès, négatif = erreur)
-    Valeur : nom symbolique ABB (ex: "SYS_CTRL_E_MASTER_REJECT")
+Exception hierarchy:
+    RWSError                        ← base class, always catchable with a single except
+    ├── RWSConnectionError          ← unreachable network / TCP timeout
+    ├── RWSTimeoutError             ← HTTP timeout exceeded
+    ├── RWSAuthenticationError      ← persistent 401 after digest handshake
+    ├── RWSHTTPError                ← any HTTP response >= 400 not covered above
+    │   └── RWSNotFoundError        ← 404 (variable / resource not found)
+    ├── MastershipError             ← base class for mastership errors
+    │   ├── MastershipDenied        ← controller refuses mastership acquisition
+    │   └── MastershipNotHeld       ← write attempt without an active mastership
+    └── RWSValueError               ← invalid RAPID value / serialization failure
+
+CTRL_CODES:
+    Complete dictionary of ABB RobotWare 6 return codes.
+    Source: robot_controller_return_code.xml (RWS API documentation).
+    Key  : integer code (positive = success, negative = error)
+    Value: ABB symbolic name (e.g. ``"SYS_CTRL_E_MASTER_REJECT"``)
 """
 
 from __future__ import annotations
 
 # ---------------------------------------------------------------------------
-# Codes de retour ABB RobotWare 6 — source : return_codes.html
-# Utilisés pour enrichir les messages d'erreur avec le nom symbolique ABB.
+# ABB RobotWare 6 return codes — source: return_codes.html
+# Used to enrich error messages with the ABB symbolic name.
 # ---------------------------------------------------------------------------
 
 CTRL_CODES: dict[int, str] = {
-    # ── Succès ──────────────────────────────────────────────────────────────
+    # ── Success ─────────────────────────────────────────────────────────────
     294912: "SYS_CTRL_S_OK",
     294913: "SYS_CTRL_S_DONE",
     294914: "SYS_CTRL_S_PENDING",
@@ -47,7 +49,7 @@ CTRL_CODES: dict[int, str] = {
     299013: "SYS_CTRL_S_ABORTED",
     299014: "SYS_CTRL_S_PREVIOUS_PATH_REMAINS",
     304129: "SYS_CTRL_S_CFG_NAME_EXIST",
-    # ── Erreurs générales ───────────────────────────────────────────────────
+    # ── General errors ──────────────────────────────────────────────────────
     -1073445887: "SYS_CTRL_E_OUTOFMEMORY",
     -1073445886: "SYS_CTRL_E_NOTIMPL",
     -1073445885: "SYS_CTRL_E_SERVICE_NOT_SUPPORTED",
@@ -97,7 +99,7 @@ CTRL_CODES: dict[int, str] = {
     -1073445834: "SYS_CTRL_E_GATEWAY_ADDRESS",
     -1073445833: "SYS_CTRL_E_NETWORK_CONFIGURATION",
     -1073445832: "SYS_CTRL_E_USER_HOOK_REJECT",
-    # ── Erreurs RAPID ───────────────────────────────────────────────────────
+    # ── RAPID errors ────────────────────────────────────────────────────────
     -1073442816: "SYS_CTRL_E_NO_SUCH_SYMBOL",  # → RWSNotFoundError
     -1073442815: "SYS_CTRL_E_SOURCEPOS",
     -1073442814: "SYS_CTRL_E_INVALID_PROGRAMFILE",
@@ -133,7 +135,7 @@ CTRL_CODES: dict[int, str] = {
     -1073442784: "SYS_CTRL_E_UI_INSTRUCTION_NOT_ACTIVE",
     -1073442783: "SYS_CTRL_E_NO_PP",
     -1073442782: "SYS_CTRL_E_TOO_BIG_MODULE",
-    # ── Erreurs fichier ─────────────────────────────────────────────────────
+    # ── File errors ─────────────────────────────────────────────────────────
     -1073438720: "SYS_CTRL_E_GENERAL_FILE_ERROR",
     -1073438719: "SYS_CTRL_E_DEVICE_FULL",
     -1073438718: "SYS_CTRL_E_WRONG_DISK",
@@ -149,13 +151,13 @@ CTRL_CODES: dict[int, str] = {
     -1073438707: "SYS_CTRL_E_FILENAME_TOO_LONG",
     -1073438706: "SYS_CTRL_E_NOT_ENOUGH_SPACE",
     -1073438705: "SYS_CTRL_E_PATH_TOO_LONG",
-    # ── Erreurs IO ──────────────────────────────────────────────────────────
+    # ── IO errors ───────────────────────────────────────────────────────────
     -1073438208: "SYS_CTRL_E_IO_UNIT_DISABLE_NOT_ALLOWED",
     -1073438207: "SYS_CTRL_E_IO_UNIT_NOT_RUNNING",
     -1073438206: "SYS_CTRL_E_IO_UNBLOCKED_INSIGNAL",
     -1073438205: "SYS_CTRL_E_IO_CROSS_RESULTANT",
     -1073438204: "SYS_CTRL_E_IO_SET_BY_DEVICE_TRANSFER",
-    # ── Erreurs CFG ─────────────────────────────────────────────────────────
+    # ── CFG errors ──────────────────────────────────────────────────────────
     -1073437696: "SYS_CTRL_E_CFG_DOMAIN_INVALID",
     -1073437695: "SYS_CTRL_E_CFG_TYPE_INVALID",
     -1073437694: "SYS_CTRL_E_CFG_ATTRIBUTE_INVALID",
@@ -167,7 +169,7 @@ CTRL_CODES: dict[int, str] = {
     -1073437686: "SYS_CTRL_E_CFG_VERSION",
     -1073437685: "SYS_CTRL_E_CS_NONEXISTENT",
     -1073437684: "SYS_CTRL_E_SS_NONEXISTENT",
-    # ── Erreurs Motion ──────────────────────────────────────────────────────
+    # ── Motion errors ───────────────────────────────────────────────────────
     -1073436672: "SYS_CTRL_E_TOOL_ERROR",
     -1073436671: "SYS_CTRL_E_WOBJ_ERROR",
     -1073436670: "SYS_CTRL_E_MECHUNIT_DEACTIVATED",
@@ -193,7 +195,7 @@ CTRL_CODES: dict[int, str] = {
     -1073436650: "SYS_CTRL_E_MECSTA_NOT_READY",
     -1073436649: "SYS_CTRL_E_NME_ACTIVATION_ERROR",
     -1073436648: "SYS_CTRL_E_POSE_SINGULARITY",
-    # ── Erreurs DIPC / Queue ────────────────────────────────────────────────
+    # ── DIPC / Queue errors ─────────────────────────────────────────────────
     -1073435904: "SYS_CTRL_E_INVALIDSLOTID",
     -1073435903: "SYS_CTRL_E_QUEUEFULL",
     -1073435902: "SYS_CTRL_E_POWER_FAIL_IN_PROGRESS",
@@ -215,21 +217,21 @@ CTRL_CODES: dict[int, str] = {
     -1073435886: "SYS_CTRL_E_OPERATION_IS_UNLOCKED",
     -1073435885: "SYS_CTRL_E_INVALID_PIN_CODE",
     -1073435884: "SYS_CTRL_E_OPERATION_FAILED",
-    # ── Erreurs génériques ──────────────────────────────────────────────────
+    # ── Generic errors ──────────────────────────────────────────────────────
     -1073414146: "SYS_CTRL_E_FAIL",
     -1073414145: "SYS_CTRL_E_UNEXPECTED",
 }
 
 
 def ctrl_code_name(code: int) -> str:
-    """Retourne le nom symbolique ABB d'un code de retour, ou sa repr décimale.
+    """Return the ABB symbolic name for a return code, or its decimal representation.
 
     Args:
-        code: Code entier retourné par le contrôleur ABB.
+        code: Integer code returned by the ABB controller.
 
     Returns:
-        Nom symbolique (ex: ``"SYS_CTRL_E_MASTER_REJECT"``) ou
-        ``"UNKNOWN(code)"`` si le code n'est pas répertorié.
+        Symbolic name (e.g. ``"SYS_CTRL_E_MASTER_REJECT"``) or
+        ``"UNKNOWN(code)"`` if the code is not registered.
 
     Example:
         >>> ctrl_code_name(-1073445859)
@@ -241,16 +243,26 @@ def ctrl_code_name(code: int) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Racine
+# Base exception
 # ---------------------------------------------------------------------------
 
 
 class RWSError(Exception):
-    """Classe de base pour toutes les erreurs RWS.
+    """Base class for all RWS errors.
+
+    All exceptions raised by this library inherit from ``RWSError``,
+    allowing callers to catch every library error with a single
+    ``except RWSError`` clause.
 
     Attributes:
-        message: Description lisible de l'erreur.
-        status_code: Code HTTP associé, si applicable.
+        message: Human-readable error description.
+        status_code: Associated HTTP status code, if applicable.
+
+    Example:
+        >>> try:
+        ...     await client.get("rw/rapid/execution")
+        ... except RWSError as exc:
+        ...     print(exc.message)
     """
 
     message: str
@@ -272,36 +284,54 @@ class RWSError(Exception):
 
 
 # ---------------------------------------------------------------------------
-# Erreurs réseau / transport
+# Network / transport errors
 # ---------------------------------------------------------------------------
 
 
 class RWSConnectionError(RWSError):
-    """Impossible d'établir la connexion TCP avec le contrôleur.
+    """Cannot establish a TCP connection to the controller.
 
-    Levée quand httpx.ConnectError ou httpx.ConnectTimeout est intercepté
-    après épuisement de tous les retries.
+    Raised when ``httpx.ConnectError`` or ``httpx.ConnectTimeout`` is caught
+    after all retries have been exhausted.
+
+    Example:
+        >>> try:
+        ...     await client.get("rw/rapid/execution")
+        ... except RWSConnectionError:
+        ...     print("Controller unreachable")
     """
 
 
 class RWSTimeoutError(RWSError):
-    """Le contrôleur n'a pas répondu dans le délai imparti.
+    """The controller did not respond within the configured timeout.
 
-    Levée quand httpx.ReadTimeout ou httpx.PoolTimeout est intercepté
-    après épuisement de tous les retries.
+    Raised when ``httpx.ReadTimeout`` or ``httpx.PoolTimeout`` is caught
+    after all retries have been exhausted.
+
+    Example:
+        >>> try:
+        ...     await client.get("rw/rapid/execution")
+        ... except RWSTimeoutError:
+        ...     print("Request timed out")
     """
 
 
 # ---------------------------------------------------------------------------
-# Erreurs HTTP
+# HTTP errors
 # ---------------------------------------------------------------------------
 
 
 class RWSAuthenticationError(RWSError):
-    """Authentification Digest refusée (401 persistant).
+    """Digest authentication refused (persistent HTTP 401).
 
-    Indique des credentials incorrects ou un utilisateur non autorisé
-    dans l'UAS (User Authorization System) du contrôleur.
+    Indicates incorrect credentials or a user not authorised in the
+    controller's UAS (User Authorization System).
+
+    Example:
+        >>> try:
+        ...     await client.get("rw/rapid/execution")
+        ... except RWSAuthenticationError:
+        ...     print("Invalid credentials")
     """
 
     def __init__(self, message: str = "Authentication failed (HTTP 401)") -> None:
@@ -309,11 +339,18 @@ class RWSAuthenticationError(RWSError):
 
 
 class RWSHTTPError(RWSError):
-    """Réponse HTTP inattendue (>= 400) non couverte par une exception plus spécifique.
+    """Unexpected HTTP response (>= 400) not covered by a more specific exception.
 
     Attributes:
-        ctrl_code: Code de retour ABB extrait du corps de la réponse, si présent.
-        ctrl_code_name: Nom symbolique ABB du code (ex: ``"SYS_CTRL_E_EXEC_STATE"``).
+        ctrl_code: ABB return code extracted from the response body, if present.
+        ctrl_code_name: ABB symbolic name for the code
+            (e.g. ``"SYS_CTRL_E_EXEC_STATE"``).
+
+    Example:
+        >>> try:
+        ...     await client.post("rw/rapid/execution", params={"action": "start"})
+        ... except RWSHTTPError as exc:
+        ...     print(exc.ctrl_code_name)
     """
 
     ctrl_code: int | None
@@ -339,12 +376,19 @@ class RWSHTTPError(RWSError):
 
 
 class RWSNotFoundError(RWSHTTPError):
-    """Ressource RWS introuvable (HTTP 404).
+    """RWS resource not found (HTTP 404).
 
-    Typiquement : variable RAPID inexistante, module ou tâche incorrect.
+    Typically raised for a non-existent RAPID variable, incorrect module
+    name, or unknown task.
 
     Attributes:
-        resource: Chemin de la ressource introuvable.
+        resource: Path of the resource that was not found.
+
+    Example:
+        >>> try:
+        ...     await client.get("rw/rapid/symbol/data/RAPID/T_ROB1/MOD/MISSING")
+        ... except RWSNotFoundError as exc:
+        ...     print(exc.resource)
     """
 
     resource: str
@@ -359,23 +403,36 @@ class RWSNotFoundError(RWSHTTPError):
 
 
 # ---------------------------------------------------------------------------
-# Erreurs Mastership
+# Mastership errors
 # ---------------------------------------------------------------------------
 
 
 class MastershipError(RWSError):
-    """Classe de base pour les erreurs liées au mastership RAPID."""
+    """Base class for RAPID mastership-related errors.
+
+    Example:
+        >>> try:
+        ...     await client.post("rw/mastership", params={"action": "request"})
+        ... except MastershipError:
+        ...     print("Mastership operation failed")
+    """
 
 
 class MastershipDenied(MastershipError):
-    """Le contrôleur a refusé l'acquisition du mastership.
+    """The controller refused the mastership acquisition request.
 
-    Causes typiques :
-    - Le programme RAPID tourne en mode automatique.
-    - Un autre client détient déjà le mastership.
-    - L'UAS refuse l'accès à cet utilisateur.
+    Typical causes:
+    - The RAPID program is running in automatic mode.
+    - Another client already holds mastership.
+    - The UAS denies access for this user.
 
-    Contrainte ABB : SYS_CTRL_E_MASTER_REJECT (code -1073445859).
+    ABB constraint: ``SYS_CTRL_E_MASTER_REJECT`` (code ``-1073445859``).
+
+    Example:
+        >>> try:
+        ...     await client.post("rw/mastership", params={"action": "request"})
+        ... except MastershipDenied:
+        ...     print("Mastership denied by controller")
     """
 
     def __init__(self, message: str = "Mastership request denied by controller") -> None:
@@ -383,10 +440,16 @@ class MastershipDenied(MastershipError):
 
 
 class MastershipNotHeld(MastershipError):
-    """Tentative d'opération d'écriture sans mastership actif.
+    """Write operation attempted without an active mastership.
 
-    Levée côté client avant même d'envoyer la requête HTTP,
-    comme garde-fou contre les appels mal ordonnés.
+    Raised client-side before the HTTP request is even sent,
+    as a guard against out-of-order calls.
+
+    Example:
+        >>> try:
+        ...     await set_rapid_variable(client, ...)
+        ... except MastershipNotHeld:
+        ...     print("Acquire mastership first")
     """
 
     def __init__(self) -> None:
@@ -394,13 +457,20 @@ class MastershipNotHeld(MastershipError):
 
 
 # ---------------------------------------------------------------------------
-# Erreurs de valeur / sérialisation
+# Value / serialization errors
 # ---------------------------------------------------------------------------
 
 
 class RWSValueError(RWSError):
-    """Valeur RAPID invalide ou échec de sérialisation / désérialisation.
+    """Invalid RAPID value or serialization / deserialization failure.
 
-    Levée par ``_core/serializers.py`` quand une valeur Python ne peut pas
-    être convertie en format RWS, ou inversement.
+    Raised by ``_core/serializers.py`` when a Python value cannot be
+    converted to RWS format, or conversely when a raw RWS string cannot
+    be parsed into a Python type.
+
+    Example:
+        >>> try:
+        ...     rws_to_robtarget("not_a_valid_robtarget")
+        ... except RWSValueError as exc:
+        ...     print(exc.message)
     """

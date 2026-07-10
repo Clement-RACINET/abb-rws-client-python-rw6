@@ -1,12 +1,14 @@
 # abb_rws_client/_core/serializers.py
 """
-Sérialisation / désérialisation des types RAPID ↔ format RWS.
+Serialization / deserialization of RAPID types ↔ RWS format.
 
-Format RWS d'un robtarget (string compacte, sans espaces) :
+Author: Clément RACINET
+
+RWS format for a robtarget (compact string, no spaces):
     [[x,y,z],[q1,q2,q3,q4],[cf1,cf4,cf6,cfx],[eax_a,eax_b,eax_c,eax_d,eax_e,eax_f]]
 
-Convention ABB quaternion : [w, x, y, z]  (scalaire en premier)
-Axe externe inactif       : 9E+9
+ABB quaternion convention : [w, x, y, z]  (scalar first)
+Inactive external axis     : 9E+9
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ from typing import TypeAlias
 
 from abb_rws_client._core.exceptions import RWSValueError
 
+#: ABB sentinel value for an inactive external axis
 _INACTIVE_AXIS = 9e9
 _INACTIVE_AXIS_STR = "9E+9"
 
@@ -29,18 +32,35 @@ _ROBTARGET_RE = re.compile(
     r"\]\s*$"
 )
 
+#: Set of RAPID types supported by the serialization layer
 _RAPID_TYPES = frozenset({"num", "bool", "string", "robtarget"})
 
 
 @dataclass
 class RobTarget:
-    """Représentation Python d'un robtarget ABB.
+    """Python representation of an ABB robtarget.
 
     Attributes:
-        x, y, z: Position cartésienne (mm).
-        qw, qx, qy, qz: Quaternion d'orientation (convention ABB : scalaire en premier).
-        cf1, cf4, cf6, cfx: Configuration du robot (quadrant).
-        eax: Axes externes (6 valeurs ; 9E+9 = inactif).
+        x: Cartesian X position (mm).
+        y: Cartesian Y position (mm).
+        z: Cartesian Z position (mm).
+        qw: Orientation quaternion — scalar component (ABB convention: scalar first).
+        qx: Orientation quaternion — X component.
+        qy: Orientation quaternion — Y component.
+        qz: Orientation quaternion — Z component.
+        cf1: Robot configuration — axis 1 quadrant.
+        cf4: Robot configuration — axis 4 quadrant.
+        cf6: Robot configuration — axis 6 quadrant.
+        cfx: Robot configuration — extended quadrant.
+        eax: External axes (exactly 6 values; use ``9E+9`` for inactive axes).
+
+    Raises:
+        RWSValueError: If ``eax`` does not contain exactly 6 values.
+
+    Example:
+        >>> rt = RobTarget(x=100.0, y=200.0, z=300.0)
+        >>> rt.eax
+        [9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0, 9000000000.0]
     """
 
     x: float = 0.0
@@ -65,7 +85,25 @@ RapidValue: TypeAlias = float | bool | str | RobTarget
 
 
 def _fmt(value: float) -> str:
-    """Formate un float pour RWS : entier si possible, sinon repr compacte."""
+    """Format a float for RWS: integer string if possible, compact repr otherwise.
+
+    The inactive axis sentinel ``9E+9`` is always rendered as ``"9E+9"``
+    regardless of the integer-check branch.
+
+    Args:
+        value: Float value to format.
+
+    Returns:
+        Compact string representation suitable for a RWS payload.
+
+    Example:
+        >>> _fmt(100.0)
+        '100'
+        >>> _fmt(3.14)
+        '3.14'
+        >>> _fmt(9e9)
+        '9E+9'
+    """
     if value == _INACTIVE_AXIS:
         return _INACTIVE_AXIS_STR
     if value == int(value) and abs(value) < 1e15:
@@ -74,10 +112,30 @@ def _fmt(value: float) -> str:
 
 
 def _parse_floats(raw: str, expected: int, context: str) -> list[float]:
-    """Parse une chaîne CSV de floats avec validation du nombre d'éléments."""
+    """Parse a CSV string of floats with element count validation.
+
+    Args:
+        raw: Comma-separated string of float values (e.g. ``"0,0,500"``).
+        expected: Expected number of elements.
+        context: Label used in error messages to identify the field
+            (e.g. ``"trans"``, ``"rot"``).
+
+    Returns:
+        List of parsed float values.
+
+    Raises:
+        RWSValueError: If the element count does not match ``expected``,
+            or if any element cannot be converted to float.
+
+    Example:
+        >>> _parse_floats("0,0,500", 3, "trans")
+        [0.0, 0.0, 500.0]
+    """
     parts = [p.strip() for p in raw.split(",")]
     if len(parts) != expected:
-        raise RWSValueError(f"{context}: expected {expected} values, got {len(parts)} in {raw!r}")
+        raise RWSValueError(
+            f"{context}: expected {expected} values, got {len(parts)} in {raw!r}"
+        )
     try:
         return [float(p) for p in parts]
     except ValueError as exc:
@@ -85,15 +143,15 @@ def _parse_floats(raw: str, expected: int, context: str) -> list[float]:
 
 
 def robtarget_to_rws(rt: RobTarget) -> str:
-    """Sérialise un RobTarget en string RWS compacte.
+    """Serialize a RobTarget into a compact RWS string.
 
-    Route : PUT /rw/rapid/symbol/data/RAPID/{task}/{module}/{symbol}
+    Route: ``PUT /rw/rapid/symbol/data/RAPID/{task}/{module}/{symbol}``
 
     Args:
-        rt: Instance RobTarget à sérialiser.
+        rt: RobTarget instance to serialize.
 
     Returns:
-        String RWS compacte sans espaces, ex:
+        Compact RWS string with no spaces, e.g.:
         ``"[[100,200,300],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]"``
 
     Example:
@@ -108,21 +166,24 @@ def robtarget_to_rws(rt: RobTarget) -> str:
 
 
 def rws_to_robtarget(raw: str) -> RobTarget:
-    """Désérialise une string RWS en RobTarget.
+    """Deserialize a raw RWS string into a RobTarget instance.
 
-    Route : GET /rw/rapid/symbol/data/RAPID/{task}/{module}/{symbol}
+    Route: ``GET /rw/rapid/symbol/data/RAPID/{task}/{module}/{symbol}``
 
     Args:
-        raw: String RWS brute retournée par le contrôleur.
+        raw: Raw RWS string returned by the controller.
 
     Returns:
-        Instance RobTarget peuplée.
+        Populated RobTarget instance.
 
     Raises:
-        RWSValueError: Si le format est invalide ou les valeurs non parsables.
+        RWSValueError: If the string format is invalid or any value
+            cannot be parsed as a float.
 
     Example:
-        >>> rws_to_robtarget("[[0,0,500],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]")
+        >>> rws_to_robtarget(
+        ...     "[[0,0,500],[1,0,0,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]"
+        ... )
         RobTarget(x=0.0, y=0.0, z=500.0, ...)
     """
     m = _ROBTARGET_RE.match(raw.strip())
@@ -149,17 +210,19 @@ def rws_to_robtarget(raw: str) -> RobTarget:
 
 
 def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str) -> str:
-    """Convertit une valeur Python en string RAPID pour l'API RWS.
+    """Convert a Python value to a RAPID string for the RWS API.
 
     Args:
-        value: Valeur Python à convertir.
-        rapid_type: Type RAPID cible : ``"num"``, ``"bool"``, ``"string"``, ``"robtarget"``.
+        value: Python value to convert.
+        rapid_type: Target RAPID type: ``"num"``, ``"bool"``,
+            ``"string"``, or ``"robtarget"``.
 
     Returns:
-        String au format attendu par RWS.
+        String in the format expected by RWS.
 
     Raises:
-        RWSValueError: Type RAPID inconnu, ou valeur incompatible avec le type.
+        RWSValueError: Unknown RAPID type, or value incompatible
+            with the requested type.
 
     Example:
         >>> python_to_rapid_value(3.14, "num")
@@ -174,37 +237,46 @@ def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str
             f"Unknown RAPID type: {rapid_type!r}. Expected one of {sorted(_RAPID_TYPES)}"
         )
     if rapid_type == "num":
-        # bool est sous-classe de int — doit être rejeté explicitement
+        # bool is a subclass of int — must be rejected explicitly
         if isinstance(value, bool) or not isinstance(value, int | float):
-            raise RWSValueError(f"Expected int or float for 'num', got {type(value).__name__!r}")
+            raise RWSValueError(
+                f"Expected int or float for 'num', got {type(value).__name__!r}"
+            )
         return str(int(value)) if float(value) == int(value) else repr(float(value))
     if rapid_type == "bool":
         if not isinstance(value, bool):
-            raise RWSValueError(f"Expected bool for 'bool', got {type(value).__name__!r}")
+            raise RWSValueError(
+                f"Expected bool for 'bool', got {type(value).__name__!r}"
+            )
         return "TRUE" if value else "FALSE"
     if rapid_type == "string":
         if not isinstance(value, str):
-            raise RWSValueError(f"Expected str for 'string', got {type(value).__name__!r}")
-        return value  # ← pas de guillemets : RWS gère l'encodage côté form-data
+            raise RWSValueError(
+                f"Expected str for 'string', got {type(value).__name__!r}"
+            )
+        return value  # no quotes: RWS handles encoding on the form-data side
     if rapid_type == "robtarget":
         if not isinstance(value, RobTarget):
-            raise RWSValueError(f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}")
+            raise RWSValueError(
+                f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}"
+            )
         return robtarget_to_rws(value)
-    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable, mypy
+    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable — mypy guard
 
 
 def rapid_value_to_python(raw: str, rapid_type: str) -> float | bool | str | RobTarget:
-    """Convertit une string RWS en valeur Python selon le type RAPID.
+    """Convert a raw RWS string to a Python value according to the RAPID type.
 
     Args:
-        raw: String brute retournée par le contrôleur RWS.
-        rapid_type: Type RAPID : ``"num"``, ``"bool"``, ``"string"``, ``"robtarget"``.
+        raw: Raw string returned by the RWS controller.
+        rapid_type: RAPID type: ``"num"``, ``"bool"``,
+            ``"string"``, or ``"robtarget"``.
 
     Returns:
-        Valeur Python typée.
+        Typed Python value.
 
     Raises:
-        RWSValueError: Conversion impossible ou type inconnu.
+        RWSValueError: Conversion failed or unknown RAPID type.
 
     Example:
         >>> rapid_value_to_python("3.14", "num")
@@ -231,7 +303,7 @@ def rapid_value_to_python(raw: str, rapid_type: str) -> float | bool | str | Rob
             return False
         raise RWSValueError(f"Cannot convert {raw!r} to bool")
     if rapid_type == "string":
-        return raw  # ← passthrough brut, sans strip de guillemets
+        return raw  # raw passthrough, no quote stripping
     if rapid_type == "robtarget":
         return rws_to_robtarget(raw)
-    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable, mypy
+    raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable — mypy guard

@@ -1,6 +1,6 @@
-1. _core/client.py
-2. _core/exceptions.py
-3. _core/serializers.py
+1. _core/client.py --> ok
+2. _core/exceptions.py --> ok
+3. _core/serializers.py --> ok
 4. tests/test_client.py
 5. tests/test_exceptions.py
 6. tests/test_serializers.py
