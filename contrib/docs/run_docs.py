@@ -1,5 +1,17 @@
+#!/usr/bin/env python3
 # contrib/docs/run_docs.py
-"""Orchestrateur : génère la doc API, le rapport coverage, et lance mkdocs serve."""
+"""
+Documentation pipeline orchestrator.
+
+Author: Clément RACINET
+
+Generates the API reference pages, produces the coverage HTML report,
+and starts ``mkdocs serve``.
+
+Usage:
+    python contrib/docs/run_docs.py
+    pixi run docs          # if configured in pixi.toml
+"""
 from __future__ import annotations
 
 import subprocess
@@ -11,12 +23,12 @@ from contrib.docs.generate_api import generate_api_docs, update_mkdocs_nav
 
 
 def _generate_coverage(project_root: Path) -> None:
-    """Lance pytest pour produire le rapport HTML dans docs/htmlcov/.
+    """Run pytest to produce the HTML coverage report in ``docs/htmlcov/``.
 
     Args:
-        project_root: Racine absolue du projet.
+        project_root: Absolute path to the project root.
     """
-    print("\n Génération du rapport coverage...")
+    print("\n📊 Generating coverage report...")
     result = subprocess.run(
         [
             sys.executable, "-m", "pytest",
@@ -29,20 +41,27 @@ def _generate_coverage(project_root: Path) -> None:
         check=False,
     )
     if result.returncode != 0:
-        print("⚠️  Des tests ont échoué — rapport coverage peut être incomplet.")
+        print("⚠️  Some tests failed — coverage report may be incomplete.")
 
 
 def main() -> None:
-    """Point d'entrée principal de la pipeline documentaire."""
+    """Main entry point of the documentation pipeline.
+
+    Runs the three pipeline stages in order:
+
+    1. Generate API Markdown pages and update ``mkdocs.yml``.
+    2. Run pytest and produce the HTML coverage report.
+    3. Start ``mkdocs serve`` (blocking until Ctrl+C).
+    """
     cfg = build_config()
 
-    print("\n📁 Génération des pages API...")
+    print("\n📁 Generating API pages...")
     nav = generate_api_docs(cfg)
     update_mkdocs_nav(cfg, nav)
 
     _generate_coverage(cfg.project_root)
 
-    print("\n🚀 Lancement de mkdocs serve...  (Ctrl+C pour arrêter)")
+    print("\n🚀 Starting mkdocs serve...  (Ctrl+C to stop)")
     try:
         subprocess.run(
             [sys.executable, "-m", "mkdocs", "serve"],
@@ -50,7 +69,7 @@ def main() -> None:
             check=True,
         )
     except (KeyboardInterrupt, subprocess.CalledProcessError):
-        print("\n👋 Serveur arrêté.")
+        print("\n👋 Server stopped.")
         sys.exit(0)
 
 

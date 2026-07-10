@@ -1,32 +1,36 @@
+#!/usr/bin/env python3
 # contrib/docs/config.py
-"""Configuration centralisée pour la pipeline de documentation MkDocs.
+"""
+Documentation pipeline configuration for abb_rws_client.
 
-Ce module est le seul point de vérité pour les chemins et paramètres
-utilisés par generate_api.py et run_docs.py.
+Author: Clément RACINET
+
+Single source of truth for all paths and parameters used by
+``generate_api.py`` and ``run_docs.py``.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# Racine du projet = 2 niveaux au-dessus de contrib/docs/
+#: Absolute path to the project root (2 levels above contrib/docs/)
 PROJECT_ROOT: Path = Path(__file__).resolve().parents[2]
 
 
 @dataclass
 class DocConfig:
-    """Paramètres de la pipeline documentaire.
+    """Documentation pipeline parameters.
 
     Attributes:
-        project_root: Racine absolue du projet.
-        mkdocs_path: Chemin vers mkdocs.yml.
-        docs_src_dir: Dossier source des fichiers Markdown.
-        docs_api_dir: Sous-dossier généré automatiquement (API Reference).
-        packages_to_scan: Liste des packages Python à documenter.
-        exclude_dirs: Noms de dossiers à ignorer lors du scan.
-        exclude_files: Patterns de fichiers à ignorer lors du scan (fnmatch).
-        balise_api_debut: Balise de début de la section AUTOGEN dans mkdocs.yml.
-        balise_api_fin: Balise de fin de la section AUTOGEN dans mkdocs.yml.
+        project_root: Absolute path to the project root.
+        mkdocs_path: Path to ``mkdocs.yml``.
+        docs_src_dir: Source directory for Markdown files.
+        docs_api_dir: Auto-generated sub-directory (API Reference).
+        packages_to_scan: List of Python packages to document.
+        exclude_dirs: Directory names to skip during the scan.
+        exclude_files: File name patterns to skip during the scan (fnmatch).
+        balise_api_debut: Opening tag of the AUTOGEN section in ``mkdocs.yml``.
+        balise_api_fin: Closing tag of the AUTOGEN section in ``mkdocs.yml``.
     """
 
     project_root: Path
@@ -41,10 +45,10 @@ class DocConfig:
 
 
 def build_config() -> DocConfig:
-    """Construit la configuration pour le projet abb_rws_client.
+    """Build the documentation pipeline configuration for abb_rws_client.
 
     Returns:
-        DocConfig: Instance de configuration prête à l'emploi.
+        A fully populated ``DocConfig`` instance ready for use.
 
     Example:
         >>> from contrib.docs.config import build_config
