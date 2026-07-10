@@ -8,6 +8,7 @@ RWS module: Controller Service → Get Controller Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_controller_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl")
 
+
 async def get_controller_actions(
     client: RWSClient,
     action: str | None = None,
@@ -65,7 +67,10 @@ async def get_controller_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl?action=show"
     """
-    return await client.get("/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_controller_environment_variable(
     client: RWSClient,
@@ -94,6 +99,7 @@ async def get_controller_environment_variable(
     """
     return await client.get(f"/ctrl/${envname}")
 
+
 async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
     """
     Restart or Shutdown controller.
@@ -117,6 +123,7 @@ async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST "http://localhost/ctrl"
     """
     return await client.post("/ctrl")
+
 
 async def set_controller_language(
     client: RWSClient,
@@ -144,7 +151,10 @@ async def set_controller_language(
     Example:
         # Set controller language
     """
-    return await client.post("/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
     """
@@ -169,6 +179,7 @@ async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system"
     """
     return await client.get("/ctrl/system")
+
 
 async def get_actions_on_system(
     client: RWSClient,
@@ -196,7 +207,10 @@ async def get_actions_on_system(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?action=show"
     """
-    return await client.get("/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_boot_device(
     client: RWSClient,
@@ -224,7 +238,10 @@ async def set_boot_device(
     Example:
         # curl --digest -u ""Default User":robotics -d "path={Path}" -X POST "
     """
-    return await client.post("/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_boot_device(
     client: RWSClient,
@@ -252,7 +269,10 @@ async def get_boot_device(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?resource=boot-device"
     """
-    return await client.get("/ctrl/system", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/system", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def load_boot_image(
     client: RWSClient,
@@ -280,7 +300,10 @@ async def load_boot_image(
     Example:
         # curl --digest -u ""Default User":robotics -d -X POST "
     """
-    return await client.post("/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_unload_boot_image(
     client: RWSClient,
@@ -308,7 +331,10 @@ async def post_unload_boot_image(
     Example:
         # curl --digest -u ""Default User":robotics -d -X POST "
     """
-    return await client.post("/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_selected_system_name(
     client: RWSClient,
@@ -336,7 +362,10 @@ async def get_selected_system_name(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system?type=selected"
     """
-    return await client.get("/ctrl/system", params={k: v for k, v in {"type": type}.items() if v is not None})
+    return await client.get(
+        "/ctrl/system", params={k: v for k, v in {"type": type}.items() if v is not None}
+    )
+
 
 async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
     """
@@ -362,6 +391,7 @@ async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
     """
     return await client.post("/ctrl/system/installdpkg")
 
+
 async def validate_deployment_package(client: RWSClient) -> httpx.Response:
     """
     Validate deployment package.
@@ -385,6 +415,7 @@ async def validate_deployment_package(client: RWSClient) -> httpx.Response:
         # curl --digest -u ""Default User":robotics -d "path=/hd0a/inbox/TEMP" -X POST "
     """
     return await client.post("/ctrl/system/validatedpkg")
+
 
 async def get_system_resource(
     client: RWSClient,
@@ -414,6 +445,7 @@ async def get_system_resource(
     """
     return await client.get(f"/ctrl/system/{system_name}")
 
+
 async def get_actions_on_system_resource(
     client: RWSClient,
     system_name: str,
@@ -442,7 +474,11 @@ async def get_actions_on_system_resource(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048?action=show"
     """
-    return await client.get(f"/ctrl/system/{system_name}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/ctrl/system/{system_name}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_rename_system(
     client: RWSClient,
@@ -474,7 +510,12 @@ async def post_rename_system(
     Example:
         # curl --digest -u "Default User":robotics -d "newname=System123" -X POST "http://localhost/ctrl/system/RW6_TEST?action=re
     """
-    return await client.post(f"/ctrl/system/{system_name}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"newname": newname}.items() if v is not None})
+    return await client.post(
+        f"/ctrl/system/{system_name}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"newname": newname}.items() if v is not None},
+    )
+
 
 async def post_select_system(
     client: RWSClient,
@@ -504,7 +545,11 @@ async def post_select_system(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system/RW6_TEST?action=activate"
     """
-    return await client.post(f"/ctrl/system/{system_name}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/ctrl/system/{system_name}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def delete_system(
     client: RWSClient,
@@ -534,6 +579,7 @@ async def delete_system(
     """
     return await client.delete(f"/ctrl/system/{system_name}")
 
+
 async def post_deselect_system(
     client: RWSClient,
     action: str | None = None,
@@ -560,7 +606,10 @@ async def post_deselect_system(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system?action=deactivate"
     """
-    return await client.post("/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/system", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_network_resource(client: RWSClient) -> httpx.Response:
     """
@@ -584,6 +633,7 @@ async def get_network_resource(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/network"
     """
     return await client.get("/ctrl/network")
+
 
 async def get_network_setting_actions(
     client: RWSClient,
@@ -611,7 +661,10 @@ async def get_network_setting_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/network?action=show"
     """
-    return await client.get("/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_network_configuration(
     client: RWSClient,
@@ -639,7 +692,10 @@ async def set_network_configuration(
     Example:
         # curl --digest -u "Default User":robotics -d "method=fixip&address={IP address}&mask={Mask address}&gateway={Default Gate
     """
-    return await client.post("/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/network", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_dns_resource(client: RWSClient) -> httpx.Response:
     """
@@ -663,6 +719,7 @@ async def get_dns_resource(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/network/dns"
     """
     return await client.get("/ctrl/network/dns")
+
 
 async def add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -688,6 +745,7 @@ async def add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     return await client.post("/ctrl/network/route/add")
 
+
 async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Options to add a route table entry.
@@ -711,6 +769,7 @@ async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.R
         # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/add"
     """
     return await client.options("/ctrl/network/route/add")
+
 
 async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -736,6 +795,7 @@ async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     return await client.post("/ctrl/network/route/remove")
 
+
 async def options_options_to_remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Options to remove a route table entry.
@@ -760,6 +820,7 @@ async def options_options_to_remove_route_table_entry(client: RWSClient) -> http
     """
     return await client.options("/ctrl/network/route/remove")
 
+
 async def get_compress_resources(client: RWSClient) -> httpx.Response:
     """
     Get compress resources.
@@ -783,6 +844,7 @@ async def get_compress_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress"
     """
     return await client.get("/ctrl/compress")
+
 
 async def get_compress_actions(
     client: RWSClient,
@@ -810,7 +872,10 @@ async def get_compress_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/compress?action=show"
     """
-    return await client.get("/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_compress_decompress_resource(
     client: RWSClient,
@@ -838,7 +903,10 @@ async def post_compress_decompress_resource(
     Example:
         # curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST
     """
-    return await client.post("/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/compress", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
     """
@@ -863,6 +931,7 @@ async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics"
     """
     return await client.get("/ctrl/diagnostics")
+
 
 async def get_diagnostics_actions(
     client: RWSClient,
@@ -890,7 +959,10 @@ async def get_diagnostics_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics?action=show"
     """
-    return await client.get("/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def save_system_diagnostics(
     client: RWSClient,
@@ -918,7 +990,10 @@ async def save_system_diagnostics(
     Example:
         # curl --digest -u "Default User":robotics -d "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localho
     """
-    return await client.post("/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/diagnostics", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def subscribe_on_system_dump(
     client: RWSClient,
@@ -948,7 +1023,15 @@ async def subscribe_on_system_dump(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_diagnostics_states_get_system_diagnostics(
     client: RWSClient,
@@ -978,7 +1061,15 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_safety_resources(client: RWSClient) -> httpx.Response:
     """
@@ -1003,6 +1094,7 @@ async def get_safety_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety"
     """
     return await client.get("/ctrl/safety")
+
 
 async def get_safety_actions(
     client: RWSClient,
@@ -1030,7 +1122,10 @@ async def get_safety_actions(
     Example:
         # Retrieve actions on the CFG resource
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def load_safety_configuration_file_to_controller(
     client: RWSClient,
@@ -1058,7 +1153,10 @@ async def load_safety_configuration_file_to_controller(
     Example:
         # Rename a file
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_safety_mode_of_the_controller(
     client: RWSClient,
@@ -1088,7 +1186,12 @@ async def set_safety_mode_of_the_controller(
     Example:
         # curl --digest -u "Default User":robotics -d "mode=service" -X POST "http://localhost/ctrl/safety?action=set-mode"
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mode": mode}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mode": mode}.items() if v is not None},
+    )
+
 
 async def get_config_status(
     client: RWSClient,
@@ -1116,7 +1219,10 @@ async def get_config_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=config-status"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def get_safety_mode_status(
     client: RWSClient,
@@ -1144,7 +1250,10 @@ async def get_safety_mode_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-mode"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def get_safety_cyclic_brake_check_status(
     client: RWSClient,
@@ -1174,7 +1283,13 @@ async def get_safety_cyclic_brake_check_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety",
+        params={
+            k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None
+        },
+    )
+
 
 async def get_loadoperation_status(
     client: RWSClient,
@@ -1202,7 +1317,10 @@ async def get_loadoperation_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=loadoperation-status"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def get_safety_configurations(
     client: RWSClient,
@@ -1229,7 +1347,10 @@ async def get_safety_configurations(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-config"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def get_safety_violation_info(
     client: RWSClient,
@@ -1257,7 +1378,10 @@ async def get_safety_violation_info(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=violation-info"
     """
-    return await client.get("/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/ctrl/safety", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def post_unlock_the_safety_configuration(
     client: RWSClient,
@@ -1285,7 +1409,10 @@ async def post_unlock_the_safety_configuration(
     Example:
         # Rename a file
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_software_sync_acknowledgement(
     client: RWSClient,
@@ -1315,7 +1442,12 @@ async def post_software_sync_acknowledgement(
     Example:
         # Rename a file
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"index": index}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"index": index}.items() if v is not None},
+    )
+
 
 async def add_validation_info(
     client: RWSClient,
@@ -1345,7 +1477,12 @@ async def add_validation_info(
     Example:
         # `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST "http://localhost/ctrl/safety?action=validate-cfg
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"validated_by": validated_by}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"validated_by": validated_by}.items() if v is not None},
+    )
+
 
 async def remove_validation_info(
     client: RWSClient,
@@ -1373,7 +1510,10 @@ async def remove_validation_info(
     Example:
         # `curl –digest -u "Default User":robotics POST "http://localhost/ctrl/safety?action=invalidate-cfg"
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_reset_safety_controller(
     client: RWSClient,
@@ -1401,7 +1541,10 @@ async def set_reset_safety_controller(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?action=reset"
     """
-    return await client.post("/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/safety", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_options_resource(
     client: RWSClient,
@@ -1431,6 +1574,7 @@ async def get_options_resource(
     """
     return await client.get(f"/ctrl/options/{option_to_verify}")
 
+
 async def get_check_robotware_version_compatibility_with_contorller_hardware(
     client: RWSClient,
     robotware_version: str,
@@ -1459,6 +1603,7 @@ async def get_check_robotware_version_compatibility_with_contorller_hardware(
     """
     return await client.get(f"/ctrl/compatibility/{robotware_version}")
 
+
 async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
     """
     Get Virtual Time resources.
@@ -1482,6 +1627,7 @@ async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime"
     """
     return await client.get("/ctrl/virtualtime")
+
 
 async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
@@ -1507,6 +1653,7 @@ async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime/vttime")
 
+
 async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
     """
     Get VTTimeslice Value.
@@ -1530,6 +1677,7 @@ async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
     """
     return await client.get("/ctrl/virtualtime/vttimeslice")
+
 
 async def get_actions_on_vttimeslice(
     client: RWSClient,
@@ -1557,7 +1705,11 @@ async def get_actions_on_vttimeslice(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
     """
-    return await client.get("/ctrl/virtualtime/vttimeslice", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/virtualtime/vttimeslice",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_vttimeslice_value(
     client: RWSClient,
@@ -1585,7 +1737,11 @@ async def set_vttimeslice_value(
     Example:
         # curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST "http://localhost/ctrl/virtualtime/vttimeslice"
     """
-    return await client.post("/ctrl/virtualtime/vttimeslice", data={k: v for k, v in {"vttimeslice": vttimeslice}.items() if v is not None})
+    return await client.post(
+        "/ctrl/virtualtime/vttimeslice",
+        data={k: v for k, v in {"vttimeslice": vttimeslice}.items() if v is not None},
+    )
+
 
 async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
@@ -1610,6 +1766,7 @@ async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed"
     """
     return await client.get("/ctrl/virtualtime/vtspeed")
+
 
 async def get_actions_on_vtspeed(
     client: RWSClient,
@@ -1637,7 +1794,11 @@ async def get_actions_on_vtspeed(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed?action=show"
     """
-    return await client.get("/ctrl/virtualtime/vtspeed", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/virtualtime/vtspeed",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_speed_of_virtualtime(
     client: RWSClient,
@@ -1665,7 +1826,11 @@ async def set_speed_of_virtualtime(
     Example:
         # curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST "http://localhost/ctrl/virtualtime/vtspeed"
     """
-    return await client.post("/ctrl/virtualtime/vtspeed", data={k: v for k, v in {"vtspeed": vtspeed}.items() if v is not None})
+    return await client.post(
+        "/ctrl/virtualtime/vtspeed",
+        data={k: v for k, v in {"vtspeed": vtspeed}.items() if v is not None},
+    )
+
 
 async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
@@ -1690,6 +1855,7 @@ async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate"
     """
     return await client.get("/ctrl/virtualtime/vtstate")
+
 
 async def get_actions_on_vtstate(
     client: RWSClient,
@@ -1717,7 +1883,11 @@ async def get_actions_on_vtstate(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate?action=show"
     """
-    return await client.get("/ctrl/virtualtime/vtstate", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/virtualtime/vtstate",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_state_of_virtualtime(
     client: RWSClient,
@@ -1745,7 +1915,11 @@ async def set_state_of_virtualtime(
     Example:
         # curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST "http://localhost/ctrl/virtualtime/vtstate"
     """
-    return await client.post("/ctrl/virtualtime/vtstate", data={k: v for k, v in {"vtstate": vtstate}.items() if v is not None})
+    return await client.post(
+        "/ctrl/virtualtime/vtstate",
+        data={k: v for k, v in {"vtstate": vtstate}.items() if v is not None},
+    )
+
 
 async def post_vt_run(client: RWSClient) -> httpx.Response:
     """

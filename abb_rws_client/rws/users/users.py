@@ -8,6 +8,7 @@ RWS module: User Service → Get User Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -40,7 +41,10 @@ async def get_user_resources(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/users"
     """
-    return await client.get("/users", params={k: v for k, v in {"user_type": user_type}.items() if v is not None})
+    return await client.get(
+        "/users", params={k: v for k, v in {"user_type": user_type}.items() if v is not None}
+    )
+
 
 async def get_user_actions(
     client: RWSClient,
@@ -68,7 +72,10 @@ async def get_user_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/users?action=show"
     """
-    return await client.get("/users", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/users", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def register_the_user(client: RWSClient) -> httpx.Response:
     """
@@ -93,6 +100,7 @@ async def register_the_user(client: RWSClient) -> httpx.Response:
         # Register user
     """
     return await client.post("/users")
+
 
 async def impersonate_user(
     client: RWSClient,
@@ -120,7 +128,10 @@ async def impersonate_user(
     Example:
         # Register user
     """
-    return await client.post("/users", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/users", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def login_as_local_user(
     client: RWSClient,
@@ -150,4 +161,8 @@ async def login_as_local_user(
     Example:
         # Login as local user
     """
-    return await client.post("/users", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"type": type}.items() if v is not None})
+    return await client.post(
+        "/users",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"type": type}.items() if v is not None},
+    )

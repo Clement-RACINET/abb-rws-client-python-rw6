@@ -125,7 +125,8 @@ abb_rws_client_python_rw6
 │   │   ├── test_subscription.py
 │   │   ├── test_system.py
 │   │   └── test_vision.py
-│   └── __init__.py
+│   ├── __init__.py
+│   └── conftest.py
 ├── .env.example
 ├── .gitignore
 ├── CONTEXT.md

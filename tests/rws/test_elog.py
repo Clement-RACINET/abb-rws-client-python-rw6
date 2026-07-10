@@ -2,22 +2,22 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/elog."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.elog import (
-    get_elog_resources,
+    get_actions_on_elog_domain,
     get_elog_actions,
+    get_elog_message_in_domain,
+    get_elog_messages_in_domain,
+    get_elog_resources,
     post_clear_elog_messages,
     save_elog_in_system_dump_format,
-    get_elog_messages_in_domain,
-    get_actions_on_elog_domain,
-    post_clear_elog_messages,
     subscribe_on_elog_domain,
-    get_elog_message_in_domain,
 )
 
 
@@ -58,6 +58,7 @@ async def test_get_elog_resources() -> None:
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_elog_actions() -> None:
     """Verify that get_elog_actions sends GET /rw/elog."""
@@ -70,6 +71,7 @@ async def test_get_elog_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_clear_elog_messages() -> None:
@@ -84,6 +86,7 @@ async def test_post_clear_elog_messages() -> None:
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_save_elog_in_system_dump_format() -> None:
     """Verify that save_elog_in_system_dump_format sends POST /rw/elog."""
@@ -96,6 +99,7 @@ async def test_save_elog_in_system_dump_format() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 202
+
 
 @pytest.mark.asyncio
 async def test_get_elog_messages_in_domain() -> None:
@@ -110,6 +114,7 @@ async def test_get_elog_messages_in_domain() -> None:
     assert transport.last_request.url.path == "/rw/elog/domain_number_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_elog_domain() -> None:
     """Verify that get_actions_on_elog_domain sends GET /rw/elog/{domain-number}."""
@@ -122,6 +127,7 @@ async def test_get_actions_on_elog_domain() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/elog/domain_number_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_clear_elog_messages() -> None:
@@ -136,6 +142,7 @@ async def test_post_clear_elog_messages() -> None:
     assert transport.last_request.url.path == "/rw/elog/domain_number_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_elog_domain() -> None:
     """Verify that subscribe_on_elog_domain sends POST /subscription."""
@@ -148,6 +155,7 @@ async def test_subscribe_on_elog_domain() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_elog_message_in_domain() -> None:

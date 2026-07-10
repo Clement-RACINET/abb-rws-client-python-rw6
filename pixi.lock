@@ -374,10 +374,15 @@ packages:
 - pypi: ./
   name: abb-rws6-python-client
   version: 0.1.0
-  sha256: 35b18fd4ea720d2197dd45646ff6994485c2fa421289d4cf25ea66df78e43997
+  sha256: b039020948117003f9cbe65aa4535addf2ba688e36e9a9ee1a8a8f825d0bd0ef
   requires_dist:
   - httpx>=0.27,<1.0
   - python-dotenv>=1.0,<2.0
+  - pytest>=8.0,<9.0 ; extra == 'dev'
+  - pytest-asyncio>=0.24,<1.0 ; extra == 'dev'
+  - anyio[trio]>=4.0 ; extra == 'dev'
+  - pytest-cov>=7.1.0,<8 ; extra == 'dev'
+  - ruff>=0.4,<1.0 ; extra == 'dev'
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/noarch/anyio-4.14.1-pyhcf101f3_0.conda

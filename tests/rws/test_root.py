@@ -2,10 +2,11 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/root."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.root import (
@@ -50,6 +51,7 @@ async def test_get_service_list() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_logout() -> None:

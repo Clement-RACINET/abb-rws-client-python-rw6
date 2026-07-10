@@ -8,6 +8,7 @@ RWS module: RobotWare Services → IO Service → Operations on IO Signals
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -38,6 +39,7 @@ async def get_io_signals(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals"
     """
     return await client.get("/rw/iosystem/signals")
+
 
 async def post_signal_search(
     client: RWSClient,
@@ -89,7 +91,31 @@ async def post_signal_search(
     Example:
         # curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?acti
     """
-    return await client.post("/rw/iosystem/signals", params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None}, data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None})
+    return await client.post(
+        "/rw/iosystem/signals",
+        params={
+            k: v
+            for k, v in {"action": action, "start": start, "limit": limit}.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "device": device,
+                "network": network,
+                "category": category,
+                "category_pon": category_pon,
+                "type": type,
+                "invert": invert,
+                "blocked": blocked,
+                "name2": name2,
+                "device2": device2,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_signal_search_extended(
     client: RWSClient,
@@ -141,7 +167,31 @@ async def post_signal_search_extended(
     Example:
         # curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?acti
     """
-    return await client.post("/rw/iosystem/signals", params={k: v for k, v in {"action": action, "start": start, "limit": limit}.items() if v is not None}, data={k: v for k, v in {"name": name, "device": device, "network": network, "category": category, "category_pon": category_pon, "type": type, "invert": invert, "blocked": blocked, "name2": name2, "device2": device2}.items() if v is not None})
+    return await client.post(
+        "/rw/iosystem/signals",
+        params={
+            k: v
+            for k, v in {"action": action, "start": start, "limit": limit}.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "name": name,
+                "device": device,
+                "network": network,
+                "category": category,
+                "category_pon": category_pon,
+                "type": type,
+                "invert": invert,
+                "blocked": blocked,
+                "name2": name2,
+                "device2": device2,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_unblock_signals(
     client: RWSClient,
@@ -169,7 +219,11 @@ async def post_unblock_signals(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/iosystem/signals?action=unblock-signal"
     """
-    return await client.post("/rw/iosystem/signals", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/iosystem/signals",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_io_signals_actions(
     client: RWSClient,
@@ -197,4 +251,7 @@ async def get_io_signals_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals?action=show"
     """
-    return await client.get("/rw/iosystem/signals", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/iosystem/signals",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )

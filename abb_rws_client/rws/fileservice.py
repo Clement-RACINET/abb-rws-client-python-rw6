@@ -8,6 +8,7 @@ RWS module: File Service → Get File Service Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_file_service_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/fileservice")
 
+
 async def get_directory_listing_of_resources(
     client: RWSClient,
     environment_variable_device: str,
@@ -68,6 +70,7 @@ async def get_directory_listing_of_resources(
         # Directory Listing
     """
     return await client.get(f"/fileservice/{environment_variable_device}/{directory}")
+
 
 async def get_directory_actions(
     client: RWSClient,
@@ -99,7 +102,11 @@ async def get_directory_actions(
     Example:
         # Get actions on directory
     """
-    return await client.get(f"/fileservice/{device}|{directory}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/fileservice/{device}|{directory}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def create_directory(
     client: RWSClient,
@@ -131,6 +138,7 @@ async def create_directory(
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
 
+
 async def post_rename_directory(
     client: RWSClient,
     device_environment_variable: str,
@@ -160,6 +168,7 @@ async def post_rename_directory(
         # Rename a directory
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
+
 
 async def post_copy_directory(
     client: RWSClient,
@@ -191,6 +200,7 @@ async def post_copy_directory(
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
 
+
 async def delete_directory(
     client: RWSClient,
     device_environment_variable: str,
@@ -220,6 +230,7 @@ async def delete_directory(
         # Delate a directory
     """
     return await client.delete(f"/fileservice/{device_environment_variable}/{directory}")
+
 
 async def get_file(
     client: RWSClient,
@@ -253,6 +264,7 @@ async def get_file(
     """
     return await client.get(f"/fileservice/{device}|{directory}/{file}")
 
+
 async def get_file_actions(
     client: RWSClient,
     device: str,
@@ -285,7 +297,11 @@ async def get_file_actions(
     Example:
         # Get actions on a file.
     """
-    return await client.get(f"/fileservice/{device}|{directory}/{file}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/fileservice/{device}|{directory}/{file}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_rename_file(
     client: RWSClient,
@@ -317,6 +333,7 @@ async def post_rename_file(
     """
     return await client.post(f"/fileservice/{device_environment_variable_directory}/{file}")
 
+
 async def create_copy_of_file(
     client: RWSClient,
     device_environment_variable: str,
@@ -346,6 +363,7 @@ async def create_copy_of_file(
         # Create a copy of a file
     """
     return await client.post(f"/fileservice/{device_environment_variable}/{filename}")
+
 
 async def put_upload_file(
     client: RWSClient,
@@ -377,6 +395,7 @@ async def put_upload_file(
     """
     return await client.put(f"/fileservice/{device_environment_variable_directory}/{file}")
 
+
 async def delete_file(
     client: RWSClient,
     device_environment_variable_directory: str,
@@ -406,6 +425,7 @@ async def delete_file(
         # Delete a file
     """
     return await client.delete(f"/fileservice/{device_environment_variable_directory}/{file}")
+
 
 async def get_file_meta_data(
     client: RWSClient,

@@ -2,21 +2,22 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/dipc."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.dipc import (
-    get_dipc_resources,
-    get_dipc_actions,
     create_queue,
+    delete_dipc_queue,
+    get_dipc_actions,
     get_dipc_queue,
     get_dipc_queue_actions,
-    post_send_message,
+    get_dipc_resources,
     get_read_message,
-    delete_dipc_queue,
+    post_send_message,
     subscribe_dipc_queue,
     subscribe_dipc_queue_without_reading_message,
 )
@@ -59,6 +60,7 @@ async def test_get_dipc_resources() -> None:
     assert transport.last_request.url.path == "/rw/dipc"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_dipc_actions() -> None:
     """Verify that get_dipc_actions sends GET /rw/dipc."""
@@ -71,6 +73,7 @@ async def test_get_dipc_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/dipc"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_create_queue() -> None:
@@ -85,6 +88,7 @@ async def test_create_queue() -> None:
     assert transport.last_request.url.path == "/rw/dipc"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_dipc_queue() -> None:
     """Verify that get_dipc_queue sends GET /rw/dipc/{queue-name}."""
@@ -97,6 +101,7 @@ async def test_get_dipc_queue() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_dipc_queue_actions() -> None:
@@ -111,6 +116,7 @@ async def test_get_dipc_queue_actions() -> None:
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_send_message() -> None:
     """Verify that post_send_message sends POST /rw/dipc/{queue-name}."""
@@ -123,6 +129,7 @@ async def test_post_send_message() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_read_message() -> None:
@@ -137,6 +144,7 @@ async def test_get_read_message() -> None:
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_delete_dipc_queue() -> None:
     """Verify that delete_dipc_queue sends DELETE /rw/dipc/{queue-name}."""
@@ -150,6 +158,7 @@ async def test_delete_dipc_queue() -> None:
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_dipc_queue() -> None:
     """Verify that subscribe_dipc_queue sends POST /subscription."""
@@ -162,6 +171,7 @@ async def test_subscribe_dipc_queue() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_dipc_queue_without_reading_message() -> None:

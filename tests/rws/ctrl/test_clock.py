@@ -2,23 +2,24 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/clock."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.clock import (
-    get_clock_resource,
     get_clock_actions,
-    set_the_clock_of_the_controller,
-    get_timezone_resource,
-    get_timezone_actions,
-    set_the_time_zone,
-    get_time_server_resource,
-    get_time_server_actions,
-    set_the_time_server,
+    get_clock_resource,
     get_test_time_server,
+    get_time_server_actions,
+    get_time_server_resource,
+    get_timezone_actions,
+    get_timezone_resource,
+    set_the_clock_of_the_controller,
+    set_the_time_server,
+    set_the_time_zone,
 )
 
 
@@ -59,6 +60,7 @@ async def test_get_clock_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_clock_actions() -> None:
     """Verify that get_clock_actions sends GET /ctrl/clock."""
@@ -71,6 +73,7 @@ async def test_get_clock_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_clock_of_the_controller() -> None:
@@ -85,6 +88,7 @@ async def test_set_the_clock_of_the_controller() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_timezone_resource() -> None:
     """Verify that get_timezone_resource sends GET /ctrl/clock/timezone."""
@@ -97,6 +101,7 @@ async def test_get_timezone_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_timezone_actions() -> None:
@@ -112,6 +117,7 @@ async def test_get_timezone_actions() -> None:
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_the_time_zone() -> None:
     """Verify that set_the_time_zone sends POST /ctrl/clock/timezone."""
@@ -125,6 +131,7 @@ async def test_set_the_time_zone() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_time_server_resource() -> None:
     """Verify that get_time_server_resource sends GET /ctrl/clock/timeserver."""
@@ -137,6 +144,7 @@ async def test_get_time_server_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_time_server_actions() -> None:
@@ -152,6 +160,7 @@ async def test_get_time_server_actions() -> None:
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_the_time_server() -> None:
     """Verify that set_the_time_server sends POST /ctrl/clock/timeserver."""
@@ -164,6 +173,7 @@ async def test_set_the_time_server() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_test_time_server() -> None:

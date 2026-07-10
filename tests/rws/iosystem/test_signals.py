@@ -2,18 +2,19 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/iosystem/signals."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.signals import (
     get_io_signals,
+    get_io_signals_actions,
     post_signal_search,
     post_signal_search_extended,
     post_unblock_signals,
-    get_io_signals_actions,
 )
 
 
@@ -54,6 +55,7 @@ async def test_get_io_signals() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/signals"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_signal_search() -> None:
     """Verify that post_signal_search sends POST /rw/iosystem/signals."""
@@ -66,6 +68,7 @@ async def test_post_signal_search() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/signals"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_signal_search_extended() -> None:
@@ -80,6 +83,7 @@ async def test_post_signal_search_extended() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/signals"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_unblock_signals() -> None:
     """Verify that post_unblock_signals sends POST /rw/iosystem/signals."""
@@ -92,6 +96,7 @@ async def test_post_unblock_signals() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/signals"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_io_signals_actions() -> None:

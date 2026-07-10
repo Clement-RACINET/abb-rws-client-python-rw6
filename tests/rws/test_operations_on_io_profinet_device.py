@@ -2,22 +2,20 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/operations_on_io_profinet_device."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.operations_on_io_profinet_device import (
-    get_profinet_device_read_record_implicit_data,
-    post_read_record_implicit_data_from_device_in,
-    get_forms,
-    get_profinet_device_read_record_data,
-    get_profinet_device_read_record_data,
     get_forms,
     get_profinet_device_alarms_xml_response,
+    get_profinet_device_read_record_data,
+    get_profinet_device_read_record_implicit_data,
     post_clear_the_alarms,
-    get_forms,
+    post_read_record_implicit_data_from_device_in,
 )
 
 
@@ -51,12 +49,18 @@ async def test_get_profinet_device_read_record_implicit_data() -> None:
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await get_profinet_device_read_record_implicit_data(client, "network_test", "device_test")
+    resp = await get_profinet_device_read_record_implicit_data(
+        client, "network_test", "device_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_read_record_implicit_data_from_device_in() -> None:
@@ -64,12 +68,18 @@ async def test_post_read_record_implicit_data_from_device_in() -> None:
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await post_read_record_implicit_data_from_device_in(client, "network_test", "device_test")
+    resp = await post_read_record_implicit_data_from_device_in(
+        client, "network_test", "device_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_forms() -> None:
@@ -81,8 +91,12 @@ async def test_get_forms() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "OPTIONS"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/implicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_profinet_device_read_record_data() -> None:
@@ -94,8 +108,12 @@ async def test_get_profinet_device_read_record_data() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_profinet_device_read_record_data() -> None:
@@ -107,8 +125,12 @@ async def test_get_profinet_device_read_record_data() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_forms() -> None:
@@ -120,8 +142,12 @@ async def test_get_forms() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "OPTIONS"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/explicitdata"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_profinet_device_alarms_xml_response() -> None:
@@ -136,6 +162,7 @@ async def test_get_profinet_device_alarms_xml_response() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/alarms"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_clear_the_alarms() -> None:
     """Verify that post_clear_the_alarms sends POST rw/iosystem/devices/{network}/{device}/alarms/clear."""
@@ -146,8 +173,12 @@ async def test_post_clear_the_alarms() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_forms() -> None:
@@ -159,5 +190,8 @@ async def test_get_forms() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "OPTIONS"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/alarms/clear"
+    )
     assert resp.status_code == 200

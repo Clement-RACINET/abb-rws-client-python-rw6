@@ -8,6 +8,7 @@ RWS module: RobotWare Services → System service → System Information
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_system_information(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system")
 
+
 async def get_robot_type(client: RWSClient) -> httpx.Response:
     """
     Get robot type.
@@ -63,6 +65,7 @@ async def get_robot_type(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system/robottype")
 
+
 async def get_system_options(client: RWSClient) -> httpx.Response:
     """
     System Options.
@@ -86,6 +89,7 @@ async def get_system_options(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/options"
     """
     return await client.get("/rw/system/options")
+
 
 async def get_system_energy_actions(
     client: RWSClient,
@@ -113,7 +117,10 @@ async def get_system_energy_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=show"
     """
-    return await client.get("/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_system_energy_info_change_count(
     client: RWSClient,
@@ -141,7 +148,11 @@ async def get_system_energy_info_change_count(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?resource=change-count"
     """
-    return await client.get("/rw/system/energy", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/rw/system/energy",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def reset_accumulated_energy(
     client: RWSClient,
@@ -169,7 +180,10 @@ async def reset_accumulated_energy(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=reset"
     """
-    return await client.post("/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/system/energy", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_system_energy(client: RWSClient) -> httpx.Response:
     """
@@ -194,6 +208,7 @@ async def get_system_energy(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/energy"
     """
     return await client.get("/rw/system/energy")
+
 
 async def subscribe_on_system_energy_changes(
     client: RWSClient,
@@ -223,7 +238,15 @@ async def subscribe_on_system_energy_changes(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
     """
@@ -248,6 +271,7 @@ async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/system/license"
     """
     return await client.get("/rw/system/license")
+
 
 async def get_installed_products(
     client: RWSClient,
@@ -275,4 +299,6 @@ async def get_installed_products(
     Example:
         # `curl –digest -u "Default User":robotics " "
     """
-    return await client.get("/rw/system/products", params={k: v for k, v in {"name": name}.items() if v is not None})
+    return await client.get(
+        "/rw/system/products", params={k: v for k, v in {"name": name}.items() if v is not None}
+    )

@@ -2,18 +2,19 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/users."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.users import (
-    get_user_resources,
     get_user_actions,
-    register_the_user,
+    get_user_resources,
     impersonate_user,
     login_as_local_user,
+    register_the_user,
 )
 
 
@@ -54,6 +55,7 @@ async def test_get_user_resources() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_user_actions() -> None:
     """Verify that get_user_actions sends GET /users."""
@@ -66,6 +68,7 @@ async def test_get_user_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_register_the_user() -> None:
@@ -80,6 +83,7 @@ async def test_register_the_user() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_impersonate_user() -> None:
     """Verify that impersonate_user sends POST /users."""
@@ -92,6 +96,7 @@ async def test_impersonate_user() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_login_as_local_user() -> None:

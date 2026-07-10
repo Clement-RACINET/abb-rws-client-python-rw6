@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on Rapid AliasIO
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -43,4 +44,7 @@ async def get_aliasio_list(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get("/rw/rapid/aliasio", params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/aliasio",
+        params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
+    )

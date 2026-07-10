@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Get RobotWare services
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx

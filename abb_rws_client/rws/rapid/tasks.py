@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID tasks
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,7 +42,11 @@ async def get_rapid_tasks(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks"
     """
-    return await client.get("/rw/rapid/tasks", params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
+    )
+
 
 async def get_rapid_tasks_actions(
     client: RWSClient,
@@ -69,7 +74,10 @@ async def get_rapid_tasks_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?action=show"
     """
-    return await client.get("/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def start_rapid_spy_logging(
     client: RWSClient,
@@ -99,7 +107,12 @@ async def start_rapid_spy_logging(
     Example:
         # curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST "http://localhost/rw/rapid/tasks?action=start-spy
     """
-    return await client.post("/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"log_file": log_file}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"log_file": log_file}.items() if v is not None},
+    )
+
 
 async def get_rapid_spy_logging_status(
     client: RWSClient,
@@ -126,7 +139,10 @@ async def get_rapid_spy_logging_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=spy-status"
     """
-    return await client.get("/rw/rapid/tasks", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/tasks", params={k: v for k, v in {"resource": resource}.items() if v is not None}
+    )
+
 
 async def stop_rapid_spy_logging(
     client: RWSClient,
@@ -154,7 +170,10 @@ async def stop_rapid_spy_logging(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=stop-spy"
     """
-    return await client.post("/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_activate_deactivate_rapid_tasks(
     client: RWSClient,
@@ -182,7 +201,10 @@ async def post_activate_deactivate_rapid_tasks(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=activate"
     """
-    return await client.post("/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/tasks", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_program_motion_pointer_sync_state_for(
     client: RWSClient,
@@ -212,7 +234,11 @@ async def get_program_motion_pointer_sync_state_for(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
     """
-    return await client.get("/rw/rapid/tasks", params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/tasks",
+        params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
+    )
+
 
 async def subscribe_on_build_log_change(
     client: RWSClient,
@@ -242,7 +268,15 @@ async def subscribe_on_build_log_change(
     Example:
         # Subscribe on RAPID build log change
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_task_state(
     client: RWSClient,
@@ -272,7 +306,11 @@ async def get_rapid_task_state(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
+    )
+
 
 async def get_rapid_task_actions(
     client: RWSClient,
@@ -302,7 +340,11 @@ async def get_rapid_task_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def load_rapid_module_into_rapid_task(
     client: RWSClient,
@@ -336,7 +378,14 @@ async def load_rapid_module_into_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod" "http://localhost/rw/rapid/tasks/T_ROB1?action=
     """
-    return await client.post(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None
+        },
+    )
+
 
 async def post_unload_module_from_rapid_task(
     client: RWSClient,
@@ -368,7 +417,12 @@ async def post_unload_module_from_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics -d "module=modulename" "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod
     """
-    return await client.post(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"module": module}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"module": module}.items() if v is not None},
+    )
+
 
 async def post_abort_current_execution_level(
     client: RWSClient,
@@ -398,7 +452,11 @@ async def post_abort_current_execution_level(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_activate_deactivate_rapid_task(
     client: RWSClient,
@@ -428,7 +486,11 @@ async def post_activate_deactivate_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_activation_record(
     client: RWSClient,
@@ -460,7 +522,15 @@ async def get_activation_record(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "stackframe": stackframe}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "stackframe": stackframe}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_structural_change_count(
     client: RWSClient,
@@ -490,7 +560,11 @@ async def get_structural_change_count(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def get_preferable_data_types(
     client: RWSClient,
@@ -524,7 +598,19 @@ async def get_preferable_data_types(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "instruction": instruction, "parameter": parameter}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "instruction": instruction,
+                "parameter": parameter,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_program_pointer_sync_state(
     client: RWSClient,
@@ -556,7 +642,11 @@ async def get_program_pointer_sync_state(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
+    )
+
 
 async def get_motion_pointer_sync_state(
     client: RWSClient,
@@ -588,7 +678,11 @@ async def get_motion_pointer_sync_state(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
+    )
+
 
 async def post_link_rapid_task(
     client: RWSClient,
@@ -618,7 +712,11 @@ async def post_link_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_pallet(
     client: RWSClient,
@@ -650,7 +748,15 @@ async def get_pallet(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_pallet_head(
     client: RWSClient,
@@ -682,7 +788,15 @@ async def get_pallet_head(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task_name}", params={k: v for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task_name}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_rapid_task_change(
     client: RWSClient,
@@ -712,7 +826,15 @@ async def subscribe_on_rapid_task_change(
     Example:
         # Subscribe on RAPID task change
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_rapid_pp_sync_state_change(
     client: RWSClient,
@@ -742,7 +864,15 @@ async def subscribe_on_rapid_pp_sync_state_change(
     Example:
         # Subscribe on RAPID task sync state change
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_rapid_task_pgmexecution_state_change(
     client: RWSClient,
@@ -772,7 +902,15 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
     Example:
         # Subscribe on RAPID task sync state change
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_motion(
     client: RWSClient,
@@ -801,6 +939,7 @@ async def get_rapid_motion(
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
     """
     return await client.get(f"/rw/rapid/tasks/{task}/motion")
+
 
 async def get_robtarget(
     client: RWSClient,
@@ -834,7 +973,15 @@ async def get_robtarget(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wo
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/motion", params={k: v for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/motion",
+        params={
+            k: v
+            for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_joint_target(
     client: RWSClient,
@@ -864,7 +1011,11 @@ async def get_joint_target(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/motion", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/motion",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def get_mechanical_units(
     client: RWSClient,
@@ -894,7 +1045,11 @@ async def get_mechanical_units(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/motion", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/motion",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def get_external_joint_states(
     client: RWSClient,
@@ -924,7 +1079,11 @@ async def get_external_joint_states(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/motion", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/motion",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def post_calibration_for_displacement(
     client: RWSClient,
@@ -969,9 +1128,28 @@ async def post_calibration_for_displacement(
         # ABB codes: BAD_REQUEST (400) ,See
 
     Example:
-        # curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 
+        # curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/motion/calib", data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/motion/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_tcp(
     client: RWSClient,
@@ -1018,7 +1196,26 @@ async def post_calibration_for_tcp(
     Example:
         # curl --digest -u "Default User":robotics -d "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0,
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/motion/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/motion/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_program_resource(
     client: RWSClient,
@@ -1048,7 +1245,11 @@ async def get_rapid_program_resource(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
+    )
+
 
 async def get_rapid_program_actions(
     client: RWSClient,
@@ -1078,7 +1279,11 @@ async def get_rapid_program_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def load_program_into_rapid_task(
     client: RWSClient,
@@ -1112,7 +1317,14 @@ async def load_program_into_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf" "http://localhost:7777/rw/rapid/tasks/T_
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None
+        },
+    )
+
 
 async def post_unload_program_from_rapid_task(
     client: RWSClient,
@@ -1142,7 +1354,11 @@ async def post_unload_program_from_rapid_task(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def save_program(
     client: RWSClient,
@@ -1174,7 +1390,12 @@ async def save_program(
     Example:
         # curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"path": path}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"path": path}.items() if v is not None},
+    )
+
 
 async def set_program_name(
     client: RWSClient,
@@ -1206,7 +1427,12 @@ async def set_program_name(
     Example:
         # curl --digest -u "Default User":robotics -d "name=myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"name": name}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"name": name}.items() if v is not None},
+    )
+
 
 async def set_entry_point(
     client: RWSClient,
@@ -1238,7 +1464,12 @@ async def set_entry_point(
     Example:
         # curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"routine": routine}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"routine": routine}.items() if v is not None},
+    )
+
 
 async def get_build_errors(
     client: RWSClient,
@@ -1270,7 +1501,11 @@ async def get_build_errors(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/program/builderror", params={k: v for k, v in {"limit": limit, "start": start}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/program/builderror",
+        params={k: v for k, v in {"limit": limit, "start": start}.items() if v is not None},
+    )
+
 
 async def get_rapid_breakpoint_actions(
     client: RWSClient,
@@ -1300,7 +1535,11 @@ async def get_rapid_breakpoint_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/program/breakpoint", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/program/breakpoint",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_break_point(
     client: RWSClient,
@@ -1336,7 +1575,16 @@ async def set_break_point(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3" "http://127.0.0.1/rw/rapid/tasks
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/program/breakpoint", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"module": module, "row": row, "column": column}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/program/breakpoint",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"module": module, "row": row, "column": column}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_break_points(
     client: RWSClient,
@@ -1368,7 +1616,11 @@ async def get_break_points(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/program/breakpoint", params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/program/breakpoint",
+        params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
+    )
+
 
 async def get_rapid_task_motion_program_pointer_positions(
     client: RWSClient,
@@ -1398,6 +1650,7 @@ async def get_rapid_task_motion_program_pointer_positions(
     """
     return await client.get(f"/rw/rapid/tasks/{task}/pcp")
 
+
 async def get_rapid_task_pcp_actions(
     client: RWSClient,
     task: str,
@@ -1426,7 +1679,11 @@ async def get_rapid_task_pcp_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1464,7 +1721,21 @@ async def set_the_program_pointer_pp_position_to(
     Example:
         # curl --digest -u "Default User":robotics -d "module=modulename&line=6&column=14&routine=routinename" -X POST "http://loc
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"module": module, "routine": routine, "line": line, "column": column}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "module": module,
+                "routine": routine,
+                "line": line,
+                "column": column,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1500,7 +1771,16 @@ async def set_the_program_pointer_pp_position_to(
     Example:
         # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename&userlevel=true" -X POST "http://local
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items()
+            if v is not None
+        },
+    )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1534,7 +1814,12 @@ async def set_the_program_pointer_pp_position_to(
     Example:
         # curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X POST "http://localhost/rw/rapid/t
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"module": module, "routine": routine}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"module": module, "routine": routine}.items() if v is not None},
+    )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1564,7 +1849,11 @@ async def set_the_program_pointer_pp_position_to(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1594,7 +1883,11 @@ async def set_the_program_pointer_pp_position_to(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
     """
-    return await client.post(f"/rw/rapid/tasks/{task}/pcp", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/tasks/{task}/pcp",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def subscribe_on_program_pointer(
     client: RWSClient,
@@ -1624,7 +1917,15 @@ async def subscribe_on_program_pointer(
     Example:
         # Subscribe on RAPID program pointer
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_motion_pointer(
     client: RWSClient,
@@ -1654,7 +1955,15 @@ async def subscribe_on_motion_pointer(
     Example:
         # Subscribe on RAPID motion pointer
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_service_routine(
     client: RWSClient,
@@ -1688,7 +1997,15 @@ async def get_rapid_service_routine(
     Example:
         # curl --digest -u "Default User":robotics"
     """
-    return await client.get(f"/rw/rapid/tasks/{task}/serviceroutine", params={k: v for k, v in {"start": start, "limit": limit, "allread": allread}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/tasks/{task}/serviceroutine",
+        params={
+            k: v
+            for k, v in {"start": start, "limit": limit, "allread": allread}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_program_counter_position(
     client: RWSClient,

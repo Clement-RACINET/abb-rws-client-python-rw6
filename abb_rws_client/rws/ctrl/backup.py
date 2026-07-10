@@ -8,6 +8,7 @@ RWS module: Controller Service → Operations on Backup Resource → Get backup 
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -38,6 +39,7 @@ async def get_backup_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/backup")
 
+
 async def get_backup_actions(
     client: RWSClient,
     action: str | None = None,
@@ -64,12 +66,16 @@ async def get_backup_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=show"
     """
-    return await client.get("/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def create_backup(
     client: RWSClient,
     action: str | None = None,
-    environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str | None = None,
+    environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup: str
+    | None = None,
     archive: str | None = None,
 ) -> httpx.Response:
     """
@@ -96,12 +102,25 @@ async def create_backup(
     Example:
         # curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/back
     """
-    return await client.post("/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup, "archive": archive}.items() if v is not None})
+    return await client.post(
+        "/ctrl/backup",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup": environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_but_home_directory_cannot_be_used_as_backup_path_example_backup,
+                "archive": archive,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_restore_backup(
     client: RWSClient,
     action: str | None = None,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str
+    | None = None,
 ) -> httpx.Response:
     """
     Restore a backup..
@@ -126,11 +145,23 @@ async def post_restore_backup(
     Example:
         # `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/back
     """
-    return await client.post("/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None})
+    return await client.post(
+        "/ctrl/backup",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_check_restore(
     client: RWSClient,
-    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str | None = None,
+    path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup: str
+    | None = None,
 ) -> httpx.Response:
     """
     Check Restore.
@@ -154,7 +185,17 @@ async def get_check_restore(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/
     """
-    return await client.get("/ctrl/backup", params={k: v for k, v in {"path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup}.items() if v is not None})
+    return await client.get(
+        "/ctrl/backup",
+        params={
+            k: v
+            for k, v in {
+                "path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup": path_must_be_part_of_the_controller_file_system_environment_variables_such_as_temp_system_shall_be_possible_to_have_in_the_path_example_backup
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_backup_state(
     client: RWSClient,
@@ -182,7 +223,10 @@ async def get_backup_state(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=backupstate"
     """
-    return await client.get("/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/backup", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def subscribe_on_backup_system_information(
     client: RWSClient,
@@ -212,7 +256,15 @@ async def subscribe_on_backup_system_information(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_backup_system_information(
     client: RWSClient,
@@ -240,4 +292,7 @@ async def get_backup_system_information(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/Robot
     """
-    return await client.get("/ctrl/backup/info/", params={k: v for k, v in {"backup_path": backup_path}.items() if v is not None})
+    return await client.get(
+        "/ctrl/backup/info/",
+        params={k: v for k, v in {"backup_path": backup_path}.items() if v is not None},
+    )

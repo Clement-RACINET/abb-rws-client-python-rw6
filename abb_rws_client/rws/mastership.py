@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Mastership service → Get Mastership Resourc
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_mastership_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/mastership")
 
+
 async def get_mastership_actions(
     client: RWSClient,
     action: str | None = None,
@@ -65,7 +67,10 @@ async def get_mastership_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/mastership?action=show"
     """
-    return await client.get("/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_mastership_request(
     client: RWSClient,
@@ -93,7 +98,10 @@ async def post_mastership_request(
     Example:
         # Request mastership on all domains
     """
-    return await client.post("/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_mastership_release(
     client: RWSClient,
@@ -121,7 +129,10 @@ async def post_mastership_release(
     Example:
         # Release mastership on all domains
     """
-    return await client.post("/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/mastership", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_mastership_subscribe(
     client: RWSClient,
@@ -151,7 +162,15 @@ async def post_mastership_subscribe(
     Example:
         # Subscribe on mastership state changes
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_mastership_domain(
     client: RWSClient,
@@ -181,6 +200,7 @@ async def get_mastership_domain(
     """
     return await client.get(f"/rw/mastership/{domain_name}")
 
+
 async def get_mastership_domain_actions(
     client: RWSClient,
     domain_name: str,
@@ -209,7 +229,11 @@ async def get_mastership_domain_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg?action=show"
     """
-    return await client.get(f"/rw/mastership/{domain_name}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/mastership/{domain_name}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_mastership_domain_request(
     client: RWSClient,
@@ -239,7 +263,11 @@ async def post_mastership_domain_request(
     Example:
         # Request mastership on cfg domain
     """
-    return await client.post(f"/rw/mastership/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/mastership/{domain}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_mastership_domain_release(
     client: RWSClient,
@@ -269,7 +297,11 @@ async def post_mastership_domain_release(
     Example:
         # Release mastership on cfg domain
     """
-    return await client.post(f"/rw/mastership/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/mastership/{domain}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def post_mastership_domain_subscribe(
     client: RWSClient,
@@ -299,4 +331,11 @@ async def post_mastership_domain_subscribe(
     Example:
         # Subscribe on cfg domain for changes
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )

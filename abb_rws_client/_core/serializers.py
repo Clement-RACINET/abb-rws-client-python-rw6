@@ -133,9 +133,7 @@ def _parse_floats(raw: str, expected: int, context: str) -> list[float]:
     """
     parts = [p.strip() for p in raw.split(",")]
     if len(parts) != expected:
-        raise RWSValueError(
-            f"{context}: expected {expected} values, got {len(parts)} in {raw!r}"
-        )
+        raise RWSValueError(f"{context}: expected {expected} values, got {len(parts)} in {raw!r}")
     try:
         return [float(p) for p in parts]
     except ValueError as exc:
@@ -239,27 +237,19 @@ def python_to_rapid_value(value: float | bool | str | RobTarget, rapid_type: str
     if rapid_type == "num":
         # bool is a subclass of int — must be rejected explicitly
         if isinstance(value, bool) or not isinstance(value, int | float):
-            raise RWSValueError(
-                f"Expected int or float for 'num', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected int or float for 'num', got {type(value).__name__!r}")
         return str(int(value)) if float(value) == int(value) else repr(float(value))
     if rapid_type == "bool":
         if not isinstance(value, bool):
-            raise RWSValueError(
-                f"Expected bool for 'bool', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected bool for 'bool', got {type(value).__name__!r}")
         return "TRUE" if value else "FALSE"
     if rapid_type == "string":
         if not isinstance(value, str):
-            raise RWSValueError(
-                f"Expected str for 'string', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected str for 'string', got {type(value).__name__!r}")
         return value  # no quotes: RWS handles encoding on the form-data side
     if rapid_type == "robtarget":
         if not isinstance(value, RobTarget):
-            raise RWSValueError(
-                f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}"
-            )
+            raise RWSValueError(f"Expected RobTarget for 'robtarget', got {type(value).__name__!r}")
         return robtarget_to_rws(value)
     raise RWSValueError(f"Unknown RAPID type: {rapid_type!r}")  # unreachable — mypy guard
 

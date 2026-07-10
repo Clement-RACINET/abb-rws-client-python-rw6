@@ -8,6 +8,7 @@ RWS module: RobotWare Services → CFG Service → Get CFG resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -38,6 +39,7 @@ async def get_cfg_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/cfg")
 
+
 async def get_cfg_actions(
     client: RWSClient,
     action: str | None = None,
@@ -64,7 +66,10 @@ async def get_cfg_actions(
     Example:
         # Retrieve actions on the CFG resource
     """
-    return await client.get("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def validate_cfg_file(
     client: RWSClient,
@@ -92,7 +97,10 @@ async def validate_cfg_file(
     Example:
         # curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/
     """
-    return await client.post("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def load_cfg_file(
     client: RWSClient,
@@ -120,7 +128,10 @@ async def load_cfg_file(
     Example:
         # curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/
     """
-    return await client.post("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def validate_cfg_instance_before_delete(
     client: RWSClient,
@@ -150,7 +161,12 @@ async def validate_cfg_instance_before_delete(
     Example:
         # curl --digest -u "Default User":robotics -d "name=abc" -X POST "http://localhost/rw/cfg?action=validate-inst-at-del"
     """
-    return await client.post("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"name": name}.items() if v is not None})
+    return await client.post(
+        "/rw/cfg",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"name": name}.items() if v is not None},
+    )
+
 
 async def validate_cfg_instances(
     client: RWSClient,
@@ -188,7 +204,22 @@ async def validate_cfg_instances(
     Example:
         # curl --digest -u "Default User":robotics -d "operation=1&cfgdomain=I/O&cfgtype=DeviceNetDevice&instances=TestingValid1&i
     """
-    return await client.post("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"operation": operation, "cfgdomain": cfgdomain, "cfgtype": cfgtype, "instances": instances, "instancescount": instancescount}.items() if v is not None})
+    return await client.post(
+        "/rw/cfg",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "operation": operation,
+                "cfgdomain": cfgdomain,
+                "cfgtype": cfgtype,
+                "instances": instances,
+                "instancescount": instancescount,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_keyless_motor_on(
     client: RWSClient,
@@ -218,7 +249,12 @@ async def post_keyless_motor_on(
     Example:
         # curl --digest -u "Default User":robotics -d "state=run" -X POST "http://localhost/rw/cfg?action=keyless"
     """
-    return await client.post("/rw/cfg", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"state": state}.items() if v is not None})
+    return await client.post(
+        "/rw/cfg",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"state": state}.items() if v is not None},
+    )
+
 
 async def subscribe_on_cfg_changecount(
     client: RWSClient,
@@ -248,7 +284,15 @@ async def subscribe_on_cfg_changecount(
     Example:
         # Subscribe on cfg change count
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_cfg_domain_types(
     client: RWSClient,
@@ -279,7 +323,11 @@ async def get_cfg_domain_types(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/cfg/moc"
     """
-    return await client.get(f"/rw/cfg/{domain}", params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None})
+    return await client.get(
+        f"/rw/cfg/{domain}",
+        params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
+    )
+
 
 async def get_actions_on_cfg_domain(
     client: RWSClient,
@@ -309,7 +357,10 @@ async def get_actions_on_cfg_domain(
     Example:
         # Get actions supported by a CFG domain
     """
-    return await client.get(f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def save_cfg_domain(
     client: RWSClient,
@@ -339,7 +390,10 @@ async def save_cfg_domain(
     Example:
         # Save the CFG domain to the given file
     """
-    return await client.post(f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def reset_cfg_domain(
     client: RWSClient,
@@ -369,7 +423,10 @@ async def reset_cfg_domain(
     Example:
         # Remove all external instances in a CFG domain
     """
-    return await client.post(f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/cfg/{domain}", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_cfg_type(
     client: RWSClient,
@@ -401,6 +458,7 @@ async def get_cfg_type(
     """
     return await client.get(f"/rw/cfg/{domain}/{type}")
 
+
 async def get_all_attributes_of_the_given_domain(
     client: RWSClient,
     domain: str,
@@ -430,6 +488,7 @@ async def get_all_attributes_of_the_given_domain(
         # curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/attributes"
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/attributes")
+
 
 async def get_all_instances_of_the_given_domain(
     client: RWSClient,
@@ -461,6 +520,7 @@ async def get_all_instances_of_the_given_domain(
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances")
 
+
 async def get_actions_on_cfg_instances(
     client: RWSClient,
     domain: str,
@@ -491,7 +551,11 @@ async def get_actions_on_cfg_instances(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=show"
     """
-    return await client.get(f"/rw/cfg/{domain}/{type}/instances", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/cfg/{domain}/{type}/instances",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def reset_cfg_instances(
     client: RWSClient,
@@ -523,7 +587,11 @@ async def reset_cfg_instances(
     Example:
         # Reset CFG instances
     """
-    return await client.post(f"/rw/cfg/{domain}/{type}/instances", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/cfg/{domain}/{type}/instances",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def create_default_cfg_instance(
     client: RWSClient,
@@ -555,7 +623,11 @@ async def create_default_cfg_instance(
     Example:
         # Create default CFG instance
     """
-    return await client.post(f"/rw/cfg/{domain}/{type}/instances", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/cfg/{domain}/{type}/instances",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_cfg_instance(
     client: RWSClient,
@@ -589,6 +661,7 @@ async def get_cfg_instance(
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances/{instance_name}")
 
+
 async def get_cfg_instance_actions(
     client: RWSClient,
     domain: str,
@@ -621,7 +694,11 @@ async def get_cfg_instance_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/cfg/{domain}/{type}/instances/{instance}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/cfg/{domain}/{type}/instances/{instance}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_cfg_instance(
     client: RWSClient,
@@ -657,7 +734,12 @@ async def update_cfg_instance(
     Example:
         # Update one or more attributes
     """
-    return await client.post(f"/rw/cfg/{domain}/{type}/instances/{instance}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"attribute_name": attribute_name}.items() if v is not None})
+    return await client.post(
+        f"/rw/cfg/{domain}/{type}/instances/{instance}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"attribute_name": attribute_name}.items() if v is not None},
+    )
+
 
 async def delete_cfg_instance(
     client: RWSClient,

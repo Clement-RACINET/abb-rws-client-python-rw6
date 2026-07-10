@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Elog service → Get Elog Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -46,7 +47,20 @@ async def get_elog_resources(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/elog"
     """
-    return await client.get("/rw/elog", params={k: v for k, v in {"lang": lang, "example_lang": example_lang, "resource": resource, "example_resource": example_resource}.items() if v is not None})
+    return await client.get(
+        "/rw/elog",
+        params={
+            k: v
+            for k, v in {
+                "lang": lang,
+                "example_lang": example_lang,
+                "resource": resource,
+                "example_resource": example_resource,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_elog_actions(
     client: RWSClient,
@@ -73,7 +87,10 @@ async def get_elog_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/elog?action=show"
     """
-    return await client.get("/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_clear_elog_messages(
     client: RWSClient,
@@ -101,7 +118,10 @@ async def post_clear_elog_messages(
     Example:
         # Clear all elog messages
     """
-    return await client.post("/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def save_elog_in_system_dump_format(
     client: RWSClient,
@@ -131,7 +151,12 @@ async def save_elog_in_system_dump_format(
     Example:
         # Generate elog in system dump format.
     """
-    return await client.post("/rw/elog", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"path": path}.items() if v is not None})
+    return await client.post(
+        "/rw/elog",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"path": path}.items() if v is not None},
+    )
+
 
 async def get_elog_messages_in_domain(
     client: RWSClient,
@@ -167,7 +192,20 @@ async def get_elog_messages_in_domain(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/elog/0"
     """
-    return await client.get(f"/rw/elog/{domain_number}", params={k: v for k, v in {"example_lang": example_lang, "example_resource": example_resource, "example_order": example_order, "example_elogseqnum": example_elogseqnum}.items() if v is not None})
+    return await client.get(
+        f"/rw/elog/{domain_number}",
+        params={
+            k: v
+            for k, v in {
+                "example_lang": example_lang,
+                "example_resource": example_resource,
+                "example_order": example_order,
+                "example_elogseqnum": example_elogseqnum,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_actions_on_elog_domain(
     client: RWSClient,
@@ -197,6 +235,7 @@ async def get_actions_on_elog_domain(
     """
     return await client.get(f"/rw/elog/{domain_number}")
 
+
 async def post_clear_elog_messages(
     client: RWSClient,
     domain_number: str,
@@ -225,7 +264,11 @@ async def post_clear_elog_messages(
     Example:
         # Clear all elog messages
     """
-    return await client.post(f"/rw/elog/{domain_number}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/elog/{domain_number}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def subscribe_on_elog_domain(
     client: RWSClient,
@@ -255,7 +298,15 @@ async def subscribe_on_elog_domain(
     Example:
         # Subscribe on elog domain 0
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_elog_message_in_domain(
     client: RWSClient,
@@ -289,4 +340,9 @@ async def get_elog_message_in_domain(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/elog/0/8?lang=en"
     """
-    return await client.get(f"/rw/elog/{domain_number}/{sequence_number}", params={k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None})
+    return await client.get(
+        f"/rw/elog/{domain_number}/{sequence_number}",
+        params={
+            k: v for k, v in {"lang": lang, "example_lang": example_lang}.items() if v is not None
+        },
+    )

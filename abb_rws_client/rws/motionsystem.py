@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Motion System → Get Motion System
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,7 +43,15 @@ async def get_motion_system(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem"
     """
-    return await client.get("/rw/motionsystem", params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem",
+        params={
+            k: v
+            for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_motion_system_action(
     client: RWSClient,
@@ -69,7 +78,10 @@ async def get_motion_system_action(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem?action=show"
     """
-    return await client.get("/rw/motionsystem", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_mechunit_for_jogging(
     client: RWSClient,
@@ -98,7 +110,12 @@ async def set_mechunit_for_jogging(
     Example:
         # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1" -X POST "http://localhost/rw/motionsystem?action=set-m
     """
-    return await client.post("/rw/motionsystem", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mechunit_name": mechunit_name}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mechunit_name": mechunit_name}.items() if v is not None},
+    )
+
 
 async def post_perform_jogging(
     client: RWSClient,
@@ -139,9 +156,27 @@ async def post_perform_jogging(
         # ABB codes: BAD_REQUEST(400), FORBIDDEN(403)
 
     Example:
-        # curl --digest -u "Default User":robotics -d "axis1=900&axis2=0&axis3=0&axis4=0&axis5=0&axis6=0&ccount=0&inc-mode=Large" 
+        # curl --digest -u "Default User":robotics -d "axis1=900&axis2=0&axis3=0&axis4=0&axis5=0&axis6=0&ccount=0&inc-mode=Large"
     """
-    return await client.post("/rw/motionsystem", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"axis1": axis1, "axis2": axis2, "axis3": axis3, "axis4": axis4, "axis5": axis5, "axis6": axis6, "ccount": ccount, "inc_mode": inc_mode}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "axis1": axis1,
+                "axis2": axis2,
+                "axis3": axis3,
+                "axis4": axis4,
+                "axis5": axis5,
+                "axis6": axis6,
+                "ccount": ccount,
+                "inc_mode": inc_mode,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_robo_target_position(
     client: RWSClient,
@@ -188,7 +223,27 @@ async def set_robo_target_position(
     Example:
         # curl --digest -u "Default User":robotics -d "pos-x=634.609&pos-y=50.7298&pos-z=432.9419&orient-q1=0.4932235&orient-q2=-0
     """
-    return await client.post("/rw/motionsystem", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"pos_x": pos_x, "pos_y": pos_y, "pos_z": pos_z, "orient_q1": orient_q1, "orient_q2": orient_q2, "orient_q3": orient_q3, "orient_q4": orient_q4, "config_j1": config_j1, "config_j4": config_j4, "config_j6": config_j6}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "pos_x": pos_x,
+                "pos_y": pos_y,
+                "pos_z": pos_z,
+                "orient_q1": orient_q1,
+                "orient_q2": orient_q2,
+                "orient_q3": orient_q3,
+                "orient_q4": orient_q4,
+                "config_j1": config_j1,
+                "config_j4": config_j4,
+                "config_j6": config_j6,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_check_change_count(
     client: RWSClient,
@@ -215,7 +270,11 @@ async def get_check_change_count(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/checkchangecount?changecount=0"
     """
-    return await client.get("/rw/motionsystem/checkchangecount", params={k: v for k, v in {"changecount": changecount}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/checkchangecount",
+        params={k: v for k, v in {"changecount": changecount}.items() if v is not None},
+    )
+
 
 async def subscribe_on_error_eventchange(
     client: RWSClient,
@@ -245,7 +304,15 @@ async def subscribe_on_error_eventchange(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource**
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_error_state(client: RWSClient) -> httpx.Response:
     """
@@ -268,6 +335,7 @@ async def get_error_state(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/errorstate"
     """
     return await client.get("/rw/motionsystem/errorstate")
+
 
 async def get_motion_supervision(
     client: RWSClient,
@@ -294,7 +362,11 @@ async def get_motion_supervision(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?mechunit=ROB_1"
     """
-    return await client.get("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None},
+    )
+
 
 async def get_motion_supervision_actions(
     client: RWSClient,
@@ -321,7 +393,11 @@ async def get_motion_supervision_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=show"
     """
-    return await client.get("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_motion_supervision_mode_jog_supervision_mode(
     client: RWSClient,
@@ -352,7 +428,14 @@ async def set_motion_supervision_mode_jog_supervision_mode(
     Example:
         # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&mode=True" - POST "http://localhost/rw/motionsystem/mot
     """
-    return await client.post("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mechunit_name": mechunit_name, "mode": mode}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v for k, v in {"mechunit_name": mechunit_name, "mode": mode}.items() if v is not None
+        },
+    )
+
 
 async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
     client: RWSClient,
@@ -383,7 +466,16 @@ async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
     Example:
         # curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&sensitivity=30" - POST "http://localhost/rw/motionsyste
     """
-    return await client.post("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mechunit_name": mechunit_name, "sensitivity": sensitivity}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"mechunit_name": mechunit_name, "sensitivity": sensitivity}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_motion_supervision_collision_prediction_mode(
     client: RWSClient,
@@ -410,7 +502,11 @@ async def get_motion_supervision_collision_prediction_mode(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=collision-prediction
     """
-    return await client.get("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_motion_supervision_collision_prediction_mode(
     client: RWSClient,
@@ -439,7 +535,12 @@ async def set_motion_supervision_collision_prediction_mode(
     Example:
         # curl --digest -u "Default User":robotics -d "mode=true" - POST "http://localhost/rw/motionsystem/motionsupervision?actio
     """
-    return await client.post("/rw/motionsystem/motionsupervision", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mode": mode}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/motionsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mode": mode}.items() if v is not None},
+    )
+
 
 async def get_path_supervision(
     client: RWSClient,
@@ -466,7 +567,11 @@ async def get_path_supervision(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?mechunit=ROB_1"
     """
-    return await client.get("/rw/motionsystem/pathsupervision", params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/pathsupervision",
+        params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None},
+    )
+
 
 async def get_path_supervision_actions(
     client: RWSClient,
@@ -493,7 +598,11 @@ async def get_path_supervision_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?action=show"
     """
-    return await client.get("/rw/motionsystem/pathsupervision", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/pathsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_path_supervision_mode(
     client: RWSClient,
@@ -524,7 +633,12 @@ async def set_path_supervision_mode(
     Example:
         # curl --digest -u "Default User":robotics -d "mechunit=ROB_1&mode=ON" -X POST "http://localhost/rw/motionsystem/pathsuper
     """
-    return await client.post("/rw/motionsystem/pathsupervision", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mechunit": mechunit, "mode": mode}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/pathsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mechunit": mechunit, "mode": mode}.items() if v is not None},
+    )
+
 
 async def set_path_supervision_level(
     client: RWSClient,
@@ -555,7 +669,12 @@ async def set_path_supervision_level(
     Example:
         # curl --digest -u "Default User":robotics -d "mechunit=ROB_1&level=90" -X POST "http://localhost/rw/motionsystem/pathsupe
     """
-    return await client.post("/rw/motionsystem/pathsupervision", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mechunit": mechunit, "level": level}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/pathsupervision",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mechunit": mechunit, "level": level}.items() if v is not None},
+    )
+
 
 async def get_non_motion_execution_mode(client: RWSClient) -> httpx.Response:
     """
@@ -579,6 +698,7 @@ async def get_non_motion_execution_mode(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution"
     """
     return await client.get("/rw/motionsystem/nonmotionexecution")
+
 
 async def get_nonmotion_execution_actions(
     client: RWSClient,
@@ -605,7 +725,11 @@ async def get_nonmotion_execution_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution?action=show"
     """
-    return await client.get("/rw/motionsystem/nonmotionexecution", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/motionsystem/nonmotionexecution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_nonmotion_execution_mode(
     client: RWSClient,
@@ -634,7 +758,12 @@ async def set_nonmotion_execution_mode(
     Example:
         # curl --digest -u "Default User":robotics -d "mode=ON" -X POST "http://localhost/rw/motionsystem/nonmotionexecution?actio
     """
-    return await client.post("/rw/motionsystem/nonmotionexecution", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"mode": mode}.items() if v is not None})
+    return await client.post(
+        "/rw/motionsystem/nonmotionexecution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"mode": mode}.items() if v is not None},
+    )
+
 
 async def get_mechunits(client: RWSClient) -> httpx.Response:
     """
@@ -658,6 +787,7 @@ async def get_mechunits(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits"
     """
     return await client.get("/rw/motionsystem/mechunits")
+
 
 async def get_mechunit(
     client: RWSClient,
@@ -688,7 +818,15 @@ async def get_mechunit(
     Example:
         # Sample call1:
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={
+            k: v
+            for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_mechunit_action(
     client: RWSClient,
@@ -717,7 +855,11 @@ async def get_mechunit_action(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?action=show"
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_mechunit(
     client: RWSClient,
@@ -762,7 +904,28 @@ async def set_mechunit(
     Example:
         # curl --digest -u "Default User":robotics -d "tool=tool1&wobj=wobj2&payload=load2" -X POST "http://localhost/rw/motionsys
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action, "continue_on_err": continue_on_err}.items() if v is not None}, data={k: v for k, v in {"tool": tool, "wobj": wobj, "payload": payload, "total_payload": total_payload, "mode": mode, "jog_mode": jog_mode, "coord_system": coord_system}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={
+            k: v
+            for k, v in {"action": action, "continue_on_err": continue_on_err}.items()
+            if v is not None
+        },
+        data={
+            k: v
+            for k, v in {
+                "tool": tool,
+                "wobj": wobj,
+                "payload": payload,
+                "total_payload": total_payload,
+                "mode": mode,
+                "jog_mode": jog_mode,
+                "coord_system": coord_system,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_compliance_lead_through(
     client: RWSClient,
@@ -793,7 +956,12 @@ async def set_compliance_lead_through(
     Example:
         # curl --digest -u "Default User":robotics -d "status=active" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_R?ac
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"status": status}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"status": status}.items() if v is not None},
+    )
+
 
 async def get_compliance_lead_through(
     client: RWSClient,
@@ -822,7 +990,11 @@ async def get_compliance_lead_through(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?resource=lead-through"
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def set_fine_calibration(
     client: RWSClient,
@@ -853,7 +1025,12 @@ async def set_fine_calibration(
     Example:
         # curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=fi
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"axis": axis}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"axis": axis}.items() if v is not None},
+    )
+
 
 async def update_syncronize_revolution_counter(
     client: RWSClient,
@@ -884,7 +1061,12 @@ async def update_syncronize_revolution_counter(
     Example:
         # curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=up
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"axis": axis}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"axis": axis}.items() if v is not None},
+    )
+
 
 async def get_physical_joints(
     client: RWSClient,
@@ -912,6 +1094,7 @@ async def get_physical_joints(
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/pjoints"
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/pjoints")
+
 
 async def get_cartesian_value(
     client: RWSClient,
@@ -946,7 +1129,20 @@ async def get_cartesian_value(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/cartesian?tool=tool0&wobj=wob
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/cartesian", params={k: v for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate, "elog_at_err": elog_at_err}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/cartesian",
+        params={
+            k: v
+            for k, v in {
+                "tool": tool,
+                "wobj": wobj,
+                "coordinate": coordinate,
+                "elog_at_err": elog_at_err,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_mechanical_unit(
     client: RWSClient,
@@ -979,7 +1175,16 @@ async def set_mechanical_unit(
     Example:
         # curl --digest -u "Default User":robotics -d "rob_joint=[18.23,8.45,-13.23,-5.25,13.63,-72.31]&ext_joint=[0,0,0,0,0,0]" -
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"rob_joint": rob_joint, "ext_joint": ext_joint}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"rob_joint": rob_joint, "ext_joint": ext_joint}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_robtarget(
     client: RWSClient,
@@ -1012,7 +1217,15 @@ async def get_robtarget(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/robtarget?tool=tool0&wobj=wob
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/robtarget", params={k: v for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/robtarget",
+        params={
+            k: v
+            for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_joint_target(
     client: RWSClient,
@@ -1040,6 +1253,7 @@ async def get_joint_target(
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/jointtarget"
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/jointtarget")
+
 
 async def subscribe_on_mechunit_mode_change(
     client: RWSClient,
@@ -1069,7 +1283,15 @@ async def subscribe_on_mechunit_mode_change(
     Example:
         # Subscribe on RAPID task change
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_joints_from_position(
     client: RWSClient,
@@ -1118,7 +1340,27 @@ async def get_joints_from_position(
     Example:
         # curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "old_rob_joints": old_rob_joints,
+                "old_ext_joints": old_ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration,
+                "elog_at_error": elog_at_error,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_position_from_joints(
     client: RWSClient,
@@ -1159,7 +1401,23 @@ async def get_position_from_joints(
     Example:
         # curl --digest -u "Default User":robotics -d "tool_frame_position=[0,0,0]&tool_frame_orientation=[1.0,0,0,0]&rob_joints=[
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"tool_frame_position": tool_frame_position, "tool_frame_orientation": tool_frame_orientation, "rob_joints": rob_joints, "ext_joints": ext_joints, "robot_fixed_object": robot_fixed_object, "elog_at_error": elog_at_error}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "tool_frame_position": tool_frame_position,
+                "tool_frame_orientation": tool_frame_orientation,
+                "rob_joints": rob_joints,
+                "ext_joints": ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "elog_at_error": elog_at_error,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_all_joint_solution(
     client: RWSClient,
@@ -1202,7 +1460,24 @@ async def get_all_joint_solution(
     Example:
         # curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547102,0.665710211]&curr_ext_joints=[0,0,
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_joints_from_cartesian(
     client: RWSClient,
@@ -1251,7 +1526,27 @@ async def get_joints_from_cartesian(
     Example:
         # curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"curr_position": curr_position, "curr_ext_joints": curr_ext_joints, "tool_frame_position": tool_frame_position, "curr_orientation": curr_orientation, "tool_frame_orientation": tool_frame_orientation, "old_rob_joints": old_rob_joints, "old_ext_joints": old_ext_joints, "robot_fixed_object": robot_fixed_object, "robot_configuration": robot_configuration, "elog_at_error": elog_at_error}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "curr_position": curr_position,
+                "curr_ext_joints": curr_ext_joints,
+                "tool_frame_position": tool_frame_position,
+                "curr_orientation": curr_orientation,
+                "tool_frame_orientation": tool_frame_orientation,
+                "old_rob_joints": old_rob_joints,
+                "old_ext_joints": old_ext_joints,
+                "robot_fixed_object": robot_fixed_object,
+                "robot_configuration": robot_configuration,
+                "elog_at_error": elog_at_error,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_calibration_info(
     client: RWSClient,
@@ -1279,6 +1574,7 @@ async def get_calibration_info(
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/calibrationinfo"
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/calibrationinfo")
+
 
 async def post_calibration_for_baseframe(
     client: RWSClient,
@@ -1325,7 +1621,26 @@ async def post_calibration_for_baseframe(
     Example:
         # curl --digest -u "Default User":robotics -d "method=BaseFrame&type=ROBOT&reference=[0,0,0]&point1=[349.9289,7.176809,509
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "reference": reference, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "reference": reference,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_baseframemoving(
     client: RWSClient,
@@ -1372,7 +1687,26 @@ async def post_calibration_for_baseframemoving(
     Example:
         # curl --digest -u "Default User":robotics -d "method=BaseFrameMoving&type=ROBOT2&point1=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_externalrobotnombasenew(
     client: RWSClient,
@@ -1419,7 +1753,26 @@ async def post_calibration_for_externalrobotnombasenew(
     Example:
         # curl --digest -u "Default User":robotics -d "method=ExternalRobotNomBaseNew&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_robotaxisrot(
     client: RWSClient,
@@ -1466,7 +1819,26 @@ async def post_calibration_for_robotaxisrot(
     Example:
         # curl --digest -u "Default User":robotics -d "method=RobotAxisRot&type=SINGLE&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "axis": axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "axis": axis,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_singleuserrotnew(
     client: RWSClient,
@@ -1513,7 +1885,26 @@ async def post_calibration_for_singleuserrotnew(
     Example:
         # curl --digest -u "Default User":robotics -d "method=SingleUserRotNew&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_rotextctrlzdef(
     client: RWSClient,
@@ -1560,7 +1951,26 @@ async def post_calibration_for_rotextctrlzdef(
     Example:
         # curl --digest -u "Default User":robotics -d "method=RotExtCtrlZdef&type=SINGLE&tolerance=1&pose=[0, 0, 0, 0, 1, 0, 0]&po
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "pose": pose, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "pose": pose,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_singleuserlin(
     client: RWSClient,
@@ -1607,7 +2017,26 @@ async def post_calibration_for_singleuserlin(
     Example:
         # curl --digest -u "Default User":robotics -d "method=SingleUserLin&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_singletrack(
     client: RWSClient,
@@ -1654,7 +2083,26 @@ async def post_calibration_for_singletrack(
     Example:
         # curl --digest -u "Default User":robotics -d "method=SingleTrack&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6, "point7": point7, "point8": point8}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+                "point7": point7,
+                "point8": point8,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_calibration_for_robotaxisrot2(
     client: RWSClient,
@@ -1701,7 +2149,26 @@ async def post_calibration_for_robotaxisrot2(
     Example:
         # curl --digest -u "Default User":robotics -d "method=RobotAxisRot2&type=SINGLE2&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0,
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/calib", data={k: v for k, v in {"method": method, "type": type, "tolerance": tolerance, "axis": axis, "point1": point1, "point2": point2, "point3": point3, "point4": point4, "point5": point5, "point6": point6}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/calib",
+        data={
+            k: v
+            for k, v in {
+                "method": method,
+                "type": type,
+                "tolerance": tolerance,
+                "axis": axis,
+                "point1": point1,
+                "point2": point2,
+                "point3": point3,
+                "point4": point4,
+                "point5": point5,
+                "point6": point6,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_base_frame(
     client: RWSClient,
@@ -1730,6 +2197,7 @@ async def get_base_frame(
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/baseframe")
 
+
 async def get_base_frame_actions(
     client: RWSClient,
     mechunit: str,
@@ -1757,7 +2225,11 @@ async def get_base_frame_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=show"
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/baseframe", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def set_base_frame(
     client: RWSClient,
@@ -1800,7 +2272,16 @@ async def set_base_frame(
     Example:
         # curl --digest -u "Default User":robotics -d "x=1&y=2&z=3&q1=0.1825742&q2=0.3651484&q3=0.5477226&q4=0.7302967" -X POST "h
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/baseframe", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_axes(
     client: RWSClient,
@@ -1828,6 +2309,7 @@ async def get_axes(
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes"
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes")
+
 
 async def get_axis(
     client: RWSClient,
@@ -1858,6 +2340,7 @@ async def get_axis(
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}")
 
+
 async def get_axis_actions(
     client: RWSClient,
     mechunit: str,
@@ -1887,7 +2370,11 @@ async def get_axis_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_axis_pose(
     client: RWSClient,
@@ -1918,7 +2405,11 @@ async def get_axis_pose(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?resource=axis-pose"
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def set_axis_pose(
     client: RWSClient,
@@ -1963,7 +2454,16 @@ async def set_axis_pose(
     Example:
         # curl --digest -u "Default User":robotics -d "x=0&y=0&z=0&q1=0&q2=1&q3=0&q4=0" -X POST "http://localhost/rw/motionsystem/
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items()
+            if v is not None
+        },
+    )
+
 
 async def update_commutate(
     client: RWSClient,
@@ -1994,7 +2494,11 @@ async def update_commutate(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_sync_revolution_counter(
     client: RWSClient,
@@ -2027,7 +2531,12 @@ async def update_sync_revolution_counter(
     Example:
         # curl --digest -u "Default User":robotics -d "syncType=1" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"synctype": synctype}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"synctype": synctype}.items() if v is not None},
+    )
+
 
 async def set_smb_data(
     client: RWSClient,
@@ -2057,7 +2566,12 @@ async def set_smb_data(
     Example:
         # curl --digest -u "Default User":robotics -d "type=robot-to-controller" -X POST "http://localhost/rw/motionsystem/mechuni
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/smbdata", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"type": type}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"type": type}.items() if v is not None},
+    )
+
 
 async def post_clear_smb_data(
     client: RWSClient,
@@ -2087,7 +2601,12 @@ async def post_clear_smb_data(
     Example:
         # curl --digest -u "Default User":robotics -d "type=robot" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/smbda
     """
-    return await client.post(f"/rw/motionsystem/mechunits/{mechunit}/smbdata", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"type": type}.items() if v is not None})
+    return await client.post(
+        f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"type": type}.items() if v is not None},
+    )
+
 
 async def get_smb_data(
     client: RWSClient,
@@ -2114,6 +2633,7 @@ async def get_smb_data(
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata"
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/smbdata")
+
 
 async def get_smb_data_actions(
     client: RWSClient,
@@ -2142,7 +2662,11 @@ async def get_smb_data_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=show"
     """
-    return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/smbdata", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_motor_calib_names(
     client: RWSClient,

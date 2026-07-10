@@ -2,10 +2,11 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/remote."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.remote import (
@@ -53,6 +54,7 @@ async def test_get_remote_user_actions() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_remote_user_logon_request() -> None:
     """Verify that post_remote_user_logon_request sends POST /users/remoteuser."""
@@ -66,6 +68,7 @@ async def test_post_remote_user_logon_request() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_remote_user_logout_request() -> None:
     """Verify that post_remote_user_logout_request sends POST /users/remoteuser."""
@@ -78,6 +81,7 @@ async def test_post_remote_user_logout_request() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_remote_user_state() -> None:

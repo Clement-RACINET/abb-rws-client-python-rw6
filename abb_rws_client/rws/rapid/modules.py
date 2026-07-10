@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID modules
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,7 +42,10 @@ async def get_rapid_modules_action(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get("/rw/rapid/modules", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/modules", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def get_rapid_modules(
     client: RWSClient,
@@ -69,7 +73,10 @@ async def get_rapid_modules(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?task=T_ROB1"
     """
-    return await client.get("/rw/rapid/modules", params={k: v for k, v in {"task": task}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/modules", params={k: v for k, v in {"task": task}.items() if v is not None}
+    )
+
 
 async def get_mod_possible_all(
     client: RWSClient,
@@ -97,7 +104,11 @@ async def get_mod_possible_all(
     Example:
         # curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?resource=mod-possible-all"
     """
-    return await client.get("/rw/rapid/modules", params={k: v for k, v in {"resource": resource}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/modules",
+        params={k: v for k, v in {"resource": resource}.items() if v is not None},
+    )
+
 
 async def set_modify_all_positions(
     client: RWSClient,
@@ -129,7 +140,16 @@ async def set_modify_all_positions(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "checklimit=false&checkdeactaxes=false" "http://localhost/rw/rapid/m
     """
-    return await client.post("/rw/rapid/modules", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"checklimit": checklimit, "checkdeactaxes": checkdeactaxes}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/modules",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {"checklimit": checklimit, "checkdeactaxes": checkdeactaxes}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_specified_range_of_text(
     client: RWSClient,
@@ -159,6 +179,7 @@ async def get_specified_range_of_text(
     """
     return await client.get(f"/rw/rapid/modules/{module}")
 
+
 async def get_rapid_module_actions(
     client: RWSClient,
     module: str,
@@ -187,7 +208,11 @@ async def get_rapid_module_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def save_rapid_module(
     client: RWSClient,
@@ -223,7 +248,12 @@ async def save_rapid_module(
     Example:
         # curl --digest -u "Default User":robotics -d "name=MainModule&path=C:/Users/mymod" -X POST "http://localhost/rw/rapid/mod
     """
-    return await client.post(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"task": task, "action": action}.items() if v is not None}, data={k: v for k, v in {"name": name, "path": path}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"task": task, "action": action}.items() if v is not None},
+        data={k: v for k, v in {"name": name, "path": path}.items() if v is not None},
+    )
+
 
 async def set_text_range(
     client: RWSClient,
@@ -269,7 +299,25 @@ async def set_text_range(
     Example:
         # curl --digest -u "Default User":robotics -d "task=T_ROB1&replace-mode=After&query-mode=Force&startrow=8&startcol=8&endro
     """
-    return await client.post(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"task": task, "replace_mode": replace_mode, "query_mode": query_mode, "startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol, "text": text}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "task": task,
+                "replace_mode": replace_mode,
+                "query_mode": query_mode,
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol,
+                "text": text,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_module_text(
     client: RWSClient,
@@ -303,7 +351,12 @@ async def set_module_text(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "text=SampleTest" -X POST "http://localhost/rw/rapid/modules/MainMod
     """
-    return await client.post(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"task": task, "action": action}.items() if v is not None}, data={k: v for k, v in {"text": text}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"task": task, "action": action}.items() if v is not None},
+        data={k: v for k, v in {"text": text}.items() if v is not None},
+    )
+
 
 async def get_rapid_module_attributes(
     client: RWSClient,
@@ -335,7 +388,15 @@ async def get_rapid_module_attributes(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1"
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"task": task, "continue_on_err": continue_on_err}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {"task": task, "continue_on_err": continue_on_err}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_change_count(
     client: RWSClient,
@@ -366,7 +427,11 @@ async def get_change_count(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=change-count&task=T_ROB1
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
+    )
+
 
 async def get_rulesinstr(
     client: RWSClient,
@@ -405,7 +470,22 @@ async def get_rulesinstr(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=rules-instr&task=T_ROB1&
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task, "name": name, "data_type": data_type, "line": line, "col": col}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "name": name,
+                "data_type": data_type,
+                "line": line,
+                "col": col,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_module_possible_attributes(
     client: RWSClient,
@@ -437,7 +517,11 @@ async def get_module_possible_attributes(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&attribute=readonly&attr
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"task": task, "attribute": attribute}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"task": task, "attribute": attribute}.items() if v is not None},
+    )
+
 
 async def get_search_text(
     client: RWSClient,
@@ -473,7 +557,20 @@ async def get_search_text(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&startrow=1&startcol=1
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"task": task, "startrow": startrow, "startcol": startcol, "text": text}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {
+                "task": task,
+                "startrow": startrow,
+                "startcol": startcol,
+                "text": text,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_rapid_object(
     client: RWSClient,
@@ -502,6 +599,7 @@ async def get_rapid_object(
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/BASE?task=T_ROB1&startrow=3&startcol=2&desti
     """
     return await client.get(f"/rw/rapid/modules/{module}")
+
 
 async def set_syncpers(
     client: RWSClient,
@@ -532,7 +630,11 @@ async def set_syncpers(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/modules/MainModule?action=set-syncpers&task=
     """
-    return await client.post(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"action": action, "task": task}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"action": action, "task": task}.items() if v is not None},
+    )
+
 
 async def set_modify_position(
     client: RWSClient,
@@ -577,7 +679,24 @@ async def set_modify_position(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "startrow=3&startcol=9&endrow=3&endcol=102&checklimit=false&checkdea
     """
-    return await client.post(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"action": action, "task": task}.items() if v is not None}, data={k: v for k, v in {"startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol, "checklimit": checklimit, "checkdeactaxes": checkdeactaxes, "allowdeact": allowdeact}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"action": action, "task": task}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol,
+                "checklimit": checklimit,
+                "checkdeactaxes": checkdeactaxes,
+                "allowdeact": allowdeact,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_module_extension(
     client: RWSClient,
@@ -608,7 +727,11 @@ async def get_module_extension(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-extension&task=T_
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
+    )
+
 
 async def get_mod_possible(
     client: RWSClient,
@@ -647,7 +770,22 @@ async def get_mod_possible(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=mod-possible&task=T_ROB1
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task, "startrow": startrow, "startcol": startcol, "endrow": endrow, "endcol": endcol}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "startrow": startrow,
+                "startcol": startcol,
+                "endrow": endrow,
+                "endcol": endcol,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_object_child(
     client: RWSClient,
@@ -686,7 +824,22 @@ async def get_object_child(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost:4444/rw/rapid/modules/base?resource=object-child&task=T_ROB1&
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task, "startline": startline, "startcolumn": startcolumn, "endline": endline, "endcolumn": endcolumn}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "task": task,
+                "startline": startline,
+                "startcolumn": startcolumn,
+                "endline": endline,
+                "endcolumn": endcolumn,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_syncpers_status(
     client: RWSClient,
@@ -717,7 +870,11 @@ async def get_syncpers_status(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/base?resource=syncper-status&task=T_ROB1"
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
+    )
+
 
 async def get_module_text(
     client: RWSClient,
@@ -748,7 +905,11 @@ async def get_module_text(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-text&task=T_ROB1"
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
+    )
+
 
 async def get_symbol_information(
     client: RWSClient,
@@ -783,7 +944,15 @@ async def get_symbol_information(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-symbol&task=T_ROB
     """
-    return await client.get(f"/rw/rapid/modules/{module}", params={k: v for k, v in {"resource": resource, "task": task, "row": row, "col": col}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "task": task, "row": row, "col": col}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_routine_information(
     client: RWSClient,
@@ -817,7 +986,13 @@ async def get_routine_information(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?task=T_ROB1&row=10&column
     """
-    return await client.get(f"/rw/rapid/modules/{module}/routine", params={k: v for k, v in {"task": task, "row": row, "column": column}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}/routine",
+        params={
+            k: v for k, v in {"task": task, "row": row, "column": column}.items() if v is not None
+        },
+    )
+
 
 async def get_routineargs_information(
     client: RWSClient,
@@ -857,4 +1032,18 @@ async def get_routineargs_information(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?resource=routine-args&mar
     """
-    return await client.get(f"/rw/rapid/modules/{module}/routine", params={k: v for k, v in {"resource": resource, "mark": mark, "limit": limit, "task": task, "row": row, "column": column}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/modules/{module}/routine",
+        params={
+            k: v
+            for k, v in {
+                "resource": resource,
+                "mark": mark,
+                "limit": limit,
+                "task": task,
+                "row": row,
+                "column": column,
+            }.items()
+            if v is not None
+        },
+    )

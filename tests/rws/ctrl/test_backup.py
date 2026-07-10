@@ -2,21 +2,22 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/backup."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.backup import (
-    get_backup_resources,
-    get_backup_actions,
     create_backup,
-    post_restore_backup,
-    get_check_restore,
+    get_backup_actions,
+    get_backup_resources,
     get_backup_state,
-    subscribe_on_backup_system_information,
     get_backup_system_information,
+    get_check_restore,
+    post_restore_backup,
+    subscribe_on_backup_system_information,
 )
 
 
@@ -57,6 +58,7 @@ async def test_get_backup_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_backup_actions() -> None:
     """Verify that get_backup_actions sends GET /ctrl/backup."""
@@ -69,6 +71,7 @@ async def test_get_backup_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_create_backup() -> None:
@@ -83,6 +86,7 @@ async def test_create_backup() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_post_restore_backup() -> None:
     """Verify that post_restore_backup sends POST /ctrl/backup."""
@@ -95,6 +99,7 @@ async def test_post_restore_backup() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_check_restore() -> None:
@@ -109,6 +114,7 @@ async def test_get_check_restore() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_backup_state() -> None:
     """Verify that get_backup_state sends GET /ctrl/backup."""
@@ -122,6 +128,7 @@ async def test_get_backup_state() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_backup_system_information() -> None:
     """Verify that subscribe_on_backup_system_information sends POST /subscription."""
@@ -134,6 +141,7 @@ async def test_subscribe_on_backup_system_information() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_backup_system_information() -> None:

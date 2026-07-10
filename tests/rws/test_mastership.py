@@ -2,23 +2,24 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/mastership."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.mastership import (
-    get_mastership_resources,
     get_mastership_actions,
-    post_mastership_request,
-    post_mastership_release,
-    post_mastership_subscribe,
     get_mastership_domain,
     get_mastership_domain_actions,
-    post_mastership_domain_request,
+    get_mastership_resources,
     post_mastership_domain_release,
+    post_mastership_domain_request,
     post_mastership_domain_subscribe,
+    post_mastership_release,
+    post_mastership_request,
+    post_mastership_subscribe,
 )
 
 
@@ -59,6 +60,7 @@ async def test_get_mastership_resources() -> None:
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_mastership_actions() -> None:
     """Verify that get_mastership_actions sends GET /rw/mastership."""
@@ -71,6 +73,7 @@ async def test_get_mastership_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_request() -> None:
@@ -85,6 +88,7 @@ async def test_post_mastership_request() -> None:
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_mastership_release() -> None:
     """Verify that post_mastership_release sends POST /rw/mastership."""
@@ -97,6 +101,7 @@ async def test_post_mastership_release() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_subscribe() -> None:
@@ -111,6 +116,7 @@ async def test_post_mastership_subscribe() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_mastership_domain() -> None:
     """Verify that get_mastership_domain sends GET /rw/mastership/{domain-name}."""
@@ -123,6 +129,7 @@ async def test_get_mastership_domain() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/mastership/domain_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_mastership_domain_actions() -> None:
@@ -137,6 +144,7 @@ async def test_get_mastership_domain_actions() -> None:
     assert transport.last_request.url.path == "/rw/mastership/domain_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_mastership_domain_request() -> None:
     """Verify that post_mastership_domain_request sends POST /rw/mastership/{domain}."""
@@ -150,6 +158,7 @@ async def test_post_mastership_domain_request() -> None:
     assert transport.last_request.url.path == "/rw/mastership/domain_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_mastership_domain_release() -> None:
     """Verify that post_mastership_domain_release sends POST /rw/mastership/{domain}."""
@@ -162,6 +171,7 @@ async def test_post_mastership_domain_release() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership/domain_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_domain_subscribe() -> None:

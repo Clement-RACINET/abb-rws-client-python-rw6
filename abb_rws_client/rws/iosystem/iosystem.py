@@ -8,6 +8,7 @@ RWS module: RobotWare Services → IO Service → Get IO System resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_io_system_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/iosystem")
 
+
 async def get_io_network(
     client: RWSClient,
     network: str,
@@ -66,6 +68,7 @@ async def get_io_network(
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local"
     """
     return await client.get(f"/rw/iosystem/networks/{network}")
+
 
 async def get_io_network_actions(
     client: RWSClient,
@@ -95,7 +98,11 @@ async def get_io_network_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?action=show"
     """
-    return await client.get(f"/rw/iosystem/networks/{network}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/networks/{network}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_io_network(
     client: RWSClient,
@@ -127,7 +134,12 @@ async def update_io_network(
     Example:
         # Set signal value
     """
-    return await client.post(f"/rw/iosystem/networks/{network}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"lstate": lstate}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/networks/{network}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
+    )
+
 
 async def subscribe_io_network(
     client: RWSClient,
@@ -157,7 +169,15 @@ async def subscribe_io_network(
     Example:
         # Subscribe on IO Network
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_io_network_configuration_properties(
     client: RWSClient,
@@ -189,7 +209,15 @@ async def get_io_network_configuration_properties(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?resource=config&configtype=1"
     """
-    return await client.get(f"/rw/iosystem/networks/{network}", params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/networks/{network}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "configtype": configtype}.items()
+            if v is not None
+        },
+    )
+
 
 async def update_io_network_configuration_type(
     client: RWSClient,
@@ -221,7 +249,12 @@ async def update_io_network_configuration_type(
     Example:
         # curl --digest -u "Default User":robotics -d "config-type=BITS" -X POST "http://localhost/rw/iosystem/networks/Local?acti
     """
-    return await client.post(f"/rw/iosystem/networks/{network}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"config_type": config_type}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/networks/{network}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"config_type": config_type}.items() if v is not None},
+    )
+
 
 async def get_io_device(
     client: RWSClient,
@@ -251,6 +284,7 @@ async def get_io_device(
     """
     return await client.get(f"/rw/iosystem/devices/{device}")
 
+
 async def get_io_device_actions(
     client: RWSClient,
     device: str,
@@ -279,7 +313,11 @@ async def get_io_device_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/Local/PANEL?action=show"
     """
-    return await client.get(f"/rw/iosystem/devices/{device}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/devices/{device}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_io_device(
     client: RWSClient,
@@ -311,7 +349,12 @@ async def update_io_device(
     Example:
         # Set signal value
     """
-    return await client.post(f"/rw/iosystem/devices/{device}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"lstate": lstate}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/devices/{device}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
+    )
+
 
 async def subscribe_io_device(
     client: RWSClient,
@@ -341,7 +384,15 @@ async def subscribe_io_device(
     Example:
         # Subscribe on IO Device
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def set_input_data(
     client: RWSClient,
@@ -377,7 +428,20 @@ async def set_input_data(
     Example:
         # curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosys
     """
-    return await client.post(f"/rw/iosystem/devices/{device}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/devices/{device}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startbyte": startbyte,
+                "signaldata": signaldata,
+                "datamask": datamask,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def set_output_data(
     client: RWSClient,
@@ -413,7 +477,20 @@ async def set_output_data(
     Example:
         # curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosys
     """
-    return await client.post(f"/rw/iosystem/devices/{device}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"startbyte": startbyte, "signaldata": signaldata, "datamask": datamask}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/devices/{device}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "startbyte": startbyte,
+                "signaldata": signaldata,
+                "datamask": datamask,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_io_device_configuration_properties(
     client: RWSClient,
@@ -445,7 +522,15 @@ async def get_io_device_configuration_properties(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/DeviceNet/DN_Internal_Device?resource=con
     """
-    return await client.get(f"/rw/iosystem/devices/{device}", params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/devices/{device}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "configtype": configtype}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_eio_device_status_information(
     client: RWSClient,
@@ -476,6 +561,7 @@ async def get_eio_device_status_information(
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/EtherNetIP/EN_Internal_Device/upgradeinfo
     """
     return await client.get(f"/rw/iosystem/devices/{network}/{device}/upgradeinfo")
+
 
 async def post_send_device_command(
     client: RWSClient,
@@ -511,7 +597,20 @@ async def post_send_device_command(
     Example:
         # curl --digest -u "Default User":robotics -d "commandName=FIRMWARE_INFO&value=0&valueLength=0&timeout=0" -X POST "http://
     """
-    return await client.post(f"/rw/iosystem/devices/{device}/command", data={k: v for k, v in {"commandname": commandname, "value": value, "valuelength": valuelength, "timeout": timeout}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/devices/{device}/command",
+        data={
+            k: v
+            for k, v in {
+                "commandname": commandname,
+                "value": value,
+                "valuelength": valuelength,
+                "timeout": timeout,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def options_send_device_command_actions(
     client: RWSClient,
@@ -540,6 +639,7 @@ async def options_send_device_command_actions(
         # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
     """
     return await client.options(f"/rw/iosystem/devices/{device}/command")
+
 
 async def get_an_io_signal(
     client: RWSClient,
@@ -573,6 +673,7 @@ async def get_an_io_signal(
     """
     return await client.get(f"/rw/iosystem/signals/{network}/{unit}/{signal}")
 
+
 async def get_io_signal_actions(
     client: RWSClient,
     network: str,
@@ -605,7 +706,11 @@ async def get_io_signal_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=show"
     """
-    return await client.get(f"/rw/iosystem/signals/{network}/{unit}/{signal}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/signals/{network}/{unit}/{signal}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_io_signal_state(
     client: RWSClient,
@@ -641,7 +746,12 @@ async def update_io_signal_state(
     Example:
         # Set signal value
     """
-    return await client.post(f"/rw/iosystem/signals/{network}/{device}/{signal}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"lstate": lstate}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/signals/{network}/{device}/{signal}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
+    )
+
 
 async def update_io_signal_value(
     client: RWSClient,
@@ -672,7 +782,11 @@ async def update_io_signal_value(
         RWSHTTPError: On any other HTTP >= 400.
         # ABB codes: BAD_REQUEST(400)
     """
-    return await client.post(f"/rw/iosystem/signals/{network}/{device}/{signal}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        f"/rw/iosystem/signals/{network}/{device}/{signal}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def subscribe_io_signal(
     client: RWSClient,
@@ -702,7 +816,15 @@ async def subscribe_io_signal(
     Example:
         # Subscribe on IO-Signal, it is possible to subscribe with any subscription priority (i.e High,Medium,Low priority) on IO-
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_io_signal_configuration_properties(
     client: RWSClient,
@@ -738,4 +860,11 @@ async def get_io_signal_configuration_properties(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?resource=config&config
     """
-    return await client.get(f"/rw/iosystem/signals/{network}/{unit}/{signal}", params={k: v for k, v in {"resource": resource, "configtype": configtype}.items() if v is not None})
+    return await client.get(
+        f"/rw/iosystem/signals/{network}/{unit}/{signal}",
+        params={
+            k: v
+            for k, v in {"resource": resource, "configtype": configtype}.items()
+            if v is not None
+        },
+    )

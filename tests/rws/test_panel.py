@@ -2,35 +2,36 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/panel."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.panel import (
-    get_panel_resources,
-    get_panel_actions,
-    set_the_language,
-    restart_the_controller,
-    get_controller_state,
-    get_controller_state_actions,
-    set_controller_state,
-    subscribe_controller_state,
-    get_operation_mode,
-    get_operation_mode_actions,
-    subscribe_operation_mode,
-    post_acknowledgement_for_operation_mode,
-    get_operation_mode_lock_status,
-    post_lock_operation_mode_selection,
-    post_unlock_operation_mode_selection,
-    get_speed_ratio,
-    get_speed_ratio_actions,
-    set_speed_ratio,
-    subscribe_speed_ratio,
     get_collision_detection_state,
     get_collision_detection_state_actions,
+    get_controller_state,
+    get_controller_state_actions,
+    get_operation_mode,
+    get_operation_mode_actions,
+    get_operation_mode_lock_status,
+    get_panel_actions,
+    get_panel_resources,
+    get_speed_ratio,
+    get_speed_ratio_actions,
+    post_acknowledgement_for_operation_mode,
+    post_lock_operation_mode_selection,
+    post_unlock_operation_mode_selection,
+    restart_the_controller,
+    set_controller_state,
+    set_speed_ratio,
+    set_the_language,
+    subscribe_controller_state,
     subscribe_on_collision_detection_state,
+    subscribe_operation_mode,
+    subscribe_speed_ratio,
 )
 
 
@@ -71,6 +72,7 @@ async def test_get_panel_resources() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_panel_actions() -> None:
     """Verify that get_panel_actions sends GET /rw/panel."""
@@ -83,6 +85,7 @@ async def test_get_panel_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_language() -> None:
@@ -97,6 +100,7 @@ async def test_set_the_language() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_restart_the_controller() -> None:
     """Verify that restart_the_controller sends POST /rw/panel."""
@@ -109,6 +113,7 @@ async def test_restart_the_controller() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_controller_state() -> None:
@@ -123,6 +128,7 @@ async def test_get_controller_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_controller_state_actions() -> None:
     """Verify that get_controller_state_actions sends GET /rw/panel/ctrlstate."""
@@ -135,6 +141,7 @@ async def test_get_controller_state_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_controller_state() -> None:
@@ -149,6 +156,7 @@ async def test_set_controller_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_controller_state() -> None:
     """Verify that subscribe_controller_state sends POST /subscription."""
@@ -161,6 +169,7 @@ async def test_subscribe_controller_state() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_operation_mode() -> None:
@@ -175,6 +184,7 @@ async def test_get_operation_mode() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_operation_mode_actions() -> None:
     """Verify that get_operation_mode_actions sends GET /rw/panel/opmode."""
@@ -187,6 +197,7 @@ async def test_get_operation_mode_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_operation_mode() -> None:
@@ -201,6 +212,7 @@ async def test_subscribe_operation_mode() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_post_acknowledgement_for_operation_mode() -> None:
     """Verify that post_acknowledgement_for_operation_mode sends POST /rw/panel/opmode."""
@@ -213,6 +225,7 @@ async def test_post_acknowledgement_for_operation_mode() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_operation_mode_lock_status() -> None:
@@ -227,6 +240,7 @@ async def test_get_operation_mode_lock_status() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_lock_operation_mode_selection() -> None:
     """Verify that post_lock_operation_mode_selection sends POST /rw/panel/opmode."""
@@ -239,6 +253,7 @@ async def test_post_lock_operation_mode_selection() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_unlock_operation_mode_selection() -> None:
@@ -253,6 +268,7 @@ async def test_post_unlock_operation_mode_selection() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_speed_ratio() -> None:
     """Verify that get_speed_ratio sends GET /rw/panel/speedratio."""
@@ -265,6 +281,7 @@ async def test_get_speed_ratio() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_speed_ratio_actions() -> None:
@@ -279,6 +296,7 @@ async def test_get_speed_ratio_actions() -> None:
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_speed_ratio() -> None:
     """Verify that set_speed_ratio sends POST /rw/panel/speedratio."""
@@ -291,6 +309,7 @@ async def test_set_speed_ratio() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_speed_ratio() -> None:
@@ -305,6 +324,7 @@ async def test_subscribe_speed_ratio() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_collision_detection_state() -> None:
     """Verify that get_collision_detection_state sends GET /rw/panel/coldetstate."""
@@ -318,6 +338,7 @@ async def test_get_collision_detection_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_collision_detection_state_actions() -> None:
     """Verify that get_collision_detection_state_actions sends GET /rw/panel/coldetstate."""
@@ -330,6 +351,7 @@ async def test_get_collision_detection_state_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_collision_detection_state() -> None:

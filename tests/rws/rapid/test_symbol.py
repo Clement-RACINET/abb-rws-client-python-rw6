@@ -2,20 +2,21 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/symbol."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.symbol import (
-    get_rapid_symbol_properties,
     get_rapid_symbol_data,
     get_rapid_symbol_data_actions,
-    update_rapid_variable_current_value,
-    validate_rapid_variable,
+    get_rapid_symbol_properties,
     subscribe_on_rapid_persistent_variable,
+    update_rapid_variable_current_value,
     update_rapid_variable_initial_value,
+    validate_rapid_variable,
 )
 
 
@@ -56,6 +57,7 @@ async def test_get_rapid_symbol_properties() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/properties/symbolurl_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data() -> None:
     """Verify that get_rapid_symbol_data sends GET /rw/rapid/symbol/data/{symbolurl}."""
@@ -68,6 +70,7 @@ async def test_get_rapid_symbol_data() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data_actions() -> None:
@@ -82,6 +85,7 @@ async def test_get_rapid_symbol_data_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols/symbolurl_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_update_rapid_variable_current_value() -> None:
     """Verify that update_rapid_variable_current_value sends POST /rw/rapid/symbol/data/{symbolurl}."""
@@ -94,6 +98,7 @@ async def test_update_rapid_variable_current_value() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_validate_rapid_variable() -> None:
@@ -108,6 +113,7 @@ async def test_validate_rapid_variable() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/data"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_persistent_variable() -> None:
     """Verify that subscribe_on_rapid_persistent_variable sends POST /subscription."""
@@ -120,6 +126,7 @@ async def test_subscribe_on_rapid_persistent_variable() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_update_rapid_variable_initial_value() -> None:

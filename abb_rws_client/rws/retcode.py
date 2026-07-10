@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RobotWare return codes service → Get a list
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -40,4 +41,6 @@ async def get_list_of_robotware_return_codes(
     Example:
         # curl --digest -u "Default User":robotics "http://192.168.8.105/rw/retcode"
     """
-    return await client.get("/rw/retcode", params={k: v for k, v in {"code": code}.items() if v is not None})
+    return await client.get(
+        "/rw/retcode", params={k: v for k, v in {"code": code}.items() if v is not None}
+    )

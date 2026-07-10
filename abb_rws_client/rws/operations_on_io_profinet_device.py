@@ -8,6 +8,7 @@ RWS module: Operations on IO Profinet Device → Get profinet I/O device read re
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -55,7 +56,22 @@ async def get_profinet_device_read_record_implicit_data(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
     """
-    return await client.get(f"rw/iosystem/devices/{network}/{device}/implicitdata", params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid}.items() if v is not None})
+    return await client.get(
+        f"rw/iosystem/devices/{network}/{device}/implicitdata",
+        params={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+                "vendorid": vendorid,
+                "deviceid": deviceid,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def post_read_record_implicit_data_from_device_in(
     client: RWSClient,
@@ -99,7 +115,23 @@ async def post_read_record_implicit_data_from_device_in(
     Example:
         # curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60&vendorid=42&deviceid=787&ip=127.1.1.
     """
-    return await client.post(f"rw/iosystem/devices/{network}/{device}/implicitdata", data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength, "vendorid": vendorid, "deviceid": deviceid, "ip": ip}.items() if v is not None})
+    return await client.post(
+        f"rw/iosystem/devices/{network}/{device}/implicitdata",
+        data={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+                "vendorid": vendorid,
+                "deviceid": deviceid,
+                "ip": ip,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_forms(
     client: RWSClient,
@@ -130,6 +162,7 @@ async def get_forms(
         # curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/im
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/implicitdata")
+
 
 async def get_profinet_device_read_record_data(
     client: RWSClient,
@@ -167,7 +200,20 @@ async def get_profinet_device_read_record_data(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
     """
-    return await client.get(f"rw/iosystem/devices/{network}/{device}/explicitdata", params={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None})
+    return await client.get(
+        f"rw/iosystem/devices/{network}/{device}/explicitdata",
+        params={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_profinet_device_read_record_data(
     client: RWSClient,
@@ -205,7 +251,20 @@ async def get_profinet_device_read_record_data(
     Example:
         # curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60" -X POST "http://localhost/rw/iosyst
     """
-    return await client.post(f"rw/iosystem/devices/{network}/{device}/explicitdata", data={k: v for k, v in {"slot": slot, "subslot": subslot, "index": index, "datalength": datalength}.items() if v is not None})
+    return await client.post(
+        f"rw/iosystem/devices/{network}/{device}/explicitdata",
+        data={
+            k: v
+            for k, v in {
+                "slot": slot,
+                "subslot": subslot,
+                "index": index,
+                "datalength": datalength,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def get_forms(
     client: RWSClient,
@@ -237,6 +296,7 @@ async def get_forms(
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/explicitdata")
 
+
 async def get_profinet_device_alarms_xml_response(
     client: RWSClient,
     network: str,
@@ -267,6 +327,7 @@ async def get_profinet_device_alarms_xml_response(
     """
     return await client.get(f"rw/iosystem/devices/{network}/{device}/alarms")
 
+
 async def post_clear_the_alarms(
     client: RWSClient,
     network: str,
@@ -296,6 +357,7 @@ async def post_clear_the_alarms(
         # curl --digest -u "Default User":robotics -d POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarm
     """
     return await client.post(f"rw/iosystem/devices/{network}/{device}/alarms/clear")
+
 
 async def get_forms(
     client: RWSClient,

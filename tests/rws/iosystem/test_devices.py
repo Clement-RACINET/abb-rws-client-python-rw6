@@ -2,15 +2,16 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/iosystem/devices."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.devices import (
-    get_io_devices,
     get_actions_io_devices,
+    get_io_devices,
     post_search_io_devices,
 )
 
@@ -52,6 +53,7 @@ async def test_get_io_devices() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_io_devices() -> None:
     """Verify that get_actions_io_devices sends GET /rw/iosystem/devices."""
@@ -64,6 +66,7 @@ async def test_get_actions_io_devices() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/devices"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_search_io_devices() -> None:

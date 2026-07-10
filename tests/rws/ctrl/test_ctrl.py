@@ -2,78 +2,79 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/ctrl/ctrl."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.ctrl.ctrl import (
-    get_controller_resources,
+    add_route_table_entry,
+    add_validation_info,
+    delete_system,
+    get_actions_on_system,
+    get_actions_on_system_resource,
+    get_actions_on_vtspeed,
+    get_actions_on_vtstate,
+    get_actions_on_vttimeslice,
+    get_boot_device,
+    get_check_robotware_version_compatibility_with_contorller_hardware,
+    get_compress_actions,
+    get_compress_resources,
+    get_config_status,
     get_controller_actions,
     get_controller_environment_variable,
-    restart_or_shutdown_controller,
-    set_controller_language,
+    get_controller_resources,
+    get_diagnostics_actions,
+    get_diagnostics_resources,
+    get_dns_resource,
     get_list_of_installed_systems,
-    get_actions_on_system,
-    set_boot_device,
-    get_boot_device,
-    load_boot_image,
-    post_unload_boot_image,
-    get_selected_system_name,
-    post_install_deployment_package,
-    validate_deployment_package,
-    get_system_resource,
-    get_actions_on_system_resource,
-    post_rename_system,
-    post_select_system,
-    delete_system,
-    post_deselect_system,
+    get_loadoperation_status,
     get_network_resource,
     get_network_setting_actions,
-    set_network_configuration,
-    get_dns_resource,
-    add_route_table_entry,
-    options_options_to_add_route_table_entry,
-    remove_route_table_entry,
-    options_options_to_remove_route_table_entry,
-    get_compress_resources,
-    get_compress_actions,
-    post_compress_decompress_resource,
-    get_diagnostics_resources,
-    get_diagnostics_actions,
-    save_system_diagnostics,
-    subscribe_on_system_dump,
-    subscribe_on_diagnostics_states_get_system_diagnostics,
-    get_safety_resources,
-    get_safety_actions,
-    load_safety_configuration_file_to_controller,
-    set_safety_mode_of_the_controller,
-    get_config_status,
-    get_safety_mode_status,
-    get_safety_cyclic_brake_check_status,
-    get_loadoperation_status,
-    get_safety_configurations,
-    get_safety_violation_info,
-    post_unlock_the_safety_configuration,
-    post_software_sync_acknowledgement,
-    add_validation_info,
-    remove_validation_info,
-    set_reset_safety_controller,
     get_options_resource,
-    get_check_robotware_version_compatibility_with_contorller_hardware,
+    get_safety_actions,
+    get_safety_configurations,
+    get_safety_cyclic_brake_check_status,
+    get_safety_mode_status,
+    get_safety_resources,
+    get_safety_violation_info,
+    get_selected_system_name,
+    get_speed_of_virtual_time,
+    get_state_of_virtual_time,
+    get_system_resource,
     get_virtual_time_resources,
     get_virtualtime,
     get_vttimeslice_value,
-    get_actions_on_vttimeslice,
-    set_vttimeslice_value,
-    get_speed_of_virtual_time,
-    get_actions_on_vtspeed,
-    set_speed_of_virtualtime,
-    get_state_of_virtual_time,
-    get_actions_on_vtstate,
-    set_state_of_virtualtime,
+    load_boot_image,
+    load_safety_configuration_file_to_controller,
+    options_options_to_add_route_table_entry,
+    options_options_to_remove_route_table_entry,
+    post_compress_decompress_resource,
+    post_deselect_system,
+    post_install_deployment_package,
+    post_rename_system,
+    post_select_system,
+    post_software_sync_acknowledgement,
+    post_unload_boot_image,
+    post_unlock_the_safety_configuration,
     post_vt_run,
+    remove_route_table_entry,
+    remove_validation_info,
+    restart_or_shutdown_controller,
+    save_system_diagnostics,
+    set_boot_device,
+    set_controller_language,
+    set_network_configuration,
+    set_reset_safety_controller,
+    set_safety_mode_of_the_controller,
+    set_speed_of_virtualtime,
+    set_state_of_virtualtime,
+    set_vttimeslice_value,
+    subscribe_on_diagnostics_states_get_system_diagnostics,
+    subscribe_on_system_dump,
+    validate_deployment_package,
 )
 
 
@@ -114,6 +115,7 @@ async def test_get_controller_resources() -> None:
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_controller_actions() -> None:
     """Verify that get_controller_actions sends GET /ctrl."""
@@ -126,6 +128,7 @@ async def test_get_controller_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_controller_environment_variable() -> None:
@@ -140,6 +143,7 @@ async def test_get_controller_environment_variable() -> None:
     assert transport.last_request.url.path == "/ctrl/$envname_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_restart_or_shutdown_controller() -> None:
     """Verify that restart_or_shutdown_controller sends POST /ctrl."""
@@ -152,6 +156,7 @@ async def test_restart_or_shutdown_controller() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_controller_language() -> None:
@@ -166,6 +171,7 @@ async def test_set_controller_language() -> None:
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_list_of_installed_systems() -> None:
     """Verify that get_list_of_installed_systems sends GET /ctrl/system."""
@@ -178,6 +184,7 @@ async def test_get_list_of_installed_systems() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_actions_on_system() -> None:
@@ -192,6 +199,7 @@ async def test_get_actions_on_system() -> None:
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_boot_device() -> None:
     """Verify that set_boot_device sends POST /ctrl/system."""
@@ -204,6 +212,7 @@ async def test_set_boot_device() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_boot_device() -> None:
@@ -218,6 +227,7 @@ async def test_get_boot_device() -> None:
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_load_boot_image() -> None:
     """Verify that load_boot_image sends POST /ctrl/system."""
@@ -230,6 +240,7 @@ async def test_load_boot_image() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 202
+
 
 @pytest.mark.asyncio
 async def test_post_unload_boot_image() -> None:
@@ -244,6 +255,7 @@ async def test_post_unload_boot_image() -> None:
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_selected_system_name() -> None:
     """Verify that get_selected_system_name sends GET /ctrl/system."""
@@ -256,6 +268,7 @@ async def test_get_selected_system_name() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_install_deployment_package() -> None:
@@ -270,6 +283,7 @@ async def test_post_install_deployment_package() -> None:
     assert transport.last_request.url.path == "/ctrl/system/installdpkg"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_validate_deployment_package() -> None:
     """Verify that validate_deployment_package sends POST /ctrl/system/validatedpkg."""
@@ -282,6 +296,7 @@ async def test_validate_deployment_package() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/system/validatedpkg"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_system_resource() -> None:
@@ -296,6 +311,7 @@ async def test_get_system_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_system_resource() -> None:
     """Verify that get_actions_on_system_resource sends GET /ctrl/system/{system-name}."""
@@ -308,6 +324,7 @@ async def test_get_actions_on_system_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_rename_system() -> None:
@@ -322,6 +339,7 @@ async def test_post_rename_system() -> None:
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_post_select_system() -> None:
     """Verify that post_select_system sends POST /ctrl/system/{system-name}."""
@@ -334,6 +352,7 @@ async def test_post_select_system() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_delete_system() -> None:
@@ -348,6 +367,7 @@ async def test_delete_system() -> None:
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_deselect_system() -> None:
     """Verify that post_deselect_system sends POST /ctrl/system."""
@@ -360,6 +380,7 @@ async def test_post_deselect_system() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_network_resource() -> None:
@@ -374,6 +395,7 @@ async def test_get_network_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/network"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_network_setting_actions() -> None:
     """Verify that get_network_setting_actions sends GET /ctrl/network."""
@@ -386,6 +408,7 @@ async def test_get_network_setting_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/network"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_network_configuration() -> None:
@@ -400,6 +423,7 @@ async def test_set_network_configuration() -> None:
     assert transport.last_request.url.path == "/ctrl/network"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_dns_resource() -> None:
     """Verify that get_dns_resource sends GET /ctrl/network/dns."""
@@ -412,6 +436,7 @@ async def test_get_dns_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/network/dns"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_add_route_table_entry() -> None:
@@ -426,6 +451,7 @@ async def test_add_route_table_entry() -> None:
     assert transport.last_request.url.path == "/ctrl/network/route/add"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_options_options_to_add_route_table_entry() -> None:
     """Verify that options_options_to_add_route_table_entry sends OPTIONS /ctrl/network/route/add."""
@@ -438,6 +464,7 @@ async def test_options_options_to_add_route_table_entry() -> None:
     assert transport.last_request.method == "OPTIONS"
     assert transport.last_request.url.path == "/ctrl/network/route/add"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_remove_route_table_entry() -> None:
@@ -452,6 +479,7 @@ async def test_remove_route_table_entry() -> None:
     assert transport.last_request.url.path == "/ctrl/network/route/remove"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_options_options_to_remove_route_table_entry() -> None:
     """Verify that options_options_to_remove_route_table_entry sends OPTIONS /ctrl/network/route/remove."""
@@ -464,6 +492,7 @@ async def test_options_options_to_remove_route_table_entry() -> None:
     assert transport.last_request.method == "OPTIONS"
     assert transport.last_request.url.path == "/ctrl/network/route/remove"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_compress_resources() -> None:
@@ -478,6 +507,7 @@ async def test_get_compress_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/compress"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_compress_actions() -> None:
     """Verify that get_compress_actions sends GET /ctrl/compress."""
@@ -490,6 +520,7 @@ async def test_get_compress_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/compress"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_compress_decompress_resource() -> None:
@@ -504,6 +535,7 @@ async def test_post_compress_decompress_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/compress"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_diagnostics_resources() -> None:
     """Verify that get_diagnostics_resources sends GET /ctrl/diagnostics."""
@@ -516,6 +548,7 @@ async def test_get_diagnostics_resources() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/diagnostics"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_diagnostics_actions() -> None:
@@ -530,6 +563,7 @@ async def test_get_diagnostics_actions() -> None:
     assert transport.last_request.url.path == "/ctrl/diagnostics"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_save_system_diagnostics() -> None:
     """Verify that save_system_diagnostics sends POST /ctrl/diagnostics."""
@@ -542,6 +576,7 @@ async def test_save_system_diagnostics() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/diagnostics"
     assert resp.status_code == 202
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_system_dump() -> None:
@@ -556,6 +591,7 @@ async def test_subscribe_on_system_dump() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_diagnostics_states_get_system_diagnostics() -> None:
     """Verify that subscribe_on_diagnostics_states_get_system_diagnostics sends POST /subscription."""
@@ -568,6 +604,7 @@ async def test_subscribe_on_diagnostics_states_get_system_diagnostics() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_safety_resources() -> None:
@@ -582,6 +619,7 @@ async def test_get_safety_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_actions() -> None:
     """Verify that get_safety_actions sends GET /ctrl/safety."""
@@ -594,6 +632,7 @@ async def test_get_safety_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_load_safety_configuration_file_to_controller() -> None:
@@ -608,6 +647,7 @@ async def test_load_safety_configuration_file_to_controller() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_safety_mode_of_the_controller() -> None:
     """Verify that set_safety_mode_of_the_controller sends POST /ctrl/safety."""
@@ -620,6 +660,7 @@ async def test_set_safety_mode_of_the_controller() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_config_status() -> None:
@@ -634,6 +675,7 @@ async def test_get_config_status() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_mode_status() -> None:
     """Verify that get_safety_mode_status sends GET /ctrl/safety."""
@@ -646,6 +688,7 @@ async def test_get_safety_mode_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_safety_cyclic_brake_check_status() -> None:
@@ -660,6 +703,7 @@ async def test_get_safety_cyclic_brake_check_status() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_loadoperation_status() -> None:
     """Verify that get_loadoperation_status sends GET /ctrl/safety."""
@@ -672,6 +716,7 @@ async def test_get_loadoperation_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_safety_configurations() -> None:
@@ -686,6 +731,7 @@ async def test_get_safety_configurations() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_violation_info() -> None:
     """Verify that get_safety_violation_info sends GET /ctrl/safety."""
@@ -698,6 +744,7 @@ async def test_get_safety_violation_info() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_unlock_the_safety_configuration() -> None:
@@ -712,6 +759,7 @@ async def test_post_unlock_the_safety_configuration() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_software_sync_acknowledgement() -> None:
     """Verify that post_software_sync_acknowledgement sends POST /ctrl/safety."""
@@ -724,6 +772,7 @@ async def test_post_software_sync_acknowledgement() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_add_validation_info() -> None:
@@ -738,6 +787,7 @@ async def test_add_validation_info() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_remove_validation_info() -> None:
     """Verify that remove_validation_info sends POST /ctrl/safety."""
@@ -750,6 +800,7 @@ async def test_remove_validation_info() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_reset_safety_controller() -> None:
@@ -764,6 +815,7 @@ async def test_set_reset_safety_controller() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_options_resource() -> None:
     """Verify that get_options_resource sends GET /ctrl/options/{option to verify}."""
@@ -777,18 +829,22 @@ async def test_get_options_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/options/option_to_verify_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_check_robotware_version_compatibility_with_contorller_hardware() -> None:
     """Verify that get_check_robotware_version_compatibility_with_contorller_hardware sends GET /ctrl/compatibility/{robotware version}."""
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await get_check_robotware_version_compatibility_with_contorller_hardware(client, "robotware_version_test")
+    resp = await get_check_robotware_version_compatibility_with_contorller_hardware(
+        client, "robotware_version_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/compatibility/robotware_version_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_virtual_time_resources() -> None:
@@ -803,6 +859,7 @@ async def test_get_virtual_time_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_virtualtime() -> None:
     """Verify that get_virtualtime sends GET /ctrl/virtualtime/vttime."""
@@ -815,6 +872,7 @@ async def test_get_virtualtime() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttime"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_vttimeslice_value() -> None:
@@ -829,6 +887,7 @@ async def test_get_vttimeslice_value() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttimeslice"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_vttimeslice() -> None:
     """Verify that get_actions_on_vttimeslice sends GET /ctrl/virtualtime/vttimeslice."""
@@ -841,6 +900,7 @@ async def test_get_actions_on_vttimeslice() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttimeslice"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_vttimeslice_value() -> None:
@@ -855,6 +915,7 @@ async def test_set_vttimeslice_value() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttimeslice"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_speed_of_virtual_time() -> None:
     """Verify that get_speed_of_virtual_time sends GET /ctrl/virtualtime/vtspeed."""
@@ -867,6 +928,7 @@ async def test_get_speed_of_virtual_time() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtspeed"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_actions_on_vtspeed() -> None:
@@ -881,6 +943,7 @@ async def test_get_actions_on_vtspeed() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtspeed"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_speed_of_virtualtime() -> None:
     """Verify that set_speed_of_virtualtime sends POST /ctrl/virtualtime/vtspeed."""
@@ -893,6 +956,7 @@ async def test_set_speed_of_virtualtime() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtspeed"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_state_of_virtual_time() -> None:
@@ -907,6 +971,7 @@ async def test_get_state_of_virtual_time() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_vtstate() -> None:
     """Verify that get_actions_on_vtstate sends GET /ctrl/virtualtime/vtstate."""
@@ -920,6 +985,7 @@ async def test_get_actions_on_vtstate() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_state_of_virtualtime() -> None:
     """Verify that set_state_of_virtualtime sends POST /ctrl/virtualtime/vtstate."""
@@ -932,6 +998,7 @@ async def test_set_state_of_virtualtime() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtstate"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_vt_run() -> None:

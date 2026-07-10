@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID symbol
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -43,6 +44,7 @@ async def get_rapid_symbol_properties(
     """
     return await client.get(f"/rw/rapid/symbol/properties/{symbolurl}")
 
+
 async def get_rapid_symbol_data(
     client: RWSClient,
     symbolurl: str,
@@ -71,7 +73,11 @@ async def get_rapid_symbol_data(
     Example:
         # curl --digest -u "Default User":robotics
     """
-    return await client.get(f"/rw/rapid/symbol/data/{symbolurl}", params={k: v for k, v in {"value": value}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/symbol/data/{symbolurl}",
+        params={k: v for k, v in {"value": value}.items() if v is not None},
+    )
+
 
 async def get_rapid_symbol_data_actions(
     client: RWSClient,
@@ -101,7 +107,11 @@ async def get_rapid_symbol_data_actions(
     Example:
         # curl --digest -u "Default User":robotics
     """
-    return await client.get(f"/rw/rapid/symbols/{symbolurl}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/rw/rapid/symbols/{symbolurl}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def update_rapid_variable_current_value(
     client: RWSClient,
@@ -133,7 +143,12 @@ async def update_rapid_variable_current_value(
     Example:
         # Update a num:
     """
-    return await client.post(f"/rw/rapid/symbol/data/{symbolurl}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"value": value}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/symbol/data/{symbolurl}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"value": value}.items() if v is not None},
+    )
+
 
 async def validate_rapid_variable(
     client: RWSClient,
@@ -161,7 +176,11 @@ async def validate_rapid_variable(
     Example:
         # curl --digest -u "Default User":robotics -d "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&
     """
-    return await client.post("/rw/rapid/symbol/data", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/symbol/data",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def subscribe_on_rapid_persistent_variable(
     client: RWSClient,
@@ -191,7 +210,15 @@ async def subscribe_on_rapid_persistent_variable(
     Example:
         # Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the form /rw/rapid/symbol/data/{symbol
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def update_rapid_variable_initial_value(
     client: RWSClient,
@@ -223,4 +250,8 @@ async def update_rapid_variable_initial_value(
     Example:
         # Update a num:
     """
-    return await client.post(f"/rw/rapid/symbol/data/{symbolurl}", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"value": value}.items() if v is not None})
+    return await client.post(
+        f"/rw/rapid/symbol/data/{symbolurl}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"value": value}.items() if v is not None},
+    )

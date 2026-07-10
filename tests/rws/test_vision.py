@@ -2,31 +2,32 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/vision."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.vision import (
-    get_vision_manager_resource,
-    get_number_of_cameras_of_iv,
-    get_iv_camera_validity,
-    get_vision_camera_resource_actions,
-    get_camera_jobname,
-    restart_camera,
-    post_flash_led_of_camera,
-    set_camera_state,
-    post_refesh_the_camera,
-    set_hostname_of_the_camera,
-    set_camera_to_be_dhcp_client,
-    set_camera_dns_settings,
-    get_camera_status,
     get_camera_info_using_index_of_the,
-    set_camera_name,
-    set_camera_user_credentials,
-    set_camera_ip_settings,
+    get_camera_jobname,
+    get_camera_status,
     get_iv_camera_info,
+    get_iv_camera_validity,
+    get_number_of_cameras_of_iv,
+    get_vision_camera_resource_actions,
+    get_vision_manager_resource,
+    post_flash_led_of_camera,
+    post_refesh_the_camera,
+    restart_camera,
+    set_camera_dns_settings,
+    set_camera_ip_settings,
+    set_camera_name,
+    set_camera_state,
+    set_camera_to_be_dhcp_client,
+    set_camera_user_credentials,
+    set_hostname_of_the_camera,
 )
 
 
@@ -67,6 +68,7 @@ async def test_get_vision_manager_resource() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_number_of_cameras_of_iv() -> None:
     """Verify that get_number_of_cameras_of_iv sends GET /rw/vision."""
@@ -79,6 +81,7 @@ async def test_get_number_of_cameras_of_iv() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_iv_camera_validity() -> None:
@@ -93,6 +96,7 @@ async def test_get_iv_camera_validity() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_vision_camera_resource_actions() -> None:
     """Verify that get_vision_camera_resource_actions sends GET /rw/vision."""
@@ -105,6 +109,7 @@ async def test_get_vision_camera_resource_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_camera_jobname() -> None:
@@ -119,6 +124,7 @@ async def test_get_camera_jobname() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_restart_camera() -> None:
     """Verify that restart_camera sends POST /rw/vision."""
@@ -131,6 +137,7 @@ async def test_restart_camera() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_flash_led_of_camera() -> None:
@@ -145,6 +152,7 @@ async def test_post_flash_led_of_camera() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_state() -> None:
     """Verify that set_camera_state sends POST /rw/vision."""
@@ -157,6 +165,7 @@ async def test_set_camera_state() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_refesh_the_camera() -> None:
@@ -171,6 +180,7 @@ async def test_post_refesh_the_camera() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_hostname_of_the_camera() -> None:
     """Verify that set_hostname_of_the_camera sends POST /rw/vision."""
@@ -183,6 +193,7 @@ async def test_set_hostname_of_the_camera() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_camera_to_be_dhcp_client() -> None:
@@ -197,6 +208,7 @@ async def test_set_camera_to_be_dhcp_client() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_dns_settings() -> None:
     """Verify that set_camera_dns_settings sends POST /rw/vision."""
@@ -209,6 +221,7 @@ async def test_set_camera_dns_settings() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_camera_status() -> None:
@@ -223,6 +236,7 @@ async def test_get_camera_status() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_camera_info_using_index_of_the() -> None:
     """Verify that get_camera_info_using_index_of_the sends GET /rw/vision."""
@@ -235,6 +249,7 @@ async def test_get_camera_info_using_index_of_the() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_camera_name() -> None:
@@ -249,6 +264,7 @@ async def test_set_camera_name() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_user_credentials() -> None:
     """Verify that set_camera_user_credentials sends POST /rw/vision."""
@@ -262,6 +278,7 @@ async def test_set_camera_user_credentials() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_ip_settings() -> None:
     """Verify that set_camera_ip_settings sends POST /rw/vision."""
@@ -274,6 +291,7 @@ async def test_set_camera_ip_settings() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_iv_camera_info() -> None:

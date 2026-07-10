@@ -23,19 +23,19 @@ pytest-cov    = ">=7.1.0,<8"
 
 # ── Feature : dev ─────────────────────────────────────────────────────────
 [feature.dev.pypi-dependencies]
-pytest          = ">=8.0,<9.0"
-pytest-asyncio  = ">=0.23,<1.0"
-anyio           = ">=4.0"
-ruff            = ">=0.4,<1.0"
+pytest         = ">=8.0,<9.0"
+pytest-asyncio = ">=0.24,<1.0"    # ← 0.24 minimum obligatoire
+anyio          = ">=4.0"
+ruff           = ">=0.4,<1.0"
 mkdocs          = ">=1.6,<2.0"
 mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 
 [feature.dev.tasks]
-lint    = "ruff check abb_rws_client tests contrib"
-format  = "ruff format abb_rws_client tests contrib"
-test    = "pytest tests/ -v"
-fix-init = "python contrib/fix_init.py"
+lint       = "ruff check abb_rws_client tests"
+format     = "ruff format abb_rws_client tests"
+test       = { cmd = "python -m pytest tests/ -v", env = {} }
+fix-init   = "python contrib/fix_init.py"
 docs       = "python contrib/docs/run_docs.py"
 docs-build = "python -m mkdocs build"
 
@@ -45,4 +45,4 @@ requests       = ">=2.32,<3.0"
 beautifulsoup4 = ">=4.12,<5.0"
 
 [feature.scraping.tasks]
-scrape = "python contrib/scraping/scrape.py"
+scrape = "python contrib/scraping/scrape.py"    # ← chemin corrigé

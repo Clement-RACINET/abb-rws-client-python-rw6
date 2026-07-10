@@ -2,24 +2,25 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/rapid/execution."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.rapid.execution import (
-    get_rapid_execution_state,
     get_rapid_execution_actions,
-    start_rapid_execution,
-    stop_rapid_execution,
-    start_rapid_execution_from_production_entry,
+    get_rapid_execution_state,
     reset_rapid_program_pointer_to_main,
+    set_hold_to_run_cmd,
     set_number_of_execution_cycles,
+    start_rapid_execution,
+    start_rapid_execution_from_production_entry,
+    stop_rapid_execution,
+    subscribe_on_hold_to_run,
     subscribe_rapid_execution,
     subscribe_rapid_execution_cycle,
-    subscribe_on_hold_to_run,
-    set_hold_to_run_cmd,
 )
 
 
@@ -60,6 +61,7 @@ async def test_get_rapid_execution_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_execution_actions() -> None:
     """Verify that get_rapid_execution_actions sends GET /rw/rapid/execution."""
@@ -72,6 +74,7 @@ async def test_get_rapid_execution_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_start_rapid_execution() -> None:
@@ -86,6 +89,7 @@ async def test_start_rapid_execution() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_stop_rapid_execution() -> None:
     """Verify that stop_rapid_execution sends POST /rw/rapid/execution."""
@@ -98,6 +102,7 @@ async def test_stop_rapid_execution() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_start_rapid_execution_from_production_entry() -> None:
@@ -112,6 +117,7 @@ async def test_start_rapid_execution_from_production_entry() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_reset_rapid_program_pointer_to_main() -> None:
     """Verify that reset_rapid_program_pointer_to_main sends POST /rw/rapid/execution."""
@@ -124,6 +130,7 @@ async def test_reset_rapid_program_pointer_to_main() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_number_of_execution_cycles() -> None:
@@ -138,6 +145,7 @@ async def test_set_number_of_execution_cycles() -> None:
     assert transport.last_request.url.path == "/rw/rapid/execution"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_rapid_execution() -> None:
     """Verify that subscribe_rapid_execution sends POST /subscription."""
@@ -150,6 +158,7 @@ async def test_subscribe_rapid_execution() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_rapid_execution_cycle() -> None:
@@ -164,6 +173,7 @@ async def test_subscribe_rapid_execution_cycle() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_hold_to_run() -> None:
     """Verify that subscribe_on_hold_to_run sends POST /subscription."""
@@ -176,6 +186,7 @@ async def test_subscribe_on_hold_to_run() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_set_hold_to_run_cmd() -> None:

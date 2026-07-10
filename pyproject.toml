@@ -30,8 +30,18 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/<ton-org>/abb-rws6-python-client"
-Issues     = "https://github.com/<ton-org>/abb-rws6-python-client/issues"
+Repository = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6"
+Issues     = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6/issues"
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "pytest-asyncio>=0.24,<1.0",
+    "anyio[trio]>=4.0",
+    "pytest-cov>=7.1.0,<8",
+    "ruff>=0.4,<1.0",
+]
 
 # ---------------------------------------------------------------------------
 # Hatchling — découverte du package
@@ -77,6 +87,7 @@ indent-style = "space"
 # ---------------------------------------------------------------------------
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function" 
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
@@ -96,10 +107,7 @@ addopts = [
 # ---------------------------------------------------------------------------
 [tool.coverage.run]
 source  = ["abb_rws_client"]
-include = [
-    "abb_rws_client/_core/*.py",
-    "abb_rws_client/rws/**/*.py",
-]
+branch = true
 omit = [
     ".pixi/*",
     "tests/*",

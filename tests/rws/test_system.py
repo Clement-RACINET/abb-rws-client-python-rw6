@@ -2,23 +2,24 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/system."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.system import (
-    get_system_information,
+    get_installed_products,
     get_robot_type,
-    get_system_options,
+    get_system_energy,
     get_system_energy_actions,
     get_system_energy_info_change_count,
-    reset_accumulated_energy,
-    get_system_energy,
-    subscribe_on_system_energy_changes,
+    get_system_information,
+    get_system_options,
     get_system_robotware_license,
-    get_installed_products,
+    reset_accumulated_energy,
+    subscribe_on_system_energy_changes,
 )
 
 
@@ -59,6 +60,7 @@ async def test_get_system_information() -> None:
     assert transport.last_request.url.path == "/rw/system"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_robot_type() -> None:
     """Verify that get_robot_type sends GET /rw/system/robottype."""
@@ -71,6 +73,7 @@ async def test_get_robot_type() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/robottype"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_system_options() -> None:
@@ -85,6 +88,7 @@ async def test_get_system_options() -> None:
     assert transport.last_request.url.path == "/rw/system/options"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_system_energy_actions() -> None:
     """Verify that get_system_energy_actions sends GET /rw/system/energy."""
@@ -97,6 +101,7 @@ async def test_get_system_energy_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_system_energy_info_change_count() -> None:
@@ -111,6 +116,7 @@ async def test_get_system_energy_info_change_count() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_reset_accumulated_energy() -> None:
     """Verify that reset_accumulated_energy sends POST /rw/system/energy."""
@@ -123,6 +129,7 @@ async def test_reset_accumulated_energy() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_system_energy() -> None:
@@ -137,6 +144,7 @@ async def test_get_system_energy() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_system_energy_changes() -> None:
     """Verify that subscribe_on_system_energy_changes sends POST /subscription."""
@@ -150,6 +158,7 @@ async def test_subscribe_on_system_energy_changes() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_system_robotware_license() -> None:
     """Verify that get_system_robotware_license sends GET /rw/system/license."""
@@ -162,6 +171,7 @@ async def test_get_system_robotware_license() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/license"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_installed_products() -> None:

@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID executi
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,7 +42,11 @@ async def get_rapid_execution_state(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/rapid/execution"
     """
-    return await client.get("/rw/rapid/execution", params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/execution",
+        params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
+    )
+
 
 async def get_rapid_execution_actions(
     client: RWSClient,
@@ -69,7 +74,10 @@ async def get_rapid_execution_actions(
     Example:
         # curl --digest -u "Default User":robotics" "
     """
-    return await client.get("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def start_rapid_execution(
     client: RWSClient,
@@ -109,7 +117,23 @@ async def start_rapid_execution(
     Example:
         # curl --digest -u "Default User":robotics -d "regain=continue&execmode=continue&cycle=forever&condition=none&stopatbp=dis
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"regain": regain, "execmode": execmode, "cycle": cycle, "condition": condition, "stopatbp": stopatbp, "alltaskbytsp": alltaskbytsp}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={
+            k: v
+            for k, v in {
+                "regain": regain,
+                "execmode": execmode,
+                "cycle": cycle,
+                "condition": condition,
+                "stopatbp": stopatbp,
+                "alltaskbytsp": alltaskbytsp,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def stop_rapid_execution(
     client: RWSClient,
@@ -141,7 +165,12 @@ async def stop_rapid_execution(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=stop"
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"stopmode": stopmode, "usetsp": usetsp}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"stopmode": stopmode, "usetsp": usetsp}.items() if v is not None},
+    )
+
 
 async def start_rapid_execution_from_production_entry(
     client: RWSClient,
@@ -169,7 +198,10 @@ async def start_rapid_execution_from_production_entry(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=startprodentry"
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def reset_rapid_program_pointer_to_main(
     client: RWSClient,
@@ -197,7 +229,10 @@ async def reset_rapid_program_pointer_to_main(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=resetpp"
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_number_of_execution_cycles(
     client: RWSClient,
@@ -227,7 +262,12 @@ async def set_number_of_execution_cycles(
     Example:
         # curl --digest -u "Default User":robotics -d "cycle=once" -X POST "http://localhost/rw/rapid/execution?action=setcycle"
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"cycle": cycle}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"cycle": cycle}.items() if v is not None},
+    )
+
 
 async def subscribe_rapid_execution(
     client: RWSClient,
@@ -259,7 +299,19 @@ async def subscribe_rapid_execution(
     Example:
         # Subscribe on RAPID execution state
     """
-    return await client.post("/subscription", data={k: v for k, v in {"resources": resources, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {
+                "resources": resources,
+                "identifier": identifier,
+                "identifier_p": identifier_p,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_rapid_execution_cycle(
     client: RWSClient,
@@ -291,7 +343,19 @@ async def subscribe_rapid_execution_cycle(
     Example:
         # Subscribe on RAPID execution cycle
     """
-    return await client.post("/subscription", data={k: v for k, v in {"resources": resources, "identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {
+                "resources": resources,
+                "identifier": identifier,
+                "identifier_p": identifier_p,
+            }.items()
+            if v is not None
+        },
+    )
+
 
 async def subscribe_on_hold_to_run(
     client: RWSClient,
@@ -321,7 +385,15 @@ async def subscribe_on_hold_to_run(
     Example:
         # Subscribe on RAPID hold to run
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def set_hold_to_run_cmd(
     client: RWSClient,
@@ -351,4 +423,8 @@ async def set_hold_to_run_cmd(
     Example:
         # curl --digest -u "Default User":robotics -X POST -d "state={press | held | release}" "http://localhost/rw/rapid/executio
     """
-    return await client.post("/rw/rapid/execution", params={k: v for k, v in {"action": action}.items() if v is not None}, data={k: v for k, v in {"state": state}.items() if v is not None})
+    return await client.post(
+        "/rw/rapid/execution",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={k: v for k, v in {"state": state}.items() if v is not None},
+    )

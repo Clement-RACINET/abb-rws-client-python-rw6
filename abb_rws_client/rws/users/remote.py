@@ -8,6 +8,7 @@ RWS module: User Service → Operations on Remote User → Get remote user actio
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,7 +42,10 @@ async def get_remote_user_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/users/remoteuser?action=show"
     """
-    return await client.get("/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_remote_user_logon_request(
     client: RWSClient,
@@ -69,7 +73,10 @@ async def post_remote_user_logon_request(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogin"
     """
-    return await client.post("/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def post_remote_user_logout_request(
     client: RWSClient,
@@ -97,7 +104,10 @@ async def post_remote_user_logout_request(
     Example:
         # curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogout"
     """
-    return await client.post("/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/users/remoteuser", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def subscribe_on_remote_user_state(
     client: RWSClient,
@@ -127,4 +137,11 @@ async def subscribe_on_remote_user_state(
     Example:
         # only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )

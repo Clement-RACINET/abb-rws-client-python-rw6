@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Devices service → Devices tree information
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,4 +42,6 @@ async def get_devices_tree_information(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/rw/devices"
     """
-    return await client.get("/rw/devices", params={k: v for k, v in {"lang": lang}.items() if v is not None})
+    return await client.get(
+        "/rw/devices", params={k: v for k, v in {"lang": lang}.items() if v is not None}
+    )

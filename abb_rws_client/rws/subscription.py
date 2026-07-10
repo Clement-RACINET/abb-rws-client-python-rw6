@@ -8,6 +8,7 @@ RWS module: Subscription Service → Get Subscription Actions
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,7 +42,10 @@ async def get_subscription_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/subscription?action=show"
     """
-    return await client.get("/subscription", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/subscription", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def subscribe_on_resources(
     client: RWSClient,
@@ -71,7 +75,15 @@ async def subscribe_on_resources(
     Example:
         # Low Priority subscription
     """
-    return await client.post("/subscription", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.post(
+        "/subscription",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def get_subscription_group_actions(
     client: RWSClient,
@@ -101,7 +113,11 @@ async def get_subscription_group_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/subscription/1?action=show"
     """
-    return await client.get(f"/subscription/{group_id}", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        f"/subscription/{group_id}",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def add_new_resources_remove_existing_resources_or(
     client: RWSClient,
@@ -133,7 +149,15 @@ async def add_new_resources_remove_existing_resources_or(
     Example:
         # Update resources in Subscription group.
     """
-    return await client.put(f"/subscripion/{group_id}", data={k: v for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items() if v is not None})
+    return await client.put(
+        f"/subscripion/{group_id}",
+        data={
+            k: v
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            if v is not None
+        },
+    )
+
 
 async def unsubscribe_or_remove_the_subscription_group_resources(
     client: RWSClient,
@@ -162,6 +186,7 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
         # Unsubscribe or remove subscription group.
     """
     return await client.delete(f"/subscripion/{group_id}")
+
 
 async def unsubscribe_or_remove_the_resource_from_subscription(
     client: RWSClient,

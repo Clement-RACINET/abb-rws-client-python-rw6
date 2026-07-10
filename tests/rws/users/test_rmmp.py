@@ -2,20 +2,21 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/users/rmmp."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.users.rmmp import (
-    get_rmmp_state,
-    get_rmmp_actions,
-    request_rmmp,
-    grant_or_deny_an_rmmp_request,
     cancel_held_or_requested_rmmp,
-    subscribe_on_rmmp_request_event,
+    get_rmmp_actions,
+    get_rmmp_state,
+    grant_or_deny_an_rmmp_request,
     poll_for_rmmp_grant_status,
+    request_rmmp,
+    subscribe_on_rmmp_request_event,
 )
 
 
@@ -56,6 +57,7 @@ async def test_get_rmmp_state() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rmmp_actions() -> None:
     """Verify that get_rmmp_actions sends GET /users/rmmp."""
@@ -68,6 +70,7 @@ async def test_get_rmmp_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_request_rmmp() -> None:
@@ -82,6 +85,7 @@ async def test_request_rmmp() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_grant_or_deny_an_rmmp_request() -> None:
     """Verify that grant_or_deny_an_rmmp_request sends POST /users/rmmp."""
@@ -94,6 +98,7 @@ async def test_grant_or_deny_an_rmmp_request() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_cancel_held_or_requested_rmmp() -> None:
@@ -108,6 +113,7 @@ async def test_cancel_held_or_requested_rmmp() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_rmmp_request_event() -> None:
     """Verify that subscribe_on_rmmp_request_event sends POST /subscription."""
@@ -120,6 +126,7 @@ async def test_subscribe_on_rmmp_request_event() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_poll_for_rmmp_grant_status() -> None:

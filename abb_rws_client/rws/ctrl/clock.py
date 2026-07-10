@@ -8,6 +8,7 @@ RWS module: Controller Service → Operations on Clock Resource → Get Clock Re
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -39,6 +40,7 @@ async def get_clock_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/clock")
 
+
 async def get_clock_actions(
     client: RWSClient,
     action: str | None = None,
@@ -65,7 +67,10 @@ async def get_clock_actions(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock?action=show"
     """
-    return await client.get("/ctrl/clock", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.get(
+        "/ctrl/clock", params={k: v for k, v in {"action": action}.items() if v is not None}
+    )
+
 
 async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
     """
@@ -91,6 +96,7 @@ async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
     """
     return await client.put("/ctrl/clock")
 
+
 async def get_timezone_resource(client: RWSClient) -> httpx.Response:
     """
     Get timezone resource.
@@ -114,6 +120,7 @@ async def get_timezone_resource(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone"
     """
     return await client.get("/ctrl/clock/timezone")
+
 
 async def get_timezone_actions(client: RWSClient) -> httpx.Response:
     """
@@ -139,6 +146,7 @@ async def get_timezone_actions(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/clock/timezone", params={"action": "show"})
 
+
 async def set_the_time_zone(client: RWSClient) -> httpx.Response:
     """
     Set the time zone.
@@ -162,6 +170,7 @@ async def set_the_time_zone(client: RWSClient) -> httpx.Response:
         # Set the time zone
     """
     return await client.post("/ctrl/clock/timezone")
+
 
 async def get_time_server_resource(client: RWSClient) -> httpx.Response:
     """
@@ -187,6 +196,7 @@ async def get_time_server_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/clock/timeserver")
 
+
 async def get_time_server_actions(client: RWSClient) -> httpx.Response:
     """
     Get time server actions.
@@ -210,6 +220,7 @@ async def get_time_server_actions(client: RWSClient) -> httpx.Response:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?action=show"
     """
     return await client.get("/ctrl/clock/timeserver", params={"action": "show"})
+
 
 async def set_the_time_server(
     client: RWSClient,
@@ -237,7 +248,11 @@ async def set_the_time_server(
     Example:
         # Set the time zone
     """
-    return await client.post("/ctrl/clock/timeserver", params={k: v for k, v in {"action": action}.items() if v is not None})
+    return await client.post(
+        "/ctrl/clock/timeserver",
+        params={k: v for k, v in {"action": action}.items() if v is not None},
+    )
+
 
 async def get_test_time_server(
     client: RWSClient,
@@ -267,4 +282,9 @@ async def get_test_time_server(
     Example:
         # curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?resource=servertime&server-ip=129.6.15.
     """
-    return await client.get("/ctrl/clock/timeserver", params={k: v for k, v in {"resource": resource, "server_ip": server_ip}.items() if v is not None})
+    return await client.get(
+        "/ctrl/clock/timeserver",
+        params={
+            k: v for k, v in {"resource": resource, "server_ip": server_ip}.items() if v is not None
+        },
+    )

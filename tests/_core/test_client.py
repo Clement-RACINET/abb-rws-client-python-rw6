@@ -24,11 +24,11 @@ from abb_rws_client._core.client import (
     _RETRY_BASE_DELAY,
     _RETRY_JITTER,
     _RETRY_MAX_ATTEMPTS,
+    RWSClient,
+    RWSClientSync,
     _build_auth,
     _raise_for_status,
     _retry_delay,
-    RWSClient,
-    RWSClientSync,
 )
 from abb_rws_client._core.exceptions import (
     RWSAuthenticationError,
@@ -37,7 +37,6 @@ from abb_rws_client._core.exceptions import (
     RWSNotFoundError,
     RWSTimeoutError,
 )
-
 
 # ---------------------------------------------------------------------------
 # Mock helpers — async
@@ -390,9 +389,7 @@ class TestHttpMethods:
 
     async def test_put_sends_form_data(self) -> None:
         """put() must send the correct HTTP method and form-encoded body."""
-        transport = _RouteTransport(
-            {"rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR": _resp(204)}
-        )
+        transport = _RouteTransport({"rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR": _resp(204)})
         client = await _open_client(transport)
         await client.put(
             "rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR",
@@ -467,10 +464,12 @@ class TestStatusCodeValidation:
 class TestRetryPolicy:
     async def test_retry_on_connect_error(self) -> None:
         """ConnectError triggers a retry — success on the second attempt."""
-        transport = _SequentialTransport([
-            httpx.ConnectError("connection refused"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.ConnectError("connection refused"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200
@@ -478,29 +477,31 @@ class TestRetryPolicy:
 
     async def test_retry_on_read_timeout(self) -> None:
         """ReadTimeout triggers a retry — success on the second attempt."""
-        transport = _SequentialTransport([
-            httpx.ReadTimeout("read timeout"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.ReadTimeout("read timeout"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200
 
     async def test_retry_on_pool_timeout(self) -> None:
         """PoolTimeout triggers a retry — success on the second attempt."""
-        transport = _SequentialTransport([
-            httpx.PoolTimeout("pool timeout"),
-            _resp(200),
-        ])
+        transport = _SequentialTransport(
+            [
+                httpx.PoolTimeout("pool timeout"),
+                _resp(200),
+            ]
+        )
         client = await _open_client(transport)
         response = await client.get("rw/test")
         assert response.status_code == 200
 
     async def test_retry_exhausted_connect_error_raises_connection_error(self) -> None:
         """ConnectError on every attempt must raise RWSConnectionError."""
-        transport = _SequentialTransport(
-            [httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialTransport([httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS)
         client = await _open_client(transport)
         with pytest.raises(RWSConnectionError):
             await client.get("rw/test")
@@ -508,18 +509,14 @@ class TestRetryPolicy:
 
     async def test_retry_exhausted_read_timeout_raises_timeout_error(self) -> None:
         """ReadTimeout on every attempt must raise RWSTimeoutError."""
-        transport = _SequentialTransport(
-            [httpx.ReadTimeout("timeout")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialTransport([httpx.ReadTimeout("timeout")] * _RETRY_MAX_ATTEMPTS)
         client = await _open_client(transport)
         with pytest.raises(RWSTimeoutError):
             await client.get("rw/test")
 
     async def test_retry_exhausted_pool_timeout_raises_timeout_error(self) -> None:
         """PoolTimeout on every attempt must raise RWSTimeoutError."""
-        transport = _SequentialTransport(
-            [httpx.PoolTimeout("pool")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialTransport([httpx.PoolTimeout("pool")] * _RETRY_MAX_ATTEMPTS)
         client = await _open_client(transport)
         with pytest.raises(RWSTimeoutError):
             await client.get("rw/test")
@@ -534,9 +531,7 @@ class TestRetryPolicy:
 
     async def test_exact_retry_count(self) -> None:
         """Total attempt count must equal _RETRY_MAX_ATTEMPTS exactly."""
-        transport = _SequentialTransport(
-            [httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialTransport([httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS)
         client = await _open_client(transport)
         with pytest.raises(RWSConnectionError):
             await client.get("rw/test")
@@ -611,9 +606,7 @@ class TestRWSClientSyncHttpMethods:
 
     def test_put_sends_form_data(self) -> None:
         """put() must send the correct HTTP method and form-encoded body."""
-        transport = _RouteSyncTransport(
-            {"rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR": _resp(204)}
-        )
+        transport = _RouteSyncTransport({"rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR": _resp(204)})
         client = _open_sync_client(transport)
         client.put(
             "rw/rapid/symbol/data/RAPID/T_ROB1/MOD/VAR",
@@ -673,10 +666,12 @@ class TestRWSClientSyncStatusCodes:
 class TestRWSClientSyncRetryPolicy:
     def test_retry_on_connect_error(self) -> None:
         """ConnectError triggers a retry — success on the second attempt."""
-        transport = _SequentialSyncTransport([
-            httpx.ConnectError("refused"),
-            _resp(200),
-        ])
+        transport = _SequentialSyncTransport(
+            [
+                httpx.ConnectError("refused"),
+                _resp(200),
+            ]
+        )
         client = _open_sync_client(transport)
         response = client.get("rw/test")
         assert response.status_code == 200
@@ -684,29 +679,31 @@ class TestRWSClientSyncRetryPolicy:
 
     def test_retry_on_read_timeout(self) -> None:
         """ReadTimeout triggers a retry — success on the second attempt."""
-        transport = _SequentialSyncTransport([
-            httpx.ReadTimeout("timeout"),
-            _resp(200),
-        ])
+        transport = _SequentialSyncTransport(
+            [
+                httpx.ReadTimeout("timeout"),
+                _resp(200),
+            ]
+        )
         client = _open_sync_client(transport)
         response = client.get("rw/test")
         assert response.status_code == 200
 
     def test_retry_on_pool_timeout(self) -> None:
         """PoolTimeout triggers a retry — success on the second attempt."""
-        transport = _SequentialSyncTransport([
-            httpx.PoolTimeout("pool"),
-            _resp(200),
-        ])
+        transport = _SequentialSyncTransport(
+            [
+                httpx.PoolTimeout("pool"),
+                _resp(200),
+            ]
+        )
         client = _open_sync_client(transport)
         response = client.get("rw/test")
         assert response.status_code == 200
 
     def test_retry_exhausted_connect_error_raises_connection_error(self) -> None:
         """ConnectError on every attempt must raise RWSConnectionError."""
-        transport = _SequentialSyncTransport(
-            [httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialSyncTransport([httpx.ConnectError("refused")] * _RETRY_MAX_ATTEMPTS)
         client = _open_sync_client(transport)
         with pytest.raises(RWSConnectionError):
             client.get("rw/test")
@@ -714,9 +711,7 @@ class TestRWSClientSyncRetryPolicy:
 
     def test_retry_exhausted_timeout_raises_timeout_error(self) -> None:
         """ReadTimeout on every attempt must raise RWSTimeoutError."""
-        transport = _SequentialSyncTransport(
-            [httpx.ReadTimeout("timeout")] * _RETRY_MAX_ATTEMPTS
-        )
+        transport = _SequentialSyncTransport([httpx.ReadTimeout("timeout")] * _RETRY_MAX_ATTEMPTS)
         client = _open_sync_client(transport)
         with pytest.raises(RWSTimeoutError):
             client.get("rw/test")

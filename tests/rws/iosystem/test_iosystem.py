@@ -2,36 +2,37 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clément RACINET
 """Auto-generated unit tests for rws/iosystem/iosystem."""
+
 from __future__ import annotations
 
-import pytest
 import httpx
+import pytest
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client.rws.iosystem.iosystem import (
-    get_io_system_resources,
-    get_io_network,
-    get_io_network_actions,
-    update_io_network,
-    subscribe_io_network,
-    get_io_network_configuration_properties,
-    update_io_network_configuration_type,
+    get_an_io_signal,
+    get_eio_device_status_information,
     get_io_device,
     get_io_device_actions,
-    update_io_device,
-    subscribe_io_device,
+    get_io_device_configuration_properties,
+    get_io_network,
+    get_io_network_actions,
+    get_io_network_configuration_properties,
+    get_io_signal_actions,
+    get_io_signal_configuration_properties,
+    get_io_system_resources,
+    options_send_device_command_actions,
+    post_send_device_command,
     set_input_data,
     set_output_data,
-    get_io_device_configuration_properties,
-    get_eio_device_status_information,
-    post_send_device_command,
-    options_send_device_command_actions,
-    get_an_io_signal,
-    get_io_signal_actions,
+    subscribe_io_device,
+    subscribe_io_network,
+    subscribe_io_signal,
+    update_io_device,
+    update_io_network,
+    update_io_network_configuration_type,
     update_io_signal_state,
     update_io_signal_value,
-    subscribe_io_signal,
-    get_io_signal_configuration_properties,
 )
 
 
@@ -72,6 +73,7 @@ async def test_get_io_system_resources() -> None:
     assert transport.last_request.url.path == "/rw/iosystem"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_io_network() -> None:
     """Verify that get_io_network sends GET /rw/iosystem/networks/{network}."""
@@ -84,6 +86,7 @@ async def test_get_io_network() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_io_network_actions() -> None:
@@ -98,6 +101,7 @@ async def test_get_io_network_actions() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_update_io_network() -> None:
     """Verify that update_io_network sends POST /rw/iosystem/networks/{network}."""
@@ -110,6 +114,7 @@ async def test_update_io_network() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_io_network() -> None:
@@ -124,6 +129,7 @@ async def test_subscribe_io_network() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_io_network_configuration_properties() -> None:
     """Verify that get_io_network_configuration_properties sends GET /rw/iosystem/networks/{network}."""
@@ -136,6 +142,7 @@ async def test_get_io_network_configuration_properties() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_network_configuration_type() -> None:
@@ -150,6 +157,7 @@ async def test_update_io_network_configuration_type() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_io_device() -> None:
     """Verify that get_io_device sends GET /rw/iosystem/devices/{device}."""
@@ -162,6 +170,7 @@ async def test_get_io_device() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_io_device_actions() -> None:
@@ -176,6 +185,7 @@ async def test_get_io_device_actions() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_update_io_device() -> None:
     """Verify that update_io_device sends POST /rw/iosystem/devices/{device}."""
@@ -188,6 +198,7 @@ async def test_update_io_device() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_io_device() -> None:
@@ -202,6 +213,7 @@ async def test_subscribe_io_device() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_set_input_data() -> None:
     """Verify that set_input_data sends POST /rw/iosystem/devices/{device}."""
@@ -214,6 +226,7 @@ async def test_set_input_data() -> None:
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_output_data() -> None:
@@ -228,6 +241,7 @@ async def test_set_output_data() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_io_device_configuration_properties() -> None:
     """Verify that get_io_device_configuration_properties sends GET /rw/iosystem/devices/{device}."""
@@ -241,6 +255,7 @@ async def test_get_io_device_configuration_properties() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_eio_device_status_information() -> None:
     """Verify that get_eio_device_status_information sends GET /rw/iosystem/devices/{network}/{device}/upgradeinfo."""
@@ -251,8 +266,12 @@ async def test_get_eio_device_status_information() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/devices/network_test/device_test/upgradeinfo"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/devices/network_test/device_test/upgradeinfo"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_send_device_command() -> None:
@@ -267,6 +286,7 @@ async def test_post_send_device_command() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test/command"
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_options_send_device_command_actions() -> None:
     """Verify that options_send_device_command_actions sends OPTIONS /rw/iosystem/devices/{device}/command."""
@@ -280,6 +300,7 @@ async def test_options_send_device_command_actions() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test/command"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_an_io_signal() -> None:
     """Verify that get_an_io_signal sends GET /rw/iosystem/signals/{network}/{unit}/{signal}."""
@@ -290,8 +311,11 @@ async def test_get_an_io_signal() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    assert (
+        transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_io_signal_actions() -> None:
@@ -303,8 +327,11 @@ async def test_get_io_signal_actions() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    assert (
+        transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    )
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_signal_state() -> None:
@@ -316,8 +343,12 @@ async def test_update_io_signal_state() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    )
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_update_io_signal_value() -> None:
@@ -329,8 +360,12 @@ async def test_update_io_signal_value() -> None:
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
-    assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    assert (
+        transport.last_request.url.path
+        == "/rw/iosystem/signals/network_test/device_test/signal_test"
+    )
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_io_signal() -> None:
@@ -345,15 +380,20 @@ async def test_subscribe_io_signal() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_io_signal_configuration_properties() -> None:
     """Verify that get_io_signal_configuration_properties sends GET /rw/iosystem/signals/{network}/{unit}/{signal}."""
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await get_io_signal_configuration_properties(client, "network_test", "unit_test", "signal_test")
+    resp = await get_io_signal_configuration_properties(
+        client, "network_test", "unit_test", "signal_test"
+    )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
-    assert transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    assert (
+        transport.last_request.url.path == "/rw/iosystem/signals/network_test/unit_test/signal_test"
+    )
     assert resp.status_code == 200
