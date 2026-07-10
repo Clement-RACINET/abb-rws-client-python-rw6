@@ -66,6 +66,7 @@ abb_rws_client_python_rw6
 │   │   ├── routes_list.json
 │   │   ├── scrape.log
 │   │   └── scrape.py
+│   ├── clean_cache.py
 │   ├── export_structure.py
 │   ├── fix_init.py
 │   ├── README.fr.md
@@ -125,8 +126,6 @@ abb_rws_client_python_rw6
 │   │   ├── test_system.py
 │   │   └── test_vision.py
 │   └── __init__.py
-├── .env.example
-├── .gitignore
 ├── CONTEXT.md
 ├── mkdocs.yml
 ├── objectifs.md

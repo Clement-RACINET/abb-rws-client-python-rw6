@@ -2,9 +2,6 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-# ---------------------------------------------------------------------------
-# Métadonnées du package (PEP 621)
-# ---------------------------------------------------------------------------
 [project]
 name = "abb-rws6-python-client"
 version = "0.1.0"
@@ -24,6 +21,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 
+# ← Strictement runtime : ce que pip installe pour l'utilisateur final
 dependencies = [
     "httpx>=0.27,<1.0",
     "python-dotenv>=1.0,<2.0",
@@ -33,47 +31,34 @@ dependencies = [
 Repository = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6"
 Issues     = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6/issues"
 
-
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0,<9.0",
     "pytest-asyncio>=0.24,<1.0",
-    "anyio[trio]>=4.0",
+    "anyio>=4.0",
     "pytest-cov>=7.1.0,<8",
     "ruff>=0.4,<1.0",
 ]
+scraping = [
+    "requests>=2.32,<3.0",
+    "beautifulsoup4>=4.12,<5.0",
+]
 
-# ---------------------------------------------------------------------------
-# Hatchling — découverte du package
-# ---------------------------------------------------------------------------
+# ── Hatchling ──────────────────────────────────────────────────────────────
 [tool.hatch.build.targets.wheel]
 packages = ["abb_rws_client"]
 
-# ---------------------------------------------------------------------------
-# Ruff — linting & formatting
-# ---------------------------------------------------------------------------
+# ── Ruff ───────────────────────────────────────────────────────────────────
 [tool.ruff]
 target-version = "py311"
 line-length = 100
 
 [tool.ruff.lint]
-select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes
-    "I",   # isort
-    "UP",  # pyupgrade
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "SIM", # flake8-simplify
-    "ANN", # annotations (type hints)
-]
-ignore = [  
-
-]
+select = ["E", "W", "F", "I", "UP", "B", "C4", "SIM", "ANN"]
+ignore = []
 
 [tool.ruff.lint.per-file-ignores]
-"abb_rws_client/_core/client.py" = ["ANN401"]  # **kwargs: Any forwarded to httpx
+"abb_rws_client/_core/client.py" = ["ANN401"]
 
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
@@ -83,12 +68,10 @@ known-first-party = ["abb_rws_client"]
 quote-style = "double"
 indent-style = "space"
 
-# ---------------------------------------------------------------------------
-# Pytest
-# ---------------------------------------------------------------------------
+# ── Pytest ─────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-asyncio_default_fixture_loop_scope = "function" 
+asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
@@ -103,19 +86,11 @@ addopts = [
     "--cov-report=xml:tests/coverage.xml",
 ]
 
-# ---------------------------------------------------------------------------
-# Coverage
-# ---------------------------------------------------------------------------
+# ── Coverage ───────────────────────────────────────────────────────────────
 [tool.coverage.run]
-source  = ["abb_rws_client"]
+source = ["abb_rws_client"]
 branch = true
-omit = [
-    ".pixi/*",
-    "tests/*",
-    "contrib/*",
-    "site/*",
-    "docs/*",
-]
+omit = [".pixi/*", "tests/*", "contrib/*", "site/*", "docs/*"]
 
 [tool.coverage.report]
 exclude_lines = [
@@ -129,17 +104,11 @@ skip_covered = false
 
 [tool.coverage.html]
 directory = "docs/coverage"
-# ---------------------------------------------------------------------------
-# basedpyright — type checker VS Code
-# ---------------------------------------------------------------------------
+
+# ── basedpyright ───────────────────────────────────────────────────────────
 [tool.basedpyright]
 pythonVersion = "3.11"
 typeCheckingMode = "standard"
-
-# Règles désactivées intentionnellement :
-# - reportImplicitOverride   : typing.override n'existe qu'en Python 3.12+
-# - reportUnknownMemberType  : faux positifs sur les stubs tiers incomplets (pytest.approx)
-# - reportUnusedCallResult   : pattern légitime dans pytest.raises (assignation à _)
 reportImplicitOverride = "none"
 reportUnknownMemberType = "none"
 reportUnusedCallResult  = "none"

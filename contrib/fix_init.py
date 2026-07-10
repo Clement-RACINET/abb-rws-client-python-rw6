@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # contrib/fix_init.py
-"""Audit and auto-fix all __init__.py files in abb_rws_client/.
+"""Audit and auto-fix all __init__.py files in abb_rws_client/ and tests/.
 
 For each Python package directory (containing .py files or sub-packages):
   - Creates __init__.py if missing.
@@ -8,6 +8,7 @@ For each Python package directory (containing .py files or sub-packages):
   - Rewrites abb_rws_client/rws/__init__.py with explicit sub-package re-exports.
   - Rewrites abb_rws_client/__init__.py with public API exports.
   - Rewrites abb_rws_client/_core/__init__.py with core exports.
+  - Creates minimal __init__.py in tests/ sub-directories (no imports).
 
 Usage:
     pixi run python contrib/fix_init.py
@@ -30,6 +31,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
 PKG_ROOT = REPO_ROOT / "abb_rws_client"
+TESTS_ROOT = REPO_ROOT / "tests"
 
 _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
     "client": ["RWSClient", "RWSClientSync"],
@@ -58,11 +60,13 @@ _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _collect_public_names(py_file: Path) -> list[str]:
     """Parse a .py file with AST and return top-level public names only.
 
-    Only inspects the module's top-level body (no recursion into functions).
-    Handles ImportFrom re-exports in addition to definitions.
+    Only inspects the module's top-level body (no recursion).
+    Excludes imports — only collects definitions (functions, classes,
+    assignments) that are genuinely defined in this module.
 
     Args:
         py_file: Path to the Python source file.
@@ -93,12 +97,7 @@ def _collect_public_names(py_file: Path) -> list[str]:
             case ast.AnnAssign(target=ast.Name(id=n)):
                 if not n.startswith("_"):
                     names.append(n)
-            # ← NOUVEAU : collecte aussi les `from .x import A, B`
-            case ast.ImportFrom(names=aliases):
-                for alias in aliases:
-                    n = alias.asname or alias.name
-                    if n and not n.startswith("_") and n != "*":
-                        names.append(n)
+            # ast.ImportFrom and ast.Import → intentionally ignored
 
     seen: set[str] = set()
     result: list[str] = []
@@ -109,8 +108,57 @@ def _collect_public_names(py_file: Path) -> list[str]:
     return sorted(result)
 
 
+def _format_import(module: str, names: list[str]) -> str:
+    """Format a single from-import statement, wrapping beyond 88 chars.
+
+    Names are sorted alphabetically to satisfy isort (ruff I001).
+
+    Args:
+        module: The module to import from (e.g. '.backup').
+        names: List of names to import (order does not matter).
+
+    Returns:
+        A formatted import string, single-line or parenthesised multi-line.
+    """
+    if not names:
+        return ""
+
+    sorted_names = sorted(names)
+
+    single = f"from {module} import {', '.join(sorted_names)}"
+    if len(single) <= 88:
+        return single
+
+    lines = [f"from {module} import ("]
+    for name in sorted_names:
+        lines.append(f"    {name},")
+    lines.append(")")
+    return "\n".join(lines)
+
+
+def _format_all(names: list[str]) -> str:
+    """Format a deduplicated, sorted list of names for __all__.
+
+    Args:
+        names: Raw list of names (may contain duplicates).
+
+    Returns:
+        Indented string of quoted names with trailing commas,
+        ready to be embedded inside ``__all__ = [\\n    ...\\n]``.
+    """
+    unique = sorted(set(names))
+    if not unique:
+        return ""
+    return "\n    ".join(f'"{n}",' for n in unique)
+
+
 def _write(path: Path, content: str, dry_run: bool) -> None:
     """Write content to path, or print it in dry-run mode.
+
+    Compares existing content before writing to report the actual status:
+    - [NEW]       file did not exist
+    - [UNCHANGED] content is identical, no write performed
+    - [UPDATED]   content changed, file rewritten
 
     Args:
         path: Destination file path.
@@ -118,15 +166,27 @@ def _write(path: Path, content: str, dry_run: bool) -> None:
         dry_run: If True, only print; do not write.
     """
     rel = path.relative_to(REPO_ROOT)
+
     if dry_run:
         print(f"\n{'=' * 60}")
         print(f"[DRY-RUN] Would write: {rel}")
         print(f"{'=' * 60}")
         print(content)
+        return
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    if path.exists():
+        existing = path.read_text(encoding="utf-8")
+        if existing == content:
+            print(f"  [UNCHANGED] {rel}")
+            return
+        status = "UPDATED"
     else:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
-        print(f"  [OK] Written: {rel}")
+        status = "NEW"
+
+    path.write_text(content, encoding="utf-8")
+    print(f"  [{status}] {rel}")
 
 
 def _is_package_dir(directory: Path) -> bool:
@@ -153,16 +213,26 @@ def _is_package_dir(directory: Path) -> bool:
     return has_py or has_subpkg
 
 
-def _format_all(names: list[str]) -> str:
-    """Format a list of names as a __all__ block body.
+def _collect_test_dirs(root: Path) -> list[Path]:
+    """Recursively collect all sub-directories of tests/ containing .py files.
+
+    Ignores hidden directories and __pycache__.
 
     Args:
-        names: List of public symbol names.
+        root: Root of the tests/ directory.
 
     Returns:
-        Indented string ready to be inserted inside __all__ = [...].
+        Sorted list of directories that contain at least one .py file.
     """
-    return "\n    ".join(f'"{n}",' for n in sorted(names))
+    result: list[Path] = []
+    for d in sorted(root.rglob("*")):
+        if not d.is_dir():
+            continue
+        if any(part.startswith((".", "__")) for part in d.parts):
+            continue
+        if any(f.suffix == ".py" for f in d.iterdir() if f.is_file()):
+            result.append(d)
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -185,18 +255,18 @@ def _gen_rws_submodule_init(pkg_dir: Path) -> str:
         if f.is_file() and f.suffix == ".py" and f.name != "__init__.py"
     )
 
-    import_lines: list[str] = []
+    import_blocks: list[str] = []
     all_names: list[str] = []
 
     for py_file in py_files:
         names = _collect_public_names(py_file)
         if names:
-            import_lines.append(
-                f"from .{py_file.stem} import {', '.join(names)}"
-            )
+            import_blocks.append(_format_import(f".{py_file.stem}", names))
             all_names.extend(names)
 
-    imports_block = "\n".join(import_lines) if import_lines else "# No public symbols"
+    imports_block = (
+        "\n".join(import_blocks) if import_blocks else "# No public symbols"
+    )
     rel = pkg_dir.relative_to(PKG_ROOT).as_posix()
 
     return f"""\
@@ -219,16 +289,13 @@ __all__ = [
 def _gen_rws_init(rws_dir: Path) -> str:
     """Generate __init__.py for abb_rws_client/rws/.
 
-    Collects public names directly from source .py files in each sub-package
-    (not from the generated __init__.py) to avoid AST re-export ambiguity.
-
     Args:
         rws_dir: Path to abb_rws_client/rws/.
 
     Returns:
         Complete __init__.py content as a string.
     """
-    import_lines: list[str] = []
+    import_blocks: list[str] = []
     all_names: list[str] = []
 
     for sub in sorted(rws_dir.iterdir()):
@@ -247,12 +314,12 @@ def _gen_rws_init(rws_dir: Path) -> str:
         sub_names = sorted(set(sub_names))
 
         if sub_names:
-            import_lines.append(
-                f"from .{sub.name} import {', '.join(sub_names)}"
-            )
+            import_blocks.append(_format_import(f".{sub.name}", sub_names))
             all_names.extend(sub_names)
 
-    imports_block = "\n".join(import_lines) if import_lines else "# No sub-packages"
+    imports_block = (
+        "\n".join(import_blocks) if import_blocks else "# No sub-packages"
+    )
 
     return f"""\
 # abb_rws_client/rws/__init__.py
@@ -277,12 +344,14 @@ def _gen_core_init() -> str:
     Returns:
         Complete __init__.py content as a string.
     """
-    import_lines: list[str] = []
+    import_blocks: list[str] = []
     all_names: list[str] = []
 
     for module, names in _CORE_PUBLIC_EXPORTS.items():
-        import_lines.append(f"from .{module} import {', '.join(names)}")
+        import_blocks.append(_format_import(f".{module}", names))
         all_names.extend(names)
+
+    imports_block = "\n".join(import_blocks)
 
     return f"""\
 # abb_rws_client/_core/__init__.py
@@ -293,7 +362,7 @@ Not part of the public API. Import from ``abb_rws_client`` directly.
 
 from __future__ import annotations
 
-{chr(10).join(import_lines)}
+{imports_block}
 
 __all__ = [
     {_format_all(all_names)}
@@ -307,14 +376,16 @@ def _gen_package_init() -> str:
     Returns:
         Complete __init__.py content as a string.
     """
+    import_blocks: list[str] = []
     all_names: list[str] = []
-    import_lines: list[str] = []
 
     for module, names in _CORE_PUBLIC_EXPORTS.items():
-        import_lines.append(
-            f"from abb_rws_client._core.{module} import {', '.join(names)}"
+        import_blocks.append(
+            _format_import(f"abb_rws_client._core.{module}", names)
         )
         all_names.extend(names)
+
+    imports_block = "\n".join(import_blocks)
 
     return f"""\
 # abb_rws_client/__init__.py
@@ -334,7 +405,7 @@ Example:
 
 from __future__ import annotations
 
-{chr(10).join(import_lines)}
+{imports_block}
 
 __all__ = [
     {_format_all(all_names)}
@@ -344,16 +415,54 @@ __version__ = "0.1.0"
 """
 
 
+def _gen_test_init(directory: Path) -> str:
+    """Generate a minimal __init__.py for a tests/ sub-directory.
+
+    Tests __init__.py files must stay empty of imports to avoid
+    circular dependencies and pytest collection conflicts.
+    They only serve as package markers for relative imports in conftest.
+
+    Args:
+        directory: The test sub-directory.
+
+    Returns:
+        Minimal __init__.py content as a string.
+    """
+    rel = directory.relative_to(REPO_ROOT).as_posix()
+    return f"""\
+# {rel}/__init__.py
+# Package marker — do not add imports here.
+# Auto-generated by contrib/fix_init.py — do not edit manually.
+"""
+
+
 # ---------------------------------------------------------------------------
 # Fix functions
 # ---------------------------------------------------------------------------
 
 
+def fix_package(dry_run: bool) -> None:
+    """Rewrite abb_rws_client/__init__.py.
+
+    Args:
+        dry_run: If True, only print without writing.
+    """
+    print("\n── abb_rws_client/__init__.py ──────────────────────────────")
+    _write(PKG_ROOT / "__init__.py", _gen_package_init(), dry_run)
+
+
+def fix_core(dry_run: bool) -> None:
+    """Rewrite _core/__init__.py.
+
+    Args:
+        dry_run: If True, only print without writing.
+    """
+    print("\n── _core/__init__.py ───────────────────────────────────────")
+    _write(PKG_ROOT / "_core" / "__init__.py", _gen_core_init(), dry_run)
+
+
 def fix_rws(dry_run: bool) -> None:
     """Process all rws/ sub-packages, then rws/__init__.py.
-
-    Sub-package __init__.py files are written first so that
-    _gen_rws_init can read them when building the top-level rws/__init__.py.
 
     Args:
         dry_run: If True, only print without writing.
@@ -371,26 +480,6 @@ def fix_rws(dry_run: bool) -> None:
 
     print("\n── rws/__init__.py ─────────────────────────────────────────")
     _write(rws_dir / "__init__.py", _gen_rws_init(rws_dir), dry_run)
-
-
-def fix_core(dry_run: bool) -> None:
-    """Rewrite _core/__init__.py.
-
-    Args:
-        dry_run: If True, only print without writing.
-    """
-    print("\n── _core/__init__.py ───────────────────────────────────────")
-    _write(PKG_ROOT / "_core" / "__init__.py", _gen_core_init(), dry_run)
-
-
-def fix_package(dry_run: bool) -> None:
-    """Rewrite abb_rws_client/__init__.py.
-
-    Args:
-        dry_run: If True, only print without writing.
-    """
-    print("\n── abb_rws_client/__init__.py ──────────────────────────────")
-    _write(PKG_ROOT / "__init__.py", _gen_package_init(), dry_run)
 
 
 def fix_highlevel(dry_run: bool) -> None:
@@ -417,6 +506,32 @@ def fix_highlevel(dry_run: bool) -> None:
         print(f"  [SKIP] Already exists: {init_path.relative_to(REPO_ROOT)}")
 
 
+def fix_tests(dry_run: bool) -> None:
+    """Create minimal __init__.py markers in all tests/ sub-directories.
+
+    Only processes sub-directories (not tests/ root itself, which pytest
+    manages directly). Skips directories that already have an __init__.py
+    with custom content to avoid overwriting intentional markers.
+
+    Args:
+        dry_run: If True, only print without writing.
+    """
+    if not TESTS_ROOT.exists():
+        print("\n[SKIP] tests/ not found — skipping.")
+        return
+
+    print("\n── tests/ sub-directories ──────────────────────────────────")
+
+    sub_dirs = _collect_test_dirs(TESTS_ROOT)
+
+    if not sub_dirs:
+        print("  [SKIP] No sub-directories with .py files found in tests/.")
+        return
+
+    for directory in sub_dirs:
+        _write(directory / "__init__.py", _gen_test_init(directory), dry_run)
+
+
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
@@ -429,7 +544,10 @@ def main() -> None:
         SystemExit: On argument parsing error.
     """
     parser = argparse.ArgumentParser(
-        description="Audit and fix all __init__.py files in abb_rws_client/.",
+        description=(
+            "Audit and fix all __init__.py files in "
+            "abb_rws_client/ and tests/."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -437,15 +555,27 @@ def main() -> None:
         action="store_true",
         help="Print what would be written without touching the filesystem.",
     )
+    parser.add_argument(
+        "--skip-tests",
+        action="store_true",
+        help="Skip processing of tests/ sub-directories.",
+    )
     args = parser.parse_args()
 
     dry = args.dry_run
-    print("🔍 DRY-RUN mode — no files will be written.\n" if dry else "🔧 Fixing __init__.py files...\n")
+    print(
+        "🔍 DRY-RUN mode — no files will be written.\n"
+        if dry
+        else "🔧 Fixing __init__.py files...\n"
+    )
 
     fix_package(dry)
     fix_core(dry)
     fix_rws(dry)
     fix_highlevel(dry)
+
+    if not args.skip_tests:
+        fix_tests(dry)
 
     print("\n✓ Dry-run complete." if dry else "\n✓ Done.")
 
