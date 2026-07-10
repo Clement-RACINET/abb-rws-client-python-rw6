@@ -177,7 +177,7 @@ def main() -> None:
         OUTPUT_FILE.unlink()
 
     OUTPUT_FILE.write_text("\n".join(tree_lines), encoding="utf-8")
-    print(f"✓ Repository structure exported to: {OUTPUT_FILE}")
+    print(f"Repository structure exported to: {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
