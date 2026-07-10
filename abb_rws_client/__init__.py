@@ -1,2 +1,42 @@
 # abb_rws_client/__init__.py
+"""abb-rws6-python-client — Async Python client for ABB RWS (RobotWare 6).
 
+Public API surface:
+    - RWSClient / RWSClientSync  : HTTP session management
+    - RWSError hierarchy         : typed exceptions
+    - RobTarget / RapidValue     : RAPID type helpers
+    - robtarget_to_rws / rws_to_robtarget : serializers
+
+Example:
+    >>> from abb_rws_client import RWSClient
+    >>> async with RWSClient(host="192.168.125.1") as client:
+    ...     resp = await client.get("/rw/rapid/execution")
+"""
+
+from __future__ import annotations
+
+from abb_rws_client._core.client import RWSClient, RWSClientSync
+from abb_rws_client._core.exceptions import RWSError, RWSConnectionError, RWSTimeoutError, RWSAuthenticationError, RWSHTTPError, RWSNotFoundError, MastershipError, MastershipDenied, MastershipNotHeld, RWSValueError, CTRL_CODES
+from abb_rws_client._core.serializers import RobTarget, RapidValue, robtarget_to_rws, rws_to_robtarget
+
+__all__ = [
+    "CTRL_CODES",
+    "MastershipDenied",
+    "MastershipError",
+    "MastershipNotHeld",
+    "RWSAuthenticationError",
+    "RWSClient",
+    "RWSClientSync",
+    "RWSConnectionError",
+    "RWSError",
+    "RWSHTTPError",
+    "RWSNotFoundError",
+    "RWSTimeoutError",
+    "RWSValueError",
+    "RapidValue",
+    "RobTarget",
+    "robtarget_to_rws",
+    "rws_to_robtarget",
+]
+
+__version__ = "0.1.0"

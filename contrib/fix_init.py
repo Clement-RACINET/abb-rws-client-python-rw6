@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 # contrib/fix_init.py
-"""
-Audit and auto-fix all __init__.py files in abb_rws_client/ and tests/.
+"""Audit and auto-fix all __init__.py files in abb_rws_client/.
 
 For each Python package directory (containing .py files or sub-packages):
   - Creates __init__.py if missing.
   - Rewrites abb_rws_client/rws/*/__init__.py with correct imports + __all__.
+  - Rewrites abb_rws_client/rws/__init__.py with explicit sub-package re-exports.
   - Rewrites abb_rws_client/__init__.py with public API exports.
   - Rewrites abb_rws_client/_core/__init__.py with core exports.
-  - Rewrites tests/__init__.py and tests/rws/**/__init__.py as empty markers.
 
 Usage:
     pixi run python contrib/fix_init.py
@@ -31,9 +30,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
 PKG_ROOT = REPO_ROOT / "abb_rws_client"
-TESTS_ROOT = REPO_ROOT / "tests"
 
-# Modules _core exportés publiquement depuis abb_rws_client/
 _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
     "client": ["RWSClient", "RWSClientSync"],
     "exceptions": [
@@ -49,22 +46,29 @@ _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
         "RWSValueError",
         "CTRL_CODES",
     ],
-    "serializers": ["RobTarget", "RapidValue", "robtarget_to_rws", "rws_to_robtarget"],
+    "serializers": [
+        "RobTarget",
+        "RapidValue",
+        "robtarget_to_rws",
+        "rws_to_robtarget",
+    ],
 }
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
-
 def _collect_public_names(py_file: Path) -> list[str]:
-    """Parse a .py file with AST and return all top-level public names.
+    """Parse a .py file with AST and return top-level public names only.
+
+    Only inspects the module's top-level body (no recursion into functions).
+    Handles ImportFrom re-exports in addition to definitions.
 
     Args:
         py_file: Path to the Python source file.
 
     Returns:
-        Sorted list of public names (no leading underscore).
+        Deduplicated, sorted list of public names (no leading underscore).
     """
     try:
         tree = ast.parse(py_file.read_text(encoding="utf-8"))
@@ -73,7 +77,8 @@ def _collect_public_names(py_file: Path) -> list[str]:
         return []
 
     names: list[str] = []
-    for node in ast.walk(tree):
+
+    for node in tree.body:
         match node:
             case ast.FunctionDef(name=n) | ast.AsyncFunctionDef(name=n):
                 if not n.startswith("_"):
@@ -81,15 +86,20 @@ def _collect_public_names(py_file: Path) -> list[str]:
             case ast.ClassDef(name=n):
                 if not n.startswith("_"):
                     names.append(n)
-            case ast.Assign(targets=targets, value=_):
+            case ast.Assign(targets=targets):
                 for t in targets:
                     if isinstance(t, ast.Name) and not t.id.startswith("_"):
                         names.append(t.id)
             case ast.AnnAssign(target=ast.Name(id=n)):
                 if not n.startswith("_"):
                     names.append(n)
+            # ← NOUVEAU : collecte aussi les `from .x import A, B`
+            case ast.ImportFrom(names=aliases):
+                for alias in aliases:
+                    n = alias.asname or alias.name
+                    if n and not n.startswith("_") and n != "*":
+                        names.append(n)
 
-    # Deduplicate preserving first occurrence order
     seen: set[str] = set()
     result: list[str] = []
     for n in names:
@@ -109,9 +119,9 @@ def _write(path: Path, content: str, dry_run: bool) -> None:
     """
     rel = path.relative_to(REPO_ROOT)
     if dry_run:
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"[DRY-RUN] Would write: {rel}")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         print(content)
     else:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -143,6 +153,18 @@ def _is_package_dir(directory: Path) -> bool:
     return has_py or has_subpkg
 
 
+def _format_all(names: list[str]) -> str:
+    """Format a list of names as a __all__ block body.
+
+    Args:
+        names: List of public symbol names.
+
+    Returns:
+        Indented string ready to be inserted inside __all__ = [...].
+    """
+    return "\n    ".join(f'"{n}",' for n in sorted(names))
+
+
 # ---------------------------------------------------------------------------
 # Generators
 # ---------------------------------------------------------------------------
@@ -151,9 +173,6 @@ def _is_package_dir(directory: Path) -> bool:
 def _gen_rws_submodule_init(pkg_dir: Path) -> str:
     """Generate __init__.py for a rws/ sub-package (e.g. rws/ctrl/).
 
-    Imports all public names from every .py sibling (except __init__.py)
-    and builds __all__.
-
     Args:
         pkg_dir: Path to the sub-package directory.
 
@@ -161,7 +180,8 @@ def _gen_rws_submodule_init(pkg_dir: Path) -> str:
         Complete __init__.py content as a string.
     """
     py_files = sorted(
-        f for f in pkg_dir.iterdir()
+        f
+        for f in pkg_dir.iterdir()
         if f.is_file() and f.suffix == ".py" and f.name != "__init__.py"
     )
 
@@ -169,38 +189,38 @@ def _gen_rws_submodule_init(pkg_dir: Path) -> str:
     all_names: list[str] = []
 
     for py_file in py_files:
-        module_name = py_file.stem
         names = _collect_public_names(py_file)
         if names:
-            names_str = ", ".join(names)
-            import_lines.append(f"from .{module_name} import {names_str}")
+            import_lines.append(
+                f"from .{py_file.stem} import {', '.join(names)}"
+            )
             all_names.extend(names)
 
-    all_list = "\n    ".join(f'"{n}",' for n in sorted(all_names))
     imports_block = "\n".join(import_lines) if import_lines else "# No public symbols"
+    rel = pkg_dir.relative_to(PKG_ROOT).as_posix()
 
-    rel = pkg_dir.relative_to(PKG_ROOT)
-    return f'''\
+    return f"""\
 # abb_rws_client/{rel}/__init__.py
-"""Public re-exports for the {rel} sub-package.
+\"\"\"Public re-exports for the {rel} sub-package.
 
 Auto-generated by contrib/fix_init.py — do not edit manually.
-"""
+\"\"\"
 
 from __future__ import annotations
 
 {imports_block}
 
 __all__ = [
-    {all_list}
+    {_format_all(all_names)}
 ]
-'''
+"""
 
 
 def _gen_rws_init(rws_dir: Path) -> str:
     """Generate __init__.py for abb_rws_client/rws/.
 
-    Re-exports everything from all sub-packages.
+    Collects public names directly from source .py files in each sub-package
+    (not from the generated __init__.py) to avoid AST re-export ambiguity.
 
     Args:
         rws_dir: Path to abb_rws_client/rws/.
@@ -208,26 +228,47 @@ def _gen_rws_init(rws_dir: Path) -> str:
     Returns:
         Complete __init__.py content as a string.
     """
-    sub_pkgs = sorted(
-        d.name for d in rws_dir.iterdir()
-        if d.is_dir() and not d.name.startswith("_") and not d.name.startswith(".")
-    )
+    import_lines: list[str] = []
+    all_names: list[str] = []
 
-    import_lines = [f"from .{pkg} import *  # noqa: F401, F403" for pkg in sub_pkgs]
+    for sub in sorted(rws_dir.iterdir()):
+        if not sub.is_dir() or sub.name.startswith("_") or sub.name.startswith("."):
+            continue
+
+        sub_names: list[str] = []
+        for py_file in sorted(sub.iterdir()):
+            if (
+                py_file.is_file()
+                and py_file.suffix == ".py"
+                and py_file.name != "__init__.py"
+            ):
+                sub_names.extend(_collect_public_names(py_file))
+
+        sub_names = sorted(set(sub_names))
+
+        if sub_names:
+            import_lines.append(
+                f"from .{sub.name} import {', '.join(sub_names)}"
+            )
+            all_names.extend(sub_names)
+
     imports_block = "\n".join(import_lines) if import_lines else "# No sub-packages"
 
-    return f'''\
+    return f"""\
 # abb_rws_client/rws/__init__.py
-"""RWS API mirror — atomic HTTP functions (1 function = 1 endpoint).
+\"\"\"RWS API mirror — atomic HTTP functions (1 function = 1 endpoint).
 
 Auto-generated by contrib/fix_init.py — do not edit manually.
-Sub-packages: {", ".join(sub_pkgs)}
-"""
+\"\"\"
 
 from __future__ import annotations
 
 {imports_block}
-'''
+
+__all__ = [
+    {_format_all(all_names)}
+]
+"""
 
 
 def _gen_core_init() -> str:
@@ -240,28 +281,24 @@ def _gen_core_init() -> str:
     all_names: list[str] = []
 
     for module, names in _CORE_PUBLIC_EXPORTS.items():
-        names_str = ", ".join(names)
-        import_lines.append(f"from .{module} import {names_str}")
+        import_lines.append(f"from .{module} import {', '.join(names)}")
         all_names.extend(names)
 
-    imports_block = "\n".join(import_lines)
-    all_list = "\n    ".join(f'"{n}",' for n in all_names)
-
-    return f'''\
+    return f"""\
 # abb_rws_client/_core/__init__.py
-"""Internal core — session, exceptions, serializers.
+\"\"\"Internal core — session, exceptions, serializers.
 
 Not part of the public API. Import from ``abb_rws_client`` directly.
-"""
+\"\"\"
 
 from __future__ import annotations
 
-{imports_block}
+{chr(10).join(import_lines)}
 
 __all__ = [
-    {all_list}
+    {_format_all(all_names)}
 ]
-'''
+"""
 
 
 def _gen_package_init() -> str:
@@ -270,20 +307,18 @@ def _gen_package_init() -> str:
     Returns:
         Complete __init__.py content as a string.
     """
-    client_names = ", ".join(_CORE_PUBLIC_EXPORTS["client"])
-    exc_names = ", ".join(_CORE_PUBLIC_EXPORTS["exceptions"])
-    ser_names = ", ".join(_CORE_PUBLIC_EXPORTS["serializers"])
+    all_names: list[str] = []
+    import_lines: list[str] = []
 
-    all_names = (
-        _CORE_PUBLIC_EXPORTS["client"]
-        + _CORE_PUBLIC_EXPORTS["exceptions"]
-        + _CORE_PUBLIC_EXPORTS["serializers"]
-    )
-    all_list = "\n    ".join(f'"{n}",' for n in all_names)
+    for module, names in _CORE_PUBLIC_EXPORTS.items():
+        import_lines.append(
+            f"from abb_rws_client._core.{module} import {', '.join(names)}"
+        )
+        all_names.extend(names)
 
-    return f'''\
+    return f"""\
 # abb_rws_client/__init__.py
-"""abb-rws6-python-client — Async Python client for ABB RWS (RobotWare 6).
+\"\"\"abb-rws6-python-client — Async Python client for ABB RWS (RobotWare 6).
 
 Public API surface:
     - RWSClient / RWSClientSync  : HTTP session management
@@ -294,45 +329,31 @@ Public API surface:
 Example:
     >>> from abb_rws_client import RWSClient
     >>> async with RWSClient(host="192.168.125.1") as client:
-    ...     resp = await client.get("rw/rapid/execution")
-"""
+    ...     resp = await client.get("/rw/rapid/execution")
+\"\"\"
 
 from __future__ import annotations
 
-from abb_rws_client._core.client import {client_names}
-from abb_rws_client._core.exceptions import {exc_names}
-from abb_rws_client._core.serializers import {ser_names}
+{chr(10).join(import_lines)}
 
 __all__ = [
-    {all_list}
+    {_format_all(all_names)}
 ]
 
 __version__ = "0.1.0"
-'''
-
-
-def _gen_empty_init(path: Path, comment: str = "") -> str:
-    """Generate a minimal marker __init__.py.
-
-    Args:
-        path: Destination path (used for the header comment).
-        comment: Optional one-line description.
-
-    Returns:
-        Minimal __init__.py content.
-    """
-    rel = path.relative_to(REPO_ROOT)
-    body = f"# {comment}" if comment else "# Package marker — auto-generated."
-    return f"# {rel}\n{body}\n"
+"""
 
 
 # ---------------------------------------------------------------------------
-# Main logic
+# Fix functions
 # ---------------------------------------------------------------------------
 
 
 def fix_rws(dry_run: bool) -> None:
-    """Process all rws/ sub-packages.
+    """Process all rws/ sub-packages, then rws/__init__.py.
+
+    Sub-package __init__.py files are written first so that
+    _gen_rws_init can read them when building the top-level rws/__init__.py.
 
     Args:
         dry_run: If True, only print without writing.
@@ -346,9 +367,7 @@ def fix_rws(dry_run: bool) -> None:
     for sub in sorted(rws_dir.iterdir()):
         if not sub.is_dir() or sub.name.startswith("_") or sub.name.startswith("."):
             continue
-        init_path = sub / "__init__.py"
-        content = _gen_rws_submodule_init(sub)
-        _write(init_path, content, dry_run)
+        _write(sub / "__init__.py", _gen_rws_submodule_init(sub), dry_run)
 
     print("\n── rws/__init__.py ─────────────────────────────────────────")
     _write(rws_dir / "__init__.py", _gen_rws_init(rws_dir), dry_run)
@@ -375,7 +394,7 @@ def fix_package(dry_run: bool) -> None:
 
 
 def fix_highlevel(dry_run: bool) -> None:
-    """Ensure highlevel/ has an __init__.py.
+    """Ensure highlevel/ has a minimal __init__.py if the directory exists.
 
     Args:
         dry_run: If True, only print without writing.
@@ -388,39 +407,14 @@ def fix_highlevel(dry_run: bool) -> None:
     print("\n── highlevel/__init__.py ───────────────────────────────────")
     init_path = hl_dir / "__init__.py"
     if not init_path.exists():
-        _write(
-            init_path,
-            _gen_empty_init(init_path, "High-level composed wrappers (no direct HTTP)."),
-            dry_run,
+        content = (
+            "# abb_rws_client/highlevel/__init__.py\n"
+            "# High-level composed wrappers (no direct HTTP).\n"
+            "# Auto-generated by contrib/fix_init.py — do not edit manually.\n"
         )
+        _write(init_path, content, dry_run)
     else:
         print(f"  [SKIP] Already exists: {init_path.relative_to(REPO_ROOT)}")
-
-
-def fix_tests(dry_run: bool) -> None:
-    """Ensure all test directories have an __init__.py.
-
-    Args:
-        dry_run: If True, only print without writing.
-    """
-    print("\n── tests/ ──────────────────────────────────────────────────")
-    for dirpath in sorted(TESTS_ROOT.rglob("*")):
-        if not dirpath.is_dir():
-            continue
-        if dirpath.name.startswith(".") or dirpath.name == "__pycache__":
-            continue
-        # Only create if there are .py files or sub-dirs inside
-        if not _is_package_dir(dirpath):
-            continue
-        init_path = dirpath / "__init__.py"
-        if not init_path.exists():
-            _write(
-                init_path,
-                _gen_empty_init(init_path, "Test package marker."),
-                dry_run,
-            )
-        else:
-            print(f"  [SKIP] Already exists: {init_path.relative_to(REPO_ROOT)}")
 
 
 # ---------------------------------------------------------------------------
@@ -435,7 +429,7 @@ def main() -> None:
         SystemExit: On argument parsing error.
     """
     parser = argparse.ArgumentParser(
-        description="Audit and fix all __init__.py files in the project.",
+        description="Audit and fix all __init__.py files in abb_rws_client/.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -446,18 +440,14 @@ def main() -> None:
     args = parser.parse_args()
 
     dry = args.dry_run
-    if dry:
-        print("🔍 DRY-RUN mode — no files will be written.\n")
-    else:
-        print("🔧 Fixing __init__.py files...\n")
+    print("🔍 DRY-RUN mode — no files will be written.\n" if dry else "🔧 Fixing __init__.py files...\n")
 
     fix_package(dry)
     fix_core(dry)
     fix_rws(dry)
     fix_highlevel(dry)
-    fix_tests(dry)
 
-    print("\n✓ Done." if not dry else "\n✓ Dry-run complete.")
+    print("\n✓ Dry-run complete." if dry else "\n✓ Done.")
 
 
 if __name__ == "__main__":
