@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
-# export_structure.py
-"""
-Repository tree exporter.
+# contrib/export_structure.py
+"""Repository tree exporter.
 
 Author: Clément RACINET
 
-Walks the repository from its root, respects ``.gitignore`` patterns via
-``pathspec``, and writes a Unicode tree representation to
-``structure_repo.txt``.
+Walks the repository from its root, respects ``.gitignore`` patterns
+via stdlib only (fnmatch + re), and writes a Unicode tree representation
+to ``structure_repo.txt``.
+
+No third-party dependencies — safe to run with any Python 3.11+
+interpreter, including the system Python used by Git hooks.
 
 Usage:
     python export_structure.py
 
 Output:
-    <project_root>/structure_repo.txt
+    /structure_repo.txt
 """
+
 from __future__ import annotations
 
+import fnmatch
+import re
 from pathlib import Path
-
-import pathspec
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -33,42 +36,150 @@ OUTPUT_FILE: Path = ROOT_DIR / "structure_repo.txt"
 
 #: Hard-coded exclusions applied regardless of ``.gitignore`` content
 EXTRA_IGNORE: set[str] = {
-    ".git",           # usually already in .gitignore, forced here as a safety net
-    OUTPUT_FILE.name, # prevent the output file from including itself
+    ".git",
+    OUTPUT_FILE.name,
     "site",
-    "docs"
+    "docs",
 }
 
-
 # ---------------------------------------------------------------------------
-# .gitignore loading
+# Minimal .gitignore parser (no pathspec dependency)
 # ---------------------------------------------------------------------------
 
 
-def load_gitignore_spec(root: Path) -> pathspec.PathSpec:
-    """Load ``.gitignore`` patterns and return a compiled ``PathSpec``.
-
-    If no ``.gitignore`` file is found, returns an empty spec (nothing
-    is ignored by default).
+def _parse_gitignore_patterns(root: Path) -> list[str]:
+    """Read raw patterns from .gitignore, stripping comments and blanks.
 
     Args:
         root: Absolute path to the repository root.
 
     Returns:
-        A ``pathspec.PathSpec`` compiled from ``gitwildmatch`` patterns.
+        List of raw gitignore pattern strings.
+    """
+    gitignore_path = root / ".gitignore"
+    if not gitignore_path.exists():
+        return []
+    lines = gitignore_path.read_text(encoding="utf-8").splitlines()
+    return [
+        line
+        for line in lines
+        if line.strip() and not line.startswith("#")
+    ]
+
+
+def _pattern_to_regex(pattern: str) -> re.Pattern[str]:
+    """Convert a single gitignore pattern to a compiled regex.
+
+    Handles the most common gitignore rules:
+    - Leading ``/``  → anchored to root
+    - Trailing ``/`` → directories only (matched as prefix)
+    - ``*``          → any chars except ``/``
+    - ``**``         → any chars including ``/``
+    - ``?``          → any single char except ``/``
+
+    Args:
+        pattern: Raw gitignore pattern string.
+
+    Returns:
+        Compiled regex pattern.
+    """
+    # Strip trailing spaces (not escaped)
+    pattern = pattern.rstrip(" ")
+
+    dir_only = pattern.endswith("/")
+    if dir_only:
+        pattern = pattern[:-1]
+
+    anchored = pattern.startswith("/")
+    if anchored:
+        pattern = pattern[1:]
+
+    # Convert gitignore glob to regex
+    regex = ""
+    i = 0
+    while i < len(pattern):
+        if pattern[i : i + 2] == "**":
+            regex += ".*"
+            i += 2
+            # Skip optional surrounding slashes
+            if i < len(pattern) and pattern[i] == "/":
+                i += 1
+        elif pattern[i] == "*":
+            regex += "[^/]*"
+            i += 1
+        elif pattern[i] == "?":
+            regex += "[^/]"
+            i += 1
+        else:
+            regex += re.escape(pattern[i])
+            i += 1
+
+    if anchored:
+        regex = "^" + regex
+    else:
+        regex = "(^|/)" + regex
+
+    if dir_only:
+        regex += "(/|$)"
+    else:
+        regex += "(/.*)?$"
+
+    return re.compile(regex)
+
+
+class GitIgnoreSpec:
+    """Minimal gitignore matcher using stdlib only.
+
+    Replaces ``pathspec.PathSpec`` without any third-party dependency.
+    Suitable for use in Git hooks where only the system Python is available.
+
+    Args:
+        root: Absolute path to the repository root.
+
+    Example:
+        >>> spec = GitIgnoreSpec(Path("/my/project"))
+        >>> spec.match_file("__pycache__/")
+        True
+    """
+
+    def __init__(self, root: Path) -> None:
+        patterns = _parse_gitignore_patterns(root)
+        self._regexes: list[re.Pattern[str]] = [
+            _pattern_to_regex(p) for p in patterns
+        ]
+
+    def match_file(self, rel_path: str) -> bool:
+        """Return True if rel_path matches any gitignore pattern.
+
+        Args:
+            rel_path: Relative POSIX path from the repository root.
+                      Directories should include a trailing ``/``.
+
+        Returns:
+            True if the path is ignored.
+        """
+        return any(rx.search(rel_path) for rx in self._regexes)
+
+
+def load_gitignore_spec(root: Path) -> GitIgnoreSpec:
+    """Load ``.gitignore`` patterns and return a ``GitIgnoreSpec``.
+
+    Drop-in replacement for the former ``pathspec``-based loader.
+    If no ``.gitignore`` file is found, returns an empty spec
+    (nothing is ignored by default).
+
+    Args:
+        root: Absolute path to the repository root.
+
+    Returns:
+        A ``GitIgnoreSpec`` instance compiled from ``.gitignore`` patterns.
 
     Example:
         >>> spec = load_gitignore_spec(Path("/my/project"))
         >>> spec.match_file("__pycache__/")
         True
     """
-    gitignore_path = root / ".gitignore"
-    patterns: list[str] = []
-
-    if gitignore_path.exists():
-        patterns = gitignore_path.read_text(encoding="utf-8").splitlines()
-
-    return pathspec.PathSpec.from_lines("gitwildmatch", patterns)
+    return GitIgnoreSpec(root)
 
 
 # ---------------------------------------------------------------------------
@@ -76,7 +187,7 @@ def load_gitignore_spec(root: Path) -> pathspec.PathSpec:
 # ---------------------------------------------------------------------------
 
 
-def should_ignore(path: Path, spec: pathspec.PathSpec, root: Path) -> bool:
+def should_ignore(path: Path, spec: GitIgnoreSpec, root: Path) -> bool:
     """Return whether a path should be excluded from the tree.
 
     Applies both ``EXTRA_IGNORE`` hard-coded names and the compiled
@@ -85,7 +196,7 @@ def should_ignore(path: Path, spec: pathspec.PathSpec, root: Path) -> bool:
 
     Args:
         path: Absolute path to the file or directory to test.
-        spec: Compiled ``PathSpec`` from ``.gitignore``.
+        spec: ``GitIgnoreSpec`` instance built from ``.gitignore``.
         root: Absolute path to the repository root.
 
     Returns:
@@ -97,11 +208,12 @@ def should_ignore(path: Path, spec: pathspec.PathSpec, root: Path) -> bool:
     """
     if path.name in EXTRA_IGNORE:
         return True
-
+    # Also ignore hidden files/dirs (starting with .)
+    if path.name.startswith("."):
+        return True
     rel_str = path.relative_to(root).as_posix()
     if path.is_dir():
         rel_str += "/"
-
     return spec.match_file(rel_str)
 
 
@@ -112,22 +224,21 @@ def should_ignore(path: Path, spec: pathspec.PathSpec, root: Path) -> bool:
 
 def generate_tree(
     directory: Path,
-    spec: pathspec.PathSpec,
+    spec: GitIgnoreSpec,
     root: Path,
     prefix: str = "",
 ) -> list[str]:
     """Recursively generate a Unicode tree representation of a directory.
 
-    Directories are listed before files at each level. Entries ignored
-    by ``should_ignore()`` are skipped entirely.
+    Directories are listed before files at each level.
+    Entries ignored by ``should_ignore()`` are skipped entirely.
 
     Args:
         directory: Directory to render.
-        spec: Compiled ``PathSpec`` from ``.gitignore``.
-        root: Absolute path to the repository root (used for relative
-            path computation).
+        spec: ``GitIgnoreSpec`` instance built from ``.gitignore``.
+        root: Absolute path to the repository root.
         prefix: Current line prefix (box-drawing characters accumulated
-            through recursion). Defaults to ``""``.
+                through recursion). Defaults to ``""``.
 
     Returns:
         List of formatted tree lines for ``directory`` and all its
@@ -142,17 +253,13 @@ def generate_tree(
         [p for p in directory.iterdir() if not should_ignore(p, spec, root)],
         key=lambda p: (p.is_file(), p.name.lower()),
     )
-
     lines: list[str] = []
-
     for index, entry in enumerate(entries):
         connector = "└── " if index == len(entries) - 1 else "├── "
         lines.append(f"{prefix}{connector}{entry.name}")
-
         if entry.is_dir():
             extension = "    " if index == len(entries) - 1 else "│   "
             lines.extend(generate_tree(entry, spec, root, prefix + extension))
-
     return lines
 
 
@@ -164,12 +271,11 @@ def generate_tree(
 def main() -> None:
     """Generate the repository tree and write it to ``structure_repo.txt``.
 
-    Loads ``.gitignore``, walks the full repository tree, and writes the
-    result to ``OUTPUT_FILE``. Any pre-existing output file is removed
-    before writing.
+    Loads ``.gitignore``, walks the full repository tree, and writes
+    the result to ``OUTPUT_FILE``. Any pre-existing output file is
+    removed before writing.
     """
     spec = load_gitignore_spec(ROOT_DIR)
-
     tree_lines = [ROOT_DIR.name]
     tree_lines.extend(generate_tree(ROOT_DIR, spec, ROOT_DIR))
 
