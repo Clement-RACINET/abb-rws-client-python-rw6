@@ -35,6 +35,8 @@ OUTPUT_FILE: Path = ROOT_DIR / "structure_repo.txt"
 EXTRA_IGNORE: set[str] = {
     ".git",           # usually already in .gitignore, forced here as a safety net
     OUTPUT_FILE.name, # prevent the output file from including itself
+    "site",
+    "docs"
 }
 
 
