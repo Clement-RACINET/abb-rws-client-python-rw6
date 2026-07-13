@@ -56,6 +56,8 @@ _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
         "robtarget_to_rws",
         "rws_to_robtarget",
     ],
+    "env": ["load_env"],
+    "logging":     ["configure_logging", "get_logger"],
 }
 
 # ---------------------------------------------------------------------------

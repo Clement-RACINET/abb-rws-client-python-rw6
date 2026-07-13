@@ -3,6 +3,7 @@ abb_rws_client_python_rw6
 │   ├── _core
 │   │   ├── __init__.py
 │   │   ├── client.py
+│   │   ├── env.py
 │   │   ├── exceptions.py
 │   │   ├── logging.py
 │   │   └── serializers.py
@@ -77,22 +78,23 @@ abb_rws_client_python_rw6
 │   └── README.md
 ├── exemples
 │   ├── 01
-│   │   ├── 01_ping.py
 │   │   └── ping.py
 │   ├── 02
 │   │   ├── example_start_stop.py
 │   │   ├── ExampleStartStop.mod
 │   │   └── ExampleStartStop.pgf
 │   ├── 03
-│   │   ├── 03_read_write_variable.mod
-│   │   └── 03_read_write_variable.py
+│   │   ├── 03_read_write_variable.py
+│   │   ├── ReadWriteVariable.mod
+│   │   └── ReadWriteVariable.pgf
 │   ├── 04
-│   │   ├── 04_load_module.mod
-│   │   └── 04_load_module.py
-│   ├── 05
-│   │   ├── 05_io_signal.mod
-│   │   └── 05_io_signal.py
-│   └── _env.py
+│   │   ├── 04_load_module.py
+│   │   ├── LoadModule.mod
+│   │   └── LoadModule.pgf
+│   └── 05
+│       ├── 05_io_signal.py
+│       ├── LoadModule.mod
+│       └── LoadModule.pgf
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py

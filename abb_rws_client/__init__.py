@@ -35,6 +35,8 @@ from abb_rws_client._core.serializers import (
     robtarget_to_rws,
     rws_to_robtarget,
 )
+from abb_rws_client._core.env import load_env
+from abb_rws_client._core.logging import configure_logging, get_logger
 
 __all__ = [
     "CTRL_CODES",
@@ -52,6 +54,9 @@ __all__ = [
     "RWSValueError",
     "RapidValue",
     "RobTarget",
+    "configure_logging",
+    "get_logger",
+    "load_env",
     "robtarget_to_rws",
     "rws_to_robtarget",
 ]

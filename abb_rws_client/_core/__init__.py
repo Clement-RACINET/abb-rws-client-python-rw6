@@ -21,6 +21,8 @@ from .exceptions import (
     RWSValueError,
 )
 from .serializers import RapidValue, RobTarget, robtarget_to_rws, rws_to_robtarget
+from .env import load_env
+from .logging import configure_logging, get_logger
 
 __all__ = [
     "CTRL_CODES",
@@ -38,6 +40,9 @@ __all__ = [
     "RWSValueError",
     "RapidValue",
     "RobTarget",
+    "configure_logging",
+    "get_logger",
+    "load_env",
     "robtarget_to_rws",
     "rws_to_robtarget",
 ]

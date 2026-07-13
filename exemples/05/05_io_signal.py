@@ -1,28 +1,28 @@
-# exemples/05_io_signal.py
+# exemples/05/example_io_signal.py
 """Example 05 — Read and write digital IO signals.
 
 Demonstrates:
-    - Listing all IO signals via get_io_signals
-    - Searching a specific signal by name via post_signal_search
-    - Reading the lvalue from the search response
+    - Listing all IO signals via ``get_io_signals``.
+    - Searching a specific signal by name via ``post_signal_search``.
+    - Reading the ``lvalue`` from the search response.
 
 Note on write access:
     The write endpoint is:
-        POST /rw/iosystem/signals/{network}/{unit}/{signal}?action=set
-    The generated rws/ layer does not yet expose a dedicated per-signal
-    write function.  The network and unit names required for the path
-    are controller-specific.  See the inline comment in main() for the
+        ``POST /rw/iosystem/signals/{network}/{unit}/{signal}?action=set``
+    The ``network`` and ``unit`` names required for the path are
+    controller-specific. See the inline comment in ``main()`` for the
     raw call pattern once those values are known.
 
 Prerequisites:
-    - Controller with at least one configured digital output (DO)
-    - .env with ROBOT_IP, RWS_USER, RWS_PASSWORD
-    - Set RWS_SIGNAL_NAME to match a real signal on your controller
+    - Controller with at least one configured digital output (DO).
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
+      ``RWS_PASSWORD``, ``RWS_SIGNAL_NAME`` (optional — defaults apply).
 
-RAPID side: see exemples/05_io_signal.mod
+RAPID side:
+    None required.
 
 Run:
-    pixi run python exemples/05_io_signal.py
+    pixi run python exemples/05/example_io_signal.py
 """
 
 from __future__ import annotations
@@ -32,11 +32,20 @@ import os
 import re
 import sys
 
-from _env import load_env
 import httpx
 
-from abb_rws_client import RWSClient, RWSError
+from abb_rws_client import (
+    RWSClient,
+    RWSError,
+    configure_logging,
+    get_logger,
+    load_env,
+)
 from abb_rws_client.rws.iosystem.signals import get_io_signals, post_signal_search
+
+load_env()
+configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
+logger = get_logger("examples.io_signal")
 
 
 def _parse_lvalue(response: httpx.Response) -> str:
@@ -54,6 +63,11 @@ def _parse_lvalue(response: httpx.Response) -> str:
 
     Raises:
         ValueError: If the value cannot be extracted from the response body.
+
+    Example:
+        ```python
+        val = _parse_lvalue(resp)  # "0" or "1"
+        ```
     """
     try:
         data = response.json()
@@ -73,34 +87,34 @@ def _parse_lvalue(response: httpx.Response) -> str:
 
 
 async def main() -> None:
-    load_env()
+    """Run the IO signal example."""
+    signal_name = os.getenv("RWS_SIGNAL_NAME", "DO_EXAMPLE")
 
-    host = os.environ.get("ROBOT_IP", "192.168.125.1")
-    user = os.environ.get("RWS_USER", "Default User")
-    password = os.environ.get("RWS_PASSWORD", "robotics")
-    signal_name = os.environ.get("RWS_SIGNAL_NAME", "DO_EXAMPLE")
-
-    print(f"Connecting to {host} ...")
-    print(f"Target signal: {signal_name!r}")
+    logger.info("Connecting to controller …")
+    logger.info("Target signal: %r", signal_name)
 
     try:
-        async with RWSClient(host=host, username=user, password=password) as client:
-            # List all signals (overview)
-            print("\nFetching signal list ...")
-            resp_list = await get_io_signals(client)
-            print(f"HTTP {resp_list.status_code} — {len(resp_list.text)} bytes")
+        async with RWSClient() as client:
+            logger.info("Connected → %s", client.base_url)
 
-            # Search for the specific signal by name
-            print(f"\nSearching for signal {signal_name!r} ...")
+            logger.info("Fetching signal list …")
+            resp_list = await get_io_signals(client)
+            logger.info(
+                "HTTP %s — %d bytes received",
+                resp_list.status_code,
+                len(resp_list.text),
+            )
+
+            logger.info("Searching for signal %r …", signal_name)
             resp_search = await post_signal_search(
                 client,
                 action="signal-search",
                 name=signal_name,
             )
-            print(f"HTTP {resp_search.status_code}")
+            logger.info("HTTP %s", resp_search.status_code)
 
             current = _parse_lvalue(resp_search)
-            print(f"Current value: {current!r}")
+            logger.info("Current value: %r", current)
 
             # Write pattern (requires network + unit names from your config):
             #
@@ -112,14 +126,11 @@ async def main() -> None:
             #       params={"action": "set"},
             #       data={"lvalue": new_value},
             #   )
-            #
-            # Once rws/iosystem/signal.py is generated, replace the above
-            # with the dedicated atomic function.
 
-            print("\nDone.")
+            logger.info("Done.")
 
     except RWSError as exc:
-        print(f"RWS error: {exc}", file=sys.stderr)
+        logger.error("RWS error: %s", exc)
         sys.exit(1)
 
 

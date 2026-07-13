@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Program>
-	<Module>ExampleStartStop.mod</Module>
+	<Module>LoadModule.mod</Module>
 </Program>

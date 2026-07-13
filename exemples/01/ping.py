@@ -1,14 +1,16 @@
-# exemples/01_ping.py
+# exemples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 
 Prerequisites:
-    - .env file at the repository root with ROBOT_IP, RWS_USER, RWS_PASSWORD
-    - Controller reachable on the network
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
+      ``RWS_PASSWORD`` (optional — defaults apply if absent).
+    - Controller reachable on the network.
 
-RAPID side: none required (read-only, no program needed).
+RAPID side:
+    None required (read-only, no program needed).
 
 Run:
-    pixi run python exemples/01_ping.py
+    pixi run python exemples/01/example_ping.py
 """
 
 from __future__ import annotations
@@ -18,17 +20,27 @@ import os
 import re
 import sys
 
-from _env import load_env
 import httpx
 
-from abb_rws_client import RWSClient, RWSConnectionError, RWSError
+from abb_rws_client import (
+    RWSClient,
+    RWSConnectionError,
+    RWSError,
+    configure_logging,
+    get_logger,
+    load_env,
+)
 from abb_rws_client.rws.panel import get_controller_state, get_operation_mode
+
+load_env()
+configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
+logger = get_logger("examples.ping")
 
 
 def _extract_class_value(response: httpx.Response, css_class: str) -> str:
     """Extract the ``title`` attribute of the first element with a given CSS class.
 
-    ABB RWS RobotWare 6 returns XML/HTML by default.  State values are
+    ABB RWS RobotWare 6 returns XML/HTML by default. State values are
     encoded as ``title`` attributes on ``<li>`` elements whose ``class``
     matches the resource name.
 
@@ -38,6 +50,11 @@ def _extract_class_value(response: httpx.Response, css_class: str) -> str:
 
     Returns:
         The ``title`` value as a string, or ``"<not found>"`` if absent.
+
+    Example:
+        ```python
+        state = _extract_class_value(resp, "pnl-ctrlstate")
+        ```
     """
     match = re.search(
         rf'class="{re.escape(css_class)}"[^>]*title="([^"]+)"',
@@ -45,7 +62,6 @@ def _extract_class_value(response: httpx.Response, css_class: str) -> str:
     )
     if match:
         return match.group(1)
-    # Fallback: value may be in element text
     match = re.search(
         rf'class="{re.escape(css_class)}"[^>]*>([^<]+)<',
         response.text,
@@ -56,41 +72,31 @@ def _extract_class_value(response: httpx.Response, css_class: str) -> str:
 
 
 async def main() -> None:
-    load_env()
-
-    host = os.environ.get("ROBOT_IP", "192.168.125.1")
-    user = os.environ.get("RWS_USER", "Default User")
-    password = os.environ.get("RWS_PASSWORD", "robotics")
-
-    print(f"Connecting to {host} as '{user}' ...")
+    """Run the ping example."""
+    logger.info("Connecting to controller …")
 
     try:
-        async with RWSClient(host=host, username=user, password=password) as client:
-            # Controller state
+        async with RWSClient() as client:
+            logger.info("Connected → %s", client.base_url)
+
             resp_state = await get_controller_state(client)
             ctrl_state = _extract_class_value(resp_state, "pnl-ctrlstate")
-            print(f"HTTP {resp_state.status_code} — Controller reachable")
-            print(f"  ctrlstate : {ctrl_state}")
+            logger.info("ctrlstate : %s", ctrl_state)
 
-            # Operation mode
             resp_mode = await get_operation_mode(client)
             op_mode = _extract_class_value(resp_mode, "pnl-opmode")
-            print(f"HTTP {resp_mode.status_code} — Operation mode")
-            print(f"  opmode    : {op_mode}")
+            logger.info("opmode    : %s", op_mode)
 
-            # Summary
-            print()
-            print("Summary")
-            print("-------")
-            print(f"  Host         : {host}")
-            print(f"  ctrlstate    : {ctrl_state}")
-            print(f"  opmode       : {op_mode}")
+            logger.info("─── Summary ───────────────────────────")
+            logger.info("  Host      : %s", client.host)
+            logger.info("  ctrlstate : %s", ctrl_state)
+            logger.info("  opmode    : %s", op_mode)
 
     except RWSConnectionError as exc:
-        print(f"Cannot reach controller at {host}: {exc}", file=sys.stderr)
+        logger.error("Cannot reach controller: %s", exc)
         sys.exit(1)
     except RWSError as exc:
-        print(f"RWS error: {exc}", file=sys.stderr)
+        logger.error("RWS error: %s", exc)
         sys.exit(1)
 
 

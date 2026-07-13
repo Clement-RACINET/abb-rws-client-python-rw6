@@ -44,6 +44,7 @@ from typing import Any, Self
 
 import httpx
 
+from abb_rws_client._core.env import get_env_float, get_env_int, get_env_str
 from abb_rws_client._core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
@@ -120,9 +121,10 @@ def _raise_for_status(response: httpx.Response, path: str) -> None:
         raise RWSAuthenticationError()
     if code == 404:
         raise RWSNotFoundError(path)
+    # ── _raise_for_status : 200 → 1000 ────────────────────────────────────────
     if code >= 400:
         raise RWSHTTPError(
-            f"HTTP {code} on {path}: {response.text[:1000]}",
+            f"HTTP {code} on {path}: {response.text[:1000]}",  # était 200
             status_code=code,
         )
 
@@ -174,18 +176,18 @@ class RWSClient:
 
     def __init__(
         self,
-        host: str,
-        username: str = "Default User",
-        password: str = "robotics",
-        port: int = 80,
-        timeout: float = 10.0,
+        host: str | None = None,
+        username: str | None = None,
+        password: str | None = None,
+        port: int | None = None,
+        timeout: float | None = None,
     ) -> None:
-        self.host = host
-        self.username = username
-        self.password = password
-        self.port = port
-        self.timeout = timeout
-        self.base_url = f"http://{host}:{port}/"
+        self.host     = host     or get_env_str("RWS_HOST",     "192.168.125.1")
+        self.username = username or get_env_str("RWS_USER",     "Default User")
+        self.password = password or get_env_str("RWS_PASSWORD", "robotics")
+        self.port     = port     or get_env_int("RWS_PORT",     80)
+        self.timeout  = timeout  or get_env_float("RWS_TIMEOUT", 10.0)
+        self.base_url = f"http://{self.host}:{self.port}/"
         self._http: httpx.AsyncClient | None = None
 
     # ── Lifecycle ───────────────────────────────────────────────────────────

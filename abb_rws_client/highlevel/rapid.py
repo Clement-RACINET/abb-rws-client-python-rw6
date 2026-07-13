@@ -10,13 +10,13 @@ All functions are async and require an open ``RWSClient`` instance.
 from __future__ import annotations
 
 import asyncio
-import logging
 import re
 
 import httpx
 
 from abb_rws_client._core.client import RWSClient
 from abb_rws_client._core.exceptions import RWSHTTPError
+from abb_rws_client._core.logging import get_logger
 from abb_rws_client.rws.mastership import (
     post_mastership_release,
     post_mastership_request,
@@ -37,7 +37,7 @@ from abb_rws_client.rws.rapid.tasks import (
     post_unload_module_from_rapid_task,
 )
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # ---------------------------------------------------------------------------
 # Internal helpers
@@ -349,6 +349,7 @@ async def wait_until_stopped(
 
 async def set_variable_with_mastership(
     client: RWSClient,
+    *,
     symbolurl: str,
     value: str,
 ) -> None:
@@ -412,6 +413,7 @@ async def set_variable_with_mastership(
 
 async def get_variable(
     client: RWSClient,
+    *,
     symbolurl: str,
 ) -> str:
     """Read a RAPID variable value.
@@ -462,6 +464,7 @@ async def get_variable(
 
 async def load_module_safe(
     client: RWSClient,
+    *,
     task: str,
     module_path: str,
     module_name: str,

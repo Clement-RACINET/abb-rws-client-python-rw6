@@ -1,19 +1,21 @@
-# exemples/04_load_module.py
+# exemples/04/example_load_module.py
 """Example 04 — Load a RAPID module into a task at runtime.
 
 Demonstrates:
-    - Using load_module_safe (highlevel) to unload/load with mastership
+    - Using ``load_module_safe`` (highlevel) to unload/load with mastership.
 
 Prerequisites:
-    - Controller in AUTO mode, RAPID stopped
-    - Module file already present on the controller at CONTROLLER_PATH
-      (upload it beforehand via FTP, USB, or RWS fileservice)
-    - .env with ROBOT_IP, RWS_USER, RWS_PASSWORD, RWS_RAPID_TASK
+    - Controller in AUTO mode, RAPID stopped.
+    - Module file already present on the controller at ``RWS_MODULE_PATH``
+      (upload it beforehand via FTP, USB, or RWS fileservice).
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
+      ``RWS_PASSWORD``, ``RWS_RAPID_TASK``, ``RWS_MODULE_PATH`` (optional).
 
-RAPID side: see exemples/04_load_module.mod
+RAPID side:
+    See ``exemples/04/LoadModule.mod``.
 
 Run:
-    pixi run python exemples/04_load_module.py
+    pixi run python exemples/04/example_load_module.py
 """
 
 from __future__ import annotations
@@ -22,49 +24,54 @@ import asyncio
 import os
 import sys
 
-from _env import load_env
-
-from abb_rws_client import RWSClient, RWSError
+from abb_rws_client import (
+    RWSClient,
+    RWSError,
+    configure_logging,
+    get_logger,
+    load_env,
+)
 from abb_rws_client.highlevel.rapid import is_running, load_module_safe, stop_rapid
+
+load_env()
+configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
+logger = get_logger("examples.load_module")
 
 
 async def main() -> None:
-    load_env()
+    """Run the load module example."""
+    task = os.getenv("RWS_RAPID_TASK", "T_ROB1")
+    module_name = "LoadModule"
+    controller_path = os.getenv("RWS_MODULE_PATH", f"$HOME/{module_name}.mod")
 
-    host = os.environ.get("ROBOT_IP", "192.168.125.1")
-    user = os.environ.get("RWS_USER", "Default User")
-    password = os.environ.get("RWS_PASSWORD", "robotics")
-
-    task = os.environ.get("RWS_RAPID_TASK", "T_ROB1")
-    module_name = "ExampleLoadModule"
-    # Path on the controller filesystem.
-    # The file must be uploaded beforehand (via FTP, USB, or RWS fileservice).
-    controller_path = f"$HOME/{module_name}.mod"
-
-    print(f"Connecting to {host} ...")
-    print(f"Module      : {module_name}")
-    print(f"Controller  : {controller_path}")
-    print(f"Task        : {task}")
+    logger.info("Connecting to controller …")
+    logger.info("Module     : %s", module_name)
+    logger.info("Controller : %s", controller_path)
+    logger.info("Task       : %s", task)
 
     try:
-        async with RWSClient(host=host, username=user, password=password) as client:
-            if await is_running(client):
-                print("RAPID is running — stopping before load ...")
-                await stop_rapid(client)
-                print("RAPID stopped.")
+        async with RWSClient() as client:
+            logger.info("Connected → %s", client.base_url)
 
-            print(f"\nLoading {module_name} into {task} ...")
+            if await is_running(client):
+                logger.info("RAPID is running — stopping before load …")
+                await stop_rapid(client)
+                logger.info("RAPID stopped.")
+
+            logger.info("Loading %s into %s …", module_name, task)
             await load_module_safe(
                 client,
                 task=task,
                 module_name=module_name,
                 module_path=controller_path,
             )
-            print(f"Module '{module_name}' loaded successfully into {task}.")
-            print("\nYou can now run example 02 to execute it.")
+            logger.info(
+                "Module '%s' loaded successfully into %s.", module_name, task
+            )
+            logger.info("You can now run example 02 to execute it.")
 
     except RWSError as exc:
-        print(f"RWS error: {exc}", file=sys.stderr)
+        logger.error("RWS error: %s", exc)
         sys.exit(1)
 
 
