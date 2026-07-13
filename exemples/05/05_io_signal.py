@@ -51,32 +51,34 @@ logger = get_logger("examples.io_signal")
 #  Helpers
 
 def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
-    """Extract the canonical href of a named signal from a search response.
+    """Extract the canonical absolute href of a named signal from a search response.
 
-    The search response body contains HTML/XML with ``<a href="...">`` links
-    pointing to each matched signal. This function extracts the path for the
-    signal whose name matches ``signal_name`` exactly.
+    The RW6 search response body is an HTML document whose ``<base href>`` is
+    set to ``http://<host>/rw/iosystem/``.  Signal links are therefore
+    **relative** (e.g. ``signals/EtherNetIP/Unit/Name``), not absolute.
+    This function extracts the matching href and normalises it to an absolute
+    path suitable for a direct ``GET`` via ``RWSClient``.
 
     Args:
         response: Raw HTTP response from ``post_signal_search``.
         signal_name: Exact signal name to locate (case-sensitive).
 
     Returns:
-        Relative URL path to the signal resource, e.g.
-        ``"/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE"``.
+        Absolute URL path to the signal resource, e.g.
+        ``"/rw/iosystem/signals/EtherNetIP/Pushcorp_AKD/PCorpAKD_GI_MotorTemperature"``.
 
     Raises:
-        ValueError: If no href matching ``signal_name`` is found.
+        ValueError: If no href matching ``signal_name`` is found in the
+            response body.
 
     Example:
         ```python
-        href = _parse_signal_href(resp_search, "DO_EXAMPLE")
-        # "/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE"
+        href = _parse_signal_href(resp_search, "PCorpAKD_GI_MotorTemperature")
+        # "/rw/iosystem/signals/EtherNetIP/Pushcorp_AKD/PCorpAKD_GI_MotorTemperature"
         ```
     """
-    # RW6 response format:
-    # <a href="/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE;state">DO_EXAMPLE</a>
-    # We match the href that ends with /{signal_name} or /{signal_name};state
+    # RW6 response format (relative href, base = /rw/iosystem/):
+    # <a href="signals/EtherNetIP/Unit/Name;state">Name</a>
     pattern = rf'href=["\']([^"\']*/{re.escape(signal_name)}(?:;[^"\']*)?)["\']'
     match = re.search(pattern, response.text)
     if not match:
@@ -86,6 +88,11 @@ def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
         )
     # Strip any ;state suffix and query parameters — keep the clean path
     href = match.group(1).split(";")[0].split("?")[0]
+
+    # Normalise to absolute path — RW6 base is /rw/iosystem/
+    if not href.startswith("/"):
+        href = "/rw/iosystem/" + href
+
     return href
 
 
@@ -158,7 +165,7 @@ async def main() -> None:
             )
 
             # DEBUG TEMPORAIRE — à supprimer après
-            logger.info("Signal list body:\n%s", resp_list.text[:])
+            logger.debug("Signal list body:\n%s", resp_list.text[:])
 
 
             #  2. Search the signal by name to get its canonical href
