@@ -30,7 +30,7 @@ from abb_rws_client.highlevel.rapid import (
 
 
 async def main() -> None:
-    load_env()
+    #load_env()
 
     host = os.environ.get("ROBOT_IP", "192.168.125.1")
     user = os.environ.get("RWS_USER", "Default User")
