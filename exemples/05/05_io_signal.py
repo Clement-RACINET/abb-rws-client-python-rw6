@@ -1,25 +1,23 @@
 # exemples/05/example_io_signal.py
-"""Example 05 — Read and write digital IO signals.
+"""Example 05 — Read and write a virtual digital output signal (TEST_DO_RWS).
 
 Demonstrates:
     - Listing all IO signals via ``get_io_signals``.
     - Searching a specific signal by name via ``post_signal_search``.
-    - Reading the ``lvalue`` from the search response.
-
-Note on write access:
-    The write endpoint is:
-        ``POST /rw/iosystem/signals/{network}/{unit}/{signal}?action=set``
-    The ``network`` and ``unit`` names required for the path are
-    controller-specific. See the inline comment in ``main()`` for the
-    raw call pattern once those values are known.
+    - Reading the ``lvalue`` of the signal via a direct GET.
+    - Writing a new value via POST with ``action=set``.
+    - Toggling the signal so the RAPID module can detect the change.
 
 Prerequisites:
-    - Controller with at least one configured digital output (DO).
+    - A virtual digital output ``TEST_DO_RWS`` configured in the IO system
+      under a Virtual unit (e.g. ``VIRTUAL1``).
+    - The RAPID module ``ExampleIOSignal`` loaded and running on ``T_ROB1``.
     - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
-      ``RWS_PASSWORD``, ``RWS_SIGNAL_NAME`` (optional — defaults apply).
+      ``RWS_PASSWORD``.
 
 RAPID side:
-    None required.
+    ``exemples/05/IOSignal.mod`` — waits for ``TEST_DO_RWS`` to go HIGH
+    via ``WaitUntil DOutput(...) = 1``.
 
 Run:
     pixi run python exemples/05/example_io_signal.py
@@ -48,16 +46,18 @@ configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
 logger = get_logger("examples.io_signal")
 
 
-#  Helpers
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 
 def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
     """Extract the canonical absolute href of a named signal from a search response.
 
     The RW6 search response body is an HTML document whose ``<base href>`` is
-    set to ``http://<host>/rw/iosystem/``.  Signal links are therefore
-    **relative** (e.g. ``signals/EtherNetIP/Unit/Name``), not absolute.
+    set to ``http://<host>/rw/iosystem/``. Signal links are therefore
+    **relative** (e.g. ``signals/Virtual/VIRTUAL1/TEST_DO_RWS``), not absolute.
     This function extracts the matching href and normalises it to an absolute
-    path suitable for a direct ``GET`` via ``RWSClient``.
+    path suitable for a direct ``GET`` or ``POST`` via ``RWSClient``.
 
     Args:
         response: Raw HTTP response from ``post_signal_search``.
@@ -65,7 +65,7 @@ def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
 
     Returns:
         Absolute URL path to the signal resource, e.g.
-        ``"/rw/iosystem/signals/EtherNetIP/Pushcorp_AKD/PCorpAKD_GI_MotorTemperature"``.
+        ``"/rw/iosystem/signals/Virtual/VIRTUAL1/TEST_DO_RWS"``.
 
     Raises:
         ValueError: If no href matching ``signal_name`` is found in the
@@ -73,12 +73,12 @@ def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
 
     Example:
         ```python
-        href = _parse_signal_href(resp_search, "PCorpAKD_GI_MotorTemperature")
-        # "/rw/iosystem/signals/EtherNetIP/Pushcorp_AKD/PCorpAKD_GI_MotorTemperature"
+        href = _parse_signal_href(resp_search, "TEST_DO_RWS")
+        # "/rw/iosystem/signals/Virtual/VIRTUAL1/TEST_DO_RWS"
         ```
     """
     # RW6 response format (relative href, base = /rw/iosystem/):
-    # <a href="signals/EtherNetIP/Unit/Name;state">Name</a>
+    # <a href="signals/Virtual/VIRTUAL1/TEST_DO_RWS" rel="self"></a>
     pattern = rf'href=["\']([^"\']*/{re.escape(signal_name)}(?:;[^"\']*)?)["\']'
     match = re.search(pattern, response.text)
     if not match:
@@ -99,26 +99,18 @@ def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
 def _parse_lvalue(response: httpx.Response) -> str:
     """Extract the ``lvalue`` from a direct signal GET response.
 
-    This function must be called on the response of a ``GET`` to the
-    signal's canonical URL (e.g. ``GET /rw/iosystem/signals/{net}/{unit}/{name}``),
-    **not** on a search response.
-
-    Handles both JSON and XML/HTML responses from different RW6 firmware
-    versions.
-
     Args:
         response: Raw HTTP response from a direct ``GET`` on a signal URL.
 
     Returns:
-        Signal logical value as string (``"0"`` or ``"1"`` for digital
-        signals).
+        Signal logical value as string (``"0"`` or ``"1"`` for digital signals).
 
     Raises:
         ValueError: If the value cannot be extracted from the response body.
 
     Example:
         ```python
-        resp = await client.get("/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE")
+        resp = await client.get("/rw/iosystem/signals/Virtual/VIRTUAL1/TEST_DO_RWS")
         val = _parse_lvalue(resp)
         # "0" or "1"
         ```
@@ -142,12 +134,23 @@ def _parse_lvalue(response: httpx.Response) -> str:
     )
 
 
+# ---------------------------------------------------------------------------
 # main()
+# ---------------------------------------------------------------------------
 
 async def main() -> None:
-    """Run the IO signal example."""
-    #signal_name = os.getenv("RWS_SIGNAL_NAME", "DO_EXAMPLE") [DEBUG]
-    signal_name = os.getenv("RWS_SIGNAL_NAME", "PCorpAKD_GI_MotorTemperature")
+    """Run the IO signal read/write example against TEST_DO_RWS.
+
+    Sequence:
+        1. List all IO signals (sanity check).
+        2. Search for TEST_DO_RWS and resolve its canonical href.
+        3. Read current value.
+        4. Write 1 → RAPID module detects HIGH and logs on FlexPendant.
+        5. Read back to confirm.
+        6. Write 0 → reset to known state.
+        7. Read back final value.
+    """
+    signal_name = os.getenv("RWS_SIGNAL_NAME", "TEST_DO_RWS")
     logger.info("Connecting to controller …")
     logger.info("Target signal: %r", signal_name)
 
@@ -155,7 +158,9 @@ async def main() -> None:
         async with RWSClient() as client:
             logger.info("Connected → %s", client.base_url)
 
-            #  1. List all signals
+            # ------------------------------------------------------------------
+            # 1. List all signals (sanity check)
+            # ------------------------------------------------------------------
             logger.info("Fetching signal list …")
             resp_list = await get_io_signals(client)
             logger.info(
@@ -164,14 +169,9 @@ async def main() -> None:
                 len(resp_list.text),
             )
 
-            # DEBUG TEMPORAIRE — à supprimer après
-            logger.debug("Signal list body:\n%s", resp_list.text[:])
-
-
-            #  2. Search the signal by name to get its canonical href
-            # post_signal_search returns a FILTERED LIST of signal links,
-            # NOT a lvalue. We must extract the href and GET the signal
-            # directly to read its value.
+            # ------------------------------------------------------------------
+            # 2. Search signal by name → resolve canonical href
+            # ------------------------------------------------------------------
             logger.info("Searching for signal %r …", signal_name)
             resp_search = await post_signal_search(
                 client,
@@ -180,29 +180,52 @@ async def main() -> None:
             )
             logger.info("HTTP %s (search)", resp_search.status_code)
 
-            # Extract the canonical path from the search result links
             signal_href = _parse_signal_href(resp_search, signal_name)
-            logger.debug("Signal href: %s", signal_href)
+            logger.info("Signal href: %s", signal_href)
 
-            #  3. GET the signal directly to read its lvalue
-            resp_signal = await client.get(signal_href)
-            logger.info("HTTP %s (direct GET)", resp_signal.status_code)
+            # ------------------------------------------------------------------
+            # 3. Read current value
+            # ------------------------------------------------------------------
+            resp_get = await client.get(signal_href)
+            logger.info("HTTP %s (GET)", resp_get.status_code)
+            value_before = _parse_lvalue(resp_get)
+            logger.info("Value before write: %r", value_before)
 
-            current = _parse_lvalue(resp_signal)
-            logger.info("Current value of %r: %r", signal_name, current)
+            # ------------------------------------------------------------------
+            # 4. Write 1 — RAPID WaitUntil will unblock
+            # ------------------------------------------------------------------
+            logger.info("Writing 1 to %r …", signal_name)
+            resp_set = await client.post(
+                signal_href,
+                params={"action": "set"},
+                data={"lvalue": "1"},
+            )
+            logger.info("HTTP %s (SET → 1)", resp_set.status_code)
 
-            #  4. Write pattern (requires network + unit from your config)
-            # Uncomment and adapt once network/unit names are known:
-            #
-            # network = "Local"   # adapt to your controller
-            # unit    = "PANEL"   # adapt to your controller
-            # new_value = "0" if current == "1" else "1"
-            # await client.post(
-            #     f"/rw/iosystem/signals/{network}/{unit}/{signal_name}",
-            #     params={"action": "set"},
-            #     data={"lvalue": new_value},
-            # )
-            # logger.info("Signal %r set to %r", signal_name, new_value)
+            # ------------------------------------------------------------------
+            # 5. Read back to confirm
+            # ------------------------------------------------------------------
+            resp_get2 = await client.get(signal_href)
+            value_after = _parse_lvalue(resp_get2)
+            logger.info("Value after write 1: %r", value_after)
+
+            # ------------------------------------------------------------------
+            # 6. Write 0 — reset to known state
+            # ------------------------------------------------------------------
+            logger.info("Resetting %r to 0 …", signal_name)
+            resp_reset = await client.post(
+                signal_href,
+                params={"action": "set"},
+                data={"lvalue": "0"},
+            )
+            logger.info("HTTP %s (SET → 0)", resp_reset.status_code)
+
+            # ------------------------------------------------------------------
+            # 7. Read back final value
+            # ------------------------------------------------------------------
+            resp_get3 = await client.get(signal_href)
+            value_final = _parse_lvalue(resp_get3)
+            logger.info("Final value: %r", value_final)
 
             logger.info("Done.")
 
