@@ -723,3 +723,203 @@ class TestRWSClientSyncRetryPolicy:
         with pytest.raises(RWSHTTPError):
             client.get("rw/test")
         assert len(transport.requests) == 1
+
+
+class TestHttpMethodsHeadOptions:
+    """Tests for head() and options() — async."""
+
+    async def test_head_sends_correct_method(self) -> None:
+        """head() must use the HEAD HTTP method."""
+        transport = _RouteTransport({"rw/fileservice/test.txt": _resp(200)})
+        client = await _open_client(transport)
+        await client.head("rw/fileservice/test.txt")
+        assert transport.requests[0].method == "HEAD"
+
+    async def test_head_returns_response(self) -> None:
+        """head() must return the httpx response on HTTP 200."""
+        transport = _RouteTransport({"rw/test": _resp(200)})
+        client = await _open_client(transport)
+        response = await client.head("rw/test")
+        assert response.status_code == 200
+
+    async def test_options_sends_correct_method(self) -> None:
+        """options() must use the OPTIONS HTTP method."""
+        transport = _RouteTransport({"ctrl/network/route/add": _resp(200)})
+        client = await _open_client(transport)
+        await client.options("ctrl/network/route/add")
+        assert transport.requests[0].method == "OPTIONS"
+
+    async def test_options_returns_response(self) -> None:
+        """options() must return the httpx response on HTTP 200."""
+        transport = _RouteTransport({"rw/test": _resp(200)})
+        client = await _open_client(transport)
+        response = await client.options("rw/test")
+        assert response.status_code == 200
+
+
+class TestContentTypeInjection:
+    """Tests for the automatic Content-Type injection on POST/PUT — async."""
+
+    async def test_post_without_content_type_gets_form_urlencoded(self) -> None:
+        """POST without explicit Content-Type must receive
+        application/x-www-form-urlencoded."""
+        transport = _RouteTransport({"rw/test": _resp(204)})
+        client = await _open_client(transport)
+        await client.post("rw/test")
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/x-www-form-urlencoded" in ct
+
+    async def test_put_without_content_type_gets_form_urlencoded(self) -> None:
+        """PUT without explicit Content-Type must receive
+        application/x-www-form-urlencoded."""
+        transport = _RouteTransport({"rw/test": _resp(204)})
+        client = await _open_client(transport)
+        await client.put("rw/test", data={"value": "1"})
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/x-www-form-urlencoded" in ct
+
+    async def test_post_with_existing_content_type_is_not_overwritten(self) -> None:
+        """POST with an explicit Content-Type must not be overwritten."""
+        transport = _RouteTransport({"rw/test": _resp(204)})
+        client = await _open_client(transport)
+        await client.post(
+            "rw/test",
+            headers={"Content-Type": "application/json"},
+            content=b"{}",
+        )
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/json" in ct
+
+    async def test_get_does_not_get_content_type_injected(self) -> None:
+        """GET requests must NOT receive an injected Content-Type."""
+        transport = _RouteTransport({"rw/test": _resp(200)})
+        client = await _open_client(transport)
+        await client.get("rw/test")
+        sent = transport.requests[0]
+        assert "content-type" not in {k.lower() for k in dict(sent.headers)}
+
+
+class TestRetryPolicyConnectTimeout:
+    """ConnectTimeout retry coverage — async."""
+
+    async def test_retry_on_connect_timeout(self) -> None:
+        """ConnectTimeout triggers a retry — success on the second attempt."""
+        transport = _SequentialTransport(
+            [
+                httpx.ConnectTimeout("connect timeout"),
+                _resp(200),
+            ]
+        )
+        client = await _open_client(transport)
+        response = await client.get("rw/test")
+        assert response.status_code == 200
+        assert len(transport.requests) == 2
+
+    async def test_retry_exhausted_connect_timeout_raises_timeout_error(
+        self,
+    ) -> None:
+        """ConnectTimeout on every attempt must raise RWSTimeoutError."""
+        transport = _SequentialTransport(
+            [httpx.ConnectTimeout("connect timeout")] * _RETRY_MAX_ATTEMPTS
+        )
+        client = await _open_client(transport)
+        with pytest.raises(RWSTimeoutError):
+            await client.get("rw/test")
+
+
+class TestRWSClientSyncHttpMethodsHeadOptions:
+    """Tests for head() and options() — sync."""
+
+    def test_head_sends_correct_method(self) -> None:
+        """head() must use the HEAD HTTP method."""
+        transport = _RouteSyncTransport({"rw/test": _resp(200)})
+        client = _open_sync_client(transport)
+        client.head("rw/test")
+        assert transport.requests[0].method == "HEAD"
+
+    def test_head_returns_response(self) -> None:
+        """head() must return the httpx response on HTTP 200."""
+        transport = _RouteSyncTransport({"rw/test": _resp(200)})
+        client = _open_sync_client(transport)
+        response = client.head("rw/test")
+        assert response.status_code == 200
+
+    def test_options_sends_correct_method(self) -> None:
+        """options() must use the OPTIONS HTTP method."""
+        transport = _RouteSyncTransport({"rw/test": _resp(200)})
+        client = _open_sync_client(transport)
+        client.options("rw/test")
+        assert transport.requests[0].method == "OPTIONS"
+
+    def test_options_returns_response(self) -> None:
+        """options() must return the httpx response on HTTP 200."""
+        transport = _RouteSyncTransport({"rw/test": _resp(200)})
+        client = _open_sync_client(transport)
+        response = client.options("rw/test")
+        assert response.status_code == 200
+
+
+class TestRWSClientSyncContentTypeInjection:
+    """Tests for the automatic Content-Type injection on POST/PUT — sync."""
+
+    def test_post_without_content_type_gets_form_urlencoded(self) -> None:
+        """POST without explicit Content-Type must receive
+        application/x-www-form-urlencoded."""
+        transport = _RouteSyncTransport({"rw/test": _resp(204)})
+        client = _open_sync_client(transport)
+        client.post("rw/test")
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/x-www-form-urlencoded" in ct
+
+    def test_put_without_content_type_gets_form_urlencoded(self) -> None:
+        """PUT without explicit Content-Type must receive
+        application/x-www-form-urlencoded."""
+        transport = _RouteSyncTransport({"rw/test": _resp(204)})
+        client = _open_sync_client(transport)
+        client.put("rw/test", data={"value": "1"})
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/x-www-form-urlencoded" in ct
+
+    def test_post_with_existing_content_type_is_not_overwritten(self) -> None:
+        """POST with an explicit Content-Type must not be overwritten."""
+        transport = _RouteSyncTransport({"rw/test": _resp(204)})
+        client = _open_sync_client(transport)
+        client.post(
+            "rw/test",
+            headers={"Content-Type": "application/json"},
+            content=b"{}",
+        )
+        sent = transport.requests[0]
+        ct = sent.headers.get("content-type", "")
+        assert "application/json" in ct
+
+
+class TestRWSClientSyncRetryPolicyConnectTimeout:
+    """ConnectTimeout retry coverage — sync."""
+
+    def test_retry_on_connect_timeout(self) -> None:
+        """ConnectTimeout triggers a retry — success on the second attempt."""
+        transport = _SequentialSyncTransport(
+            [
+                httpx.ConnectTimeout("connect timeout"),
+                _resp(200),
+            ]
+        )
+        client = _open_sync_client(transport)
+        response = client.get("rw/test")
+        assert response.status_code == 200
+        assert len(transport.requests) == 2
+
+    def test_retry_exhausted_connect_timeout_raises_timeout_error(self) -> None:
+        """ConnectTimeout on every attempt must raise RWSTimeoutError."""
+        transport = _SequentialSyncTransport(
+            [httpx.ConnectTimeout("connect timeout")] * _RETRY_MAX_ATTEMPTS
+        )
+        client = _open_sync_client(transport)
+        with pytest.raises(RWSTimeoutError):
+            client.get("rw/test")

@@ -90,7 +90,7 @@ addopts = [
 [tool.coverage.run]
 source = ["abb_rws_client"]
 branch = true
-omit = [".pixi/*", "tests/*", "contrib/*", "site/*", "docs/*"]
+omit = [".pixi/*", "tests/*", "contrib/*", "site/*", "docs/*", "*old*"]
 
 [tool.coverage.report]
 exclude_lines = [
