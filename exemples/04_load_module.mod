@@ -2,6 +2,10 @@ MODULE ExampleLoadModule
     !**********************************************************************
     ! Example 04 — Dynamic module loading
     !
+    ! Auteur : Clement RACINET
+    !
+    ! Date : 13/07/2026
+    !
     ! Purpose : This module is loaded at runtime by Python via RWS.
     !           It demonstrates that a module can be injected into a
     !           running task without FlexPendant interaction.

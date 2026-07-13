@@ -2,7 +2,7 @@
 """
 HTTP session management for an ABB RWS controller (RobotWare 6).
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Module responsibilities:
 - Create and maintain an httpx.AsyncClient configured for RWS

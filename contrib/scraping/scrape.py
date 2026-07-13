@@ -3,7 +3,7 @@
 """
 ABB RobotWare 6 RWS API scraper.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Crawls the ABB Developer Center Doxygen documentation and extracts all
 RWS REST API endpoints into structured JSON and Markdown files.

@@ -2,6 +2,10 @@ MODULE ExampleIOSignal
     !**********************************************************************
     ! Example 05 — IO Signal interaction with Python
     !
+    ! Auteur : Clement RACINET
+    !
+    ! Date : 13/07/2026
+    !
     ! Purpose : RAPID side of the IO signal example.
     !           Python writes DO_EXAMPLE; this program reads it and reacts.
     !

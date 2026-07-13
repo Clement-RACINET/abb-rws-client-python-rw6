@@ -2,7 +2,7 @@
 """
 Unit tests for abb_rws_client._core.exceptions — no robot required.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Coverage:
 - RWSError base class: message, status_code, str, repr

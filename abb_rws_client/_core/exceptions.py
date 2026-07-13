@@ -2,7 +2,7 @@
 """
 Custom exceptions for abb-rws6-python-client.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Exception hierarchy::
 

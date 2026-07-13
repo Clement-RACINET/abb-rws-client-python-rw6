@@ -2,7 +2,7 @@
 """
 Serialization / deserialization of RAPID types ↔ RWS format.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 RWS format for a robtarget (compact string, no spaces)::
 

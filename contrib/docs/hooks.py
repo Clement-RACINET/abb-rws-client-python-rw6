@@ -3,7 +3,7 @@
 """
 MkDocs hook: copy docs/htmlcov/ into site/htmlcov/ after each build.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Registered in ``mkdocs.yml`` under the ``hooks:`` key. Called automatically
 by MkDocs after every ``build`` or ``serve`` run.

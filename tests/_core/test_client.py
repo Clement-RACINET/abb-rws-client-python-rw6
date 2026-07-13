@@ -2,7 +2,7 @@
 """
 Unit tests for RWSClient (async) and RWSClientSync.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Coverage:
 - Lifecycle: aopen / aclose / context manager / idempotence

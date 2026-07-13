@@ -3,7 +3,7 @@
 """
 Documentation pipeline configuration for abb_rws_client.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Single source of truth for all paths and parameters used by
 ``generate_api.py`` and ``run_docs.py``.

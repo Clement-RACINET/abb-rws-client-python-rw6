@@ -3,7 +3,7 @@
 """
 Documentation pipeline orchestrator.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Generates the API reference pages, produces the coverage HTML report,
 and starts ``mkdocs serve``.

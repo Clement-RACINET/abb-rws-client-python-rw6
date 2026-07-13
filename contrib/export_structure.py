@@ -2,7 +2,7 @@
 # contrib/export_structure.py
 """Repository tree exporter.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Walks the repository from its root, respects ``.gitignore`` patterns
 via stdlib only (fnmatch + re), and writes a Unicode tree representation

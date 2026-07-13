@@ -2,6 +2,10 @@ MODULE ExampleReadWrite
     !**********************************************************************
     ! Example 03 — Read / Write RAPID variables
     !
+    ! Auteur : Clement RACINET
+    !
+    ! Date : 13/07/2026
+    !
     ! Purpose : Expose RAPID variables that Python can read and write
     !           via RWS symbol API.
     !

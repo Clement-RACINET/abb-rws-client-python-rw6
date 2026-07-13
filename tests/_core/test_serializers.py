@@ -2,7 +2,7 @@
 """
 Unit tests for abb_rws_client._core.serializers — no robot required.
 
-Author: Clément RACINET
+Author: Clement RACINET
 
 Coverage:
 - robtarget_to_rws: serialization, float precision, sentinel values, no spaces
