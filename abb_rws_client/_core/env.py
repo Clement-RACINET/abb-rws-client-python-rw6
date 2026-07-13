@@ -15,7 +15,8 @@ Environment variables recognised by :class:`~abb_rws_client.RWSClient`:
     - ``RWS_USER``     : RWS username (default: ``"Default User"``).
     - ``RWS_PASSWORD`` : RWS password (default: ``"robotics"``).
     - ``RWS_PORT``     : HTTP port as integer string (default: ``"80"``).
-    - ``RWS_TIMEOUT``  : HTTP timeout in seconds as float string (default: ``"10.0"``).
+    - ``RWS_TIMEOUT``  : HTTP timeout in seconds as float string (default: no timeout).
+                         Set to a number (e.g. ``"30"``) to limit request duration.
     - ``RWS_LOG_LEVEL``: Logging level for :func:`~abb_rws_client.configure_logging`
                          (default: ``"WARNING"``).
 """
@@ -178,6 +179,37 @@ def get_env_float(key: str, default: float) -> float:
         >>> timeout = get_env_float("RWS_TIMEOUT", 10.0)
     """
     raw = os.environ.get(key, "")
+    try:
+        return float(raw)
+    except ValueError:
+        return default
+
+
+def get_env_float_or_none(key: str, default: float | None) -> float | None:
+    """Read a float-or-None environment variable with a fallback default.
+
+    Accepts ``"none"``, ``"inf"``, ``"infinite"``, ``"infinity"``
+    (case-insensitive) as special string values mapping to ``None``
+    (no timeout). When the variable is absent or empty, *default* is
+    returned as-is.
+
+    Args:
+        key: Environment variable name.
+        default: Value returned when the variable is absent, empty, or invalid.
+
+    Returns:
+        The parsed float, ``None`` (no timeout), or *default*.
+
+    Example:
+        >>> timeout = get_env_float_or_none("RWS_TIMEOUT", None)
+        >>> timeout is None  # → no timeout
+        True
+    """
+    raw = os.environ.get(key, "").strip().lower()
+    if not raw:
+        return default
+    if raw in {"none", "inf", "infinite", "infinity"}:
+        return None
     try:
         return float(raw)
     except ValueError:

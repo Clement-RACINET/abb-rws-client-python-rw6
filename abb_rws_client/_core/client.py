@@ -44,7 +44,7 @@ from typing import Any, Self
 
 import httpx
 
-from abb_rws_client._core.env import get_env_float, get_env_int, get_env_str
+from abb_rws_client._core.env import get_env_float_or_none, get_env_int, get_env_str
 from abb_rws_client._core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
@@ -165,7 +165,7 @@ class RWSClient:
         username: RWS username (ABB default: ``"Default User"``).
         password: RWS password (ABB default: ``"robotics"``).
         port: Controller HTTP port (default: ``80``).
-        timeout: HTTP timeout in seconds (default: ``10.0``).
+        timeout: HTTP timeout in seconds, or ``None`` for no timeout (default: ``None``).
 
     Example:
         ```python
@@ -186,7 +186,9 @@ class RWSClient:
         self.username = username or get_env_str("RWS_USER",     "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
         self.port     = port     or get_env_int("RWS_PORT",     80)
-        self.timeout  = timeout  or get_env_float("RWS_TIMEOUT", 10.0)
+        self.timeout = (
+            timeout if timeout is not None else get_env_float_or_none("RWS_TIMEOUT", None)
+        )
         self.base_url = f"http://{self.host}:{self.port}/"
         self._http: httpx.AsyncClient | None = None
 
@@ -500,11 +502,17 @@ class RWSClientSync:
     Designed to be used as a synchronous context manager.
 
     Args:
-        host: Controller IP address or hostname.
+        host: Controller IP address or hostname (e.g. ``"192.168.125.1"``).
+            Reads ``RWS_HOST`` from environment if ``None``.
         username: RWS username (ABB default: ``"Default User"``).
+            Reads ``RWS_USER`` from environment if ``None``.
         password: RWS password (ABB default: ``"robotics"``).
+            Reads ``RWS_PASSWORD`` from environment if ``None``.
         port: HTTP port (default: ``80``).
-        timeout: HTTP timeout in seconds (default: ``10.0``).
+            Reads ``RWS_PORT`` from environment if ``None``.
+        timeout: HTTP timeout in seconds, or ``None`` for no timeout
+            (default: ``None``). Reads ``RWS_TIMEOUT`` from environment
+            if not provided explicitly.
 
     Example:
         ```python
@@ -515,18 +523,20 @@ class RWSClientSync:
 
     def __init__(
         self,
-        host: str,
-        username: str = "Default User",
-        password: str = "robotics",
-        port: int = 80,
-        timeout: float = 10.0,
+        host: str | None = None,
+        username: str | None = None,
+        password: str | None = None,
+        port: int | None = None,
+        timeout: float | None = None,
     ) -> None:
-        self.host = host
-        self.username = username
-        self.password = password
-        self.port = port
-        self.timeout = timeout
-        self.base_url = f"http://{host}:{port}/"
+        self.host     = host     or get_env_str("RWS_HOST",     "192.168.125.1")
+        self.username = username or get_env_str("RWS_USER",     "Default User")
+        self.password = password or get_env_str("RWS_PASSWORD", "robotics")
+        self.port     = port     or get_env_int("RWS_PORT",     80)
+        self.timeout = (
+            timeout if timeout is not None else get_env_float_or_none("RWS_TIMEOUT", None)
+        )
+        self.base_url = f"http://{self.host}:{self.port}/"
         self._http: httpx.Client | None = None
 
     # ── Lifecycle ───────────────────────────────────────────────────────────
