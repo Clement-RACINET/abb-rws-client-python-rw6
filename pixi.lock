@@ -509,8 +509,8 @@ packages:
   timestamp: 1770939786096
 - pypi: ./
   name: abb-rws6-python-client
-  version: 0.1.0
-  sha256: b198f41b059d88aa2baf95092bd4641445215a0607e38d25c6bf094801a96208
+  version: 0.8.0
+  sha256: f6eea3332e7a45a37c363301c31273c8c0db4c19d9c6cd525540fd9631ddb6fe
   requires_dist:
   - httpx>=0.27,<1.0
   - python-dotenv>=1.0,<2.0

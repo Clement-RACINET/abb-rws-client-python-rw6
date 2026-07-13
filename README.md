@@ -13,9 +13,12 @@ API under **RobotWare 6**.
 | Domain           | Operations                                                                   |
 | ---------------- | ---------------------------------------------------------------------------- |
 | Session          | HTTP Digest authentication, ABBCX cookie, automatic retry                    |
-| RAPID Mastership | Acquire / release (`async with` context manager)                           |
-| RAPID Variables  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget` |
-| RAPID Execution  | Read execution state (`running` / `stopped`)                             |
+| RAPID Mastership | Acquire / release (`async with` context manager)                             |
+| RAPID Variables  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget`                |
+| RAPID Execution  | Read / control execution state (`running` / `stopped`)                       |
+| IO Signals       | Read / write digital & analog signals                                        |
+| Controller       | Panel, motion system, CFG, elog, file service, subscriptions                 |
+| Coverage         | 710 unit tests — 99% coverage — `ruff` clean                                 |
 
 ---
 
@@ -65,12 +68,12 @@ All options are read from environment variables (`.env` file):
 
 | Variable             | Default          | Description               |
 | -------------------- | ---------------- | ------------------------- |
-| `ROBOT_IP`         | —               | ABB controller IP address |
+| `ROBOT_IP`         | ---               | ABB controller IP address |
 | `RWS_USER`         | `Default User` | RWS username              |
 | `RWS_PASSWORD`     | `robotics`     | RWS password              |
-| `RWS_TIMEOUT`      | `10`           | HTTP timeout (seconds)    |
-| `RWS_RAPID_MODULE` | —               | Target RAPID module name  |
+| `RWS_TIMEOUT`      | ---            | HTTP timeout (seconds)    |
 | `RWS_RAPID_TASK`   | `T_ROB1`       | Target RAPID task name    |
+| `RWS_LOG_LEVEL`    | `T_ROB1`       | Target RAPID task name    |
 
 ---
 
@@ -81,11 +84,15 @@ abb_rws_client/
 ├── _core/
 │   ├── client.py        # RWSClient (async) + RWSClientSync
 │   ├── exceptions.py    # Custom exception hierarchy
-│   └── serializers.py   # RAPID types ↔ Python
+│   ├── serializers.py   # RAPID types ↔ Python
+│   ├── env.py           # .env loader
+│   └── logging.py       # Library logger
 ├── rws/                 # 1 function = 1 HTTP endpoint  ← AUTO-GENERATED
 │   ├── ctrl/
+│   ├── iosystem/
 │   ├── rapid/
-│   └── ...
+│   ├── users/
+│   └── ...              # cfg, elog, panel, motionsystem, vision…
 └── highlevel/           # Composed wrappers (no direct HTTP)
 ```
 

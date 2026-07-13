@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "abb-rws6-python-client"
-version = "0.1.0"
+version = "0.8.0"
 description = "Async Python client for ABB Robot Web Services (RobotWare 6)"
 readme = "README.md"
 license = { text = "MIT" }

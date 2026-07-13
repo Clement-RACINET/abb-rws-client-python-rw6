@@ -1,4 +1,3 @@
-
 ## `contrib/README.fr.md` (FR)
 
 ```markdown
@@ -11,7 +10,6 @@ publié (exclu via `pyproject.toml → [tool.hatch.build.targets.wheel]`).
 ---
 
 ## Structure
-
 ```
 
 contrib/
@@ -30,7 +28,8 @@ contrib/
 │   ├── routes_list.json                 # Liste brute des routes (cache du crawl)
 │   ├── robot_controller_return_code.txt # Référence des codes retour ABB
 │   └── scrape.log                       # Journal du dernier scraping
-└── export_structure.py    # Exporte la structure du repo dans un fichier .txt
+├── export_structure.py    # Exporte la structure du repo dans un fichier .txt
+└── fix_init.py            # Audite et réécrit tous les fichiers __init__.py
 
 ```
 

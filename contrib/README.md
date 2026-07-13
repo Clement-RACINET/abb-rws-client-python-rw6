@@ -27,7 +27,8 @@ contrib/
 │   ├── routes_list.json                 # Raw route list (crawl cache)
 │   ├── robot_controller_return_code.txt # ABB return codes reference
 │   └── scrape.log                       # Log of the last scraping run
-└── export_structure.py    # Exports the repository tree to a .txt file
+├── export_structure.py    # Exports the repository tree to a .txt file
+└── fix_init.py            # Audits and recites all __init__.py files
 
 ```
 

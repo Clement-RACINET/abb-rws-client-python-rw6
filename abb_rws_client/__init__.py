@@ -64,4 +64,4 @@ __all__ = [
     "rws_to_robtarget",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.8.0"
