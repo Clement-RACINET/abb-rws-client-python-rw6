@@ -70,6 +70,7 @@ async def test_subscribe_on_resources() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -100,6 +101,7 @@ async def test_add_new_resources_remove_existing_resources_or() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "PUT"
     assert transport.last_request.url.path == "/subscripion/group_id_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 200
 
 @pytest.mark.asyncio

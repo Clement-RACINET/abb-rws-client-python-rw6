@@ -48,14 +48,59 @@ configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
 logger = get_logger("examples.io_signal")
 
 
+#  Helpers
+
+def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
+    """Extract the canonical href of a named signal from a search response.
+
+    The search response body contains HTML/XML with ``<a href="...">`` links
+    pointing to each matched signal. This function extracts the path for the
+    signal whose name matches ``signal_name`` exactly.
+
+    Args:
+        response: Raw HTTP response from ``post_signal_search``.
+        signal_name: Exact signal name to locate (case-sensitive).
+
+    Returns:
+        Relative URL path to the signal resource, e.g.
+        ``"/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE"``.
+
+    Raises:
+        ValueError: If no href matching ``signal_name`` is found.
+
+    Example:
+        ```python
+        href = _parse_signal_href(resp_search, "DO_EXAMPLE")
+        # "/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE"
+        ```
+    """
+    # RW6 response format:
+    # <a href="/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE;state">DO_EXAMPLE</a>
+    # We match the href that ends with /{signal_name} or /{signal_name};state
+    pattern = rf'href=["\']([^"\']*/{re.escape(signal_name)}(?:;[^"\']*)?)["\']'
+    match = re.search(pattern, response.text)
+    if not match:
+        raise ValueError(
+            f"Signal {signal_name!r} not found in search response. "
+            f"Body excerpt: {response.text[:300]}"
+        )
+    # Strip any ;state suffix and query parameters — keep the clean path
+    href = match.group(1).split(";")[0].split("?")[0]
+    return href
+
+
 def _parse_lvalue(response: httpx.Response) -> str:
-    """Extract the ``lvalue`` from a signal search response.
+    """Extract the ``lvalue`` from a direct signal GET response.
+
+    This function must be called on the response of a ``GET`` to the
+    signal's canonical URL (e.g. ``GET /rw/iosystem/signals/{net}/{unit}/{name}``),
+    **not** on a search response.
 
     Handles both JSON and XML/HTML responses from different RW6 firmware
     versions.
 
     Args:
-        response: Raw HTTP response from ``post_signal_search``.
+        response: Raw HTTP response from a direct ``GET`` on a signal URL.
 
     Returns:
         Signal logical value as string (``"0"`` or ``"1"`` for digital
@@ -66,9 +111,12 @@ def _parse_lvalue(response: httpx.Response) -> str:
 
     Example:
         ```python
-        val = _parse_lvalue(resp)  # "0" or "1"
+        resp = await client.get("/rw/iosystem/signals/Local/PANEL/DO_EXAMPLE")
+        val = _parse_lvalue(resp)
+        # "0" or "1"
         ```
     """
+    # JSON path: {"state": [{"lvalue": "0", ...}]}
     try:
         data = response.json()
         states = data.get("state", [])
@@ -77,6 +125,7 @@ def _parse_lvalue(response: httpx.Response) -> str:
     except Exception:
         pass
 
+    # XML / HTML path: <span class="lvalue">0</span>
     match = re.search(r'class=["\']lvalue["\'][^>]*>([^<]+)<', response.text)
     if match:
         return match.group(1).strip()
@@ -86,10 +135,12 @@ def _parse_lvalue(response: httpx.Response) -> str:
     )
 
 
+# main()
+
 async def main() -> None:
     """Run the IO signal example."""
-    signal_name = os.getenv("RWS_SIGNAL_NAME", "DO_EXAMPLE")
-
+    #signal_name = os.getenv("RWS_SIGNAL_NAME", "DO_EXAMPLE") [DEBUG]
+    signal_name = os.getenv("RWS_SIGNAL_NAME", "PCorpAKD_GI_MotorTemperature")
     logger.info("Connecting to controller …")
     logger.info("Target signal: %r", signal_name)
 
@@ -97,6 +148,7 @@ async def main() -> None:
         async with RWSClient() as client:
             logger.info("Connected → %s", client.base_url)
 
+            #  1. List all signals
             logger.info("Fetching signal list …")
             resp_list = await get_io_signals(client)
             logger.info(
@@ -105,27 +157,45 @@ async def main() -> None:
                 len(resp_list.text),
             )
 
+            # DEBUG TEMPORAIRE — à supprimer après
+            logger.info("Signal list body:\n%s", resp_list.text[:])
+
+
+            #  2. Search the signal by name to get its canonical href
+            # post_signal_search returns a FILTERED LIST of signal links,
+            # NOT a lvalue. We must extract the href and GET the signal
+            # directly to read its value.
             logger.info("Searching for signal %r …", signal_name)
             resp_search = await post_signal_search(
                 client,
                 action="signal-search",
                 name=signal_name,
             )
-            logger.info("HTTP %s", resp_search.status_code)
+            logger.info("HTTP %s (search)", resp_search.status_code)
 
-            current = _parse_lvalue(resp_search)
-            logger.info("Current value: %r", current)
+            # Extract the canonical path from the search result links
+            signal_href = _parse_signal_href(resp_search, signal_name)
+            logger.debug("Signal href: %s", signal_href)
 
-            # Write pattern (requires network + unit names from your config):
+            #  3. GET the signal directly to read its lvalue
+            resp_signal = await client.get(signal_href)
+            logger.info("HTTP %s (direct GET)", resp_signal.status_code)
+
+            current = _parse_lvalue(resp_signal)
+            logger.info("Current value of %r: %r", signal_name, current)
+
+            #  4. Write pattern (requires network + unit from your config)
+            # Uncomment and adapt once network/unit names are known:
             #
-            #   network = "Local"          # adapt to your controller
-            #   unit    = "PANEL"          # adapt to your controller
-            #   new_value = "0" if current == "1" else "1"
-            #   await client.post(
-            #       f"/rw/iosystem/signals/{network}/{unit}/{signal_name}",
-            #       params={"action": "set"},
-            #       data={"lvalue": new_value},
-            #   )
+            # network = "Local"   # adapt to your controller
+            # unit    = "PANEL"   # adapt to your controller
+            # new_value = "0" if current == "1" else "1"
+            # await client.post(
+            #     f"/rw/iosystem/signals/{network}/{unit}/{signal_name}",
+            #     params={"action": "set"},
+            #     data={"lvalue": new_value},
+            # )
+            # logger.info("Signal %r set to %r", signal_name, new_value)
 
             logger.info("Done.")
 

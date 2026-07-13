@@ -89,6 +89,7 @@ async def test_post_mastership_request() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -104,6 +105,7 @@ async def test_post_mastership_release() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -119,6 +121,7 @@ async def test_post_mastership_subscribe() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -164,6 +167,7 @@ async def test_post_mastership_domain_request() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership/domain_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -179,6 +183,7 @@ async def test_post_mastership_domain_release() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/mastership/domain_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -194,4 +199,5 @@ async def test_post_mastership_domain_subscribe() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201

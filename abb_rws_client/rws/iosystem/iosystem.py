@@ -852,6 +852,7 @@ async def update_io_signal_value(
     return await client.post(
         f"/rw/iosystem/signals/{network}/{device}/{signal}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_io_signal(

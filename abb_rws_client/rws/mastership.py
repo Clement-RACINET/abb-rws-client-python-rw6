@@ -109,6 +109,7 @@ async def post_mastership_request(
     return await client.post(
         "/rw/mastership",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_mastership_release(
@@ -143,6 +144,7 @@ async def post_mastership_release(
     return await client.post(
         "/rw/mastership",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_mastership_subscribe(
@@ -290,6 +292,7 @@ async def post_mastership_domain_request(
     return await client.post(
         f"/rw/mastership/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_mastership_domain_release(
@@ -326,6 +329,7 @@ async def post_mastership_domain_release(
     return await client.post(
         f"/rw/mastership/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_mastership_domain_subscribe(

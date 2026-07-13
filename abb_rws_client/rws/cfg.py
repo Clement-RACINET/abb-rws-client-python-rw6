@@ -107,6 +107,7 @@ async def validate_cfg_file(
     return await client.post(
         "/rw/cfg",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def load_cfg_file(
@@ -141,6 +142,7 @@ async def load_cfg_file(
     return await client.post(
         "/rw/cfg",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def validate_cfg_instance_before_delete(
@@ -423,6 +425,7 @@ async def save_cfg_domain(
     return await client.post(
         f"/rw/cfg/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def reset_cfg_domain(
@@ -459,6 +462,7 @@ async def reset_cfg_domain(
     return await client.post(
         f"/rw/cfg/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_cfg_type(
@@ -634,6 +638,7 @@ async def reset_cfg_instances(
     return await client.post(
         f"/rw/cfg/{domain}/{type}/instances",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def create_default_cfg_instance(
@@ -673,6 +678,7 @@ async def create_default_cfg_instance(
     return await client.post(
         f"/rw/cfg/{domain}/{type}/instances",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_cfg_instance(

@@ -238,6 +238,7 @@ async def post_unblock_signals(
     return await client.post(
         "/rw/iosystem/signals",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_io_signals_actions(

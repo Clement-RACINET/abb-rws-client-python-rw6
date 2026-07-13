@@ -89,6 +89,7 @@ async def test_create_queue() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/dipc"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -134,6 +135,7 @@ async def test_post_send_message() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -179,6 +181,7 @@ async def test_subscribe_dipc_queue() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -194,4 +197,5 @@ async def test_subscribe_dipc_queue_without_reading_message() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201

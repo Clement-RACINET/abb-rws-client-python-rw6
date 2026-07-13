@@ -1,6 +1,6 @@
-MODULE ExampleReadWrite
+MODULE ReadWriteVariable
     !**********************************************************************
-    ! Example 03 — Read / Write RAPID variables
+    ! Example 03 - Read / Write RAPID variables
     !
     ! Auteur : Clement RACINET
     !
@@ -10,15 +10,15 @@ MODULE ExampleReadWrite
     !           via RWS symbol API.
     !
     ! Variable types demonstrated:
-    !   - num    (gCounter)  → Python writes an integer as string "42"
-    !   - string (gMessage)  → Python writes a quoted string "\"Hello\""
-    !   - bool   (gEnabled)  → Python writes "TRUE" or "FALSE"
+    !   - num    (gCounter)  : Python writes an integer as string "42"
+    !   - string (gMessage)  : Python writes a quoted string "\"Hello\""
+    !   - bool   (gEnabled)  : Python writes "TRUE" or "FALSE"
     !
     ! Note: PERS variables persist across program restarts.
     !       VAR variables are reset to their initial value on resetpp.
     !**********************************************************************
 
-    ! Persistent variables — survive program restart
+    ! Persistent variables - survive program restart
     PERS num    gCounter := 0;
     PERS string gMessage := "initial";
     PERS bool   gEnabled := FALSE;

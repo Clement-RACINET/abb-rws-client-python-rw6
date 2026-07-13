@@ -68,6 +68,7 @@ async def test_post_remote_user_logon_request() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/remoteuser"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -83,6 +84,7 @@ async def test_post_remote_user_logout_request() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/remoteuser"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -98,4 +100,5 @@ async def test_subscribe_on_remote_user_state() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201

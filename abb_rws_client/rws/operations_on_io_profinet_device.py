@@ -384,7 +384,10 @@ async def post_clear_the_alarms(
         <Response [200]>
         ```
     """
-    return await client.post(f"rw/iosystem/devices/{network}/{device}/alarms/clear")
+    return await client.post(
+        f"rw/iosystem/devices/{network}/{device}/alarms/clear",
+        data={},
+    )
 
 async def get_forms_3(
     client: RWSClient,

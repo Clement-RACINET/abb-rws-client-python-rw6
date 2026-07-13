@@ -101,6 +101,7 @@ async def test_update_rapid_variable_current_value() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -116,6 +117,7 @@ async def test_validate_rapid_variable() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/symbol/data"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -131,6 +133,7 @@ async def test_subscribe_on_rapid_persistent_variable() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -146,4 +149,5 @@ async def test_update_rapid_variable_initial_value() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204

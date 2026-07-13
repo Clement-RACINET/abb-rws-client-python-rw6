@@ -69,6 +69,7 @@ async def test_post_signal_search() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/signals"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -84,6 +85,7 @@ async def test_post_signal_search_extended() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/signals"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -99,6 +101,7 @@ async def test_post_unblock_signals() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/signals"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204
 
 @pytest.mark.asyncio

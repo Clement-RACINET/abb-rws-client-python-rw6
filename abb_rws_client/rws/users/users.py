@@ -109,7 +109,10 @@ async def register_the_user(client: RWSClient) -> httpx.Response:
         <Response [201]>
         ```
     """
-    return await client.post("/users")
+    return await client.post(
+        "/users",
+        data={},
+    )
 
 async def impersonate_user(
     client: RWSClient,
@@ -143,6 +146,7 @@ async def impersonate_user(
     return await client.post(
         "/users",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def login_as_local_user(

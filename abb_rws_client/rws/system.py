@@ -198,6 +198,7 @@ async def reset_accumulated_energy(
     return await client.post(
         "/rw/system/energy",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_system_energy(client: RWSClient) -> httpx.Response:

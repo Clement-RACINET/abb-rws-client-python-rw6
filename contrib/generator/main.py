@@ -23,10 +23,10 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 import re
 import sys
 import textwrap
-from pathlib import Path
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -713,7 +713,7 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep, func_name in zip(endpoints, func_names):
+    for ep, func_name in zip(endpoints, func_names, strict=False,):
         lines.extend(render_function(ep, func_name=func_name))
         lines.append("")
 
@@ -732,6 +732,12 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
 
         All docstring lines are wrapped to ``_MAX_LINE`` characters to
         satisfy ``E501``.
+
+        All POST and PUT requests include ``data={}`` at minimum, even
+        when the ABB endpoint declares no body parameters. This ensures
+        httpx always sends ``Content-Type: application/x-www-form-urlencoded``,
+        which ABB RW6 requires on every POST/PUT — returning HTTP 415
+        otherwise.
 
     Args:
         ep: Endpoint dictionary extracted from the ABB JSON.
@@ -813,11 +819,21 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
         else:
             httpx_kwargs.append(f"params={{{items_str}}}")
 
-    if body_params and method in ("POST", "PUT"):
-        items = ", ".join(f'"{n}": {n}' for n, _ in body_params)
-        httpx_kwargs.append(
-            f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}"
-        )
+    if method in ("POST", "PUT"):
+        if body_params:
+            # Body parameters present: build a filtered dict comprehension
+            # so that optional params set to None are not sent.
+            items = ", ".join(f'"{n}": {n}' for n, _ in body_params)
+            httpx_kwargs.append(
+                f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}"
+            )
+        else:
+            # No body parameters declared by ABB, but we still must send
+            # Content-Type: application/x-www-form-urlencoded.
+            # ABB RW6 returns HTTP 415 on any POST/PUT that lacks this
+            # header, even when the body is empty.
+            # Passing data={} causes httpx to set the header automatically.
+            httpx_kwargs.append("data={}")
 
     method_lower = method.lower()
     success_code = parse_success_code(success_raw)
@@ -977,7 +993,7 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep, func_name in zip(endpoints, func_names):
+    for ep, func_name in zip(endpoints, func_names, strict=False,):
         lines.extend(render_test_function(ep, func_name=func_name))
         lines.append("")
 
@@ -1038,6 +1054,7 @@ def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]
     for raw_p, py_p in zip(
         re.findall(r"\{([^}]+)\}", url_path_only),
         path_params,
+        strict=False,
     ):
         expected_path = expected_path.replace(f"{{{raw_p}}}", f"{py_p}_test")
     if not expected_path.startswith("/"):
@@ -1073,6 +1090,14 @@ def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]
             lines.append(
                 f'    assert transport.last_request.url.params["{n}"] == "{n}_val"'
             )
+
+    # POST/PUT must always carry Content-Type: application/x-www-form-urlencoded
+    # (ABB RW6 returns 415 otherwise, even when the body is empty)
+    if method in ("POST", "PUT"):
+        lines.append(
+            '    assert "application/x-www-form-urlencoded" in '
+            '(transport.last_request.headers.get("content-type") or "")'
+        )
 
     lines.append(f"    assert resp.status_code == {status_code}")
 
@@ -1177,7 +1202,8 @@ def main(argv: list[str] | None = None) -> None:
             test_file.write_text(test_content, encoding="utf-8")
             print(f"  [TEST] {test_file.relative_to(REPO_ROOT)}")
 
-    print(f"\n[OK] {'Dry run' if args.dry_run else 'Generation'} complete — {len(modules)} modules.")
+    label = "Dry run" if args.dry_run else "Generation"
+    print(f"\n[OK] {label} complete — {len(modules)} modules.")
 
 
 if __name__ == "__main__":

@@ -247,6 +247,76 @@ class RWSClient:
 
     # ── Internal request with retry ─────────────────────────────────────────
 
+    async def _old_request(
+        self,
+        method: str,
+        path: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        """Execute an HTTP request with the transport-error retry policy.
+
+        Args:
+            method: HTTP method (``"GET"``, ``"POST"``, ``"PUT"``, ``"DELETE"``).
+            path: Path relative to the base URL (e.g. ``"rw/rapid/execution"``).
+            **kwargs: Additional parameters forwarded to httpx
+                (``params``, ``data``, ``json``, …).
+
+        Returns:
+            httpx response (status not checked — call ``_raise_for_status``
+            if needed, though it is already called internally).
+
+        Raises:
+            RuntimeError: If the client is not open.
+            RWSConnectionError: After retries are exhausted on ConnectError.
+            RWSTimeoutError: After retries are exhausted on ReadTimeout/PoolTimeout.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+
+        Example:
+            ```python
+            >>> resp = await client._request(
+            ...     "GET",
+            ...     "rw/rapid/execution",
+            ...     params={"json": "1"},
+            ... )
+            ```
+        """
+        if self._http is None:
+            raise RuntimeError(
+                "RWSClient is not open. Use 'async with RWSClient(...) as client' "
+                "or call await client.aopen() first."
+            )
+        last_exc: Exception | None = None
+        for attempt in range(_RETRY_MAX_ATTEMPTS):
+            try:
+                response = await self._http.request(method, path, **kwargs)
+                _raise_for_status(response, path)
+                return response
+            except _RETRYABLE_EXCEPTIONS as exc:
+                last_exc = exc
+                if attempt < _RETRY_MAX_ATTEMPTS - 1:
+                    delay = _retry_delay(attempt)
+                    logger.warning(
+                        "RWSClient %s %s → %s (attempt %d/%d, retry in %.2fs)",
+                        method,
+                        path,
+                        type(exc).__name__,
+                        attempt + 1,
+                        _RETRY_MAX_ATTEMPTS,
+                        delay,
+                    )
+                    await asyncio.sleep(delay)
+        # All retries exhausted
+        assert last_exc is not None
+        if isinstance(last_exc, httpx.ConnectError):
+            raise RWSConnectionError(
+                f"Connection failed to {self.base_url}: {last_exc}"
+            ) from last_exc
+        raise RWSTimeoutError(
+            f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
+        ) from last_exc
+    
     async def _request(
         self,
         method: str,
@@ -287,6 +357,16 @@ class RWSClient:
                 "RWSClient is not open. Use 'async with RWSClient(...) as client' "
                 "or call await client.aopen() first."
             )
+
+        # ABB RW6 requires Content-Type: application/x-www-form-urlencoded on
+        # every POST and PUT, even when the body is empty. httpx does not set
+        # this header automatically when data={} or no body is provided.
+        if method in ("POST", "PUT"):
+            headers: dict[str, str] = dict(kwargs.pop("headers", None) or {})
+            if "content-type" not in {k.lower() for k in headers}:
+                headers["Content-Type"] = "application/x-www-form-urlencoded"
+            kwargs["headers"] = headers
+
         last_exc: Exception | None = None
         for attempt in range(_RETRY_MAX_ATTEMPTS):
             try:
@@ -591,6 +671,71 @@ class RWSClientSync:
 
     # ── Internal request with retry ─────────────────────────────────────────
 
+    def __old_request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
+        """Execute a synchronous HTTP request with the transport-error retry policy.
+
+        Args:
+            method: HTTP method (``"GET"``, ``"POST"``, ``"PUT"``, ``"DELETE"``).
+            path: Path relative to the base URL.
+            **kwargs: Additional parameters forwarded to httpx.
+
+        Returns:
+            Validated httpx response (status < 400).
+
+        Raises:
+            RuntimeError: If the client is not open.
+            RWSConnectionError: After retries are exhausted on ConnectError.
+            RWSTimeoutError: After retries are exhausted on timeout errors.
+            RWSAuthenticationError: On HTTP 401.
+            RWSNotFoundError: On HTTP 404.
+            RWSHTTPError: On any other HTTP >= 400.
+
+        Example:
+            ```python
+            >>> resp = client._request(
+            ...     "GET",
+            ...     "rw/rapid/execution",
+            ...     params={"json": "1"},
+            ... )
+            ```
+        """
+        if self._http is None:
+            raise RuntimeError(
+                "RWSClientSync is not open. Use 'with RWSClientSync(...) as client' "
+                "or call client.open() first."
+            )
+        import time
+
+        last_exc: Exception | None = None
+        for attempt in range(_RETRY_MAX_ATTEMPTS):
+            try:
+                response = self._http.request(method, path, **kwargs)
+                _raise_for_status(response, path)
+                return response
+            except _RETRYABLE_EXCEPTIONS as exc:
+                last_exc = exc
+                if attempt < _RETRY_MAX_ATTEMPTS - 1:
+                    delay = _retry_delay(attempt)
+                    logger.warning(
+                        "RWSClientSync %s %s → %s (attempt %d/%d, retry in %.2fs)",
+                        method,
+                        path,
+                        type(exc).__name__,
+                        attempt + 1,
+                        _RETRY_MAX_ATTEMPTS,
+                        delay,
+                    )
+                    time.sleep(delay)
+        # All retries exhausted
+        assert last_exc is not None
+        if isinstance(last_exc, httpx.ConnectError):
+            raise RWSConnectionError(
+                f"Cannot connect to {self.base_url}: {last_exc}"
+            ) from last_exc
+        raise RWSTimeoutError(
+            f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
+        ) from last_exc
+
     def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
         """Execute a synchronous HTTP request with the transport-error retry policy.
 
@@ -624,6 +769,16 @@ class RWSClientSync:
                 "RWSClientSync is not open. Use 'with RWSClientSync(...) as client' "
                 "or call client.open() first."
             )
+
+        # ABB RW6 requires Content-Type: application/x-www-form-urlencoded on
+        # every POST and PUT, even when the body is empty. httpx does not set
+        # this header automatically when data={} or no body is provided.
+        if method in ("POST", "PUT"):
+            headers: dict[str, str] = dict(kwargs.pop("headers", None) or {})
+            if "content-type" not in {k.lower() for k in headers}:
+                headers["Content-Type"] = "application/x-www-form-urlencoded"
+            kwargs["headers"] = headers
+
         import time
 
         last_exc: Exception | None = None

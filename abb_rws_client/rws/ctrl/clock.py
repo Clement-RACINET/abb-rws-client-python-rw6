@@ -101,7 +101,10 @@ async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
         <Response [204]>
         ```
     """
-    return await client.put("/ctrl/clock")
+    return await client.put(
+        "/ctrl/clock",
+        data={},
+    )
 
 async def get_timezone_resource(client: RWSClient) -> httpx.Response:
     """
@@ -185,7 +188,10 @@ async def set_the_time_zone(client: RWSClient) -> httpx.Response:
         <Response [204]>
         ```
     """
-    return await client.post("/ctrl/clock/timezone")
+    return await client.post(
+        "/ctrl/clock/timezone",
+        data={},
+    )
 
 async def get_time_server_resource(client: RWSClient) -> httpx.Response:
     """
@@ -276,6 +282,7 @@ async def set_the_time_server(
     return await client.post(
         "/ctrl/clock/timeserver",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_test_time_server(

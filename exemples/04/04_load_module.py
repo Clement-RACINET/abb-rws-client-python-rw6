@@ -42,7 +42,11 @@ async def main() -> None:
     """Run the load module example."""
     task = os.getenv("RWS_RAPID_TASK", "T_ROB1")
     module_name = "LoadModule"
-    controller_path = os.getenv("RWS_MODULE_PATH", f"$HOME/{module_name}.mod")
+    # actual path on the controller, local overload
+    controller_path = os.getenv(
+        "RWS_MODULE_PATH",
+        "$HOME/000_TESTS/RWS_test/2026_test/LoadModule/LoadModule.mod",
+    )
 
     logger.info("Connecting to controller …")
     logger.info("Module     : %s", module_name)

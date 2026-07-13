@@ -82,4 +82,5 @@ async def test_set_the_identity_of_the_controller() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "PUT"
     assert transport.last_request.url.path == "/ctrl/identity"
+    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
     assert resp.status_code == 204

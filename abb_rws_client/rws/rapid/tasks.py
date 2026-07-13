@@ -187,6 +187,7 @@ async def stop_rapid_spy_logging(
     return await client.post(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_activate_deactivate_rapid_tasks(
@@ -222,6 +223,7 @@ async def post_activate_deactivate_rapid_tasks(
     return await client.post(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_program_motion_pointer_sync_state_for(
@@ -496,6 +498,7 @@ async def post_abort_current_execution_level(
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_activate_deactivate_rapid_task(
@@ -532,6 +535,7 @@ async def post_activate_deactivate_rapid_task(
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_activation_record(
@@ -773,6 +777,7 @@ async def post_link_rapid_task(
     return await client.post(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_pallet(
@@ -1474,6 +1479,7 @@ async def post_unload_program_from_rapid_task(
     return await client.post(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def save_program(
@@ -2006,6 +2012,7 @@ async def set_the_program_pointer_pp_position_to_4(
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def set_the_program_pointer_pp_position_to_5(
@@ -2042,6 +2049,7 @@ async def set_the_program_pointer_pp_position_to_5(
     return await client.post(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_program_pointer(

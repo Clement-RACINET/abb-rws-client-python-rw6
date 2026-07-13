@@ -220,6 +220,7 @@ async def start_rapid_execution_from_production_entry(
     return await client.post(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def reset_rapid_program_pointer_to_main(
@@ -254,6 +255,7 @@ async def reset_rapid_program_pointer_to_main(
     return await client.post(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def set_number_of_execution_cycles(

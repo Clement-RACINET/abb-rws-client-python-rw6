@@ -128,6 +128,7 @@ async def post_clear_elog_messages(
     return await client.post(
         "/rw/elog",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def save_elog_in_system_dump_format(
@@ -285,6 +286,7 @@ async def post_clear_elog_messages_2(
     return await client.post(
         f"/rw/elog/{domain_number}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_elog_domain(

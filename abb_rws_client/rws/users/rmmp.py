@@ -99,7 +99,10 @@ async def request_rmmp(client: RWSClient) -> httpx.Response:
         <Response [202]>
         ```
     """
-    return await client.post("/users/rmmp")
+    return await client.post(
+        "/users/rmmp",
+        data={},
+    )
 
 async def grant_or_deny_an_rmmp_request(
     client: RWSClient,
@@ -133,6 +136,7 @@ async def grant_or_deny_an_rmmp_request(
     return await client.post(
         "/users/rmmp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def cancel_held_or_requested_rmmp(
@@ -166,6 +170,7 @@ async def cancel_held_or_requested_rmmp(
     return await client.post(
         "/users/rmmp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_rmmp_request_event(

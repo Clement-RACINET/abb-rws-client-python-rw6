@@ -101,6 +101,7 @@ async def create_queue(
     return await client.post(
         "/rw/dipc",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_dipc_queue(
@@ -204,6 +205,7 @@ async def post_send_message(
     return await client.post(
         f"/rw/dipc/{queue_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_read_message(

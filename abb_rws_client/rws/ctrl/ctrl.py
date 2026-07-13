@@ -131,7 +131,10 @@ async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
         <Response [200]>
         ```
     """
-    return await client.post("/ctrl")
+    return await client.post(
+        "/ctrl",
+        data={},
+    )
 
 async def set_controller_language(
     client: RWSClient,
@@ -165,6 +168,7 @@ async def set_controller_language(
     return await client.post(
         "/ctrl",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
@@ -260,6 +264,7 @@ async def set_boot_device(
     return await client.post(
         "/ctrl/system",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_boot_device(
@@ -329,6 +334,7 @@ async def load_boot_image(
     return await client.post(
         "/ctrl/system",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_unload_boot_image(
@@ -363,6 +369,7 @@ async def post_unload_boot_image(
     return await client.post(
         "/ctrl/system",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_selected_system_name(
@@ -428,7 +435,10 @@ async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
         <Response [202]>
         ```
     """
-    return await client.post("/ctrl/system/installdpkg")
+    return await client.post(
+        "/ctrl/system/installdpkg",
+        data={},
+    )
 
 async def validate_deployment_package(client: RWSClient) -> httpx.Response:
     """
@@ -455,7 +465,10 @@ async def validate_deployment_package(client: RWSClient) -> httpx.Response:
         <Response [204]>
         ```
     """
-    return await client.post("/ctrl/system/validatedpkg")
+    return await client.post(
+        "/ctrl/system/validatedpkg",
+        data={},
+    )
 
 async def get_system_resource(
     client: RWSClient,
@@ -599,6 +612,7 @@ async def post_select_system(
     return await client.post(
         f"/ctrl/system/{system_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def delete_system(
@@ -664,6 +678,7 @@ async def post_deselect_system(
     return await client.post(
         "/ctrl/system",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_network_resource(client: RWSClient) -> httpx.Response:
@@ -759,6 +774,7 @@ async def set_network_configuration(
     return await client.post(
         "/ctrl/network",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_dns_resource(client: RWSClient) -> httpx.Response:
@@ -812,7 +828,10 @@ async def add_route_table_entry(client: RWSClient) -> httpx.Response:
         <Response [204]>
         ```
     """
-    return await client.post("/ctrl/network/route/add")
+    return await client.post(
+        "/ctrl/network/route/add",
+        data={},
+    )
 
 async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -867,7 +886,10 @@ async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
         <Response [202]>
         ```
     """
-    return await client.post("/ctrl/network/route/remove")
+    return await client.post(
+        "/ctrl/network/route/remove",
+        data={},
+    )
 
 async def options_options_to_remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -992,6 +1014,7 @@ async def post_compress_decompress_resource(
     return await client.post(
         "/ctrl/compress",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
@@ -1089,6 +1112,7 @@ async def save_system_diagnostics(
     return await client.post(
         "/ctrl/diagnostics",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_system_dump(
@@ -1275,6 +1299,7 @@ async def load_safety_configuration_file_to_controller(
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def set_safety_mode_of_the_controller(
@@ -1558,6 +1583,7 @@ async def post_unlock_the_safety_configuration(
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_software_sync_acknowledgement(
@@ -1668,6 +1694,7 @@ async def remove_validation_info(
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def set_reset_safety_controller(
@@ -1702,6 +1729,7 @@ async def set_reset_safety_controller(
     return await client.post(
         "/ctrl/safety",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def get_options_resource(
@@ -2137,4 +2165,7 @@ async def post_vt_run(client: RWSClient) -> httpx.Response:
         <Response [204]>
         ```
     """
-    return await client.post("/ctrl/virtualtime/vtrun")
+    return await client.post(
+        "/ctrl/virtualtime/vtrun",
+        data={},
+    )

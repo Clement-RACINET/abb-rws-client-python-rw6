@@ -157,7 +157,10 @@ async def create_directory(
         <Response [201]>
         ```
     """
-    return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
+    return await client.post(
+        f"/fileservice/{device_environment_variable}/{directory}",
+        data={},
+    )
 
 async def post_rename_directory(
     client: RWSClient,
@@ -195,7 +198,10 @@ async def post_rename_directory(
         <Response [200]>
         ```
     """
-    return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
+    return await client.post(
+        f"/fileservice/{device_environment_variable}/{directory}",
+        data={},
+    )
 
 async def post_copy_directory(
     client: RWSClient,
@@ -236,7 +242,10 @@ async def post_copy_directory(
         <Response [204]>
         ```
     """
-    return await client.post(f"/fileservice/{device_environment_variable}/{directory}")
+    return await client.post(
+        f"/fileservice/{device_environment_variable}/{directory}",
+        data={},
+    )
 
 async def delete_directory(
     client: RWSClient,
@@ -385,7 +394,10 @@ async def post_rename_file(
         <Response [204]>
         ```
     """
-    return await client.post(f"/fileservice/{device_environment_variable_directory}/{file}")
+    return await client.post(
+        f"/fileservice/{device_environment_variable_directory}/{file}",
+        data={},
+    )
 
 async def create_copy_of_file(
     client: RWSClient,
@@ -426,7 +438,10 @@ async def create_copy_of_file(
         <Response [204]>
         ```
     """
-    return await client.post(f"/fileservice/{device_environment_variable}/{filename}")
+    return await client.post(
+        f"/fileservice/{device_environment_variable}/{filename}",
+        data={},
+    )
 
 async def put_upload_file(
     client: RWSClient,
@@ -465,7 +480,10 @@ async def put_upload_file(
         <Response [200]>
         ```
     """
-    return await client.put(f"/fileservice/{device_environment_variable_directory}/{file}")
+    return await client.put(
+        f"/fileservice/{device_environment_variable_directory}/{file}",
+        data={},
+    )
 
 async def delete_file(
     client: RWSClient,

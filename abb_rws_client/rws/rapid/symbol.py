@@ -190,6 +190,7 @@ async def validate_rapid_variable(
     return await client.post(
         "/rw/rapid/symbol/data",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_rapid_persistent_variable(

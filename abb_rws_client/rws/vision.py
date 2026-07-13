@@ -327,6 +327,7 @@ async def post_refesh_the_camera(
     return await client.post(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def set_hostname_of_the_camera(

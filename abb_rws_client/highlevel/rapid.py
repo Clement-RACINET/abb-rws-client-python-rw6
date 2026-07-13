@@ -18,8 +18,8 @@ from abb_rws_client._core.client import RWSClient
 from abb_rws_client._core.exceptions import RWSHTTPError
 from abb_rws_client._core.logging import get_logger
 from abb_rws_client.rws.mastership import (
-    post_mastership_release,
-    post_mastership_request,
+    post_mastership_domain_release,
+    post_mastership_domain_request,
 )
 from abb_rws_client.rws.panel import set_controller_state
 from abb_rws_client.rws.rapid.execution import (
@@ -352,26 +352,28 @@ async def set_variable_with_mastership(
     *,
     symbolurl: str,
     value: str,
+    domain: str = "rapid",
 ) -> None:
     """Write a RAPID variable value, acquiring and releasing mastership.
 
     Composes:
 
-    1. ``post_mastership_request(action="request")``
+    1. ``post_mastership_domain_request(domain, action="request")``
     2. ``update_rapid_variable_current_value(action="set", value=value)``
-    3. ``post_mastership_release(action="release")``
+    3. ``post_mastership_domain_release(domain, action="release")``
 
     Mastership is **always** released in a ``finally`` block, even if
     the write fails, to avoid leaving the controller locked.
 
     Route (delegated):
-        - ``POST /rw/mastership`` (action=request)
+        - ``POST /rw/mastership/{domain}`` (action=request)
         - ``POST /rw/rapid/symbol/data/{symbolurl}`` (action=set)
-        - ``POST /rw/mastership`` (action=release)
+        - ``POST /rw/mastership/{domain}`` (action=release)
 
     ABB constraints:
         - Requires AUTO mode for mastership.
         - ``symbolurl`` format: ``RAPID/T_ROB1/MainModule/my_var``
+        - ``domain`` must be one of: ``"rapid"``, ``"cfg"``, ``"motion"``.
 
     Args:
         client: Open ``RWSClient`` instance.
@@ -379,6 +381,7 @@ async def set_variable_with_mastership(
             ``"RAPID/T_ROB1/MainModule/counter"``.
         value: New value as a string. Numeric types must be
             pre-converted: ``str(42)``, ``str(3.14)``.
+        domain: Mastership domain. Defaults to ``"rapid"``.
 
     Returns:
         None. Expects HTTP 204 on the write call.
@@ -398,7 +401,8 @@ async def set_variable_with_mastership(
             )
         ```
     """
-    await post_mastership_request(client, action="request")
+    # Acquire mastership on the specified domain
+    await post_mastership_domain_request(client, domain=domain, action="request")
     try:
         await update_rapid_variable_current_value(
             client,
@@ -408,7 +412,9 @@ async def set_variable_with_mastership(
         )
         logger.debug("Variable %s set to %r", symbolurl, value)
     finally:
-        await post_mastership_release(client, action="release")
+        # Always release — even on exception — to avoid locking the controller
+        await post_mastership_domain_release(client, domain=domain, action="release")
+
 
 
 async def get_variable(
@@ -461,40 +467,48 @@ async def get_variable(
 # Module management
 # ---------------------------------------------------------------------------
 
-
 async def load_module_safe(
     client: RWSClient,
     *,
     task: str,
     module_path: str,
     module_name: str,
+    domain: str = "rapid",
 ) -> None:
     """Unload (if present) then load a RAPID module, with mastership.
 
     Composes:
 
-    1. ``post_mastership_request(action="request")``
-    2. ``post_unload_module_from_rapid_task(action="unloadmod",
+    1. ``reset_rapid_program_pointer_to_main(action="resetpp")`` — resets
+       the program pointer so the controller accepts module load/unload
+       operations (ABB requires PP reset before any structural change).
+    2. ``post_mastership_domain_request(domain, action="request")``
+    3. ``post_unload_module_from_rapid_task(task, action="unloadmod",
        module=module_name)`` — errors are logged but not re-raised
        (module may not be loaded yet).
-    3. ``load_rapid_module_into_rapid_task(action="loadmod",
+    4. ``load_rapid_module_into_rapid_task(task, action="loadmod",
        modulepath=module_path)``
-    4. ``post_mastership_release(action="release")``
+    5. ``post_mastership_domain_release(domain, action="release")``
 
     Mastership is always released in a ``finally`` block.
 
     Route (delegated):
-        - ``POST /rw/mastership`` (action=request)
+        - ``POST /rw/rapid/execution`` (action=resetpp)
+        - ``POST /rw/mastership/{domain}`` (action=request)
         - ``POST /rw/rapid/tasks/{task}`` (action=unloadmod)
         - ``POST /rw/rapid/tasks/{task}`` (action=loadmod)
-        - ``POST /rw/mastership`` (action=release)
+        - ``POST /rw/mastership/{domain}`` (action=release)
 
     ABB constraints:
+        - ``resetpp`` must be called before any module load/unload
+          operation, even when RAPID is already stopped. Omitting it
+          causes HTTP 400 (SYS_CTRL_E_EXEC_STATE).
         - ``module_path`` is a path on the **controller filesystem**,
           e.g. ``"$HOME/my_module.mod"``.
         - ``module_name`` is the RAPID module name (without extension),
           e.g. ``"my_module"``.
         - RAPID mastership required for both load and unload.
+        - ``domain`` must be one of: ``"rapid"``, ``"cfg"``, ``"motion"``.
 
     Args:
         client: Open ``RWSClient`` instance.
@@ -503,6 +517,7 @@ async def load_module_safe(
             ``"$HOME/my_module.mod"``.
         module_name: RAPID module name (no extension), e.g.
             ``"my_module"``.
+        domain: Mastership domain. Defaults to ``"rapid"``.
 
     Returns:
         None. Expects HTTP 204 on the load call.
@@ -523,8 +538,22 @@ async def load_module_safe(
             )
         ```
     """
-    await post_mastership_request(client, action="request")
+    # Step 1 — Reset program pointer BEFORE taking mastership.
+    # ABB RW6 rejects loadmod/unloadmod with HTTP 400 (SYS_CTRL_E_EXEC_STATE)
+    # if the PP has not been reset, even when RAPID is stopped.
+    logger.debug("Resetting program pointer before module load …")
     try:
+        await reset_rapid_program_pointer_to_main(client, action="resetpp")
+        logger.debug("Program pointer reset OK.")
+    except RWSHTTPError as exc:
+        # resetpp can fail if no program is loaded yet (first load).
+        # This is acceptable — log and continue.
+        logger.debug("resetpp skipped (no program loaded yet: %s)", exc)
+
+    # Step 2 — Acquire mastership on the specified domain
+    await post_mastership_domain_request(client, domain=domain, action="request")
+    try:
+        # Step 3 — Attempt unload — silently ignore if module is not loaded
         try:
             await post_unload_module_from_rapid_task(
                 client,
@@ -532,14 +561,15 @@ async def load_module_safe(
                 action="unloadmod",
                 module=module_name,
             )
-            logger.debug("Module %r unloaded from task %r", module_name, task)
+            logger.debug("Module %r unloaded from task %r.", module_name, task)
         except RWSHTTPError as exc:
             logger.debug(
-                "Unload of %r skipped (not loaded or error: %s)",
+                "Unload of %r skipped (not loaded or error: %s).",
                 module_name,
                 exc,
             )
 
+        # Step 4 — Load the module
         await load_rapid_module_into_rapid_task(
             client,
             task=task,
@@ -547,13 +577,16 @@ async def load_module_safe(
             modulepath=module_path,
         )
         logger.debug(
-            "Module %r loaded into task %r from %r",
+            "Module %r loaded into task %r from %r.",
             module_name,
             task,
             module_path,
         )
     finally:
-        await post_mastership_release(client, action="release")
+        # Step 5 — Always release mastership, even on exception
+        await post_mastership_domain_release(client, domain=domain, action="release")
+
+
 
 
 # ---------------------------------------------------------------------------

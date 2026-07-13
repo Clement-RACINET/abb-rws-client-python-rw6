@@ -82,6 +82,7 @@ async def post_remote_user_logon_request(
     return await client.post(
         "/users/remoteuser",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def post_remote_user_logout_request(
@@ -116,6 +117,7 @@ async def post_remote_user_logout_request(
     return await client.post(
         "/users/remoteuser",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def subscribe_on_remote_user_state(

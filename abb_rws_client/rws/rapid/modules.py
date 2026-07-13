@@ -683,6 +683,7 @@ async def set_syncpers(
     return await client.post(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"action": action, "task": task}.items() if v is not None},
+        data={},
     )
 
 async def set_modify_position(

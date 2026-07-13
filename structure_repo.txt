@@ -93,8 +93,8 @@ abb_rws_client_python_rw6
 │   │   └── LoadModule.pgf
 │   └── 05
 │       ├── 05_io_signal.py
-│       ├── LoadModule.mod
-│       └── LoadModule.pgf
+│       ├── IOSignal.mod
+│       └── IOSignal.pgf
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
@@ -160,4 +160,5 @@ abb_rws_client_python_rw6
 ├── pixi.toml
 ├── pyproject.toml
 ├── README.fr.md
-└── README.md
+├── README.md
+└── signal.html

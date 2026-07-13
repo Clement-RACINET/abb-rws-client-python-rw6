@@ -101,4 +101,7 @@ async def set_the_identity_of_the_controller(client: RWSClient) -> httpx.Respons
         <Response [204]>
         ```
     """
-    return await client.put("/ctrl/identity")
+    return await client.put(
+        "/ctrl/identity",
+        data={},
+    )

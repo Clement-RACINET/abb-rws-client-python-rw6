@@ -21,8 +21,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import shutil
 from pathlib import Path
+import shutil
 
 REPO_ROOT = Path(__file__).parent.parent
 

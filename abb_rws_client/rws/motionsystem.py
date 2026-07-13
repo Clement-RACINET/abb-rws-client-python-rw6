@@ -2661,6 +2661,7 @@ async def update_commutate(
     return await client.post(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
+        data={},
     )
 
 async def update_sync_revolution_counter(

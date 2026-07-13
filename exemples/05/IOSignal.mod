@@ -1,6 +1,6 @@
 MODULE ExampleIOSignal
     !**********************************************************************
-    ! Example 05 — IO Signal interaction with Python
+    ! Example 05 - IO Signal interaction with Python
     !
     ! Auteur : Clement RACINET
     !
@@ -19,9 +19,9 @@ MODULE ExampleIOSignal
     !   3. Observe the TPWrite output on the FlexPendant
     !**********************************************************************
 
-    ! Signal aliases — must match the names in the IO configuration
-    ALIAS signaldo DO_EXAMPLE_OUT;
-    ALIAS signaldi DI_EXAMPLE_IN;
+    ! Signal aliases - must match the names in the IO configuration
+    VAR signaldo DO_EXAMPLE_OUT;
+    VAR signaldi DI_EXAMPLE_IN;
 
     PROC main()
         ! Wait for Python to set the signal high
