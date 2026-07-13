@@ -122,7 +122,7 @@ def _raise_for_status(response: httpx.Response, path: str) -> None:
         raise RWSNotFoundError(path)
     if code >= 400:
         raise RWSHTTPError(
-            f"HTTP {code} on {path}: {response.text[:200]}",
+            f"HTTP {code} on {path}: {response.text[:1000]}",
             status_code=code,
         )
 

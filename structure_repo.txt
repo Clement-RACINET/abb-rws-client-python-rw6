@@ -4,6 +4,7 @@ abb_rws_client_python_rw6
 │   │   ├── __init__.py
 │   │   ├── client.py
 │   │   ├── exceptions.py
+│   │   ├── logging.py
 │   │   └── serializers.py
 │   ├── highlevel
 │   │   ├── __init__.py
