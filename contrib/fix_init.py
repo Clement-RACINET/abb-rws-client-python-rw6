@@ -23,8 +23,9 @@ from __future__ import annotations
 
 import argparse
 import ast
-import sys
+import io
 from pathlib import Path
+import sys
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -542,6 +543,12 @@ def main() -> None:
     Raises:
         SystemExit: On argument parsing error.
     """
+    # sys.stdout is typed as TextIO but is actually a TextIOWrapper at runtime.
+    # Cast explicitly so Pylance accepts .reconfigure() without errors.
+    stdout = sys.stdout
+    if isinstance(stdout, io.TextIOWrapper):
+        stdout.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(
         description=(
             "Audit and fix all __init__.py files in "
@@ -565,7 +572,7 @@ def main() -> None:
     print(
         "🔍 DRY-RUN mode — no files will be written.\n"
         if dry
-        else "🔧 Fixing __init__.py files...\n"
+        else "Fixing __init__.py files...\n"
     )
 
     fix_package(dry)
@@ -576,7 +583,7 @@ def main() -> None:
     if not args.skip_tests:
         fix_tests(dry)
 
-    print("\n✓ Dry-run complete." if dry else "\n✓ Done.")
+    print("\n Dry-run complete." if dry else "\n Done.")
 
 
 if __name__ == "__main__":
