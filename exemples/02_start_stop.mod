@@ -1,0 +1,28 @@
+MODULE ExampleStartStop
+    !**********************************************************************
+    ! Example 02 — Start / Stop
+    !
+    ! Purpose : Minimal RAPID program to demonstrate start/stop from Python.
+    !           The robot moves to a safe home position and stops.
+    !
+    ! Usage   : Load this module into T_ROB1.
+    !           Run from Python: pixi run python examples/02_start_stop.py
+    !
+    ! Note    : Adapt pHome to a safe position for your robot cell.
+    !**********************************************************************
+
+    ! Safe home position — ADAPT TO YOUR CELL
+    CONST robtarget pHome := [[400, 0, 600],
+                               [1, 0, 0, 0],
+                               [0, 0, 0, 0],
+                               [9E9, 9E9, 9E9, 9E9, 9E9, 9E9]];
+
+    PROC main()
+        ! Move to home position at medium speed
+        MoveJ pHome, v200, fine, tool0;
+
+        ! Signal Python that work is done
+        TPWrite "ExampleStartStop: done.";
+    ENDPROC
+
+ENDMODULE

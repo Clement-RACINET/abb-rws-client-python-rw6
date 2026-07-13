@@ -74,6 +74,17 @@ abb_rws_client_python_rw6
 │   ├── fix_init.py
 │   ├── README.fr.md
 │   └── README.md
+├── exemples
+│   ├── 01_ping.py
+│   ├── 02_start_stop.mod
+│   ├── 02_start_stop.py
+│   ├── 03_read_write.mod
+│   ├── 03_read_write_variable.py
+│   ├── 04_load_module.mod
+│   ├── 04_load_module.py
+│   ├── 05_io_signal.mod
+│   ├── 05_io_signal.py
+│   └── _env.py
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
