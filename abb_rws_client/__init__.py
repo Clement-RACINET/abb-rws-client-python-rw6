@@ -6,6 +6,9 @@ Public API surface:
     - RWSError hierarchy         : typed exceptions
     - RobTarget / RapidValue     : RAPID type helpers
     - robtarget_to_rws / rws_to_robtarget : serializers
+    - load_env                   : .env file loader
+    - configure_logging          : library log level
+    - get_logger                 : namespaced child logger
 
 Example:
     >>> from abb_rws_client import RWSClient
@@ -16,6 +19,7 @@ Example:
 from __future__ import annotations
 
 from abb_rws_client._core.client import RWSClient, RWSClientSync
+from abb_rws_client._core.env import load_env
 from abb_rws_client._core.exceptions import (
     CTRL_CODES,
     MastershipDenied,
@@ -29,14 +33,13 @@ from abb_rws_client._core.exceptions import (
     RWSTimeoutError,
     RWSValueError,
 )
+from abb_rws_client._core.logging import configure_logging, get_logger
 from abb_rws_client._core.serializers import (
     RapidValue,
     RobTarget,
     robtarget_to_rws,
     rws_to_robtarget,
 )
-from abb_rws_client._core.env import load_env
-from abb_rws_client._core.logging import configure_logging, get_logger
 
 __all__ = [
     "CTRL_CODES",

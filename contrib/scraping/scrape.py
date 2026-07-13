@@ -25,19 +25,19 @@ Notes:
 
 import json
 import logging
+from pathlib import Path
 import re
 import sys
 import time
-from pathlib import Path
 
-import requests
 from bs4 import BeautifulSoup, Tag
+import requests
 
 # ============================================================
 #  Paths
 # ============================================================
 
-SCRIPT_DIR = Path(__file__).parent 
+SCRIPT_DIR = Path(__file__).parent
 OUTPUT_DIR = SCRIPT_DIR
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -158,7 +158,8 @@ def crawl_js(
         resp = requests.get(js_url, timeout=10)
 
         if resp.status_code == 404 or not resp.text.strip():
-            ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+            ROUTES.append({"title": title, "url_suffix": html_file,
+                "breadcrumb": current_breadcrumb})
             log.info("  ✓ [%3d] (no js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
             return
 
@@ -166,13 +167,15 @@ def crawl_js(
         children = parse_js_tree(resp.text)
 
         if not children:
-            ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+            ROUTES.append({"title": title, "url_suffix": html_file,
+                "breadcrumb": current_breadcrumb})
             log.info("  ✓ [%3d] (empty js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
             return
 
         children_htmls = {h for _, h, _ in children}
         if html_file not in children_htmls:
-            ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+            ROUTES.append({"title": title, "url_suffix": html_file,
+                "breadcrumb": current_breadcrumb})
             log.info("  ✓ [%3d] (+ parent) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
 
         log.info("  ⟦☰⟧ /  %s  (%d children)", " > ".join(current_breadcrumb[-3:]), len(children))

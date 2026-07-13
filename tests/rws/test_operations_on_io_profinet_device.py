@@ -85,7 +85,8 @@ async def test_post_read_record_implicit_data_from_device_in() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/rw/iosystem/devices/network_test/device_test/implicitdata"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -136,7 +137,8 @@ async def test_get_profinet_device_read_record_data_2() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/rw/iosystem/devices/network_test/device_test/explicitdata"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -187,7 +189,8 @@ async def test_post_clear_the_alarms() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/rw/iosystem/devices/network_test/device_test/alarms/clear"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio

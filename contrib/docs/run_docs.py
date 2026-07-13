@@ -14,9 +14,9 @@ Usage:
 """
 from __future__ import annotations
 
+from pathlib import Path
 import subprocess
 import sys
-from pathlib import Path
 
 from contrib.docs.config import build_config
 from contrib.docs.generate_api import generate_api_docs, update_mkdocs_nav

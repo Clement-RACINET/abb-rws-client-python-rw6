@@ -87,7 +87,8 @@ async def test_create_backup() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/backup"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
 @pytest.mark.asyncio
@@ -103,7 +104,8 @@ async def test_post_restore_backup() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/backup"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -149,7 +151,8 @@ async def test_subscribe_on_backup_system_information() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio

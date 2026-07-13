@@ -117,7 +117,8 @@ async def test_update_io_network() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -133,7 +134,8 @@ async def test_subscribe_io_network() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -165,7 +167,8 @@ async def test_update_io_network_configuration_type() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -211,7 +214,8 @@ async def test_update_io_device() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -227,7 +231,8 @@ async def test_subscribe_io_device() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -243,7 +248,8 @@ async def test_set_input_data() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -259,7 +265,8 @@ async def test_set_output_data() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -307,7 +314,8 @@ async def test_post_send_device_command() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test/command"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -373,7 +381,8 @@ async def test_update_io_signal_state() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/rw/iosystem/signals/network_test/device_test/signal_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -391,7 +400,8 @@ async def test_update_io_signal_value() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/rw/iosystem/signals/network_test/device_test/signal_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -407,7 +417,8 @@ async def test_subscribe_io_signal() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio

@@ -86,7 +86,8 @@ async def test_request_rmmp() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/rmmp"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
 @pytest.mark.asyncio
@@ -102,7 +103,8 @@ async def test_grant_or_deny_an_rmmp_request() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/rmmp"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -118,7 +120,8 @@ async def test_cancel_held_or_requested_rmmp() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/users/rmmp"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -134,7 +137,8 @@ async def test_subscribe_on_rmmp_request_event() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/subscription"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio

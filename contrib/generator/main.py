@@ -1094,10 +1094,10 @@ def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]
     # POST/PUT must always carry Content-Type: application/x-www-form-urlencoded
     # (ABB RW6 returns 415 otherwise, even when the body is empty)
     if method in ("POST", "PUT"):
-        lines.append(
-            '    assert "application/x-www-form-urlencoded" in '
-            '(transport.last_request.headers.get("content-type") or "")'
-        )
+        lines += [
+            '    ct = transport.last_request.headers.get("content-type") or ""',
+            '    assert "application/x-www-form-urlencoded" in ct',
+        ]
 
     lines.append(f"    assert resp.status_code == {status_code}")
 

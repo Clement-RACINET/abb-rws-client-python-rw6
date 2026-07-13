@@ -14,8 +14,7 @@ from __future__ import annotations
 import fnmatch
 from pathlib import Path
 
-from contrib.docs.config import DocConfig, build_config
-
+from contrib.docs.config import DocConfig
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -205,8 +204,8 @@ def update_mkdocs_nav(cfg: DocConfig, nav_block: str) -> None:
 
     # Apply the tag indentation to every non-empty line
     indented_lines = [
-        balise_indent + l if l.strip() else ""
-        for l in nav_block.splitlines()
+        balise_indent + line if line.strip() else ""
+        for line in nav_block.splitlines()
     ]
 
     new_lines = (

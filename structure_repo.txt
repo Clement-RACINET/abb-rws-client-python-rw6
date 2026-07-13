@@ -162,4 +162,5 @@ abb_rws_client_python_rw6
 ├── pixi.toml
 ├── pyproject.toml
 ├── README.fr.md
-└── README.md
+├── README.md
+└── ruff_check

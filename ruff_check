@@ -1,0 +1,139 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> abb_rws_client\__init__.py:16:1
+   |
+14 |   """
+15 |
+16 | / from __future__ import annotations
+17 | |
+18 | | from abb_rws_client._core.client import RWSClient, RWSClientSync
+19 | | from abb_rws_client._core.exceptions import (
+20 | |     CTRL_CODES,
+21 | |     MastershipDenied,
+22 | |     MastershipError,
+23 | |     MastershipNotHeld,
+24 | |     RWSAuthenticationError,
+25 | |     RWSConnectionError,
+26 | |     RWSError,
+27 | |     RWSHTTPError,
+28 | |     RWSNotFoundError,
+29 | |     RWSTimeoutError,
+30 | |     RWSValueError,
+31 | | )
+32 | | from abb_rws_client._core.serializers import (
+33 | |     RapidValue,
+34 | |     RobTarget,
+35 | |     robtarget_to_rws,
+36 | |     rws_to_robtarget,
+37 | | )
+38 | | from abb_rws_client._core.env import load_env
+39 | | from abb_rws_client._core.logging import configure_logging, get_logger
+   | |______________________________________________________________________^
+40 |
+41 |   __all__ = [
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> abb_rws_client\_core\__init__.py:7:1
+   |
+ 5 |   """
+ 6 |
+ 7 | / from __future__ import annotations
+ 8 | |
+ 9 | | from .client import RWSClient, RWSClientSync
+10 | | from .exceptions import (
+11 | |     CTRL_CODES,
+12 | |     MastershipDenied,
+13 | |     MastershipError,
+14 | |     MastershipNotHeld,
+15 | |     RWSAuthenticationError,
+16 | |     RWSConnectionError,
+17 | |     RWSError,
+18 | |     RWSHTTPError,
+19 | |     RWSNotFoundError,
+20 | |     RWSTimeoutError,
+21 | |     RWSValueError,
+22 | | )
+23 | | from .serializers import RapidValue, RobTarget, robtarget_to_rws, rws_to_robtarget
+24 | | from .env import load_env
+25 | | from .logging import configure_logging, get_logger
+   | |__________________________________________________^
+26 |
+27 |   __all__ = [
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> contrib\scraping\scrape.py:26:1
+   |
+24 |   """
+25 |
+26 | / import json
+27 | | import logging
+28 | | import re
+29 | | import sys
+30 | | import time
+31 | | from pathlib import Path
+32 | |
+33 | | import requests
+34 | | from bs4 import BeautifulSoup, Tag
+   | |__________________________________^
+35 |
+36 |   # ============================================================
+   |
+help: Organize imports
+
+W291 [*] Trailing whitespace
+  --> contrib\scraping\scrape.py:40:35
+   |
+38 | # ============================================================
+39 |
+40 | SCRIPT_DIR = Path(__file__).parent 
+   |                                   ^
+41 | OUTPUT_DIR = SCRIPT_DIR
+42 | OUTPUT_DIR.mkdir(exist_ok=True)
+   |
+help: Remove trailing whitespace
+
+E501 Line too long (102 > 100)
+   --> contrib\scraping\scrape.py:161:101
+    |
+160 |         if resp.status_code == 404 or not resp.text.strip():
+161 |             ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+    |                                                                                                     ^^
+162 |             log.info("  ✓ [%3d] (no js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
+163 |             return
+    |
+
+E501 Line too long (102 > 100)
+   --> contrib\scraping\scrape.py:169:101
+    |
+168 |         if not children:
+169 |             ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+    |                                                                                                     ^^
+170 |             log.info("  ✓ [%3d] (empty js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
+171 |             return
+    |
+
+E501 Line too long (102 > 100)
+   --> contrib\scraping\scrape.py:175:101
+    |
+173 |         children_htmls = {h for _, h, _ in children}
+174 |         if html_file not in children_htmls:
+175 |             ROUTES.append({"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb})
+    |                                                                                                     ^^
+176 |             log.info("  ✓ [%3d] (+ parent) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
+    |
+
+W292 [*] No newline at end of file
+   --> tests\_core\test_client.py:925:34
+    |
+923 |         client = _open_sync_client(transport)
+924 |         with pytest.raises(RWSTimeoutError):
+925 |             client.get("rw/test")
+    |                                  ^
+    |
+help: Add trailing newline
+
+Found 8 errors.
+[*] 5 fixable with the `--fix` option.

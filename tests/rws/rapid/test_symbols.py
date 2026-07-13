@@ -83,7 +83,8 @@ async def test_post_search_rapid_symbols() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/rw/rapid/symbols"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio

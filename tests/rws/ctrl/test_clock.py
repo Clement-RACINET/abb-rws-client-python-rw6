@@ -89,7 +89,8 @@ async def test_set_the_clock_of_the_controller() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "PUT"
     assert transport.last_request.url.path == "/ctrl/clock"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -136,7 +137,8 @@ async def test_set_the_time_zone() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -183,7 +185,8 @@ async def test_set_the_time_server() -> None:
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio

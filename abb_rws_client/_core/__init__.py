@@ -7,6 +7,7 @@ Not part of the public API. Import from ``abb_rws_client`` directly.
 from __future__ import annotations
 
 from .client import RWSClient, RWSClientSync
+from .env import load_env
 from .exceptions import (
     CTRL_CODES,
     MastershipDenied,
@@ -20,9 +21,8 @@ from .exceptions import (
     RWSTimeoutError,
     RWSValueError,
 )
-from .serializers import RapidValue, RobTarget, robtarget_to_rws, rws_to_robtarget
-from .env import load_env
 from .logging import configure_logging, get_logger
+from .serializers import RapidValue, RobTarget, robtarget_to_rws, rws_to_robtarget
 
 __all__ = [
     "CTRL_CODES",

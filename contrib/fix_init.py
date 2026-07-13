@@ -11,12 +11,18 @@ For each Python package directory (containing .py files or sub-packages):
   - Rewrites abb_rws_client/_core/__init__.py with core exports.
   - Creates minimal __init__.py in tests/ sub-directories (no imports).
 
+Discovery strategy:
+  All public names are discovered automatically via AST scanning — no
+  manual declaration required. The only exception is _CORE_PUBLIC_EXPORTS,
+  which filters the _core/ API surface to avoid exposing private helpers.
+
 Usage:
     pixi run python contrib/fix_init.py
     pixi run python contrib/fix_init.py --dry-run
 
 Args:
     --dry-run: Print what would be written without touching the filesystem.
+    --skip-tests: Skip processing of tests/ sub-directories.
 """
 
 from __future__ import annotations
@@ -35,29 +41,32 @@ REPO_ROOT = Path(__file__).parent.parent
 PKG_ROOT = REPO_ROOT / "abb_rws_client"
 TESTS_ROOT = REPO_ROOT / "tests"
 
+# Only _core/ requires an explicit allowlist because its files contain
+# private helpers (_build_auth, _raise_for_status, …) that must NOT be
+# re-exported. Every other sub-package uses full AST auto-discovery.
 _CORE_PUBLIC_EXPORTS: dict[str, list[str]] = {
     "client": ["RWSClient", "RWSClientSync"],
+    "env": ["load_env"],
     "exceptions": [
-        "RWSError",
-        "RWSConnectionError",
-        "RWSTimeoutError",
+        "CTRL_CODES",
+        "MastershipDenied",
+        "MastershipError",
+        "MastershipNotHeld",
         "RWSAuthenticationError",
+        "RWSConnectionError",
+        "RWSError",
         "RWSHTTPError",
         "RWSNotFoundError",
-        "MastershipError",
-        "MastershipDenied",
-        "MastershipNotHeld",
+        "RWSTimeoutError",
         "RWSValueError",
-        "CTRL_CODES",
     ],
+    "logging": ["configure_logging", "get_logger"],
     "serializers": [
-        "RobTarget",
         "RapidValue",
+        "RobTarget",
         "robtarget_to_rws",
         "rws_to_robtarget",
     ],
-    "env": ["load_env"],
-    "logging":     ["configure_logging", "get_logger"],
 }
 
 # ---------------------------------------------------------------------------
@@ -123,12 +132,12 @@ def _format_import(module: str, names: list[str]) -> str:
 
     Returns:
         A formatted import string, single-line or parenthesised multi-line.
+        Empty string if names is empty.
     """
     if not names:
         return ""
 
     sorted_names = sorted(names)
-
     single = f"from {module} import {', '.join(sorted_names)}"
     if len(single) <= 88:
         return single
@@ -149,6 +158,7 @@ def _format_all(names: list[str]) -> str:
     Returns:
         Indented string of quoted names with trailing commas,
         ready to be embedded inside ``__all__ = [\\n    ...\\n]``.
+        Empty string if names is empty.
     """
     unique = sorted(set(names))
     if not unique:
@@ -245,10 +255,11 @@ def _collect_test_dirs(root: Path) -> list[Path]:
 
 
 def _gen_rws_submodule_init(pkg_dir: Path) -> str:
-    """Generate __init__.py for any flat sub-package (rws/ctrl/, highlevel/, etc.).
+    """Generate __init__.py for any flat sub-package via AST auto-discovery.
 
     Scans all .py files (excluding __init__.py) in the directory,
     extracts public names via AST, and generates imports + __all__.
+    No manual declaration required.
 
     Args:
         pkg_dir: Path to the sub-package directory.
@@ -268,7 +279,9 @@ def _gen_rws_submodule_init(pkg_dir: Path) -> str:
     for py_file in py_files:
         names = _collect_public_names(py_file)
         if names:
-            import_blocks.append(_format_import(f".{py_file.stem}", names))
+            block = _format_import(f".{py_file.stem}", names)
+            if block:
+                import_blocks.append(block)
             all_names.extend(names)
 
     imports_block = (
@@ -294,7 +307,12 @@ __all__ = [
 
 
 def _gen_rws_init(rws_dir: Path) -> str:
-    """Generate __init__.py for abb_rws_client/rws/.
+    """Generate __init__.py for abb_rws_client/rws/ via AST auto-discovery.
+
+    Collects all public names from every sub-package AND flat .py files
+    in rws/, merges them into a single sorted import block, and deduplicates
+    names that appear in multiple modules (keeping the first occurrence by
+    alphabetical module order to avoid F811 redefinition errors).
 
     Args:
         rws_dir: Path to abb_rws_client/rws/.
@@ -302,13 +320,18 @@ def _gen_rws_init(rws_dir: Path) -> str:
     Returns:
         Complete __init__.py content as a string.
     """
-    import_blocks: list[str] = []
-    all_names: list[str] = []
+    # ── Step 1: collect all (module_stem, [names]) pairs, sorted alpha ────
+    # Mix sub-packages and flat .py files in a single sorted pass so that
+    # the import order is strictly alphabetical → satisfies ruff I001.
 
+    entries: list[tuple[str, list[str]]] = []
+
+    # Sub-packages (directories)
     for sub in sorted(rws_dir.iterdir()):
-        if not sub.is_dir() or sub.name.startswith("_") or sub.name.startswith("."):
+        if not sub.is_dir():
             continue
-
+        if sub.name.startswith("_") or sub.name.startswith("."):
+            continue
         sub_names: list[str] = []
         for py_file in sorted(sub.iterdir()):
             if (
@@ -317,12 +340,45 @@ def _gen_rws_init(rws_dir: Path) -> str:
                 and py_file.name != "__init__.py"
             ):
                 sub_names.extend(_collect_public_names(py_file))
-
-        sub_names = sorted(set(sub_names))
-
         if sub_names:
-            import_blocks.append(_format_import(f".{sub.name}", sub_names))
-            all_names.extend(sub_names)
+            entries.append((sub.name, sorted(set(sub_names))))
+
+    # Flat .py files directly in rws/
+    for py_file in sorted(rws_dir.iterdir()):
+        if (
+            py_file.is_file()
+            and py_file.suffix == ".py"
+            and py_file.name != "__init__.py"
+        ):
+            names = _collect_public_names(py_file)
+            if names:
+                entries.append((py_file.stem, names))
+
+    # Sort all entries alphabetically by module stem → ruff I001 compliant
+    entries.sort(key=lambda x: x[0])
+
+    # ── Step 2: deduplicate — first module (alpha order) wins ─────────────
+    # When the same function name exists in two modules (e.g. get_robtarget
+    # in both rapid/tasks.py and motionsystem.py), only the first occurrence
+    # (alphabetically) is kept to avoid F811 redefinition errors.
+    seen_names: set[str] = set()
+    deduped_entries: list[tuple[str, list[str]]] = []
+
+    for stem, names in entries:
+        unique_names = [n for n in names if n not in seen_names]
+        seen_names.update(unique_names)
+        if unique_names:
+            deduped_entries.append((stem, unique_names))
+
+    # ── Step 3: render ────────────────────────────────────────────────────
+    import_blocks: list[str] = []
+    all_names: list[str] = []
+
+    for stem, names in deduped_entries:
+        block = _format_import(f".{stem}", names)
+        if block:
+            import_blocks.append(block)
+        all_names.extend(names)
 
     imports_block = (
         "\n".join(import_blocks) if import_blocks else "# No sub-packages"
@@ -348,14 +404,23 @@ __all__ = [
 def _gen_core_init() -> str:
     """Generate __init__.py for abb_rws_client/_core/.
 
+    Uses the explicit allowlist ``_CORE_PUBLIC_EXPORTS`` (not AST
+    auto-discovery) because _core/ contains private helpers that must
+    not be re-exported. The allowlist is sorted per-module and globally
+    to satisfy ruff I001.
+
     Returns:
         Complete __init__.py content as a string.
     """
     import_blocks: list[str] = []
     all_names: list[str] = []
 
-    for module, names in _CORE_PUBLIC_EXPORTS.items():
-        import_blocks.append(_format_import(f".{module}", names))
+    # Iterate in sorted module order so ruff I001 is satisfied
+    for module in sorted(_CORE_PUBLIC_EXPORTS):
+        names = _CORE_PUBLIC_EXPORTS[module]
+        block = _format_import(f".{module}", names)
+        if block:
+            import_blocks.append(block)
         all_names.extend(names)
 
     imports_block = "\n".join(import_blocks)
@@ -380,16 +445,21 @@ __all__ = [
 def _gen_package_init() -> str:
     """Generate abb_rws_client/__init__.py with the public API surface.
 
+    Imports are generated in sorted module order (isort-compatible) so
+    that ``ruff check`` passes without requiring a subsequent ``--fix``.
+
     Returns:
         Complete __init__.py content as a string.
     """
     import_blocks: list[str] = []
     all_names: list[str] = []
 
-    for module, names in _CORE_PUBLIC_EXPORTS.items():
-        import_blocks.append(
-            _format_import(f"abb_rws_client._core.{module}", names)
-        )
+    # Sorted module order → satisfies ruff I001 out of the box
+    for module in sorted(_CORE_PUBLIC_EXPORTS):
+        names = _CORE_PUBLIC_EXPORTS[module]
+        block = _format_import(f"abb_rws_client._core.{module}", names)
+        if block:
+            import_blocks.append(block)
         all_names.extend(names)
 
     imports_block = "\n".join(import_blocks)
@@ -403,6 +473,9 @@ Public API surface:
     - RWSError hierarchy         : typed exceptions
     - RobTarget / RapidValue     : RAPID type helpers
     - robtarget_to_rws / rws_to_robtarget : serializers
+    - load_env                   : .env file loader
+    - configure_logging          : library log level
+    - get_logger                 : namespaced child logger
 
 Example:
     >>> from abb_rws_client import RWSClient
@@ -469,7 +542,7 @@ def fix_core(dry_run: bool) -> None:
 
 
 def fix_rws(dry_run: bool) -> None:
-    """Process all rws/ sub-packages, then rws/__init__.py.
+    """Process all rws/ sub-packages via AST auto-discovery, then rws/__init__.py.
 
     Args:
         dry_run: If True, only print without writing.
@@ -490,11 +563,10 @@ def fix_rws(dry_run: bool) -> None:
 
 
 def fix_highlevel(dry_run: bool) -> None:
-    """Rewrite highlevel/__init__.py with imports from all .py modules.
+    """Rewrite highlevel/__init__.py via AST auto-discovery.
 
-    Uses the same AST-scanning logic as rws/ sub-packages via
-    ``_gen_rws_submodule_init()``. Automatically picks up any new
-    module added to highlevel/ without requiring manual edits.
+    Automatically picks up any new module added to highlevel/ without
+    requiring manual edits to this script.
 
     Args:
         dry_run: If True, only print without writing.
@@ -511,10 +583,6 @@ def fix_highlevel(dry_run: bool) -> None:
 def fix_tests(dry_run: bool) -> None:
     """Create minimal __init__.py markers in all tests/ sub-directories.
 
-    Only processes sub-directories (not tests/ root itself, which pytest
-    manages directly). Skips directories that already have an __init__.py
-    with custom content to avoid overwriting intentional markers.
-
     Args:
         dry_run: If True, only print without writing.
     """
@@ -523,7 +591,6 @@ def fix_tests(dry_run: bool) -> None:
         return
 
     print("\n── tests/ sub-directories ──────────────────────────────────")
-
     sub_dirs = _collect_test_dirs(TESTS_ROOT)
 
     if not sub_dirs:
@@ -545,8 +612,6 @@ def main() -> None:
     Raises:
         SystemExit: On argument parsing error.
     """
-    # sys.stdout is typed as TextIO but is actually a TextIOWrapper at runtime.
-    # Cast explicitly so Pylance accepts .reconfigure() without errors.
     stdout = sys.stdout
     if isinstance(stdout, io.TextIOWrapper):
         stdout.reconfigure(encoding="utf-8", errors="replace")

@@ -116,7 +116,8 @@ async def test_create_directory() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/fileservice/device_environment_variable_test/directory_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
 @pytest.mark.asyncio
@@ -138,7 +139,8 @@ async def test_post_rename_directory() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/fileservice/device_environment_variable_test/directory_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio
@@ -160,7 +162,8 @@ async def test_post_copy_directory() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/fileservice/device_environment_variable_test/directory_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -229,7 +232,8 @@ async def test_post_rename_file() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/fileservice/device_environment_variable_directory_test/file_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -247,7 +251,8 @@ async def test_create_copy_of_file() -> None:
     assert transport.last_request.method == "POST"
     expected_path = "/fileservice/device_environment_variable_test/filename_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
 @pytest.mark.asyncio
@@ -269,7 +274,8 @@ async def test_put_upload_file() -> None:
     assert transport.last_request.method == "PUT"
     expected_path = "/fileservice/device_environment_variable_directory_test/file_test"
     assert transport.last_request.url.path == expected_path
-    assert "application/x-www-form-urlencoded" in (transport.last_request.headers.get("content-type") or "")
+    ct = transport.last_request.headers.get("content-type") or ""
+    assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
 @pytest.mark.asyncio

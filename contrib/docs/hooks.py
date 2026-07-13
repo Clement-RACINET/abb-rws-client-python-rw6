@@ -10,8 +10,8 @@ by MkDocs after every ``build`` or ``serve`` run.
 """
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
+import shutil
 
 
 def on_post_build(config: dict[str, object]) -> None:
