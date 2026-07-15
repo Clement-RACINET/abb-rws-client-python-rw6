@@ -33,7 +33,7 @@ from abb_rws_client_python_rw6.core.exceptions import (
     RWSTimeoutError,
     RWSValueError,
 )
-from abb_rws_client_python_rw6.core.logging import configure_logging, get_logger
+from abb_rws_client_python_rw6.core.logger import configure_logging, get_logger
 from abb_rws_client_python_rw6.core.serializers import (
     RapidValue,
     RobTarget,

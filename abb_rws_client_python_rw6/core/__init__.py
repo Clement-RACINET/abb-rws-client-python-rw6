@@ -21,7 +21,7 @@ from .exceptions import (
     RWSTimeoutError,
     RWSValueError,
 )
-from .logging import configure_logging, get_logger
+from .logger import configure_logging, get_logger
 from .serializers import RapidValue, RobTarget, robtarget_to_rws, rws_to_robtarget
 
 __all__ = [

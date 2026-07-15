@@ -60,7 +60,7 @@ core_PUBLIC_EXPORTS: dict[str, list[str]] = {
         "RWSTimeoutError",
         "RWSValueError",
     ],
-    "logging": ["configure_logging", "get_logger"],
+    "logger": ["configure_logging", "get_logger"],
     "serializers": [
         "RapidValue",
         "RobTarget",

@@ -16,7 +16,7 @@ import httpx
 
 from abb_rws_client_python_rw6.core.client import RWSClient
 from abb_rws_client_python_rw6.core.exceptions import RWSHTTPError
-from abb_rws_client_python_rw6.core.logging import get_logger
+from abb_rws_client_python_rw6.core.logger import get_logger
 from abb_rws_client_python_rw6.rws.mastership import (
     post_mastership_domain_release,
     post_mastership_domain_request,

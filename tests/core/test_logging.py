@@ -1,5 +1,5 @@
-# tests/core/test_logging.py
-"""Tests for abb_rws_client_python_rw6.core.logging."""
+# tests/core/test_logger.py
+"""Tests for abb_rws_client_python_rw6.core.logger."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import logging
 
 import pytest
 
-from abb_rws_client_python_rw6.core.logging import (
+from abb_rws_client_python_rw6.core.logger import (
     _ROOT_LOGGER_NAME,
     configure_logging,
     get_logger,

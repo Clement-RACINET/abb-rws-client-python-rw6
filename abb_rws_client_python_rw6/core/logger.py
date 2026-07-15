@@ -1,4 +1,4 @@
-# abb_rws_client/core/logging.py
+# abb_rws_client/core/logger.py
 """Centralised logging configuration for abb_rws_client_python_rw6.
 
 The entire library uses the standard :mod:`logging` module with loggers
@@ -152,7 +152,7 @@ def get_logger(name: str) -> logging.Logger:
     Example:
         Inside a library module::
 
-            from abb_rws_client_python_rw6.core.logging import get_logger
+            from abb_rws_client_python_rw6.core.logger import get_logger
             logger = get_logger(__name__)
 
         Inside an example script::

@@ -86,7 +86,7 @@ abb_rws_client/
 │   ├── exceptions.py    # Custom exception hierarchy
 │   ├── serializers.py   # RAPID types ↔ Python
 │   ├── env.py           # .env loader
-│   └── logging.py       # Library logger
+│   └── logger.py       # Library logger
 ├── rws/                 # 1 function = 1 HTTP endpoint  ← AUTO-GENERATED
 │   ├── ctrl/
 │   ├── iosystem/

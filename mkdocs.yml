@@ -30,7 +30,7 @@ nav:
         - Client: api/abb_rws_client_python_rw6/core/client.md
         - Env: api/abb_rws_client_python_rw6/core/env.md
         - Exceptions: api/abb_rws_client_python_rw6/core/exceptions.md
-        - Logging: api/abb_rws_client_python_rw6/core/logging.md
+        - Logger: api/abb_rws_client_python_rw6/core/logger.md
         - Serializers: api/abb_rws_client_python_rw6/core/serializers.md
       - Highlevel:
         - Rapid: api/abb_rws_client_python_rw6/highlevel/rapid.md
