@@ -1,6 +1,6 @@
 # tests/test_exceptions.py
 """
-Unit tests for abb_rws_client.core.exceptions — no robot required.
+Unit tests for abb_rws_client_python_rw6.core.exceptions — no robot required.
 
 Author: Clement RACINET
 
@@ -13,7 +13,7 @@ Coverage:
 
 import pytest
 
-from abb_rws_client.core.exceptions import (
+from abb_rws_client_python_rw6.core.exceptions import (
     MastershipDenied,
     MastershipError,
     MastershipNotHeld,

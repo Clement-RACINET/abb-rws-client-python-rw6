@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # utils/docs/generate_api.py
 """
-Automatic MkDocs API page generator for abb_rws_client.
+Automatic MkDocs API page generator for abb_rws_client_python_rw6.
 
 Author: Clement RACINET
 
@@ -57,7 +57,7 @@ def _module_path(py_file: Path, project_root: Path) -> str:
         project_root: Absolute path to the project root.
 
     Returns:
-        Dotted module path (e.g. ``"abb_rws_client.rws.rapid.execution"``).
+        Dotted module path (e.g. ``"abb_rws_client_python_rw6.rws.rapid.execution"``).
     """
     rel = py_file.relative_to(project_root).with_suffix("")
     return ".".join(rel.parts)

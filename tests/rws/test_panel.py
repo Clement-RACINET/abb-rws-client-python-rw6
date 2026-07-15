@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.panel import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.panel import (
     get_collision_detection_state,
     get_collision_detection_state_actions,
     get_controller_state,

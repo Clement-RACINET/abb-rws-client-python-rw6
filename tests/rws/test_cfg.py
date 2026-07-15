@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.cfg import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.cfg import (
     create_default_cfg_instance,
     delete_cfg_instance,
     get_actions_on_cfg_domain,

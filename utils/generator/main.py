@@ -10,7 +10,7 @@ Writes : abb_rws_client/rws/**/*.py
          tests/rws/**/*.py
 
 This script is an internal development tool.
-It is NOT part of the published library (pyproject.toml → packages = ["abb_rws_client"]).
+It is NOT part of the published library (pyproject.toml → packages = ["abb_rws_client_python_rw6"]).
 
 Usage:
     python utils/generator/main.py [--dry-run] [--only <module_path>]
@@ -34,7 +34,7 @@ import textwrap
 
 REPO_ROOT = Path(__file__).parent.parent.parent
 API_JSON = REPO_ROOT / "utils" / "scraping" / "abb_rws_api_full.json"
-RWS_OUT = REPO_ROOT / "abb_rws_client" / "rws"
+RWS_OUT = REPO_ROOT / "abb_rws_client_python_rw6" / "rws"
 TESTS_OUT = REPO_ROOT / "tests" / "rws"
 
 # Maximum line length (matches ruff line-length = 100, with 3 chars margin)
@@ -708,7 +708,7 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
         "",
         "import httpx",
         "",
-        "from abb_rws_client.core.client import RWSClient",
+        "from abb_rws_client_python_rw6.core.client import RWSClient",
         "",
         "",
     ]
@@ -958,8 +958,8 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "import httpx",
         "import pytest",
         "",
-        "from abb_rws_client.core.client import RWSClient",
-        f"from abb_rws_client.rws.{module_import} import (",
+        "from abb_rws_client_python_rw6.core.client import RWSClient",
+        f"from abb_rws_client_python_rw6.rws.{module_import} import (",
     ]
     for fn in sorted(func_names):   # trié alphabétiquement
         lines.append(f"    {fn},")

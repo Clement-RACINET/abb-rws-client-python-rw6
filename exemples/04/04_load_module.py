@@ -24,14 +24,14 @@ import asyncio
 import os
 import sys
 
-from abb_rws_client import (
+from abb_rws_client_python_rw6 import (
     RWSClient,
     RWSError,
     configure_logging,
     get_logger,
     load_env,
 )
-from abb_rws_client.highlevel.rapid import is_running, load_module_safe, stop_rapid
+from abb_rws_client_python_rw6.highlevel.rapid import is_running, load_module_safe, stop_rapid
 
 load_env()
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))

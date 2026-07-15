@@ -38,7 +38,7 @@ import sys
 # ---------------------------------------------------------------------------
 
 REPO_ROOT = Path(__file__).parent.parent
-PKG_ROOT = REPO_ROOT / "abb_rws_client"
+PKG_ROOT = REPO_ROOT / "abb_rws_client_python_rw6"
 TESTS_ROOT = REPO_ROOT / "tests"
 
 # Only core/ requires an explicit allowlist because its files contain
@@ -457,7 +457,7 @@ def _gen_package_init() -> str:
     # Sorted module order → satisfies ruff I001 out of the box
     for module in sorted(core_PUBLIC_EXPORTS):
         names = core_PUBLIC_EXPORTS[module]
-        block = _format_import(f"abb_rws_client.core.{module}", names)
+        block = _format_import(f"abb_rws_client_python_rw6.core.{module}", names)
         if block:
             import_blocks.append(block)
         all_names.extend(names)
@@ -478,7 +478,7 @@ Public API surface:
     - get_logger                 : namespaced child logger
 
 Example:
-    >>> from abb_rws_client import RWSClient
+    >>> from abb_rws_client_python_rw6import RWSClient
     >>> async with RWSClient(host="192.168.125.1") as client:
     ...     resp = await client.get("/rw/rapid/execution")
 \"\"\"

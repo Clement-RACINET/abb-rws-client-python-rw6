@@ -1,5 +1,5 @@
 # tests/highlevel/test_rapid.py
-"""Tests for abb_rws_client.highlevel.rapid.
+"""Tests for abb_rws_client_python_rw6.highlevel.rapid.
 
 Covers all public functions and internal helpers.
 All rws/ dependencies are mocked via unittest.mock.AsyncMock — no HTTP
@@ -17,8 +17,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from abb_rws_client.core.exceptions import RWSHTTPError
-from abb_rws_client.highlevel.rapid import (
+from abb_rws_client_python_rw6.core.exceptions import RWSHTTPError
+from abb_rws_client_python_rw6.highlevel.rapid import (
     _parse_exec_state,
     _parse_symbol_value,
     get_variable,
@@ -36,7 +36,7 @@ from abb_rws_client.highlevel.rapid import (
 # Helpers
 # ---------------------------------------------------------------------------
 
-_MODULE = "abb_rws_client.highlevel.rapid"
+_MODULE = "abb_rws_client_python_rw6.highlevel.rapid"
 
 
 def _resp(body: str = "", status: int = 200) -> httpx.Response:

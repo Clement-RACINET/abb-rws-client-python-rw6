@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.iosystem.networks import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.iosystem.networks import (
     get_actions_on_io_networks,
     get_io_networks_resources,
     post_search_io_networks,

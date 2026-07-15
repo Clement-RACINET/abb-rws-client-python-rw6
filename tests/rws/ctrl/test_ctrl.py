@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.ctrl.ctrl import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.ctrl.ctrl import (
     add_route_table_entry,
     add_validation_info,
     delete_system,

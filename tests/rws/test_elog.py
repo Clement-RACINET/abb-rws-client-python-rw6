@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.elog import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.elog import (
     get_actions_on_elog_domain,
     get_elog_actions,
     get_elog_message_in_domain,

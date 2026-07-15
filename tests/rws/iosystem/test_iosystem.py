@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.iosystem.iosystem import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.iosystem.iosystem import (
     get_an_io_signal,
     get_eio_device_status_information,
     get_io_device,

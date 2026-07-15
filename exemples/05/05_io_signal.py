@@ -32,14 +32,14 @@ import sys
 
 import httpx
 
-from abb_rws_client import (
+from abb_rws_client_python_rw6 import (
     RWSClient,
     RWSError,
     configure_logging,
     get_logger,
     load_env,
 )
-from abb_rws_client.rws.iosystem.signals import get_io_signals, post_signal_search
+from abb_rws_client_python_rw6.rws.iosystem.signals import get_io_signals, post_signal_search
 
 load_env()
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))

@@ -22,7 +22,7 @@ import sys
 
 import httpx
 
-from abb_rws_client import (
+from abb_rws_client_python_rw6 import (
     RWSClient,
     RWSConnectionError,
     RWSError,
@@ -30,7 +30,7 @@ from abb_rws_client import (
     get_logger,
     load_env,
 )
-from abb_rws_client.rws.panel import get_controller_state, get_operation_mode
+from abb_rws_client_python_rw6.rws.panel import get_controller_state, get_operation_mode
 
 load_env()
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))

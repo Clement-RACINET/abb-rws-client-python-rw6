@@ -34,8 +34,8 @@ mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 
 [feature.dev.tasks]
-lint       = "ruff check abb_rws_client tests"
-format     = "ruff format abb_rws_client tests"
+lint       = "ruff check abb_rws_client_python_rw6tests"
+format     = "ruff format abb_rws_client_python_rw6tests"
 test       = "python -m pytest tests/ -v"
 fix-init   = "python utils/fix_init.py"
 clean      = "python utils/clean.py"

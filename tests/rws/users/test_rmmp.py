@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.users.rmmp import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.users.rmmp import (
     cancel_held_or_requested_rmmp,
     get_rmmp_actions,
     get_rmmp_state,

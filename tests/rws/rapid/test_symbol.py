@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.rapid.symbol import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.rapid.symbol import (
     get_rapid_symbol_data,
     get_rapid_symbol_data_actions,
     get_rapid_symbol_properties,

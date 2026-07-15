@@ -46,7 +46,7 @@ scraping = [
 
 # ── Hatchling ──────────────────────────────────────────────────────────────
 [tool.hatch.build.targets.wheel]
-packages = ["abb_rws_client"]
+packages = ["abb_rws_client_python_rw6"]
 
 # ── Ruff ───────────────────────────────────────────────────────────────────
 [tool.ruff]
@@ -62,7 +62,7 @@ ignore = []
 
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
-known-first-party = ["abb_rws_client"]
+known-first-party = ["abb_rws_client_python_rw6"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -79,7 +79,7 @@ python_functions = ["test_*"]
 log_cli = true
 log_cli_level = "INFO"
 addopts = [
-    "--cov=abb_rws_client",
+    "--cov=abb_rws_client_python_rw6",
     "--cov-branch",
     "--cov-report=term-missing",
     "--cov-report=html:docs/coverage",
@@ -88,7 +88,7 @@ addopts = [
 
 # ── Coverage ───────────────────────────────────────────────────────────────
 [tool.coverage.run]
-source = ["abb_rws_client"]
+source = ["abb_rws_client_python_rw6"]
 branch = true
 omit = [".pixi/*", "tests/*", "utils/*", "site/*", "docs/*", "*old*"]
 

@@ -32,7 +32,7 @@ def _generate_coverage(project_root: Path) -> None:
     result = subprocess.run(
         [
             sys.executable, "-m", "pytest",
-            "--cov=abb_rws_client",
+            "--cov=abb_rws_client_python_rw6",
             "--cov-branch",
             "--cov-report=html:docs/htmlcov",
             "--no-header", "-q",

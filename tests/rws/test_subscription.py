@@ -7,8 +7,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import RWSClient
-from abb_rws_client.rws.subscription import (
+from abb_rws_client_python_rw6.core.client import RWSClient
+from abb_rws_client_python_rw6.rws.subscription import (
     add_new_resources_remove_existing_resources_or,
     get_subscription_actions,
     get_subscription_group_actions,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # utils/docs/config.py
 """
-Documentation pipeline configuration for abb_rws_client.
+Documentation pipeline configuration for abb_rws_client_python_rw6.
 
 Author: Clement RACINET
 
@@ -45,7 +45,7 @@ class DocConfig:
 
 
 def build_config() -> DocConfig:
-    """Build the documentation pipeline configuration for abb_rws_client.
+    """Build the documentation pipeline configuration for abb_rws_client_python_rw6.
 
     Returns:
         A fully populated ``DocConfig`` instance ready for use.
@@ -61,13 +61,13 @@ def build_config() -> DocConfig:
         mkdocs_path=PROJECT_ROOT / "mkdocs.yml",
         docs_src_dir=PROJECT_ROOT / "docs",
         docs_api_dir=PROJECT_ROOT / "docs" / "api",
-        packages_to_scan=["abb_rws_client"],
+        packages_to_scan=["abb_rws_client_python_rw6"],
         exclude_dirs={
             "__pycache__",
             ".pytest_cache",
             ".git",
             ".pixi",
-            "abb_rws_client.egg-info",
+            "abb_rws_client_python_rw6.egg-info",
             "utils",
         },
         exclude_files={

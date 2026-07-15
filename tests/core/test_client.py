@@ -20,7 +20,7 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from abb_rws_client.core.client import (
+from abb_rws_client_python_rw6.core.client import (
     _RETRY_BASE_DELAY,
     _RETRY_JITTER,
     _RETRY_MAX_ATTEMPTS,
@@ -30,7 +30,7 @@ from abb_rws_client.core.client import (
     _raise_for_status,
     _retry_delay,
 )
-from abb_rws_client.core.exceptions import (
+from abb_rws_client_python_rw6.core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
     RWSHTTPError,
