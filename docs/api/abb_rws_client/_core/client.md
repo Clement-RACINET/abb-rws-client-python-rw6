@@ -1,3 +1,3 @@
 # Client
 
-::: abb_rws_client._core.client
+::: abb_rws_client.core.client

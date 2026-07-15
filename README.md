@@ -81,7 +81,7 @@ All options are read from environment variables (`.env` file):
 
 ```
 abb_rws_client/
-├── _core/
+├── core/
 │   ├── client.py        # RWSClient (async) + RWSClientSync
 │   ├── exceptions.py    # Custom exception hierarchy
 │   ├── serializers.py   # RAPID types ↔ Python
@@ -96,7 +96,7 @@ abb_rws_client/
 └── highlevel/           # Composed wrappers (no direct HTTP)
 ```
 
-> `rws/` is **auto-generated** by `contrib/generator/main.py`.
+> `rws/` is **auto-generated** by `utils/generator/main.py`.
 > Do not edit it manually.
 
 ---

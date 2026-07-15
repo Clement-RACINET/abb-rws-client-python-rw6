@@ -1,4 +1,4 @@
-# abb_rws_client/_core/env.py
+# abb_rws_client/core/env.py
 """Environment configuration loader for abb-rws-client-python-rw6.
 
 Resolves and loads a ``.env`` file into :data:`os.environ` using
@@ -112,7 +112,7 @@ def _find_env(start: Path) -> Path | None:
 
     Example:
         >>> from pathlib import Path
-        >>> from abb_rws_client._core.env import _find_env
+        >>> from abb_rws_client.core.env import _find_env
         >>> _find_env(Path("/home/user/projects/robot/examples/02"))
         PosixPath('/home/user/projects/robot/.env')  # if it exists there
     """

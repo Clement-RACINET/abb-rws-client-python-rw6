@@ -37,10 +37,10 @@ mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 lint       = "ruff check abb_rws_client tests"
 format     = "ruff format abb_rws_client tests"
 test       = "python -m pytest tests/ -v"
-fix-init   = "python contrib/fix_init.py"
-clean      = "python contrib/clean.py"
-clean-dry  = "python contrib/clean.py --dry-run"
-docs       = "python contrib/docs/run_docs.py"
+fix-init   = "python utils/fix_init.py"
+clean      = "python utils/clean.py"
+clean-dry  = "python utils/clean.py --dry-run"
+docs       = "python utils/docs/run_docs.py"
 docs-build = "python -m mkdocs build"
 
 # ── Feature : scraping ────────────────────────────────────────────────────
@@ -49,4 +49,4 @@ requests       = ">=2.32,<3.0"
 beautifulsoup4 = ">=4.12,<5.0"
 
 [feature.scraping.tasks]
-scrape = "python contrib/scraping/scrape.py"
+scrape = "python utils/scraping/scrape.py"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/docs/hooks.py
+# utils/docs/hooks.py
 """
 MkDocs hook: copy docs/htmlcov/ into site/htmlcov/ after each build.
 

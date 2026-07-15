@@ -18,9 +18,9 @@ Example:
 
 from __future__ import annotations
 
-from abb_rws_client._core.client import RWSClient, RWSClientSync
-from abb_rws_client._core.env import load_env
-from abb_rws_client._core.exceptions import (
+from abb_rws_client.core.client import RWSClient, RWSClientSync
+from abb_rws_client.core.env import load_env
+from abb_rws_client.core.exceptions import (
     CTRL_CODES,
     MastershipDenied,
     MastershipError,
@@ -33,8 +33,8 @@ from abb_rws_client._core.exceptions import (
     RWSTimeoutError,
     RWSValueError,
 )
-from abb_rws_client._core.logging import configure_logging, get_logger
-from abb_rws_client._core.serializers import (
+from abb_rws_client.core.logging import configure_logging, get_logger
+from abb_rws_client.core.serializers import (
     RapidValue,
     RobTarget,
     robtarget_to_rws,

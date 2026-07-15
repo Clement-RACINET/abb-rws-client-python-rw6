@@ -1,7 +1,7 @@
-## `contrib/README.fr.md` (FR)
+## `utils/README.fr.md` (FR)
 
 ```markdown
-# `contrib/` — Outils de développement interne
+# `utils/` — Outils de développement interne
 
 Ce dossier contient les outils utilisés pour **construire et maintenir**
 la bibliothèque `abb_rws_client`. Il ne fait **pas** partie du package
@@ -12,7 +12,7 @@ publié (exclu via `pyproject.toml → [tool.hatch.build.targets.wheel]`).
 ## Structure
 ```
 
-contrib/
+utils/
 ├── docs/
 │   ├── config.py          # Configuration centralisée de la pipeline MkDocs
 │   ├── generate_api.py    # Générateur de pages Markdown + injection mkdocs.yml
@@ -40,7 +40,7 @@ contrib/
 ### 1. Scraping *(rare — uniquement si l'API ABB évolue)*
 
 ```bash
-pixi run python contrib/scraping/scrape.py
+pixi run python utils/scraping/scrape.py
 ```
 
 Produit `abb_rws_api_full.json` en scrapant le Developer Center ABB.
@@ -54,7 +54,7 @@ rm -rf abb_rws_client/rws tests/rws          # Linux / macOS
 rmdir /s /q abb_rws_client\rws tests\rws     # Windows
 
 # Régénérer tout
-pixi run python contrib/generator/main.py
+pixi run python utils/generator/main.py
 
 # Vérifier
 pixi run python -m pytest tests/ -v
@@ -70,7 +70,7 @@ Options disponibles :
 ### 3. Documentation *(après modification des docstrings ou de l'API)*
 
 ```bash
-pixi run python contrib/docs/run_docs.py
+pixi run python utils/docs/run_docs.py
 ```
 
 Génère les pages Markdown de l'API, produit le rapport de coverage et lance

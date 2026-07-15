@@ -1,4 +1,4 @@
-# abb_rws_client/_core/__init__.py
+# abb_rws_client/core/__init__.py
 """Internal core — session, exceptions, serializers.
 
 Not part of the public API. Import from ``abb_rws_client`` directly.

@@ -1,5 +1,5 @@
-# tests/_core/test_logging.py
-"""Tests for abb_rws_client._core.logging."""
+# tests/core/test_logging.py
+"""Tests for abb_rws_client.core.logging."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import logging
 
 import pytest
 
-from abb_rws_client._core.logging import (
+from abb_rws_client.core.logging import (
     _ROOT_LOGGER_NAME,
     configure_logging,
     get_logger,
@@ -152,8 +152,8 @@ class TestGetLogger:
 
     def test_dunder_name_pattern(self) -> None:
         """Typical usage: get_logger(__name__)."""
-        logger = get_logger("abb_rws_client._core.env")
-        assert logger.name == f"{_ROOT_LOGGER_NAME}.abb_rws_client._core.env"
+        logger = get_logger("abb_rws_client.core.env")
+        assert logger.name == f"{_ROOT_LOGGER_NAME}.abb_rws_client.core.env"
 
     def test_child_inherits_parent_level(self) -> None:
         """Child logger must inherit the root library logger's level."""

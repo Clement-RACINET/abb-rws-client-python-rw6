@@ -1,4 +1,4 @@
-# abb_rws_client/_core/logging.py
+# abb_rws_client/core/logging.py
 """Centralised logging configuration for abb-rws-client-python-rw6.
 
 The entire library uses the standard :mod:`logging` module with loggers
@@ -35,7 +35,7 @@ import logging
 import sys
 from typing import TextIO
 
-#: Name of the library root logger.  Every sub-logger (``_core.client``,
+#: Name of the library root logger.  Every sub-logger (``core.client``,
 #: ``highlevel.rapid``, ``rws.rapid.execution``, …) is a child of this one.
 _ROOT_LOGGER_NAME: str = "abb_rws_client"
 
@@ -57,7 +57,7 @@ def configure_logging(
     the ``"abb_rws_client"`` logger and sets its level.  Calling this
     function more than once replaces the existing handlers.
 
-    All child loggers (``abb_rws_client._core.client``,
+    All child loggers (``abb_rws_client.core.client``,
     ``abb_rws_client.highlevel.rapid``, ``abb_rws_client.rws.*``, …)
     inherit this configuration automatically — no per-module setup needed.
 
@@ -152,7 +152,7 @@ def get_logger(name: str) -> logging.Logger:
     Example:
         Inside a library module::
 
-            from abb_rws_client._core.logging import get_logger
+            from abb_rws_client.core.logging import get_logger
             logger = get_logger(__name__)
 
         Inside an example script::

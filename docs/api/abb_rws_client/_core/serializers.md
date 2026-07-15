@@ -1,3 +1,3 @@
 # Serializers
 
-::: abb_rws_client._core.serializers
+::: abb_rws_client.core.serializers

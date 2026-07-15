@@ -1,4 +1,4 @@
-# abb_rws_client/_core/client.py
+# abb_rws_client/core/client.py
 """
 HTTP session management for an ABB RWS controller (RobotWare 6).
 
@@ -44,8 +44,8 @@ from typing import Any, Self
 
 import httpx
 
-from abb_rws_client._core.env import get_env_float_or_none, get_env_int, get_env_str
-from abb_rws_client._core.exceptions import (
+from abb_rws_client.core.env import get_env_float_or_none, get_env_int, get_env_str
+from abb_rws_client.core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
     RWSHTTPError,

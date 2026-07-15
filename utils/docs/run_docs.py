@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/docs/run_docs.py
+# utils/docs/run_docs.py
 """
 Documentation pipeline orchestrator.
 
@@ -9,7 +9,7 @@ Generates the API reference pages, produces the coverage HTML report,
 and starts ``mkdocs serve``.
 
 Usage:
-    python contrib/docs/run_docs.py
+    python utils/docs/run_docs.py
     pixi run docs          # if configured in pixi.toml
 """
 from __future__ import annotations
@@ -18,8 +18,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-from contrib.docs.config import build_config
-from contrib.docs.generate_api import generate_api_docs, update_mkdocs_nav
+from utils.docs.config import build_config
+from utils.docs.generate_api import generate_api_docs, update_mkdocs_nav
 
 
 def _generate_coverage(project_root: Path) -> None:

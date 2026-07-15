@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/clean.py
+# utils/clean.py
 """Remove all cache and build artefacts from the repository.
 
 Targets:
@@ -14,8 +14,8 @@ Targets:
     - tests/coverage.xml coverage XML report
 
 Usage:
-    pixi run python contrib/clean.py
-    pixi run python contrib/clean.py --dry-run
+    pixi run python utils/clean.py
+    pixi run python utils/clean.py --dry-run
 """
 
 from __future__ import annotations

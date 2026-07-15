@@ -14,9 +14,9 @@ import re
 
 import httpx
 
-from abb_rws_client._core.client import RWSClient
-from abb_rws_client._core.exceptions import RWSHTTPError
-from abb_rws_client._core.logging import get_logger
+from abb_rws_client.core.client import RWSClient
+from abb_rws_client.core.exceptions import RWSHTTPError
+from abb_rws_client.core.logging import get_logger
 from abb_rws_client.rws.mastership import (
     post_mastership_domain_release,
     post_mastership_domain_request,

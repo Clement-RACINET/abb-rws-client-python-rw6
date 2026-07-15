@@ -1,6 +1,6 @@
 # tests/test_serializers.py
 """
-Unit tests for abb_rws_client._core.serializers — no robot required.
+Unit tests for abb_rws_client.core.serializers — no robot required.
 
 Author: Clement RACINET
 
@@ -14,8 +14,8 @@ Coverage:
 
 import pytest
 
-from abb_rws_client._core.exceptions import RWSValueError
-from abb_rws_client._core.serializers import (
+from abb_rws_client.core.exceptions import RWSValueError
+from abb_rws_client.core.serializers import (
     RapidValue,
     RobTarget,
     python_to_rapid_value,

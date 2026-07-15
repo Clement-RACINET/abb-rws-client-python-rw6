@@ -19,7 +19,7 @@ plugins:
             show_root_heading: true
 
 hooks:
-  - contrib/docs/hooks.py 
+  - utils/docs/hooks.py 
 
 nav:
   - Accueil: index.md
@@ -27,11 +27,11 @@ nav:
     # --- AUTOGEN_API_START ---
     - Abb Rws Client:
       - Core:
-        - Client: api/abb_rws_client/_core/client.md
-        - Env: api/abb_rws_client/_core/env.md
-        - Exceptions: api/abb_rws_client/_core/exceptions.md
-        - Logging: api/abb_rws_client/_core/logging.md
-        - Serializers: api/abb_rws_client/_core/serializers.md
+        - Client: api/abb_rws_client/core/client.md
+        - Env: api/abb_rws_client/core/env.md
+        - Exceptions: api/abb_rws_client/core/exceptions.md
+        - Logging: api/abb_rws_client/core/logging.md
+        - Serializers: api/abb_rws_client/core/serializers.md
       - Highlevel:
         - Rapid: api/abb_rws_client/highlevel/rapid.md
       - Rws:

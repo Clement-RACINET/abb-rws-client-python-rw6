@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/docs/config.py
+# utils/docs/config.py
 """
 Documentation pipeline configuration for abb_rws_client.
 
@@ -13,7 +13,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-#: Absolute path to the project root (2 levels above contrib/docs/)
+#: Absolute path to the project root (2 levels above utils/docs/)
 PROJECT_ROOT: Path = Path(__file__).resolve().parents[2]
 
 
@@ -51,7 +51,7 @@ def build_config() -> DocConfig:
         A fully populated ``DocConfig`` instance ready for use.
 
     Example:
-        >>> from contrib.docs.config import build_config
+        >>> from utils.docs.config import build_config
         >>> cfg = build_config()
         >>> cfg.project_root.name
         'abb_rws_client_python_rw6'
@@ -68,7 +68,7 @@ def build_config() -> DocConfig:
             ".git",
             ".pixi",
             "abb_rws_client.egg-info",
-            "contrib",
+            "utils",
         },
         exclude_files={
             "__init__.py",

@@ -1,5 +1,5 @@
-# tests/_core/test_env.py
-"""Tests for abb_rws_client._core.env."""
+# tests/core/test_env.py
+"""Tests for abb_rws_client.core.env."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import pytest
 
-from abb_rws_client._core.env import (
+from abb_rws_client.core.env import (
     _find_env,
     get_env_float,
     get_env_float_or_none,
@@ -108,7 +108,7 @@ class TestLoadEnv:
     def test_returns_none_when_no_env_found(self, tmp_path: Path) -> None:
         """Auto-discovery must return None gracefully when no .env exists."""
         with patch(
-            "abb_rws_client._core.env._find_env", return_value=None
+            "abb_rws_client.core.env._find_env", return_value=None
         ):
             result = load_env()
         assert result is None

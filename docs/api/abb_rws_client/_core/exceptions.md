@@ -1,3 +1,3 @@
 # Exceptions
 
-::: abb_rws_client._core.exceptions
+::: abb_rws_client.core.exceptions

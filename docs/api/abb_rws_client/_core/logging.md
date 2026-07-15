@@ -1,3 +1,3 @@
 # Logging
 
-::: abb_rws_client._core.logging
+::: abb_rws_client.core.logging

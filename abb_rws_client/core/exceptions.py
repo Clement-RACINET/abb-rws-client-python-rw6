@@ -1,4 +1,4 @@
-# abb_rws_client/_core/exceptions.py
+# abb_rws_client/core/exceptions.py
 """
 Custom exceptions for abb-rws-client-python-rw6.
 
@@ -488,7 +488,7 @@ class MastershipNotHeld(MastershipError):
 class RWSValueError(RWSError):
     """Invalid RAPID value or serialization / deserialization failure.
 
-    Raised by ``_core/serializers.py`` when a Python value cannot be
+    Raised by ``core/serializers.py`` when a Python value cannot be
     converted to RWS format, or conversely when a raw RWS string cannot
     be parsed into a Python type.
 

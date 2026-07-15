@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/export_structure.py
+# utils/export_structure.py
 """Repository tree exporter.
 
 Author: Clement RACINET

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/docs/generate_api.py
+# utils/docs/generate_api.py
 """
 Automatic MkDocs API page generator for abb_rws_client.
 
@@ -14,7 +14,7 @@ from __future__ import annotations
 import fnmatch
 from pathlib import Path
 
-from contrib.docs.config import DocConfig
+from utils.docs.config import DocConfig
 
 # ---------------------------------------------------------------------------
 # Helpers

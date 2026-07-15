@@ -1,5 +1,5 @@
 
-# `contrib/` — Internal development tools
+# `utils/` — Internal development tools
 
 This directory contains the tools used to **build and maintain**
 the `abb_rws_client` library. It is **not** part of the published package
@@ -11,7 +11,7 @@ the `abb_rws_client` library. It is **not** part of the published package
 
 ```
 
-contrib/
+utils/
 ├── docs/
 │   ├── config.py          # Centralised MkDocs pipeline configuration
 │   ├── generate_api.py    # Markdown page generator + mkdocs.yml injection
@@ -39,7 +39,7 @@ contrib/
 ### 1. Scraping *(rare — only if the ABB API changes)*
 
 ```bash
-pixi run python contrib/scraping/scrape.py
+pixi run python utils/scraping/scrape.py
 ```
 
 Produces `abb_rws_api_full.json` by scraping the ABB Developer Center.
@@ -53,7 +53,7 @@ rm -rf abb_rws_client/rws tests/rws          # Linux / macOS
 rmdir /s /q abb_rws_client\rws tests\rws     # Windows
 
 # Regenerate everything
-pixi run python contrib/generator/main.py
+pixi run python utils/generator/main.py
 
 # Verify
 pixi run python -m pytest tests/ -v
@@ -69,7 +69,7 @@ Available options:
 ### 3. Documentation *(after modifying docstrings or the API)*
 
 ```bash
-pixi run python contrib/docs/run_docs.py
+pixi run python utils/docs/run_docs.py
 ```
 
 Generates API Markdown pages, produces the coverage report, and starts

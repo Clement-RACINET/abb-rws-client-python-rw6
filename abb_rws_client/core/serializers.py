@@ -1,4 +1,4 @@
-# abb_rws_client/_core/serializers.py
+# abb_rws_client/core/serializers.py
 """
 Serialization / deserialization of RAPID types ↔ RWS format.
 
@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 import re
 from typing import TypeAlias
 
-from abb_rws_client._core.exceptions import RWSValueError
+from abb_rws_client.core.exceptions import RWSValueError
 
 #: ABB sentinel value for an inactive external axis
 _INACTIVE_AXIS = 9e9

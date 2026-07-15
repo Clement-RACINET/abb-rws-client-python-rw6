@@ -1229,7 +1229,7 @@
 10:41:57 [555/555]  Get Forms
 10:41:57 
  Exporting...
-10:41:57    JSON  → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\contrib\scraping\abb_rws_api_full.json
-10:41:57     MD    → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\contrib\scraping\abb_rws_api_full.md
+10:41:57    JSON  → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\utils\scraping\abb_rws_api_full.json
+10:41:57     MD    → c:\Users\cleme\Documents\GitLab_ENSAM\abb_rws_client_python_rw6\utils\scraping\abb_rws_api_full.md
 10:41:57 
 ✓ Done — 555 routes documented.

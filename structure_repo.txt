@@ -1,6 +1,6 @@
 abb_rws_client_python_rw6
 ├── abb_rws_client
-│   ├── _core
+│   ├── core
 │   │   ├── __init__.py
 │   │   ├── client.py
 │   │   ├── env.py
@@ -59,23 +59,6 @@ abb_rws_client_python_rw6
 │   │   ├── system.py
 │   │   └── vision.py
 │   └── __init__.py
-├── contrib
-│   ├── generator
-│   │   └── main.py
-│   ├── scraping
-│   │   ├── manual
-│   │   │   ├── architecture_api.txt
-│   │   │   └── robot_controller_return_code.txt
-│   │   ├── abb_rws_api_full.json
-│   │   ├── abb_rws_api_full.md
-│   │   ├── routes_list.json
-│   │   ├── scrape.log
-│   │   └── scrape.py
-│   ├── clean_cache.py
-│   ├── export_structure.py
-│   ├── fix_init.py
-│   ├── README.fr.md
-│   └── README.md
 ├── exemples
 │   ├── 01
 │   │   └── ping.py
@@ -108,7 +91,7 @@ abb_rws_client_python_rw6
 │   ├── logo_projet2.png
 │   └── logo_projet2.svg
 ├── tests
-│   ├── _core
+│   ├── core
 │   │   ├── __init__.py
 │   │   ├── test_client.py
 │   │   ├── test_env.py
@@ -167,6 +150,23 @@ abb_rws_client_python_rw6
 │   │   ├── test_system.py
 │   │   └── test_vision.py
 │   └── __init__.py
+├── utils
+│   ├── generator
+│   │   └── main.py
+│   ├── scraping
+│   │   ├── manual
+│   │   │   ├── architecture_api.txt
+│   │   │   └── robot_controller_return_code.txt
+│   │   ├── abb_rws_api_full.json
+│   │   ├── abb_rws_api_full.md
+│   │   ├── routes_list.json
+│   │   ├── scrape.log
+│   │   └── scrape.py
+│   ├── clean_cache.py
+│   ├── export_structure.py
+│   ├── fix_init.py
+│   ├── README.fr.md
+│   └── README.md
 ├── mkdocs.yml
 ├── pixi.lock
 ├── pixi.toml

@@ -17,7 +17,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from abb_rws_client._core.exceptions import RWSHTTPError
+from abb_rws_client.core.exceptions import RWSHTTPError
 from abb_rws_client.highlevel.rapid import (
     _parse_exec_state,
     _parse_symbol_value,

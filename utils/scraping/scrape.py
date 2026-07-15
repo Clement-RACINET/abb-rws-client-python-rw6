@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# contrib/scraping/scrape.py
+# utils/scraping/scrape.py
 """
 ABB RobotWare 6 RWS API scraper.
 
@@ -9,13 +9,13 @@ Crawls the ABB Developer Center Doxygen documentation and extracts all
 RWS REST API endpoints into structured JSON and Markdown files.
 
 Reads  : https://developercenter.robotstudio.com/api/rwsApi/
-Writes : contrib/scraping/abb_rws_api_full.json
-         contrib/scraping/abb_rws_api_full.md
-         contrib/scraping/routes_list.json  (crawl cache)
-         contrib/scraping/scrape.log
+Writes : utils/scraping/abb_rws_api_full.json
+         utils/scraping/abb_rws_api_full.md
+         utils/scraping/routes_list.json  (crawl cache)
+         utils/scraping/scrape.log
 
 Usage:
-    python contrib/scraping/scrape.py
+    python utils/scraping/scrape.py
 
 Notes:
     - If ``routes_list.json`` already exists, the crawl phase (Phase 1)
@@ -331,7 +331,7 @@ def export_json(
     Args:
         full_api: List of parsed route dictionaries.
         path: Output file path. Defaults to
-            ``contrib/scraping/abb_rws_api_full.json``.
+            ``utils/scraping/abb_rws_api_full.json``.
     """
     with open(path, "w", encoding="utf-8") as f:
         json.dump(full_api, f, ensure_ascii=False, indent=2)
@@ -350,7 +350,7 @@ def export_markdown(
     Args:
         full_api: List of parsed route dictionaries.
         path: Output file path. Defaults to
-            ``contrib/scraping/abb_rws_api_full.md``.
+            ``utils/scraping/abb_rws_api_full.md``.
     """
     with open(path, "w", encoding="utf-8") as f:
         f.write("# ABB Robot Web Services — API Reference\n\n")

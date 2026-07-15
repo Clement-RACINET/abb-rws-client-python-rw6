@@ -58,7 +58,7 @@ select = ["E", "W", "F", "I", "UP", "B", "C4", "SIM", "ANN"]
 ignore = []
 
 [tool.ruff.lint.per-file-ignores]
-"abb_rws_client/_core/client.py" = ["ANN401"]
+"abb_rws_client/core/client.py" = ["ANN401"]
 
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
@@ -90,7 +90,7 @@ addopts = [
 [tool.coverage.run]
 source = ["abb_rws_client"]
 branch = true
-omit = [".pixi/*", "tests/*", "contrib/*", "site/*", "docs/*", "*old*"]
+omit = [".pixi/*", "tests/*", "utils/*", "site/*", "docs/*", "*old*"]
 
 [tool.coverage.report]
 exclude_lines = [
