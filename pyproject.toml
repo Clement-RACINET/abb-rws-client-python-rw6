@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "abb-rws-client-python-rw6"
+name = "abb_rws_client_python_rw6"
 version = "0.8.0"
 description = "Async Python client for ABB Robot Web Services (RobotWare 6)"
 readme = "README.md"
@@ -28,8 +28,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6"
-Issues     = "https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6/issues"
+Repository = "https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6"
+Issues     = "https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6/issues"
 
 [project.optional-dependencies]
 dev = [

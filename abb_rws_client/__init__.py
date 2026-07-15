@@ -1,5 +1,5 @@
 # abb_rws_client/__init__.py
-"""abb-rws-client-python-rw6 — Async Python client for ABB RWS (RobotWare 6).
+"""abb_rws_client_python_rw6 — Async Python client for ABB RWS (RobotWare 6).
 
 Public API surface:
     - RWSClient / RWSClientSync  : HTTP session management

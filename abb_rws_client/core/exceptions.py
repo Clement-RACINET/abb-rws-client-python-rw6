@@ -1,6 +1,6 @@
 # abb_rws_client/core/exceptions.py
 """
-Custom exceptions for abb-rws-client-python-rw6.
+Custom exceptions for abb_rws_client_python_rw6.
 
 Author: Clement RACINET
 

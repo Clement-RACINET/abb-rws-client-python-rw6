@@ -1,4 +1,4 @@
-# abb-rws-client-python-rw6
+# abb_rws_client_python_rw6
 
 Client Python asynchrone pour les contrôleurs de robots ABB via l'API
 [Robot Web Services (RWS)](https://developercenter.robotstudio.com/api/rwsApi/)
@@ -33,7 +33,7 @@ sous **RobotWare 6**.
 ## Installation rapide (en tant que dépendance)
 
 ```bash
-pip install git+https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6.git
+pip install git+https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6.git
 ```
 
 ---
@@ -42,8 +42,8 @@ pip install git+https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6.git
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://gitlab.ensam.eu/lcfc/abb-rws-client-python-rw6.git
-cd abb-rws-client-python-rw6
+git clone https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6.git
+cd abb_rws_client_python_rw6
 
 # 2. Installer l'environnement (pixi résout tout automatiquement)
 pixi install

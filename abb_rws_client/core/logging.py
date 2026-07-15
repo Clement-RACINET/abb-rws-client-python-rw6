@@ -1,5 +1,5 @@
 # abb_rws_client/core/logging.py
-"""Centralised logging configuration for abb-rws-client-python-rw6.
+"""Centralised logging configuration for abb_rws_client_python_rw6.
 
 The entire library uses the standard :mod:`logging` module with loggers
 named after their module (``logging.getLogger(__name__)``).  All of them
