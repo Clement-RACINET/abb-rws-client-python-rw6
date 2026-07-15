@@ -35,3 +35,8 @@ Thumbs.db
 # Les fichiers "old"
 *old*
 **/*old*
+
+
+#fichiers de travail 
+*.ppt
+*.pptx

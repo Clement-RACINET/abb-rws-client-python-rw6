@@ -95,6 +95,14 @@ abb_rws_client_python_rw6
 │       ├── 05_io_signal.py
 │       ├── IOSignal.mod
 │       └── IOSignal.pgf
+├── pictures
+│   ├── logo_abb
+│   │   └── 6620926e3c8df-ABB.svg
+│   ├── logo_python
+│   │   └── python-icon.svg
+│   ├── logo_robot
+│   │   └── robot_logo.svg
+│   └── logo_projet.svg
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
