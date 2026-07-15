@@ -466,7 +466,7 @@ def _gen_package_init() -> str:
 
     return f"""\
 # abb_rws_client/__init__.py
-\"\"\"abb-rws6-python-client — Async Python client for ABB RWS (RobotWare 6).
+\"\"\"abb-rws-client-python-rw6 — Async Python client for ABB RWS (RobotWare 6).
 
 Public API surface:
     - RWSClient / RWSClientSync  : HTTP session management

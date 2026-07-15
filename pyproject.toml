@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "abb-rws6-python-client"
+name = "abb-rws-client-python-rw6"
 version = "0.8.0"
 description = "Async Python client for ABB Robot Web Services (RobotWare 6)"
 readme = "README.md"

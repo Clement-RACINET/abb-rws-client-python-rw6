@@ -1,4 +1,4 @@
-# abb-rws6-python-client
+# abb-rws-client-python-rw6
 
 Client Python asynchrone pour les contrôleurs de robots ABB via l'API
 [Robot Web Services (RWS)](https://developercenter.robotstudio.com/api/rwsApi/)
