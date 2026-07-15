@@ -96,7 +96,7 @@ abb_rws_client_python_rw6
 │   │   ├── test_client.py
 │   │   ├── test_env.py
 │   │   ├── test_exceptions.py
-│   │   ├── test_logger.py
+│   │   ├── test_logging.py
 │   │   └── test_serializers.py
 │   ├── highlevel
 │   │   ├── __init__.py
