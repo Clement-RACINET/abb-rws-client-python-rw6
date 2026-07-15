@@ -73,7 +73,7 @@ Toutes les options sont lues depuis des variables d'environnement (fichier `.env
 | `RWS_PASSWORD`     | `robotics`     | Mot de passe RWS                     |
 | `RWS_TIMEOUT`      | ---            | Délai d'attente HTTP (secondes)      |
 | `RWS_RAPID_TASK`   | `T_ROB1`       | Nom de la tâche RAPID cible          |
-| `RWS_LOG_LEVEL`    | `T_ROB1`       | Nom de la tâche RAPID cible          |
+| `RWS_LOG_LEVEL`    | `INFO`         | Niveau de verbosité des logs         |
 
 ---
 
@@ -98,3 +98,10 @@ abb_rws_client/
 
 > `rws/` est **auto-généré** par `utils/generator/main.py`.
 > Ne pas l'éditer manuellement.
+
+---
+
+## Licence
+
+Ce projet est distribué sous licence **MIT** — voir le fichier [`LICENSE`](./LICENSE) pour le texte complet.  
+© 2026 RACINET Clément
