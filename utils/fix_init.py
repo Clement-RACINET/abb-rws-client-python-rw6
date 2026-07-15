@@ -491,7 +491,7 @@ __all__ = [
     {_format_all(all_names)}
 ]
 
-__version__ = "0.8.0"
+__version__ = "1.0.0"
 """
 
 
