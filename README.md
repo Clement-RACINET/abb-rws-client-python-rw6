@@ -99,8 +99,3 @@ abb_rws_client/
 > `rws/` is **auto-generated** by `utils/generator/main.py`.
 > Do not edit it manually.
 
----
-
-## License
-
-Internal project — LCFC / ENSAM. All rights reserved.
