@@ -102,7 +102,11 @@ abb_rws_client_python_rw6
 │   │   └── python-icon.svg
 │   ├── logo_robot
 │   │   └── robot_logo.svg
-│   └── logo_projet.svg
+│   ├── ico.jpg
+│   ├── icone.ico
+│   ├── logo_projet.svg
+│   ├── logo_projet2.png
+│   └── logo_projet2.svg
 ├── tests
 │   ├── _core
 │   │   ├── __init__.py
