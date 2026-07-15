@@ -1,6 +1,8 @@
 # abb_rws_client/core/logger.py
 """Centralised logging configuration for abb_rws_client_python_rw6.
 
+Author: Clement RACINET
+
 The entire library uses the standard :mod:`logging` module with loggers
 named after their module (``logging.getLogger(__name__)``).  All of them
 are children of the root logger ``"abb_rws_client_python_rw6"``, so a single call to

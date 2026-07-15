@@ -1,6 +1,8 @@
 # abb_rws_client/core/env.py
 """Environment configuration loader for abb_rws_client_python_rw6.
 
+Author: Clement RACINET
+
 Resolves and loads a ``.env`` file into :data:`os.environ` using
 :mod:`python-dotenv` (already a runtime dependency).  The lookup walks
 up the directory tree from a given starting point, so it works correctly

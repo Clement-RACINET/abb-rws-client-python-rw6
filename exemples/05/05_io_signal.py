@@ -1,6 +1,8 @@
 # exemples/05/example_io_signal.py
 """Example 05 — Read and write a virtual digital output signal (TEST_DO_RWS).
 
+Author: Clement RACINET
+
 Demonstrates:
     - Listing all IO signals via ``get_io_signals``.
     - Searching a specific signal by name via ``post_signal_search``.

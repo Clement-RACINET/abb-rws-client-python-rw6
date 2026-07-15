@@ -1,6 +1,8 @@
 # exemples/03/example_read_write_variable.py
 """Example 03 — Read and write a RAPID variable.
 
+Author: Clement RACINET
+
 Demonstrates:
     - Reading a RAPID VAR/PERS via ``get_variable`` (highlevel).
     - Writing a RAPID VAR/PERS via ``set_variable_with_mastership`` (highlevel).

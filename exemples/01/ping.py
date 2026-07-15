@@ -1,6 +1,8 @@
 # exemples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 
+Author: Clement RACINET
+
 Prerequisites:
     - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD`` (optional — defaults apply if absent).

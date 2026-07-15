@@ -1,6 +1,8 @@
 # exemples/02/example_start_stop.py
 """Example 02 — Start and stop RAPID execution.
 
+Author: Clement RACINET
+
 Prerequisites:
     - Controller in AUTO mode, motors ON.
     - A RAPID program loaded in T_ROB1 with a ``main()`` procedure.

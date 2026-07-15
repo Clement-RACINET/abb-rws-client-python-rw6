@@ -1,6 +1,8 @@
 # exemples/04/example_load_module.py
 """Example 04 — Load a RAPID module into a task at runtime.
 
+Author: Clement RACINET
+
 Demonstrates:
     - Using ``load_module_safe`` (highlevel) to unload/load with mastership.
 

@@ -1,6 +1,8 @@
 # abb_rws_client/highlevel/rapid.py
 """High-level RAPID wrappers for ABB RWS RobotWare 6.
 
+Author: Clement RACINET
+
 Composed operations built exclusively from atomic ``rws/`` functions.
 No HTTP calls are made directly in this module.
 
