@@ -58,7 +58,8 @@ abb_rws_client_python_rw6
 │   │   ├── subscription.py
 │   │   ├── system.py
 │   │   └── vision.py
-│   └── __init__.py
+│   ├── __init__.py
+│   └── py.typed
 ├── exemples
 │   ├── 01
 │   │   └── ping.py
@@ -171,7 +172,6 @@ abb_rws_client_python_rw6
 ├── mkdocs.yml
 ├── pixi.lock
 ├── pixi.toml
-├── py.typed
 ├── pyproject.toml
 ├── README.fr.md
 └── README.md
