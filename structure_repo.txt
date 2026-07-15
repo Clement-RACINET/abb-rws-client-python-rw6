@@ -167,6 +167,7 @@ abb_rws_client_python_rw6
 │   ├── fix_init.py
 │   ├── README.fr.md
 │   └── README.md
+├── LICENSE
 ├── mkdocs.yml
 ├── pixi.lock
 ├── pixi.toml
