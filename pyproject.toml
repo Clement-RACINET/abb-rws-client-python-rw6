@@ -47,6 +47,7 @@ scraping = [
 # ── Hatchling ──────────────────────────────────────────────────────────────
 [tool.hatch.build.targets.wheel]
 packages = ["abb_rws_client_python_rw6"]
+artifacts = ["abb_rws_client_python_rw6/py.typed"]
 
 # ── Ruff ───────────────────────────────────────────────────────────────────
 [tool.ruff]

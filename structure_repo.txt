@@ -171,6 +171,7 @@ abb_rws_client_python_rw6
 ├── mkdocs.yml
 ├── pixi.lock
 ├── pixi.toml
+├── py.typed
 ├── pyproject.toml
 ├── README.fr.md
 └── README.md
