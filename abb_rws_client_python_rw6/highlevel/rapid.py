@@ -417,6 +417,34 @@ async def set_variable_with_mastership(
         # Always release — even on exception — to avoid locking the controller
         await post_mastership_domain_release(client, domain=domain, action="release")
 
+async def set_variables_with_mastership(
+    client: RWSClient,
+    *,
+    values: dict[str, str],
+    domain: str = "rapid",
+) -> None:
+    """Write multiple RAPID variables while holding mastership once.
+
+    Args:
+        client: Open RWSClient instance.
+        values: Mapping of symbolurl -> value.
+        domain: Mastership domain. Defaults to "rapid".
+
+    Returns:
+        None.
+    """
+    await post_mastership_domain_request(client, domain=domain, action="request")
+    try:
+        for symbolurl, value in values.items():
+            await update_rapid_variable_current_value(
+                client,
+                symbolurl=symbolurl,
+                action="set",
+                value=value,
+            )
+            logger.debug("Variable %s set to %r", symbolurl, value)
+    finally:
+        await post_mastership_domain_release(client, domain=domain, action="release")
 
 
 async def get_variable(

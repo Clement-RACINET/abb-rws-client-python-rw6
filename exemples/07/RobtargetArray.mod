@@ -6,7 +6,7 @@ MODULE RobtargetArray
     !             Call VerifyPoints from FlexPendant to check the result.
     !
     !             Reference position for this cell:
-    !             trans=[1500,0,1789], rot=[0,0,1,0] (180° around Z)
+    !             trans=[1500,0,1789], rot=[0,0,1,0] (180ï¿½ around Z)
 
     PERS robtarget TrajectoryPoints{10} := [
         [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]],
@@ -40,7 +40,7 @@ MODULE RobtargetArray
     !-------------------------------------------------------------------------
         VAR num i;
         FOR i FROM 1 TO 10 DO
-            TPWrite "Point "\Num:=i\Num:=TrajectoryPoints{i}.trans.x;
+            TPWrite "Point " + NumToStr(i, 0) + " X=" \Num:=TrajectoryPoints{i}.trans.x;
         ENDFOR
     ENDPROC
 
