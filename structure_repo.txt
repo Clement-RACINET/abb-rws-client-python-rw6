@@ -80,7 +80,7 @@ abb_rws_client_python_rw6
 │   │   ├── IOSignal.mod
 │   │   └── IOSignal.pgf
 │   ├── 06
-│   │   ├── ExampleSubscription.mod
+│   │   ├── Subscription.mod
 │   │   └── subscription.py
 │   └── 07
 │       ├── RobtargetArray.mod
