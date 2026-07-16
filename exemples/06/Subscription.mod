@@ -1,4 +1,4 @@
-MODULE ExampleSubscription
+MODULE Subscription
     !DATE:        2026-07-16
     !AUTHOR:      C. RACINET
     !DESCRIPTION: Minimal module to test RWS WebSocket subscription.
@@ -18,7 +18,7 @@ MODULE ExampleSubscription
     !             by calling ToggleWatchedValue manually.
     !-------------------------------------------------------------------------
         DeactUnit M7DM1;
-        TPWrite "ExampleSubscription ready.";
+        TPWrite "Subscription ready.";
         TPWrite "Call ToggleWatchedValue to trigger WebSocket events.";
         STOP;
     ENDPROC
@@ -30,16 +30,16 @@ MODULE ExampleSubscription
     !-------------------------------------------------------------------------
         IF WatchedValue = 0 THEN
             WatchedValue := 1;
-            TPWrite "WatchedValue → 1";
+            TPWrite "WatchedValue --> 1";
         ELSE
             WatchedValue := 0;
-            TPWrite "WatchedValue → 0";
+            TPWrite "WatchedValue --> 0";
         ENDIF
     ENDPROC
 
     !=========================================================================
     PROC CycleWatchedValue()
-    !DESCRIPTION: Cycles WatchedValue 0→1→2→...→9→0 in a loop with 2s delay.
+    !DESCRIPTION: Cycles WatchedValue 0-->1-->2-->...-->9-->0 in a loop with 2s delay.
     !             Useful to observe a stream of events without needing to
     !             call ToggleWatchedValue manually each time.
     !             Stop with the RAPID stop button on the FlexPendant.
@@ -47,7 +47,7 @@ MODULE ExampleSubscription
         VAR num i := 0;
         WHILE TRUE DO
             WatchedValue := i;
-            TPWrite "WatchedValue → "\Num:=i;
+            TPWrite "WatchedValue --> "\Num:=i;
             i := (i + 1) MOD 10;
             WaitTime 2;
         ENDWHILE

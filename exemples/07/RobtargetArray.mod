@@ -1,12 +1,12 @@
 MODULE RobtargetArray
     !DATE:        2026-07-16
     !AUTHOR:      C. RACINET
-    !DESCRIPTION: RAPID module for Example 07 — robtarget array write test.
+    !DESCRIPTION: RAPID module for Example 07 - robtarget array write test.
     !             Python writes TrajectoryPoints via RWS element by element.
     !             Call VerifyPoints from FlexPendant to check the result.
     !
     !             Reference position for this cell:
-    !             trans=[1500,0,1789], rot=[0,0,1,0] (180° around Z)
+    !             trans=[1500,0,1789], rot=[0,0,1,0] (180� around Z)
 
     PERS robtarget TrajectoryPoints{10} := [
         [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]],

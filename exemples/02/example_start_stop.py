@@ -10,7 +10,7 @@ Prerequisites:
       ``RWS_PASSWORD`` (optional — defaults apply if absent).
 
 RAPID side:
-    See ``exemples/02/ExampleStartStop.mod``.
+    See ``exemples/02/StartStop.mod``.
 
 Run:
     pixi run python exemples/02/example_start_stop.py

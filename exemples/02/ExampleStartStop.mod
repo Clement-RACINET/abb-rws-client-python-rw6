@@ -1,4 +1,4 @@
-MODULE ExampleStartStop
+MODULE StartStop
     !**********************************************************************
     ! Example 02 - Start / Stop
     !
@@ -35,7 +35,7 @@ MODULE ExampleStartStop
         MoveJ pHome, v10, fine, tool0;
 
         ! Signal Python that work is done
-        TPWrite "ExampleStartStop: done.";
+        TPWrite "StartStop: done.";
     ENDPROC
 
 ENDMODULE

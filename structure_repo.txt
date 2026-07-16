@@ -81,9 +81,11 @@ abb_rws_client_python_rw6
 │   │   └── IOSignal.pgf
 │   ├── 06
 │   │   ├── Subscription.mod
+│   │   ├── Subscription.pgf
 │   │   └── subscription.py
 │   └── 07
 │       ├── RobtargetArray.mod
+│       ├── RobtargetArray.pgf
 │       └── write_robtarget_array.py
 ├── pictures
 │   ├── logo_abb

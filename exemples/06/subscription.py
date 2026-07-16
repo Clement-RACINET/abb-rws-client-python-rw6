@@ -41,7 +41,7 @@ from abb_rws_client_python_rw6.rws.rapid.symbol import (
 # ---------------------------------------------------------------------------
 
 TASK: str = "T_ROB1"
-MODULE: str = "ExampleSubscription"
+MODULE: str = "Subscription"
 VARIABLE: str = "WatchedValue"
 PRIORITY: str = "1"
 
@@ -55,7 +55,7 @@ def _build_resource_url(task: str, module: str, variable: str) -> str:
 
     Args:
         task: RAPID task name (e.g. ``"T_ROB1"``).
-        module: RAPID module name (e.g. ``"ExampleSubscription"``).
+        module: RAPID module name (e.g. ``"Subscription"``).
         variable: RAPID variable name (e.g. ``"WatchedValue"``).
 
     Returns:
@@ -206,7 +206,7 @@ async def watch_rapid_variable(
 
             async with RWSClient(host="192.168.125.1") as client:
                 async for value in watch_rapid_variable(
-                    client, "T_ROB1", "ExampleSubscription", "WatchedValue"
+                    client, "T_ROB1", "Subscription", "WatchedValue"
                 ):
                     print(f"New value: {value}")
     """
