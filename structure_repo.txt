@@ -75,10 +75,16 @@ abb_rws_client_python_rw6
 │   │   ├── 04_load_module.py
 │   │   ├── LoadModule.mod
 │   │   └── LoadModule.pgf
-│   └── 05
-│       ├── 05_io_signal.py
-│       ├── IOSignal.mod
-│       └── IOSignal.pgf
+│   ├── 05
+│   │   ├── 05_io_signal.py
+│   │   ├── IOSignal.mod
+│   │   └── IOSignal.pgf
+│   ├── 06
+│   │   ├── ExampleSubscription.mod
+│   │   └── subscription.py
+│   └── 07
+│       ├── RobtargetArray.mod
+│       └── write_robtarget_array.py
 ├── pictures
 │   ├── logo_abb
 │   │   └── 6620926e3c8df-ABB.svg

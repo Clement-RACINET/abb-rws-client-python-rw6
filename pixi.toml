@@ -6,9 +6,10 @@ channels = ["conda-forge"]
 platforms = ["linux-64", "win-64", "osx-arm64"]
 
 [environments]
-default  = { features = [],                        solve-group = "default" }
-dev      = { features = ["dev"],                   solve-group = "default" }
-full     = { features = ["dev", "scraping"],       solve-group = "default" }
+default  = { features = [],                              solve-group = "default" }
+dev      = { features = ["dev"],                         solve-group = "default" }
+examples = { features = ["examples"],                    solve-group = "default" }
+full     = { features = ["dev", "scraping", "examples"], solve-group = "default" }
 
 # ── Dépendances runtime (utilisateur final) ───────────────────────────────
 [dependencies]
@@ -16,13 +17,10 @@ python = "3.11.*"
 
 [pypi-dependencies]
 abb_rws_client_python_rw6 = { path = ".", editable = true }
-httpx                  = ">=0.27,<1.0"
-python-dotenv          = ">=1.0,<2.0"
+httpx                     = ">=0.27,<1.0"
+python-dotenv             = ">=1.0,<2.0"
 
 # ── Feature : dev ─────────────────────────────────────────────────────────
-[feature.dev.dependencies]
-# Rien de conda-specific nécessaire ici
-
 [feature.dev.pypi-dependencies]
 pytest         = ">=8.0,<9.0"
 pytest-asyncio = ">=0.24,<1.0"
@@ -34,8 +32,8 @@ mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 
 [feature.dev.tasks]
-lint       = "ruff check abb_rws_client_python_rw6tests"
-format     = "ruff format abb_rws_client_python_rw6tests"
+lint       = "ruff check abb_rws_client_python_rw6 tests"
+format     = "ruff format abb_rws_client_python_rw6 tests"
 test       = "python -m pytest tests/ -v"
 fix-init   = "python utils/fix_init.py"
 clean      = "python utils/clean.py"
@@ -50,3 +48,11 @@ beautifulsoup4 = ">=4.12,<5.0"
 
 [feature.scraping.tasks]
 scrape = "python utils/scraping/scrape.py"
+
+# ── Feature : examples ────────────────────────────────────────────────────
+[feature.examples.pypi-dependencies]
+httpx-ws = ">=0.6,<1.0"
+
+[feature.examples.tasks]
+example-06 = "python exemples/06/subscription.py"
+example-07 = "python exemples/07/write_robtarget_array.py"
