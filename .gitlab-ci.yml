@@ -1,0 +1,10 @@
+pages:
+  image: python:3.11
+  script:
+    - pip install mkdocs mkdocs-material mkdocstrings[python]
+    - mkdocs build --site-dir public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
