@@ -26,7 +26,8 @@ htmlcov/
 coverage.xml  
 
 # Docs
-site/ 
+site/
+public/
 
 # OS
 .DS_Store

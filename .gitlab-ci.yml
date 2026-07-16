@@ -2,6 +2,7 @@ pages:
   image: python:3.11
   script:
     - pip install mkdocs mkdocs-material mkdocstrings[python]
+    - python scripts/doc/generate_api.py
     - mkdocs build --site-dir public
   artifacts:
     paths:

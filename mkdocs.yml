@@ -1,6 +1,7 @@
 site_name: ABB RWS6 Python Client
 site_description: Async Python client for ABB RobotWare 6 REST API
 repo_url: https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6
+site_dir: public 
 
 theme:
   name: material
