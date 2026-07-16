@@ -1,11 +1,29 @@
 pages:
   image: python:3.11
   script:
+    # 1. Installer les dépendances doc
     - pip install mkdocs mkdocs-material mkdocstrings[python]
-    - python scripts/doc/generate_api.py
+
+    # 2. Installer ton package (nécessaire pour mkdocstrings + hooks.py)
+    - pip install -e .
+
+    # 3. Générer les .md API (ton script est dans utils/docs/)
+    - python -c "
+import sys
+sys.path.insert(0, '.')
+from utils.docs.config import build_config
+from utils.docs.generate_api import generate_api_docs, update_mkdocs_nav
+cfg = build_config()
+nav = generate_api_docs(cfg)
+update_mkdocs_nav(cfg, nav)
+"
+
+    # 4. Compiler → dossier public/
     - mkdocs build --site-dir public
+
   artifacts:
     paths:
       - public
+
   only:
     - main
