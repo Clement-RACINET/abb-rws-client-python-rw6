@@ -2,7 +2,7 @@ pages:
   image: python:3.11
   script:
     # 1. Installer les dépendances doc
-    - pip install mkdocs mkdocs-material mkdocstrings[python]
+    - pip install mkdocs mkdocs-material mkdocstrings[python] mkdocs-coverage
 
     # 2. Installer le package (nécessaire pour mkdocstrings + hooks.py)
     - pip install -e .
