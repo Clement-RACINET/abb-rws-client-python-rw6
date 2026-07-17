@@ -47,7 +47,7 @@ async def main() -> None:
     # actual path on the controller, local overload
     controller_path = os.getenv(
         "RWS_MODULE_PATH",
-        "$HOME/000_TESTS/RWS_test/2026_test/LoadModule/LoadModule.mod",
+        "$HOME/000_DEMONSTRATIONS/RWS/LoadModule/LoadModule.mod",
     )
 
     logger.info("Connecting to controller …")

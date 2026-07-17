@@ -407,7 +407,7 @@ async def toggle_loop(client: RWSClient, stop_event: asyncio.Event) -> None:
                 logger.info("toggle: %s %s → %s", VARIABLE, current, new_value)
                 print(
                     f"[toggle] {VARIABLE} {current} → {new_value}"
-                    f" | time: {time.time()*1000 :.3f}ms"
+                    f" | time: {time.time()*1000 :.3f} ms"
                 )
 
             except Exception as exc:
@@ -546,7 +546,7 @@ async def watch_task(client: RWSClient, stop_event: asyncio.Event) -> None:
             VARIABLE,
             priority=PRIORITY,
         ):
-            print(f"[event] {VARIABLE} = {value} | time: {time.time()*1000 :.3f}ms")
+            print(f"[event] {VARIABLE} = {value} | time: {time.time()*1000 :.3f} ms")
 
             if stop_event.is_set():
                 break

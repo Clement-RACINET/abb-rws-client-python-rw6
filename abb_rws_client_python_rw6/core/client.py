@@ -182,7 +182,7 @@ class RWSClient:
         port: int | None = None,
         timeout: float | None = None,
     ) -> None:
-        self.host     = host     or get_env_str("RWS_HOST",     "192.168.125.1")
+        self.host     = host     or get_env_str("RWS_HOST",     "192.168.1.10")
         self.username = username or get_env_str("RWS_USER",     "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
         self.port     = port     or get_env_int("RWS_PORT",     80)

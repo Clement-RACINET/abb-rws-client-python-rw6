@@ -1,0 +1,9 @@
+~/abb_rws_client_python_rw6/exemples/04/04_load_module.py
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Connecting to controller …
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Module     : LoadModule
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Controller : $HOME/000_DEMONSTRATIONS/RWS/LoadModule/LoadModule.mod
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Task       : T_ROB1
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Connected → http://192.168.1.10:80/
+17:02:52 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Loading LoadModule into T_ROB1 …
+17:03:05 [INFO    ] abb_rws_client_python_rw6.examples.load_module — Module 'LoadModule' loaded successfully into T_ROB1.
+17:03:05 [INFO    ] abb_rws_client_python_rw6.examples.load_module — You can now run example 02 to execute it.

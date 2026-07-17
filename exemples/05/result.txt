@@ -1,0 +1,18 @@
+~/abb_rws_client_python_rw6/exemples/05/05_io_signal.py
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Connecting to controller …
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Target signal: 'TEST_DO_RWS'
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Connected → http://192.168.1.10:80/
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Fetching signal list …
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — HTTP 200 — 36243 bytes received
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Searching for signal 'TEST_DO_RWS' …
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — HTTP 200 (search)
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Signal href: /rw/iosystem/signals/TEST_DO_RWS
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — HTTP 200 (GET)
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Value before write: '0'
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Writing 1 to 'TEST_DO_RWS' …
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — HTTP 204 (SET → 1)
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Value after write 1: '1'
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Resetting 'TEST_DO_RWS' to 0 …
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — HTTP 204 (SET → 0)
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Final value: '0'
+16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Done.

@@ -62,28 +62,35 @@ abb_rws_client_python_rw6
 │   └── py.typed
 ├── exemples
 │   ├── 01
-│   │   └── ping.py
+│   │   ├── ping.py
+│   │   └── result.txt
 │   ├── 02
 │   │   ├── example_start_stop.py
 │   │   ├── ExampleStartStop.mod
-│   │   └── ExampleStartStop.pgf
+│   │   ├── ExampleStartStop.pgf
+│   │   └── result.txt
 │   ├── 03
 │   │   ├── 03_read_write_variable.py
 │   │   ├── ReadWriteVariable.mod
-│   │   └── ReadWriteVariable.pgf
+│   │   ├── ReadWriteVariable.pgf
+│   │   └── result.txt
 │   ├── 04
 │   │   ├── 04_load_module.py
 │   │   ├── LoadModule.mod
-│   │   └── LoadModule.pgf
+│   │   ├── LoadModule.pgf
+│   │   └── result.txt
 │   ├── 05
 │   │   ├── 05_io_signal.py
 │   │   ├── IOSignal.mod
-│   │   └── IOSignal.pgf
+│   │   ├── IOSignal.pgf
+│   │   └── result.txt
 │   ├── 06
+│   │   ├── result.txt
 │   │   ├── Subscription.mod
 │   │   ├── Subscription.pgf
 │   │   └── subscription.py
 │   └── 07
+│       ├── result.txt
 │       ├── RobtargetArray.mod
 │       ├── RobtargetArray.pgf
 │       └── write_robtarget_array.py
