@@ -22,14 +22,15 @@ python-dotenv             = ">=1.0,<2.0"
 
 # ── Feature : dev ─────────────────────────────────────────────────────────
 [feature.dev.pypi-dependencies]
-pytest         = ">=8.0,<9.0"
-pytest-asyncio = ">=0.24,<1.0"
-anyio          = ">=4.0"
-pytest-cov     = ">=7.1.0,<8"
-ruff           = ">=0.4,<1.0"
+pytest          = ">=8.0,<9.0"
+pytest-asyncio  = ">=0.24,<1.0"
+anyio           = ">=4.0"
+pytest-cov      = ">=7.1.0,<8"
+ruff            = ">=0.4,<1.0"
 mkdocs          = ">=1.6,<2.0"
 mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
+mkdocs-coverage = ">=2.0.0,<3"
 
 [feature.dev.tasks]
 lint       = "ruff check abb_rws_client_python_rw6 tests"

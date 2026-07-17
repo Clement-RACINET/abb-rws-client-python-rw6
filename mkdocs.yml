@@ -18,9 +18,10 @@ plugins:
             docstring_style: google
             show_source: true
             show_root_heading: true
-
-hooks:
-  - utils/docs/hooks.py 
+  - coverage:
+      html_report_dir: docs/coverage
+# hooks:
+#   - utils/docs/hooks.py 
 
 nav:
   - Accueil: index.md
