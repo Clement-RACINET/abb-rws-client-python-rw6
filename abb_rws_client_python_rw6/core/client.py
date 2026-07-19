@@ -39,12 +39,17 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
+import time
 from types import TracebackType
-from typing import Any, Self
+from typing import Any, Self, cast
 
 import httpx
 
-from abb_rws_client_python_rw6.core.env import get_env_float_or_none, get_env_int, get_env_str
+from abb_rws_client_python_rw6.core.env import (
+    get_env_float_or_none,
+    get_env_int,
+    get_env_str,
+)
 from abb_rws_client_python_rw6.core.exceptions import (
     RWSAuthenticationError,
     RWSConnectionError,
@@ -79,6 +84,43 @@ _RETRYABLE_EXCEPTIONS = (
 # ---------------------------------------------------------------------------
 # Shared helpers (async/sync)
 # ---------------------------------------------------------------------------
+
+
+def _prepare_request_kwargs(
+    method: str,
+    kwargs: dict[str, object],
+) -> dict[str, Any]:
+    """Prepare kwargs before forwarding them to httpx.
+
+    Args:
+        method: HTTP method.
+        kwargs: Keyword arguments received by the public HTTP wrapper.
+
+    Returns:
+        Mutable kwargs dictionary accepted by ``httpx.request``.
+
+    Raises:
+        None.
+
+    Example:
+        ```python
+        >>> prepared = _prepare_request_kwargs("POST", {"data": {"action": "set"}})
+        >>> "headers" in prepared
+        True
+        ```
+    """
+    request_kwargs: dict[str, Any] = dict(kwargs)
+
+    if method in ("POST", "PUT"):
+        raw_headers = request_kwargs.pop("headers", None)
+        headers: dict[str, str] = dict(cast(Any, raw_headers) or {})
+
+        if "content-type" not in {key.lower() for key in headers}:
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+
+        request_kwargs["headers"] = headers
+
+    return request_kwargs
 
 
 def _build_auth(username: str, password: str) -> httpx.DigestAuth:
@@ -251,7 +293,7 @@ class RWSClient:
         self,
         method: str,
         path: str,
-        **kwargs: Any,
+        **kwargs: object,
     ) -> httpx.Response:
         """Execute an HTTP request with the transport-error retry policy.
 
@@ -291,16 +333,12 @@ class RWSClient:
         # ABB RW6 requires Content-Type: application/x-www-form-urlencoded on
         # every POST and PUT, even when the body is empty. httpx does not set
         # this header automatically when data={} or no body is provided.
-        if method in ("POST", "PUT"):
-            headers: dict[str, str] = dict(kwargs.pop("headers", None) or {})
-            if "content-type" not in {k.lower() for k in headers}:
-                headers["Content-Type"] = "application/x-www-form-urlencoded"
-            kwargs["headers"] = headers
+        request_kwargs = _prepare_request_kwargs(method, kwargs)
 
         last_exc: Exception | None = None
         for attempt in range(_RETRY_MAX_ATTEMPTS):
             try:
-                response = await self._http.request(method, path, **kwargs)
+                response = await self._http.request(method, path, **request_kwargs)
                 _raise_for_status(response, path)
                 return response
             except _RETRYABLE_EXCEPTIONS as exc:
@@ -329,7 +367,7 @@ class RWSClient:
 
     # ── Public HTTP methods ──────────────────────────────────────────────────
 
-    async def get(self, path: str, **kwargs: Any) -> httpx.Response:
+    async def get(self, path: str, **kwargs: object) -> httpx.Response:
         """Send an HTTP GET request to the RWS controller.
 
         Route: ``GET {path}``
@@ -355,7 +393,7 @@ class RWSClient:
         """
         return await self._request("GET", path, **kwargs)
 
-    async def post(self, path: str, **kwargs: Any) -> httpx.Response:
+    async def post(self, path: str, **kwargs: object) -> httpx.Response:
         """Send an HTTP POST request to the RWS controller.
 
         Route: ``POST {path}``
@@ -381,7 +419,7 @@ class RWSClient:
         """
         return await self._request("POST", path, **kwargs)
 
-    async def put(self, path: str, **kwargs: Any) -> httpx.Response:
+    async def put(self, path: str, **kwargs: object) -> httpx.Response:
         """Send an HTTP PUT request to the RWS controller.
 
         Route: ``PUT {path}`` — typically used to write a RAPID variable.
@@ -410,7 +448,7 @@ class RWSClient:
         """
         return await self._request("PUT", path, **kwargs)
 
-    async def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+    async def delete(self, path: str, **kwargs: object) -> httpx.Response:
         """Send an HTTP DELETE request to the RWS controller.
 
         Route: ``DELETE {path}`` — typically used for fileservice or elog resources.
@@ -439,7 +477,7 @@ class RWSClient:
     async def head(
         self,
         path: str,
-        **kwargs: Any,
+        **kwargs: object,
     ) -> httpx.Response:
         """Send an HTTP HEAD request to the RWS controller.
 
@@ -469,7 +507,7 @@ class RWSClient:
     async def options(
         self,
         path: str,
-        **kwargs: Any,
+        **kwargs: object,
     ) -> httpx.Response:
         """Send an HTTP OPTIONS request to the RWS controller.
 
@@ -601,7 +639,7 @@ class RWSClientSync:
 
     # ── Internal request with retry ─────────────────────────────────────────
 
-    def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
+    def _request(self, method: str, path: str, **kwargs: object) -> httpx.Response:
         """Execute a synchronous HTTP request with the transport-error retry policy.
 
         Args:
@@ -638,18 +676,12 @@ class RWSClientSync:
         # ABB RW6 requires Content-Type: application/x-www-form-urlencoded on
         # every POST and PUT, even when the body is empty. httpx does not set
         # this header automatically when data={} or no body is provided.
-        if method in ("POST", "PUT"):
-            headers: dict[str, str] = dict(kwargs.pop("headers", None) or {})
-            if "content-type" not in {k.lower() for k in headers}:
-                headers["Content-Type"] = "application/x-www-form-urlencoded"
-            kwargs["headers"] = headers
-
-        import time
+        request_kwargs = _prepare_request_kwargs(method, kwargs)
 
         last_exc: Exception | None = None
         for attempt in range(_RETRY_MAX_ATTEMPTS):
             try:
-                response = self._http.request(method, path, **kwargs)
+                response = self._http.request(method, path, **request_kwargs)
                 _raise_for_status(response, path)
                 return response
             except _RETRYABLE_EXCEPTIONS as exc:
@@ -676,7 +708,7 @@ class RWSClientSync:
 
     # ── Public HTTP methods ──────────────────────────────────────────────────
 
-    def get(self, path: str, **kwargs: Any) -> httpx.Response:
+    def get(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP GET request to the RWS controller.
 
         Route: ``GET {path}``
@@ -702,7 +734,7 @@ class RWSClientSync:
         """
         return self._request("GET", path, **kwargs)
 
-    def post(self, path: str, **kwargs: Any) -> httpx.Response:
+    def post(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP POST request to the RWS controller.
 
         Route: ``POST {path}``
@@ -728,7 +760,7 @@ class RWSClientSync:
         """
         return self._request("POST", path, **kwargs)
 
-    def put(self, path: str, **kwargs: Any) -> httpx.Response:
+    def put(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP PUT request to the RWS controller.
 
         Route: ``PUT {path}`` — typically used to write a RAPID variable.
@@ -757,7 +789,7 @@ class RWSClientSync:
         """
         return self._request("PUT", path, **kwargs)
 
-    def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+    def delete(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP DELETE request to the RWS controller.
 
         Route: ``DELETE {path}``
@@ -783,7 +815,7 @@ class RWSClientSync:
         """
         return self._request("DELETE", path, **kwargs)
 
-    def head(self, path: str, **kwargs: Any) -> httpx.Response:
+    def head(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP HEAD request to the RWS controller.
 
         Route: ``HEAD {path}``
@@ -809,7 +841,7 @@ class RWSClientSync:
         """
         return self._request("HEAD", path, **kwargs)
 
-    def options(self, path: str, **kwargs: Any) -> httpx.Response:
+    def options(self, path: str, **kwargs: object) -> httpx.Response:
         """Send a synchronous HTTP OPTIONS request to the RWS controller.
 
         Route: ``OPTIONS {path}``
