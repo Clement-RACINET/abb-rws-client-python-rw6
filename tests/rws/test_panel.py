@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/panel."""
+
 from __future__ import annotations
 
 import httpx
@@ -73,6 +74,7 @@ async def test_get_panel_resources() -> None:
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_panel_actions() -> None:
     """
@@ -87,6 +89,7 @@ async def test_get_panel_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_language() -> None:
@@ -105,6 +108,7 @@ async def test_set_the_language() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_restart_the_controller() -> None:
     """
@@ -122,6 +126,7 @@ async def test_restart_the_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_controller_state() -> None:
     """
@@ -137,6 +142,7 @@ async def test_get_controller_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_controller_state_actions() -> None:
     """
@@ -151,6 +157,7 @@ async def test_get_controller_state_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/ctrlstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_controller_state() -> None:
@@ -169,6 +176,7 @@ async def test_set_controller_state() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_controller_state() -> None:
     """
@@ -186,6 +194,7 @@ async def test_subscribe_controller_state() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_operation_mode() -> None:
     """
@@ -201,6 +210,7 @@ async def test_get_operation_mode() -> None:
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_operation_mode_actions() -> None:
     """
@@ -215,6 +225,7 @@ async def test_get_operation_mode_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_operation_mode() -> None:
@@ -233,6 +244,7 @@ async def test_subscribe_operation_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_post_acknowledgement_for_operation_mode() -> None:
     """
@@ -250,6 +262,7 @@ async def test_post_acknowledgement_for_operation_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_operation_mode_lock_status() -> None:
     """
@@ -264,6 +277,7 @@ async def test_get_operation_mode_lock_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/opmode"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_lock_operation_mode_selection() -> None:
@@ -282,6 +296,7 @@ async def test_post_lock_operation_mode_selection() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_unlock_operation_mode_selection() -> None:
     """
@@ -299,6 +314,7 @@ async def test_post_unlock_operation_mode_selection() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_speed_ratio() -> None:
     """
@@ -314,6 +330,7 @@ async def test_get_speed_ratio() -> None:
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_speed_ratio_actions() -> None:
     """
@@ -328,6 +345,7 @@ async def test_get_speed_ratio_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/speedratio"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_speed_ratio() -> None:
@@ -346,6 +364,7 @@ async def test_set_speed_ratio() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_speed_ratio() -> None:
     """
@@ -363,6 +382,7 @@ async def test_subscribe_speed_ratio() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_collision_detection_state() -> None:
     """
@@ -378,6 +398,7 @@ async def test_get_collision_detection_state() -> None:
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_collision_detection_state_actions() -> None:
     """
@@ -392,6 +413,7 @@ async def test_get_collision_detection_state_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/panel/coldetstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_collision_detection_state() -> None:

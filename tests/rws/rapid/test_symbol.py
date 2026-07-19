@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/symbol."""
+
 from __future__ import annotations
 
 import httpx
@@ -58,6 +59,7 @@ async def test_get_rapid_symbol_properties() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/properties/symbolurl_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data() -> None:
     """
@@ -73,6 +75,7 @@ async def test_get_rapid_symbol_data() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbol/data/symbolurl_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_symbol_data_actions() -> None:
     """
@@ -87,6 +90,7 @@ async def test_get_rapid_symbol_data_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/symbols/symbolurl_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_rapid_variable_current_value() -> None:
@@ -105,6 +109,7 @@ async def test_update_rapid_variable_current_value() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_validate_rapid_variable() -> None:
     """
@@ -122,6 +127,7 @@ async def test_validate_rapid_variable() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_persistent_variable() -> None:
     """
@@ -138,6 +144,7 @@ async def test_subscribe_on_rapid_persistent_variable() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_update_rapid_variable_initial_value() -> None:

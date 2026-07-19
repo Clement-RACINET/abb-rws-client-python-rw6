@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/symbols."""
+
 from __future__ import annotations
 
 import httpx
@@ -55,6 +56,7 @@ async def test_get_rapid_symbols_resources() -> None:
     assert transport.last_request.url.path == "/rw/rapid/symbols"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_symbols_actions() -> None:
     """
@@ -69,6 +71,7 @@ async def test_get_rapid_symbols_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/symbols"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_search_rapid_symbols() -> None:
@@ -86,6 +89,7 @@ async def test_post_search_rapid_symbols() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_object_extension_list() -> None:

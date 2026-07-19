@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/ctrl/backup."""
+
 from __future__ import annotations
 
 import httpx
@@ -59,6 +60,7 @@ async def test_get_backup_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_backup_actions() -> None:
     """
@@ -73,6 +75,7 @@ async def test_get_backup_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_create_backup() -> None:
@@ -91,6 +94,7 @@ async def test_create_backup() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_post_restore_backup() -> None:
     """
@@ -108,6 +112,7 @@ async def test_post_restore_backup() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_check_restore() -> None:
     """
@@ -123,6 +128,7 @@ async def test_get_check_restore() -> None:
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_backup_state() -> None:
     """
@@ -137,6 +143,7 @@ async def test_get_backup_state() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/backup"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_backup_system_information() -> None:
@@ -154,6 +161,7 @@ async def test_subscribe_on_backup_system_information() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_backup_system_information() -> None:

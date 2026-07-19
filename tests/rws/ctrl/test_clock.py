@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/ctrl/clock."""
+
 from __future__ import annotations
 
 import httpx
@@ -61,6 +62,7 @@ async def test_get_clock_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_clock_actions() -> None:
     """
@@ -75,6 +77,7 @@ async def test_get_clock_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_clock_of_the_controller() -> None:
@@ -93,6 +96,7 @@ async def test_set_the_clock_of_the_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_timezone_resource() -> None:
     """
@@ -107,6 +111,7 @@ async def test_get_timezone_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_timezone_actions() -> None:
@@ -123,6 +128,7 @@ async def test_get_timezone_actions() -> None:
     assert transport.last_request.url.path == "/ctrl/clock/timezone"
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_time_zone() -> None:
@@ -141,6 +147,7 @@ async def test_set_the_time_zone() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_time_server_resource() -> None:
     """
@@ -155,6 +162,7 @@ async def test_get_time_server_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/clock/timeserver"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_time_server_actions() -> None:
@@ -172,6 +180,7 @@ async def test_get_time_server_actions() -> None:
     assert transport.last_request.url.params["action"] == "show"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_the_time_server() -> None:
     """
@@ -188,6 +197,7 @@ async def test_set_the_time_server() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_test_time_server() -> None:

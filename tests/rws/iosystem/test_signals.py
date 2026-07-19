@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/iosystem/signals."""
+
 from __future__ import annotations
 
 import httpx
@@ -56,6 +57,7 @@ async def test_get_io_signals() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/signals"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_signal_search() -> None:
     """
@@ -72,6 +74,7 @@ async def test_post_signal_search() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_signal_search_extended() -> None:
@@ -90,6 +93,7 @@ async def test_post_signal_search_extended() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_unblock_signals() -> None:
     """
@@ -106,6 +110,7 @@ async def test_post_unblock_signals() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_io_signals_actions() -> None:

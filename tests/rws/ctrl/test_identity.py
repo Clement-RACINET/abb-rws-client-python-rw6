@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/ctrl/identity."""
+
 from __future__ import annotations
 
 import httpx
@@ -54,6 +55,7 @@ async def test_get_identity_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/identity"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_identity_actions() -> None:
     """
@@ -68,6 +70,7 @@ async def test_get_identity_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/identity"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_identity_of_the_controller() -> None:

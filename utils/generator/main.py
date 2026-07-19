@@ -19,6 +19,7 @@ Options:
     --dry-run          Print what would be generated without writing any files.
     --only <path>      Only generate the specified module (e.g. rapid/execution).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -237,17 +238,13 @@ def group_by_module(endpoints: list[dict]) -> dict[str, list[dict]]:
         result.setdefault(module_path, []).append(ep)
 
     total = sum(len(v) for v in result.values())
-    print(
-        f"[INFO] {total} endpoints → {len(result)} modules "
-        f"({skipped} navigation nodes skipped)"
-    )
+    print(f"[INFO] {total} endpoints → {len(result)} modules ({skipped} navigation nodes skipped)")
     return result
 
 
 # ---------------------------------------------------------------------------
 # ABB parameter name sanitisation
 # ---------------------------------------------------------------------------
-
 
 
 def _sanitize_param_name(raw: str, max_len: int = 38) -> str:  # ← 40 → 38
@@ -398,13 +395,37 @@ def parse_body_params(data_params_raw: str) -> list[tuple[str, bool]]:
 # Function naming  ← CORRIGÉ : déduplication F811
 # ---------------------------------------------------------------------------
 
-_VERB_PREFIXES = frozenset({
-    "get", "set", "post", "put", "delete", "create", "update",
-    "start", "stop", "request", "release", "subscribe", "unsubscribe",
-    "load", "save", "reset", "restart", "validate", "register",
-    "login", "logout", "grant", "cancel", "poll", "add", "remove",
-    "impersonate",
-})
+_VERB_PREFIXES = frozenset(
+    {
+        "get",
+        "set",
+        "post",
+        "put",
+        "delete",
+        "create",
+        "update",
+        "start",
+        "stop",
+        "request",
+        "release",
+        "subscribe",
+        "unsubscribe",
+        "load",
+        "save",
+        "reset",
+        "restart",
+        "validate",
+        "register",
+        "login",
+        "logout",
+        "grant",
+        "cancel",
+        "poll",
+        "add",
+        "remove",
+        "impersonate",
+    }
+)
 
 
 def endpoint_to_func_name(ep: dict, _counter: dict[str, int] | None = None) -> str:
@@ -480,9 +501,11 @@ def _wrap_doc(text: str, indent: str = "    ", max_width: int = _MAX_LINE) -> li
     )
     return [f"{indent}{line}" for line in wrapped] if wrapped else [f"{indent}{text}"]
 
+
 # ---------------------------------------------------------------------------
 # Helpers de rendu HTTP
 # ---------------------------------------------------------------------------
+
 
 def _split_dict_items(items_str: str) -> list[str]:
     """Split a comma-separated dict items string respecting nesting depth.
@@ -497,20 +520,20 @@ def _split_dict_items(items_str: str) -> list[str]:
     depth = 0
     current: list[str] = []
     for ch in items_str:
-        if ch in ('{', '[', '('):
+        if ch in ("{", "[", "("):
             depth += 1
             current.append(ch)
-        elif ch in ('}', ']', ')'):
+        elif ch in ("}", "]", ")"):
             depth -= 1
             current.append(ch)
-        elif ch == ',' and depth == 0:
-            item = ''.join(current).strip()
+        elif ch == "," and depth == 0:
+            item = "".join(current).strip()
             if item:
                 items.append(item)
             current = []
         else:
             current.append(ch)
-    item = ''.join(current).strip()
+    item = "".join(current).strip()
     if item:
         items.append(item)
     return items
@@ -537,14 +560,14 @@ def _render_kwarg(kwarg: str, indent: str = "        ") -> list[str]:
 
     # Pattern: params={k: v for k, v in {ITEMS}.items() if v is not None}
     match = re.match(
-        r'^(params|data)=\{k: v for k, v in \{(.+)\}\.items\(\) if v is not None\}$',
+        r"^(params|data)=\{k: v for k, v in \{(.+)\}\.items\(\) if v is not None\}$",
         kwarg,
         re.DOTALL,
     )
     if not match:
         # Fixed params dict (no comprehension) — split on comma+space boundary
         # e.g. params={"action": "show", "type": "selected"}
-        kv_match = re.match(r'^(params|data)=\{(.+)\}$', kwarg, re.DOTALL)
+        kv_match = re.match(r"^(params|data)=\{(.+)\}$", kwarg, re.DOTALL)
         if kv_match:
             kw_name = kv_match.group(1)
             raw_items = _split_dict_items(kv_match.group(2))
@@ -558,7 +581,7 @@ def _render_kwarg(kwarg: str, indent: str = "        ") -> list[str]:
         # Unrecognised pattern — keep as-is, accept the E501
         return [full_line]
 
-    kw_name = match.group(1)    # "params" or "data"
+    kw_name = match.group(1)  # "params" or "data"
     items_str = match.group(2)  # '"key1": var1, "key2": var2, ...'
     raw_items = _split_dict_items(items_str)
 
@@ -638,8 +661,8 @@ def _render_call_line(call_str: str) -> list[str]:
         return [line]
 
     paren_idx = call_str.index("(")
-    func_part = call_str[:paren_idx + 1]
-    args_str = call_str[paren_idx + 1:-1]
+    func_part = call_str[: paren_idx + 1]
+    args_str = call_str[paren_idx + 1 : -1]
     args = _split_dict_items(args_str)  # réutilise le splitter depth-aware
 
     result = [f"    resp = {func_part}"]
@@ -648,6 +671,7 @@ def _render_call_line(call_str: str) -> list[str]:
         result.append(f"        {arg}{comma}")
     result.append("    )")
     return result
+
 
 # ---------------------------------------------------------------------------
 # rws/ module generation
@@ -689,7 +713,7 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
     prefix = "RWS module: "
     max_title_len = _MAX_LINE - len(prefix)
     if len(title) > max_title_len:
-        title = title[:max_title_len - 3] + "..."
+        title = title[: max_title_len - 3] + "..."
 
     func_names = _compute_func_names(endpoints)
 
@@ -713,7 +737,11 @@ def render_module(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep, func_name in zip(endpoints, func_names, strict=False,):
+    for ep, func_name in zip(
+        endpoints,
+        func_names,
+        strict=False,
+    ):
         lines.extend(render_function(ep, func_name=func_name))
         lines.append("")
 
@@ -771,13 +799,9 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
         for pair in (url.split("?")[1] if "?" in url else "").split("&")
         if "=" in pair
     }
-    query_required = [
-        f"{n}: str" for n, req in query_params if req and n not in _url_qs_keys
-    ]
+    query_required = [f"{n}: str" for n, req in query_params if req and n not in _url_qs_keys]
     query_optional = [
-        f"{n}: str | None = None"
-        for n, req in query_params
-        if not req and n not in _url_qs_keys
+        f"{n}: str | None = None" for n, req in query_params if not req and n not in _url_qs_keys
     ]
     body_required = [f"{n}: str" for n, req in body_params if req]
     body_optional = [f"{n}: str | None = None" for n, req in body_params if not req]
@@ -801,9 +825,7 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
                     fixed_qs_pairs.append((k, v))
 
     fixed_qs_keys_func: set[str] = {k for k, _ in fixed_qs_pairs}
-    dynamic_query_params = [
-        (n, req) for n, req in query_params if n not in fixed_qs_keys_func
-    ]
+    dynamic_query_params = [(n, req) for n, req in query_params if n not in fixed_qs_keys_func]
 
     if fixed_qs_pairs or dynamic_query_params:
         parts: list[str] = []
@@ -824,9 +846,7 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
             # Body parameters present: build a filtered dict comprehension
             # so that optional params set to None are not sent.
             items = ", ".join(f'"{n}": {n}' for n, _ in body_params)
-            httpx_kwargs.append(
-                f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}"
-            )
+            httpx_kwargs.append(f"data={{k: v for k, v in {{{items}}}.items() if v is not None}}")
         else:
             # No body parameters declared by ABB, but we still must send
             # Content-Type: application/x-www-form-urlencoded.
@@ -911,7 +931,7 @@ def render_function(ep: dict, *, func_name: str | None = None) -> list[str]:
         lines.append(f"        >>> {call_example}")
     else:
         paren_idx = call_example.index("(")
-        func_part = call_example[:paren_idx + 1]
+        func_part = call_example[: paren_idx + 1]
         ex_args = _split_dict_items(call_example[paren_idx + 1 : -1])
         lines.append(f"        >>> {func_part}")
         for i, arg in enumerate(ex_args):
@@ -961,7 +981,7 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "from abb_rws_client_python_rw6.core.client import RWSClient",
         f"from abb_rws_client_python_rw6.rws.{module_import} import (",
     ]
-    for fn in sorted(func_names):   # trié alphabétiquement
+    for fn in sorted(func_names):  # trié alphabétiquement
         lines.append(f"    {fn},")
     lines.append(")")
     lines.append("")
@@ -970,7 +990,7 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "class _MockTransport(httpx.AsyncBaseTransport):",
         '    """Mock transport returning a configurable HTTP response."""',
         "",
-        "    def __init__(self, status_code: int = 200, content: bytes = b\"\") -> None:",
+        '    def __init__(self, status_code: int = 200, content: bytes = b"") -> None:',
         "        self.status_code = status_code",
         "        self.content = content",
         "        self.last_request: httpx.Request | None = None",
@@ -993,7 +1013,11 @@ def render_tests(module_path: str, endpoints: list[dict]) -> str:
         "",
     ]
 
-    for ep, func_name in zip(endpoints, func_names, strict=False,):
+    for ep, func_name in zip(
+        endpoints,
+        func_names,
+        strict=False,
+    ):
         lines.extend(render_test_function(ep, func_name=func_name))
         lines.append("")
 
@@ -1087,9 +1111,7 @@ def render_test_function(ep: dict, *, func_name: str | None = None) -> list[str]
         lines.append(f'    assert transport.last_request.url.params["{k}"] == "{v}"')
     for n, req in query_params:
         if req and n not in fixed_qs_keys:
-            lines.append(
-                f'    assert transport.last_request.url.params["{n}"] == "{n}_val"'
-            )
+            lines.append(f'    assert transport.last_request.url.params["{n}"] == "{n}_val"')
 
     # POST/PUT must always carry Content-Type: application/x-www-form-urlencoded
     # (ABB RW6 returns 415 otherwise, even when the body is empty)
@@ -1168,8 +1190,10 @@ def main(argv: list[str] | None = None) -> None:
     if args.only:
         if args.only not in modules:
             available = "\n  ".join(sorted(modules))
-            print(f"[ERROR] Module '{args.only}' not found.\nAvailable:\n  {available}",
-                  file=sys.stderr)
+            print(
+                f"[ERROR] Module '{args.only}' not found.\nAvailable:\n  {available}",
+                file=sys.stderr,
+            )
             sys.exit(1)
         modules = {args.only: modules[args.only]}
 

@@ -71,9 +71,7 @@ async def main() -> None:
                 module_name=module_name,
                 module_path=controller_path,
             )
-            logger.info(
-                "Module '%s' loaded successfully into %s.", module_name, task
-            )
+            logger.info("Module '%s' loaded successfully into %s.", module_name, task)
             logger.info("You can now run example 02 to execute it.")
 
     except RWSError as exc:

@@ -68,9 +68,7 @@ async def main() -> None:
             new_counter = str(int(counter) + 1) if counter.isdigit() else "1"
 
             logger.info("Writing gCounter = %s …", new_counter)
-            await set_variable_with_mastership(
-                client, symbolurl=sym_counter, value=new_counter
-            )
+            await set_variable_with_mastership(client, symbolurl=sym_counter, value=new_counter)
 
             logger.info('Writing gMessage = "Hello from Python" …')
             await set_variable_with_mastership(
@@ -78,9 +76,7 @@ async def main() -> None:
             )
 
             logger.info("Writing gEnabled = TRUE …")
-            await set_variable_with_mastership(
-                client, symbolurl=sym_enabled, value="TRUE"
-            )
+            await set_variable_with_mastership(client, symbolurl=sym_enabled, value="TRUE")
 
             logger.info("Verifying …")
             counter_after = await get_variable(client, symbolurl=sym_counter)

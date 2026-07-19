@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/dipc."""
+
 from __future__ import annotations
 
 import httpx
@@ -61,6 +62,7 @@ async def test_get_dipc_resources() -> None:
     assert transport.last_request.url.path == "/rw/dipc"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_dipc_actions() -> None:
     """
@@ -75,6 +77,7 @@ async def test_get_dipc_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/dipc"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_create_queue() -> None:
@@ -93,6 +96,7 @@ async def test_create_queue() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_dipc_queue() -> None:
     """
@@ -108,6 +112,7 @@ async def test_get_dipc_queue() -> None:
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_dipc_queue_actions() -> None:
     """
@@ -122,6 +127,7 @@ async def test_get_dipc_queue_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_send_message() -> None:
@@ -140,6 +146,7 @@ async def test_post_send_message() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_read_message() -> None:
     """
@@ -155,6 +162,7 @@ async def test_get_read_message() -> None:
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_delete_dipc_queue() -> None:
     """
@@ -169,6 +177,7 @@ async def test_delete_dipc_queue() -> None:
     assert transport.last_request.method == "DELETE"
     assert transport.last_request.url.path == "/rw/dipc/queue_name_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_dipc_queue() -> None:
@@ -186,6 +195,7 @@ async def test_subscribe_dipc_queue() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_dipc_queue_without_reading_message() -> None:

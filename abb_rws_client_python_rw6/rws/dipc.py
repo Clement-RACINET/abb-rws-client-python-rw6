@@ -8,6 +8,7 @@ RWS module: RobotWare Services → DIPC service → Get DIPC Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_dipc_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/dipc")
 
+
 async def get_dipc_actions(client: RWSClient) -> httpx.Response:
     """
     Get DIPC Actions.
@@ -68,6 +70,7 @@ async def get_dipc_actions(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/dipc")
+
 
 async def create_queue(
     client: RWSClient,
@@ -104,6 +107,7 @@ async def create_queue(
         data={},
     )
 
+
 async def get_dipc_queue(
     client: RWSClient,
     queue_name: str,
@@ -134,6 +138,7 @@ async def get_dipc_queue(
         ```
     """
     return await client.get(f"/rw/dipc/{queue_name}")
+
 
 async def get_dipc_queue_actions(
     client: RWSClient,
@@ -170,6 +175,7 @@ async def get_dipc_queue_actions(
         f"/rw/dipc/{queue_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def post_send_message(
     client: RWSClient,
@@ -208,6 +214,7 @@ async def post_send_message(
         data={},
     )
 
+
 async def get_read_message(
     client: RWSClient,
     queue_name: str,
@@ -243,15 +250,9 @@ async def get_read_message(
     """
     return await client.get(
         f"/rw/dipc/{queue_name}",
-        params={
-            k: v
-            for k, v in {
-                "action": action,
-                "timeout": timeout
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"action": action, "timeout": timeout}.items() if v is not None},
     )
+
 
 async def delete_dipc_queue(
     client: RWSClient,
@@ -284,6 +285,7 @@ async def delete_dipc_queue(
         ```
     """
     return await client.delete(f"/rw/dipc/{queue_name}")
+
 
 async def subscribe_dipc_queue(
     client: RWSClient,
@@ -320,13 +322,11 @@ async def subscribe_dipc_queue(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_dipc_queue_without_reading_message(
     client: RWSClient,
@@ -362,10 +362,7 @@ async def subscribe_dipc_queue_without_reading_message(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )

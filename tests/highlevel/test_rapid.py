@@ -68,32 +68,16 @@ class TestParseExecState:
     """Unit tests for the _parse_exec_state helper."""
 
     def test_json_running(self) -> None:
-        assert (
-            _parse_exec_state(
-                _json_resp({"state": [{"ctrlexecstate": "running"}]})
-            )
-            == "running"
-        )
+        assert _parse_exec_state(_json_resp({"state": [{"ctrlexecstate": "running"}]})) == "running"
 
     def test_json_stopped(self) -> None:
-        assert (
-            _parse_exec_state(
-                _json_resp({"state": [{"ctrlexecstate": "stopped"}]})
-            )
-            == "stopped"
-        )
+        assert _parse_exec_state(_json_resp({"state": [{"ctrlexecstate": "stopped"}]})) == "stopped"
 
     def test_xml_running(self) -> None:
-        assert (
-            _parse_exec_state(_resp('<span class="ctrlexecstate">running</span>'))
-            == "running"
-        )
+        assert _parse_exec_state(_resp('<span class="ctrlexecstate">running</span>')) == "running"
 
     def test_xml_stopped(self) -> None:
-        assert (
-            _parse_exec_state(_resp('<span class="ctrlexecstate">stopped</span>'))
-            == "stopped"
-        )
+        assert _parse_exec_state(_resp('<span class="ctrlexecstate">stopped</span>')) == "stopped"
 
     def test_raises_on_unparseable(self) -> None:
         with pytest.raises(ValueError, match="ctrlexecstate"):
@@ -114,14 +98,10 @@ class TestParseSymbolValue:
     """Unit tests for the _parse_symbol_value helper."""
 
     def test_json_value(self) -> None:
-        assert (
-            _parse_symbol_value(_json_resp({"state": [{"value": "42"}]})) == "42"
-        )
+        assert _parse_symbol_value(_json_resp({"state": [{"value": "42"}]})) == "42"
 
     def test_xml_value(self) -> None:
-        assert (
-            _parse_symbol_value(_resp('<span class="value">TRUE</span>')) == "TRUE"
-        )
+        assert _parse_symbol_value(_resp('<span class="value">TRUE</span>')) == "TRUE"
 
     def test_raises_on_unparseable(self) -> None:
         with pytest.raises(ValueError, match="symbol value"):
@@ -129,9 +109,7 @@ class TestParseSymbolValue:
 
     def test_json_value_numeric_cast(self) -> None:
         """Numeric values stored as int in JSON must be cast to str."""
-        assert (
-            _parse_symbol_value(_json_resp({"state": [{"value": 99}]})) == "99"
-        )
+        assert _parse_symbol_value(_json_resp({"state": [{"value": 99}]})) == "99"
 
 
 # ---------------------------------------------------------------------------
@@ -146,9 +124,7 @@ class TestIsRunning:
     async def test_true_when_running(self, client: MagicMock) -> None:
         with patch(
             f"{_MODULE}.get_rapid_execution_state",
-            new=AsyncMock(
-                return_value=_json_resp({"state": [{"ctrlexecstate": "running"}]})
-            ),
+            new=AsyncMock(return_value=_json_resp({"state": [{"ctrlexecstate": "running"}]})),
         ):
             assert await is_running(client) is True
 
@@ -156,9 +132,7 @@ class TestIsRunning:
     async def test_false_when_stopped(self, client: MagicMock) -> None:
         with patch(
             f"{_MODULE}.get_rapid_execution_state",
-            new=AsyncMock(
-                return_value=_json_resp({"state": [{"ctrlexecstate": "stopped"}]})
-            ),
+            new=AsyncMock(return_value=_json_resp({"state": [{"ctrlexecstate": "stopped"}]})),
         ):
             assert await is_running(client) is False
 
@@ -167,9 +141,7 @@ class TestIsRunning:
         """Any state other than 'running' must return False."""
         with patch(
             f"{_MODULE}.get_rapid_execution_state",
-            new=AsyncMock(
-                return_value=_json_resp({"state": [{"ctrlexecstate": "idle"}]})
-            ),
+            new=AsyncMock(return_value=_json_resp({"state": [{"ctrlexecstate": "idle"}]})),
         ):
             assert await is_running(client) is False
 
@@ -294,9 +266,7 @@ class TestWaitUntilStopped:
     """Tests for wait_until_stopped()."""
 
     @pytest.mark.asyncio
-    async def test_returns_immediately_when_stopped(
-        self, client: MagicMock
-    ) -> None:
+    async def test_returns_immediately_when_stopped(self, client: MagicMock) -> None:
         with patch(
             f"{_MODULE}.is_running",
             new=AsyncMock(return_value=False),
@@ -335,9 +305,7 @@ class TestWaitUntilStopped:
             await wait_until_stopped(client, poll_interval=0.1, timeout=0.05)
 
     @pytest.mark.asyncio
-    async def test_no_timeout_polls_forever_until_stopped(
-        self, client: MagicMock
-    ) -> None:
+    async def test_no_timeout_polls_forever_until_stopped(self, client: MagicMock) -> None:
         """With timeout=None, must keep polling until stopped."""
         side_effects = [True] * 5 + [False]
         call_count = 0
@@ -368,20 +336,14 @@ class TestSetVariableWithMastership:
     """Tests for set_variable_with_mastership()."""
 
     @pytest.mark.asyncio
-    async def test_request_write_release_order(
-        self, client: MagicMock
-    ) -> None:
+    async def test_request_write_release_order(self, client: MagicMock) -> None:
         call_order: list[str] = []
 
-        async def fake_request(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_request(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:request")
             return _resp(status=204)
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:release")
             return _resp(status=204)
 
@@ -418,9 +380,7 @@ class TestSetVariableWithMastership:
         assert call_order == ["mastership:request", "update", "mastership:release"]
 
     @pytest.mark.asyncio
-    async def test_release_called_even_on_error(
-        self, client: MagicMock
-    ) -> None:
+    async def test_release_called_even_on_error(self, client: MagicMock) -> None:
         """Mastership must be released even when the write raises."""
         released: list[bool] = []
 
@@ -433,9 +393,7 @@ class TestSetVariableWithMastership:
         ) -> httpx.Response:
             raise RWSHTTPError("write failed", status_code=403)
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             released.append(True)
             return _resp(status=204)
 
@@ -463,9 +421,7 @@ class TestSetVariableWithMastership:
         assert released == [True]
 
     @pytest.mark.asyncio
-    async def test_update_called_with_correct_args(
-        self, client: MagicMock
-    ) -> None:
+    async def test_update_called_with_correct_args(self, client: MagicMock) -> None:
         """update_rapid_variable_current_value must receive action='set'."""
         mock_update = AsyncMock(return_value=_resp(status=204))
         with (
@@ -500,9 +456,7 @@ class TestSetVariableWithMastership:
         """Default domain must be 'rapid'."""
         captured: dict[str, str] = {}
 
-        async def fake_request(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_request(c: object, *, domain: str, action: str) -> httpx.Response:
             captured["domain"] = domain
             return _resp(status=204)
 
@@ -541,20 +495,14 @@ class TestGetVariable:
     async def test_returns_parsed_value(self, client: MagicMock) -> None:
         with patch(
             f"{_MODULE}.get_rapid_symbol_data",
-            new=AsyncMock(
-                return_value=_json_resp({"state": [{"value": "123"}]})
-            ),
+            new=AsyncMock(return_value=_json_resp({"state": [{"value": "123"}]})),
         ):
-            result = await get_variable(
-                client, symbolurl="RAPID/T_ROB1/MainModule/counter"
-            )
+            result = await get_variable(client, symbolurl="RAPID/T_ROB1/MainModule/counter")
         assert result == "123"
 
     @pytest.mark.asyncio
     async def test_passes_symbolurl(self, client: MagicMock) -> None:
-        mock_get = AsyncMock(
-            return_value=_json_resp({"state": [{"value": "TRUE"}]})
-        )
+        mock_get = AsyncMock(return_value=_json_resp({"state": [{"value": "TRUE"}]}))
         with patch(f"{_MODULE}.get_rapid_symbol_data", new=mock_get):
             await get_variable(client, symbolurl="RAPID/T_ROB1/M/flag")
 
@@ -564,9 +512,7 @@ class TestGetVariable:
     async def test_returns_xml_value(self, client: MagicMock) -> None:
         with patch(
             f"{_MODULE}.get_rapid_symbol_data",
-            new=AsyncMock(
-                return_value=_resp('<span class="value">3.14</span>')
-            ),
+            new=AsyncMock(return_value=_resp('<span class="value">3.14</span>')),
         ):
             result = await get_variable(client, symbolurl="RAPID/T_ROB1/M/pi")
         assert result == "3.14"
@@ -591,21 +537,15 @@ class TestLoadModuleSafe:
             call_order.append("resetpp")
             return _resp(status=204)
 
-        async def fake_request(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_request(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:request")
             return _resp(status=204)
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:release")
             return _resp(status=204)
 
-        async def fake_unload(
-            c: object, *, task: str, action: str, module: str
-        ) -> httpx.Response:
+        async def fake_unload(c: object, *, task: str, action: str, module: str) -> httpx.Response:
             call_order.append("unload")
             return _resp(status=204)
 
@@ -657,9 +597,7 @@ class TestLoadModuleSafe:
         """A 404 on unload must not propagate — module may not be loaded."""
         released: list[bool] = []
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             released.append(True)
             return _resp(status=204)
 
@@ -704,9 +642,7 @@ class TestLoadModuleSafe:
         """Mastership must be released even when load raises."""
         released: list[bool] = []
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             released.append(True)
             return _resp(status=204)
 
@@ -729,9 +665,7 @@ class TestLoadModuleSafe:
             ),
             patch(
                 f"{_MODULE}.load_rapid_module_into_rapid_task",
-                new=AsyncMock(
-                    side_effect=RWSHTTPError("load failed", status_code=500)
-                ),
+                new=AsyncMock(side_effect=RWSHTTPError("load failed", status_code=500)),
             ),
             pytest.raises(RWSHTTPError),
         ):
@@ -745,24 +679,18 @@ class TestLoadModuleSafe:
         assert released == [True]
 
     @pytest.mark.asyncio
-    async def test_resetpp_failure_is_swallowed(
-        self, client: MagicMock
-    ) -> None:
+    async def test_resetpp_failure_is_swallowed(self, client: MagicMock) -> None:
         """resetpp HTTP error must be swallowed (first load, no program)."""
         call_order: list[str] = []
 
         async def fake_reset_fail(c: object, *, action: str) -> httpx.Response:
             raise RWSHTTPError("no program", status_code=400)
 
-        async def fake_request(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_request(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:request")
             return _resp(status=204)
 
-        async def fake_release(
-            c: object, *, domain: str, action: str
-        ) -> httpx.Response:
+        async def fake_release(c: object, *, domain: str, action: str) -> httpx.Response:
             call_order.append("mastership:release")
             return _resp(status=204)
 
@@ -798,9 +726,7 @@ class TestLoadModuleSafe:
         assert call_order == ["mastership:request", "mastership:release"]
 
     @pytest.mark.asyncio
-    async def test_load_called_with_correct_args(
-        self, client: MagicMock
-    ) -> None:
+    async def test_load_called_with_correct_args(self, client: MagicMock) -> None:
         """load_rapid_module_into_rapid_task must receive the correct args."""
         mock_load = AsyncMock(return_value=_resp(status=204))
         with (
@@ -854,9 +780,7 @@ class TestMotorControl:
         with patch(f"{_MODULE}.set_controller_state", new=mock_set):
             await set_motors_on(client)
 
-        mock_set.assert_awaited_once_with(
-            client, action="setctrlstate", ctrl_state="motoron"
-        )
+        mock_set.assert_awaited_once_with(client, action="setctrlstate", ctrl_state="motoron")
 
     @pytest.mark.asyncio
     async def test_motors_off(self, client: MagicMock) -> None:
@@ -864,9 +788,7 @@ class TestMotorControl:
         with patch(f"{_MODULE}.set_controller_state", new=mock_set):
             await set_motors_off(client)
 
-        mock_set.assert_awaited_once_with(
-            client, action="setctrlstate", ctrl_state="motoroff"
-        )
+        mock_set.assert_awaited_once_with(client, action="setctrlstate", ctrl_state="motoroff")
 
     @pytest.mark.asyncio
     async def test_motors_on_returns_none(self, client: MagicMock) -> None:

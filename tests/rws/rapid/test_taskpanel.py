@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/taskpanel."""
+
 from __future__ import annotations
 
 import httpx
@@ -52,6 +53,7 @@ async def test_get_user_modify_from_taskpanel() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/taskselection"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_tasks_panel_change() -> None:

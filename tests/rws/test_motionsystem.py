@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/motionsystem."""
+
 from __future__ import annotations
 
 import httpx
@@ -115,6 +116,7 @@ async def test_get_motion_system() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_motion_system_action() -> None:
     """
@@ -129,6 +131,7 @@ async def test_get_motion_system_action() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_mechunit_for_jogging() -> None:
@@ -147,6 +150,7 @@ async def test_set_mechunit_for_jogging() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_perform_jogging() -> None:
     """
@@ -163,6 +167,7 @@ async def test_post_perform_jogging() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_robo_target_position() -> None:
@@ -181,6 +186,7 @@ async def test_set_robo_target_position() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_check_change_count() -> None:
     """
@@ -195,6 +201,7 @@ async def test_get_check_change_count() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/checkchangecount"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_error_eventchange() -> None:
@@ -213,6 +220,7 @@ async def test_subscribe_on_error_eventchange() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_error_state() -> None:
     """
@@ -227,6 +235,7 @@ async def test_get_error_state() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/errorstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_motion_supervision() -> None:
@@ -243,6 +252,7 @@ async def test_get_motion_supervision() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_motion_supervision_actions() -> None:
     """
@@ -257,6 +267,7 @@ async def test_get_motion_supervision_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_motion_supervision_mode_jog_supervision_mode() -> None:
@@ -276,6 +287,7 @@ async def test_set_motion_supervision_mode_jog_supervision_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_motion_supervision_sensitivity_jog_supervision_sensitivity() -> None:
     """
@@ -294,6 +306,7 @@ async def test_set_motion_supervision_sensitivity_jog_supervision_sensitivity() 
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_motion_supervision_collision_prediction_mode() -> None:
     """
@@ -309,6 +322,7 @@ async def test_get_motion_supervision_collision_prediction_mode() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/motionsupervision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_motion_supervision_collision_prediction_mode() -> None:
@@ -328,6 +342,7 @@ async def test_set_motion_supervision_collision_prediction_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_path_supervision() -> None:
     """
@@ -343,6 +358,7 @@ async def test_get_path_supervision() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_path_supervision_actions() -> None:
     """
@@ -357,6 +373,7 @@ async def test_get_path_supervision_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/pathsupervision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_path_supervision_mode() -> None:
@@ -375,6 +392,7 @@ async def test_set_path_supervision_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_path_supervision_level() -> None:
     """
@@ -392,6 +410,7 @@ async def test_set_path_supervision_level() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_non_motion_execution_mode() -> None:
     """
@@ -407,6 +426,7 @@ async def test_get_non_motion_execution_mode() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/nonmotionexecution"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_nonmotion_execution_actions() -> None:
     """
@@ -421,6 +441,7 @@ async def test_get_nonmotion_execution_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/nonmotionexecution"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_nonmotion_execution_mode() -> None:
@@ -439,6 +460,7 @@ async def test_set_nonmotion_execution_mode() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_mechunits() -> None:
     """
@@ -453,6 +475,7 @@ async def test_get_mechunits() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_mechunit() -> None:
@@ -469,6 +492,7 @@ async def test_get_mechunit() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_mechunit_action() -> None:
     """
@@ -483,6 +507,7 @@ async def test_get_mechunit_action() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_mechunit() -> None:
@@ -501,6 +526,7 @@ async def test_set_mechunit() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_compliance_lead_through() -> None:
     """
@@ -518,6 +544,7 @@ async def test_set_compliance_lead_through() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_compliance_lead_through() -> None:
     """
@@ -532,6 +559,7 @@ async def test_get_compliance_lead_through() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_fine_calibration() -> None:
@@ -549,6 +577,7 @@ async def test_set_fine_calibration() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_update_syncronize_revolution_counter() -> None:
@@ -568,6 +597,7 @@ async def test_update_syncronize_revolution_counter() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_physical_joints() -> None:
     """
@@ -582,6 +612,7 @@ async def test_get_physical_joints() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/pjoints"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_cartesian_value() -> None:
@@ -598,6 +629,7 @@ async def test_get_cartesian_value() -> None:
     expected_path = "/rw/motionsystem/mechunits/mechunit_test/cartesian"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_mechanical_unit() -> None:
@@ -616,6 +648,7 @@ async def test_set_mechanical_unit() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_robtarget() -> None:
     """
@@ -632,6 +665,7 @@ async def test_get_robtarget() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_joint_target() -> None:
     """
@@ -647,6 +681,7 @@ async def test_get_joint_target() -> None:
     expected_path = "/rw/motionsystem/mechunits/mechunit_test/jointtarget"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_mechunit_mode_change() -> None:
@@ -665,6 +700,7 @@ async def test_subscribe_on_mechunit_mode_change() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_joints_from_position() -> None:
     """
@@ -681,6 +717,7 @@ async def test_get_joints_from_position() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_position_from_joints() -> None:
@@ -699,6 +736,7 @@ async def test_get_position_from_joints() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_all_joint_solution() -> None:
     """
@@ -715,6 +753,7 @@ async def test_get_all_joint_solution() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_joints_from_cartesian() -> None:
@@ -733,6 +772,7 @@ async def test_get_joints_from_cartesian() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_calibration_info() -> None:
     """
@@ -749,6 +789,7 @@ async def test_get_calibration_info() -> None:
     expected_path = "/rw/motionsystem/mechunits/mechunit_test/calibrationinfo"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_baseframe() -> None:
@@ -768,6 +809,7 @@ async def test_post_calibration_for_baseframe() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_calibration_for_baseframemoving() -> None:
     """
@@ -785,6 +827,7 @@ async def test_post_calibration_for_baseframemoving() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_externalrobotnombasenew() -> None:
@@ -804,6 +847,7 @@ async def test_post_calibration_for_externalrobotnombasenew() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_calibration_for_robotaxisrot() -> None:
     """
@@ -821,6 +865,7 @@ async def test_post_calibration_for_robotaxisrot() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_singleuserrotnew() -> None:
@@ -840,6 +885,7 @@ async def test_post_calibration_for_singleuserrotnew() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_calibration_for_rotextctrlzdef() -> None:
     """
@@ -857,6 +903,7 @@ async def test_post_calibration_for_rotextctrlzdef() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_singleuserlin() -> None:
@@ -876,6 +923,7 @@ async def test_post_calibration_for_singleuserlin() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_calibration_for_singletrack() -> None:
     """
@@ -893,6 +941,7 @@ async def test_post_calibration_for_singletrack() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_robotaxisrot2() -> None:
@@ -912,6 +961,7 @@ async def test_post_calibration_for_robotaxisrot2() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_base_frame() -> None:
     """
@@ -928,6 +978,7 @@ async def test_get_base_frame() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_base_frame_actions() -> None:
     """
@@ -943,6 +994,7 @@ async def test_get_base_frame_actions() -> None:
     expected_path = "/rw/motionsystem/mechunits/mechunit_test/baseframe"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_base_frame() -> None:
@@ -962,6 +1014,7 @@ async def test_set_base_frame() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_axes() -> None:
     """
@@ -976,6 +1029,7 @@ async def test_get_axes() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/axes"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_axis() -> None:
@@ -993,6 +1047,7 @@ async def test_get_axis() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_axis_actions() -> None:
     """
@@ -1009,6 +1064,7 @@ async def test_get_axis_actions() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_axis_pose() -> None:
     """
@@ -1024,6 +1080,7 @@ async def test_get_axis_pose() -> None:
     expected_path = "/rw/motionsystem/mechunits/mechunit_test/axes/axis_num_test"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_axis_pose() -> None:
@@ -1042,6 +1099,7 @@ async def test_set_axis_pose() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_update_commutate() -> None:
@@ -1062,6 +1120,7 @@ async def test_update_commutate() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_update_sync_revolution_counter() -> None:
     """
@@ -1081,6 +1140,7 @@ async def test_update_sync_revolution_counter() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_smb_data() -> None:
     """
@@ -1097,6 +1157,7 @@ async def test_set_smb_data() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_clear_smb_data() -> None:
@@ -1115,6 +1176,7 @@ async def test_post_clear_smb_data() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_smb_data() -> None:
     """
@@ -1130,6 +1192,7 @@ async def test_get_smb_data() -> None:
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_smb_data_actions() -> None:
     """
@@ -1144,6 +1207,7 @@ async def test_get_smb_data_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/motionsystem/mechunits/mechunit_test/smbdata"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_motor_calib_names() -> None:

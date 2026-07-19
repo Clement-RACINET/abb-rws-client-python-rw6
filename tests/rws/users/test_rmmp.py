@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/users/rmmp."""
+
 from __future__ import annotations
 
 import httpx
@@ -58,6 +59,7 @@ async def test_get_rmmp_state() -> None:
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rmmp_actions() -> None:
     """
@@ -72,6 +74,7 @@ async def test_get_rmmp_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/users/rmmp"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_request_rmmp() -> None:
@@ -90,6 +93,7 @@ async def test_request_rmmp() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_grant_or_deny_an_rmmp_request() -> None:
     """
@@ -106,6 +110,7 @@ async def test_grant_or_deny_an_rmmp_request() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_cancel_held_or_requested_rmmp() -> None:
@@ -124,6 +129,7 @@ async def test_cancel_held_or_requested_rmmp() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_rmmp_request_event() -> None:
     """
@@ -140,6 +146,7 @@ async def test_subscribe_on_rmmp_request_event() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_poll_for_rmmp_grant_status() -> None:

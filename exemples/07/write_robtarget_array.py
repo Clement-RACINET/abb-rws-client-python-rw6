@@ -242,9 +242,7 @@ async def main() -> None:
             logger.info("Connected → %s", client.base_url)
 
             if await is_running(client):
-                logger.error(
-                    "RAPID is running. Stop RAPID before writing PERS variables."
-                )
+                logger.error("RAPID is running. Stop RAPID before writing PERS variables.")
                 sys.exit(1)
 
             await write_robtarget_array_batch(

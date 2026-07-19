@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID symbol
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -46,6 +47,7 @@ async def get_rapid_symbol_properties(
     """
     return await client.get(f"/rw/rapid/symbol/properties/{symbolurl}")
 
+
 async def get_rapid_symbol_data(
     client: RWSClient,
     symbolurl: str,
@@ -82,6 +84,7 @@ async def get_rapid_symbol_data(
         params={k: v for k, v in {"value": value}.items() if v is not None},
     )
 
+
 async def get_rapid_symbol_data_actions(
     client: RWSClient,
     symbolurl: str,
@@ -117,6 +120,7 @@ async def get_rapid_symbol_data_actions(
         f"/rw/rapid/symbols/{symbolurl}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def update_rapid_variable_current_value(
     client: RWSClient,
@@ -158,6 +162,7 @@ async def update_rapid_variable_current_value(
         data={k: v for k, v in {"value": value}.items() if v is not None},
     )
 
+
 async def validate_rapid_variable(
     client: RWSClient,
     action: str | None = None,
@@ -192,6 +197,7 @@ async def validate_rapid_variable(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def subscribe_on_rapid_persistent_variable(
     client: RWSClient,
@@ -228,13 +234,11 @@ async def subscribe_on_rapid_persistent_variable(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def update_rapid_variable_initial_value(
     client: RWSClient,

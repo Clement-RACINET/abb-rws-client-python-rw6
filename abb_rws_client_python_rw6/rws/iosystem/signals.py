@@ -8,6 +8,7 @@ RWS module: RobotWare Services → IO Service → Operations on IO Signals
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,6 +42,7 @@ async def get_io_signals(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/iosystem/signals")
+
 
 async def post_signal_search(
     client: RWSClient,
@@ -99,11 +101,7 @@ async def post_signal_search(
         "/rw/iosystem/signals",
         params={
             k: v
-            for k, v in {
-                "action": action,
-                "start": start,
-                "limit": limit
-            }.items()
+            for k, v in {"action": action, "start": start, "limit": limit}.items()
             if v is not None
         },
         data={
@@ -118,11 +116,12 @@ async def post_signal_search(
                 "invert": invert,
                 "blocked": blocked,
                 "name2": name2,
-                "device2": device2
+                "device2": device2,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_signal_search_extended(
     client: RWSClient,
@@ -181,11 +180,7 @@ async def post_signal_search_extended(
         "/rw/iosystem/signals",
         params={
             k: v
-            for k, v in {
-                "action": action,
-                "start": start,
-                "limit": limit
-            }.items()
+            for k, v in {"action": action, "start": start, "limit": limit}.items()
             if v is not None
         },
         data={
@@ -200,11 +195,12 @@ async def post_signal_search_extended(
                 "invert": invert,
                 "blocked": blocked,
                 "name2": name2,
-                "device2": device2
+                "device2": device2,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_unblock_signals(
     client: RWSClient,
@@ -240,6 +236,7 @@ async def post_unblock_signals(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def get_io_signals_actions(
     client: RWSClient,

@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/tasks."""
+
 from __future__ import annotations
 
 import httpx
@@ -105,6 +106,7 @@ async def test_get_rapid_tasks() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_tasks_actions() -> None:
     """
@@ -119,6 +121,7 @@ async def test_get_rapid_tasks_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_start_rapid_spy_logging() -> None:
@@ -137,6 +140,7 @@ async def test_start_rapid_spy_logging() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_spy_logging_status() -> None:
     """
@@ -151,6 +155,7 @@ async def test_get_rapid_spy_logging_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_stop_rapid_spy_logging() -> None:
@@ -169,6 +174,7 @@ async def test_stop_rapid_spy_logging() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_activate_deactivate_rapid_tasks() -> None:
     """
@@ -186,6 +192,7 @@ async def test_post_activate_deactivate_rapid_tasks() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_program_motion_pointer_sync_state_for() -> None:
     """
@@ -200,6 +207,7 @@ async def test_get_program_motion_pointer_sync_state_for() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_build_log_change() -> None:
@@ -218,6 +226,7 @@ async def test_subscribe_on_build_log_change() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_task_state() -> None:
     """
@@ -233,6 +242,7 @@ async def test_get_rapid_task_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_task_actions() -> None:
     """
@@ -247,6 +257,7 @@ async def test_get_rapid_task_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_load_rapid_module_into_rapid_task() -> None:
@@ -265,6 +276,7 @@ async def test_load_rapid_module_into_rapid_task() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_unload_module_from_rapid_task() -> None:
     """
@@ -281,6 +293,7 @@ async def test_post_unload_module_from_rapid_task() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_abort_current_execution_level() -> None:
@@ -299,6 +312,7 @@ async def test_post_abort_current_execution_level() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_activate_deactivate_rapid_task() -> None:
     """
@@ -316,6 +330,7 @@ async def test_post_activate_deactivate_rapid_task() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_activation_record() -> None:
     """
@@ -330,6 +345,7 @@ async def test_get_activation_record() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_structural_change_count() -> None:
@@ -346,6 +362,7 @@ async def test_get_structural_change_count() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_preferable_data_types() -> None:
     """
@@ -360,6 +377,7 @@ async def test_get_preferable_data_types() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_program_pointer_sync_state() -> None:
@@ -376,6 +394,7 @@ async def test_get_program_pointer_sync_state() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_motion_pointer_sync_state() -> None:
     """
@@ -390,6 +409,7 @@ async def test_get_motion_pointer_sync_state() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_link_rapid_task() -> None:
@@ -408,6 +428,7 @@ async def test_post_link_rapid_task() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_pallet() -> None:
     """
@@ -423,6 +444,7 @@ async def test_get_pallet() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_pallet_head() -> None:
     """
@@ -437,6 +459,7 @@ async def test_get_pallet_head() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_task_change() -> None:
@@ -455,6 +478,7 @@ async def test_subscribe_on_rapid_task_change() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_pp_sync_state_change() -> None:
     """
@@ -471,6 +495,7 @@ async def test_subscribe_on_rapid_pp_sync_state_change() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_rapid_task_pgmexecution_state_change() -> None:
@@ -489,6 +514,7 @@ async def test_subscribe_on_rapid_task_pgmexecution_state_change() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_motion() -> None:
     """
@@ -503,6 +529,7 @@ async def test_get_rapid_motion() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_robtarget() -> None:
@@ -519,6 +546,7 @@ async def test_get_robtarget() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_joint_target() -> None:
     """
@@ -533,6 +561,7 @@ async def test_get_joint_target() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_mechanical_units() -> None:
@@ -549,6 +578,7 @@ async def test_get_mechanical_units() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_external_joint_states() -> None:
     """
@@ -563,6 +593,7 @@ async def test_get_external_joint_states() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/motion"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_calibration_for_displacement() -> None:
@@ -581,6 +612,7 @@ async def test_post_calibration_for_displacement() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_calibration_for_tcp() -> None:
     """
@@ -598,6 +630,7 @@ async def test_post_calibration_for_tcp() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_program_resource() -> None:
     """
@@ -613,6 +646,7 @@ async def test_get_rapid_program_resource() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_program_actions() -> None:
     """
@@ -627,6 +661,7 @@ async def test_get_rapid_program_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_load_program_into_rapid_task() -> None:
@@ -645,6 +680,7 @@ async def test_load_program_into_rapid_task() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_unload_program_from_rapid_task() -> None:
     """
@@ -661,6 +697,7 @@ async def test_post_unload_program_from_rapid_task() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_save_program() -> None:
@@ -679,6 +716,7 @@ async def test_save_program() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_program_name() -> None:
     """
@@ -695,6 +733,7 @@ async def test_set_program_name() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_entry_point() -> None:
@@ -713,6 +752,7 @@ async def test_set_entry_point() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_build_errors() -> None:
     """
@@ -728,6 +768,7 @@ async def test_get_build_errors() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/builderror"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_breakpoint_actions() -> None:
     """
@@ -742,6 +783,7 @@ async def test_get_rapid_breakpoint_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/breakpoint"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_break_point() -> None:
@@ -760,6 +802,7 @@ async def test_set_break_point() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_break_points() -> None:
     """
@@ -774,6 +817,7 @@ async def test_get_break_points() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/program/breakpoint"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_rapid_task_motion_program_pointer_positions() -> None:
@@ -791,6 +835,7 @@ async def test_get_rapid_task_motion_program_pointer_positions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_task_pcp_actions() -> None:
     """
@@ -805,6 +850,7 @@ async def test_get_rapid_task_pcp_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/pcp"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to() -> None:
@@ -823,6 +869,7 @@ async def test_set_the_program_pointer_pp_position_to() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to_2() -> None:
     """
@@ -839,6 +886,7 @@ async def test_set_the_program_pointer_pp_position_to_2() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to_3() -> None:
@@ -857,6 +905,7 @@ async def test_set_the_program_pointer_pp_position_to_3() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to_4() -> None:
     """
@@ -873,6 +922,7 @@ async def test_set_the_program_pointer_pp_position_to_4() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_the_program_pointer_pp_position_to_5() -> None:
@@ -891,6 +941,7 @@ async def test_set_the_program_pointer_pp_position_to_5() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_program_pointer() -> None:
     """
@@ -907,6 +958,7 @@ async def test_subscribe_on_program_pointer() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_motion_pointer() -> None:
@@ -925,6 +977,7 @@ async def test_subscribe_on_motion_pointer() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_service_routine() -> None:
     """
@@ -939,6 +992,7 @@ async def test_get_rapid_service_routine() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/tasks/task_test/serviceroutine"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_rapid_program_counter_position() -> None:

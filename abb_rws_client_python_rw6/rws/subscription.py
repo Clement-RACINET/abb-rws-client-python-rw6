@@ -8,6 +8,7 @@ RWS module: Subscription Service → Get Subscription Actions
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -53,6 +54,7 @@ async def get_subscription_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def subscribe_on_resources(
     client: RWSClient,
     identifier: str | None = None,
@@ -91,13 +93,11 @@ async def subscribe_on_resources(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_subscription_group_actions(
     client: RWSClient,
@@ -139,6 +139,7 @@ async def get_subscription_group_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def add_new_resources_remove_existing_resources_or(
     client: RWSClient,
     group_id: str,
@@ -179,13 +180,11 @@ async def add_new_resources_remove_existing_resources_or(
         f"/subscripion/{group_id}",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def unsubscribe_or_remove_the_subscription_group_resources(
     client: RWSClient,
@@ -220,6 +219,7 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
         ```
     """
     return await client.delete(f"/subscripion/{group_id}")
+
 
 async def unsubscribe_or_remove_the_resource_from_subscription(
     client: RWSClient,

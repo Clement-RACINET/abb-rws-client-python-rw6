@@ -8,6 +8,7 @@ RWS module: RobotWare Services → IO Service → Get IO System resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_io_system_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/iosystem")
 
+
 async def get_io_network(
     client: RWSClient,
     network: str,
@@ -72,6 +74,7 @@ async def get_io_network(
         ```
     """
     return await client.get(f"/rw/iosystem/networks/{network}")
+
 
 async def get_io_network_actions(
     client: RWSClient,
@@ -108,6 +111,7 @@ async def get_io_network_actions(
         f"/rw/iosystem/networks/{network}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def update_io_network(
     client: RWSClient,
@@ -148,6 +152,7 @@ async def update_io_network(
         data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
     )
 
+
 async def subscribe_io_network(
     client: RWSClient,
     identifier: str | None = None,
@@ -183,13 +188,11 @@ async def subscribe_io_network(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_io_network_configuration_properties(
     client: RWSClient,
@@ -229,13 +232,11 @@ async def get_io_network_configuration_properties(
         f"/rw/iosystem/networks/{network}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "configtype": configtype
-            }.items()
+            for k, v in {"resource": resource, "configtype": configtype}.items()
             if v is not None
         },
     )
+
 
 async def update_io_network_configuration_type(
     client: RWSClient,
@@ -276,6 +277,7 @@ async def update_io_network_configuration_type(
         data={k: v for k, v in {"config_type": config_type}.items() if v is not None},
     )
 
+
 async def get_io_device(
     client: RWSClient,
     device: str,
@@ -306,6 +308,7 @@ async def get_io_device(
         ```
     """
     return await client.get(f"/rw/iosystem/devices/{device}")
+
 
 async def get_io_device_actions(
     client: RWSClient,
@@ -342,6 +345,7 @@ async def get_io_device_actions(
         f"/rw/iosystem/devices/{device}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def update_io_device(
     client: RWSClient,
@@ -382,6 +386,7 @@ async def update_io_device(
         data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
     )
 
+
 async def subscribe_io_device(
     client: RWSClient,
     identifier: str | None = None,
@@ -417,13 +422,11 @@ async def subscribe_io_device(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def set_input_data(
     client: RWSClient,
@@ -473,11 +476,12 @@ async def set_input_data(
             for k, v in {
                 "startbyte": startbyte,
                 "signaldata": signaldata,
-                "datamask": datamask
+                "datamask": datamask,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_output_data(
     client: RWSClient,
@@ -527,11 +531,12 @@ async def set_output_data(
             for k, v in {
                 "startbyte": startbyte,
                 "signaldata": signaldata,
-                "datamask": datamask
+                "datamask": datamask,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_io_device_configuration_properties(
     client: RWSClient,
@@ -571,13 +576,11 @@ async def get_io_device_configuration_properties(
         f"/rw/iosystem/devices/{device}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "configtype": configtype
-            }.items()
+            for k, v in {"resource": resource, "configtype": configtype}.items()
             if v is not None
         },
     )
+
 
 async def get_eio_device_status_information(
     client: RWSClient,
@@ -611,6 +614,7 @@ async def get_eio_device_status_information(
         ```
     """
     return await client.get(f"/rw/iosystem/devices/{network}/{device}/upgradeinfo")
+
 
 async def post_send_device_command(
     client: RWSClient,
@@ -657,11 +661,12 @@ async def post_send_device_command(
                 "commandname": commandname,
                 "value": value,
                 "valuelength": valuelength,
-                "timeout": timeout
+                "timeout": timeout,
             }.items()
             if v is not None
         },
     )
+
 
 async def options_send_device_command_actions(
     client: RWSClient,
@@ -693,6 +698,7 @@ async def options_send_device_command_actions(
         ```
     """
     return await client.options(f"/rw/iosystem/devices/{device}/command")
+
 
 async def get_an_io_signal(
     client: RWSClient,
@@ -730,6 +736,7 @@ async def get_an_io_signal(
         ```
     """
     return await client.get(f"/rw/iosystem/signals/{network}/{unit}/{signal}")
+
 
 async def get_io_signal_actions(
     client: RWSClient,
@@ -770,6 +777,7 @@ async def get_io_signal_actions(
         f"/rw/iosystem/signals/{network}/{unit}/{signal}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def update_io_signal_state(
     client: RWSClient,
@@ -814,6 +822,7 @@ async def update_io_signal_state(
         data={k: v for k, v in {"lstate": lstate}.items() if v is not None},
     )
 
+
 async def update_io_signal_value(
     client: RWSClient,
     network: str,
@@ -855,6 +864,7 @@ async def update_io_signal_value(
         data={},
     )
 
+
 async def subscribe_io_signal(
     client: RWSClient,
     identifier: str | None = None,
@@ -890,13 +900,11 @@ async def subscribe_io_signal(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_io_signal_configuration_properties(
     client: RWSClient,
@@ -945,10 +953,7 @@ async def get_io_signal_configuration_properties(
         f"/rw/iosystem/signals/{network}/{unit}/{signal}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "configtype": configtype
-            }.items()
+            for k, v in {"resource": resource, "configtype": configtype}.items()
             if v is not None
         },
     )

@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/users/users."""
+
 from __future__ import annotations
 
 import httpx
@@ -56,6 +57,7 @@ async def test_get_user_resources() -> None:
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_user_actions() -> None:
     """
@@ -70,6 +72,7 @@ async def test_get_user_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/users"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_register_the_user() -> None:
@@ -88,6 +91,7 @@ async def test_register_the_user() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_impersonate_user() -> None:
     """
@@ -104,6 +108,7 @@ async def test_impersonate_user() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_login_as_local_user() -> None:

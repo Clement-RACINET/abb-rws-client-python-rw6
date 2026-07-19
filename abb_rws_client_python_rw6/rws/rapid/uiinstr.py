@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID UI inst
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,6 +42,7 @@ async def get_ui_instruction_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/rapid/uiinstr")
+
 
 async def get_ui_instruction_actions(
     client: RWSClient,
@@ -76,6 +78,7 @@ async def get_ui_instruction_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def subscribe_on_ui_instruction(
     client: RWSClient,
     resources: str | None = None,
@@ -110,6 +113,7 @@ async def subscribe_on_ui_instruction(
         data={k: v for k, v in {"resources": resources}.items() if v is not None},
     )
 
+
 async def get_active_ui_instruction(client: RWSClient) -> httpx.Response:
     """
     Get Active UI Instruction.
@@ -136,6 +140,7 @@ async def get_active_ui_instruction(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/rapid/uiinstr/active")
+
 
 async def get_active_ui_instruction_actions(
     client: RWSClient,
@@ -170,6 +175,7 @@ async def get_active_ui_instruction_actions(
         "/rw/rapid/uiinstr/active",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def update_an_active_ui_instruction_parameter(
     client: RWSClient,
@@ -218,6 +224,7 @@ async def update_an_active_ui_instruction_parameter(
         data={k: v for k, v in {"value": value}.items() if v is not None},
     )
 
+
 async def get_parameter_value_for_an_active_ui(
     client: RWSClient,
     stackurl: str,
@@ -250,6 +257,7 @@ async def get_parameter_value_for_an_active_ui(
         ```
     """
     return await client.get(f"/rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}")
+
 
 async def get_active_ui_instruction_parameters(
     client: RWSClient,

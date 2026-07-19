@@ -81,8 +81,7 @@ def load_env(
         from dotenv import load_dotenv  # python-dotenv
     except ImportError as exc:  # pragma: no cover
         raise ImportError(
-            "python-dotenv is required for load_env(). "
-            "Install it with: pip install python-dotenv"
+            "python-dotenv is required for load_env(). Install it with: pip install python-dotenv"
         ) from exc
 
     resolved: Path | None

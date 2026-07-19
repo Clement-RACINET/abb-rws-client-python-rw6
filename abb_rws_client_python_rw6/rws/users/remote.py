@@ -8,6 +8,7 @@ RWS module: User Service → Operations on Remote User → Get remote user actio
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -49,6 +50,7 @@ async def get_remote_user_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def post_remote_user_logon_request(
     client: RWSClient,
     action: str | None = None,
@@ -85,6 +87,7 @@ async def post_remote_user_logon_request(
         data={},
     )
 
+
 async def post_remote_user_logout_request(
     client: RWSClient,
     action: str | None = None,
@@ -119,6 +122,7 @@ async def post_remote_user_logout_request(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def subscribe_on_remote_user_state(
     client: RWSClient,
@@ -155,10 +159,7 @@ async def subscribe_on_remote_user_state(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )

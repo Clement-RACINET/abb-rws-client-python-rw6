@@ -52,6 +52,7 @@ logger = get_logger("examples.io_signal")
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _parse_signal_href(response: httpx.Response, signal_name: str) -> str:
     """Extract the canonical absolute href of a named signal from a search response.
 
@@ -131,14 +132,13 @@ def _parse_lvalue(response: httpx.Response) -> str:
     if match:
         return match.group(1).strip()
 
-    raise ValueError(
-        f"Cannot parse lvalue from signal response: {response.text[:200]}"
-    )
+    raise ValueError(f"Cannot parse lvalue from signal response: {response.text[:200]}")
 
 
 # ---------------------------------------------------------------------------
 # main()
 # ---------------------------------------------------------------------------
+
 
 async def main() -> None:
     """Run the IO signal read/write example against TEST_DO_RWS.

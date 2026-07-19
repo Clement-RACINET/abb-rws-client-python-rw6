@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/uiinstr."""
+
 from __future__ import annotations
 
 import httpx
@@ -59,6 +60,7 @@ async def test_get_ui_instruction_resource() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_ui_instruction_actions() -> None:
     """
@@ -73,6 +75,7 @@ async def test_get_ui_instruction_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/uiinstr"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_ui_instruction() -> None:
@@ -91,6 +94,7 @@ async def test_subscribe_on_ui_instruction() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction() -> None:
     """
@@ -105,6 +109,7 @@ async def test_get_active_ui_instruction() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction_actions() -> None:
@@ -121,6 +126,7 @@ async def test_get_active_ui_instruction_actions() -> None:
     assert transport.last_request.url.path == "/rw/rapid/uiinstr/active"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_update_an_active_ui_instruction_parameter() -> None:
     """
@@ -130,11 +136,7 @@ async def test_update_an_active_ui_instruction_parameter() -> None:
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await update_an_active_ui_instruction_parameter(
-        client,
-        "stackurl_test",
-        "uiparam_test"
-    )
+    resp = await update_an_active_ui_instruction_parameter(client, "stackurl_test", "uiparam_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
@@ -143,6 +145,7 @@ async def test_update_an_active_ui_instruction_parameter() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_parameter_value_for_an_active_ui() -> None:
@@ -160,6 +163,7 @@ async def test_get_parameter_value_for_an_active_ui() -> None:
     expected_path = "/rw/rapid/uiinstr/active/param/stackurl_test/uiparam_test"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_active_ui_instruction_parameters() -> None:

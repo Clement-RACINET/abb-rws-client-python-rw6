@@ -61,11 +61,7 @@ def _parse_gitignore_patterns(root: Path) -> list[str]:
     # Read the file as UTF-8 and split into individual lines
     lines = gitignore_path.read_text(encoding="utf-8").splitlines()
     # Keep only non-empty lines that are not comments
-    return [
-        line
-        for line in lines
-        if line.strip() and not line.startswith("#")
-    ]
+    return [line for line in lines if line.strip() and not line.startswith("#")]
 
 
 def _pattern_to_regex(pattern: str) -> re.Pattern[str]:
@@ -152,9 +148,7 @@ class GitIgnoreSpec:
     def __init__(self, root: Path) -> None:
         patterns = _parse_gitignore_patterns(root)
         # Pre-compile every pattern into a regex for efficient repeated matching
-        self._regexes: list[re.Pattern[str]] = [
-            _pattern_to_regex(p) for p in patterns
-        ]
+        self._regexes: list[re.Pattern[str]] = [_pattern_to_regex(p) for p in patterns]
 
     def match_file(self, rel_path: str) -> bool:
         """Return True if rel_path matches any gitignore pattern.

@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Panel service → Get Panel Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_panel_resources(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/panel")
 
+
 async def get_panel_actions(client: RWSClient) -> httpx.Response:
     """
     Get Panel Actions.
@@ -68,6 +70,7 @@ async def get_panel_actions(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/panel")
+
 
 async def set_the_language(
     client: RWSClient,
@@ -106,6 +109,7 @@ async def set_the_language(
         data={k: v for k, v in {"lang_code": lang_code}.items() if v is not None},
     )
 
+
 async def restart_the_controller(
     client: RWSClient,
     action: str | None = None,
@@ -143,6 +147,7 @@ async def restart_the_controller(
         data={k: v for k, v in {"restart_mode": restart_mode}.items() if v is not None},
     )
 
+
 async def get_controller_state(client: RWSClient) -> httpx.Response:
     """
     Get Controller State.
@@ -172,6 +177,7 @@ async def get_controller_state(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/panel/ctrlstate")
+
 
 async def get_controller_state_actions(
     client: RWSClient,
@@ -206,6 +212,7 @@ async def get_controller_state_actions(
         "/rw/panel/ctrlstate",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_controller_state(
     client: RWSClient,
@@ -243,6 +250,7 @@ async def set_controller_state(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"ctrl_state": ctrl_state}.items() if v is not None},
     )
+
 
 async def subscribe_controller_state(
     client: RWSClient,
@@ -282,13 +290,11 @@ async def subscribe_controller_state(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_operation_mode(client: RWSClient) -> httpx.Response:
     """
@@ -316,6 +322,7 @@ async def get_operation_mode(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/panel/opmode")
+
 
 async def get_operation_mode_actions(
     client: RWSClient,
@@ -350,6 +357,7 @@ async def get_operation_mode_actions(
         "/rw/panel/opmode",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def subscribe_operation_mode(
     client: RWSClient,
@@ -386,13 +394,11 @@ async def subscribe_operation_mode(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def post_acknowledgement_for_operation_mode(
     client: RWSClient,
@@ -432,6 +438,7 @@ async def post_acknowledgement_for_operation_mode(
         data={k: v for k, v in {"opmode": opmode}.items() if v is not None},
     )
 
+
 async def get_operation_mode_lock_status(
     client: RWSClient,
     resource: str | None = None,
@@ -465,6 +472,7 @@ async def get_operation_mode_lock_status(
         "/rw/panel/opmode",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def post_lock_operation_mode_selection(
     client: RWSClient,
@@ -507,6 +515,7 @@ async def post_lock_operation_mode_selection(
         data={k: v for k, v in {"pin": pin, "permanent": permanent}.items() if v is not None},
     )
 
+
 async def post_unlock_operation_mode_selection(
     client: RWSClient,
     action: str | None = None,
@@ -546,6 +555,7 @@ async def post_unlock_operation_mode_selection(
         data={k: v for k, v in {"pin": pin}.items() if v is not None},
     )
 
+
 async def get_speed_ratio(client: RWSClient) -> httpx.Response:
     """
     Get Speed Ratio.
@@ -572,6 +582,7 @@ async def get_speed_ratio(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/panel/speedratio")
+
 
 async def get_speed_ratio_actions(
     client: RWSClient,
@@ -606,6 +617,7 @@ async def get_speed_ratio_actions(
         "/rw/panel/speedratio",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_speed_ratio(
     client: RWSClient,
@@ -644,6 +656,7 @@ async def set_speed_ratio(
         data={k: v for k, v in {"speed_ratio": speed_ratio}.items() if v is not None},
     )
 
+
 async def subscribe_speed_ratio(
     client: RWSClient,
     identifier: str | None = None,
@@ -679,13 +692,11 @@ async def subscribe_speed_ratio(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
     """
@@ -713,6 +724,7 @@ async def get_collision_detection_state(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/panel/coldetstate")
+
 
 async def get_collision_detection_state_actions(
     client: RWSClient,
@@ -747,6 +759,7 @@ async def get_collision_detection_state_actions(
         "/rw/panel/coldetstate",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def subscribe_on_collision_detection_state(
     client: RWSClient,
@@ -783,10 +796,7 @@ async def subscribe_on_collision_detection_state(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )

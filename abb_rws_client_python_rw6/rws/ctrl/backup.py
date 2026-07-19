@@ -8,6 +8,7 @@ RWS module: Controller Service → Operations on Backup Resource → Get backup 
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -40,6 +41,7 @@ async def get_backup_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/backup")
+
 
 async def get_backup_actions(
     client: RWSClient,
@@ -74,6 +76,7 @@ async def get_backup_actions(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def create_backup(
     client: RWSClient,
@@ -118,11 +121,12 @@ async def create_backup(
             k: v
             for k, v in {
                 "environment_variables_such_as_temp_sys": environment_variables_such_as_temp_sys,
-                "archive": archive
+                "archive": archive,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_restore_backup(
     client: RWSClient,
@@ -167,6 +171,7 @@ async def post_restore_backup(
         },
     )
 
+
 async def get_check_restore(
     client: RWSClient,
     path_must_be_part_of_the_controller_fi: str | None = None,
@@ -207,6 +212,7 @@ async def get_check_restore(
         },
     )
 
+
 async def get_backup_state(
     client: RWSClient,
     action: str | None = None,
@@ -240,6 +246,7 @@ async def get_backup_state(
         "/ctrl/backup",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def subscribe_on_backup_system_information(
     client: RWSClient,
@@ -278,13 +285,11 @@ async def subscribe_on_backup_system_information(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_backup_system_information(
     client: RWSClient,

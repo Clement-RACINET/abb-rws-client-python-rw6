@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/operations_on_io_profinet_device."""
+
 from __future__ import annotations
 
 import httpx
@@ -55,9 +56,7 @@ async def test_get_profinet_device_read_record_implicit_data() -> None:
     client = _make_client(transport)
 
     resp = await get_profinet_device_read_record_implicit_data(
-        client,
-        "network_test",
-        "device_test"
+        client, "network_test", "device_test"
     )
 
     assert transport.last_request is not None
@@ -65,6 +64,7 @@ async def test_get_profinet_device_read_record_implicit_data() -> None:
     expected_path = "/rw/iosystem/devices/network_test/device_test/implicitdata"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_read_record_implicit_data_from_device_in() -> None:
@@ -76,9 +76,7 @@ async def test_post_read_record_implicit_data_from_device_in() -> None:
     client = _make_client(transport)
 
     resp = await post_read_record_implicit_data_from_device_in(
-        client,
-        "network_test",
-        "device_test"
+        client, "network_test", "device_test"
     )
 
     assert transport.last_request is not None
@@ -88,6 +86,7 @@ async def test_post_read_record_implicit_data_from_device_in() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_forms() -> None:
@@ -105,6 +104,7 @@ async def test_get_forms() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_profinet_device_read_record_data() -> None:
     """
@@ -121,6 +121,7 @@ async def test_get_profinet_device_read_record_data() -> None:
     expected_path = "/rw/iosystem/devices/network_test/device_test/explicitdata"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_profinet_device_read_record_data_2() -> None:
@@ -141,6 +142,7 @@ async def test_get_profinet_device_read_record_data_2() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_forms_2() -> None:
     """
@@ -156,6 +158,7 @@ async def test_get_forms_2() -> None:
     expected_path = "/rw/iosystem/devices/network_test/device_test/explicitdata"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_profinet_device_alarms_xml_response() -> None:
@@ -173,6 +176,7 @@ async def test_get_profinet_device_alarms_xml_response() -> None:
     expected_path = "/rw/iosystem/devices/network_test/device_test/alarms"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_clear_the_alarms() -> None:
@@ -192,6 +196,7 @@ async def test_post_clear_the_alarms() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_forms_3() -> None:

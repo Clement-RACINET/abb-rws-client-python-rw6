@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/mastership."""
+
 from __future__ import annotations
 
 import httpx
@@ -61,6 +62,7 @@ async def test_get_mastership_resources() -> None:
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_mastership_actions() -> None:
     """
@@ -75,6 +77,7 @@ async def test_get_mastership_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/mastership"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_request() -> None:
@@ -93,6 +96,7 @@ async def test_post_mastership_request() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_mastership_release() -> None:
     """
@@ -109,6 +113,7 @@ async def test_post_mastership_release() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_subscribe() -> None:
@@ -127,6 +132,7 @@ async def test_post_mastership_subscribe() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_mastership_domain() -> None:
     """
@@ -142,6 +148,7 @@ async def test_get_mastership_domain() -> None:
     assert transport.last_request.url.path == "/rw/mastership/domain_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_mastership_domain_actions() -> None:
     """
@@ -156,6 +163,7 @@ async def test_get_mastership_domain_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/mastership/domain_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_domain_request() -> None:
@@ -174,6 +182,7 @@ async def test_post_mastership_domain_request() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_mastership_domain_release() -> None:
     """
@@ -190,6 +199,7 @@ async def test_post_mastership_domain_release() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_mastership_domain_subscribe() -> None:

@@ -12,6 +12,7 @@ Usage:
     python utils/docs/run_docs.py
     pixi run docs          # if configured in pixi.toml
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -31,11 +32,14 @@ def _generate_coverage(project_root: Path) -> None:
     print("\n📊 Generating coverage report...")
     result = subprocess.run(
         [
-            sys.executable, "-m", "pytest",
+            sys.executable,
+            "-m",
+            "pytest",
             "--cov=abb_rws_client_python_rw6",
             "--cov-branch",
             "--cov-report=html:docs/htmlcov",
-            "--no-header", "-q",
+            "--no-header",
+            "-q",
         ],
         cwd=project_root,
         check=False,

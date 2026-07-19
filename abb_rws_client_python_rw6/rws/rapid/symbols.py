@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID symbols
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -40,6 +41,7 @@ async def get_rapid_symbols_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/rapid/symbols")
+
 
 async def get_rapid_symbols_actions(
     client: RWSClient,
@@ -74,6 +76,7 @@ async def get_rapid_symbols_actions(
         "/rw/rapid/symbols",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def post_search_rapid_symbols(
     client: RWSClient,
@@ -139,11 +142,12 @@ async def post_search_rapid_symbols(
                 "stack": stack,
                 "onlyused": onlyused,
                 "skipshared": skipshared,
-                "regexp": regexp
+                "regexp": regexp,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_object_extension_list(
     client: RWSClient,
@@ -196,7 +200,7 @@ async def get_object_extension_list(
                 "statements": statements,
                 "backwardstmts": backwardstmts,
                 "undostmts": undostmts,
-                "typedecls": typedecls
+                "typedecls": typedecls,
             }.items()
             if v is not None
         },

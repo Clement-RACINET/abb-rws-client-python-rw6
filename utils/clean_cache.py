@@ -71,9 +71,7 @@ def clean(dry_run: bool = False) -> None:
     removed = 0
 
     # Dossiers nommés exactement (récursif dans tout le repo)
-    exact_dir_names = {
-        p for p in _DIR_PATTERNS if "*" not in p and "/" not in p
-    }
+    exact_dir_names = {p for p in _DIR_PATTERNS if "*" not in p and "/" not in p}
     for dirpath in sorted(REPO_ROOT.rglob("*")):
         if dirpath.is_dir() and dirpath.name in exact_dir_names:
             # Ne pas descendre dans .pixi/
@@ -132,9 +130,7 @@ def main() -> None:
     args = parser.parse_args()
 
     print(
-        "🔍 DRY-RUN — nothing will be deleted.\n"
-        if args.dry_run
-        else "🧹 Cleaning repository...\n"
+        "🔍 DRY-RUN — nothing will be deleted.\n" if args.dry_run else "🧹 Cleaning repository...\n"
     )
     clean(args.dry_run)
 

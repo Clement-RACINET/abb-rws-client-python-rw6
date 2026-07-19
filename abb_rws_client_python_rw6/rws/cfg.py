@@ -8,6 +8,7 @@ RWS module: RobotWare Services → CFG Service → Get CFG resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -40,6 +41,7 @@ async def get_cfg_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/cfg")
+
 
 async def get_cfg_actions(
     client: RWSClient,
@@ -74,6 +76,7 @@ async def get_cfg_actions(
         "/rw/cfg",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def validate_cfg_file(
     client: RWSClient,
@@ -110,6 +113,7 @@ async def validate_cfg_file(
         data={},
     )
 
+
 async def load_cfg_file(
     client: RWSClient,
     action: str | None = None,
@@ -144,6 +148,7 @@ async def load_cfg_file(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def validate_cfg_instance_before_delete(
     client: RWSClient,
@@ -181,6 +186,7 @@ async def validate_cfg_instance_before_delete(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
+
 
 async def validate_cfg_instances(
     client: RWSClient,
@@ -231,11 +237,12 @@ async def validate_cfg_instances(
                 "cfgdomain": cfgdomain,
                 "cfgtype": cfgtype,
                 "instances": instances,
-                "instancescount": instancescount
+                "instancescount": instancescount,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_keyless_motor_on(
     client: RWSClient,
@@ -274,6 +281,7 @@ async def post_keyless_motor_on(
         data={k: v for k, v in {"state": state}.items() if v is not None},
     )
 
+
 async def subscribe_on_cfg_changecount(
     client: RWSClient,
     identifier: str | None = None,
@@ -309,13 +317,11 @@ async def subscribe_on_cfg_changecount(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_cfg_domain_types(
     client: RWSClient,
@@ -354,6 +360,7 @@ async def get_cfg_domain_types(
         params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
     )
 
+
 async def get_actions_on_cfg_domain(
     client: RWSClient,
     domain: str,
@@ -390,6 +397,7 @@ async def get_actions_on_cfg_domain(
         f"/rw/cfg/{domain}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def save_cfg_domain(
     client: RWSClient,
@@ -428,6 +436,7 @@ async def save_cfg_domain(
         data={},
     )
 
+
 async def reset_cfg_domain(
     client: RWSClient,
     domain: str,
@@ -465,6 +474,7 @@ async def reset_cfg_domain(
         data={},
     )
 
+
 async def get_cfg_type(
     client: RWSClient,
     domain: str,
@@ -497,6 +507,7 @@ async def get_cfg_type(
         ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}")
+
 
 async def get_all_attributes_of_the_given_domain(
     client: RWSClient,
@@ -531,6 +542,7 @@ async def get_all_attributes_of_the_given_domain(
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/attributes")
 
+
 async def get_all_instances_of_the_given_domain(
     client: RWSClient,
     domain: str,
@@ -563,6 +575,7 @@ async def get_all_instances_of_the_given_domain(
         ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances")
+
 
 async def get_actions_on_cfg_instances(
     client: RWSClient,
@@ -602,6 +615,7 @@ async def get_actions_on_cfg_instances(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def reset_cfg_instances(
     client: RWSClient,
     domain: str,
@@ -640,6 +654,7 @@ async def reset_cfg_instances(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def create_default_cfg_instance(
     client: RWSClient,
@@ -681,6 +696,7 @@ async def create_default_cfg_instance(
         data={},
     )
 
+
 async def get_cfg_instance(
     client: RWSClient,
     domain: str,
@@ -715,6 +731,7 @@ async def get_cfg_instance(
         ```
     """
     return await client.get(f"/rw/cfg/{domain}/{type}/instances/{instance_name}")
+
 
 async def get_cfg_instance_actions(
     client: RWSClient,
@@ -761,6 +778,7 @@ async def get_cfg_instance_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def update_cfg_instance(
     client: RWSClient,
     domain: str,
@@ -803,6 +821,7 @@ async def update_cfg_instance(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"attribute_name": attribute_name}.items() if v is not None},
     )
+
 
 async def delete_cfg_instance(
     client: RWSClient,

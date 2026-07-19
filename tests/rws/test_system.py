@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/system."""
+
 from __future__ import annotations
 
 import httpx
@@ -61,6 +62,7 @@ async def test_get_system_information() -> None:
     assert transport.last_request.url.path == "/rw/system"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_robot_type() -> None:
     """
@@ -75,6 +77,7 @@ async def test_get_robot_type() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/robottype"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_system_options() -> None:
@@ -91,6 +94,7 @@ async def test_get_system_options() -> None:
     assert transport.last_request.url.path == "/rw/system/options"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_system_energy_actions() -> None:
     """
@@ -106,6 +110,7 @@ async def test_get_system_energy_actions() -> None:
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_system_energy_info_change_count() -> None:
     """
@@ -120,6 +125,7 @@ async def test_get_system_energy_info_change_count() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_reset_accumulated_energy() -> None:
@@ -138,6 +144,7 @@ async def test_reset_accumulated_energy() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_system_energy() -> None:
     """
@@ -152,6 +159,7 @@ async def test_get_system_energy() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/energy"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_system_energy_changes() -> None:
@@ -170,6 +178,7 @@ async def test_subscribe_on_system_energy_changes() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_system_robotware_license() -> None:
     """
@@ -184,6 +193,7 @@ async def test_get_system_robotware_license() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/system/license"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_installed_products() -> None:

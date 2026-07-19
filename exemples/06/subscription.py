@@ -113,9 +113,7 @@ TOGGLE_INTERVAL_S: float = 3.0
 # BasedPyright note:
 # websockets expects Sequence[Subprotocol] | None, not a plain list[str].
 # Therefore we explicitly wrap the protocol name with Subprotocol(...).
-RWS_SUBPROTOCOLS: tuple[Subprotocol, ...] = (
-    Subprotocol("robapi2_subscription"),
-)
+RWS_SUBPROTOCOLS: tuple[Subprotocol, ...] = (Subprotocol("robapi2_subscription"),)
 
 
 # ---------------------------------------------------------------------------
@@ -407,7 +405,7 @@ async def toggle_loop(client: RWSClient, stop_event: asyncio.Event) -> None:
                 logger.info("toggle: %s %s → %s", VARIABLE, current, new_value)
                 print(
                     f"[toggle] {VARIABLE} {current} → {new_value}"
-                    f" | time: {time.time()*1000 :.3f} ms"
+                    f" | time: {time.time() * 1000:.3f} ms"
                 )
 
             except Exception as exc:
@@ -525,7 +523,6 @@ async def watch_rapid_variable(
             logger.warning("Could not delete subscription id=%s: %s", group_id, exc)
 
 
-
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -546,7 +543,7 @@ async def watch_task(client: RWSClient, stop_event: asyncio.Event) -> None:
             VARIABLE,
             priority=PRIORITY,
         ):
-            print(f"[event] {VARIABLE} = {value} | time: {time.time()*1000 :.3f} ms")
+            print(f"[event] {VARIABLE} = {value} | time: {time.time() * 1000:.3f} ms")
 
             if stop_event.is_set():
                 break
@@ -586,10 +583,7 @@ async def main() -> None:
         async with RWSClient() as client:
             print(f"[main] Connected to {client.host}:{client.port}")
             print(f"[main] Watching RAPID/{TASK}/{MODULE}/{VARIABLE}")
-            print(
-                f"[main] Auto-toggle every {TOGGLE_INTERVAL_S}s "
-                "— Press Ctrl+C to stop.\n"
-            )
+            print(f"[main] Auto-toggle every {TOGGLE_INTERVAL_S}s — Press Ctrl+C to stop.\n")
 
             watcher = asyncio.create_task(watch_task(client, stop_event))
             toggler = asyncio.create_task(toggle_loop(client, stop_event))

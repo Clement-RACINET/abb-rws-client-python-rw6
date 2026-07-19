@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Get RAPID system resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx

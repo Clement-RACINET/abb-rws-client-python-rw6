@@ -8,6 +8,7 @@ RWS module: User Service → Operations on Users grants → Get User grants
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx

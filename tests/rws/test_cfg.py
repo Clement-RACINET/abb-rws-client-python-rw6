@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/cfg."""
+
 from __future__ import annotations
 
 import httpx
@@ -73,6 +74,7 @@ async def test_get_cfg_resources() -> None:
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_cfg_actions() -> None:
     """
@@ -87,6 +89,7 @@ async def test_get_cfg_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/cfg"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_validate_cfg_file() -> None:
@@ -105,6 +108,7 @@ async def test_validate_cfg_file() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_load_cfg_file() -> None:
     """
@@ -121,6 +125,7 @@ async def test_load_cfg_file() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_validate_cfg_instance_before_delete() -> None:
@@ -139,6 +144,7 @@ async def test_validate_cfg_instance_before_delete() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_validate_cfg_instances() -> None:
     """
@@ -155,6 +161,7 @@ async def test_validate_cfg_instances() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_keyless_motor_on() -> None:
@@ -173,6 +180,7 @@ async def test_post_keyless_motor_on() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_cfg_changecount() -> None:
     """
@@ -190,6 +198,7 @@ async def test_subscribe_on_cfg_changecount() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_cfg_domain_types() -> None:
     """
@@ -205,6 +214,7 @@ async def test_get_cfg_domain_types() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_cfg_domain() -> None:
     """
@@ -219,6 +229,7 @@ async def test_get_actions_on_cfg_domain() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/cfg/domain_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_save_cfg_domain() -> None:
@@ -237,6 +248,7 @@ async def test_save_cfg_domain() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_reset_cfg_domain() -> None:
     """
@@ -254,6 +266,7 @@ async def test_reset_cfg_domain() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_cfg_type() -> None:
     """
@@ -268,6 +281,7 @@ async def test_get_cfg_type() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_all_attributes_of_the_given_domain() -> None:
@@ -285,6 +299,7 @@ async def test_get_all_attributes_of_the_given_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/attributes"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_all_instances_of_the_given_domain() -> None:
     """
@@ -301,6 +316,7 @@ async def test_get_all_instances_of_the_given_domain() -> None:
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_cfg_instances() -> None:
     """
@@ -315,6 +331,7 @@ async def test_get_actions_on_cfg_instances() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/cfg/domain_test/type_test/instances"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_reset_cfg_instances() -> None:
@@ -333,6 +350,7 @@ async def test_reset_cfg_instances() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_create_default_cfg_instance() -> None:
     """
@@ -350,6 +368,7 @@ async def test_create_default_cfg_instance() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_cfg_instance() -> None:
     """
@@ -366,6 +385,7 @@ async def test_get_cfg_instance() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_cfg_instance_actions() -> None:
     """
@@ -381,6 +401,7 @@ async def test_get_cfg_instance_actions() -> None:
     expected_path = "/rw/cfg/domain_test/type_test/instances/instance_test"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_cfg_instance() -> None:
@@ -399,6 +420,7 @@ async def test_update_cfg_instance() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_delete_cfg_instance() -> None:

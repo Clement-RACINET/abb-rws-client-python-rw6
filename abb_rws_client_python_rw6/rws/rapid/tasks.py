@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID tasks
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -49,6 +50,7 @@ async def get_rapid_tasks(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
+
 async def get_rapid_tasks_actions(
     client: RWSClient,
     action: str | None = None,
@@ -82,6 +84,7 @@ async def get_rapid_tasks_actions(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def start_rapid_spy_logging(
     client: RWSClient,
@@ -121,6 +124,7 @@ async def start_rapid_spy_logging(
         data={k: v for k, v in {"log_file": log_file}.items() if v is not None},
     )
 
+
 async def get_rapid_spy_logging_status(
     client: RWSClient,
     resource: str | None = None,
@@ -153,6 +157,7 @@ async def get_rapid_spy_logging_status(
         "/rw/rapid/tasks",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def stop_rapid_spy_logging(
     client: RWSClient,
@@ -190,6 +195,7 @@ async def stop_rapid_spy_logging(
         data={},
     )
 
+
 async def post_activate_deactivate_rapid_tasks(
     client: RWSClient,
     action: str | None = None,
@@ -225,6 +231,7 @@ async def post_activate_deactivate_rapid_tasks(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def get_program_motion_pointer_sync_state_for(
     client: RWSClient,
@@ -262,6 +269,7 @@ async def get_program_motion_pointer_sync_state_for(
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
 
+
 async def subscribe_on_build_log_change(
     client: RWSClient,
     identifier: str | None = None,
@@ -297,13 +305,11 @@ async def subscribe_on_build_log_change(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_task_state(
     client: RWSClient,
@@ -341,6 +347,7 @@ async def get_rapid_task_state(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
+
 async def get_rapid_task_actions(
     client: RWSClient,
     task: str,
@@ -376,6 +383,7 @@ async def get_rapid_task_actions(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def load_rapid_module_into_rapid_task(
     client: RWSClient,
@@ -416,14 +424,10 @@ async def load_rapid_module_into_rapid_task(
         f"/rw/rapid/tasks/{task}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
-            k: v
-            for k, v in {
-                "modulepath": modulepath,
-                "replace": replace
-            }.items()
-            if v is not None
+            k: v for k, v in {"modulepath": modulepath, "replace": replace}.items() if v is not None
         },
     )
+
 
 async def post_unload_module_from_rapid_task(
     client: RWSClient,
@@ -464,6 +468,7 @@ async def post_unload_module_from_rapid_task(
         data={k: v for k, v in {"module": module}.items() if v is not None},
     )
 
+
 async def post_abort_current_execution_level(
     client: RWSClient,
     task: str,
@@ -500,6 +505,7 @@ async def post_abort_current_execution_level(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def post_activate_deactivate_rapid_task(
     client: RWSClient,
@@ -538,6 +544,7 @@ async def post_activate_deactivate_rapid_task(
         data={},
     )
 
+
 async def get_activation_record(
     client: RWSClient,
     task_name: str,
@@ -575,13 +582,11 @@ async def get_activation_record(
         f"/rw/rapid/tasks/{task_name}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "stackframe": stackframe
-            }.items()
+            for k, v in {"resource": resource, "stackframe": stackframe}.items()
             if v is not None
         },
     )
+
 
 async def get_structural_change_count(
     client: RWSClient,
@@ -618,6 +623,7 @@ async def get_structural_change_count(
         f"/rw/rapid/tasks/{task_name}",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def get_preferable_data_types(
     client: RWSClient,
@@ -661,11 +667,12 @@ async def get_preferable_data_types(
             for k, v in {
                 "resource": resource,
                 "instruction": instruction,
-                "parameter": parameter
+                "parameter": parameter,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_program_pointer_sync_state(
     client: RWSClient,
@@ -705,6 +712,7 @@ async def get_program_pointer_sync_state(
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
 
+
 async def get_motion_pointer_sync_state(
     client: RWSClient,
     task_name: str,
@@ -743,6 +751,7 @@ async def get_motion_pointer_sync_state(
         params={k: v for k, v in {"resource": resource, "type": type}.items() if v is not None},
     )
 
+
 async def post_link_rapid_task(
     client: RWSClient,
     task: str,
@@ -779,6 +788,7 @@ async def post_link_rapid_task(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def get_pallet(
     client: RWSClient,
@@ -817,13 +827,11 @@ async def get_pallet(
         f"/rw/rapid/tasks/{task_name}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "start_page_no_limit": start_page_no_limit
-            }.items()
+            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
             if v is not None
         },
     )
+
 
 async def get_pallet_head(
     client: RWSClient,
@@ -862,13 +870,11 @@ async def get_pallet_head(
         f"/rw/rapid/tasks/{task_name}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "start_page_no_limit": start_page_no_limit
-            }.items()
+            for k, v in {"resource": resource, "start_page_no_limit": start_page_no_limit}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_rapid_task_change(
     client: RWSClient,
@@ -906,13 +912,11 @@ async def subscribe_on_rapid_task_change(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_rapid_pp_sync_state_change(
     client: RWSClient,
@@ -950,13 +954,11 @@ async def subscribe_on_rapid_pp_sync_state_change(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_rapid_task_pgmexecution_state_change(
     client: RWSClient,
@@ -994,13 +996,11 @@ async def subscribe_on_rapid_task_pgmexecution_state_change(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_motion(
     client: RWSClient,
@@ -1032,6 +1032,7 @@ async def get_rapid_motion(
         ```
     """
     return await client.get(f"/rw/rapid/tasks/{task}/motion")
+
 
 async def get_robtarget(
     client: RWSClient,
@@ -1072,14 +1073,11 @@ async def get_robtarget(
         f"/rw/rapid/tasks/{task}/motion",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "tool": tool,
-                "wobj": wobj
-            }.items()
+            for k, v in {"resource": resource, "tool": tool, "wobj": wobj}.items()
             if v is not None
         },
     )
+
 
 async def get_joint_target(
     client: RWSClient,
@@ -1117,6 +1115,7 @@ async def get_joint_target(
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
 
+
 async def get_mechanical_units(
     client: RWSClient,
     task: str,
@@ -1153,6 +1152,7 @@ async def get_mechanical_units(
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
 
+
 async def get_external_joint_states(
     client: RWSClient,
     task: str,
@@ -1188,6 +1188,7 @@ async def get_external_joint_states(
         f"/rw/rapid/tasks/{task}/motion",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def post_calibration_for_displacement(
     client: RWSClient,
@@ -1251,11 +1252,12 @@ async def post_calibration_for_displacement(
                 "point5": point5,
                 "point6": point6,
                 "point7": point7,
-                "point8": point8
+                "point8": point8,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_tcp(
     client: RWSClient,
@@ -1319,11 +1321,12 @@ async def post_calibration_for_tcp(
                 "point4": point4,
                 "point5": point5,
                 "point6": point6,
-                "point7": point7
+                "point7": point7,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_program_resource(
     client: RWSClient,
@@ -1361,6 +1364,7 @@ async def get_rapid_program_resource(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
+
 async def get_rapid_program_actions(
     client: RWSClient,
     task: str,
@@ -1396,6 +1400,7 @@ async def get_rapid_program_actions(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def load_program_into_rapid_task(
     client: RWSClient,
@@ -1436,14 +1441,10 @@ async def load_program_into_rapid_task(
         f"/rw/rapid/tasks/{task}/program",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
-            k: v
-            for k, v in {
-                "progpath": progpath,
-                "loadmode": loadmode
-            }.items()
-            if v is not None
+            k: v for k, v in {"progpath": progpath, "loadmode": loadmode}.items() if v is not None
         },
     )
+
 
 async def post_unload_program_from_rapid_task(
     client: RWSClient,
@@ -1481,6 +1482,7 @@ async def post_unload_program_from_rapid_task(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def save_program(
     client: RWSClient,
@@ -1521,6 +1523,7 @@ async def save_program(
         data={k: v for k, v in {"path": path}.items() if v is not None},
     )
 
+
 async def set_program_name(
     client: RWSClient,
     task: str,
@@ -1560,6 +1563,7 @@ async def set_program_name(
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
 
+
 async def set_entry_point(
     client: RWSClient,
     task: str,
@@ -1598,6 +1602,7 @@ async def set_entry_point(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"routine": routine}.items() if v is not None},
     )
+
 
 async def get_build_errors(
     client: RWSClient,
@@ -1639,6 +1644,7 @@ async def get_build_errors(
         params={k: v for k, v in {"limit": limit, "start": start}.items() if v is not None},
     )
 
+
 async def get_rapid_breakpoint_actions(
     client: RWSClient,
     task: str,
@@ -1674,6 +1680,7 @@ async def get_rapid_breakpoint_actions(
         f"/rw/rapid/tasks/{task}/program/breakpoint",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_break_point(
     client: RWSClient,
@@ -1717,14 +1724,11 @@ async def set_break_point(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "module": module,
-                "row": row,
-                "column": column
-            }.items()
+            for k, v in {"module": module, "row": row, "column": column}.items()
             if v is not None
         },
     )
+
 
 async def get_break_points(
     client: RWSClient,
@@ -1764,6 +1768,7 @@ async def get_break_points(
         params={k: v for k, v in {"start": start, "limit": limit}.items() if v is not None},
     )
 
+
 async def get_rapid_task_motion_program_pointer_positions(
     client: RWSClient,
     task: str,
@@ -1794,6 +1799,7 @@ async def get_rapid_task_motion_program_pointer_positions(
         ```
     """
     return await client.get(f"/rw/rapid/tasks/{task}/pcp")
+
 
 async def get_rapid_task_pcp_actions(
     client: RWSClient,
@@ -1830,6 +1836,7 @@ async def get_rapid_task_pcp_actions(
         f"/rw/rapid/tasks/{task}/pcp",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_the_program_pointer_pp_position_to(
     client: RWSClient,
@@ -1880,11 +1887,12 @@ async def set_the_program_pointer_pp_position_to(
                 "module": module,
                 "routine": routine,
                 "line": line,
-                "column": column
+                "column": column,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_the_program_pointer_pp_position_to_2(
     client: RWSClient,
@@ -1928,14 +1936,11 @@ async def set_the_program_pointer_pp_position_to_2(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "module": module,
-                "routine": routine,
-                "userlevel": userlevel
-            }.items()
+            for k, v in {"module": module, "routine": routine, "userlevel": userlevel}.items()
             if v is not None
         },
     )
+
 
 async def set_the_program_pointer_pp_position_to_3(
     client: RWSClient,
@@ -1978,6 +1983,7 @@ async def set_the_program_pointer_pp_position_to_3(
         data={k: v for k, v in {"module": module, "routine": routine}.items() if v is not None},
     )
 
+
 async def set_the_program_pointer_pp_position_to_4(
     client: RWSClient,
     task: str,
@@ -2014,6 +2020,7 @@ async def set_the_program_pointer_pp_position_to_4(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def set_the_program_pointer_pp_position_to_5(
     client: RWSClient,
@@ -2052,6 +2059,7 @@ async def set_the_program_pointer_pp_position_to_5(
         data={},
     )
 
+
 async def subscribe_on_program_pointer(
     client: RWSClient,
     identifier: str | None = None,
@@ -2088,13 +2096,11 @@ async def subscribe_on_program_pointer(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_motion_pointer(
     client: RWSClient,
@@ -2132,13 +2138,11 @@ async def subscribe_on_motion_pointer(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_service_routine(
     client: RWSClient,
@@ -2179,14 +2183,11 @@ async def get_rapid_service_routine(
         f"/rw/rapid/tasks/{task}/serviceroutine",
         params={
             k: v
-            for k, v in {
-                "start": start,
-                "limit": limit,
-                "allread": allread
-            }.items()
+            for k, v in {"start": start, "limit": limit, "allread": allread}.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_program_counter_position(
     client: RWSClient,

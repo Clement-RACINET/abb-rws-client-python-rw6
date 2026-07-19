@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/rapid/modules."""
+
 from __future__ import annotations
 
 import httpx
@@ -76,6 +77,7 @@ async def test_get_rapid_modules_action() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_modules() -> None:
     """
@@ -91,6 +93,7 @@ async def test_get_rapid_modules() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_mod_possible_all() -> None:
     """
@@ -105,6 +108,7 @@ async def test_get_mod_possible_all() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_modify_all_positions() -> None:
@@ -123,6 +127,7 @@ async def test_set_modify_all_positions() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_specified_range_of_text() -> None:
     """
@@ -138,6 +143,7 @@ async def test_get_specified_range_of_text() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_module_actions() -> None:
     """
@@ -152,6 +158,7 @@ async def test_get_rapid_module_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_save_rapid_module() -> None:
@@ -170,6 +177,7 @@ async def test_save_rapid_module() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_text_range() -> None:
     """
@@ -186,6 +194,7 @@ async def test_set_text_range() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_module_text() -> None:
@@ -204,6 +213,7 @@ async def test_set_module_text() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_module_attributes() -> None:
     """
@@ -218,6 +228,7 @@ async def test_get_rapid_module_attributes() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_change_count() -> None:
@@ -234,6 +245,7 @@ async def test_get_change_count() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rulesinstr() -> None:
     """
@@ -248,6 +260,7 @@ async def test_get_rulesinstr() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_module_possible_attributes() -> None:
@@ -264,6 +277,7 @@ async def test_get_module_possible_attributes() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_search_text() -> None:
     """
@@ -279,6 +293,7 @@ async def test_get_search_text() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_rapid_object() -> None:
     """
@@ -293,6 +308,7 @@ async def test_get_rapid_object() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_syncpers() -> None:
@@ -311,6 +327,7 @@ async def test_set_syncpers() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_modify_position() -> None:
     """
@@ -328,6 +345,7 @@ async def test_set_modify_position() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_module_extension() -> None:
     """
@@ -342,6 +360,7 @@ async def test_get_module_extension() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_mod_possible() -> None:
@@ -358,6 +377,7 @@ async def test_get_mod_possible() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_object_child() -> None:
     """
@@ -372,6 +392,7 @@ async def test_get_object_child() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_syncpers_status() -> None:
@@ -388,6 +409,7 @@ async def test_get_syncpers_status() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_module_text() -> None:
     """
@@ -402,6 +424,7 @@ async def test_get_module_text() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_symbol_information() -> None:
@@ -418,6 +441,7 @@ async def test_get_symbol_information() -> None:
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_routine_information() -> None:
     """
@@ -432,6 +456,7 @@ async def test_get_routine_information() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/rapid/modules/module_test/routine"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_routineargs_information() -> None:

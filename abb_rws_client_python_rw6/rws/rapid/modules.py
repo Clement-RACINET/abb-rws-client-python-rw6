@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID modules
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -49,6 +50,7 @@ async def get_rapid_modules_action(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def get_rapid_modules(
     client: RWSClient,
     task: str | None = None,
@@ -83,6 +85,7 @@ async def get_rapid_modules(
         params={k: v for k, v in {"task": task}.items() if v is not None},
     )
 
+
 async def get_mod_possible_all(
     client: RWSClient,
     resource: str | None = None,
@@ -116,6 +119,7 @@ async def get_mod_possible_all(
         "/rw/rapid/modules",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def set_modify_all_positions(
     client: RWSClient,
@@ -156,13 +160,11 @@ async def set_modify_all_positions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "checklimit": checklimit,
-                "checkdeactaxes": checkdeactaxes
-            }.items()
+            for k, v in {"checklimit": checklimit, "checkdeactaxes": checkdeactaxes}.items()
             if v is not None
         },
     )
+
 
 async def get_specified_range_of_text(
     client: RWSClient,
@@ -194,6 +196,7 @@ async def get_specified_range_of_text(
         ```
     """
     return await client.get(f"/rw/rapid/modules/{module}")
+
 
 async def get_rapid_module_actions(
     client: RWSClient,
@@ -230,6 +233,7 @@ async def get_rapid_module_actions(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def save_rapid_module(
     client: RWSClient,
@@ -273,6 +277,7 @@ async def save_rapid_module(
         params={k: v for k, v in {"task": task, "action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name, "path": path}.items() if v is not None},
     )
+
 
 async def set_text_range(
     client: RWSClient,
@@ -334,11 +339,12 @@ async def set_text_range(
                 "startcol": startcol,
                 "endrow": endrow,
                 "endcol": endcol,
-                "text": text
+                "text": text,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_module_text(
     client: RWSClient,
@@ -381,6 +387,7 @@ async def set_module_text(
         data={k: v for k, v in {"text": text}.items() if v is not None},
     )
 
+
 async def get_rapid_module_attributes(
     client: RWSClient,
     module: str,
@@ -418,13 +425,11 @@ async def get_rapid_module_attributes(
         f"/rw/rapid/modules/{module}",
         params={
             k: v
-            for k, v in {
-                "task": task,
-                "continue_on_err": continue_on_err
-            }.items()
+            for k, v in {"task": task, "continue_on_err": continue_on_err}.items()
             if v is not None
         },
     )
+
 
 async def get_change_count(
     client: RWSClient,
@@ -462,6 +467,7 @@ async def get_change_count(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
     )
+
 
 async def get_rulesinstr(
     client: RWSClient,
@@ -513,11 +519,12 @@ async def get_rulesinstr(
                 "name": name,
                 "data_type": data_type,
                 "line": line,
-                "col": col
+                "col": col,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_module_possible_attributes(
     client: RWSClient,
@@ -555,15 +562,9 @@ async def get_module_possible_attributes(
     """
     return await client.get(
         f"/rw/rapid/modules/{module}",
-        params={
-            k: v
-            for k, v in {
-                "task": task,
-                "attribute": attribute
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"task": task, "attribute": attribute}.items() if v is not None},
     )
+
 
 async def get_search_text(
     client: RWSClient,
@@ -611,11 +612,12 @@ async def get_search_text(
                 "task": task,
                 "startrow": startrow,
                 "startcol": startcol,
-                "text": text
+                "text": text,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_rapid_object(
     client: RWSClient,
@@ -647,6 +649,7 @@ async def get_rapid_object(
         ```
     """
     return await client.get(f"/rw/rapid/modules/{module}")
+
 
 async def set_syncpers(
     client: RWSClient,
@@ -685,6 +688,7 @@ async def set_syncpers(
         params={k: v for k, v in {"action": action, "task": task}.items() if v is not None},
         data={},
     )
+
 
 async def set_modify_position(
     client: RWSClient,
@@ -744,11 +748,12 @@ async def set_modify_position(
                 "endcol": endcol,
                 "checklimit": checklimit,
                 "checkdeactaxes": checkdeactaxes,
-                "allowdeact": allowdeact
+                "allowdeact": allowdeact,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_module_extension(
     client: RWSClient,
@@ -786,6 +791,7 @@ async def get_module_extension(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
     )
+
 
 async def get_mod_possible(
     client: RWSClient,
@@ -837,11 +843,12 @@ async def get_mod_possible(
                 "startrow": startrow,
                 "startcol": startcol,
                 "endrow": endrow,
-                "endcol": endcol
+                "endcol": endcol,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_object_child(
     client: RWSClient,
@@ -893,11 +900,12 @@ async def get_object_child(
                 "startline": startline,
                 "startcolumn": startcolumn,
                 "endline": endline,
-                "endcolumn": endcolumn
+                "endcolumn": endcolumn,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_syncpers_status(
     client: RWSClient,
@@ -936,6 +944,7 @@ async def get_syncpers_status(
         params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
     )
 
+
 async def get_module_text(
     client: RWSClient,
     module: str,
@@ -972,6 +981,7 @@ async def get_module_text(
         f"/rw/rapid/modules/{module}",
         params={k: v for k, v in {"resource": resource, "task": task}.items() if v is not None},
     )
+
 
 async def get_symbol_information(
     client: RWSClient,
@@ -1013,15 +1023,11 @@ async def get_symbol_information(
         f"/rw/rapid/modules/{module}",
         params={
             k: v
-            for k, v in {
-                "resource": resource,
-                "task": task,
-                "row": row,
-                "col": col
-            }.items()
+            for k, v in {"resource": resource, "task": task, "row": row, "col": col}.items()
             if v is not None
         },
     )
+
 
 async def get_routine_information(
     client: RWSClient,
@@ -1061,15 +1067,10 @@ async def get_routine_information(
     return await client.get(
         f"/rw/rapid/modules/{module}/routine",
         params={
-            k: v
-            for k, v in {
-                "task": task,
-                "row": row,
-                "column": column
-            }.items()
-            if v is not None
+            k: v for k, v in {"task": task, "row": row, "column": column}.items() if v is not None
         },
     )
+
 
 async def get_routineargs_information(
     client: RWSClient,
@@ -1125,7 +1126,7 @@ async def get_routineargs_information(
                 "limit": limit,
                 "task": task,
                 "row": row,
-                "column": column
+                "column": column,
             }.items()
             if v is not None
         },

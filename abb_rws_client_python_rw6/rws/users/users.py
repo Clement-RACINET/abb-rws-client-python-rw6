@@ -8,6 +8,7 @@ RWS module: User Service → Get User Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -48,6 +49,7 @@ async def get_user_resources(
         params={k: v for k, v in {"user_type": user_type}.items() if v is not None},
     )
 
+
 async def get_user_actions(
     client: RWSClient,
     action: str | None = None,
@@ -82,6 +84,7 @@ async def get_user_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def register_the_user(client: RWSClient) -> httpx.Response:
     """
     Register the user.
@@ -113,6 +116,7 @@ async def register_the_user(client: RWSClient) -> httpx.Response:
         "/users",
         data={},
     )
+
 
 async def impersonate_user(
     client: RWSClient,
@@ -148,6 +152,7 @@ async def impersonate_user(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def login_as_local_user(
     client: RWSClient,

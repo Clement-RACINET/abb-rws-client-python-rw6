@@ -8,6 +8,7 @@ RWS module: RobotWare Services → System service → System Information
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_system_information(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system")
 
+
 async def get_robot_type(client: RWSClient) -> httpx.Response:
     """
     Get robot type.
@@ -71,6 +73,7 @@ async def get_robot_type(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/system/robottype")
 
+
 async def get_system_options(client: RWSClient) -> httpx.Response:
     """
     System Options.
@@ -97,6 +100,7 @@ async def get_system_options(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/system/options")
+
 
 async def get_system_energy_actions(
     client: RWSClient,
@@ -132,6 +136,7 @@ async def get_system_energy_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def get_system_energy_info_change_count(
     client: RWSClient,
     resource: str | None = None,
@@ -165,6 +170,7 @@ async def get_system_energy_info_change_count(
         "/rw/system/energy",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def reset_accumulated_energy(
     client: RWSClient,
@@ -201,6 +207,7 @@ async def reset_accumulated_energy(
         data={},
     )
 
+
 async def get_system_energy(client: RWSClient) -> httpx.Response:
     """
     System Energy.
@@ -227,6 +234,7 @@ async def get_system_energy(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/system/energy")
+
 
 async def subscribe_on_system_energy_changes(
     client: RWSClient,
@@ -263,13 +271,11 @@ async def subscribe_on_system_energy_changes(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
     """
@@ -297,6 +303,7 @@ async def get_system_robotware_license(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/system/license")
+
 
 async def get_installed_products(
     client: RWSClient,

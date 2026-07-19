@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/ctrl/ctrl."""
+
 from __future__ import annotations
 
 import httpx
@@ -116,6 +117,7 @@ async def test_get_controller_resources() -> None:
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_controller_actions() -> None:
     """
@@ -131,6 +133,7 @@ async def test_get_controller_actions() -> None:
     assert transport.last_request.url.path == "/ctrl"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_controller_environment_variable() -> None:
     """
@@ -145,6 +148,7 @@ async def test_get_controller_environment_variable() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/$envname_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_restart_or_shutdown_controller() -> None:
@@ -163,6 +167,7 @@ async def test_restart_or_shutdown_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_controller_language() -> None:
     """
@@ -180,6 +185,7 @@ async def test_set_controller_language() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_list_of_installed_systems() -> None:
     """
@@ -195,6 +201,7 @@ async def test_get_list_of_installed_systems() -> None:
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_system() -> None:
     """
@@ -209,6 +216,7 @@ async def test_get_actions_on_system() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_boot_device() -> None:
@@ -227,6 +235,7 @@ async def test_set_boot_device() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_boot_device() -> None:
     """
@@ -241,6 +250,7 @@ async def test_get_boot_device() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_load_boot_image() -> None:
@@ -259,6 +269,7 @@ async def test_load_boot_image() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_post_unload_boot_image() -> None:
     """
@@ -276,6 +287,7 @@ async def test_post_unload_boot_image() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_selected_system_name() -> None:
     """
@@ -290,6 +302,7 @@ async def test_get_selected_system_name() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_install_deployment_package() -> None:
@@ -308,6 +321,7 @@ async def test_post_install_deployment_package() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_validate_deployment_package() -> None:
     """
@@ -325,6 +339,7 @@ async def test_validate_deployment_package() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_system_resource() -> None:
     """
@@ -340,6 +355,7 @@ async def test_get_system_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_system_resource() -> None:
     """
@@ -354,6 +370,7 @@ async def test_get_actions_on_system_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_rename_system() -> None:
@@ -372,6 +389,7 @@ async def test_post_rename_system() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_post_select_system() -> None:
     """
@@ -389,6 +407,7 @@ async def test_post_select_system() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_delete_system() -> None:
     """
@@ -403,6 +422,7 @@ async def test_delete_system() -> None:
     assert transport.last_request.method == "DELETE"
     assert transport.last_request.url.path == "/ctrl/system/system_name_test"
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_deselect_system() -> None:
@@ -421,6 +441,7 @@ async def test_post_deselect_system() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_network_resource() -> None:
     """
@@ -436,6 +457,7 @@ async def test_get_network_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/network"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_network_setting_actions() -> None:
     """
@@ -450,6 +472,7 @@ async def test_get_network_setting_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/network"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_network_configuration() -> None:
@@ -468,6 +491,7 @@ async def test_set_network_configuration() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_dns_resource() -> None:
     """
@@ -482,6 +506,7 @@ async def test_get_dns_resource() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/network/dns"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_add_route_table_entry() -> None:
@@ -500,6 +525,7 @@ async def test_add_route_table_entry() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_options_options_to_add_route_table_entry() -> None:
     """
@@ -514,6 +540,7 @@ async def test_options_options_to_add_route_table_entry() -> None:
     assert transport.last_request.method == "OPTIONS"
     assert transport.last_request.url.path == "/ctrl/network/route/add"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_remove_route_table_entry() -> None:
@@ -532,6 +559,7 @@ async def test_remove_route_table_entry() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_options_options_to_remove_route_table_entry() -> None:
     """
@@ -548,6 +576,7 @@ async def test_options_options_to_remove_route_table_entry() -> None:
     assert transport.last_request.url.path == "/ctrl/network/route/remove"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_compress_resources() -> None:
     """
@@ -563,6 +592,7 @@ async def test_get_compress_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/compress"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_compress_actions() -> None:
     """
@@ -577,6 +607,7 @@ async def test_get_compress_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/compress"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_compress_decompress_resource() -> None:
@@ -595,6 +626,7 @@ async def test_post_compress_decompress_resource() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_diagnostics_resources() -> None:
     """
@@ -610,6 +642,7 @@ async def test_get_diagnostics_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/diagnostics"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_diagnostics_actions() -> None:
     """
@@ -624,6 +657,7 @@ async def test_get_diagnostics_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/diagnostics"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_save_system_diagnostics() -> None:
@@ -642,6 +676,7 @@ async def test_save_system_diagnostics() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_system_dump() -> None:
     """
@@ -658,6 +693,7 @@ async def test_subscribe_on_system_dump() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_diagnostics_states_get_system_diagnostics() -> None:
@@ -676,6 +712,7 @@ async def test_subscribe_on_diagnostics_states_get_system_diagnostics() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_safety_resources() -> None:
     """
@@ -691,6 +728,7 @@ async def test_get_safety_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_actions() -> None:
     """
@@ -705,6 +743,7 @@ async def test_get_safety_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_load_safety_configuration_file_to_controller() -> None:
@@ -723,6 +762,7 @@ async def test_load_safety_configuration_file_to_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_set_safety_mode_of_the_controller() -> None:
     """
@@ -740,6 +780,7 @@ async def test_set_safety_mode_of_the_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_config_status() -> None:
     """
@@ -754,6 +795,7 @@ async def test_get_config_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_safety_mode_status() -> None:
@@ -770,6 +812,7 @@ async def test_get_safety_mode_status() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_cyclic_brake_check_status() -> None:
     """
@@ -784,6 +827,7 @@ async def test_get_safety_cyclic_brake_check_status() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_loadoperation_status() -> None:
@@ -800,6 +844,7 @@ async def test_get_loadoperation_status() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_configurations() -> None:
     """
@@ -815,6 +860,7 @@ async def test_get_safety_configurations() -> None:
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_safety_violation_info() -> None:
     """
@@ -829,6 +875,7 @@ async def test_get_safety_violation_info() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/safety"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_unlock_the_safety_configuration() -> None:
@@ -847,6 +894,7 @@ async def test_post_unlock_the_safety_configuration() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_software_sync_acknowledgement() -> None:
     """
@@ -863,6 +911,7 @@ async def test_post_software_sync_acknowledgement() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_add_validation_info() -> None:
@@ -881,6 +930,7 @@ async def test_add_validation_info() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_remove_validation_info() -> None:
     """
@@ -897,6 +947,7 @@ async def test_remove_validation_info() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_reset_safety_controller() -> None:
@@ -915,6 +966,7 @@ async def test_set_reset_safety_controller() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_options_resource() -> None:
     """
@@ -930,6 +982,7 @@ async def test_get_options_resource() -> None:
     assert transport.last_request.url.path == "/ctrl/options/option_to_verify_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_check_robotware_version_compatibility_with_contorller_hardware() -> None:
     """
@@ -940,14 +993,14 @@ async def test_get_check_robotware_version_compatibility_with_contorller_hardwar
     client = _make_client(transport)
 
     resp = await get_check_robotware_version_compatibility_with_contorller_hardware(
-        client,
-        "robotware_version_test"
+        client, "robotware_version_test"
     )
 
     assert transport.last_request is not None
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/compatibility/robotware_version_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_virtual_time_resources() -> None:
@@ -964,6 +1017,7 @@ async def test_get_virtual_time_resources() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_virtualtime() -> None:
     """
@@ -978,6 +1032,7 @@ async def test_get_virtualtime() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttime"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_vttimeslice_value() -> None:
@@ -994,6 +1049,7 @@ async def test_get_vttimeslice_value() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttimeslice"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_vttimeslice() -> None:
     """
@@ -1008,6 +1064,7 @@ async def test_get_actions_on_vttimeslice() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vttimeslice"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_vttimeslice_value() -> None:
@@ -1026,6 +1083,7 @@ async def test_set_vttimeslice_value() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_speed_of_virtual_time() -> None:
     """
@@ -1041,6 +1099,7 @@ async def test_get_speed_of_virtual_time() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtspeed"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_vtspeed() -> None:
     """
@@ -1055,6 +1114,7 @@ async def test_get_actions_on_vtspeed() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtspeed"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_speed_of_virtualtime() -> None:
@@ -1073,6 +1133,7 @@ async def test_set_speed_of_virtualtime() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_state_of_virtual_time() -> None:
     """
@@ -1088,6 +1149,7 @@ async def test_get_state_of_virtual_time() -> None:
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtstate"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_vtstate() -> None:
     """
@@ -1102,6 +1164,7 @@ async def test_get_actions_on_vtstate() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/ctrl/virtualtime/vtstate"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_state_of_virtualtime() -> None:
@@ -1119,6 +1182,7 @@ async def test_set_state_of_virtualtime() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_post_vt_run() -> None:

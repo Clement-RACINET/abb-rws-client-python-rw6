@@ -8,6 +8,7 @@ RWS module: Root Resource → Get Service list
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,6 +42,7 @@ async def get_service_list(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/")
+
 
 async def logout(client: RWSClient) -> httpx.Response:
     """

@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Motion System → Get Motion System
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -49,13 +50,11 @@ async def get_motion_system(
         "/rw/motionsystem",
         params={
             k: v
-            for k, v in {
-                "continue_on_err": continue_on_err,
-                "resource": resource
-            }.items()
+            for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items()
             if v is not None
         },
     )
+
 
 async def get_motion_system_action(
     client: RWSClient,
@@ -89,6 +88,7 @@ async def get_motion_system_action(
         "/rw/motionsystem",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_mechunit_for_jogging(
     client: RWSClient,
@@ -125,6 +125,7 @@ async def set_mechunit_for_jogging(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"mechunit_name": mechunit_name}.items() if v is not None},
     )
+
 
 async def post_perform_jogging(
     client: RWSClient,
@@ -183,11 +184,12 @@ async def post_perform_jogging(
                 "axis5": axis5,
                 "axis6": axis6,
                 "ccount": ccount,
-                "inc_mode": inc_mode
+                "inc_mode": inc_mode,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_robo_target_position(
     client: RWSClient,
@@ -252,11 +254,12 @@ async def set_robo_target_position(
                 "orient_q4": orient_q4,
                 "config_j1": config_j1,
                 "config_j4": config_j4,
-                "config_j6": config_j6
+                "config_j6": config_j6,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_check_change_count(
     client: RWSClient,
@@ -290,6 +293,7 @@ async def get_check_change_count(
         "/rw/motionsystem/checkchangecount",
         params={k: v for k, v in {"changecount": changecount}.items() if v is not None},
     )
+
 
 async def subscribe_on_error_eventchange(
     client: RWSClient,
@@ -327,13 +331,11 @@ async def subscribe_on_error_eventchange(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_error_state(client: RWSClient) -> httpx.Response:
     """
@@ -359,6 +361,7 @@ async def get_error_state(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/motionsystem/errorstate")
+
 
 async def get_motion_supervision(
     client: RWSClient,
@@ -393,6 +396,7 @@ async def get_motion_supervision(
         params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None},
     )
 
+
 async def get_motion_supervision_actions(
     client: RWSClient,
     action: str | None = None,
@@ -425,6 +429,7 @@ async def get_motion_supervision_actions(
         "/rw/motionsystem/motionsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_motion_supervision_mode_jog_supervision_mode(
     client: RWSClient,
@@ -462,14 +467,10 @@ async def set_motion_supervision_mode_jog_supervision_mode(
         "/rw/motionsystem/motionsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
-            k: v
-            for k, v in {
-                "mechunit_name": mechunit_name,
-                "mode": mode
-            }.items()
-            if v is not None
+            k: v for k, v in {"mechunit_name": mechunit_name, "mode": mode}.items() if v is not None
         },
     )
+
 
 async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
     client: RWSClient,
@@ -508,13 +509,11 @@ async def set_motion_supervision_sensitivity_jog_supervision_sensitivity(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "mechunit_name": mechunit_name,
-                "sensitivity": sensitivity
-            }.items()
+            for k, v in {"mechunit_name": mechunit_name, "sensitivity": sensitivity}.items()
             if v is not None
         },
     )
+
 
 async def get_motion_supervision_collision_prediction_mode(
     client: RWSClient,
@@ -548,6 +547,7 @@ async def get_motion_supervision_collision_prediction_mode(
         "/rw/motionsystem/motionsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_motion_supervision_collision_prediction_mode(
     client: RWSClient,
@@ -585,6 +585,7 @@ async def set_motion_supervision_collision_prediction_mode(
         data={k: v for k, v in {"mode": mode}.items() if v is not None},
     )
 
+
 async def get_path_supervision(
     client: RWSClient,
     mechunit: str | None = None,
@@ -618,6 +619,7 @@ async def get_path_supervision(
         params={k: v for k, v in {"mechunit": mechunit}.items() if v is not None},
     )
 
+
 async def get_path_supervision_actions(
     client: RWSClient,
     action: str | None = None,
@@ -650,6 +652,7 @@ async def get_path_supervision_actions(
         "/rw/motionsystem/pathsupervision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_path_supervision_mode(
     client: RWSClient,
@@ -689,6 +692,7 @@ async def set_path_supervision_mode(
         data={k: v for k, v in {"mechunit": mechunit, "mode": mode}.items() if v is not None},
     )
 
+
 async def set_path_supervision_level(
     client: RWSClient,
     action: str | None = None,
@@ -727,6 +731,7 @@ async def set_path_supervision_level(
         data={k: v for k, v in {"mechunit": mechunit, "level": level}.items() if v is not None},
     )
 
+
 async def get_non_motion_execution_mode(client: RWSClient) -> httpx.Response:
     """
     Get Non Motion Execution Mode.
@@ -752,6 +757,7 @@ async def get_non_motion_execution_mode(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/motionsystem/nonmotionexecution")
+
 
 async def get_nonmotion_execution_actions(
     client: RWSClient,
@@ -785,6 +791,7 @@ async def get_nonmotion_execution_actions(
         "/rw/motionsystem/nonmotionexecution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_nonmotion_execution_mode(
     client: RWSClient,
@@ -822,6 +829,7 @@ async def set_nonmotion_execution_mode(
         data={k: v for k, v in {"mode": mode}.items() if v is not None},
     )
 
+
 async def get_mechunits(client: RWSClient) -> httpx.Response:
     """
     Get Mechunits.
@@ -847,6 +855,7 @@ async def get_mechunits(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/rw/motionsystem/mechunits")
+
 
 async def get_mechunit(
     client: RWSClient,
@@ -884,13 +893,11 @@ async def get_mechunit(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={
             k: v
-            for k, v in {
-                "continue_on_err": continue_on_err,
-                "resource": resource
-            }.items()
+            for k, v in {"continue_on_err": continue_on_err, "resource": resource}.items()
             if v is not None
         },
     )
+
 
 async def get_mechunit_action(
     client: RWSClient,
@@ -926,6 +933,7 @@ async def get_mechunit_action(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_mechunit(
     client: RWSClient,
@@ -977,10 +985,7 @@ async def set_mechunit(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={
             k: v
-            for k, v in {
-                "action": action,
-                "continue_on_err": continue_on_err
-            }.items()
+            for k, v in {"action": action, "continue_on_err": continue_on_err}.items()
             if v is not None
         },
         data={
@@ -992,11 +997,12 @@ async def set_mechunit(
                 "total_payload": total_payload,
                 "mode": mode,
                 "jog_mode": jog_mode,
-                "coord_system": coord_system
+                "coord_system": coord_system,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_compliance_lead_through(
     client: RWSClient,
@@ -1036,6 +1042,7 @@ async def set_compliance_lead_through(
         data={k: v for k, v in {"status": status}.items() if v is not None},
     )
 
+
 async def get_compliance_lead_through(
     client: RWSClient,
     mechunit: str,
@@ -1070,6 +1077,7 @@ async def get_compliance_lead_through(
         f"/rw/motionsystem/mechunits/{mechunit}",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def set_fine_calibration(
     client: RWSClient,
@@ -1109,6 +1117,7 @@ async def set_fine_calibration(
         data={k: v for k, v in {"axis": axis}.items() if v is not None},
     )
 
+
 async def update_syncronize_revolution_counter(
     client: RWSClient,
     mechunit: str,
@@ -1147,6 +1156,7 @@ async def update_syncronize_revolution_counter(
         data={k: v for k, v in {"axis": axis}.items() if v is not None},
     )
 
+
 async def get_physical_joints(
     client: RWSClient,
     mechunit: str,
@@ -1176,6 +1186,7 @@ async def get_physical_joints(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/pjoints")
+
 
 async def get_cartesian_value(
     client: RWSClient,
@@ -1221,11 +1232,12 @@ async def get_cartesian_value(
                 "tool": tool,
                 "wobj": wobj,
                 "coordinate": coordinate,
-                "elog_at_err": elog_at_err
+                "elog_at_err": elog_at_err,
             }.items()
             if v is not None
         },
     )
+
 
 async def set_mechanical_unit(
     client: RWSClient,
@@ -1266,13 +1278,11 @@ async def set_mechanical_unit(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "rob_joint": rob_joint,
-                "ext_joint": ext_joint
-            }.items()
+            for k, v in {"rob_joint": rob_joint, "ext_joint": ext_joint}.items()
             if v is not None
         },
     )
+
 
 async def get_robtarget(
     client: RWSClient,
@@ -1312,14 +1322,11 @@ async def get_robtarget(
         f"/rw/motionsystem/mechunits/{mechunit}/robtarget",
         params={
             k: v
-            for k, v in {
-                "tool": tool,
-                "wobj": wobj,
-                "coordinate": coordinate
-            }.items()
+            for k, v in {"tool": tool, "wobj": wobj, "coordinate": coordinate}.items()
             if v is not None
         },
     )
+
 
 async def get_joint_target(
     client: RWSClient,
@@ -1350,6 +1357,7 @@ async def get_joint_target(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/jointtarget")
+
 
 async def subscribe_on_mechunit_mode_change(
     client: RWSClient,
@@ -1386,13 +1394,11 @@ async def subscribe_on_mechunit_mode_change(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_joints_from_position(
     client: RWSClient,
@@ -1459,11 +1465,12 @@ async def get_joints_from_position(
                 "old_ext_joints": old_ext_joints,
                 "robot_fixed_object": robot_fixed_object,
                 "robot_configuration": robot_configuration,
-                "elog_at_error": elog_at_error
+                "elog_at_error": elog_at_error,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_position_from_joints(
     client: RWSClient,
@@ -1518,11 +1525,12 @@ async def get_position_from_joints(
                 "rob_joints": rob_joints,
                 "ext_joints": ext_joints,
                 "robot_fixed_object": robot_fixed_object,
-                "elog_at_error": elog_at_error
+                "elog_at_error": elog_at_error,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_all_joint_solution(
     client: RWSClient,
@@ -1580,11 +1588,12 @@ async def get_all_joint_solution(
                 "curr_orientation": curr_orientation,
                 "tool_frame_orientation": tool_frame_orientation,
                 "robot_fixed_object": robot_fixed_object,
-                "robot_configuration": robot_configuration
+                "robot_configuration": robot_configuration,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_joints_from_cartesian(
     client: RWSClient,
@@ -1651,11 +1660,12 @@ async def get_joints_from_cartesian(
                 "old_ext_joints": old_ext_joints,
                 "robot_fixed_object": robot_fixed_object,
                 "robot_configuration": robot_configuration,
-                "elog_at_error": elog_at_error
+                "elog_at_error": elog_at_error,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_calibration_info(
     client: RWSClient,
@@ -1686,6 +1696,7 @@ async def get_calibration_info(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/calibrationinfo")
+
 
 async def post_calibration_for_baseframe(
     client: RWSClient,
@@ -1749,11 +1760,12 @@ async def post_calibration_for_baseframe(
                 "point4": point4,
                 "point5": point5,
                 "point6": point6,
-                "point7": point7
+                "point7": point7,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_baseframemoving(
     client: RWSClient,
@@ -1817,11 +1829,12 @@ async def post_calibration_for_baseframemoving(
                 "point5": point5,
                 "point6": point6,
                 "point7": point7,
-                "point8": point8
+                "point8": point8,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_externalrobotnombasenew(
     client: RWSClient,
@@ -1885,11 +1898,12 @@ async def post_calibration_for_externalrobotnombasenew(
                 "point5": point5,
                 "point6": point6,
                 "point7": point7,
-                "point8": point8
+                "point8": point8,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_robotaxisrot(
     client: RWSClient,
@@ -1953,11 +1967,12 @@ async def post_calibration_for_robotaxisrot(
                 "point3": point3,
                 "point4": point4,
                 "point5": point5,
-                "point6": point6
+                "point6": point6,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_singleuserrotnew(
     client: RWSClient,
@@ -2021,11 +2036,12 @@ async def post_calibration_for_singleuserrotnew(
                 "point4": point4,
                 "point5": point5,
                 "point6": point6,
-                "point7": point7
+                "point7": point7,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_rotextctrlzdef(
     client: RWSClient,
@@ -2089,11 +2105,12 @@ async def post_calibration_for_rotextctrlzdef(
                 "point3": point3,
                 "point4": point4,
                 "point5": point5,
-                "point6": point6
+                "point6": point6,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_singleuserlin(
     client: RWSClient,
@@ -2157,11 +2174,12 @@ async def post_calibration_for_singleuserlin(
                 "point4": point4,
                 "point5": point5,
                 "point6": point6,
-                "point7": point7
+                "point7": point7,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_singletrack(
     client: RWSClient,
@@ -2225,11 +2243,12 @@ async def post_calibration_for_singletrack(
                 "point5": point5,
                 "point6": point6,
                 "point7": point7,
-                "point8": point8
+                "point8": point8,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_calibration_for_robotaxisrot2(
     client: RWSClient,
@@ -2293,11 +2312,12 @@ async def post_calibration_for_robotaxisrot2(
                 "point3": point3,
                 "point4": point4,
                 "point5": point5,
-                "point6": point6
+                "point6": point6,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_base_frame(
     client: RWSClient,
@@ -2328,6 +2348,7 @@ async def get_base_frame(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/baseframe")
+
 
 async def get_base_frame_actions(
     client: RWSClient,
@@ -2363,6 +2384,7 @@ async def get_base_frame_actions(
         f"/rw/motionsystem/mechunits/{mechunit}/baseframe",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_base_frame(
     client: RWSClient,
@@ -2413,18 +2435,11 @@ async def set_base_frame(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "x": x,
-                "y": y,
-                "z": z,
-                "q1": q1,
-                "q2": q2,
-                "q3": q3,
-                "q4": q4
-            }.items()
+            for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items()
             if v is not None
         },
     )
+
 
 async def get_axes(
     client: RWSClient,
@@ -2455,6 +2470,7 @@ async def get_axes(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes")
+
 
 async def get_axis(
     client: RWSClient,
@@ -2487,6 +2503,7 @@ async def get_axis(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}")
+
 
 async def get_axis_actions(
     client: RWSClient,
@@ -2525,6 +2542,7 @@ async def get_axis_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def get_axis_pose(
     client: RWSClient,
     mechunit: str,
@@ -2561,6 +2579,7 @@ async def get_axis_pose(
         f"/rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def set_axis_pose(
     client: RWSClient,
@@ -2613,18 +2632,11 @@ async def set_axis_pose(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "x": x,
-                "y": y,
-                "z": z,
-                "q1": q1,
-                "q2": q2,
-                "q3": q3,
-                "q4": q4
-            }.items()
+            for k, v in {"x": x, "y": y, "z": z, "q1": q1, "q2": q2, "q3": q3, "q4": q4}.items()
             if v is not None
         },
     )
+
 
 async def update_commutate(
     client: RWSClient,
@@ -2663,6 +2675,7 @@ async def update_commutate(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def update_sync_revolution_counter(
     client: RWSClient,
@@ -2704,6 +2717,7 @@ async def update_sync_revolution_counter(
         data={k: v for k, v in {"synctype": synctype}.items() if v is not None},
     )
 
+
 async def set_smb_data(
     client: RWSClient,
     mechunit: str,
@@ -2740,6 +2754,7 @@ async def set_smb_data(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"type": type}.items() if v is not None},
     )
+
 
 async def post_clear_smb_data(
     client: RWSClient,
@@ -2778,6 +2793,7 @@ async def post_clear_smb_data(
         data={k: v for k, v in {"type": type}.items() if v is not None},
     )
 
+
 async def get_smb_data(
     client: RWSClient,
     mechunit: str,
@@ -2806,6 +2822,7 @@ async def get_smb_data(
         ```
     """
     return await client.get(f"/rw/motionsystem/mechunits/{mechunit}/smbdata")
+
 
 async def get_smb_data_actions(
     client: RWSClient,
@@ -2841,6 +2858,7 @@ async def get_smb_data_actions(
         f"/rw/motionsystem/mechunits/{mechunit}/smbdata",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def get_motor_calib_names(
     client: RWSClient,

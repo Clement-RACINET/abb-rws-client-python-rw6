@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/vision."""
+
 from __future__ import annotations
 
 import httpx
@@ -69,6 +70,7 @@ async def test_get_vision_manager_resource() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_number_of_cameras_of_iv() -> None:
     """
@@ -83,6 +85,7 @@ async def test_get_number_of_cameras_of_iv() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_iv_camera_validity() -> None:
@@ -99,6 +102,7 @@ async def test_get_iv_camera_validity() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_vision_camera_resource_actions() -> None:
     """
@@ -114,6 +118,7 @@ async def test_get_vision_camera_resource_actions() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_camera_jobname() -> None:
     """
@@ -128,6 +133,7 @@ async def test_get_camera_jobname() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_restart_camera() -> None:
@@ -146,6 +152,7 @@ async def test_restart_camera() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_flash_led_of_camera() -> None:
     """
@@ -162,6 +169,7 @@ async def test_post_flash_led_of_camera() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_camera_state() -> None:
@@ -180,6 +188,7 @@ async def test_set_camera_state() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_refesh_the_camera() -> None:
     """
@@ -196,6 +205,7 @@ async def test_post_refesh_the_camera() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_hostname_of_the_camera() -> None:
@@ -214,6 +224,7 @@ async def test_set_hostname_of_the_camera() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_to_be_dhcp_client() -> None:
     """
@@ -230,6 +241,7 @@ async def test_set_camera_to_be_dhcp_client() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_set_camera_dns_settings() -> None:
@@ -248,6 +260,7 @@ async def test_set_camera_dns_settings() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_camera_status() -> None:
     """
@@ -263,6 +276,7 @@ async def test_get_camera_status() -> None:
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_camera_info_using_index_of_the() -> None:
     """
@@ -277,6 +291,7 @@ async def test_get_camera_info_using_index_of_the() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/vision"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_set_camera_name() -> None:
@@ -295,6 +310,7 @@ async def test_set_camera_name() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_user_credentials() -> None:
     """
@@ -312,6 +328,7 @@ async def test_set_camera_user_credentials() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_camera_ip_settings() -> None:
     """
@@ -328,6 +345,7 @@ async def test_set_camera_ip_settings() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_get_iv_camera_info() -> None:

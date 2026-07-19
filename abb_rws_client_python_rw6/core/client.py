@@ -182,10 +182,10 @@ class RWSClient:
         port: int | None = None,
         timeout: float | None = None,
     ) -> None:
-        self.host     = host     or get_env_str("RWS_HOST",     "192.168.1.10")
-        self.username = username or get_env_str("RWS_USER",     "Default User")
+        self.host = host or get_env_str("RWS_HOST", "192.168.1.10")
+        self.username = username or get_env_str("RWS_USER", "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
-        self.port     = port     or get_env_int("RWS_PORT",     80)
+        self.port = port or get_env_int("RWS_PORT", 80)
         self.timeout = (
             timeout if timeout is not None else get_env_float_or_none("RWS_TIMEOUT", None)
         )
@@ -539,10 +539,10 @@ class RWSClientSync:
         port: int | None = None,
         timeout: float | None = None,
     ) -> None:
-        self.host     = host     or get_env_str("RWS_HOST",     "192.168.125.1")
-        self.username = username or get_env_str("RWS_USER",     "Default User")
+        self.host = host or get_env_str("RWS_HOST", "192.168.125.1")
+        self.username = username or get_env_str("RWS_USER", "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
-        self.port     = port     or get_env_int("RWS_PORT",     80)
+        self.port = port or get_env_int("RWS_PORT", 80)
         self.timeout = (
             timeout if timeout is not None else get_env_float_or_none("RWS_TIMEOUT", None)
         )
@@ -669,9 +669,7 @@ class RWSClientSync:
         # All retries exhausted
         assert last_exc is not None
         if isinstance(last_exc, httpx.ConnectError):
-            raise RWSConnectionError(
-                f"Cannot connect to {self.base_url}: {last_exc}"
-            ) from last_exc
+            raise RWSConnectionError(f"Cannot connect to {self.base_url}: {last_exc}") from last_exc
         raise RWSTimeoutError(
             f"Timeout on {method} {path} after {_RETRY_MAX_ATTEMPTS} attempts"
         ) from last_exc

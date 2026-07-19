@@ -8,6 +8,7 @@ RWS module: Controller Service → Operations on Clock Resource → Get Clock Re
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,6 +42,7 @@ async def get_clock_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/clock")
+
 
 async def get_clock_actions(
     client: RWSClient,
@@ -76,6 +78,7 @@ async def get_clock_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
     """
     Set the Clock of the controller.
@@ -106,6 +109,7 @@ async def set_the_clock_of_the_controller(client: RWSClient) -> httpx.Response:
         data={},
     )
 
+
 async def get_timezone_resource(client: RWSClient) -> httpx.Response:
     """
     Get timezone resource.
@@ -132,6 +136,7 @@ async def get_timezone_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/clock/timezone")
+
 
 async def get_timezone_actions(client: RWSClient) -> httpx.Response:
     """
@@ -163,6 +168,7 @@ async def get_timezone_actions(client: RWSClient) -> httpx.Response:
         params={"action": "show"},
     )
 
+
 async def set_the_time_zone(client: RWSClient) -> httpx.Response:
     """
     Set the time zone.
@@ -193,6 +199,7 @@ async def set_the_time_zone(client: RWSClient) -> httpx.Response:
         data={},
     )
 
+
 async def get_time_server_resource(client: RWSClient) -> httpx.Response:
     """
     Get time server resource.
@@ -219,6 +226,7 @@ async def get_time_server_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/clock/timeserver")
+
 
 async def get_time_server_actions(client: RWSClient) -> httpx.Response:
     """
@@ -249,6 +257,7 @@ async def get_time_server_actions(client: RWSClient) -> httpx.Response:
         "/ctrl/clock/timeserver",
         params={"action": "show"},
     )
+
 
 async def set_the_time_server(
     client: RWSClient,
@@ -285,6 +294,7 @@ async def set_the_time_server(
         data={},
     )
 
+
 async def get_test_time_server(
     client: RWSClient,
     resource: str | None = None,
@@ -319,11 +329,6 @@ async def get_test_time_server(
     return await client.get(
         "/ctrl/clock/timeserver",
         params={
-            k: v
-            for k, v in {
-                "resource": resource,
-                "server_ip": server_ip
-            }.items()
-            if v is not None
+            k: v for k, v in {"resource": resource, "server_ip": server_ip}.items() if v is not None
         },
     )

@@ -8,6 +8,7 @@ RWS module: Controller Service → Operations on Identity Resource → Get Ident
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_identity_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/identity")
 
+
 async def get_identity_actions(
     client: RWSClient,
     action: str | None = None,
@@ -75,6 +77,7 @@ async def get_identity_actions(
         "/ctrl/identity",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_the_identity_of_the_controller(client: RWSClient) -> httpx.Response:
     """

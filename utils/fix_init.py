@@ -215,9 +215,7 @@ def _is_package_dir(directory: Path) -> bool:
     if not directory.is_dir():
         return False
     has_py = any(
-        f.suffix == ".py" and f.name != "__init__.py"
-        for f in directory.iterdir()
-        if f.is_file()
+        f.suffix == ".py" and f.name != "__init__.py" for f in directory.iterdir() if f.is_file()
     )
     has_subpkg = any(
         (d / "__init__.py").exists() or _is_package_dir(d)
@@ -284,9 +282,7 @@ def _gen_rws_submodule_init(pkg_dir: Path) -> str:
                 import_blocks.append(block)
             all_names.extend(names)
 
-    imports_block = (
-        "\n".join(import_blocks) if import_blocks else "# No public symbols"
-    )
+    imports_block = "\n".join(import_blocks) if import_blocks else "# No public symbols"
     rel = pkg_dir.relative_to(PKG_ROOT).as_posix()
 
     return f"""\
@@ -334,22 +330,14 @@ def _gen_rws_init(rws_dir: Path) -> str:
             continue
         sub_names: list[str] = []
         for py_file in sorted(sub.iterdir()):
-            if (
-                py_file.is_file()
-                and py_file.suffix == ".py"
-                and py_file.name != "__init__.py"
-            ):
+            if py_file.is_file() and py_file.suffix == ".py" and py_file.name != "__init__.py":
                 sub_names.extend(_collect_public_names(py_file))
         if sub_names:
             entries.append((sub.name, sorted(set(sub_names))))
 
     # Flat .py files directly in rws/
     for py_file in sorted(rws_dir.iterdir()):
-        if (
-            py_file.is_file()
-            and py_file.suffix == ".py"
-            and py_file.name != "__init__.py"
-        ):
+        if py_file.is_file() and py_file.suffix == ".py" and py_file.name != "__init__.py":
             names = _collect_public_names(py_file)
             if names:
                 entries.append((py_file.stem, names))
@@ -380,9 +368,7 @@ def _gen_rws_init(rws_dir: Path) -> str:
             import_blocks.append(block)
         all_names.extend(names)
 
-    imports_block = (
-        "\n".join(import_blocks) if import_blocks else "# No sub-packages"
-    )
+    imports_block = "\n".join(import_blocks) if import_blocks else "# No sub-packages"
 
     return f"""\
 # abb_rws_client/rws/__init__.py
@@ -617,10 +603,7 @@ def main() -> None:
         stdout.reconfigure(encoding="utf-8", errors="replace")
 
     parser = argparse.ArgumentParser(
-        description=(
-            "Audit and fix all __init__.py files in "
-            "abb_rws_client/ and tests/."
-        ),
+        description=("Audit and fix all __init__.py files in abb_rws_client/ and tests/."),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -637,9 +620,7 @@ def main() -> None:
 
     dry = args.dry_run
     print(
-        "🔍 DRY-RUN mode — no files will be written.\n"
-        if dry
-        else "Fixing __init__.py files...\n"
+        "🔍 DRY-RUN mode — no files will be written.\n" if dry else "Fixing __init__.py files...\n"
     )
 
     fix_package(dry)

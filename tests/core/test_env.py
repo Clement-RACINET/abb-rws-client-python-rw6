@@ -91,25 +91,19 @@ class TestLoadEnv:
         result = load_env(tmp_path)
         assert result == env_file
 
-    def test_raises_file_not_found_on_missing_explicit(
-        self, tmp_path: Path
-    ) -> None:
+    def test_raises_file_not_found_on_missing_explicit(self, tmp_path: Path) -> None:
         missing = tmp_path / "nonexistent.env"
         with pytest.raises(FileNotFoundError, match=".env file not found"):
             load_env(missing)
 
-    def test_raises_file_not_found_on_missing_in_dir(
-        self, tmp_path: Path
-    ) -> None:
+    def test_raises_file_not_found_on_missing_in_dir(self, tmp_path: Path) -> None:
         # Directory exists but has no .env
         with pytest.raises(FileNotFoundError, match=".env file not found"):
             load_env(tmp_path)
 
     def test_returns_none_when_no_env_found(self, tmp_path: Path) -> None:
         """Auto-discovery must return None gracefully when no .env exists."""
-        with patch(
-            "abb_rws_client_python_rw6.core.env._find_env", return_value=None
-        ):
+        with patch("abb_rws_client_python_rw6.core.env._find_env", return_value=None):
             result = load_env()
         assert result is None
 
@@ -237,9 +231,7 @@ class TestGetEnvFloatOrNone:
 
     def test_returns_parsed_float(self) -> None:
         with patch.dict(os.environ, {"RWS_TIMEOUT": "15.0"}):
-            assert get_env_float_or_none("RWS_TIMEOUT", 10.0) == pytest.approx(
-                15.0
-            )
+            assert get_env_float_or_none("RWS_TIMEOUT", 10.0) == pytest.approx(15.0)
 
     def test_returns_default_when_absent(self) -> None:
         with patch.dict(os.environ, {}, clear=False):

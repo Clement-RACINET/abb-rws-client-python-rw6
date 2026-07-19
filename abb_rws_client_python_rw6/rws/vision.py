@@ -8,6 +8,7 @@ RWS module: RobotWare Services → Integrated Vision (IV) Service → Get Vision
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -42,6 +43,7 @@ async def get_vision_manager_resource(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/rw/vision")
 
+
 async def get_number_of_cameras_of_iv(
     client: RWSClient,
     resource: str | None = None,
@@ -75,6 +77,7 @@ async def get_number_of_cameras_of_iv(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def get_iv_camera_validity(
     client: RWSClient,
@@ -112,6 +115,7 @@ async def get_iv_camera_validity(
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
 
+
 async def get_vision_camera_resource_actions(
     client: RWSClient,
     action: str | None = None,
@@ -145,6 +149,7 @@ async def get_vision_camera_resource_actions(
         "/rw/vision",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def get_camera_jobname(
     client: RWSClient,
@@ -181,6 +186,7 @@ async def get_camera_jobname(
         "/rw/vision",
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
+
 
 async def restart_camera(
     client: RWSClient,
@@ -219,6 +225,7 @@ async def restart_camera(
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
 
+
 async def post_flash_led_of_camera(
     client: RWSClient,
     action: str | None = None,
@@ -255,6 +262,7 @@ async def post_flash_led_of_camera(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
+
 
 async def set_camera_state(
     client: RWSClient,
@@ -295,6 +303,7 @@ async def set_camera_state(
         data={k: v for k, v in {"name": name, "state": state}.items() if v is not None},
     )
 
+
 async def post_refesh_the_camera(
     client: RWSClient,
     action: str | None = None,
@@ -329,6 +338,7 @@ async def post_refesh_the_camera(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def set_hostname_of_the_camera(
     client: RWSClient,
@@ -370,6 +380,7 @@ async def set_hostname_of_the_camera(
         data={k: v for k, v in {"name": name, "host": host}.items() if v is not None},
     )
 
+
 async def set_camera_to_be_dhcp_client(
     client: RWSClient,
     action: str | None = None,
@@ -407,6 +418,7 @@ async def set_camera_to_be_dhcp_client(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"name": name}.items() if v is not None},
     )
+
 
 async def set_camera_dns_settings(
     client: RWSClient,
@@ -449,14 +461,11 @@ async def set_camera_dns_settings(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "name": name,
-                "dns_server": dns_server,
-                "dns_suffix": dns_suffix
-            }.items()
+            for k, v in {"name": name, "dns_server": dns_server, "dns_suffix": dns_suffix}.items()
             if v is not None
         },
     )
+
 
 async def get_camera_status(
     client: RWSClient,
@@ -494,6 +503,7 @@ async def get_camera_status(
         params={k: v for k, v in {"resource": resource, "name": name}.items() if v is not None},
     )
 
+
 async def get_camera_info_using_index_of_the(
     client: RWSClient,
     resource: str | None = None,
@@ -527,15 +537,9 @@ async def get_camera_info_using_index_of_the(
     """
     return await client.get(
         "/rw/vision",
-        params={
-            k: v
-            for k, v in {
-                "resource": resource,
-                "index": index
-            }.items()
-            if v is not None
-        },
+        params={k: v for k, v in {"resource": resource, "index": index}.items() if v is not None},
     )
+
 
 async def set_camera_name(
     client: RWSClient,
@@ -575,6 +579,7 @@ async def set_camera_name(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"index": index, "name": name}.items() if v is not None},
     )
+
 
 async def set_camera_user_credentials(
     client: RWSClient,
@@ -616,14 +621,11 @@ async def set_camera_user_credentials(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={
             k: v
-            for k, v in {
-                "index": index,
-                "user": user,
-                "password": password
-            }.items()
+            for k, v in {"index": index, "user": user, "password": password}.items()
             if v is not None
         },
     )
+
 
 async def set_camera_ip_settings(
     client: RWSClient,
@@ -672,11 +674,12 @@ async def set_camera_ip_settings(
                 "name": name,
                 "address": address,
                 "netmask": netmask,
-                "gateway": gateway
+                "gateway": gateway,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_iv_camera_info(
     client: RWSClient,

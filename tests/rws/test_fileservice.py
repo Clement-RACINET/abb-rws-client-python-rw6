@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/fileservice."""
+
 from __future__ import annotations
 
 import httpx
@@ -65,6 +66,7 @@ async def test_get_file_service_resources() -> None:
     assert transport.last_request.url.path == "/fileservice"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_directory_listing_of_resources() -> None:
     """
@@ -75,9 +77,7 @@ async def test_get_directory_listing_of_resources() -> None:
     client = _make_client(transport)
 
     resp = await get_directory_listing_of_resources(
-        client,
-        "environment_variable_device_test",
-        "directory_test"
+        client, "environment_variable_device_test", "directory_test"
     )
 
     assert transport.last_request is not None
@@ -85,6 +85,7 @@ async def test_get_directory_listing_of_resources() -> None:
     expected_path = "/fileservice/environment_variable_device_test/directory_test"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_directory_actions() -> None:
@@ -100,6 +101,7 @@ async def test_get_directory_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_create_directory() -> None:
@@ -120,6 +122,7 @@ async def test_create_directory() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_post_rename_directory() -> None:
     """
@@ -129,11 +132,7 @@ async def test_post_rename_directory() -> None:
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await post_rename_directory(
-        client,
-        "device_environment_variable_test",
-        "directory_test"
-    )
+    resp = await post_rename_directory(client, "device_environment_variable_test", "directory_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
@@ -142,6 +141,7 @@ async def test_post_rename_directory() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_copy_directory() -> None:
@@ -152,11 +152,7 @@ async def test_post_copy_directory() -> None:
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await post_copy_directory(
-        client,
-        "device_environment_variable_test",
-        "directory_test"
-    )
+    resp = await post_copy_directory(client, "device_environment_variable_test", "directory_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
@@ -165,6 +161,7 @@ async def test_post_copy_directory() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_delete_directory() -> None:
@@ -183,6 +180,7 @@ async def test_delete_directory() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_file() -> None:
     """
@@ -197,6 +195,7 @@ async def test_get_file() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test/file_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_file_actions() -> None:
@@ -213,6 +212,7 @@ async def test_get_file_actions() -> None:
     assert transport.last_request.url.path == "/fileservice/device_test|directory_test/file_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_rename_file() -> None:
     """
@@ -222,11 +222,7 @@ async def test_post_rename_file() -> None:
     transport = _MockTransport(status_code=204)
     client = _make_client(transport)
 
-    resp = await post_rename_file(
-        client,
-        "device_environment_variable_directory_test",
-        "file_test"
-    )
+    resp = await post_rename_file(client, "device_environment_variable_directory_test", "file_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "POST"
@@ -235,6 +231,7 @@ async def test_post_rename_file() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_create_copy_of_file() -> None:
@@ -255,6 +252,7 @@ async def test_create_copy_of_file() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_put_upload_file() -> None:
     """
@@ -264,11 +262,7 @@ async def test_put_upload_file() -> None:
     transport = _MockTransport(status_code=200)
     client = _make_client(transport)
 
-    resp = await put_upload_file(
-        client,
-        "device_environment_variable_directory_test",
-        "file_test"
-    )
+    resp = await put_upload_file(client, "device_environment_variable_directory_test", "file_test")
 
     assert transport.last_request is not None
     assert transport.last_request.method == "PUT"
@@ -277,6 +271,7 @@ async def test_put_upload_file() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_delete_file() -> None:
@@ -295,6 +290,7 @@ async def test_delete_file() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_file_meta_data() -> None:
     """
@@ -305,9 +301,7 @@ async def test_get_file_meta_data() -> None:
     client = _make_client(transport)
 
     resp = await get_file_meta_data(
-        client,
-        "device_environment_variable_directory_test",
-        "file_test"
+        client, "device_environment_variable_directory_test", "file_test"
     )
 
     assert transport.last_request is not None

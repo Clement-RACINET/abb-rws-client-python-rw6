@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/users/remote."""
+
 from __future__ import annotations
 
 import httpx
@@ -55,6 +56,7 @@ async def test_get_remote_user_actions() -> None:
     assert transport.last_request.url.path == "/users/remoteuser"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_remote_user_logon_request() -> None:
     """
@@ -72,6 +74,7 @@ async def test_post_remote_user_logon_request() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_post_remote_user_logout_request() -> None:
     """
@@ -88,6 +91,7 @@ async def test_post_remote_user_logout_request() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
+
 
 @pytest.mark.asyncio
 async def test_subscribe_on_remote_user_state() -> None:

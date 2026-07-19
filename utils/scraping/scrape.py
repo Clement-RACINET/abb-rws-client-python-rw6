@@ -73,12 +73,12 @@ ROUTES: list[dict] = []
 
 #: Root navigation tree: (display title, HTML file, Doxygen JS file stem)
 NAVTREE_ROOT: list[tuple[str, str, str | None]] = [
-    ("Root Resource",                    "root_page.html",            "root_page"),
-    ("Subscription Service",             "subsrv_main_page.html",     "subsrv_main_page"),
-    ("User Service",                     "users_main_page.html",      "users_main_page"),
-    ("Controller Service",               "ctrl_main_page.html",       "ctrl_main_page"),
-    ("File Service",                     "fs_main_page.html",         "fs_main_page"),
-    ("RobotWare Services",               "rwservices_main_page.html", "rwservices_main_page"),
+    ("Root Resource", "root_page.html", "root_page"),
+    ("Subscription Service", "subsrv_main_page.html", "subsrv_main_page"),
+    ("User Service", "users_main_page.html", "users_main_page"),
+    ("Controller Service", "ctrl_main_page.html", "ctrl_main_page"),
+    ("File Service", "fs_main_page.html", "fs_main_page"),
+    ("RobotWare Services", "rwservices_main_page.html", "rwservices_main_page"),
     ("Operations on IO Profinet Device", "ios_device_data_page.html", "ios_device_data_page"),
 ]
 
@@ -158,8 +158,9 @@ def crawl_js(
         resp = requests.get(js_url, timeout=10)
 
         if resp.status_code == 404 or not resp.text.strip():
-            ROUTES.append({"title": title, "url_suffix": html_file,
-                "breadcrumb": current_breadcrumb})
+            ROUTES.append(
+                {"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb}
+            )
             log.info("  ✓ [%3d] (no js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
             return
 
@@ -167,15 +168,17 @@ def crawl_js(
         children = parse_js_tree(resp.text)
 
         if not children:
-            ROUTES.append({"title": title, "url_suffix": html_file,
-                "breadcrumb": current_breadcrumb})
+            ROUTES.append(
+                {"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb}
+            )
             log.info("  ✓ [%3d] (empty js) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
             return
 
         children_htmls = {h for _, h, _ in children}
         if html_file not in children_htmls:
-            ROUTES.append({"title": title, "url_suffix": html_file,
-                "breadcrumb": current_breadcrumb})
+            ROUTES.append(
+                {"title": title, "url_suffix": html_file, "breadcrumb": current_breadcrumb}
+            )
             log.info("  ✓ [%3d] (+ parent) %s", len(ROUTES), " > ".join(current_breadcrumb[-4:]))
 
         log.info("  ⟦☰⟧ /  %s  (%d children)", " > ".join(current_breadcrumb[-3:]), len(children))
@@ -212,8 +215,10 @@ def extract_section(content: Tag, label: str) -> str:
     """
     header = None
     for tag in content.find_all(True):
-        if tag.name in ["h1", "h2", "h3", "h4", "h5", "b", "dt", "strong", "p", "th"] \
-                and tag.get_text(strip=True).rstrip(":") == label:
+        if (
+            tag.name in ["h1", "h2", "h3", "h4", "h5", "b", "dt", "strong", "p", "th"]
+            and tag.get_text(strip=True).rstrip(":") == label
+        ):
             header = tag
             break
     if not header:
@@ -263,10 +268,17 @@ def parse_route_page(url_suffix: str) -> dict:
             return {}
 
         data: dict[str, str] = {
-            "description": "", "url": "", "method": "",
-            "url_params": "", "data_params": "", "success_response": "",
-            "error_response": "", "resources": "", "actions": "",
-            "sample_call": "", "notes": "",
+            "description": "",
+            "url": "",
+            "method": "",
+            "url_params": "",
+            "data_params": "",
+            "success_response": "",
+            "error_response": "",
+            "resources": "",
+            "actions": "",
+            "sample_call": "",
+            "notes": "",
         }
 
         h1 = content.find(["h1", "h2"])
@@ -281,16 +293,16 @@ def parse_route_page(url_suffix: str) -> dict:
                 nxt = nxt.find_next_sibling()
 
         for field, label in [
-            ("url",              "URL"),
-            ("method",           "Method"),
-            ("url_params",       "URL Params"),
-            ("data_params",      "Data Params"),
+            ("url", "URL"),
+            ("method", "Method"),
+            ("url_params", "URL Params"),
+            ("data_params", "Data Params"),
             ("success_response", "Success Response"),
-            ("error_response",   "Error Response"),
-            ("resources",        "Resources"),
-            ("actions",          "Actions"),
-            ("sample_call",      "Sample Call"),
-            ("notes",            "Notes"),
+            ("error_response", "Error Response"),
+            ("resources", "Resources"),
+            ("actions", "Actions"),
+            ("sample_call", "Sample Call"),
+            ("notes", "Notes"),
         ]:
             val = extract_section(content, label)
             if val:
@@ -367,10 +379,10 @@ def export_markdown(
             if route.get("method"):
                 f.write(f"**Method:** `{route['method']}`\n\n")
             for field, label in [
-                ("url_params",  "URL Params"),
+                ("url_params", "URL Params"),
                 ("data_params", "Data Params"),
-                ("resources",   "Resources"),
-                ("actions",     "Actions"),
+                ("resources", "Resources"),
+                ("actions", "Actions"),
             ]:
                 if route.get(field):
                     f.write(f"**{label}:**\n```\n{route[field]}\n```\n\n")

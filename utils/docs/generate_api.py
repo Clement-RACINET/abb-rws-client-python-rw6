@@ -9,6 +9,7 @@ Scans ``abb_rws_client/``, generates one ``.md`` file per module using
 the ``:::`` mkdocstrings directive, then injects the ``nav`` block into
 ``mkdocs.yml`` between the AUTOGEN marker tags.
 """
+
 from __future__ import annotations
 
 import fnmatch
@@ -97,9 +98,9 @@ def _walk(
     # --- Python modules ---
     py_files = sorted(
         [
-            p for p in src.iterdir()
-            if p.is_file() and p.suffix == ".py"
-            and not _is_excluded(p.name, cfg, is_file=True)
+            p
+            for p in src.iterdir()
+            if p.is_file() and p.suffix == ".py" and not _is_excluded(p.name, cfg, is_file=True)
         ],
         key=lambda p: p.name.lower(),
     )
@@ -204,14 +205,9 @@ def update_mkdocs_nav(cfg: DocConfig, nav_block: str) -> None:
 
     # Apply the tag indentation to every non-empty line
     indented_lines = [
-        balise_indent + line if line.strip() else ""
-        for line in nav_block.splitlines()
+        balise_indent + line if line.strip() else "" for line in nav_block.splitlines()
     ]
 
-    new_lines = (
-        lines[:start_i + 1]
-        + indented_lines
-        + lines[end_i:]
-    )
+    new_lines = lines[: start_i + 1] + indented_lines + lines[end_i:]
     cfg.mkdocs_path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
     print("mkdocs.yml updated.")

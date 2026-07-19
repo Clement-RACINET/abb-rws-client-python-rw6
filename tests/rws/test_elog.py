@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/elog."""
+
 from __future__ import annotations
 
 import httpx
@@ -60,6 +61,7 @@ async def test_get_elog_resources() -> None:
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_elog_actions() -> None:
     """
@@ -74,6 +76,7 @@ async def test_get_elog_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/elog"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_clear_elog_messages() -> None:
@@ -92,6 +95,7 @@ async def test_post_clear_elog_messages() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_save_elog_in_system_dump_format() -> None:
     """
@@ -109,6 +113,7 @@ async def test_save_elog_in_system_dump_format() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 202
 
+
 @pytest.mark.asyncio
 async def test_get_elog_messages_in_domain() -> None:
     """
@@ -124,6 +129,7 @@ async def test_get_elog_messages_in_domain() -> None:
     assert transport.last_request.url.path == "/rw/elog/domain_number_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_actions_on_elog_domain() -> None:
     """
@@ -138,6 +144,7 @@ async def test_get_actions_on_elog_domain() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/elog/domain_number_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_post_clear_elog_messages_2() -> None:
@@ -156,6 +163,7 @@ async def test_post_clear_elog_messages_2() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_elog_domain() -> None:
     """
@@ -172,6 +180,7 @@ async def test_subscribe_on_elog_domain() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_get_elog_message_in_domain() -> None:

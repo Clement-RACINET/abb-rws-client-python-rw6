@@ -8,6 +8,7 @@ RWS module: RobotWare Services → RAPID Service → Operations on RAPID executi
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -50,6 +51,7 @@ async def get_rapid_execution_state(
         params={k: v for k, v in {"continue_on_err": continue_on_err}.items() if v is not None},
     )
 
+
 async def get_rapid_execution_actions(
     client: RWSClient,
     action: str | None = None,
@@ -83,6 +85,7 @@ async def get_rapid_execution_actions(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def start_rapid_execution(
     client: RWSClient,
@@ -136,11 +139,12 @@ async def start_rapid_execution(
                 "cycle": cycle,
                 "condition": condition,
                 "stopatbp": stopatbp,
-                "alltaskbytsp": alltaskbytsp
+                "alltaskbytsp": alltaskbytsp,
             }.items()
             if v is not None
         },
     )
+
 
 async def stop_rapid_execution(
     client: RWSClient,
@@ -178,15 +182,9 @@ async def stop_rapid_execution(
     return await client.post(
         "/rw/rapid/execution",
         params={k: v for k, v in {"action": action}.items() if v is not None},
-        data={
-            k: v
-            for k, v in {
-                "stopmode": stopmode,
-                "usetsp": usetsp
-            }.items()
-            if v is not None
-        },
+        data={k: v for k, v in {"stopmode": stopmode, "usetsp": usetsp}.items() if v is not None},
     )
+
 
 async def start_rapid_execution_from_production_entry(
     client: RWSClient,
@@ -223,6 +221,7 @@ async def start_rapid_execution_from_production_entry(
         data={},
     )
 
+
 async def reset_rapid_program_pointer_to_main(
     client: RWSClient,
     action: str | None = None,
@@ -257,6 +256,7 @@ async def reset_rapid_program_pointer_to_main(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def set_number_of_execution_cycles(
     client: RWSClient,
@@ -294,6 +294,7 @@ async def set_number_of_execution_cycles(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"cycle": cycle}.items() if v is not None},
     )
+
 
 async def subscribe_rapid_execution(
     client: RWSClient,
@@ -335,11 +336,12 @@ async def subscribe_rapid_execution(
             for k, v in {
                 "resources": resources,
                 "identifier": identifier,
-                "identifier_p": identifier_p
+                "identifier_p": identifier_p,
             }.items()
             if v is not None
         },
     )
+
 
 async def subscribe_rapid_execution_cycle(
     client: RWSClient,
@@ -381,11 +383,12 @@ async def subscribe_rapid_execution_cycle(
             for k, v in {
                 "resources": resources,
                 "identifier": identifier,
-                "identifier_p": identifier_p
+                "identifier_p": identifier_p,
             }.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_hold_to_run(
     client: RWSClient,
@@ -422,13 +425,11 @@ async def subscribe_on_hold_to_run(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def set_hold_to_run_cmd(
     client: RWSClient,

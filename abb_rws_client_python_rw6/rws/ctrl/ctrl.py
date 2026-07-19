@@ -8,6 +8,7 @@ RWS module: Controller Service → Get Controller Resources
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -41,6 +42,7 @@ async def get_controller_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl")
+
 
 async def get_controller_actions(
     client: RWSClient,
@@ -76,6 +78,7 @@ async def get_controller_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def get_controller_environment_variable(
     client: RWSClient,
     envname: str,
@@ -106,6 +109,7 @@ async def get_controller_environment_variable(
     """
     return await client.get(f"/ctrl/${envname}")
 
+
 async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
     """
     Restart or Shutdown controller.
@@ -135,6 +139,7 @@ async def restart_or_shutdown_controller(client: RWSClient) -> httpx.Response:
         "/ctrl",
         data={},
     )
+
 
 async def set_controller_language(
     client: RWSClient,
@@ -171,6 +176,7 @@ async def set_controller_language(
         data={},
     )
 
+
 async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
     """
     Get list of installed systems.
@@ -197,6 +203,7 @@ async def get_list_of_installed_systems(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/system")
+
 
 async def get_actions_on_system(
     client: RWSClient,
@@ -231,6 +238,7 @@ async def get_actions_on_system(
         "/ctrl/system",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_boot_device(
     client: RWSClient,
@@ -267,6 +275,7 @@ async def set_boot_device(
         data={},
     )
 
+
 async def get_boot_device(
     client: RWSClient,
     resource: str | None = None,
@@ -300,6 +309,7 @@ async def get_boot_device(
         "/ctrl/system",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def load_boot_image(
     client: RWSClient,
@@ -337,6 +347,7 @@ async def load_boot_image(
         data={},
     )
 
+
 async def post_unload_boot_image(
     client: RWSClient,
     action: str | None = None,
@@ -371,6 +382,7 @@ async def post_unload_boot_image(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def get_selected_system_name(
     client: RWSClient,
@@ -407,6 +419,7 @@ async def get_selected_system_name(
         params={k: v for k, v in {"type": type}.items() if v is not None},
     )
 
+
 async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
     """
     Install deployment package.
@@ -440,6 +453,7 @@ async def post_install_deployment_package(client: RWSClient) -> httpx.Response:
         data={},
     )
 
+
 async def validate_deployment_package(client: RWSClient) -> httpx.Response:
     """
     Validate deployment package.
@@ -469,6 +483,7 @@ async def validate_deployment_package(client: RWSClient) -> httpx.Response:
         "/ctrl/system/validatedpkg",
         data={},
     )
+
 
 async def get_system_resource(
     client: RWSClient,
@@ -500,6 +515,7 @@ async def get_system_resource(
         ```
     """
     return await client.get(f"/ctrl/system/{system_name}")
+
 
 async def get_actions_on_system_resource(
     client: RWSClient,
@@ -536,6 +552,7 @@ async def get_actions_on_system_resource(
         f"/ctrl/system/{system_name}",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def post_rename_system(
     client: RWSClient,
@@ -577,6 +594,7 @@ async def post_rename_system(
         data={k: v for k, v in {"newname": newname}.items() if v is not None},
     )
 
+
 async def post_select_system(
     client: RWSClient,
     system_name: str,
@@ -615,6 +633,7 @@ async def post_select_system(
         data={},
     )
 
+
 async def delete_system(
     client: RWSClient,
     system_name: str,
@@ -645,6 +664,7 @@ async def delete_system(
         ```
     """
     return await client.delete(f"/ctrl/system/{system_name}")
+
 
 async def post_deselect_system(
     client: RWSClient,
@@ -681,6 +701,7 @@ async def post_deselect_system(
         data={},
     )
 
+
 async def get_network_resource(client: RWSClient) -> httpx.Response:
     """
     Get Network Resource.
@@ -706,6 +727,7 @@ async def get_network_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/network")
+
 
 async def get_network_setting_actions(
     client: RWSClient,
@@ -740,6 +762,7 @@ async def get_network_setting_actions(
         "/ctrl/network",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def set_network_configuration(
     client: RWSClient,
@@ -777,6 +800,7 @@ async def set_network_configuration(
         data={},
     )
 
+
 async def get_dns_resource(client: RWSClient) -> httpx.Response:
     """
     Get DNS Resource.
@@ -802,6 +826,7 @@ async def get_dns_resource(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/network/dns")
+
 
 async def add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -833,6 +858,7 @@ async def add_route_table_entry(client: RWSClient) -> httpx.Response:
         data={},
     )
 
+
 async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Options to add a route table entry.
@@ -859,6 +885,7 @@ async def options_options_to_add_route_table_entry(client: RWSClient) -> httpx.R
         ```
     """
     return await client.options("/ctrl/network/route/add")
+
 
 async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
@@ -891,6 +918,7 @@ async def remove_route_table_entry(client: RWSClient) -> httpx.Response:
         data={},
     )
 
+
 async def options_options_to_remove_route_table_entry(client: RWSClient) -> httpx.Response:
     """
     Options to remove a route table entry.
@@ -918,6 +946,7 @@ async def options_options_to_remove_route_table_entry(client: RWSClient) -> http
     """
     return await client.options("/ctrl/network/route/remove")
 
+
 async def get_compress_resources(client: RWSClient) -> httpx.Response:
     """
     Get compress resources.
@@ -944,6 +973,7 @@ async def get_compress_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/compress")
+
 
 async def get_compress_actions(
     client: RWSClient,
@@ -978,6 +1008,7 @@ async def get_compress_actions(
         "/ctrl/compress",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def post_compress_decompress_resource(
     client: RWSClient,
@@ -1017,6 +1048,7 @@ async def post_compress_decompress_resource(
         data={},
     )
 
+
 async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
     """
     Get diagnostics resources.
@@ -1043,6 +1075,7 @@ async def get_diagnostics_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/diagnostics")
+
 
 async def get_diagnostics_actions(
     client: RWSClient,
@@ -1077,6 +1110,7 @@ async def get_diagnostics_actions(
         "/ctrl/diagnostics",
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
+
 
 async def save_system_diagnostics(
     client: RWSClient,
@@ -1114,6 +1148,7 @@ async def save_system_diagnostics(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def subscribe_on_system_dump(
     client: RWSClient,
@@ -1153,13 +1188,11 @@ async def subscribe_on_system_dump(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def subscribe_on_diagnostics_states_get_system_diagnostics(
     client: RWSClient,
@@ -1198,13 +1231,11 @@ async def subscribe_on_diagnostics_states_get_system_diagnostics(
         "/subscription",
         data={
             k: v
-            for k, v in {
-                "identifier": identifier,
-                "identifier_p": identifier_p
-            }.items()
+            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
             if v is not None
         },
     )
+
 
 async def get_safety_resources(client: RWSClient) -> httpx.Response:
     """
@@ -1232,6 +1263,7 @@ async def get_safety_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/safety")
+
 
 async def get_safety_actions(
     client: RWSClient,
@@ -1267,6 +1299,7 @@ async def get_safety_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def load_safety_configuration_file_to_controller(
     client: RWSClient,
     action: str | None = None,
@@ -1301,6 +1334,7 @@ async def load_safety_configuration_file_to_controller(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def set_safety_mode_of_the_controller(
     client: RWSClient,
@@ -1339,6 +1373,7 @@ async def set_safety_mode_of_the_controller(
         data={k: v for k, v in {"mode": mode}.items() if v is not None},
     )
 
+
 async def get_config_status(
     client: RWSClient,
     resource: str | None = None,
@@ -1372,6 +1407,7 @@ async def get_config_status(
         "/ctrl/safety",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def get_safety_mode_status(
     client: RWSClient,
@@ -1407,6 +1443,7 @@ async def get_safety_mode_status(
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
 
+
 async def get_safety_cyclic_brake_check_status(
     client: RWSClient,
     resource: str | None = None,
@@ -1441,14 +1478,10 @@ async def get_safety_cyclic_brake_check_status(
     return await client.get(
         "/ctrl/safety",
         params={
-            k: v
-            for k, v in {
-                "resource": resource,
-                "drivenum": drivenum
-            }.items()
-            if v is not None
+            k: v for k, v in {"resource": resource, "drivenum": drivenum}.items() if v is not None
         },
     )
+
 
 async def get_loadoperation_status(
     client: RWSClient,
@@ -1484,6 +1517,7 @@ async def get_loadoperation_status(
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
 
+
 async def get_safety_configurations(
     client: RWSClient,
     resource: str | None = None,
@@ -1516,6 +1550,7 @@ async def get_safety_configurations(
         "/ctrl/safety",
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
+
 
 async def get_safety_violation_info(
     client: RWSClient,
@@ -1551,6 +1586,7 @@ async def get_safety_violation_info(
         params={k: v for k, v in {"resource": resource}.items() if v is not None},
     )
 
+
 async def post_unlock_the_safety_configuration(
     client: RWSClient,
     action: str | None = None,
@@ -1585,6 +1621,7 @@ async def post_unlock_the_safety_configuration(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={},
     )
+
 
 async def post_software_sync_acknowledgement(
     client: RWSClient,
@@ -1622,6 +1659,7 @@ async def post_software_sync_acknowledgement(
         params={k: v for k, v in {"action": action}.items() if v is not None},
         data={k: v for k, v in {"index": index}.items() if v is not None},
     )
+
 
 async def add_validation_info(
     client: RWSClient,
@@ -1661,6 +1699,7 @@ async def add_validation_info(
         data={k: v for k, v in {"validated_by": validated_by}.items() if v is not None},
     )
 
+
 async def remove_validation_info(
     client: RWSClient,
     action: str | None = None,
@@ -1697,6 +1736,7 @@ async def remove_validation_info(
         data={},
     )
 
+
 async def set_reset_safety_controller(
     client: RWSClient,
     action: str | None = None,
@@ -1732,6 +1772,7 @@ async def set_reset_safety_controller(
         data={},
     )
 
+
 async def get_options_resource(
     client: RWSClient,
     option_to_verify: str,
@@ -1763,6 +1804,7 @@ async def get_options_resource(
         ```
     """
     return await client.get(f"/ctrl/options/{option_to_verify}")
+
 
 async def get_check_robotware_version_compatibility_with_contorller_hardware(
     client: RWSClient,
@@ -1798,6 +1840,7 @@ async def get_check_robotware_version_compatibility_with_contorller_hardware(
     """
     return await client.get(f"/ctrl/compatibility/{robotware_version}")
 
+
 async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
     """
     Get Virtual Time resources.
@@ -1824,6 +1867,7 @@ async def get_virtual_time_resources(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/virtualtime")
+
 
 async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
@@ -1852,6 +1896,7 @@ async def get_virtualtime(client: RWSClient) -> httpx.Response:
     """
     return await client.get("/ctrl/virtualtime/vttime")
 
+
 async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
     """
     Get VTTimeslice Value.
@@ -1879,6 +1924,7 @@ async def get_vttimeslice_value(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/virtualtime/vttimeslice")
+
 
 async def get_actions_on_vttimeslice(
     client: RWSClient,
@@ -1915,6 +1961,7 @@ async def get_actions_on_vttimeslice(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def set_vttimeslice_value(
     client: RWSClient,
     vttimeslice: str | None = None,
@@ -1950,6 +1997,7 @@ async def set_vttimeslice_value(
         data={k: v for k, v in {"vttimeslice": vttimeslice}.items() if v is not None},
     )
 
+
 async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
     Get Speed of Virtual Time.
@@ -1976,6 +2024,7 @@ async def get_speed_of_virtual_time(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/virtualtime/vtspeed")
+
 
 async def get_actions_on_vtspeed(
     client: RWSClient,
@@ -2011,6 +2060,7 @@ async def get_actions_on_vtspeed(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def set_speed_of_virtualtime(
     client: RWSClient,
     vtspeed: str | None = None,
@@ -2045,6 +2095,7 @@ async def set_speed_of_virtualtime(
         data={k: v for k, v in {"vtspeed": vtspeed}.items() if v is not None},
     )
 
+
 async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
     """
     Get State of Virtual Time.
@@ -2071,6 +2122,7 @@ async def get_state_of_virtual_time(client: RWSClient) -> httpx.Response:
         ```
     """
     return await client.get("/ctrl/virtualtime/vtstate")
+
 
 async def get_actions_on_vtstate(
     client: RWSClient,
@@ -2106,6 +2158,7 @@ async def get_actions_on_vtstate(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
+
 async def set_state_of_virtualtime(
     client: RWSClient,
     vtstate: str | None = None,
@@ -2139,6 +2192,7 @@ async def set_state_of_virtualtime(
         "/ctrl/virtualtime/vtstate",
         data={k: v for k, v in {"vtstate": vtstate}.items() if v is not None},
     )
+
 
 async def post_vt_run(client: RWSClient) -> httpx.Response:
     """

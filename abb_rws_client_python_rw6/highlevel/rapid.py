@@ -88,9 +88,7 @@ def _parse_exec_state(response: httpx.Response) -> str:
     if match:
         return match.group(1).strip()
 
-    raise ValueError(
-        f"Cannot parse ctrlexecstate from response: {response.text[:200]}"
-    )
+    raise ValueError(f"Cannot parse ctrlexecstate from response: {response.text[:200]}")
 
 
 def _parse_symbol_value(response: httpx.Response) -> str:
@@ -129,9 +127,7 @@ def _parse_symbol_value(response: httpx.Response) -> str:
     if match:
         return match.group(1).strip()
 
-    raise ValueError(
-        f"Cannot parse symbol value from response: {response.text[:200]}"
-    )
+    raise ValueError(f"Cannot parse symbol value from response: {response.text[:200]}")
 
 
 # ---------------------------------------------------------------------------
@@ -337,8 +333,7 @@ async def wait_until_stopped(
             return
         if timeout is not None and elapsed >= timeout:
             raise TimeoutError(
-                f"RAPID still running after {timeout}s "
-                f"(poll_interval={poll_interval}s)"
+                f"RAPID still running after {timeout}s (poll_interval={poll_interval}s)"
             )
         await asyncio.sleep(poll_interval)
         elapsed += poll_interval
@@ -416,6 +411,7 @@ async def set_variable_with_mastership(
     finally:
         # Always release — even on exception — to avoid locking the controller
         await post_mastership_domain_release(client, domain=domain, action="release")
+
 
 async def set_variables_with_mastership(
     client: RWSClient,
@@ -496,6 +492,7 @@ async def get_variable(
 # ---------------------------------------------------------------------------
 # Module management
 # ---------------------------------------------------------------------------
+
 
 async def load_module_safe(
     client: RWSClient,
@@ -615,8 +612,6 @@ async def load_module_safe(
     finally:
         # Step 5 — Always release mastership, even on exception
         await post_mastership_domain_release(client, domain=domain, action="release")
-
-
 
 
 # ---------------------------------------------------------------------------

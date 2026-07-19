@@ -8,6 +8,7 @@ RWS module: Operations on IO Profinet Device → Get profinet I/O device read re
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -72,11 +73,12 @@ async def get_profinet_device_read_record_implicit_data(
                 "index": index,
                 "datalength": datalength,
                 "vendorid": vendorid,
-                "deviceid": deviceid
+                "deviceid": deviceid,
             }.items()
             if v is not None
         },
     )
+
 
 async def post_read_record_implicit_data_from_device_in(
     client: RWSClient,
@@ -138,11 +140,12 @@ async def post_read_record_implicit_data_from_device_in(
                 "datalength": datalength,
                 "vendorid": vendorid,
                 "deviceid": deviceid,
-                "ip": ip
+                "ip": ip,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_forms(
     client: RWSClient,
@@ -176,6 +179,7 @@ async def get_forms(
         ```
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/implicitdata")
+
 
 async def get_profinet_device_read_record_data(
     client: RWSClient,
@@ -224,11 +228,12 @@ async def get_profinet_device_read_record_data(
                 "slot": slot,
                 "subslot": subslot,
                 "index": index,
-                "datalength": datalength
+                "datalength": datalength,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_profinet_device_read_record_data_2(
     client: RWSClient,
@@ -277,11 +282,12 @@ async def get_profinet_device_read_record_data_2(
                 "slot": slot,
                 "subslot": subslot,
                 "index": index,
-                "datalength": datalength
+                "datalength": datalength,
             }.items()
             if v is not None
         },
     )
+
 
 async def get_forms_2(
     client: RWSClient,
@@ -315,6 +321,7 @@ async def get_forms_2(
         ```
     """
     return await client.options(f"rw/iosystem/devices/{network}/{device}/explicitdata")
+
 
 async def get_profinet_device_alarms_xml_response(
     client: RWSClient,
@@ -353,6 +360,7 @@ async def get_profinet_device_alarms_xml_response(
     """
     return await client.get(f"rw/iosystem/devices/{network}/{device}/alarms")
 
+
 async def post_clear_the_alarms(
     client: RWSClient,
     network: str,
@@ -388,6 +396,7 @@ async def post_clear_the_alarms(
         f"rw/iosystem/devices/{network}/{device}/alarms/clear",
         data={},
     )
+
 
 async def get_forms_3(
     client: RWSClient,

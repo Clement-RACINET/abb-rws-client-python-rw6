@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/iosystem/iosystem."""
+
 from __future__ import annotations
 
 import httpx
@@ -74,6 +75,7 @@ async def test_get_io_system_resources() -> None:
     assert transport.last_request.url.path == "/rw/iosystem"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_io_network() -> None:
     """
@@ -89,6 +91,7 @@ async def test_get_io_network() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_io_network_actions() -> None:
     """
@@ -103,6 +106,7 @@ async def test_get_io_network_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_network() -> None:
@@ -121,6 +125,7 @@ async def test_update_io_network() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_io_network() -> None:
     """
@@ -138,6 +143,7 @@ async def test_subscribe_io_network() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_io_network_configuration_properties() -> None:
     """
@@ -153,6 +159,7 @@ async def test_get_io_network_configuration_properties() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/networks/network_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_network_configuration_type() -> None:
@@ -171,6 +178,7 @@ async def test_update_io_network_configuration_type() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_io_device() -> None:
     """
@@ -186,6 +194,7 @@ async def test_get_io_device() -> None:
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_io_device_actions() -> None:
     """
@@ -200,6 +209,7 @@ async def test_get_io_device_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_device() -> None:
@@ -218,6 +228,7 @@ async def test_update_io_device() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_io_device() -> None:
     """
@@ -234,6 +245,7 @@ async def test_subscribe_io_device() -> None:
     ct = transport.last_request.headers.get("content-type") or ""
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
+
 
 @pytest.mark.asyncio
 async def test_set_input_data() -> None:
@@ -252,6 +264,7 @@ async def test_set_input_data() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_set_output_data() -> None:
     """
@@ -269,6 +282,7 @@ async def test_set_output_data() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_get_io_device_configuration_properties() -> None:
     """
@@ -283,6 +297,7 @@ async def test_get_io_device_configuration_properties() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_eio_device_status_information() -> None:
@@ -301,6 +316,7 @@ async def test_get_eio_device_status_information() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_post_send_device_command() -> None:
     """
@@ -318,6 +334,7 @@ async def test_post_send_device_command() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_options_send_device_command_actions() -> None:
     """
@@ -333,6 +350,7 @@ async def test_options_send_device_command_actions() -> None:
     assert transport.last_request.method == "OPTIONS"
     assert transport.last_request.url.path == "/rw/iosystem/devices/device_test/command"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_get_an_io_signal() -> None:
@@ -350,6 +368,7 @@ async def test_get_an_io_signal() -> None:
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_get_io_signal_actions() -> None:
     """
@@ -365,6 +384,7 @@ async def test_get_io_signal_actions() -> None:
     expected_path = "/rw/iosystem/signals/network_test/unit_test/signal_test"
     assert transport.last_request.url.path == expected_path
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_update_io_signal_state() -> None:
@@ -385,6 +405,7 @@ async def test_update_io_signal_state() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_update_io_signal_value() -> None:
     """
@@ -404,6 +425,7 @@ async def test_update_io_signal_value() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 204
 
+
 @pytest.mark.asyncio
 async def test_subscribe_io_signal() -> None:
     """
@@ -421,6 +443,7 @@ async def test_subscribe_io_signal() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_io_signal_configuration_properties() -> None:
     """
@@ -431,10 +454,7 @@ async def test_get_io_signal_configuration_properties() -> None:
     client = _make_client(transport)
 
     resp = await get_io_signal_configuration_properties(
-        client,
-        "network_test",
-        "unit_test",
-        "signal_test"
+        client, "network_test", "unit_test", "signal_test"
     )
 
     assert transport.last_request is not None
