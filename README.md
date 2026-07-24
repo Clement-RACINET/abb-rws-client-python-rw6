@@ -8,6 +8,13 @@ API under **RobotWare 6**.
 
 ---
 
+## Documentation
+
+Documentation is fully available **[here](https://clement-racinet.github.io/abb-rws-client-python-rw6/)**.
+
+---
+---
+
 ## Features
 
 | Domain           | Operations                                                                   |
