@@ -4,10 +4,9 @@ repo_url: https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6
 site_dir: public 
 
 theme:
-  name: material
-  palette:
-    primary: orange
-    accent: deep-orange
+  name: readthedocs #mkdocs #readthedocs #dracula
+  language: en
+  logo: assets/logo.png
 
 plugins:
   - search
