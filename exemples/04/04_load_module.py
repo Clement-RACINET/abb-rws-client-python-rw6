@@ -33,7 +33,8 @@ from abb_rws_client_python_rw6 import (
     get_logger,
     load_env,
 )
-from abb_rws_client_python_rw6.highlevel.rapid import is_running, load_module_safe, stop_rapid
+from abb_rws_client_python_rw6.highlevel.execution import is_running, stop_rapid
+from abb_rws_client_python_rw6.highlevel.modules import load_module_safe
 
 load_env()
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))

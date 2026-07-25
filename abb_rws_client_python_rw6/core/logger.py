@@ -60,7 +60,7 @@ def configure_logging(
     function more than once replaces the existing handlers.
 
     All child loggers (``abb_rws_client_python_rw6.core.client``,
-    ``abb_rws_client_python_rw6.highlevel.rapid``, ``abb_rws_client_python_rw6.rws.*``, …)
+    ``abb_rws_client_python_rw6.highlevel.*``, ``abb_rws_client_python_rw6.rws.*``, …)
     inherit this configuration automatically — no per-module setup needed.
 
     Args:

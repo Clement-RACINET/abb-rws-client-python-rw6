@@ -37,9 +37,9 @@ from abb_rws_client_python_rw6 import (
     robtarget_to_rws,
 )
 from abb_rws_client_python_rw6.core.exceptions import RWSError
-from abb_rws_client_python_rw6.highlevel.rapid import (
+from abb_rws_client_python_rw6.highlevel.execution import is_running
+from abb_rws_client_python_rw6.highlevel.variables import (
     get_variable,
-    is_running,
     set_variables_with_mastership,
 )
 

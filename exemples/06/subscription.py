@@ -82,7 +82,7 @@ from abb_rws_client_python_rw6 import configure_logging, load_env
 from abb_rws_client_python_rw6.core.client import RWSClient
 from abb_rws_client_python_rw6.core.exceptions import RWSError
 from abb_rws_client_python_rw6.core.logger import get_logger
-from abb_rws_client_python_rw6.highlevel.rapid import (
+from abb_rws_client_python_rw6.highlevel.variables import (
     get_variable,
     set_variable_with_mastership,
 )

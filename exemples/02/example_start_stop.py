@@ -29,7 +29,7 @@ from abb_rws_client_python_rw6 import (
     get_logger,
     load_env,
 )
-from abb_rws_client_python_rw6.highlevel.rapid import (
+from abb_rws_client_python_rw6.highlevel.execution import (
     is_running,
     start_rapid,
     stop_rapid,
