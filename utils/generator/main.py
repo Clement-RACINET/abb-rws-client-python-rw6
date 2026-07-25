@@ -139,6 +139,65 @@ _ROUTING_TABLE: dict[str, str | dict] = {
     },
 }
 
+# ---------------------------------------------------------------------------
+# Known ABB documentation typos
+# ---------------------------------------------------------------------------
+#
+# ABB's official RWS doc for the Subscription Service contains a typo:
+# "/subscripion/{...}" instead of "/subscription/{...}" (missing "t").
+#
+# Confirmed on a real RW6 controller (2026-07-25, C. RACINET):
+#   DELETE /subscription/{group_id}  → 204, subscription actually removed.
+#   The doc-literal "/subscripion/"  → would 404 (unroutable path on ABB side).
+#
+# The scraped JSON is left untouched (verbatim capture of ABB's doc, kept
+# for diffing against future ABB doc revisions). The fix is applied here,
+# at generation time, so it survives every regeneration.
+#
+# Also normalizes the inconsistent path param "{group-d}" → "{group-id}"
+# on the same buggy endpoint, so the generated Python parameter name is
+# "group_id" everywhere instead of the ABB-doc-typo "group_d".
+_URL_TYPO_FIXES: dict[str, str] = {
+    "/subscripion/{group-id}": "/subscription/{group-id}",
+    "/subscripion/{group-id}/{resource-uri}": "/subscription/{group-id}/{resource-uri}",
+    "/subscripion/{group-d}/{resource-uri}": "/subscription/{group-id}/{resource-uri}",
+}
+
+
+def _apply_known_typo_fixes(endpoints: list[dict]) -> None:
+    """Patch known ABB documentation URL typos in-place.
+
+    Tracks which entries of ``_URL_TYPO_FIXES`` actually matched an URL
+    in the scraped JSON. Any entry that matched zero endpoints is
+    reported as a stale patch: either ABB fixed their documentation, or
+    the JSON structure changed upstream. Stale entries must be removed
+    from ``_URL_TYPO_FIXES`` — leaving them in place is silent dead code
+    that hides a future regression if the typo ever comes back.
+
+    Args:
+        endpoints: Raw endpoint list as loaded from the scraped JSON.
+            Mutated in place — the source JSON file on disk is never
+            modified.
+    """
+    matched: set[str] = set()
+
+    for ep in endpoints:
+        url = ep.get("url", "")
+        if url in _URL_TYPO_FIXES:
+            fixed = _URL_TYPO_FIXES[url]
+            matched.add(url)
+            print(f"[FIX]  Known ABB doc typo corrected: {url!r} -> {fixed!r}")
+            ep["url"] = fixed
+
+    stale = set(_URL_TYPO_FIXES) - matched
+    for stale_url in sorted(stale):
+        print(
+            f"[WARN] Typo patch for {stale_url!r} matched NOTHING in the scraped JSON.\n"
+            f"       Either ABB fixed their documentation, or the JSON structure\n"
+            f"       changed upstream. This patch entry is now dead code.\n"
+            f"       ACTION REQUIRED: remove it from _URL_TYPO_FIXES in "
+            f"utils/generator/main.py."
+        )
 
 def resolve_module_path(breadcrumb: list[str]) -> str | None:
     """Resolve the Python module path (relative to rws/) from an ABB breadcrumb.
@@ -1184,6 +1243,8 @@ def main(argv: list[str] | None = None) -> None:
 
     raw: list[dict] = json.loads(API_JSON.read_text(encoding="utf-8"))
     print(f"[INFO] {len(raw)} entries read from {API_JSON.relative_to(REPO_ROOT)}")
+
+    _apply_known_typo_fixes(raw)
 
     modules = group_by_module(raw)
 

@@ -8,7 +8,6 @@ RWS module: Subscription Service → Get Subscription Actions
 Each function maps to exactly one HTTP endpoint.
 No composed logic — see highlevel/ for wrappers.
 """
-
 from __future__ import annotations
 
 import httpx
@@ -54,7 +53,6 @@ async def get_subscription_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def subscribe_on_resources(
     client: RWSClient,
     identifier: str | None = None,
@@ -93,11 +91,13 @@ async def subscribe_on_resources(
         "/subscription",
         data={
             k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
             if v is not None
         },
     )
-
 
 async def get_subscription_group_actions(
     client: RWSClient,
@@ -139,7 +139,6 @@ async def get_subscription_group_actions(
         params={k: v for k, v in {"action": action}.items() if v is not None},
     )
 
-
 async def add_new_resources_remove_existing_resources_or(
     client: RWSClient,
     group_id: str,
@@ -149,7 +148,7 @@ async def add_new_resources_remove_existing_resources_or(
     """
     Add new resources, Remove existing Resources or change existing resources priorities..
 
-    Route: ``PUT /subscripion/{group-id}``
+    Route: ``PUT /subscription/{group-id}``
     ABB constraints: maximum 1000 resources can be subscribed per group Each client can have
         maximum 2 groups. Low priority subscription(p=0) is allowed on any resource. Medium
         priority subscription(p=1) is allowed on any resource. RobotWebservice clients can
@@ -177,14 +176,16 @@ async def add_new_resources_remove_existing_resources_or(
         ```
     """
     return await client.put(
-        f"/subscripion/{group_id}",
+        f"/subscription/{group_id}",
         data={
             k: v
-            for k, v in {"identifier": identifier, "identifier_p": identifier_p}.items()
+            for k, v in {
+                "identifier": identifier,
+                "identifier_p": identifier_p
+            }.items()
             if v is not None
         },
     )
-
 
 async def unsubscribe_or_remove_the_subscription_group_resources(
     client: RWSClient,
@@ -193,7 +194,7 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
     """
     Unsubscribe or remove the subscription group/resources in group..
 
-    Route: ``DELETE /subscripion/{group-id}``
+    Route: ``DELETE /subscription/{group-id}``
     ABB constraints: Not supported in bootserver mode
 
     Args:
@@ -218,23 +219,22 @@ async def unsubscribe_or_remove_the_subscription_group_resources(
         <Response [200]>
         ```
     """
-    return await client.delete(f"/subscripion/{group_id}")
-
+    return await client.delete(f"/subscription/{group_id}")
 
 async def unsubscribe_or_remove_the_resource_from_subscription(
     client: RWSClient,
-    group_d: str,
+    group_id: str,
     resource_uri: str,
 ) -> httpx.Response:
     """
     Unsubscribe or remove the resource from subscription group..
 
-    Route: ``DELETE /subscripion/{group-d}/{resource-uri}``
+    Route: ``DELETE /subscription/{group-id}/{resource-uri}``
     ABB constraints: Not supported in bootserver mode
 
     Args:
         client: Open RWSClient instance.
-        group_d: URL path parameter.
+        group_id: URL path parameter.
         resource_uri: URL path parameter.
 
     Returns:
@@ -250,10 +250,10 @@ async def unsubscribe_or_remove_the_resource_from_subscription(
         ```python
         >>> await unsubscribe_or_remove_the_resource_from_subscription(
         ...     client,
-        ...     "group_d_value",
+        ...     "group_id_value",
         ...     "resource_uri_value"
         ... )
         <Response [200]>
         ```
     """
-    return await client.delete(f"/subscripion/{group_d}/{resource_uri}")
+    return await client.delete(f"/subscription/{group_id}/{resource_uri}")

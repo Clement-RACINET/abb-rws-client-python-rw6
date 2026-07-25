@@ -36,7 +36,7 @@ mkdocs-coverage = ">=2.0.0,<3"
 [feature.dev.tasks]
 lint        = "ruff check abb_rws_client_python_rw6 tests"
 format      = "ruff format abb_rws_client_python_rw6 tests"
-test        = "python -m pytest tests/ -v"
+tests       = "python -m pytest tests/ -v"
 fix_init    = "python utils/fix_init.py"
 clean_cache = "python utils/clean_cache.py"
 docs        = "python utils/docs/run_docs.py"
