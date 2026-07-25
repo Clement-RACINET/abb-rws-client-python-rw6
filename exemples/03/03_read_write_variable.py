@@ -34,7 +34,7 @@ from abb_rws_client_python_rw6 import (
     get_logger,
     load_env,
 )
-from abb_rws_client_python_rw6.highlevel.rapid import get_variable, set_variable_with_mastership
+from abb_rws_client_python_rw6.highlevel.variables import get_variable, set_variable_with_mastership
 
 load_env()
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
