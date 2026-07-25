@@ -52,8 +52,7 @@ scrape = "python utils/scraping/scrape.py"
 
 # ── Feature : examples ────────────────────────────────────────────────────
 [feature.examples.pypi-dependencies]
-# httpx-ws = ">=0.6,<1.0"
-# websockets = ">=13.0"
+
 
 [feature.examples.tasks]
 example-06 = "python exemples/06/subscription.py"
