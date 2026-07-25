@@ -9,7 +9,10 @@ abb-rws-client-python-rw6
 │   │   └── serializers.py
 │   ├── highlevel
 │   │   ├── __init__.py
-│   │   └── rapid.py
+│   │   ├── execution.py
+│   │   ├── modules.py
+│   │   ├── panel.py
+│   │   └── variables.py
 │   ├── rws
 │   │   ├── ctrl
 │   │   │   ├── __init__.py
@@ -116,7 +119,10 @@ abb-rws-client-python-rw6
 │   │   └── test_serializers.py
 │   ├── highlevel
 │   │   ├── __init__.py
-│   │   └── test_rapid.py
+│   │   ├── test_execution.py
+│   │   ├── test_modules.py
+│   │   ├── test_panel.py
+│   │   └── test_variables.py
 │   ├── rws
 │   │   ├── ctrl
 │   │   │   ├── __init__.py

@@ -33,14 +33,13 @@ mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 mkdocs-coverage = ">=2.0.0,<3"
 
 [feature.dev.tasks]
-lint       = "ruff check abb_rws_client_python_rw6 tests"
-format     = "ruff format abb_rws_client_python_rw6 tests"
-test       = "python -m pytest tests/ -v"
-fix-init   = "python utils/fix_init.py"
-clean      = "python utils/clean.py"
-clean-dry  = "python utils/clean.py --dry-run"
-docs       = "python utils/docs/run_docs.py"
-docs-build = "python -m mkdocs build"
+lint        = "ruff check abb_rws_client_python_rw6 tests"
+format      = "ruff format abb_rws_client_python_rw6 tests"
+test        = "python -m pytest tests/ -v"
+fix_init    = "python utils/fix_init.py"
+clean_cache = "python utils/clean_cache.py"
+docs        = "python utils/docs/run_docs.py"
+docs-build  = "python -m mkdocs build"
 
 # ── Feature : scraping ────────────────────────────────────────────────────
 [feature.scraping.pypi-dependencies]
