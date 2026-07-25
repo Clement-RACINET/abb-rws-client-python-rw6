@@ -370,6 +370,61 @@ class TestClientLifecycle:
         assert client.username == "admin"
         assert client.password == "secret"
 
+class TestSessionCookieHeader:
+    """Tests for RWSClient.session_cookie_header()."""
+
+    async def test_returns_empty_string_when_closed(self) -> None:
+        """A never-opened client must return an empty cookie header."""
+        client = RWSClient(host="192.168.125.1")
+        assert client.session_cookie_header() == ""
+
+    async def test_returns_empty_string_when_open_without_cookies(self) -> None:
+        """An open client with no server-set cookie yet must return an empty string."""
+        transport = _RouteTransport({"rw/test": _resp(200)})
+        client = await _open_client(transport)
+        assert client.session_cookie_header() == ""
+
+    async def test_returns_single_cookie_after_request(self) -> None:
+        """A single Set-Cookie response header must be reflected in the output."""
+        response = httpx.Response(
+            status_code=200,
+            headers={"set-cookie": "ABBCX=abc123; Path=/"},
+        )
+        transport = _RouteTransport({"rw/test": response})
+        client = await _open_client(transport)
+        await client.get("rw/test")
+        header = client.session_cookie_header()
+        assert "ABBCX=abc123" in header
+
+    async def test_returns_multiple_cookies_semicolon_separated(self) -> None:
+        """Multiple Set-Cookie headers must be joined with '; ' in a single string."""
+        response = httpx.Response(
+            status_code=200,
+            headers=[
+                ("set-cookie", "ABBCX=abc123; Path=/"),
+                ("set-cookie", "-http-session-=xyz789; Path=/"),
+            ],
+        )
+        transport = _RouteTransport({"rw/test": response})
+        client = await _open_client(transport)
+        await client.get("rw/test")
+        header = client.session_cookie_header()
+        assert "ABBCX=abc123" in header
+        assert "-http-session-=xyz789" in header
+        assert "; " in header
+
+    async def test_closed_after_use_still_returns_empty(self) -> None:
+        """Once aclose() is called, the cookie jar is gone — must return empty string."""
+        response = httpx.Response(
+            status_code=200,
+            headers={"set-cookie": "ABBCX=abc123; Path=/"},
+        )
+        transport = _RouteTransport({"rw/test": response})
+        client = await _open_client(transport)
+        await client.get("rw/test")
+        await client.aclose()
+        assert client.session_cookie_header() == ""
+
 
 class TestHttpMethods:
     async def test_get_returns_response(self) -> None:

@@ -287,6 +287,37 @@ class RWSClient:
         state = "open" if self._http is not None else "closed"
         return f"RWSClient(host={self.host!r}, timeout={self.timeout}, state={state!r})"
 
+    def session_cookie_header(self) -> str:
+        """Return the current session cookies as a single ``Cookie`` header value.
+
+        ABB Route:
+            N/A — local session helper, no HTTP call performed.
+
+        ABB Constraints:
+            Meaningful only once the session is open and at least one
+            request has succeeded (ABBCX is set by the controller after
+            the first successful digest handshake).
+
+        Returns:
+            Semicolon-separated ``name=value`` cookie pairs, ready to be
+            used as the ``Cookie`` header of a WebSocket handshake.
+            Returns an empty string if the session is not open or has no
+            cookies yet.
+
+        Example:
+            ```python
+            >>> async with RWSClient(host="192.168.125.1") as client:
+            ...     await client.get("rw/rapid/execution")
+            ...     header = client.session_cookie_header()
+            ...     # header == "-http-session-=...; ABBCX=..."
+            ```
+        """
+        if self._http is None:
+            return ""
+        return "; ".join(
+            f"{cookie.name}={cookie.value}" for cookie in self._http.cookies.jar
+        )
+
     # ── Internal request with retry ─────────────────────────────────────────
 
     async def _request(
@@ -636,40 +667,6 @@ class RWSClientSync:
     def __repr__(self) -> str:
         state = "open" if self._http is not None else "closed"
         return f"RWSClientSync(host={self.host!r}, state={state!r})"
-
-    def session_cookie_header(self) -> str:
-        """Return the current session cookies as a single ``Cookie`` header value.
-
-        ABB Route:
-            N/A — local session helper, no HTTP call performed.
-
-        ABB Constraints:
-            Meaningful only once the session is open and at least one
-            request has succeeded (ABBCX is set by the controller after
-            the first successful digest handshake).
-
-        Args:
-            None.
-
-        Returns:
-            Semicolon-separated ``name=value`` cookie pairs, ready to be
-            used as the ``Cookie`` header of a WebSocket handshake.
-            Returns an empty string if the session is not open or has no
-            cookies yet.
-
-        Example:
-            ```python
-            >>> async with RWSClient(host="192.168.125.1") as client:
-            ...     await client.get("rw/rapid/execution")
-            ...     header = client.session_cookie_header()
-            ...     # header == "-http-session-=...; ABBCX=..."
-            ```
-        """
-        if self._http is None:
-            return ""
-        return "; ".join(
-            f"{cookie.name}={cookie.value}" for cookie in self._http.cookies.jar
-        )
 
     # ── Internal request with retry ─────────────────────────────────────────
 

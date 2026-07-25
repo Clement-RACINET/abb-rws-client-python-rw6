@@ -38,7 +38,10 @@ nav:
         - Logger: api/abb_rws_client_python_rw6/core/logger.md
         - Serializers: api/abb_rws_client_python_rw6/core/serializers.md
       - Highlevel:
-        - Rapid: api/abb_rws_client_python_rw6/highlevel/rapid.md
+        - Execution: api/abb_rws_client_python_rw6/highlevel/execution.md
+        - Modules: api/abb_rws_client_python_rw6/highlevel/modules.md
+        - Panel: api/abb_rws_client_python_rw6/highlevel/panel.md
+        - Variables: api/abb_rws_client_python_rw6/highlevel/variables.md
       - Rws:
         - Cfg: api/abb_rws_client_python_rw6/rws/cfg.md
         - Devices: api/abb_rws_client_python_rw6/rws/devices.md
