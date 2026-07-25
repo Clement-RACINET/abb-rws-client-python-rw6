@@ -58,3 +58,37 @@ websockets = ">=13.0"
 [feature.examples.tasks]
 example-06 = "python exemples/06/subscription.py"
 example-07 = "python exemples/07/write_robtarget_array.py"
+
+
+
+
+[tool.pytest.ini_options]
+asyncio_mode                       = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = [
+    "--cov=trajcenter",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=html:docs/coverage",
+    "--cov-report=xml:coverage.xml",
+]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["abb_rws_client_python_rw6", "tests"]
+branch = true
+omit   = [".pixi/*", "*/site-packages/*", "examples/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+
+[tool.coverage.html]
+directory = "docs/coverage"
+title     = "TrajCenter — Coverage Report"
+
+[tool.coverage.xml]
+output = "coverage.xml"
