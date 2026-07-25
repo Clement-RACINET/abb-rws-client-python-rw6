@@ -320,7 +320,7 @@ class RWSClient:
         return "; ".join(
             f"{cookie.name}={cookie.value}" for cookie in self._http.cookies.jar
         )
-        
+
     # ── Internal request with retry ─────────────────────────────────────────
 
     async def _request(
