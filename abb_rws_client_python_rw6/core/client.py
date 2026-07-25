@@ -298,9 +298,6 @@ class RWSClient:
             request has succeeded (ABBCX is set by the controller after
             the first successful digest handshake).
 
-        Args:
-            None.
-
         Returns:
             Semicolon-separated ``name=value`` cookie pairs, ready to be
             used as the ``Cookie`` header of a WebSocket handshake.

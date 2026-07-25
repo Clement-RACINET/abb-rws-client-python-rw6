@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import fnmatch
 from pathlib import Path
+import shutil
 
 from utils.docs.config import DocConfig
 
@@ -144,12 +145,21 @@ def _walk(
 def generate_api_docs(cfg: DocConfig) -> str:
     """Generate API Markdown pages and return the YAML nav block.
 
+    Wipes ``cfg.docs_api_dir`` entirely before regenerating it, so that
+    stale pages left behind by deleted or renamed modules (e.g. after a
+    module split/refactor) do not linger on disk and break the mkdocs
+    build (mkdocstrings fails on orphan pages referencing a module that
+    no longer exists).
+
     Args:
         cfg: Documentation pipeline configuration.
 
     Returns:
         YAML navigation block with no base indentation (indent=0).
     """
+    print(f"🧹 Cleaning stale API pages → {cfg.docs_api_dir}")
+    shutil.rmtree(cfg.docs_api_dir, ignore_errors=True)
+
     print(f"📁 Generating API pages → {cfg.docs_api_dir}")
     cfg.docs_api_dir.mkdir(parents=True, exist_ok=True)
 
