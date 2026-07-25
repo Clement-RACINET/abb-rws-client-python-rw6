@@ -1,4 +1,4 @@
-abb_rws_client_python_rw6
+abb-rws-client-python-rw6
 ├── abb_rws_client_python_rw6
 │   ├── core
 │   │   ├── __init__.py
