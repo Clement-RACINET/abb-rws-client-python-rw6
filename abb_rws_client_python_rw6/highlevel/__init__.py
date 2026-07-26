@@ -9,6 +9,16 @@ from __future__ import annotations
 from .execution import is_running, logger, start_rapid, stop_rapid, wait_until_stopped
 from .modules import load_module_safe, logger
 from .panel import logger, set_motors_off, set_motors_on
+from .subscription import (
+    SubscribedResource,
+    SubscriptionHandle,
+    SubscriptionPriority,
+    build_rapid_pers_resource_uri,
+    create_subscription,
+    delete_subscription,
+    logger,
+    watch_resources,
+)
 from .variables import (
     get_variable,
     logger,
@@ -17,6 +27,12 @@ from .variables import (
 )
 
 __all__ = [
+    "SubscribedResource",
+    "SubscriptionHandle",
+    "SubscriptionPriority",
+    "build_rapid_pers_resource_uri",
+    "create_subscription",
+    "delete_subscription",
     "get_variable",
     "is_running",
     "load_module_safe",
@@ -28,4 +44,5 @@ __all__ = [
     "start_rapid",
     "stop_rapid",
     "wait_until_stopped",
+    "watch_resources",
 ]
