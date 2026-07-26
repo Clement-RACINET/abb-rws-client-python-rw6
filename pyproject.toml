@@ -29,8 +29,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6"
-Issues     = "https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6/issues"
+Repository = "https://github.com/Clement-RACINET/abb-rws-client-python-rw6"
+Issues     = "https://github.com/Clement-RACINET/abb-rws-client-python-rw6/issues"
 
 [project.optional-dependencies]
 dev = [

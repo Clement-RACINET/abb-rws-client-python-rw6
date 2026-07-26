@@ -39,7 +39,7 @@ La documentation complète est disponnible **[ici](https://clement-racinet.githu
 ## Installation rapide (en tant que dépendance)
 
 ```bash
-pip install git+https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6.git
+pip install git+https://github.com/Clement-RACINET/abb-rws-client-python-rw6.git
 ```
 
 ---
@@ -48,7 +48,7 @@ pip install git+https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6.git
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://gitlab.ensam.eu/lcfc/abb_rws_client_python_rw6.git
+git clone https://github.com/Clement-RACINET/abb-rws-client-python-rw6.git
 cd abb_rws_client_python_rw6
 
 # 2. Installer l'environnement (pixi résout tout automatiquement)
