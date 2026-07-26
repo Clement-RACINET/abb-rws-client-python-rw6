@@ -1,55 +1,54 @@
 MODULE Subscription
-    !DATE:        2026-07-16
+    !DATE:        2026-07-26
     !AUTHOR:      C. RACINET
-    !DESCRIPTION: Minimal module to test RWS WebSocket subscription.
-    !             Run ToggleWatchedValue from the FlexPendant to trigger
-    !             a value change event on the Python side.
+    !DESCRIPTION: Minimal module to test RWS WebSocket subscription on
+    !             multiple RAPID PERS variables simultaneously.
+    !
+    !             Both WatchedValue1 and WatchedValue2 cycle automatically
+    !             and continuously as soon as this module is started
+    !             (PP to Main + Start on the FlexPendant). No manual
+    !             routine call is required: AUTO mode locks "Call Routine"
+    !             from the Production Window by default, so all test logic
+    !             lives inside main() instead.
     !
     !             DeactUnit M7DM1 is required because this cell has a
     !             positioner (vireur) that must be deactivated before
     !             any RAPID execution.
 
-    PERS num WatchedValue := 0;
+    PERS num WatchedValue1 := 0;
+    PERS num WatchedValue2 := 0;
 
     !=========================================================================
     PROC main()
-    !DESCRIPTION: Entry point. Deactivates the positioner unit, then
-    !             waits. The actual test is driven from the FlexPendant
-    !             by calling ToggleWatchedValue manually.
+    !DESCRIPTION: Entry point. Deactivates the positioner unit, then runs
+    !             the automatic cycling loop forever. Stop with the RAPID
+    !             stop button on the FlexPendant.
     !-------------------------------------------------------------------------
         DeactUnit M7DM1;
-        TPWrite "Subscription ready.";
-        TPWrite "Call ToggleWatchedValue to trigger WebSocket events.";
-        STOP;
+        TPWrite "Subscription example ready.";
+        TPWrite "WatchedValue1 and WatchedValue2 will now cycle automatically.";
+        AutoCycleValues;
     ENDPROC
 
     !=========================================================================
-    PROC ToggleWatchedValue()
-    !DESCRIPTION: Toggles WatchedValue between 0 and 1.
-    !             Each call triggers one WebSocket event on the Python client.
+    PROC AutoCycleValues()
+    !DESCRIPTION: Cycles WatchedValue1 (0..9, every 2s) and WatchedValue2
+    !             (0..4, every 3s) independently and forever. Two different
+    !             periods make it easy to see, on the Python side, which
+    !             event belongs to which resource.
     !-------------------------------------------------------------------------
-        IF WatchedValue = 0 THEN
-            WatchedValue := 1;
-            TPWrite "WatchedValue --> 1";
-        ELSE
-            WatchedValue := 0;
-            TPWrite "WatchedValue --> 0";
-        ENDIF
-    ENDPROC
-
-    !=========================================================================
-    PROC CycleWatchedValue()
-    !DESCRIPTION: Cycles WatchedValue 0-->1-->2-->...-->9-->0 in a loop with 2s delay.
-    !             Useful to observe a stream of events without needing to
-    !             call ToggleWatchedValue manually each time.
-    !             Stop with the RAPID stop button on the FlexPendant.
-    !-------------------------------------------------------------------------
-        VAR num i := 0;
+        VAR num i1 := 0;
+        VAR num i2 := 0;
         WHILE TRUE DO
-            WatchedValue := i;
-            TPWrite "WatchedValue --> "\Num:=i;
-            i := (i + 1) MOD 10;
+            WatchedValue1 := i1;
+            TPWrite "WatchedValue1 --> "\Num:=i1;
+            i1 := (i1 + 1) MOD 10;
             WaitTime 2;
+
+            WatchedValue2 := i2;
+            TPWrite "WatchedValue2 --> "\Num:=i2;
+            i2 := (i2 + 1) MOD 5;
+            WaitTime 3;
         ENDWHILE
     ENDPROC
 
