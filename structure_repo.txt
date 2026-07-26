@@ -12,6 +12,7 @@ abb-rws-client-python-rw6
 │   │   ├── execution.py
 │   │   ├── modules.py
 │   │   ├── panel.py
+│   │   ├── subscription.py
 │   │   └── variables.py
 │   ├── rws
 │   │   ├── ctrl
@@ -122,6 +123,7 @@ abb-rws-client-python-rw6
 │   │   ├── test_execution.py
 │   │   ├── test_modules.py
 │   │   ├── test_panel.py
+│   │   ├── test_subscription.py
 │   │   └── test_variables.py
 │   ├── rws
 │   │   ├── ctrl
