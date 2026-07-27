@@ -2,14 +2,16 @@ pages:
   image: python:3.11
 
   script:
-    # 1. Installer les dépendances doc
+    # 1. Installer pip à jour
     - pip install --upgrade pip
-    - pip install mkdocs mkdocs-material "mkdocstrings[python]"
 
-    # 2. Installer ton package
+    # 2. Installer les dépendances de documentation
+    - pip install mkdocs mkdocs-material "mkdocstrings[python]" mkdocs-coverage
+
+    # 3. Installer le package en mode éditable
     - pip install -e .
 
-    # 3. Générer les .md API
+    # 4. Générer automatiquement les pages API et mettre à jour mkdocs.yml
     - |
       python -c "
       import sys
@@ -22,7 +24,7 @@ pages:
       update_mkdocs_nav(cfg, nav)
       "
 
-    # 4. Compiler vers public/
+    # 5. Compiler le site MkDocs dans public/
     - mkdocs build --site-dir public
 
   artifacts:
