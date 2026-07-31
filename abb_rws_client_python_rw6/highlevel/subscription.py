@@ -487,7 +487,7 @@ async def create_subscription(
         ... )
         ```
     """
-    # TODO(Clement RACINET): The multi-resource POST payload built by
+    # FIXME(Clement RACINET): The multi-resource POST payload built by
     # _build_subscription_payload (single "resources=<total>" key + per-index
     # "<i>"/"<i>-p" pairs) is inferred from ABB's documentation, which is
     # internally inconsistent on this exact point (its own 2-resource sample
