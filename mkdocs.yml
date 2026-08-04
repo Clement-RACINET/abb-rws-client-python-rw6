@@ -41,6 +41,8 @@ nav:
         - Execution: api/abb_rws_client_python_rw6/highlevel/execution.md
         - Modules: api/abb_rws_client_python_rw6/highlevel/modules.md
         - Panel: api/abb_rws_client_python_rw6/highlevel/panel.md
+        - Subscription: api/abb_rws_client_python_rw6/highlevel/subscription.md
+        - Symbol: api/abb_rws_client_python_rw6/highlevel/symbol.md
         - Variables: api/abb_rws_client_python_rw6/highlevel/variables.md
       - Rws:
         - Cfg: api/abb_rws_client_python_rw6/rws/cfg.md

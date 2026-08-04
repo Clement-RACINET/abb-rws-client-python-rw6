@@ -24,9 +24,6 @@ from abb_rws_client_python_rw6.highlevel.subscription import (
     SubscriptionHandle,
 )
 
-pytestmark = pytest.mark.asyncio
-
-
 # ---------------------------------------------------------------------------
 # Test doubles
 # ---------------------------------------------------------------------------
