@@ -33,6 +33,7 @@ mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 mkdocs-coverage = ">=2.0.0,<3"
 py-init-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-init-tools.git", branch = "main"}
+py-clean-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-clean-tools.git", branch = "main" }
 
 [feature.dev.tasks]
 lint        = "ruff check abb_rws_client_python_rw6 tests"
@@ -44,7 +45,9 @@ pyinit-check = "pyinit --check"
 pyinit-write = "pyinit --write"
 fix_init     = "pyinit --write"
 
-clean_cache = "python utils/clean_cache.py"
+clean-cache = "pyclean --write"
+clean-check = "pyclean --check"
+
 
 docs        = "python utils/docs/run_docs.py"
 docs-build  = "python -m mkdocs build"
