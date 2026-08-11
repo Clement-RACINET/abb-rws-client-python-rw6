@@ -13,6 +13,7 @@ abb-rws-client-python-rw6
 │   │   ├── modules.py
 │   │   ├── panel.py
 │   │   ├── subscription.py
+│   │   ├── symbol.py
 │   │   └── variables.py
 │   ├── rws
 │   │   ├── ctrl

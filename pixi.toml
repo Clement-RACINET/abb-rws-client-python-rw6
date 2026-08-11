@@ -13,7 +13,7 @@ full     = { features = ["dev", "scraping", "examples"], solve-group = "default"
 
 # ── Dépendances runtime (utilisateur final) ───────────────────────────────
 [dependencies]
-python = "3.11.*"
+python = "3.12.*"
 
 [pypi-dependencies]
 abb_rws_client_python_rw6 = { path = ".", editable = true }
@@ -32,13 +32,20 @@ mkdocs          = ">=1.6,<2.0"
 mkdocs-material = ">=9.5,<10.0"
 mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
 mkdocs-coverage = ">=2.0.0,<3"
+py-init-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-init-tools.git", branch = "main"}
 
 [feature.dev.tasks]
 lint        = "ruff check abb_rws_client_python_rw6 tests"
 format      = "ruff format abb_rws_client_python_rw6 tests"
 tests       = "python -m pytest tests/ -v"
-fix_init    = "python utils/fix_init.py"
+
+pyinit       = "pyinit"
+pyinit-check = "pyinit --check"
+pyinit-write = "pyinit --write"
+fix_init     = "pyinit --write"
+
 clean_cache = "python utils/clean_cache.py"
+
 docs        = "python utils/docs/run_docs.py"
 docs-build  = "python -m mkdocs build"
 
