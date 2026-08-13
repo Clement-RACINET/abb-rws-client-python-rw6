@@ -1,31 +1,15 @@
 pages:
-  image: python:3.11
+  image: ghcr.io/prefix-dev/pixi:latest
+
+  cache:
+    key:
+      files:
+        - pixi.lock
+    paths:
+      - .pixi
 
   script:
-    # 1. Installer pip à jour
-    - pip install --upgrade pip
-
-    # 2. Installer les dépendances de documentation
-    - pip install mkdocs mkdocs-material "mkdocstrings[python]" mkdocs-coverage
-
-    # 3. Installer le package en mode éditable
-    - pip install -e .
-
-    # 4. Générer automatiquement les pages API et mettre à jour mkdocs.yml
-    - |
-      python -c "
-      import sys
-      sys.path.insert(0, '.')
-      from utils.docs.config import build_config
-      from utils.docs.generate_api import generate_api_docs, update_mkdocs_nav
-
-      cfg = build_config()
-      nav = generate_api_docs(cfg)
-      update_mkdocs_nav(cfg, nav)
-      "
-
-    # 5. Compiler le site MkDocs dans public/
-    - mkdocs build --site-dir public
+    - pixi run -e dev docs
 
   artifacts:
     paths:
