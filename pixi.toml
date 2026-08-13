@@ -63,19 +63,6 @@ docs-build  = "python -m mkdocs build"
 requests       = ">=2.32,<3.0"
 beautifulsoup4 = ">=4.12,<5.0"
 
-[feature.scraping.tasks]
-scrape = "python utils/scraping/scrape.py"
-
-# ── Feature : examples ────────────────────────────────────────────────────
-[feature.examples.pypi-dependencies]
-
-
-[feature.examples.tasks]
-example-06 = "python exemples/06/subscription.py"
-example-07 = "python exemples/07/write_robtarget_array.py"
-
-
-
 
 [tool.pytest.ini_options]
 asyncio_mode                       = "auto"
