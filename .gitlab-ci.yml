@@ -1,9 +1,12 @@
 pages:
-  image: ghcr.io/prefix-dev/pixi:latest
+  image: ubuntu:24.04
 
   before_script:
     - apt-get update
-    - apt-get install -y git
+    - apt-get install -y curl git ca-certificates
+    - curl -fsSL https://pixi.sh/install.sh | bash
+    - export PATH="$HOME/.pixi/bin:$PATH"
+    - pixi --version
 
   cache:
     key:
@@ -13,6 +16,7 @@ pages:
       - .pixi
 
   script:
+    - export PATH="$HOME/.pixi/bin:$PATH"
     - pixi run -e dev docs
 
   artifacts:
