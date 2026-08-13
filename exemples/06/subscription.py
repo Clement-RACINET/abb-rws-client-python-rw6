@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# exemples/06/subscription.py
+# examples/06/subscription.py
 """Example 06 — RWS WebSocket subscription on two RAPID PERS variables.
 
 Author: Clement RACINET
@@ -10,7 +10,7 @@ priorities, and consuming their change events as plain (name, value) tuples.
 
 RAPID side
 ----------
-The RAPID module used by this example (exemples/06/Subscription.mod)
+The RAPID module used by this example (examples/06/Subscription.mod)
 declares:
 
     PERS num WatchedValue1 := 0;
@@ -38,7 +38,7 @@ what needs fixing.
 Requirements
 ------------
 - websockets >= 13.0
-- An ABB RW6 controller with RWS enabled, running exemples/06/Subscription.mod
+- An ABB RW6 controller with RWS enabled, running examples/06/Subscription.mod
 """
 
 from __future__ import annotations
@@ -116,7 +116,7 @@ async def main() -> None:
     """Run the subscription example.
 
     Watches WatchedValue1 and WatchedValue2 as they are cycled automatically
-    by the RAPID program (see exemples/06/Subscription.mod). Python never
+    by the RAPID program (see examples/06/Subscription.mod). Python never
     writes to the controller here — it only subscribes and observes.
 
     Stop with Ctrl+C.

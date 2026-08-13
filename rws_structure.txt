@@ -65,7 +65,7 @@ abb-rws-client-python-rw6
 │   │   └── vision.py
 │   ├── __init__.py
 │   └── py.typed
-├── exemples
+├── examples
 │   ├── 01
 │   │   ├── ping.py
 │   │   └── result.txt
@@ -184,11 +184,7 @@ abb-rws-client-python-rw6
 │   │   ├── abb_rws_api_full.json
 │   │   ├── abb_rws_api_full.md
 │   │   ├── routes_list.json
-│   │   ├── scrape.log
 │   │   └── scrape.py
-│   ├── clean_cache.py
-│   ├── export_structure.py
-│   ├── fix_init.py
 │   ├── README.fr.md
 │   └── README.md
 ├── LICENSE
@@ -197,4 +193,5 @@ abb-rws-client-python-rw6
 ├── pixi.toml
 ├── pyproject.toml
 ├── README.fr.md
-└── README.md
+├── README.md
+└── structure_repo.txt

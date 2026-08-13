@@ -1,4 +1,4 @@
-# exemples/02/example_start_stop.py
+# examples/02/example_start_stop.py
 """Example 02 — Start and stop RAPID execution.
 
 Author: Clement RACINET
@@ -10,10 +10,10 @@ Prerequisites:
       ``RWS_PASSWORD`` (optional — defaults apply if absent).
 
 RAPID side:
-    See ``exemples/02/StartStop.mod``.
+    See ``examples/02/StartStop.mod``.
 
 Run:
-    pixi run python exemples/02/example_start_stop.py
+    pixi run python examples/02/example_start_stop.py
 """
 
 from __future__ import annotations

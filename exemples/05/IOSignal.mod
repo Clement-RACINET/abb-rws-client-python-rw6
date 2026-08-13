@@ -25,7 +25,7 @@ MODULE ExampleIOSignal
     !         Controller > Configuration > I/O System > Signal
     !         Name: TEST_DO_RWS  |  Type: DO  |  Unit: VIRTUAL1
     !   2. Load this module and start RAPID (T_ROB1)
-    !   3. Run: pixi run python exemples/05/05_io_signal.py
+    !   3. Run: pixi run python examples/05/05_io_signal.py
     !   4. Observe the TPWrite output on the FlexPendant
     !
     ! Safety:

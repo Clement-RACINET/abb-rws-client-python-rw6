@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Repository structure - abb-rws-client-python-rw6</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --panel-soft: #1f2937;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --line: #334155;
+        --accent: #38bdf8;
+        --hover: rgba(56, 189, 248, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.45;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 16px 24px;
+        background: rgba(15, 23, 42, 0.92);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .badge {
+        padding: 3px 8px;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      button {
+        cursor: pointer;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-soft);
+        color: var(--text);
+        padding: 6px 10px;
+        font: inherit;
+        font-size: 12px;
+      }
+
+      button:hover {
+        border-color: var(--accent);
+        background: rgba(56, 189, 248, 0.12);
+      }
+
+      main {
+        padding: 24px;
+      }
+
+      .tree-panel {
+        max-width: 1200px;
+        padding: 18px;
+        background: rgba(17, 24, 39, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 22px;
+        border-left: 1px solid var(--line);
+      }
+
+      .tree-panel > ul {
+        border-left: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin: 2px 0;
+        position: relative;
+      }
+
+      summary {
+        cursor: pointer;
+        user-select: none;
+        padding: 3px 6px;
+        border-radius: 6px;
+        outline: none;
+      }
+
+      summary:hover,
+      .file span:hover {
+        background: var(--hover);
+      }
+
+      .directory > details > summary .name::before {
+        content: "📁 ";
+      }
+
+      .directory > details[open] > summary .name::before {
+        content: "📂 ";
+      }
+
+      .file span::before {
+        content: "📄 ";
+      }
+
+      .file span,
+      .empty span {
+        display: inline-block;
+        padding: 3px 6px;
+        border-radius: 6px;
+      }
+
+      .empty {
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .count {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Repository structure: abb-rws-client-python-rw6</h1>
+
+      <div class="meta">
+        <span class="badge">35 directories</span>
+        <span class="badge">162 files</span>
+        <span class="badge">Open depth: 1</span>
+      </div>
+
+      <div class="toolbar">
+        <button type="button" onclick="setAllDetails(true)">Open all</button>
+        <button type="button" onclick="setAllDetails(false)">Close all</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="tree-panel">
+        <ul>
+          <li class="directory">
+            <details open>
+              <summary>
+                <span class="name">abb-rws-client-python-rw6</span>
+                <span class="count">13</span>
+              </summary>
+              <ul>
+                <li class="directory">
+                  <details open>
+                    <summary>
+                      <span class="name">abb_rws_client_python_rw6</span>
+                      <span class="count">5</span>
+                    </summary>
+                    <ul>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">core</span>
+                            <span class="count">6</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>client.py</span></li>
+                            <li class="file"><span>env.py</span></li>
+                            <li class="file"><span>exceptions.py</span></li>
+                            <li class="file"><span>logger.py</span></li>
+                            <li class="file"><span>serializers.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">highlevel</span>
+                            <span class="count">7</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>execution.py</span></li>
+                            <li class="file"><span>modules.py</span></li>
+                            <li class="file"><span>panel.py</span></li>
+                            <li class="file"><span>subscription.py</span></li>
+                            <li class="file"><span>symbol.py</span></li>
+                            <li class="file"><span>variables.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">rws</span>
+                            <span class="count">20</span>
+                          </summary>
+                          <ul>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">ctrl</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>backup.py</span></li>
+                                  <li class="file"><span>clock.py</span></li>
+                                  <li class="file"><span>ctrl.py</span></li>
+                                  <li class="file"><span>identity.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">iosystem</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>devices.py</span></li>
+                                  <li class="file"><span>iosystem.py</span></li>
+                                  <li class="file"><span>networks.py</span></li>
+                                  <li class="file"><span>signals.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">rapid</span>
+                                  <span class="count">10</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>aliasio.py</span></li>
+                                  <li class="file"><span>execution.py</span></li>
+                                  <li class="file"><span>modules.py</span></li>
+                                  <li class="file"><span>rapid.py</span></li>
+                                  <li class="file"><span>symbol.py</span></li>
+                                  <li class="file"><span>symbols.py</span></li>
+                                  <li class="file"><span>taskpanel.py</span></li>
+                                  <li class="file"><span>tasks.py</span></li>
+                                  <li class="file"><span>uiinstr.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">rw</span>
+                                  <span class="count">2</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>misc.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">users</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>grants.py</span></li>
+                                  <li class="file"><span>remote.py</span></li>
+                                  <li class="file"><span>rmmp.py</span></li>
+                                  <li class="file"><span>users.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>cfg.py</span></li>
+                            <li class="file"><span>devices.py</span></li>
+                            <li class="file"><span>dipc.py</span></li>
+                            <li class="file"><span>elog.py</span></li>
+                            <li class="file"><span>fileservice.py</span></li>
+                            <li class="file"><span>mastership.py</span></li>
+                            <li class="file"><span>motionsystem.py</span></li>
+                            <li class="file"><span>operations_on_io_profinet_device.py</span></li>
+                            <li class="file"><span>panel.py</span></li>
+                            <li class="file"><span>retcode.py</span></li>
+                            <li class="file"><span>root.py</span></li>
+                            <li class="file"><span>subscription.py</span></li>
+                            <li class="file"><span>system.py</span></li>
+                            <li class="file"><span>vision.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="file"><span>__init__.py</span></li>
+                      <li class="file"><span>py.typed</span></li>
+                    </ul>
+                  </details>
+                </li>
+                <li class="directory">
+                  <details open>
+                    <summary>
+                      <span class="name">examples</span>
+                      <span class="count">7</span>
+                    </summary>
+                    <ul>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">01</span>
+                            <span class="count">2</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>ping.py</span></li>
+                            <li class="file"><span>result.txt</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">02</span>
+                            <span class="count">4</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>example_start_stop.py</span></li>
+                            <li class="file"><span>ExampleStartStop.mod</span></li>
+                            <li class="file"><span>ExampleStartStop.pgf</span></li>
+                            <li class="file"><span>result.txt</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">03</span>
+                            <span class="count">4</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>03_read_write_variable.py</span></li>
+                            <li class="file"><span>ReadWriteVariable.mod</span></li>
+                            <li class="file"><span>ReadWriteVariable.pgf</span></li>
+                            <li class="file"><span>result.txt</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">04</span>
+                            <span class="count">4</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>04_load_module.py</span></li>
+                            <li class="file"><span>LoadModule.mod</span></li>
+                            <li class="file"><span>LoadModule.pgf</span></li>
+                            <li class="file"><span>result.txt</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">05</span>
+                            <span class="count">4</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>05_io_signal.py</span></li>
+                            <li class="file"><span>IOSignal.mod</span></li>
+                            <li class="file"><span>IOSignal.pgf</span></li>
+                            <li class="file"><span>result.txt</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">06</span>
+                            <span class="count">3</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>Subscription.mod</span></li>
+                            <li class="file"><span>Subscription.pgf</span></li>
+                            <li class="file"><span>subscription.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">07</span>
+                            <span class="count">4</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>result.txt</span></li>
+                            <li class="file"><span>RobtargetArray.mod</span></li>
+                            <li class="file"><span>RobtargetArray.pgf</span></li>
+                            <li class="file"><span>write_robtarget_array.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li class="directory">
+                  <details open>
+                    <summary>
+                      <span class="name">pictures</span>
+                      <span class="count">8</span>
+                    </summary>
+                    <ul>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">logo_abb</span>
+                            <span class="count">1</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>6620926e3c8df-ABB.svg</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">logo_python</span>
+                            <span class="count">1</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>python-icon.svg</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">logo_robot</span>
+                            <span class="count">1</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>robot_logo.svg</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="file"><span>ico.jpg</span></li>
+                      <li class="file"><span>icone.ico</span></li>
+                      <li class="file"><span>logo_projet.svg</span></li>
+                      <li class="file"><span>logo_projet2.png</span></li>
+                      <li class="file"><span>logo_projet2.svg</span></li>
+                    </ul>
+                  </details>
+                </li>
+                <li class="directory">
+                  <details open>
+                    <summary>
+                      <span class="name">tests</span>
+                      <span class="count">4</span>
+                    </summary>
+                    <ul>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">core</span>
+                            <span class="count">6</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>test_client.py</span></li>
+                            <li class="file"><span>test_env.py</span></li>
+                            <li class="file"><span>test_exceptions.py</span></li>
+                            <li class="file"><span>test_logging.py</span></li>
+                            <li class="file"><span>test_serializers.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">highlevel</span>
+                            <span class="count">6</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>test_execution.py</span></li>
+                            <li class="file"><span>test_modules.py</span></li>
+                            <li class="file"><span>test_panel.py</span></li>
+                            <li class="file"><span>test_subscription.py</span></li>
+                            <li class="file"><span>test_variables.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">rws</span>
+                            <span class="count">20</span>
+                          </summary>
+                          <ul>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">ctrl</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>test_backup.py</span></li>
+                                  <li class="file"><span>test_clock.py</span></li>
+                                  <li class="file"><span>test_ctrl.py</span></li>
+                                  <li class="file"><span>test_identity.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">iosystem</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>test_devices.py</span></li>
+                                  <li class="file"><span>test_iosystem.py</span></li>
+                                  <li class="file"><span>test_networks.py</span></li>
+                                  <li class="file"><span>test_signals.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">rapid</span>
+                                  <span class="count">10</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>test_aliasio.py</span></li>
+                                  <li class="file"><span>test_execution.py</span></li>
+                                  <li class="file"><span>test_modules.py</span></li>
+                                  <li class="file"><span>test_rapid.py</span></li>
+                                  <li class="file"><span>test_symbol.py</span></li>
+                                  <li class="file"><span>test_symbols.py</span></li>
+                                  <li class="file"><span>test_taskpanel.py</span></li>
+                                  <li class="file"><span>test_tasks.py</span></li>
+                                  <li class="file"><span>test_uiinstr.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">rw</span>
+                                  <span class="count">2</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>test_misc.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">users</span>
+                                  <span class="count">5</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>__init__.py</span></li>
+                                  <li class="file"><span>test_grants.py</span></li>
+                                  <li class="file"><span>test_remote.py</span></li>
+                                  <li class="file"><span>test_rmmp.py</span></li>
+                                  <li class="file"><span>test_users.py</span></li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="file"><span>__init__.py</span></li>
+                            <li class="file"><span>test_cfg.py</span></li>
+                            <li class="file"><span>test_devices.py</span></li>
+                            <li class="file"><span>test_dipc.py</span></li>
+                            <li class="file"><span>test_elog.py</span></li>
+                            <li class="file"><span>test_fileservice.py</span></li>
+                            <li class="file"><span>test_mastership.py</span></li>
+                            <li class="file"><span>test_motionsystem.py</span></li>
+                            <li class="file">
+                              <span>test_operations_on_io_profinet_device.py</span>
+                            </li>
+                            <li class="file"><span>test_panel.py</span></li>
+                            <li class="file"><span>test_retcode.py</span></li>
+                            <li class="file"><span>test_root.py</span></li>
+                            <li class="file"><span>test_subscription.py</span></li>
+                            <li class="file"><span>test_system.py</span></li>
+                            <li class="file"><span>test_vision.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="file"><span>__init__.py</span></li>
+                    </ul>
+                  </details>
+                </li>
+                <li class="directory">
+                  <details open>
+                    <summary>
+                      <span class="name">utils</span>
+                      <span class="count">4</span>
+                    </summary>
+                    <ul>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">generator</span>
+                            <span class="count">1</span>
+                          </summary>
+                          <ul>
+                            <li class="file"><span>main.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="directory">
+                        <details>
+                          <summary>
+                            <span class="name">scraping</span>
+                            <span class="count">5</span>
+                          </summary>
+                          <ul>
+                            <li class="directory">
+                              <details>
+                                <summary>
+                                  <span class="name">manual</span>
+                                  <span class="count">2</span>
+                                </summary>
+                                <ul>
+                                  <li class="file"><span>architecture_api.txt</span></li>
+                                  <li class="file">
+                                    <span>robot_controller_return_code.txt</span>
+                                  </li>
+                                </ul>
+                              </details>
+                            </li>
+                            <li class="file"><span>abb_rws_api_full.json</span></li>
+                            <li class="file"><span>abb_rws_api_full.md</span></li>
+                            <li class="file"><span>routes_list.json</span></li>
+                            <li class="file"><span>scrape.py</span></li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li class="file"><span>README.fr.md</span></li>
+                      <li class="file"><span>README.md</span></li>
+                    </ul>
+                  </details>
+                </li>
+                <li class="file"><span>LICENSE</span></li>
+                <li class="file"><span>mkdocs.yml</span></li>
+                <li class="file"><span>pixi.lock</span></li>
+                <li class="file"><span>pixi.toml</span></li>
+                <li class="file"><span>pyproject.toml</span></li>
+                <li class="file"><span>README.fr.md</span></li>
+                <li class="file"><span>README.md</span></li>
+                <li class="file"><span>structure_repo.txt</span></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      function setAllDetails(open) {
+        document.querySelectorAll("details").forEach((details) => {
+          details.open = open;
+        });
+      }
+    </script>
+  </body>
+</html>

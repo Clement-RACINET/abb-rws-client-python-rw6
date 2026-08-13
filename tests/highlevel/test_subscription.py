@@ -236,9 +236,7 @@ def test_extract_li_blocks_no_match_returns_empty_list() -> None:
 def test_extract_resource_identity_from_href() -> None:
     """Nominal case: <a href="..."> carries the full resource URI."""
     block = (
-        '<li class="ios-signalstate-ev">'
-        '<a href="/rw/iosystem/signals/A;state" rel="self"/>'
-        "</li>"
+        '<li class="ios-signalstate-ev"><a href="/rw/iosystem/signals/A;state" rel="self"/></li>'
     )
     assert sub._extract_resource_identity(block) == "/rw/iosystem/signals/A;state"
 
@@ -570,8 +568,7 @@ async def test_watch_resources_skips_initial_values_when_disabled(
     resources = [SubscribedResource("a", "/rw/iosystem/signals/A;state", "1")]
 
     events = [
-        event
-        async for event in sub.watch_resources(client, resources, yield_initial_values=False)
+        event async for event in sub.watch_resources(client, resources, yield_initial_values=False)
     ]
 
     assert events == []
@@ -618,6 +615,7 @@ async def test_watch_resources_deletes_subscription_on_consumer_exception(
                 raise RuntimeError("boom")
 
     assert delete_calls == [handle]
+
 
 async def test_watch_resources_teardown_failure_does_not_mask_original_error(
     monkeypatch: pytest.MonkeyPatch,

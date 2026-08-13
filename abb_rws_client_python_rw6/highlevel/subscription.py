@@ -58,7 +58,7 @@ logger = get_logger(__name__)
 SubscriptionPriority = Literal["0", "1", "2"]
 
 #: ABB RW6 WebSocket subscription subprotocol (confirmed by ABB doc,
-#: confirmed working on real hardware in exemples/06). Do NOT use
+#: confirmed working on real hardware in examples/06). Do NOT use
 #: "rws_subscription": some RW6 controllers reject it with
 #: "Unsupported Sec-WebSocket-Protocol".
 _RWS_SUBPROTOCOLS: tuple[Subprotocol, ...] = (Subprotocol("robapi2_subscription"),)
@@ -250,7 +250,7 @@ def _build_resource_lookup(resources: Sequence[SubscribedResource]) -> dict[str,
             # ABB's "rap-data" <li> uses the bare symbolurl (no ";value"
             # suffix, no "/rw/rapid/symbol/data/" prefix) in its "title"
             # attribute — register that alternate identity too.
-            symbolurl = resource.resource_uri[len(_SYMBOL_DATA_PREFIX):].split(";")[0]
+            symbolurl = resource.resource_uri[len(_SYMBOL_DATA_PREFIX) :].split(";")[0]
             lookup[symbolurl] = resource.name
     return lookup
 
@@ -493,7 +493,7 @@ async def create_subscription(
     # internally inconsistent on this exact point (its own 2-resource sample
     # repeats the "resources" key with two different values instead of
     # sending the total once). This has ONLY been confirmed on real RW6
-    # hardware for N=1 resource (exemples/06). MUST be re-tested on a real
+    # hardware for N=1 resource (examples/06). MUST be re-tested on a real
     # controller with N>=2 resources (including mixed priorities) before
     # this is considered production-ready. If ABB rejects the payload, or
     # returns an unexpected initial-event XML shape for N>=2, fix
@@ -610,7 +610,7 @@ async def watch_resources(
             for name, value in handle.initial_values.items():
                 yield name, value
 
-        # ABB RW6 WebSocket notes (confirmed on real hardware, exemples/06):
+        # ABB RW6 WebSocket notes (confirmed on real hardware, examples/06):
         # - subprotocol MUST be "robapi2_subscription", NOT "rws_subscription"
         #   (some RW6 controllers reject the latter with
         #   "Unsupported Sec-WebSocket-Protocol").

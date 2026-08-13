@@ -1,0 +1,135 @@
+docs
+├── api
+│   └── abb_rws_client_python_rw6
+│       ├── core
+│       │   ├── client.md
+│       │   ├── env.md
+│       │   ├── exceptions.md
+│       │   ├── logger.md
+│       │   └── serializers.md
+│       ├── highlevel
+│       │   ├── execution.md
+│       │   ├── modules.md
+│       │   ├── panel.md
+│       │   ├── subscription.md
+│       │   ├── symbol.md
+│       │   └── variables.md
+│       └── rws
+│           ├── ctrl
+│           │   ├── backup.md
+│           │   ├── clock.md
+│           │   ├── ctrl.md
+│           │   └── identity.md
+│           ├── iosystem
+│           │   ├── devices.md
+│           │   ├── iosystem.md
+│           │   ├── networks.md
+│           │   └── signals.md
+│           ├── rapid
+│           │   ├── aliasio.md
+│           │   ├── execution.md
+│           │   ├── modules.md
+│           │   ├── rapid.md
+│           │   ├── symbol.md
+│           │   ├── symbols.md
+│           │   ├── taskpanel.md
+│           │   ├── tasks.md
+│           │   └── uiinstr.md
+│           ├── rw
+│           │   └── misc.md
+│           ├── users
+│           │   ├── grants.md
+│           │   ├── remote.md
+│           │   ├── rmmp.md
+│           │   └── users.md
+│           ├── cfg.md
+│           ├── devices.md
+│           ├── dipc.md
+│           ├── elog.md
+│           ├── fileservice.md
+│           ├── mastership.md
+│           ├── motionsystem.md
+│           ├── operations_on_io_profinet_device.md
+│           ├── panel.md
+│           ├── retcode.md
+│           ├── root.md
+│           ├── subscription.md
+│           ├── system.md
+│           └── vision.md
+├── coverage
+│   ├── class_index.html
+│   ├── coverage_html_cb_188fc9a4.js
+│   ├── favicon_32_cb_c827f16f.png
+│   ├── function_index.html
+│   ├── index.html
+│   ├── keybd_closed_cb_900cfef5.png
+│   ├── status.json
+│   ├── style_cb_0853b3de.css
+│   ├── z_1c25c6e8998437bd___init___py.html
+│   ├── z_212b727e92f3bfc6___init___py.html
+│   ├── z_212b727e92f3bfc6_aliasio_py.html
+│   ├── z_212b727e92f3bfc6_execution_py.html
+│   ├── z_212b727e92f3bfc6_modules_py.html
+│   ├── z_212b727e92f3bfc6_rapid_py.html
+│   ├── z_212b727e92f3bfc6_symbol_py.html
+│   ├── z_212b727e92f3bfc6_symbols_py.html
+│   ├── z_212b727e92f3bfc6_taskpanel_py.html
+│   ├── z_212b727e92f3bfc6_tasks_py.html
+│   ├── z_212b727e92f3bfc6_uiinstr_py.html
+│   ├── z_6f210cc03d202b99___init___py.html
+│   ├── z_6f210cc03d202b99_execution_py.html
+│   ├── z_6f210cc03d202b99_modules_py.html
+│   ├── z_6f210cc03d202b99_panel_py.html
+│   ├── z_6f210cc03d202b99_subscription_py.html
+│   ├── z_6f210cc03d202b99_symbol_py.html
+│   ├── z_6f210cc03d202b99_variables_py.html
+│   ├── z_839632b6ed9c2da8___init___py.html
+│   ├── z_839632b6ed9c2da8_misc_py.html
+│   ├── z_933e532afafaee73___init___py.html
+│   ├── z_933e532afafaee73_grants_py.html
+│   ├── z_933e532afafaee73_remote_py.html
+│   ├── z_933e532afafaee73_rmmp_py.html
+│   ├── z_933e532afafaee73_users_py.html
+│   ├── z_c0951b775d88d8d8___init___py.html
+│   ├── z_c0951b775d88d8d8_cfg_py.html
+│   ├── z_c0951b775d88d8d8_devices_py.html
+│   ├── z_c0951b775d88d8d8_dipc_py.html
+│   ├── z_c0951b775d88d8d8_elog_py.html
+│   ├── z_c0951b775d88d8d8_fileservice_py.html
+│   ├── z_c0951b775d88d8d8_mastership_py.html
+│   ├── z_c0951b775d88d8d8_motionsystem_py.html
+│   ├── z_c0951b775d88d8d8_operations_on_io_profinet_device_py.html
+│   ├── z_c0951b775d88d8d8_panel_py.html
+│   ├── z_c0951b775d88d8d8_retcode_py.html
+│   ├── z_c0951b775d88d8d8_root_py.html
+│   ├── z_c0951b775d88d8d8_subscription_py.html
+│   ├── z_c0951b775d88d8d8_system_py.html
+│   ├── z_c0951b775d88d8d8_vision_py.html
+│   ├── z_e4923e69603fcfad___init___py.html
+│   ├── z_e4923e69603fcfad_backup_py.html
+│   ├── z_e4923e69603fcfad_clock_py.html
+│   ├── z_e4923e69603fcfad_ctrl_py.html
+│   ├── z_e4923e69603fcfad_identity_py.html
+│   ├── z_e541dd85c1c4a830___init___py.html
+│   ├── z_e541dd85c1c4a830_client_py.html
+│   ├── z_e541dd85c1c4a830_env_py.html
+│   ├── z_e541dd85c1c4a830_exceptions_py.html
+│   ├── z_e541dd85c1c4a830_logger_py.html
+│   ├── z_e541dd85c1c4a830_serializers_py.html
+│   ├── z_e6dbbde694bb97d7___init___py.html
+│   ├── z_e6dbbde694bb97d7_devices_py.html
+│   ├── z_e6dbbde694bb97d7_iosystem_py.html
+│   ├── z_e6dbbde694bb97d7_networks_py.html
+│   └── z_e6dbbde694bb97d7_signals_py.html
+├── diagnostics
+│   ├── mkdocs.md
+│   └── ruff.md
+├── diagrams
+│   └── classes.md
+├── img
+│   ├── favicon.ico
+│   └── logo.png
+├── coverage.md
+├── index.md
+├── LICENSE
+└── todo.md

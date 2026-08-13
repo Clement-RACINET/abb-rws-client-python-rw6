@@ -162,3 +162,33 @@ use_gitignore = true
 max_depth = 5
 default_formats = ["txt", "html"]
 output_basename = "rws_structure"
+
+# ── py-doc-tools ───────────────────────────────────────────────────────────
+[tool.py-doc-tools]
+docs_dir = "docs"
+docs_src_dir = "docs"
+mkdocs_config = "mkdocs.yml"
+packages = ["abb_rws_client_python_rw6"]
+
+enable_api = true
+enable_coverage = true
+enable_readme = true
+
+enable_examples = false
+enable_todo = false
+enable_diagrams = false
+enable_diagnostics = false
+enable_tags = false
+
+[tool.py-doc-tools.api]
+output_dir = "docs/api"
+clean_output_dir = true
+
+[tool.py-doc-tools.coverage]
+package = "abb_rws_client_python_rw6"
+title = "Test coverage report"
+
+[tool.py-doc-tools.readme]
+source_file = "README.md"
+output_file = "docs/index.md"
+title = "ABB RWS Client Python RW6"

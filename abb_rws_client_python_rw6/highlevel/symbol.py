@@ -26,7 +26,7 @@ logger = get_logger(__name__)
 # in highlevel/variables.py and highlevel/execution.py.
 _SPAN_RE_TEMPLATE = r'class=["\']{field}["\'][^>]*>([^<]*)<'
 
-#FIXME (Clement RACINET):
+# FIXME (Clement RACINET):
 # ABB doc ("Get RAPID symbol properties") only documents <span class="dim">
 # for ndim=0 (empty). The separator used for ndim>=1 is NOT documented and
 # has not been confirmed on real hardware. This parser is intentionally
@@ -281,8 +281,7 @@ async def get_array_length(
 
     if dimension < 0 or dimension >= len(props.dim):
         raise ValueError(
-            f"dimension={dimension} out of range for symbol {symbolurl!r} "
-            f"with dim={props.dim!r}"
+            f"dimension={dimension} out of range for symbol {symbolurl!r} with dim={props.dim!r}"
         )
 
     length = props.dim[dimension]

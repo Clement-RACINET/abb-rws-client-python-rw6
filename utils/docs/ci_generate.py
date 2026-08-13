@@ -1,10 +1,24 @@
 #!/usr/bin/env python3
+"""Generate documentation artifacts for CI.
+
+This script is kept as a compatibility wrapper for the GitHub Actions workflow.
+The actual documentation generation is delegated to py-doc-tools.
+"""
+
+from __future__ import annotations
+
+import subprocess
 import sys
 
-sys.path.insert(0, ".")
-from utils.docs.config import build_config
-from utils.docs.generate_api import generate_api_docs, update_mkdocs_nav
 
-cfg = build_config()
-nav = generate_api_docs(cfg)
-update_mkdocs_nav(cfg, nav)
+def main() -> int:
+    """Run py-doc-tools documentation generation."""
+    result = subprocess.run(
+        [sys.executable, "-m", "py_doc_tools", "generate", "--all"],
+        check=False,
+    )
+    return result.returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

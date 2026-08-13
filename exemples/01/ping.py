@@ -1,4 +1,4 @@
-# exemples/01/example_ping.py
+# examples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 
 Author: Clement RACINET
@@ -12,7 +12,7 @@ RAPID side:
     None required (read-only, no program needed).
 
 Run:
-    pixi run python exemples/01/example_ping.py
+    pixi run python examples/01/example_ping.py
 """
 
 from __future__ import annotations

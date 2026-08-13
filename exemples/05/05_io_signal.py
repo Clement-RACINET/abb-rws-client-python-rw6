@@ -1,4 +1,4 @@
-# exemples/05/example_io_signal.py
+# examples/05/example_io_signal.py
 """Example 05 — Read and write a virtual digital output signal (TEST_DO_RWS).
 
 Author: Clement RACINET
@@ -18,11 +18,11 @@ Prerequisites:
       ``RWS_PASSWORD``.
 
 RAPID side:
-    ``exemples/05/IOSignal.mod`` — waits for ``TEST_DO_RWS`` to go HIGH
+    ``examples/05/IOSignal.mod`` — waits for ``TEST_DO_RWS`` to go HIGH
     via ``WaitUntil DOutput(...) = 1``.
 
 Run:
-    pixi run python exemples/05/example_io_signal.py
+    pixi run python examples/05/example_io_signal.py
 """
 
 from __future__ import annotations

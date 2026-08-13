@@ -213,9 +213,7 @@ class TestSetVariablesWithMastership:
     """Tests for set_variables_with_mastership()."""
 
     @pytest.mark.asyncio
-    async def test_request_once_then_writes_all_then_release(
-        self, client: MagicMock
-    ) -> None:
+    async def test_request_once_then_writes_all_then_release(self, client: MagicMock) -> None:
         """Mastership must be requested/released exactly once, regardless
         of the number of variables written."""
         call_order: list[str] = []
@@ -282,17 +280,11 @@ class TestSetVariablesWithMastership:
             )
 
         assert mock_update.await_count == 2
-        mock_update.assert_any_await(
-            client, symbolurl="RAPID/T_ROB1/M/a", action="set", value="10"
-        )
-        mock_update.assert_any_await(
-            client, symbolurl="RAPID/T_ROB1/M/b", action="set", value="20"
-        )
+        mock_update.assert_any_await(client, symbolurl="RAPID/T_ROB1/M/a", action="set", value="10")
+        mock_update.assert_any_await(client, symbolurl="RAPID/T_ROB1/M/b", action="set", value="20")
 
     @pytest.mark.asyncio
-    async def test_release_called_even_if_one_write_fails(
-        self, client: MagicMock
-    ) -> None:
+    async def test_release_called_even_if_one_write_fails(self, client: MagicMock) -> None:
         """Mastership must be released even if a write in the middle of
         the batch raises."""
         released: list[bool] = []
@@ -335,9 +327,7 @@ class TestSetVariablesWithMastership:
         assert released == [True]
 
     @pytest.mark.asyncio
-    async def test_empty_values_still_requests_and_releases(
-        self, client: MagicMock
-    ) -> None:
+    async def test_empty_values_still_requests_and_releases(self, client: MagicMock) -> None:
         """An empty values dict must still request/release mastership
         (no-op write loop) — no crash on empty input."""
         call_order: list[str] = []

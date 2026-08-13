@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# exemples/07/write_robtarget_array.py
+# examples/07/write_robtarget_array.py
 """Example 07 — Write an array of robtargets to a RAPID PERS variable.
 
 This example writes a RAPID PERS robtarget array element by element via RWS.

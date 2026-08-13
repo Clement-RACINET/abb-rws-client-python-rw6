@@ -314,9 +314,7 @@ class RWSClient:
         """
         if self._http is None:
             return ""
-        return "; ".join(
-            f"{cookie.name}={cookie.value}" for cookie in self._http.cookies.jar
-        )
+        return "; ".join(f"{cookie.name}={cookie.value}" for cookie in self._http.cookies.jar)
 
     # ── Internal request with retry ─────────────────────────────────────────
 

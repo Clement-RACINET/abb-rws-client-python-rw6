@@ -1,4 +1,4 @@
-~/abb_rws_client_python_rw6/exemples/05/05_io_signal.py
+~/abb_rws_client_python_rw6/examples/05/05_io_signal.py
 16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Connecting to controller …
 16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Target signal: 'TEST_DO_RWS'
 16:58:24 [INFO    ] abb_rws_client_python_rw6.examples.io_signal — Connected → http://192.168.1.10:80/

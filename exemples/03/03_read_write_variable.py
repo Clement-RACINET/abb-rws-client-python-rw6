@@ -1,4 +1,4 @@
-# exemples/03/example_read_write_variable.py
+# examples/03/example_read_write_variable.py
 """Example 03 — Read and write a RAPID variable.
 
 Author: Clement RACINET
@@ -10,15 +10,15 @@ Demonstrates:
 Prerequisites:
     - Controller in AUTO mode.
     - Module ``ReadWriteVariable`` loaded in T_ROB1
-      (see ``exemples/03/ReadWriteVariable.mod``).
+      (see ``examples/03/ReadWriteVariable.mod``).
     - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD``, ``RWS_RAPID_TASK`` (optional — defaults apply).
 
 RAPID side:
-    See ``exemples/03/ReadWriteVariable.mod``.
+    See ``examples/03/ReadWriteVariable.mod``.
 
 Run:
-    pixi run python exemples/03/example_read_write_variable.py
+    pixi run python examples/03/example_read_write_variable.py
 """
 
 from __future__ import annotations

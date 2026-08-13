@@ -3,14 +3,13 @@ site_description: Async Python client for ABB RobotWare 6 REST API
 repo_url: "https://github.com/Clement-RACINET/abb-rws-client-python-rw6"
 site_url: "https://clement-racinet.github.io/abb-rws-client-python-rw6/"
 
-site_dir: public 
+site_dir: public
 
 theme:
   name: readthedocs #mkdocs #readthedocs #dracula
   language: en
   logo: img/logo.png
   favicon: img/favicon.ico
-
 
 plugins:
   - search
@@ -21,73 +20,69 @@ plugins:
             docstring_style: google
             show_source: true
             show_root_heading: true
-  - coverage:
-      html_report_dir: docs/coverage
-# hooks:
-#   - utils/docs/hooks.py 
 
 nav:
   - Accueil: index.md
   - API Reference:
-    # --- AUTOGEN_API_START ---
-    - Abb Rws Client Python Rw6:
-      - Core:
-        - Client: api/abb_rws_client_python_rw6/core/client.md
-        - Env: api/abb_rws_client_python_rw6/core/env.md
-        - Exceptions: api/abb_rws_client_python_rw6/core/exceptions.md
-        - Logger: api/abb_rws_client_python_rw6/core/logger.md
-        - Serializers: api/abb_rws_client_python_rw6/core/serializers.md
-      - Highlevel:
-        - Execution: api/abb_rws_client_python_rw6/highlevel/execution.md
-        - Modules: api/abb_rws_client_python_rw6/highlevel/modules.md
-        - Panel: api/abb_rws_client_python_rw6/highlevel/panel.md
-        - Subscription: api/abb_rws_client_python_rw6/highlevel/subscription.md
-        - Symbol: api/abb_rws_client_python_rw6/highlevel/symbol.md
-        - Variables: api/abb_rws_client_python_rw6/highlevel/variables.md
-      - Rws:
-        - Cfg: api/abb_rws_client_python_rw6/rws/cfg.md
-        - Devices: api/abb_rws_client_python_rw6/rws/devices.md
-        - Dipc: api/abb_rws_client_python_rw6/rws/dipc.md
-        - Elog: api/abb_rws_client_python_rw6/rws/elog.md
-        - Fileservice: api/abb_rws_client_python_rw6/rws/fileservice.md
-        - Mastership: api/abb_rws_client_python_rw6/rws/mastership.md
-        - Motionsystem: api/abb_rws_client_python_rw6/rws/motionsystem.md
-        - Operations On Io Profinet Device: api/abb_rws_client_python_rw6/rws/operations_on_io_profinet_device.md
-        - Panel: api/abb_rws_client_python_rw6/rws/panel.md
-        - Retcode: api/abb_rws_client_python_rw6/rws/retcode.md
-        - Root: api/abb_rws_client_python_rw6/rws/root.md
-        - Subscription: api/abb_rws_client_python_rw6/rws/subscription.md
-        - System: api/abb_rws_client_python_rw6/rws/system.md
-        - Vision: api/abb_rws_client_python_rw6/rws/vision.md
-        - Ctrl:
-          - Backup: api/abb_rws_client_python_rw6/rws/ctrl/backup.md
-          - Clock: api/abb_rws_client_python_rw6/rws/ctrl/clock.md
-          - Ctrl: api/abb_rws_client_python_rw6/rws/ctrl/ctrl.md
-          - Identity: api/abb_rws_client_python_rw6/rws/ctrl/identity.md
-        - Iosystem:
-          - Devices: api/abb_rws_client_python_rw6/rws/iosystem/devices.md
-          - Iosystem: api/abb_rws_client_python_rw6/rws/iosystem/iosystem.md
-          - Networks: api/abb_rws_client_python_rw6/rws/iosystem/networks.md
-          - Signals: api/abb_rws_client_python_rw6/rws/iosystem/signals.md
-        - Rapid:
-          - Aliasio: api/abb_rws_client_python_rw6/rws/rapid/aliasio.md
-          - Execution: api/abb_rws_client_python_rw6/rws/rapid/execution.md
-          - Modules: api/abb_rws_client_python_rw6/rws/rapid/modules.md
-          - Rapid: api/abb_rws_client_python_rw6/rws/rapid/rapid.md
-          - Symbol: api/abb_rws_client_python_rw6/rws/rapid/symbol.md
-          - Symbols: api/abb_rws_client_python_rw6/rws/rapid/symbols.md
-          - Taskpanel: api/abb_rws_client_python_rw6/rws/rapid/taskpanel.md
-          - Tasks: api/abb_rws_client_python_rw6/rws/rapid/tasks.md
-          - Uiinstr: api/abb_rws_client_python_rw6/rws/rapid/uiinstr.md
-        - Rw:
-          - Misc: api/abb_rws_client_python_rw6/rws/rw/misc.md
-        - Users:
-          - Grants: api/abb_rws_client_python_rw6/rws/users/grants.md
-          - Remote: api/abb_rws_client_python_rw6/rws/users/remote.md
-          - Rmmp: api/abb_rws_client_python_rw6/rws/users/rmmp.md
-          - Users: api/abb_rws_client_python_rw6/rws/users/users.md
+      # --- AUTOGEN_API_START ---
+      - Abb Rws Client Python Rw6:
+        - Core:
+          - Client: api/abb_rws_client_python_rw6/core/client.md
+          - Env: api/abb_rws_client_python_rw6/core/env.md
+          - Exceptions: api/abb_rws_client_python_rw6/core/exceptions.md
+          - Logger: api/abb_rws_client_python_rw6/core/logger.md
+          - Serializers: api/abb_rws_client_python_rw6/core/serializers.md
+        - Highlevel:
+          - Execution: api/abb_rws_client_python_rw6/highlevel/execution.md
+          - Modules: api/abb_rws_client_python_rw6/highlevel/modules.md
+          - Panel: api/abb_rws_client_python_rw6/highlevel/panel.md
+          - Subscription: api/abb_rws_client_python_rw6/highlevel/subscription.md
+          - Symbol: api/abb_rws_client_python_rw6/highlevel/symbol.md
+          - Variables: api/abb_rws_client_python_rw6/highlevel/variables.md
+        - Rws:
+          - Cfg: api/abb_rws_client_python_rw6/rws/cfg.md
+          - Devices: api/abb_rws_client_python_rw6/rws/devices.md
+          - Dipc: api/abb_rws_client_python_rw6/rws/dipc.md
+          - Elog: api/abb_rws_client_python_rw6/rws/elog.md
+          - Fileservice: api/abb_rws_client_python_rw6/rws/fileservice.md
+          - Mastership: api/abb_rws_client_python_rw6/rws/mastership.md
+          - Motionsystem: api/abb_rws_client_python_rw6/rws/motionsystem.md
+          - Operations On Io Profinet Device: api/abb_rws_client_python_rw6/rws/operations_on_io_profinet_device.md
+          - Panel: api/abb_rws_client_python_rw6/rws/panel.md
+          - Retcode: api/abb_rws_client_python_rw6/rws/retcode.md
+          - Root: api/abb_rws_client_python_rw6/rws/root.md
+          - Subscription: api/abb_rws_client_python_rw6/rws/subscription.md
+          - System: api/abb_rws_client_python_rw6/rws/system.md
+          - Vision: api/abb_rws_client_python_rw6/rws/vision.md
+          - Ctrl:
+            - Backup: api/abb_rws_client_python_rw6/rws/ctrl/backup.md
+            - Clock: api/abb_rws_client_python_rw6/rws/ctrl/clock.md
+            - Ctrl: api/abb_rws_client_python_rw6/rws/ctrl/ctrl.md
+            - Identity: api/abb_rws_client_python_rw6/rws/ctrl/identity.md
+          - Iosystem:
+            - Devices: api/abb_rws_client_python_rw6/rws/iosystem/devices.md
+            - Iosystem: api/abb_rws_client_python_rw6/rws/iosystem/iosystem.md
+            - Networks: api/abb_rws_client_python_rw6/rws/iosystem/networks.md
+            - Signals: api/abb_rws_client_python_rw6/rws/iosystem/signals.md
+          - Rapid:
+            - Aliasio: api/abb_rws_client_python_rw6/rws/rapid/aliasio.md
+            - Execution: api/abb_rws_client_python_rw6/rws/rapid/execution.md
+            - Modules: api/abb_rws_client_python_rw6/rws/rapid/modules.md
+            - Rapid: api/abb_rws_client_python_rw6/rws/rapid/rapid.md
+            - Symbol: api/abb_rws_client_python_rw6/rws/rapid/symbol.md
+            - Symbols: api/abb_rws_client_python_rw6/rws/rapid/symbols.md
+            - Taskpanel: api/abb_rws_client_python_rw6/rws/rapid/taskpanel.md
+            - Tasks: api/abb_rws_client_python_rw6/rws/rapid/tasks.md
+            - Uiinstr: api/abb_rws_client_python_rw6/rws/rapid/uiinstr.md
+          - Rw:
+            - Misc: api/abb_rws_client_python_rw6/rws/rw/misc.md
+          - Users:
+            - Grants: api/abb_rws_client_python_rw6/rws/users/grants.md
+            - Remote: api/abb_rws_client_python_rw6/rws/users/remote.md
+            - Rmmp: api/abb_rws_client_python_rw6/rws/users/rmmp.md
+            - Users: api/abb_rws_client_python_rw6/rws/users/users.md
     # --- AUTOGEN_API_END ---
-  - Coverage: coverage.md
+  - Coverage: coverage-report.md
 
 markdown_extensions:
   - admonition

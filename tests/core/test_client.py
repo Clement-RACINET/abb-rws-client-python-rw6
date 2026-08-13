@@ -370,6 +370,7 @@ class TestClientLifecycle:
         assert client.username == "admin"
         assert client.password == "secret"
 
+
 class TestSessionCookieHeader:
     """Tests for RWSClient.session_cookie_header()."""
 

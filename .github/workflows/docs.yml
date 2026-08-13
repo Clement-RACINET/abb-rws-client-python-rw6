@@ -2,7 +2,7 @@ name: Deploy Documentation
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -20,22 +20,14 @@ jobs:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Installer Python
-        uses: actions/setup-python@v5
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.8.8
         with:
-          python-version: "3.11"
+          pixi-version: latest
+          cache: true
 
-      - name: Installer les dépendances doc
-        run: pip install mkdocs mkdocs-material mkdocstrings[python] mkdocs-coverage
-
-      - name: Installer le package (nécessaire pour mkdocstrings + hooks.py)
-        run: pip install -e .
-
-      - name: Générer les .md API
-        run: python utils/docs/ci_generate.py
-
-      - name: Compiler la documentation
-        run: mkdocs build --site-dir public
+      - name: Générer la documentation
+        run: pixi run -e dev docs
 
       - name: Upload de l'artefact Pages
         uses: actions/upload-pages-artifact@v3

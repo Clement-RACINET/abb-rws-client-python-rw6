@@ -1,4 +1,4 @@
-# exemples/04/example_load_module.py
+# examples/04/example_load_module.py
 """Example 04 — Load a RAPID module into a task at runtime.
 
 Author: Clement RACINET
@@ -14,10 +14,10 @@ Prerequisites:
       ``RWS_PASSWORD``, ``RWS_RAPID_TASK``, ``RWS_MODULE_PATH`` (optional).
 
 RAPID side:
-    See ``exemples/04/LoadModule.mod``.
+    See ``examples/04/LoadModule.mod``.
 
 Run:
-    pixi run python exemples/04/example_load_module.py
+    pixi run python examples/04/example_load_module.py
 """
 
 from __future__ import annotations

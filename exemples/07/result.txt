@@ -1,4 +1,4 @@
-~/abb_rws_client_python_rw6/exemples/07/write_robtarget_array.py
+~/abb_rws_client_python_rw6/examples/07/write_robtarget_array.py
 16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Demo trajectory: 5 points, base x=1500 y=0 z=1789
 16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [1] x=1500.0 y=0.0 z=1789.0 → [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
 16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [2] x=1510.0 y=0.0 z=1789.0 → [[1510,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]

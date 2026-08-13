@@ -2,6 +2,7 @@
 # DO NOT EDIT MANUALLY — run the generator to regenerate.
 #  Generator author: Clement RACINET
 """Auto-generated unit tests for rws/subscription."""
+
 from __future__ import annotations
 
 import httpx
@@ -57,6 +58,7 @@ async def test_get_subscription_actions() -> None:
     assert transport.last_request.url.path == "/subscription"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_subscribe_on_resources() -> None:
     """
@@ -74,6 +76,7 @@ async def test_subscribe_on_resources() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 201
 
+
 @pytest.mark.asyncio
 async def test_get_subscription_group_actions() -> None:
     """
@@ -88,6 +91,7 @@ async def test_get_subscription_group_actions() -> None:
     assert transport.last_request.method == "GET"
     assert transport.last_request.url.path == "/subscription/group_id_test"
     assert resp.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_add_new_resources_remove_existing_resources_or() -> None:
@@ -107,6 +111,7 @@ async def test_add_new_resources_remove_existing_resources_or() -> None:
     assert "application/x-www-form-urlencoded" in ct
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_unsubscribe_or_remove_the_subscription_group_resources() -> None:
     """
@@ -123,6 +128,7 @@ async def test_unsubscribe_or_remove_the_subscription_group_resources() -> None:
     assert transport.last_request.url.path == "/subscription/group_id_test"
     assert resp.status_code == 200
 
+
 @pytest.mark.asyncio
 async def test_unsubscribe_or_remove_the_resource_from_subscription() -> None:
     """
@@ -133,9 +139,7 @@ async def test_unsubscribe_or_remove_the_resource_from_subscription() -> None:
     client = _make_client(transport)
 
     resp = await unsubscribe_or_remove_the_resource_from_subscription(
-        client,
-        "group_id_test",
-        "resource_uri_test"
+        client, "group_id_test", "resource_uri_test"
     )
 
     assert transport.last_request is not None
