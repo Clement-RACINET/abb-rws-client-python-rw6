@@ -141,3 +141,24 @@ reexport_allowlist = [
 ]
 
 flat_subdirs = []
+
+
+[tool.py-structure-tools]
+exclude_dirs = [
+    "docs",
+    "site",
+    "build",
+    "dist",
+]
+
+exclude_files = [
+    "*.log",
+    "*.tmp",
+    "*.bak",
+]
+
+include_hidden = false
+use_gitignore = true
+max_depth = 5
+default_formats = ["txt", "html"]
+output_basename = "rws_structure"
