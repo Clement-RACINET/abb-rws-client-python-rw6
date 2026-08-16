@@ -1,0 +1,25 @@
+# Result
+
+Source file: `result.txt`
+
+```text
+~/abb_rws_client_python_rw6/examples/07/write_robtarget_array.py
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Demo trajectory: 5 points, base x=1500 y=0 z=1789
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [1] x=1500.0 y=0.0 z=1789.0 → [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [2] x=1510.0 y=0.0 z=1789.0 → [[1510,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [3] x=1520.0 y=0.0 z=1789.0 → [[1520,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [4] x=1530.0 y=0.0 z=1789.0 → [[1530,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [5] x=1540.0 y=0.0 z=1789.0 → [[1540,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Connected → http://192.168.1.10:80/
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — [1/5] Prepared RAPID/T_ROB1/RobtargetArray/TrajectoryPoints%7B1%7D = [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — [2/5] Prepared RAPID/T_ROB1/RobtargetArray/TrajectoryPoints%7B2%7D = [[1510,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — [3/5] Prepared RAPID/T_ROB1/RobtargetArray/TrajectoryPoints%7B3%7D = [[1520,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — [4/5] Prepared RAPID/T_ROB1/RobtargetArray/TrajectoryPoints%7B4%7D = [[1530,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — [5/5] Prepared RAPID/T_ROB1/RobtargetArray/TrajectoryPoints%7B5%7D = [[1540,0,1789],[0,0,1,0],[0,0,0,0],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Writing 5 robtargets with one mastership session.
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Write complete — 5 points written.
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Verifying first and last elements…
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [1] = [[1500,0,1789],[0,0,1,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch —   [5] = [[1540,0,1789],[0,0,1,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]]
+16:52:11 [INFO    ] abb_rws_client_python_rw6.examples.write_robtarget_array_highlevel_batch — Done.
+```

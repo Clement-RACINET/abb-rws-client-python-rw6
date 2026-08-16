@@ -174,7 +174,7 @@ enable_api = true
 enable_coverage = true
 enable_readme = true
 
-enable_examples = false
+enable_examples = true
 enable_todo = false
 enable_diagrams = false
 enable_diagnostics = false
@@ -187,6 +187,14 @@ clean_output_dir = true
 [tool.py-doc-tools.coverage]
 package = "abb_rws_client_python_rw6"
 title = "Test coverage report"
+
+[tool.py-doc-tools.examples]
+source_dir = "examples"
+output_dir = "docs/examples"
+nav_start_marker = "# --- AUTOGEN_EXAMPLES_START ---"
+nav_end_marker = "# --- AUTOGEN_EXAMPLES_END ---"
+title = "Examples"
+clean_output_dir = true
 
 [tool.py-doc-tools.readme]
 source_file = "README.md"

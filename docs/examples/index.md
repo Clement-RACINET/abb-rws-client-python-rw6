@@ -1,0 +1,3 @@
+# Examples
+
+Generated examples documentation.
