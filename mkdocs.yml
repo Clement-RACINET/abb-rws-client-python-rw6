@@ -82,7 +82,13 @@ nav:
             - Rmmp: api/abb_rws_client_python_rw6/rws/users/rmmp.md
             - Users: api/abb_rws_client_python_rw6/rws/users/users.md
     # --- AUTOGEN_API_END ---
-  - Coverage: coverage-report.md
+  - Coverage:
+      # --- AUTOGEN_COVERAGE_START ---
+      - Overview: coverage-report.md
+      - HTML index: coverage/index.html
+      - Class index: coverage/class_index.html
+      - Function index: coverage/function_index.html
+    # --- AUTOGEN_COVERAGE_END ---
 
 markdown_extensions:
   - admonition

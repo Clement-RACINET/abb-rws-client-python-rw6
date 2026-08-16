@@ -9,7 +9,6 @@ platforms = ["linux-64", "win-64", "osx-arm64"]
 default  = { features = [],                              solve-group = "default" }
 dev      = { features = ["dev"],                         solve-group = "default" }
 examples = { features = ["examples"],                    solve-group = "default" }
-full     = { features = ["dev", "scraping", "examples"], solve-group = "default" }
 
 # ── Dépendances runtime (utilisateur final) ───────────────────────────────
 [dependencies]
@@ -36,6 +35,10 @@ py-init-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-init-tools.gi
 py-clean-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-clean-tools.git", branch = "main" }
 py-structure-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-structure-tools.git", branch = "main" }
 py-doc-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-doc-tools.git", branch = "main" }
+
+# ── scraping ──────
+requests       = ">=2.32,<3.0"
+beautifulsoup4 = ">=4.12,<5.0"
 
 [feature.dev.tasks]
 lint        = "ruff check abb_rws_client_python_rw6 tests"
@@ -70,11 +73,6 @@ docs-serve  = "python -m mkdocs serve"
 
 
 [feature.examples.tasks]
-
-# ── Feature : scraping ────────────────────────────────────────────────────
-[feature.scraping.pypi-dependencies]
-requests       = ">=2.32,<3.0"
-beautifulsoup4 = ">=4.12,<5.0"
 
 
 [tool.pytest.ini_options]

@@ -8,4 +8,4 @@
   title="Coverage Report">
 </iframe>
 
-[Open coverage report in a new page](../coverage/index.html)
+[Open coverage report in a new page](coverage/index.html)
