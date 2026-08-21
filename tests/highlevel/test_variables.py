@@ -1,5 +1,8 @@
 # tests/highlevel/test_variables.py
+# Copyright (c) 2026 Clément RACINET
 """Tests for abb_rws_client_python_rw6.highlevel.variables.
+
+Author: Clement RACINET
 
 All rws/ dependencies are mocked via unittest.mock.AsyncMock — no HTTP
 calls are made.

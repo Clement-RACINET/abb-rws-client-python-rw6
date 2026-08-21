@@ -1,4 +1,5 @@
 # tests/test_client.py
+# Copyright (c) 2026 Clément RACINET
 """
 Unit tests for RWSClient (async) and RWSClientSync.
 

@@ -1,4 +1,5 @@
 # tests/core/test_env.py
+# Copyright (c) 2026 Clément RACINET
 """Tests for abb_rws_client_python_rw6.core.env."""
 
 from __future__ import annotations

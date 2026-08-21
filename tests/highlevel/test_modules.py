@@ -1,5 +1,8 @@
 # tests/highlevel/test_modules.py
+# Copyright (c) 2026 Clément RACINET
 """Tests for abb_rws_client_python_rw6.highlevel.modules.
+
+Author: Clement RACINET
 
 All rws/ dependencies are mocked via unittest.mock.AsyncMock — no HTTP
 calls are made.

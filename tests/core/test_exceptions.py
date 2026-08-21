@@ -1,4 +1,5 @@
 # tests/test_exceptions.py
+# Copyright (c) 2026 Clément RACINET
 """
 Unit tests for abb_rws_client_python_rw6.core.exceptions — no robot required.
 

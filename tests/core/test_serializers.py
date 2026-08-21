@@ -1,4 +1,5 @@
 # tests/test_serializers.py
+# Copyright (c) 2026 Clément RACINET
 """
 Unit tests for abb_rws_client_python_rw6.core.serializers — no robot required.
 
