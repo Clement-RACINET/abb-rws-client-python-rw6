@@ -224,7 +224,7 @@ class RWSClient:
         port: int | None = None,
         timeout: float | None = None,
     ) -> None:
-        self.host = host or get_env_str("RWS_HOST", "192.168.1.10")
+        self.host = host or get_env_str("ROBOT_IP", "192.168.1.10")
         self.username = username or get_env_str("RWS_USER", "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
         self.port = port or get_env_int("RWS_PORT", 80)
@@ -580,7 +580,7 @@ class RWSClientSync:
 
     Args:
         host: Controller IP address or hostname (e.g. ``"192.168.125.1"``).
-            Reads ``RWS_HOST`` from environment if ``None``.
+            Reads ``ROBOT_IP`` from environment if ``None``.
         username: RWS username (ABB default: ``"Default User"``).
             Reads ``RWS_USER`` from environment if ``None``.
         password: RWS password (ABB default: ``"robotics"``).
@@ -606,7 +606,7 @@ class RWSClientSync:
         port: int | None = None,
         timeout: float | None = None,
     ) -> None:
-        self.host = host or get_env_str("RWS_HOST", "192.168.125.1")
+        self.host = host or get_env_str("ROBOT_IP", "192.168.125.1")
         self.username = username or get_env_str("RWS_USER", "Default User")
         self.password = password or get_env_str("RWS_PASSWORD", "robotics")
         self.port = port or get_env_int("RWS_PORT", 80)

@@ -19,19 +19,20 @@ API under **RobotWare 6**.
 Documentation is fully available **[here](https://clement-racinet.github.io/abb-rws-client-python-rw6/)**.
 
 ---
+
 ---
 
 ## Features
 
-| Domain           | Operations                                                                   |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Session          | HTTP Digest authentication, ABBCX cookie, automatic retry                    |
-| RAPID Mastership | Acquire / release (`async with` context manager)                             |
-| RAPID Variables  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget`                |
-| RAPID Execution  | Read / control execution state (`running` / `stopped`)                       |
-| IO Signals       | Read / write digital & analog signals                                        |
-| Controller       | Panel, motion system, CFG, elog, file service, subscriptions                 |
-| Coverage         | 710 unit tests — 99% coverage — `ruff` clean                                 |
+| Domain           | Operations                                                    |
+| ---------------- | ------------------------------------------------------------- |
+| Session          | HTTP Digest authentication, ABBCX cookie, automatic retry     |
+| RAPID Mastership | Acquire / release (`async with` context manager)              |
+| RAPID Variables  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget` |
+| RAPID Execution  | Read / control execution state (`running` / `stopped`)        |
+| IO Signals       | Read / write digital & analog signals                         |
+| Controller       | Panel, motion system, CFG, elog, file service, subscriptions  |
+| Coverage         | 710 unit tests — 99% coverage — `ruff` clean                  |
 
 ---
 
@@ -79,14 +80,14 @@ pixi run format
 
 All options are read from environment variables (`.env` file):
 
-| Variable             | Default          | Description               |
-| -------------------- | ---------------- | ------------------------- |
-| `ROBOT_IP`         | ---               | ABB controller IP address |
-| `RWS_USER`         | `Default User` | RWS username              |
-| `RWS_PASSWORD`     | `robotics`     | RWS password              |
-| `RWS_TIMEOUT`      | ---            | HTTP timeout (seconds)    |
-| `RWS_RAPID_TASK`   | `T_ROB1`       | Target RAPID task name    |
-| `RWS_LOG_LEVEL`    | `INFO`         | Log verbosity level    |
+| Variable         | Default        | Description               |
+| ---------------- | -------------- | ------------------------- |
+| `RWS_HOST`       | ---            | ABB controller IP address |
+| `RWS_USER`       | `Default User` | RWS username              |
+| `RWS_PASSWORD`   | `robotics`     | RWS password              |
+| `RWS_TIMEOUT`    | ---            | HTTP timeout (seconds)    |
+| `RWS_RAPID_TASK` | `T_ROB1`       | Target RAPID task name    |
+| `RWS_LOG_LEVEL`  | `INFO`         | Log verbosity level       |
 
 ---
 
@@ -118,4 +119,3 @@ abb_rws_client/
 
 This project is licensed under the **MIT License** — see the [`LICENSE`](./LICENSE) file for details.  
 © 2026 RACINET Clément
-

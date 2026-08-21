@@ -15,7 +15,7 @@ Prerequisites:
     - Controller in AUTO mode, RAPID stopped.
     - Module file already present on the controller at ``RWS_MODULE_PATH``
       (upload it beforehand via FTP, USB, or RWS fileservice).
-    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
       ``RWS_PASSWORD``, ``RWS_RAPID_TASK``, ``RWS_MODULE_PATH`` (optional).
 
 RAPID side:

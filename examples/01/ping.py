@@ -34,7 +34,7 @@ from abb_rws_client_python_rw6 import (
 )
 from abb_rws_client_python_rw6.rws.panel import get_controller_state, get_operation_mode
 
-load_env()
+load_env(".env")
 configure_logging(level=os.getenv("RWS_LOG_LEVEL", "INFO"))
 logger = get_logger("examples.ping")
 

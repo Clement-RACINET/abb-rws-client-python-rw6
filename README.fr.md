@@ -16,15 +16,15 @@ La documentation complète est disponnible **[ici](https://clement-racinet.githu
 
 ## Fonctionnalités
 
-| Domaine              | Opérations                                                                        |
-| -------------------- | --------------------------------------------------------------------------------- |
-| Session              | Authentification HTTP Digest, cookie ABBCX, nouvelle tentative automatique        |
-| Mastership RAPID     | Acquisition / libération (gestionnaire de contexte `async with`)                  |
-| Variables RAPID      | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget`                     |
-| Exécution RAPID      | Lecture / contrôle de l'état d'exécution (`running` / `stopped`)                  |
-| Signaux IO           | Lecture / écriture de signaux numériques et analogiques                           |
-| Contrôleur           | Panneau, système de mouvement, CFG, elog, service de fichiers, abonnements        |
-| Couverture           | 710 tests unitaires — 99% de couverture — `ruff` clean                            |
+| Domaine          | Opérations                                                                 |
+| ---------------- | -------------------------------------------------------------------------- |
+| Session          | Authentification HTTP Digest, cookie ABBCX, nouvelle tentative automatique |
+| Mastership RAPID | Acquisition / libération (gestionnaire de contexte `async with`)           |
+| Variables RAPID  | `get` / `set` — `num`, `bool`, `string`, `array`, `robtarget`              |
+| Exécution RAPID  | Lecture / contrôle de l'état d'exécution (`running` / `stopped`)           |
+| Signaux IO       | Lecture / écriture de signaux numériques et analogiques                    |
+| Contrôleur       | Panneau, système de mouvement, CFG, elog, service de fichiers, abonnements |
+| Couverture       | 710 tests unitaires — 99% de couverture — `ruff` clean                     |
 
 ---
 
@@ -72,14 +72,14 @@ pixi run format
 
 Toutes les options sont lues depuis des variables d'environnement (fichier `.env`) :
 
-| Variable             | Défaut           | Description                          |
-| -------------------- | ---------------- | ------------------------------------ |
-| `ROBOT_IP`         | ---               | Adresse IP du contrôleur ABB         |
-| `RWS_USER`         | `Default User` | Nom d'utilisateur RWS                |
-| `RWS_PASSWORD`     | `robotics`     | Mot de passe RWS                     |
-| `RWS_TIMEOUT`      | ---            | Délai d'attente HTTP (secondes)      |
-| `RWS_RAPID_TASK`   | `T_ROB1`       | Nom de la tâche RAPID cible          |
-| `RWS_LOG_LEVEL`    | `INFO`         | Niveau de verbosité des logs         |
+| Variable         | Défaut         | Description                     |
+| ---------------- | -------------- | ------------------------------- |
+| `RWS_HOST`       | ---            | Adresse IP du contrôleur ABB    |
+| `RWS_USER`       | `Default User` | Nom d'utilisateur RWS           |
+| `RWS_PASSWORD`   | `robotics`     | Mot de passe RWS                |
+| `RWS_TIMEOUT`    | ---            | Délai d'attente HTTP (secondes) |
+| `RWS_RAPID_TASK` | `T_ROB1`       | Nom de la tâche RAPID cible     |
+| `RWS_LOG_LEVEL`  | `INFO`         | Niveau de verbosité des logs    |
 
 ---
 

@@ -2,14 +2,14 @@
 
 Source file: `ping.py`
 
-```python
+````python
 # examples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 
 Author: Clement RACINET
 
 Prerequisites:
-    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
       ``RWS_PASSWORD`` (optional — defaults apply if absent).
     - Controller reachable on the network.
 
@@ -109,4 +109,4 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
-```
+````
