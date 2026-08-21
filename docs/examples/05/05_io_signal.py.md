@@ -19,7 +19,7 @@ Prerequisites:
     - A virtual digital output ``TEST_DO_RWS`` configured in the IO system
       under a Virtual unit (e.g. ``VIRTUAL1``).
     - The RAPID module ``ExampleIOSignal`` loaded and running on ``T_ROB1``.
-    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD``.
 
 RAPID side:

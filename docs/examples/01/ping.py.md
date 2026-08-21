@@ -9,7 +9,7 @@ Source file: `ping.py`
 Author: Clement RACINET
 
 Prerequisites:
-    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD`` (optional — defaults apply if absent).
     - Controller reachable on the network.
 

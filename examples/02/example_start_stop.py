@@ -6,7 +6,7 @@ Author: Clement RACINET
 Prerequisites:
     - Controller in AUTO mode, motors ON.
     - A RAPID program loaded in T_ROB1 with a ``main()`` procedure.
-    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD`` (optional — defaults apply if absent).
 
 RAPID side:

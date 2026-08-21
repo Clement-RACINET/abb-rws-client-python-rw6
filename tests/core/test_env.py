@@ -28,12 +28,12 @@ class TestFindEnv:
 
     def test_finds_env_in_start_dir(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=1.2.3.4\n")
+        env_file.write_text("RWS_HOST=1.2.3.4\n")
         assert _find_env(tmp_path) == env_file
 
     def test_finds_env_in_parent(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=1.2.3.4\n")
+        env_file.write_text("RWS_HOST=1.2.3.4\n")
         child = tmp_path / "sub" / "deep"
         child.mkdir(parents=True)
         assert _find_env(child) == env_file
@@ -79,15 +79,15 @@ class TestLoadEnv:
 
     def test_loads_explicit_file(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=10.0.0.1\n")
+        env_file.write_text("RWS_HOST=10.0.0.1\n")
         with patch.dict(os.environ, {}, clear=False):
-            os.environ.pop("ROBOT_IP", None)
+            os.environ.pop("RWS_HOST", None)
             result = load_env(env_file)
         assert result == env_file
 
     def test_explicit_dir_resolves_to_env(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=10.0.0.2\n")
+        env_file.write_text("RWS_HOST=10.0.0.2\n")
         result = load_env(tmp_path)
         assert result == env_file
 
@@ -109,17 +109,17 @@ class TestLoadEnv:
 
     def test_does_not_override_by_default(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=from_file\n")
-        with patch.dict(os.environ, {"ROBOT_IP": "already_set"}):
+        env_file.write_text("RWS_HOST=from_file\n")
+        with patch.dict(os.environ, {"RWS_HOST": "already_set"}):
             load_env(env_file, override=False)
-            assert os.environ["ROBOT_IP"] == "already_set"
+            assert os.environ["RWS_HOST"] == "already_set"
 
     def test_override_replaces_existing(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
-        env_file.write_text("ROBOT_IP=from_file\n")
-        with patch.dict(os.environ, {"ROBOT_IP": "already_set"}):
+        env_file.write_text("RWS_HOST=from_file\n")
+        with patch.dict(os.environ, {"RWS_HOST": "already_set"}):
             load_env(env_file, override=True)
-            assert os.environ["ROBOT_IP"] == "from_file"
+            assert os.environ["RWS_HOST"] == "from_file"
 
     def test_returns_resolved_path(self, tmp_path: Path) -> None:
         env_file = tmp_path / ".env"
@@ -144,17 +144,17 @@ class TestGetEnvStr:
     """Tests for get_env_str()."""
 
     def test_returns_value_when_set(self) -> None:
-        with patch.dict(os.environ, {"ROBOT_IP": "192.168.1.1"}):
-            assert get_env_str("ROBOT_IP", "default") == "192.168.1.1"
+        with patch.dict(os.environ, {"RWS_HOST": "192.168.1.1"}):
+            assert get_env_str("RWS_HOST", "default") == "192.168.1.1"
 
     def test_returns_default_when_absent(self) -> None:
         with patch.dict(os.environ, {}, clear=False):
-            os.environ.pop("ROBOT_IP", None)
-            assert get_env_str("ROBOT_IP", "fallback") == "fallback"
+            os.environ.pop("RWS_HOST", None)
+            assert get_env_str("RWS_HOST", "fallback") == "fallback"
 
     def test_returns_default_when_empty(self) -> None:
-        with patch.dict(os.environ, {"ROBOT_IP": ""}):
-            assert get_env_str("ROBOT_IP", "fallback") == "fallback"
+        with patch.dict(os.environ, {"RWS_HOST": ""}):
+            assert get_env_str("RWS_HOST", "fallback") == "fallback"
 
 
 # ---------------------------------------------------------------------------

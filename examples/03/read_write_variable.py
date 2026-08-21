@@ -11,14 +11,14 @@ Prerequisites:
     - Controller in AUTO mode.
     - Module ``ReadWriteVariable`` loaded in T_ROB1
       (see ``examples/03/ReadWriteVariable.mod``).
-    - ``.env`` at the repository root with ``ROBOT_IP``, ``RWS_USER``,
+    - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,
       ``RWS_PASSWORD``, ``RWS_RAPID_TASK`` (optional — defaults apply).
 
 RAPID side:
     See ``examples/03/ReadWriteVariable.mod``.
 
 Run:
-    pixi run python examples/03/example_read_write_variable.py
+    pixi run python examples/03/read_write_variable.py
 """
 
 from __future__ import annotations
