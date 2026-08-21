@@ -3,31 +3,40 @@
 
 Author: Clement RACINET
 
-Wraps the ABB RWS Subscription Service (POST/PUT/DELETE /subscription) and
-the WebSocket event stream behind a resource-oriented API: the caller
-declares a list of `SubscribedResource` (name + RWS resource URI + ABB
-priority), and gets back logical `(name, value)` events instead of raw XML.
+Wraps the ABB RWS Subscription Service and the WebSocket event stream behind
+a resource-oriented API: the caller declares a list of `SubscribedResource`
+(name + RWS resource URI + ABB priority), and gets back logical
+`(name, value)` events instead of raw XML.
 
-ABB RWS subscription flow (confirmed from official ABB doc, "Subscriptions"
-section):
-    1. POST /subscription with a form body:
-           resources=<N>
-           1=<resource-uri>&1-p=<priority>
-           2=<resource-uri>&2-p=<priority>
-           ...
+ABB RWS subscription flow confirmed on real RW6 hardware:
+    1. POST /subscription with a form-urlencoded body. For multiple
+       resources, ABB expects the ``resources`` key to be repeated once per
+       subscribed resource:
+           resources=1
+           1=<resource-uri>
+           1-p=<priority>
+           resources=2
+           2=<resource-uri>
+           2-p=<priority>
        Response: HTTP 201, body = initial events for each resource, plus a
        ``Location`` header = the WebSocket URL (``ws://host:port/poll/<id>``).
     2. Open a WebSocket on that URL, subprotocol ``robapi2_subscription``,
        reusing the RWS session cookies (``-http-session-``, ``ABBCX``).
     3. Each subscribed-resource change is pushed as an XML/XHTML event.
-    4. DELETE /subscription/{group-id} to tear down the group.
+    4. Close the WebSocket to tear down the subscription group. If the
+       WebSocket was never opened, DELETE /subscription/{group-id} can be
+       used as fallback cleanup.
 
-ABB priority semantics (confirmed, ABB doc "Subscriptions"):
-    "0" = Low    (delay <= 5s)
-    "1" = Medium (delay <= 200ms)
-    "2" = High   (as soon as possible; PERS RAPID variables and IO signals
-                  only; max 64 High-priority resources across the
-                  controller)
+ABB priority semantics confirmed from ABB doc "Subscriptions":
+    "0" = Low    (events sent with a maximum delay of 5 seconds)
+    "1" = Medium (events sent with a maximum delay of 200 ms)
+    "2" = High   (events sent as soon as they occur; applicable only to
+                  persistent RAPID variables and IO signals; limit of 64
+                  high-priority subscribed resources)
+
+ABB subscription limits confirmed from ABB doc "Subscriptions":
+    - Maximum of 1000 unique low/medium-priority resources for all clients.
+    - Maximum of 64 high-priority resources.
 """
 
 from __future__ import annotations
@@ -36,16 +45,13 @@ from collections.abc import AsyncGenerator, Sequence
 from dataclasses import dataclass
 import re
 from typing import Literal
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urlencode, urlparse, urlunparse
 
 import websockets.asyncio.client
 from websockets.typing import Subprotocol
 
 from abb_rws_client_python_rw6.core.client import RWSClient
 from abb_rws_client_python_rw6.core.logger import get_logger
-from abb_rws_client_python_rw6.rws.subscription import (
-    unsubscribe_or_remove_the_subscription_group_resources,
-)
 
 logger = get_logger(__name__)
 
@@ -205,25 +211,53 @@ def _validate_resources(resources: Sequence[SubscribedResource]) -> None:
         )
 
 
-def _build_subscription_payload(resources: Sequence[SubscribedResource]) -> dict[str, str]:
-    """Build the ABB RWS form-data payload for ``POST /subscription``.
+def _build_subscription_payload(resources: Sequence[SubscribedResource]) -> str:
+    """Build the ABB RWS form-urlencoded payload for ``POST /subscription``.
 
-    ABB constraints: Format confirmed by ABB doc ("Subscriptions" section):
-        ``resources=<N>`` (total resource count) followed by, for each
-        resource ``i`` (1-based index): ``<i>=<resource-uri>`` and
-        ``<i>-p=<priority>``.
+    Route: ``POST /subscription``
+
+    ABB constraints: ABB RW6 expects one ``resources=<identifier>`` entry per
+        subscribed resource. The ``resources`` field declares the identifier
+        used by the matching ``<identifier>`` and ``<identifier>-p`` fields.
+        This repeated-key format was confirmed on real RW6 hardware with
+        multiple RAPID PERS variables.
 
     Args:
-        resources: Resources to subscribe to, in order (index i = position + 1).
+        resources: Resources to subscribe to, in order.
 
     Returns:
-        Flat dict ready for ``client.post("/subscription", data=...)``.
+        URL-encoded form body with repeated ``resources`` keys.
+
+    Raises:
+        No exception is raised by this helper.
+
+    Example:
+        ```python
+        >>> _build_subscription_payload([
+        ...     SubscribedResource(
+        ...         "a",
+        ...         "/rw/rapid/symbol/data/RAPID/T_ROB1/M/A;value",
+        ...         "1",
+        ...     ),
+        ...     SubscribedResource(
+        ...         "b",
+        ...         "/rw/rapid/symbol/data/RAPID/T_ROB1/M/B;value",
+        ...         "2",
+        ...     ),
+        ... ])
+        'resources=1&1=...&1-p=1&resources=2&2=...&2-p=2'
+        ```
     """
-    payload: dict[str, str] = {"resources": str(len(resources))}
+
+    pairs: list[tuple[str, str]] = []
+
     for index, resource in enumerate(resources, start=1):
-        payload[str(index)] = resource.resource_uri
-        payload[f"{index}-p"] = resource.priority
-    return payload
+        identifier = str(index)
+        pairs.append(("resources", identifier))
+        pairs.append((identifier, resource.resource_uri))
+        pairs.append((f"{identifier}-p", resource.priority))
+
+    return urlencode(pairs)
 
 
 def _build_resource_lookup(resources: Sequence[SubscribedResource]) -> dict[str, str]:
@@ -452,59 +486,57 @@ async def create_subscription(
     Route: ``POST /subscription``
 
     ABB constraints:
-        - Max 1000 total resources per client (low/medium priority).
-        - Max 64 resources at High priority ("2"), RAPID PERS variables and
-          IO signals only.
+        - Max 1000 total resources per client for low/medium priority.
+        - Max 64 resources at High priority ``"2"``.
         - Max 2 subscription groups per client.
+        - The multi-resource form body must repeat the ``resources`` key once
+          per subscribed resource.
         - The response body contains the initial event state for the
-          subscribed resources (parsed here into ``initial_values``); the
-          ``Location`` header carries the WebSocket URL.
+          subscribed resources.
+        - The ``Location`` header carries the WebSocket URL.
+        - The WebSocket handshake must reuse the session cookies captured
+          after the subscription creation response.
 
     Args:
         client: Open RWSClient instance.
-        resources: Resources to subscribe to (1 to N).
+        resources: Resources to subscribe to.
 
     Returns:
         SubscriptionHandle with the group id, normalized WebSocket URL,
-        session cookie header, and any initial values ABB returned inline.
+        session cookie header, subscribed resources and initial values.
 
     Raises:
-        ValueError: If ``resources`` is empty, exceeds ABB's resource-count
-            limits, or if ABB's response cannot be parsed (missing
-            WebSocket URL / group id).
+        ValueError: If the resource list is invalid or the ABB response cannot
+            be parsed.
         RWSAuthenticationError: On HTTP 401.
-        RWSHTTPError: On any other HTTP >= 400 (e.g. bad resource URI).
+        RWSHTTPError: On any other HTTP status greater than or equal to 400.
 
     Example:
         ```python
         >>> handle = await create_subscription(
         ...     client,
-        ...     [SubscribedResource(
-        ...         "watched",
-        ...         "/rw/rapid/symbol/data/RAPID/T_ROB1/M/x;value",
-        ...         "1",
-        ...     )],
+        ...     [
+        ...         SubscribedResource(
+        ...             "watched",
+        ...             "/rw/rapid/symbol/data/RAPID/T_ROB1/M/x;value",
+        ...             "1",
+        ...         )
+        ...     ],
         ... )
         ```
     """
-    # FIXME(Clement RACINET): The multi-resource POST payload built by
-    # _build_subscription_payload (single "resources=<total>" key + per-index
-    # "<i>"/"<i>-p" pairs) is inferred from ABB's documentation, which is
-    # internally inconsistent on this exact point (its own 2-resource sample
-    # repeats the "resources" key with two different values instead of
-    # sending the total once). This has ONLY been confirmed on real RW6
-    # hardware for N=1 resource (examples/06). MUST be re-tested on a real
-    # controller with N>=2 resources (including mixed priorities) before
-    # this is considered production-ready. If ABB rejects the payload, or
-    # returns an unexpected initial-event XML shape for N>=2, fix
-    # _build_subscription_payload and/or _parse_events accordingly — do not
-    # patch around it blindly.
+
     _validate_resources(resources)
+
     payload = _build_subscription_payload(resources)
     lookup = _build_resource_lookup(resources)
 
     logger.info("Creating subscription on %d resource(s)", len(resources))
-    response = await client.post("/subscription", data=payload)
+
+    # ABB RW6 expects repeated form keys. The body is pre-encoded to preserve
+    # those repeated keys while avoiding httpx.AsyncClient issues observed
+    # when passing list-of-tuples form data through data=....
+    response = await client.post("/subscription", content=payload)
 
     headers = dict(response.headers)
     ws_url_raw, group_id = _extract_ws_url_and_group_id(response.text, headers)
@@ -524,21 +556,27 @@ async def create_subscription(
 
 
 async def delete_subscription(client: RWSClient, handle: SubscriptionHandle) -> None:
-    """Delete an ABB RWS subscription group.
+    """Delete an ABB RWS subscription group through HTTP fallback cleanup.
 
     Route: ``DELETE /subscription/{group-id}``
 
-    ABB constraints: Not supported in bootserver mode.
+    ABB constraints: This explicit HTTP cleanup is intended for the case where
+        the subscription group was created but the WebSocket stream was never
+        opened. Once the WebSocket has been opened and then closed, ABB RW6
+        cleans up the group server-side and may reject a later HTTP DELETE
+        with ``Group <id> does not belong to Client <id>``.
 
     Args:
         client: Open RWSClient instance.
         handle: Handle returned by ``create_subscription``.
 
+    Returns:
+        None.
+
     Raises:
         RWSAuthenticationError: On HTTP 401.
-        RWSNotFoundError: If the group was already removed (e.g. session
-            expired server-side).
-        RWSHTTPError: On any other HTTP >= 400.
+        RWSNotFoundError: If the group was already removed.
+        RWSHTTPError: On any other HTTP status greater than or equal to 400.
 
     Example:
         ```python
@@ -546,7 +584,9 @@ async def delete_subscription(client: RWSClient, handle: SubscriptionHandle) -> 
         ```
     """
     logger.info("Deleting subscription group_id=%s", handle.group_id)
-    await unsubscribe_or_remove_the_subscription_group_resources(client, handle.group_id)
+
+    await client.delete(f"/subscription/{handle.group_id}")
+
     logger.info("Subscription group_id=%s deleted", handle.group_id)
 
 
@@ -558,45 +598,54 @@ async def watch_resources(
 ) -> AsyncGenerator[tuple[str, str], None]:
     """Subscribe to resources and yield ``(name, value)`` events as they occur.
 
-    Route: ``POST /subscription`` then WebSocket ``ws://.../poll/{group-id}``,
-    ``DELETE /subscription/{group-id}`` on exit.
+    Route: ``POST /subscription`` then WebSocket ``ws://.../poll/{group-id}``.
+        If the WebSocket was never opened, fallback cleanup uses
+        ``DELETE /subscription/{group-id}``.
 
     ABB constraints:
         - WebSocket subprotocol must be ``robapi2_subscription``.
-        - The WebSocket handshake must carry the same session cookies
-          (``-http-session-``, ``ABBCX``) as the HTTP session.
-        - permessage-deflate must be disabled (``compression=None``): some
-          RW6 controllers reject the negotiated extension with HTTP 400.
-        - The subscription group is always deleted on exit (normal
-          completion, exception, or generator close/cancellation), via
-          ``try/finally``.
+        - The WebSocket handshake must carry the same session cookies as the
+          HTTP session.
+        - ``compression=None`` disables permessage-deflate because some RW6
+          controllers reject WebSocket extension negotiation.
+        - ``ping_interval=None`` disables client-side WebSocket ping frames
+          because ABB documents its own application-level ping/pong behavior.
+        - When the WebSocket has been opened, ABB RW6 cleans up the
+          subscription group when the WebSocket closes.
+        - If the WebSocket was never opened, the subscription group is deleted
+          explicitly with ``DELETE /subscription/{group-id}``.
 
     Args:
         client: Open RWSClient instance.
-        resources: Resources to subscribe to (1 to N). See
-            ``SubscribedResource`` and ``build_rapid_pers_resource_uri``.
-        yield_initial_values: If ``True`` (default), yield the initial
-            values ABB returns inline in the ``POST /subscription``
-            response body before entering the WebSocket loop. If ``False``,
-            only events received over the WebSocket are yielded.
+        resources: Resources to subscribe to.
+        yield_initial_values: If ``True``, yield the initial values returned
+            by ABB in the ``POST /subscription`` response before reading
+            WebSocket events.
 
     Yields:
-        ``(name, value)`` tuples, where ``name`` is the
-        ``SubscribedResource.name`` the event belongs to, and ``value`` is
-        the raw string value as sent by ABB.
+        ``(name, value)`` tuples, where ``name`` is the logical
+        ``SubscribedResource.name`` and ``value`` is the raw ABB value string.
 
     Raises:
-        ValueError: Invalid resource list, or ABB response could not be
-            parsed (see ``create_subscription``).
+        ValueError: If the resource list is invalid or ABB's response cannot
+            be parsed.
         RWSAuthenticationError: On HTTP 401 during subscription setup.
-        RWSHTTPError: On any other HTTP >= 400 during subscription setup.
+        RWSHTTPError: On HTTP errors during subscription setup.
         OSError: If the WebSocket connection cannot be established.
 
     Example:
         ```python
         >>> resources = [
-        ...     SubscribedResource("a", build_rapid_pers_resource_uri("T_ROB1", "M", "X"), "1"),
-        ...     SubscribedResource("b", build_rapid_pers_resource_uri("T_ROB1", "M", "Y"), "1"),
+        ...     SubscribedResource(
+        ...         "a",
+        ...         build_rapid_pers_resource_uri("T_ROB1", "M", "X"),
+        ...         "1",
+        ...     ),
+        ...     SubscribedResource(
+        ...         "b",
+        ...         build_rapid_pers_resource_uri("T_ROB1", "M", "Y"),
+        ...         "1",
+        ...     ),
         ... ]
         >>> async for name, value in watch_resources(client, resources):
         ...     print(name, value)
@@ -604,21 +653,17 @@ async def watch_resources(
     """
     lookup = _build_resource_lookup(resources)
     handle = await create_subscription(client, resources)
+    websocket_opened = False
 
     try:
         if yield_initial_values:
             for name, value in handle.initial_values.items():
                 yield name, value
 
-        # ABB RW6 WebSocket notes (confirmed on real hardware, examples/06):
-        # - subprotocol MUST be "robapi2_subscription", NOT "rws_subscription"
-        #   (some RW6 controllers reject the latter with
-        #   "Unsupported Sec-WebSocket-Protocol").
-        # - compression=None avoids Sec-WebSocket-Extensions negotiation,
-        #   which some RW6 controllers reject with HTTP 400.
-        # - ping_interval=None: ABB documents its own application-level
-        #   ping/pong; the websockets library's built-in ping is disabled
-        #   to avoid sending a frame ABB does not expect.
+        # ABB RW6 WebSocket notes confirmed on real hardware:
+        # - subprotocol must be "robapi2_subscription";
+        # - compression must be disabled to avoid rejected extension negotiation;
+        # - ping_interval is disabled to avoid extra client-side ping frames.
         async with websockets.asyncio.client.connect(
             handle.ws_url,
             additional_headers={"Cookie": handle.cookie_header},
@@ -627,6 +672,7 @@ async def watch_resources(
             ping_interval=None,
             compression=None,
         ) as websocket:
+            websocket_opened = True
             logger.info("WebSocket connected: %s", handle.ws_url)
 
             async for message in websocket:
@@ -637,9 +683,19 @@ async def watch_resources(
                     yield name, value
 
     finally:
-        try:
-            await delete_subscription(client, handle)
-        except Exception as exc:
-            # Teardown must never raise: a failed DELETE here (e.g. session
-            # already expired) must not mask the original error, if any.
-            logger.warning("Could not delete subscription group_id=%s: %s", handle.group_id, exc)
+        if websocket_opened:
+            logger.info(
+                "Subscription group_id=%s cleanup delegated to WebSocket close",
+                handle.group_id,
+            )
+        else:
+            try:
+                await delete_subscription(client, handle)
+            except Exception as exc:
+                # Teardown must never raise: a failed cleanup must not hide
+                # the original subscription or WebSocket setup error.
+                logger.warning(
+                    "Could not delete subscription group_id=%s: %s",
+                    handle.group_id,
+                    exc,
+                )
