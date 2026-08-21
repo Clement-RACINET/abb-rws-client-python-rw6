@@ -1,6 +1,6 @@
-# 03 Read Write Variable
+# Read Write Variable
 
-Source file: `03_read_write_variable.py`
+Source file: `read_write_variable.py`
 
 ```python
 # examples/03/example_read_write_variable.py
@@ -23,7 +23,7 @@ RAPID side:
     See ``examples/03/ReadWriteVariable.mod``.
 
 Run:
-    pixi run python examples/03/example_read_write_variable.py
+    pixi run python examples/03/read_write_variable.py
 """
 
 from __future__ import annotations

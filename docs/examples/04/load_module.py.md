@@ -1,6 +1,6 @@
-# 04 Load Module
+# Load Module
 
-Source file: `04_load_module.py`
+Source file: `load_module.py`
 
 ```python
 # examples/04/example_load_module.py

@@ -95,21 +95,22 @@ nav:
         - Examplestartstop Pgf: examples/02/ExampleStartStop.pgf.md
         - Result: examples/02/result.txt.md
       - 03:
-        - 03 Read Write Variable: examples/03/03_read_write_variable.py.md
+        - Read Write Variable: examples/03/read_write_variable.py.md
         - Readwritevariable Mod: examples/03/ReadWriteVariable.mod.md
         - Readwritevariable Pgf: examples/03/ReadWriteVariable.pgf.md
         - Result: examples/03/result.txt.md
       - 04:
-        - 04 Load Module: examples/04/04_load_module.py.md
+        - Load Module: examples/04/load_module.py.md
         - Loadmodule Mod: examples/04/LoadModule.mod.md
         - Loadmodule Pgf: examples/04/LoadModule.pgf.md
         - Result: examples/04/result.txt.md
       - 05:
-        - 05 Io Signal: examples/05/05_io_signal.py.md
+        - Io Signal: examples/05/io_signal.py.md
         - Iosignal Mod: examples/05/IOSignal.mod.md
         - Iosignal Pgf: examples/05/IOSignal.pgf.md
         - Result: examples/05/result.txt.md
       - 06:
+        - Result: examples/06/result.txt.md
         - Subscription Mod: examples/06/Subscription.mod.md
         - Subscription Pgf: examples/06/Subscription.pgf.md
         - Subscription: examples/06/subscription.py.md
@@ -118,6 +119,16 @@ nav:
         - Robtargetarray Mod: examples/07/RobtargetArray.mod.md
         - Robtargetarray Pgf: examples/07/RobtargetArray.pgf.md
         - Write Robtarget Array: examples/07/write_robtarget_array.py.md
+      - 08:
+        - Result: examples/08/result.txt.md
+        - Subscription Priority: examples/08/subscription_priority.py.md
+        - Subscriptionpriority Mod: examples/08/SubscriptionPriority.mod.md
+        - Subscriptionpriority Pgf: examples/08/SubscriptionPriority.pgf.md
+      - 09:
+        - Result: examples/09/result.txt.md
+        - Symbol Properties: examples/09/symbol_properties.py.md
+        - Symbolpropertiestest Mod: examples/09/SymbolPropertiesTest.mod.md
+        - Symbolpropertiestest Pgf: examples/09/SymbolPropertiesTest.pgf.md
       # --- AUTOGEN_EXAMPLES_END ---
 
   - Coverage:

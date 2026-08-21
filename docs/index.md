@@ -119,3 +119,4 @@ abb_rws_client/
 
 This project is licensed under the **MIT License** — see the [`LICENSE`](./LICENSE) file for details.  
 © 2026 RACINET Clément
+

@@ -1,0 +1,97 @@
+# Result
+
+Source file: `result.txt`
+
+```text
+PS ~\abb-rws-client-python-rw6> pixi run -e examples python examples\08\subscription_priority.py --priority 2
+[main] Watching fast_value_1(priority=2), fast_value_2(priority=2)
+[main] Measurement duration: 20.0 s
+[main] Load examples/08/SubscriptionPriority.mod on the controller.
+[main] Start RAPID execution if not already running.
+[main] Press Ctrl+C to stop.
+
+[main] Connected to 192.168.125.1:80
+17:49:44 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Creating subscription on 2 resource(s)
+17:49:44 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription created: group_id=11, ws_url=ws://192.168.125.1:80/poll/11
+17:49:44 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — WebSocket connected: ws://192.168.125.1:80/poll/11
+
+[summary]
+  priority : 2
+  duration : 20.0 s
+  fast_value_1:
+    events     : 401
+    rate       : 20.05 Hz
+    last value : 3735
+    dt mean    : 50.0 ms
+    dt min     : 46.9 ms
+    dt max     : 52.9 ms
+  fast_value_2:
+    events     : 400
+    rate       : 20.00 Hz
+    last value : 3734
+    dt mean    : 50.0 ms
+    dt min     : 47.0 ms
+    dt max     : 52.8 ms
+17:50:04 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription group_id=11 cleanup delegated to WebSocket close
+PS ~\abb-rws-client-python-rw6> pixi run -e examples python examples\08\subscription_priority.py --priority 1
+[main] Watching fast_value_1(priority=1), fast_value_2(priority=1)
+[main] Measurement duration: 20.0 s
+[main] Load examples/08/SubscriptionPriority.mod on the controller.
+[main] Start RAPID execution if not already running.
+[main] Press Ctrl+C to stop.
+
+[main] Connected to 192.168.125.1:80
+17:50:09 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Creating subscription on 2 resource(s)
+17:50:10 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription created: group_id=12, ws_url=ws://192.168.125.1:80/poll/12
+17:50:10 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — WebSocket connected: ws://192.168.125.1:80/poll/12
+
+[summary]
+  priority : 1
+  duration : 20.0 s
+  fast_value_1:
+    events     : 51
+    rate       : 2.55 Hz
+    last value : 4254
+    dt mean    : 400.2 ms
+    dt min     : 398.6 ms
+    dt max     : 402.5 ms
+  fast_value_2:
+    events     : 50
+    rate       : 2.50 Hz
+    last value : 4246
+    dt mean    : 400.2 ms
+    dt min     : 398.7 ms
+    dt max     : 402.5 ms
+17:50:30 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription group_id=12 cleanup delegated to WebSocket close
+PS ~\abb-rws-client-python-rw6> pixi run -e examples python examples\08\subscription_priority.py --priority 0
+[main] Watching fast_value_1(priority=0), fast_value_2(priority=0)
+[main] Measurement duration: 20.0 s
+[main] Load examples/08/SubscriptionPriority.mod on the controller.
+[main] Start RAPID execution if not already running.
+[main] Press Ctrl+C to stop.
+
+[main] Connected to 192.168.125.1:80
+17:50:33 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Creating subscription on 2 resource(s)
+17:50:33 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription created: group_id=13, ws_url=ws://192.168.125.1:80/poll/13
+17:50:33 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — WebSocket connected: ws://192.168.125.1:80/poll/13
+
+[summary]
+  priority : 0
+  duration : 20.0 s
+  fast_value_1:
+    events     : 5
+    rate       : 0.25 Hz
+    last value : 4746
+    dt mean    : 5252.6 ms
+    dt min     : 5202.0 ms
+    dt max     : 5399.8 ms
+  fast_value_2:
+    events     : 4
+    rate       : 0.20 Hz
+    last value : 4642
+    dt mean    : 5268.7 ms
+    dt min     : 5202.0 ms
+    dt max     : 5399.8 ms
+17:50:54 [INFO    ] abb_rws_client_python_rw6.abb_rws_client_python_rw6.highlevel.subscription — Subscription group_id=13 cleanup delegated to WebSocket close
+PS ~\abb-rws-client-python-rw6>
+```

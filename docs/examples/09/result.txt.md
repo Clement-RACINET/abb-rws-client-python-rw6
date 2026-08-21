@@ -1,0 +1,12 @@
+# Result
+
+Source file: `result.txt`
+
+```text
+PS ~\abb-rws-client-python-rw6> pixi run -e examples python examples\09\symbol_properties.py
+[main] Connected to 192.168.125.1:80
+[scalar] SymbolProperties(symbolurl='RAPID/T_ROB1/SymbolPropertiesTest/ScalarValue', symtyp='per', dattyp='num', ndim=0, dim=(), local=False, readonly=False)
+[array] SymbolProperties(symbolurl='RAPID/T_ROB1/SymbolPropertiesTest/Array1D', symtyp='per', dattyp='num', ndim=1, dim=(4,), local=False, readonly=False)
+[array] length = 4
+PS ~\abb-rws-client-python-rw6>
+```

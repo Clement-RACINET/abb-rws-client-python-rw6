@@ -1,8 +1,8 @@
-# 05 Io Signal
+# Io Signal
 
-Source file: `05_io_signal.py`
+Source file: `io_signal.py`
 
-````python
+```python
 # examples/05/example_io_signal.py
 """Example 05 — Read and write a virtual digital output signal (TEST_DO_RWS).
 
@@ -243,4 +243,4 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
-````
+```

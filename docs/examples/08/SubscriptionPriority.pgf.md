@@ -1,0 +1,10 @@
+# Subscriptionpriority Pgf
+
+Source file: `SubscriptionPriority.pgf`
+
+```text
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Program>
+	<Module>SubscriptionPriority.mod</Module>
+</Program>
+```
