@@ -152,6 +152,22 @@ class SubscriptionHandle:
     initial_values: dict[str, str]
 
 
+@dataclass(frozen=True)
+class _ParsedSubscriptionMessage:
+    """Internal result of one ABB subscription-message parsing pass.
+
+    Attributes:
+        values: Values included directly in the ABB XHTML message, keyed by
+            the logical SubscribedResource name.
+        changed_names: Logical resource names reported as changed, in their
+            first-seen order. A name may be present here even when ABB did not
+            include its value in the message, as observed on RobotWare 6.08.
+    """
+
+    values: dict[str, str]
+    changed_names: tuple[str, ...]
+
+
 def build_rapid_pers_resource_uri(task: str, module: str, variable: str) -> str:
     """Build the ABB RWS subscription resource URI for a RAPID PERS variable.
 
@@ -349,28 +365,43 @@ def _extract_value(block: str) -> str | None:
     return value_match.group(1).strip() if value_match else None
 
 
-def _parse_events(text: str, lookup: dict[str, str]) -> dict[str, str]:
-    """Parse ABB subscription events into ``{name: value}``.
+def _parse_subscription_message(
+    text: str,
+    lookup: dict[str, str],
+) -> _ParsedSubscriptionMessage:
+    """Parse values and change notifications from one ABB XHTML message.
 
-    Handles both documented ABB XML shapes:
-    - Single-block events, where identity and value are in the same
-      ``<li>`` (generic IO signal example in ABB doc).
-    - Split-block events, where an "-ev" ``<li>`` carries only the
-      identity (``href``) and the immediately following ``<li>`` carries
-      only the value (the "rap-data" block, confirmed by ABB doc "Subscribe
-      on RAPID persistent variable" sample response).
+    RobotWare versions do not all serialize RAPID persistent-variable events
+    in the same way.
+
+    RobotWare 6.15 commonly sends two adjacent blocks:
+
+        <li class="rap-value-ev" ...>
+            <a href="/rw/.../Variable;value" .../>
+        </li>
+        <li class="rap-data" title="RAPID/.../Variable">
+            <span class="value">42</span>
+        </li>
+
+    RobotWare 6.08 may send only the first block. In that case the message
+    reports which resource changed, but does not contain its new value.
+
+    This parser therefore returns both:
+    - values found inline in the message;
+    - names of resources reported as changed.
+
+    The caller can then perform an HTTP GET for changed resources whose value
+    was omitted by the WebSocket event.
 
     Args:
-        text: Raw XHTML fragment (POST response body or WebSocket message).
-        lookup: Resource-identity-to-name table from ``_build_resource_lookup``.
+        text: Raw ABB XHTML subscription message.
+        lookup: Resource-identity-to-logical-name lookup table.
 
     Returns:
-        Dict of ``{SubscribedResource.name: value}`` for every resolvable
-        event found in ``text``. Events for resources not present in
-        ``lookup`` are silently ignored (logged at DEBUG level) — this
-        happens if ABB pushes an event for a resource outside this group.
+        Parsed message containing inline values and changed resource names.
     """
-    events: dict[str, str] = {}
+    values: dict[str, str] = {}
+    changed_names: list[str] = []
     pending_identity: str | None = None
 
     for block in _extract_li_blocks(text):
@@ -380,23 +411,116 @@ def _parse_events(text: str, lookup: dict[str, str]) -> dict[str, str]:
         if identity is not None:
             pending_identity = identity
 
+            name = lookup.get(identity)
+            if name is None:
+                logger.debug(
+                    "Subscription message references unknown resource %r",
+                    identity,
+                )
+            elif name not in changed_names:
+                changed_names.append(name)
+
         if value is None:
             continue
 
         resolved_identity = identity if identity is not None else pending_identity
+
         if resolved_identity is None:
-            logger.debug("Value span with no resolvable resource identity: %r", block)
+            logger.debug(
+                "Value span with no resolvable resource identity: %r",
+                block,
+            )
             continue
 
         name = lookup.get(resolved_identity)
+
         if name is None:
-            logger.debug("Event for unsubscribed resource %r ignored", resolved_identity)
+            logger.debug(
+                "Value for unsubscribed resource %r ignored",
+                resolved_identity,
+            )
             continue
 
-        events[name] = value
-        pending_identity = None  # Consumed — avoid leaking into next block.
+        values[name] = value
 
-    return events
+        if name not in changed_names:
+            changed_names.append(name)
+
+        # The identity has been consumed by this value. Reset it to avoid
+        # accidentally associating it with a later unrelated block.
+        pending_identity = None
+
+    return _ParsedSubscriptionMessage(
+        values=values,
+        changed_names=tuple(changed_names),
+    )
+
+
+def _parse_events(text: str, lookup: dict[str, str]) -> dict[str, str]:
+    """Parse values included directly in an ABB subscription message.
+
+    This compatibility wrapper preserves the previous private-helper
+    behavior. It returns only values physically present in the XHTML.
+
+    RobotWare 6.08 messages may report a changed resource without including
+    its value. The public watch_resources() function handles that case by
+    performing a fallback HTTP GET.
+    """
+    return _parse_subscription_message(text, lookup).values
+
+
+def _build_name_to_resource_uri(
+    resources: Sequence[SubscribedResource],
+) -> dict[str, str]:
+    """Build a logical-name-to-resource-URI lookup table.
+
+    Args:
+        resources: Resources belonging to the subscription group.
+
+    Returns:
+        Mapping from SubscribedResource.name to its complete ABB RWS URI.
+    """
+    return {resource.name: resource.resource_uri for resource in resources}
+
+
+async def _read_current_resource_value(
+    client: RWSClient,
+    resource_uri: str,
+) -> str:
+    """Read the current value of one subscribed resource through HTTP GET.
+
+    This is used as a compatibility fallback for older RobotWare versions,
+    notably RobotWare 6.08, which may send a WebSocket change notification
+    without embedding the new RAPID value.
+
+    Route:
+        GET {resource_uri}
+
+    Args:
+        client: Active RWS client using the same authenticated session.
+        resource_uri: Complete RWS resource URI, normally ending in ``;value``.
+
+    Returns:
+        Current resource value as a string.
+
+    Raises:
+        ValueError: If ABB returns a successful response whose XHTML body does
+            not contain a value span.
+        RWSAuthenticationError: On HTTP 401, depending on RWSClient behavior.
+        RWSHTTPError: On another HTTP error, depending on RWSClient behavior.
+    """
+    response = await client.get(resource_uri)
+
+    value_match = _VALUE_SPAN_RE.search(response.text)
+
+    if value_match is None:
+        raise ValueError(
+            "ABB GET response contains no value span for "
+            f"resource_uri={resource_uri!r}; "
+            f"body[:500]={response.text[:500]!r}"
+        )
+
+    return value_match.group(1).strip()
 
 
 def _extract_ws_url_and_group_id(response_text: str, headers: dict[str, str]) -> tuple[str, str]:
@@ -596,11 +720,20 @@ async def watch_resources(
     *,
     yield_initial_values: bool = True,
 ) -> AsyncGenerator[tuple[str, str], None]:
-    """Subscribe to resources and yield ``(name, value)`` events as they occur.
+    """Subscribe to resources and yield ``(name, value)`` events.
 
-    Route: ``POST /subscription`` then WebSocket ``ws://.../poll/{group-id}``.
-        If the WebSocket was never opened, fallback cleanup uses
-        ``DELETE /subscription/{group-id}``.
+    Route:
+        POST /subscription
+        WebSocket ws://.../poll/{group-id}
+        GET {resource-uri} when an older RobotWare event omits the value
+
+    RobotWare compatibility:
+        - RobotWare 6.15 commonly includes the changed value directly in the
+          WebSocket XHTML as a ``rap-data`` block.
+        - RobotWare 6.08 may include only a ``rap-value-ev`` block containing
+          the changed resource URI, without the corresponding value.
+        - When the value is omitted, this function reads the current value
+          through an authenticated HTTP GET.
 
     ABB constraints:
         - WebSocket subprotocol must be ``robapi2_subscription``.
@@ -608,62 +741,82 @@ async def watch_resources(
           HTTP session.
         - ``compression=None`` disables permessage-deflate because some RW6
           controllers reject WebSocket extension negotiation.
-        - ``ping_interval=None`` disables client-side WebSocket ping frames
-          because ABB documents its own application-level ping/pong behavior.
-        - When the WebSocket has been opened, ABB RW6 cleans up the
+        - ``ping_interval=None`` disables client-side WebSocket ping frames.
+        - Once the WebSocket has been opened, ABB normally removes the
           subscription group when the WebSocket closes.
-        - If the WebSocket was never opened, the subscription group is deleted
-          explicitly with ``DELETE /subscription/{group-id}``.
+        - If the WebSocket was never opened, the group is deleted explicitly.
 
     Args:
         client: Open RWSClient instance.
         resources: Resources to subscribe to.
-        yield_initial_values: If ``True``, yield the initial values returned
-            by ABB in the ``POST /subscription`` response before reading
-            WebSocket events.
+        yield_initial_values: If True, emit one initial value per resource.
+            Values found in the POST response are used directly. Missing
+            initial values are read through HTTP GET, which is necessary on
+            RobotWare versions that omit initial ``rap-data`` blocks.
 
     Yields:
-        ``(name, value)`` tuples, where ``name`` is the logical
-        ``SubscribedResource.name`` and ``value`` is the raw ABB value string.
+        ``(name, value)`` tuples. ``name`` is the logical resource name and
+        ``value`` is the raw ABB value string.
 
     Raises:
-        ValueError: If the resource list is invalid or ABB's response cannot
-            be parsed.
+        ValueError: If the resource list or ABB response is invalid.
         RWSAuthenticationError: On HTTP 401 during subscription setup.
         RWSHTTPError: On HTTP errors during subscription setup.
         OSError: If the WebSocket connection cannot be established.
-
-    Example:
-        ```python
-        >>> resources = [
-        ...     SubscribedResource(
-        ...         "a",
-        ...         build_rapid_pers_resource_uri("T_ROB1", "M", "X"),
-        ...         "1",
-        ...     ),
-        ...     SubscribedResource(
-        ...         "b",
-        ...         build_rapid_pers_resource_uri("T_ROB1", "M", "Y"),
-        ...         "1",
-        ...     ),
-        ... ]
-        >>> async for name, value in watch_resources(client, resources):
-        ...     print(name, value)
-        ```
     """
     lookup = _build_resource_lookup(resources)
+    name_to_uri = _build_name_to_resource_uri(resources)
+
     handle = await create_subscription(client, resources)
     websocket_opened = False
 
     try:
+        # ------------------------------------------------------------------
+        # Initial values
+        # ------------------------------------------------------------------
         if yield_initial_values:
+            yielded_initial_names: set[str] = set()
+
+            # Newer RobotWare versions may include initial values directly in
+            # the POST /subscription response.
             for name, value in handle.initial_values.items():
+                yielded_initial_names.add(name)
                 yield name, value
 
-        # ABB RW6 WebSocket notes confirmed on real hardware:
-        # - subprotocol must be "robapi2_subscription";
-        # - compression must be disabled to avoid rejected extension negotiation;
-        # - ping_interval is disabled to avoid extra client-side ping frames.
+            # Older RobotWare versions may omit initial values. Read every
+            # missing resource explicitly so callers receive the same behavior
+            # regardless of the controller version.
+            for resource in handle.resources:
+                if resource.name in yielded_initial_names:
+                    continue
+
+                logger.debug(
+                    "Initial value for %s was not included by ABB; reading it through GET %s",
+                    resource.name,
+                    resource.resource_uri,
+                )
+
+                try:
+                    value = await _read_current_resource_value(
+                        client,
+                        resource.resource_uri,
+                    )
+                except Exception as exc:
+                    # Failure to obtain one initial value should not destroy
+                    # an otherwise valid subscription.
+                    logger.warning(
+                        "Could not read initial value for resource %s from %s: %s",
+                        resource.name,
+                        resource.resource_uri,
+                        exc,
+                    )
+                    continue
+
+                yield resource.name, value
+
+        # ------------------------------------------------------------------
+        # WebSocket stream
+        # ------------------------------------------------------------------
         async with websockets.asyncio.client.connect(
             handle.ws_url,
             additional_headers={"Cookie": handle.cookie_header},
@@ -679,7 +832,57 @@ async def watch_resources(
                 text = str(message)
                 logger.debug("WebSocket message: %s", text)
 
-                for name, value in _parse_events(text, lookup).items():
+                parsed = _parse_subscription_message(text, lookup)
+
+                # Keep track of values already delivered from this message.
+                # A resource present here does not need a fallback GET.
+                inline_names: set[str] = set()
+
+                # Fast path used by RobotWare versions that embed values in
+                # the WebSocket event, such as the observed RW 6.15 behavior.
+                for name, value in parsed.values.items():
+                    inline_names.add(name)
+                    yield name, value
+
+                # Compatibility path for RobotWare versions that report only
+                # the changed resource URI, such as the observed RW 6.08
+                # behavior.
+                for name in parsed.changed_names:
+                    if name in inline_names:
+                        continue
+
+                    resource_uri = name_to_uri.get(name)
+
+                    if resource_uri is None:
+                        logger.warning(
+                            "Changed resource %s has no registered URI",
+                            name,
+                        )
+                        continue
+
+                    logger.debug(
+                        "ABB event for %s contains no inline value; "
+                        "reading current value through GET %s",
+                        name,
+                        resource_uri,
+                    )
+
+                    try:
+                        value = await _read_current_resource_value(
+                            client,
+                            resource_uri,
+                        )
+                    except Exception as exc:
+                        # Keep the WebSocket subscription alive even if one
+                        # fallback read fails because of a transient RWS error.
+                        logger.warning(
+                            "Could not read changed resource %s from %s: %s",
+                            name,
+                            resource_uri,
+                            exc,
+                        )
+                        continue
+
                     yield name, value
 
     finally:
@@ -692,8 +895,7 @@ async def watch_resources(
             try:
                 await delete_subscription(client, handle)
             except Exception as exc:
-                # Teardown must never raise: a failed cleanup must not hide
-                # the original subscription or WebSocket setup error.
+                # Teardown must never hide the original setup failure.
                 logger.warning(
                     "Could not delete subscription group_id=%s: %s",
                     handle.group_id,

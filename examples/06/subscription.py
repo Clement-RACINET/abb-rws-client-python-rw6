@@ -26,15 +26,6 @@ mechanics: POST /subscription, WebSocket handshake with the
 ``robapi2_subscription`` subprotocol, DELETE /subscription/{group-id} on
 teardown).
 
-Real-hardware validation note
-------------------------------
-This example subscribes to 2 resources in a single POST /subscription call.
-The multi-resource payload format (N >= 2) used by
-``highlevel.subscription.create_subscription`` is currently unverified on
-real hardware (see the TODO in that module) — running this example against
-a real RW6 controller is the intended way to confirm it works, or to reveal
-what needs fixing.
-
 Requirements
 ------------
 - websockets >= 13.0
