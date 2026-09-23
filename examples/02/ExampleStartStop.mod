@@ -2,7 +2,7 @@ MODULE StartStop
     !**********************************************************************
     ! Example 02 - Start / Stop
     !
-    ! Auteur : Clement RACINET
+    ! Auteur : C. RACINET
     !
     ! Date : 13/07/2026
     !

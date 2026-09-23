@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -25,7 +25,7 @@ except ImportError:
     sys.exit(1)
 
 
-COPYRIGHT_HOLDER = "Clément RACINET"
+COPYRIGHT_HOLDER = "C. RACINET"
 LICENSE_ID = "X11"
 YEAR = "2026"
 

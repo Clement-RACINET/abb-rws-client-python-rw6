@@ -1,12 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
-# SPDX-FileCopyrightText: 2026 ClÃ©ment RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # abb_rws_client/core/env.py
 """Environment configuration loader for abb_rws_client_python_rw6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Resolves and loads a ``.env`` file into :data:`os.environ` using
 :mod:`python-dotenv` (already a runtime dependency).  The lookup walks

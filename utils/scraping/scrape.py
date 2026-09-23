@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -8,7 +8,7 @@
 """
 ABB RobotWare 6 RWS API scraper.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Crawls the ABB Developer Center Doxygen documentation and extracts all
 RWS REST API endpoints into structured JSON and Markdown files.

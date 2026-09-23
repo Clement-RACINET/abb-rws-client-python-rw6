@@ -2,7 +2,7 @@ MODULE ExampleIOSignal
     !**********************************************************************
     ! Example 05 - IO Signal interaction with Python
     !
-    ! Author  : Clement RACINET
+    ! Author  : C. RACINET
     !
     ! Date    : 13/07/2026
     !

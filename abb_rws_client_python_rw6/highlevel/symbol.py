@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # abb_rws_client_python_rw6/highlevel/symbol.py
 """High-level RAPID symbol introspection for ABB RWS RobotWare 6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Provides typed helper functions around ABB RWS RAPID symbol introspection.
 

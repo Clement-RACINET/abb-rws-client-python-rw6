@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # examples/02/example_start_stop.py
 """Example 02 — Start and stop RAPID execution.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Prerequisites:
     - Controller in AUTO mode, motors ON.

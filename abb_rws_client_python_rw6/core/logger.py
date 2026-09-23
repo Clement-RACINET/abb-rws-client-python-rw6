@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # abb_rws_client/core/logger.py
 """Centralised logging configuration for abb_rws_client_python_rw6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 The entire library uses the standard :mod:`logging` module with loggers
 named after their module (``logging.getLogger(__name__)``).  All of them

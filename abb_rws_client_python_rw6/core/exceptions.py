@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -6,7 +6,7 @@
 """
 Custom exceptions for abb_rws_client_python_rw6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Exception hierarchy::
 

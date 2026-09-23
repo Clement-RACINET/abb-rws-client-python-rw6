@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 Clément RACINET
+SPDX-FileCopyrightText: 2026 C. RACINET
 
 SPDX-License-Identifier: X11
 -->
@@ -41,7 +41,7 @@ utils/
 
 ## Workflow
 
-### 1. Scraping *(rare — only if the ABB API changes)*
+### 1. Scraping _(rare — only if the ABB API changes)_
 
 ```bash
 pixi run python utils/scraping/scrape.py
@@ -50,7 +50,7 @@ pixi run python utils/scraping/scrape.py
 Produces `abb_rws_api_full.json` by scraping the ABB Developer Center.
 **Do not run without a reason** — the ABB website may block repeated requests.
 
-### 2. Code generation *(after modifying the JSON or the generator)*
+### 2. Code generation _(after modifying the JSON or the generator)_
 
 ```bash
 # Delete existing generated files
@@ -66,12 +66,12 @@ pixi run python -m pytest tests/ -v
 
 Available options:
 
-| Option              | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| `--dry-run`       | Show what would be generated without writing any file   |
+| Option            | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `--dry-run`       | Show what would be generated without writing any file |
 | `--only <module>` | Generate a single module only (e.g.`rapid/execution`) |
 
-### 3. Documentation *(after modifying docstrings or the API)*
+### 3. Documentation _(after modifying docstrings or the API)_
 
 ```bash
 pixi run python utils/docs/run_docs.py
@@ -86,8 +86,8 @@ Generates API Markdown pages, produces the coverage report, and starts
 
 The generator reads `abb_rws_api_full.json` and produces:
 
-- **`abb_rws_client/rws/**/*.py`** — atomic functions, 1 function = 1 HTTP endpoint
-- **`tests/rws/**/*.py`** — unit tests with `httpx.AsyncBaseTransport` mocks
+- **`abb_rws_client/rws/**/\*.py`\*\* — atomic functions, 1 function = 1 HTTP endpoint
+- **`tests/rws/**/\*.py`** — unit tests with `httpx.AsyncBaseTransport` mocks
 
 ### Routing principle
 

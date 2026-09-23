@@ -7,7 +7,7 @@ Source file: `subscription.py`
 # examples/06/subscription.py
 """Example 06 — RWS WebSocket subscription on two RAPID PERS variables.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Demonstrates the high-level subscription API (highlevel/subscription.py):
 subscribing to several RAPID persistent variables at once, at different ABB

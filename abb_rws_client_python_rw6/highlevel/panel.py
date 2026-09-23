@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # abb_rws_client/highlevel/panel.py
 """High-level controller motor state for ABB RWS RobotWare 6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Composed operations built exclusively from atomic ``rws/`` functions.
 No HTTP calls are made directly in this module.

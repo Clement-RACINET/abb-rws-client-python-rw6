@@ -1,11 +1,11 @@
-# Copyright (C) 2026 Clément RACINET
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# Copyright (C) 2026 C. RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 """
 Unit tests for RWSClient (async) and RWSClientSync.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Coverage:
 - Lifecycle: aopen / aclose / context manager / idempotence

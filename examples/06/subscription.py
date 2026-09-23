@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # examples/06/subscription.py
 """Example 06 — RWS WebSocket subscription on two RAPID PERS variables.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Demonstrates the high-level subscription API (highlevel/subscription.py):
 subscribing to several RAPID persistent variables at once, at different ABB

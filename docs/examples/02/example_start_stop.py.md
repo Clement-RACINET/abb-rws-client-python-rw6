@@ -6,7 +6,7 @@ Source file: `example_start_stop.py`
 # examples/02/example_start_stop.py
 """Example 02 — Start and stop RAPID execution.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Prerequisites:
     - Controller in AUTO mode, motors ON.

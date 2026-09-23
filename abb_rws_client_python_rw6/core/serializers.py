@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -6,7 +6,7 @@
 """
 Serialization / deserialization of RAPID types ↔ RWS format.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 RWS format for a robtarget (compact string, no spaces)::
 

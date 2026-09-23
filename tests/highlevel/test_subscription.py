@@ -1,10 +1,10 @@
-# Copyright (C) 2026 Clément RACINET
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# Copyright (C) 2026 C. RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 """Unit tests for abb_rws_client_python_rw6.highlevel.subscription.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Covers: payload/limit validation, resource lookup construction, XML event
 parsing, WebSocket URL / group id extraction, loopback normalization, and the

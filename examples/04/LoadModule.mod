@@ -2,7 +2,7 @@ MODULE LoadModule
     !**********************************************************************
     ! Example 04 - Dynamic module loading
     !
-    ! Auteur : Clement RACINET
+    ! Auteur : C. RACINET
     !
     ! Date : 13/07/2026
     !

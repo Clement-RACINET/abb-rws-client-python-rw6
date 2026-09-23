@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 Clément RACINET
+SPDX-FileCopyrightText: 2026 C. RACINET
 
 SPDX-License-Identifier: X11
 -->
@@ -20,24 +20,24 @@ publié (exclu via `pyproject.toml → [tool.hatch.build.targets.wheel]`).
 
 utils/
 ├── docs/
-│   ├── config.py          # Configuration centralisée de la pipeline MkDocs
-│   ├── generate_api.py    # Générateur de pages Markdown + injection mkdocs.yml
-│   ├── hooks.py           # Hook MkDocs post-build (copie htmlcov/)
-│   └── run_docs.py        # Orchestrateur de la pipeline (API + coverage + serve)
+│ ├── config.py # Configuration centralisée de la pipeline MkDocs
+│ ├── generate_api.py # Générateur de pages Markdown + injection mkdocs.yml
+│ ├── hooks.py # Hook MkDocs post-build (copie htmlcov/)
+│ └── run_docs.py # Orchestrateur de la pipeline (API + coverage + serve)
 ├── generator/
-│   └── main.py            # Générateur de code source rws/ et tests/rws/
+│ └── main.py # Générateur de code source rws/ et tests/rws/
 ├── scraping/
-│   ├── scrape.py                        # Scraper du Developer Center ABB
-│   ├── abb_rws_api_full.json            # Source de vérité : 542 endpoints ABB RWS6
-│   ├── abb_rws_api_full.md              # Version lisible du JSON
-│   ├── architecture_api.txt             # Vue arborescente de l'API ABB
-│   ├── routes_list.json                 # Liste brute des routes (cache du crawl)
-│   ├── robot_controller_return_code.txt # Référence des codes retour ABB
-│   └── scrape.log                       # Journal du dernier scraping
-├── export_structure.py    # Exporte la structure du repo dans un fichier .txt
-└── fix_init.py            # Audite et réécrit tous les fichiers __init__.py
+│ ├── scrape.py # Scraper du Developer Center ABB
+│ ├── abb_rws_api_full.json # Source de vérité : 542 endpoints ABB RWS6
+│ ├── abb_rws_api_full.md # Version lisible du JSON
+│ ├── architecture_api.txt # Vue arborescente de l'API ABB
+│ ├── routes_list.json # Liste brute des routes (cache du crawl)
+│ ├── robot_controller_return_code.txt # Référence des codes retour ABB
+│ └── scrape.log # Journal du dernier scraping
+├── export_structure.py # Exporte la structure du repo dans un fichier .txt
+└── fix_init.py # Audite et réécrit tous les fichiers **init**.py
 
-```
+````
 
 ---
 
@@ -47,12 +47,12 @@ utils/
 
 ```bash
 pixi run python utils/scraping/scrape.py
-```
+````
 
 Produit `abb_rws_api_full.json` en scrapant le Developer Center ABB.
 **Ne pas lancer sans raison** — le site ABB peut bloquer les requêtes répétées.
 
-### 2. Génération du code *(après modification du JSON ou du générateur)*
+### 2. Génération du code _(après modification du JSON ou du générateur)_
 
 ```bash
 # Supprimer les fichiers générés existants
@@ -68,12 +68,12 @@ pixi run python -m pytest tests/ -v
 
 Options disponibles :
 
-| Option              | Description                                             |
-| ------------------- | ------------------------------------------------------- |
+| Option            | Description                                         |
+| ----------------- | --------------------------------------------------- |
 | `--dry-run`       | Affiche ce qui serait généré sans écrire de fichier |
 | `--only <module>` | Ne génère qu'un module (ex :`rapid/execution`)      |
 
-### 3. Documentation *(après modification des docstrings ou de l'API)*
+### 3. Documentation _(après modification des docstrings ou de l'API)_
 
 ```bash
 pixi run python utils/docs/run_docs.py
@@ -88,8 +88,8 @@ Génère les pages Markdown de l'API, produit le rapport de coverage et lance
 
 Le générateur lit `abb_rws_api_full.json` et produit :
 
-- **`abb_rws_client/rws/**/*.py`** — fonctions atomiques, 1 fonction = 1 endpoint HTTP
-- **`tests/rws/**/*.py`** — tests unitaires avec mock `httpx.AsyncBaseTransport`
+- **`abb_rws_client/rws/**/\*.py`\*\* — fonctions atomiques, 1 fonction = 1 endpoint HTTP
+- **`tests/rws/**/\*.py`** — tests unitaires avec mock `httpx.AsyncBaseTransport`
 
 ### Principe de routage
 

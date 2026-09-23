@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -14,7 +14,7 @@ path = [
     "tests/**/__init__.py",
 ]
 precedence = "override"
-SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-FileCopyrightText = "2026 C. RACINET"
 SPDX-License-Identifier = "X11"
 
 # Fichiers de configuration et de documentation.
@@ -37,7 +37,7 @@ path = [
     "ruff.toml",
 ]
 precedence = "override"
-SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-FileCopyrightText = "2026 C. RACINET"
 SPDX-License-Identifier = "X11"
 
 # Fichiers générés automatiquement.
@@ -46,7 +46,7 @@ path = [
     "abb_rws_client_python_rw6/rws/**",
 ]
 precedence = "override"
-SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-FileCopyrightText = "2026 C. RACINET"
 SPDX-License-Identifier = "X11"
 
 
@@ -56,5 +56,5 @@ path = [
     "docs/**",
 ]
 precedence = "override"
-SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-FileCopyrightText = "2026 C. RACINET"
 SPDX-License-Identifier = "X11"

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
@@ -6,7 +6,7 @@
 """
 HTTP session management for an ABB RWS controller (RobotWare 6).
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Module responsibilities:
 - Create and maintain an httpx.AsyncClient configured for RWS

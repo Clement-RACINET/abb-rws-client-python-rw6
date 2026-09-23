@@ -1,11 +1,11 @@
-# Copyright (C) 2026 Clément RACINET
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# Copyright (C) 2026 C. RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 """
 Unit tests for abb_rws_client_python_rw6.core.exceptions — no robot required.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Coverage:
 - RWSError base class: message, status_code, str, repr

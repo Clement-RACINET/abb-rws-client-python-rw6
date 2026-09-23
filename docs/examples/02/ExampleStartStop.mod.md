@@ -7,7 +7,7 @@ MODULE StartStop
     !**********************************************************************
     ! Example 02 - Start / Stop
     !
-    ! Auteur : Clement RACINET
+    ! Auteur : C. RACINET
     !
     ! Date : 13/07/2026
     !
@@ -25,15 +25,15 @@ MODULE StartStop
                                [0, 0, 1, 0],
                                [0, 0, 0, 0],
                                [9E9, 9E9, 9E9, 9E9, 9E9, 9E9]];
-                               
+
     CONST robtarget pTarget := [[1800, 0, 1789],
                                [0, 0, 1, 0],
                                [0, 0, 0, 0],
                                [9E9, 9E9, 9E9, 9E9, 9E9, 9E9]];
     PROC main()
-        
+
         DeactUnit M7DM1;
-        
+
         ! Move to home position at medium speed
         MoveJ pHome, v10, fine, tool0;
         MoveJ pTarget, v10, fine, tool0;

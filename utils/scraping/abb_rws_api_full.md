@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 Clément RACINET
+SPDX-FileCopyrightText: 2026 C. RACINET
 
 SPDX-License-Identifier: X11
 -->
@@ -26,6 +26,7 @@ URL — /
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -33,11 +34,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 srvlst-service-li
 The RobotWare service
@@ -58,6 +61,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/"
 ```
@@ -76,6 +80,7 @@ URL — /logout
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -83,6 +88,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -95,6 +101,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/logout"
 ```
@@ -119,6 +126,7 @@ URL — /subscription
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -128,11 +136,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 subscribe
 resources
@@ -158,6 +168,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/subscription?action=show"
 ```
@@ -186,6 +197,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -200,6 +212,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 ios-signalstate-ev
 lstate
@@ -215,6 +228,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Low Priority subscription
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Virtual1/Board1/di1;state&1-p=0&resources=2&2=/rw/iosystem/signals/Virtual1/Board1/di2;state&2-p=0" -X POST "http://localhost/subscription"
@@ -259,6 +273,7 @@ URL — /subscription/{group-id}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -268,11 +283,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 unsubscribe-group
 None
@@ -309,6 +326,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/subscription/1?action=show"
 ```
@@ -338,11 +356,13 @@ URL — /subscripion/{group-id}
 **Method:** `PUT`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 update-resource-priority
 resources
@@ -371,6 +391,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Update resources in Subscription group.
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Virtual1/Board1/di1;state&1-p=0&resources=2&2=/rw/iosystem/signals/Virtual1/Board1/di2;state&2-p=1" -X PUT "http://localhost/subscription/1"
@@ -399,11 +420,13 @@ URL — /subscripion/{group-id}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -417,6 +440,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Unsubscribe or remove subscription group.
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/subscription/1"
@@ -444,11 +468,13 @@ URL — /subscripion/{group-d}/{resource-uri}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -462,6 +488,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Unsubscribe or remove subscription resource from subscription group.
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/subscription/1/rw/iosystem/signals/Virtual1/Board1/di1;state"
@@ -487,6 +514,7 @@ URL — /users
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 user-type=self
 Optional
@@ -495,11 +523,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 user
 title
@@ -511,6 +541,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users"
 ```
@@ -529,6 +560,7 @@ URL — /users
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -537,11 +569,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 register
 application
@@ -571,6 +605,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users?action=show"
 ```
@@ -589,6 +624,7 @@ URL — /users
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -596,6 +632,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 username
 = The username to register. It represents user alias name.
@@ -620,6 +657,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Register user
 curl --digest -u "Default User":robotics -d "username=xyz&application=RobotStudio&location=IN-BLR-XXXX&ulocale=remote" -X POST "http://localhost/users"
@@ -641,6 +679,7 @@ URL — /users
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=impersonate
 Required
@@ -649,6 +688,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 uid
 = The uas uid of the user to be impersonated.
@@ -664,6 +704,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Register user
 curl --digest -u "Default User":robotics -d "uid=11" -X POST "http://localhost/users?action=impersonate"
@@ -683,6 +724,7 @@ URL — /users
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-locale
 Required
@@ -691,6 +733,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 type={local|remote}
 Required
@@ -707,6 +750,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Login as local user
 curl --digest -u "Default User":robotics -d "type=local" -X POST "http://localhost/users?action=set-locale"
@@ -732,6 +776,7 @@ URL — /users/grants
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -739,11 +784,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 user-grant
 title
@@ -755,6 +802,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/grants"
 ```
@@ -779,6 +827,7 @@ URL — /users/rmmp
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -786,6 +835,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 userid
 User id
@@ -806,6 +856,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 Get RMMP state
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp"
@@ -825,6 +876,7 @@ URL — /users/rmmp
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -837,6 +889,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp?action=show"
 ```
@@ -855,6 +908,7 @@ URL — /users/rmmp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -862,6 +916,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 privilege
 ={modify|exec}
@@ -877,6 +932,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Grant RMMP
 curl --digest -u "Default User":robotics -d "privilege=modify" -X POST "http://localhost/users/rmmp"
@@ -896,6 +952,7 @@ URL — /users/rmmp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -904,6 +961,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 uid
 = The uas uid of the user who made the request for rmmp
@@ -922,6 +980,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Grant RMMP
 curl --digest -u "Default User":robotics -d "uid=11&privilege=modify" -X POST "http://localhost/users/rmmp?action=set"
@@ -941,6 +1000,7 @@ URL — /users/rmmp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=cancel
 Required
@@ -949,6 +1009,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -958,6 +1019,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 Cancel held rmmp
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/rmmp?action=cancel"
@@ -977,6 +1039,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -996,6 +1059,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=0" -X POST "http://localhost/subscription"
@@ -1016,6 +1080,7 @@ URL — /users/rmmp/poll
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -1031,6 +1096,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 poll for rmmp status
 curl --digest -u "Default User":robotics "http://localhost/users/rmmp/poll"
@@ -1056,6 +1122,7 @@ URL — /users/remoteuser
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -1072,6 +1139,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/users/remoteuser?action=show"
 ```
@@ -1090,6 +1158,7 @@ URL — /users/remoteuser
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=remotelogin
 Required
@@ -1098,6 +1167,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -1111,6 +1181,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogin"
 ```
@@ -1130,6 +1201,7 @@ URL — /users/remoteuser
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=remotelogout
 Required
@@ -1138,6 +1210,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -1151,6 +1224,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/users/remoteuser?action=remotelogout"
 ```
@@ -1169,6 +1243,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -1188,6 +1263,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/users/rmmp&1-p=0" -X POST "http://localhost/subscription"
@@ -1214,6 +1290,7 @@ URL — /ctrl
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -1221,11 +1298,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-clock-info
 datetime
@@ -1244,6 +1323,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl"
 ```
@@ -1262,6 +1342,7 @@ URL — /ctrl
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -1270,11 +1351,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 ctrl-restart
 restart-mode
@@ -1302,6 +1385,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl?action=show"
 ```
@@ -1320,16 +1404,19 @@ URL — /ctrl/${ENVNAME}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-env
 The value associated with the specified environment variable.
@@ -1342,6 +1429,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics " http://localhost/ctrl/$TEMP "
 ```
@@ -1358,12 +1446,14 @@ URL — /ctrl
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 restart-mode
 ={ restart|xstart|shutdown|istart|pstart|bstart }
@@ -1392,6 +1482,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "restart-mode=xstart" -X POST "http://localhost/ctrl"
 ```
@@ -1410,6 +1501,7 @@ URL — /ctrl
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-lang
 Required
@@ -1418,6 +1510,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 lang
 = {en|de} languages as per RFC 3066. if language is not supported, a bad request is sent as the http status.
@@ -1432,6 +1525,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set controller language
 curl --digest -u "Default User":robotics -d "lang=de" -X POST "http://localhost/ctrl?action=set-lang"
@@ -1457,6 +1551,7 @@ URL — /ctrl/clock
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -1464,11 +1559,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-clock-info
 datetime
@@ -1489,6 +1586,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock"
 ```
@@ -1507,6 +1605,7 @@ URL — /ctrl/clock
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -1516,11 +1615,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set-system-clock
 sys-clock-year
@@ -1572,6 +1673,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock?action=show"
 ```
@@ -1590,12 +1692,14 @@ URL — /ctrl/clock
 **Method:** `PUT`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 sys-clock-year
 = The year part of datetime
@@ -1625,6 +1729,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set the controller Clock
 curl --digest -u "Default User":robotics -d "sys-clock-year=2014&sys-clock-month=03&sys-clock-day=14&sys-clock-hour=08&sys-clock-min=30&sys-clock-sec=0" -X PUT "http://localhost/ctrl/clock"
@@ -1651,6 +1756,7 @@ URL — /ctrl/clock/timezone
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -1658,11 +1764,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-timezone
 timezone
@@ -1676,6 +1784,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone"
 ```
@@ -1695,6 +1804,7 @@ URL — /ctrl/clock/timezone?action=show
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -1704,11 +1814,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set-timezone
 Set timezone, string as defined by the tz database
@@ -1721,6 +1833,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timezone?action=show"
 ```
@@ -1740,6 +1853,7 @@ URL — /ctrl/clock/timezone
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 set-timezone
 See
@@ -1747,6 +1861,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 timezone
 = Time zone as defined by the tz database
@@ -1760,6 +1875,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set the time zone
 curl --digest -u "Default User":robotics -d "timezone=Europe/Stockholm" -X POST "http://localhost/ctrl/clock/timezone?action=set-timezone"
@@ -1786,17 +1902,20 @@ URL — /ctrl/clock/timeserver
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-timeserver
 timeserver
@@ -1811,6 +1930,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver"
 ```
@@ -1830,6 +1950,7 @@ URL — /ctrl/clock/timeserver?action=show
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -1839,6 +1960,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -1851,6 +1973,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?action=show"
 ```
@@ -1870,6 +1993,7 @@ URL — /ctrl/clock/timeserver
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-timeserver
 See
@@ -1877,6 +2001,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 timeserver
 = Time server
@@ -1890,6 +2015,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set the time zone
 curl --digest -u "Default User":robotics -d "timeserver=132.163.4.101" -X POST "http://localhost/ctrl/clock/timeserver?action=set-timeserver"
@@ -1910,6 +2036,7 @@ URL — /ctrl/clock/timeserver
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=servertime
 Required
@@ -1920,11 +2047,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-servertimer
 gets the server time
@@ -1939,6 +2068,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/clock/timeserver?resource=servertime&server-ip=129.6.15.28"
 ```
@@ -1964,17 +2094,20 @@ URL — /ctrl/identity
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-identity-info
 ctrl-name
@@ -1996,6 +2129,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/identity"
 ```
@@ -2014,6 +2148,7 @@ URL — /ctrl/identity
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -2023,11 +2158,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set-ctrl-identity
 ctrl-name
@@ -2047,6 +2184,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/identity?action=show"
 ```
@@ -2065,12 +2203,14 @@ URL — /ctrl/identity
 **Method:** `PUT`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 ctrl-name
 = The name of the controller
@@ -2087,6 +2227,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set the controller identity
 curl --digest -u "Default User":robotics -d "ctrl-name=testcontroller&ctrl-id=ZZZZ" -X PUT "http://localhost/ctrl/identity"
@@ -2112,6 +2253,7 @@ URL — /ctrl/system
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -2119,11 +2261,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-system-li
 Ctrl-system resource
@@ -2142,6 +2286,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system"
 ```
@@ -2160,6 +2305,7 @@ URL — /ctrl/system
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -2169,11 +2315,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set-bootdevice
 To set device path
@@ -2191,6 +2339,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?action=show"
 ```
@@ -2209,6 +2358,7 @@ Description — Sets the device/path that should be used to load boot image
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-bootdevice
 Required
@@ -2217,6 +2367,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 path
 Fully qualified path to be used for booting.
@@ -2230,6 +2381,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u ""Default User":robotics -d "path={Path}" -X POST "
 http://localhost/ctrl/system?action=set-bootdevice
@@ -2250,6 +2402,7 @@ Description — Retrieves the device/path that should be used to load boot image
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=boot-device
 Required
@@ -2258,6 +2411,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2269,6 +2423,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?resource=boot-device"
 ```
@@ -2287,6 +2442,7 @@ Description — Load the boot image from the predefined path
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-bootimage
 Required
@@ -2295,6 +2451,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2307,6 +2464,7 @@ Location header: /ctrl?action=show
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u ""Default User":robotics -d -X POST "
 http://localhost/ctrl/system?action=set-bootimage
@@ -2329,6 +2487,7 @@ Description — Undo the load boot image
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=undo-bootimage
 Required
@@ -2337,6 +2496,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2348,6 +2508,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u ""Default User":robotics -d -X POST "
 http://localhost/ctrl/system?action=undo-bootimage
@@ -2369,6 +2530,7 @@ Description — Get the controller active system name.
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 type=selected
 Required
@@ -2377,6 +2539,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2389,6 +2552,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system?type=selected"
 ```
@@ -2408,6 +2572,7 @@ URL — /ctrl/system/installdpkg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -2415,6 +2580,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 ctrl-id
 =<ctrl-id>
@@ -2438,6 +2604,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u ""Default User":robotics -d "ctrl-id=1231&ctrl-name=Ctrlname&system-path=Systems/DeploymentTest&dp-pkg-path=/hd0a/inbox" -X POST "
 http://localhost/ctrl/system/installdpkg
@@ -2458,6 +2625,7 @@ URL — /ctrl/system/validatedpkg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -2465,6 +2633,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 path
 ={path}
@@ -2480,6 +2649,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u ""Default User":robotics -d "path=/hd0a/inbox/TEMP" -X POST "
 http://localhost/ctrl/system/validatedpkg
@@ -2500,6 +2670,7 @@ URL — /ctrl/system/{system-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -2507,6 +2678,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2518,6 +2690,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048"
 ```
@@ -2536,6 +2709,7 @@ URL — /ctrl/system/{system-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -2545,11 +2719,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 rename
 Rename a system
@@ -2564,6 +2740,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/system/RW6_02_048?action=show"
 ```
@@ -2582,6 +2759,7 @@ URL — /ctrl/system/{system-name}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=rename
 Required
@@ -2590,6 +2768,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 newname={new system name}
 Required
@@ -2604,6 +2783,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "newname=System123" -X POST "http://localhost/ctrl/system/RW6_TEST?action=rename"
 ```
@@ -2622,6 +2802,7 @@ Description — Select a system to activate. A restart is required after selecti
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=activate
 Required
@@ -2630,6 +2811,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2643,6 +2825,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system/RW6_TEST?action=activate"
 ```
@@ -2661,11 +2844,13 @@ URL — /ctrl/system/{system-name}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -2678,6 +2863,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delete a System
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/ctrl/system/RW6_TEST"
@@ -2698,6 +2884,7 @@ Description — De-activate an active system. A restart is required after de-act
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=deactivate
 Required
@@ -2706,6 +2893,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 none
 ```
@@ -2717,6 +2905,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/system?action=deactivate"
 ```
@@ -2741,16 +2930,19 @@ URL — /ctrl/network
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-netw
 addr
@@ -2770,6 +2962,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network"
 ```
@@ -2788,6 +2981,7 @@ Description — Get possible actions with forms on network setting
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -2796,11 +2990,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 To set IP configuration for the LAN adaptor
@@ -2815,6 +3011,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network?action=show"
 ```
@@ -2834,6 +3031,7 @@ URL — /ctrl/network
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -2842,6 +3040,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 method
 = {IP config method}, Should be one of
@@ -2869,6 +3068,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=fixip&address={IP address}&mask={Mask address}&gateway={Default Gateway}" -X POST "http://localhost/ctrl/network?action=set"
 ```
@@ -2896,16 +3096,19 @@ URL — /ctrl/network/dns
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-netw
 name
@@ -2921,6 +3124,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/network/dns"
 ```
@@ -2946,11 +3150,13 @@ URL — /ctrl/network/route/add
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 destination
 ={destination}, Destination is either a host address or a destination network.
@@ -2969,6 +3175,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24&gateway=192.168.126.200" -X POST "http://localhost/ctrl/network/route/add"
 curl --digest -u "Default User":robotics -d "destination=10.10.10.3&gateway=192.168.125.254" -X POST "http://localhost/ctrl/network/route/add"
@@ -2989,16 +3196,19 @@ URL — /ctrl/network/route/add
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 addroute
 destination
@@ -3014,6 +3224,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/add"
 ```
@@ -3033,11 +3244,13 @@ URL — /ctrl/network/route/remove
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 destination
 ={destination}, Destination is either a host address or a destination network.
@@ -3054,6 +3267,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "destination=192.168.136.0/24" -X POST "http://localhost/ctrl/network/route/remove"
 ```
@@ -3074,16 +3288,19 @@ URL — /ctrl/network/route/remove
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 removeroute
 destination
@@ -3097,6 +3314,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/ctrl/network/route/remove"
 ```
@@ -3122,6 +3340,7 @@ URL — /ctrl/backup
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -3129,6 +3348,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -3138,6 +3358,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup"
 ```
@@ -3156,6 +3377,7 @@ Description — Get available actions on backup
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -3164,6 +3386,7 @@ Common URL parameters
 ```
 
 **Actions:**
+
 ```
 backup
 The file path to store the backup e.g. backup=/fileservice/$syspar/tempfolder
@@ -3178,6 +3401,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=show"
 ```
@@ -3196,6 +3420,7 @@ URL — /ctrl/backup
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=backup
 Required
@@ -3204,6 +3429,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 backup
 = path where the backup shall be stored. Destination path must be part of the controller file system.
@@ -3222,6 +3448,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/backup?action=backup"
 ```
@@ -3244,6 +3471,7 @@ URL — /ctrl/backup
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=restore
 Required
@@ -3252,6 +3480,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 backup
 = {path where the backup is stored}
@@ -3280,6 +3509,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 `curl –digest -u "Default User":robotics -d "backup=/fileservice/$syspar/tempfolder" -X POST "http://localhost/ctrl/backup?action=restore"
 ```
@@ -3299,6 +3529,7 @@ URL — /ctrl/backup
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action
 =check-restore
@@ -3320,11 +3551,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 status
 - {Accepted}
@@ -3339,6 +3572,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=check-restore&backup=/fileservice/$syspar/tempfolder"
 ```
@@ -3357,6 +3591,7 @@ Description — Get status of backup
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=backupstate
 Required
@@ -3365,6 +3600,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 backup state
 - {None | Init State | Backup in Progress | Backup Ready | Error during backup | Invalid}
@@ -3380,6 +3616,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup?action=backupstate"
 ```
@@ -3398,6 +3635,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -3415,6 +3653,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/progress/1;state&1-p=0" -X POST "http://localhost/subscription"
@@ -3442,6 +3681,7 @@ URL — /ctrl/backup/info/
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 backup-path={path to a backup system folder}
 Required
@@ -3450,6 +3690,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -3462,6 +3703,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/backup/info?backup-path=C:/Users/inshsal/Documents/RobotStudio/Systems/BACKUP/mybackup"
 ```
@@ -3486,6 +3728,7 @@ URL — /ctrl/compress
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -3493,6 +3736,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -3504,6 +3748,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compress"
 ```
@@ -3522,6 +3767,7 @@ URL — /ctrl/compress
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -3530,11 +3776,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 comp
 Compress
@@ -3557,6 +3805,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compress?action=show"
 ```
@@ -3575,6 +3824,7 @@ Description — Enables the user to compress and decompress resources i.e. files
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action={comp|dcomp}
 Required
@@ -3587,6 +3837,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 srcpath
 ={compress/decompress path} File or directory to compress/decompress
@@ -3606,6 +3857,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$system/Folder1&dstpath=/fileservice/$syspar/" -X POST "http://localhost/ctrl/compress?action=comp"
 curl --digest -u "Default User":robotics -d "srcpath=/fileservice/$syspar/Folder1.rzo&dstpath=/fileservice/$syspar/" -X POST "http://localhost/ctrl/compress?action=dcomp"
@@ -3634,6 +3886,7 @@ URL — /ctrl/diagnostics
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -3641,6 +3894,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -3652,6 +3906,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics"
 ```
@@ -3671,6 +3926,7 @@ URL — /ctrl/diagnostics
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -3680,11 +3936,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 save
 Save the system diagnostics
@@ -3697,6 +3955,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/diagnostics?action=show"
 ```
@@ -3716,6 +3975,7 @@ URL — /ctrl/diagnostics
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=save
 Required
@@ -3724,6 +3984,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 dstpath
 =Fully qualified file name to save the diagnostic log e.g.fileservice/hd0a/TEMP/sysdump/diagnostics.log. The path can contain environment variables.
@@ -3738,6 +3999,7 @@ Location header: /progress/{id}
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "dstpath=/fileservice/$TEMP/sysdump/diagnostics.log" -X POST "http://localhost/ctrl/diagnostics?action=save"
 ```
@@ -3758,6 +4020,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -3769,6 +4032,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 sysdump:
 to obtain the system dump.
@@ -3781,6 +4045,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/ctrl/diagnostics&1-p=0" -X POST "http://localhost/subscription"
@@ -3805,6 +4070,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -3822,6 +4088,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/progress/1;state&1-p=0" -X POST "http://localhost/subscription"
@@ -3849,12 +4116,14 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -3866,6 +4135,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety"
 ```
@@ -3884,6 +4154,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
@@ -3893,11 +4164,13 @@ Returns action forms for this resource
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 load
 - Load a Safety configuration file.
@@ -3920,6 +4193,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Retrieve actions on the CFG resource
 curl --digest -u "Default User":robotics" "
@@ -3944,6 +4218,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=load
 Required
@@ -3952,6 +4227,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 filepath
 =Safety configuration file path on controller
@@ -3965,6 +4241,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "filepath=$home/file.xml" -X POST "http://localhost/ctrl/safety?action=load"
@@ -3984,6 +4261,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-mode
 Required
@@ -3992,6 +4270,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mode= { active | commissioning | service }
 Required
@@ -4006,6 +4285,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mode=service" -X POST "http://localhost/ctrl/safety?action=set-mode"
 ```
@@ -4025,6 +4305,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=config-status
 Required
@@ -4033,11 +4314,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 ScorchConfigStatus
 - config status.
@@ -4052,6 +4335,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=config-status"
 ```
@@ -4070,17 +4354,20 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=safety-mode
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 userdata
 - User Data.
@@ -4095,6 +4382,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-mode"
 ```
@@ -4113,6 +4401,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=cbc-status
 Required
@@ -4121,11 +4410,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 time-interval
 - time interval for device brake check
@@ -4142,6 +4433,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=cbc-status&drivenum=1"
 ```
@@ -4160,6 +4452,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=loadoperation-status
 Required
@@ -4168,11 +4461,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 scorchloadoperationstatus
 - LoadOperation status {OK|SCORCH_ERR_OPTION_NOT_PRESENT|SCORCH_ERR_NOT_IN_MANUAL_MODE|SCORCH_ERR_NOT_IN_MOTORS_OFF|SCORCH_ERR_CURRENT_CONFIG_LOCKED|SCORCH_ERR_USER_GRANT_IS_MISSING}.
@@ -4186,6 +4481,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=loadoperation-status"
 ```
@@ -4205,6 +4501,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=safety-config
 Required
@@ -4213,11 +4510,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 safety-ctrl-configuration
 Ctrl-Safety resource
@@ -4247,6 +4546,7 @@ checksum as base64 encoded data
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=safety-config"
 ```
@@ -4265,6 +4565,7 @@ URL — /ctrl/safety
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=violation-info
 Required
@@ -4273,11 +4574,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 safety-violationinfo
 violation-type
@@ -4317,6 +4620,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?resource=violation-info"
 ```
@@ -4336,6 +4640,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=unlock
 Required
@@ -4344,6 +4649,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 none
 ```
@@ -4355,6 +4661,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "index=0" -X POST "http://localhost/ctrl/safety?action=syncack"
@@ -4374,6 +4681,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=syncack
 Required
@@ -4382,6 +4690,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 index={0 | 1}
 mandatory
@@ -4394,6 +4703,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "index=0" -X POST "http://localhost/ctrl/safety?action=syncack"
@@ -4413,6 +4723,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=validate-cfg
 Required
@@ -4421,6 +4732,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 validated-by={name}
 Required
@@ -4435,6 +4747,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 `curl –digest -u "Default User":robotics -d "validated-by=abc" -X POST "http://localhost/ctrl/safety?action=validate-cfg"
 ```
@@ -4454,6 +4767,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=invalidate-cfg
 Required
@@ -4462,6 +4776,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -4475,6 +4790,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 `curl –digest -u "Default User":robotics POST "http://localhost/ctrl/safety?action=invalidate-cfg"
 ```
@@ -4494,6 +4810,7 @@ URL — /ctrl/safety
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=reset
 Required
@@ -4509,6 +4826,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/safety?action=reset"
 ```
@@ -4534,6 +4852,7 @@ URL — /ctrl/options/{option to verify}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -4541,6 +4860,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -4555,6 +4875,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/options/SAFEMOVEPRO"
 ```
@@ -4579,6 +4900,7 @@ URL — /ctrl/compatibility/{robotware version}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -4586,6 +4908,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -4599,6 +4922,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/compatibility/6.03.0101"
 ```
@@ -4624,6 +4948,7 @@ URL — /ctrl/virtualtime
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -4631,11 +4956,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 vttimeslice
 get the virtual timeslice value in milliseconds.
@@ -4656,6 +4983,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime"
 ```
@@ -4681,6 +5009,7 @@ URL — /ctrl/virtualtime/vttime
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -4688,11 +5017,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-vttime
 controller virtualtime resource
@@ -4710,6 +5041,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttime"
 ```
@@ -4734,11 +5066,13 @@ URL — /ctrl/virtualtime/vttimeslice
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -4752,6 +5086,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
@@ -4772,12 +5107,14 @@ URL — /ctrl/virtualtime/vttimeslice
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -4790,6 +5127,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
@@ -4810,11 +5148,13 @@ URL — /ctrl/virtualtime/vttimeslice
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 vttimeslice={value} in ms
 Required
@@ -4829,6 +5169,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "vttimeslice=20" -X POST "http://localhost/ctrl/virtualtime/vttimeslice"
 ```
@@ -4856,6 +5197,7 @@ URL — /ctrl/virtualtime/vtspeed
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -4863,11 +5205,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-vtspeed
 controller virtualtime resource
@@ -4883,6 +5227,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed"
 ```
@@ -4902,6 +5247,7 @@ URL — /ctrl/virtualtime/vtspeed
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -4911,11 +5257,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 vtspeed
 Sets the speed of virtual time in percent relative to real time
@@ -4930,6 +5278,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtspeed?action=show"
 ```
@@ -4949,11 +5298,13 @@ URL — /ctrl/virtualtime/vtspeed
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 vtspeed={value}
 Required
@@ -4968,6 +5319,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "vtspeed=100" -X POST "http://localhost/ctrl/virtualtime/vtspeed"
 ```
@@ -4993,6 +5345,7 @@ URL — /ctrl/virtualtime/vtstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5000,11 +5353,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrl-vtstate
 controller virtualtime resource
@@ -5020,6 +5375,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate"
 ```
@@ -5039,6 +5395,7 @@ URL — /ctrl/virtualtime/vtstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -5048,11 +5405,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 vtstate
 sets the state of the virtual time server
@@ -5067,6 +5426,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/ctrl/virtualtime/vtstate?action=show"
 ```
@@ -5086,11 +5446,13 @@ URL — /ctrl/virtualtime/vtstate
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 vtstate={state_value}
 Required
@@ -5106,6 +5468,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "vtstate=VTFREERUN" -X POST "http://localhost/ctrl/virtualtime/vtstate"
 ```
@@ -5131,11 +5494,13 @@ URL — /ctrl/virtualtime/vtrun
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -5148,6 +5513,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/ctrl/virtualtime/vtrun"
 ```
@@ -5173,6 +5539,7 @@ URL — /fileservice
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5180,11 +5547,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 fs-device
 fs-device-type
@@ -5216,6 +5585,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Get a list of root resources
 curl --digest -u "Default User":robotics "http://localhost/fileservice"
@@ -5243,17 +5613,20 @@ URL — /fileservice/{environment_variable|device}/{directory}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 fs-dir
 fs-cdate
@@ -5285,6 +5658,7 @@ A boolean specifying if a file is read only or not. Possible values are: true an
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Directory Listing
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home"
@@ -5304,6 +5678,7 @@ URL — /fileservice/{device}|{directory}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -5313,11 +5688,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 fs-create
 fs-newname
@@ -5345,6 +5722,7 @@ Delete a directory
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Get actions on directory
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs?action=show"
@@ -5364,12 +5742,14 @@ URL — /fileservice/{device|environment_variable}/{directory}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 fs-newname
 =The new directory name. See
@@ -5388,12 +5768,13 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Create a new directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=create" -X POST "http://localhost/fileservice/$home/"
 ```
 
-**Notes:** Only relative path are allowed for "*fs-newname*". Absolute paths are not supported
+**Notes:** Only relative path are allowed for "_fs-newname_". Absolute paths are not supported
 The
 fs-newname
 can take nested directory structure e.g.
@@ -5416,12 +5797,14 @@ URL — /fileservice/{device|environment_variable}/{directory}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 fs-newname
 =The new directory name fs-get-directory-actions
@@ -5438,6 +5821,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Rename a directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=rename" -X POST "http://localhost/fileservice/$home/testdir"
@@ -5457,6 +5841,7 @@ URL — /fileservice/{device|environment_variable}/{directory}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5464,6 +5849,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 fs-overwrite
 = true|false defaults to false. fs-get-directory-actions
@@ -5485,6 +5871,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Create a copy of a directory
 curl --digest -u "Default User":robotics -d "fs-newname=newdir&fs-action=copy" -X POST "http://localhost/fileservice/$home/testdir"
@@ -5512,6 +5899,7 @@ URL — /fileservice/{device|environment_variable}/{directory}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5519,6 +5907,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -5530,6 +5919,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delate a directory
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/fileservice/$home/testdir"
@@ -5555,6 +5945,7 @@ URL — /fileservice/{device}|{directory}/{file}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5562,6 +5953,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -5573,6 +5965,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Get a file.
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs/test.txt"
@@ -5592,6 +5985,7 @@ URL — /fileservice/{device}|{directory}/{file}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -5601,11 +5995,13 @@ Returns action Forms for this resource
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 fs-rename
 fs-newname
@@ -5633,6 +6029,7 @@ Delete the file
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Get actions on a file.
 curl --digest -u "Default User":robotics "http://localhost/fileservice/$home/docs/test.txt?action=show"
@@ -5652,12 +6049,14 @@ URL — /fileservice/{device|environment_variable|directory}/{file}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 fs-newname
 =The new file name
@@ -5674,6 +6073,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Rename a file
 curl --digest -u "Default User":robotics -d "fs-newname=newfile.txt&fs-action=rename" -X POST "http://localhost/fileservice/$home/test.txt"
@@ -5693,12 +6093,14 @@ URL — /fileservice/{device|environment_variable}/{filename}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 fs-overwrite
 = true|false defaults to false.
@@ -5717,6 +6119,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Create a copy of a file
 curl --digest -u "Default User":robotics -d "fs-newname=newfile.txt&fs-action=copy" -X POST "http://localhost/fileservice/$home/file.txt"
@@ -5745,12 +6148,14 @@ URL — /fileservice/{device|environment_variable|directory}/{file}
 **Method:** `PUT`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 The file content
 ```
@@ -5762,6 +6167,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Upload a file
 curl --digest -u "Default User":robotics -d -X PUT "http://localhost/fileservice/$home/test.txt"
@@ -5783,12 +6189,14 @@ URL — /fileservice/{device|environment_variable|directory}/{file}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -5800,6 +6208,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delete a file
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/fileservice/$home/test.txt"
@@ -5819,11 +6228,13 @@ URL — /fileservice/{device|environment_variable|directory}/{file}
 **Method:** `HEAD`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -5834,6 +6245,7 @@ None
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delete a file
 curl --digest -u "Default User":robotics -X HEAD "http://localhost/fileservice/$home/test.txt"
@@ -5859,17 +6271,20 @@ URL — /rw
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rwservice-li
 - RobotWare service item
@@ -5885,6 +6300,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw"
 ```
@@ -5909,6 +6325,7 @@ URL — /rw/cfg
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -5916,11 +6333,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cfg-domain-li
 Specifies a link to the 'cfg-domain` resource.
@@ -5931,6 +6350,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg
@@ -5951,6 +6371,7 @@ URL — /rw/cfg
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -5960,11 +6381,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 validate
 - Validate a configuration file before loading. Inspecting a CFG file for any errors that would occur during a load of the file, including checking for duplicate instance-names.
@@ -6007,6 +6430,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Retrieve actions on the CFG resource
 curl --digest -u "Default User":robotics" "
@@ -6032,6 +6456,7 @@ URL — /rw/cfg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=validate
 Required
@@ -6040,6 +6465,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 filepath
 File on controller to validate, see
@@ -6050,6 +6476,7 @@ Get CFG actions
 ```
 
 **Resources:**
+
 ```
 cfg-validate
 Validate a configuration file before loading. Inspecting a CFG file for any errors that would occur during a load of the file, including checking for duplicate instance-names.
@@ -6066,6 +6493,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/rw/cfg?action=validate"
 ```
@@ -6084,6 +6512,7 @@ URL — /rw/cfg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=load
 Required
@@ -6092,6 +6521,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 filepath
 File on controller to load, see
@@ -6112,6 +6542,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "filepath=$TEMP/a.cfg&action-type=add-with-reset" -X POST "http://localhost/rw/cfg?action=load"
 ```
@@ -6130,12 +6561,14 @@ URL — /rw/cfg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=validate-inst-at-del
 Required
 ```
 
 **Data Params:**
+
 ```
 name={instance name}
 Required
@@ -6148,6 +6581,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=abc" -X POST "http://localhost/rw/cfg?action=validate-inst-at-del"
 ```
@@ -6166,12 +6600,14 @@ URL — /rw/cfg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=validate-instances
 Required
 ```
 
 **Data Params:**
+
 ```
 operation={0 | 1}
 Optional
@@ -6193,6 +6629,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "operation=1&cfgdomain=I/O&cfgtype=DeviceNetDevice&instances=TestingValid1&instancescount=1" -X POST "http://localhost/rw/cfg?action=validate-instances"
 ```
@@ -6211,12 +6648,14 @@ URL — /rw/cfg
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=keyless
 Required
 ```
 
 **Data Params:**
+
 ```
 state=run
 Required
@@ -6229,6 +6668,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "state=run" -X POST "http://localhost/rw/cfg?action=keyless"
 ```
@@ -6247,6 +6687,7 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -6254,6 +6695,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -6265,6 +6707,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 cfg-prop-ev
 change-count
@@ -6282,6 +6725,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on cfg change count
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -6309,6 +6753,7 @@ URL — /rw/cfg/{domain}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 start={start value} start Page number
 limit={limit value} limit Number of elements to retrieve(maximum/default value of limit is 70)
@@ -6318,11 +6763,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 next
 Link to next page (Will be absent if there is no next page)
@@ -6339,6 +6786,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/moc"
 ```
@@ -6357,6 +6805,7 @@ URL — /rw/cfg/{domain}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -6366,11 +6815,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 saveas
 - Save the CFG domain to the given file.
@@ -6390,6 +6841,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Get actions supported by a CFG domain
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/sio?action=show"
@@ -6414,6 +6866,7 @@ URL — /rw/cfg/{domain}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=saveas
 Required
@@ -6422,6 +6875,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 filepath
 Required
@@ -6440,6 +6894,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Save the CFG domain to the given file
 curl --digest -u "Default User":robotics -d "filepath=/fileservice/$HOME/a.cfg" -X POST "http://localhost/rw/cfg/sio?action=saveas"
@@ -6459,6 +6914,7 @@ URL — /rw/cfg/{domain}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=reset
 Required
@@ -6469,6 +6925,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -6484,6 +6941,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Remove all external instances in a CFG domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/cfg/sio?action=reset"
@@ -6509,6 +6967,7 @@ URL — /rw/cfg/{domain}/{type}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -6516,11 +6975,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cfg-dt-attributes-li
 Specifies a link to the 'cfg-domain-type-attributes` resource.
@@ -6541,6 +7002,7 @@ HTTP Status codes
 **Error:** NOT_FOUND(404)
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK"
 ```
@@ -6565,6 +7027,7 @@ URL — /rw/cfg/{domain}/{type}/attributes
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -6572,11 +7035,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cfg-dt-attribute-li
 name
@@ -6604,6 +7069,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/attributes"
 ```
@@ -6628,6 +7094,7 @@ URL — /rw/cfg/{domain}/{type}/instances
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -6635,11 +7102,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cfg-dt-instance-li
 Cfg instance
@@ -6666,6 +7135,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/EIO_BUS/instances"
 ```
@@ -6684,6 +7154,7 @@ URL — /rw/cfg/{domain}/{type}/instances
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -6693,11 +7164,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 reset
 - Remove all external (non-readonly) instances of a type
@@ -6714,6 +7187,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=show"
 ```
@@ -6732,6 +7206,7 @@ URL — /rw/cfg/{domain}/{type}/instances
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=reset
 Required
@@ -6740,6 +7215,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -6755,6 +7231,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Reset CFG instances
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=reset"
@@ -6774,6 +7251,7 @@ URL — /rw/cfg/{domain}/{type}/instances
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=create-default
 Required
@@ -6782,6 +7260,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 name
 name of instance
@@ -6791,6 +7270,7 @@ Get actions on CFG instances
 ```
 
 **Resources:**
+
 ```
 instancename
 Created Instance name.
@@ -6810,6 +7290,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Create default CFG instance
 curl --digest -u "Default User":robotics -d "name=testinstance" -X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances?action=create-default"
@@ -6836,6 +7317,7 @@ URL — /rw/cfg/{domain}/{type}/instances/{instance name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -6843,11 +7325,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cfg-dt-instance-li
 List of attributes for the given type
@@ -6874,6 +7358,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg/sys/PRESENT_OPTIONS/instances/sis
@@ -6894,6 +7379,7 @@ URL — /rw/cfg/{domain}/{type}/instances/{instance}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -6903,11 +7389,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 - Update one or more attributes
@@ -6926,6 +7414,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/cfg/eio/eio_bus/instances?action=show
@@ -6946,11 +7435,13 @@ URL — /rw/cfg/{domain}/{type}/instances/{instance}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 ```
 
 **Data Params:**
+
 ```
 {attribute name}={attribute value}
 ```
@@ -6964,6 +7455,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Update one or more attributes
 curl --digest - u "Default User" : robotics -d "Simulated=True" - X POST "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances/testinstance?action=set"
@@ -6983,11 +7475,13 @@ URL — /rw/cfg/{domain}/{type}/instances/{instance}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -7001,6 +7495,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delete CFG instance
 curl --digest -u "Default User":robotics - X DELETE "http://localhost/rw/cfg/eio/INDUSTRIAL_NETWORK/instances/testinstance"
@@ -7026,6 +7521,7 @@ URL — /rw/dipc
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -7033,11 +7529,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 dipc-info-li
 max-body-size
@@ -7061,6 +7559,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc"
 ```
@@ -7079,6 +7578,7 @@ URL — /rw/dipc
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -7086,11 +7586,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 dipc-create
 dipc-queue-name
@@ -7128,6 +7630,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc?action=show"
 ```
@@ -7146,12 +7649,14 @@ URL — /rw/dipc
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=dipc-create
 Required
 ```
 
 **Data Params:**
+
 ```
 dipc-queue-name
 The name of the queue
@@ -7175,6 +7680,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Restart controller with the specified mode
 curl --digest -u "Default User":robotics -d "dipc-queue-name=testq&dipc-queue-size=200&dipc-max-msg-size=50" -X POST "http://localhost/rw/dipc?action=dipc-create"
@@ -7200,6 +7706,7 @@ URL — /rw/dipc/{queue-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -7207,11 +7714,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 dipc-queue
 The operation mode
@@ -7238,6 +7747,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq"
 ```
@@ -7256,6 +7766,7 @@ URL — /rw/dipc/{queue-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -7264,11 +7775,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 dipc-send
 Send a message to a queue
@@ -7313,6 +7826,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/rw/dipc/testq?action=show"
 ```
@@ -7331,12 +7845,14 @@ URL — /rw/dipc/{queue-name}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=dipc-send
 Required
 ```
 
 **Data Params:**
+
 ```
 dipc-src-queue-name
 The source queue name
@@ -7366,6 +7882,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Send message to queue
 curl --digest -u "Default User":robotics -d "dipc-src-queue-name=testq&dipc-cmd=111&dipc-userdef=222&dipc-msgtype=1&dipc-data=hello" -X POST "http://localhost/rw/dipc/testq?action=dipc-send"
@@ -7385,6 +7902,7 @@ URL — /rw/dipc/{queue-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=dipc-read
 Required
@@ -7395,11 +7913,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 dipc-read-li
 queue-name
@@ -7429,6 +7949,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/dipc/testq?action=dipc-read"
 ```
@@ -7447,11 +7968,13 @@ URL — /rw/dipc/{queue-name}
 **Method:** `DELETE`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -7467,6 +7990,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Delete a queue
 curl --digest -u "Default User":robotics -X DELETE "http://localhost/rw/dipc/testq"
@@ -7487,11 +8011,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -7503,6 +8029,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 dipc-msg-ev
 Message in queue
@@ -7519,6 +8046,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on queue
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -7540,11 +8068,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -7556,6 +8086,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 dipc-msg-ev
 Message in queue
@@ -7572,6 +8103,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on queue
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -7601,6 +8133,7 @@ URL — /rw/elog
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 lang=[language-code]
 Optional
@@ -7616,11 +8149,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 elog-domain-li
 Specifies a link to the 'elog-domain` resource.
@@ -7637,6 +8172,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog"
 curl --digest -u "Default User":robotics "http://localhost/rw/elog?lang=de"
@@ -7656,6 +8192,7 @@ URL — /rw/elog
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -7664,11 +8201,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 clearall
 Clear elog messages in all elog domains
@@ -7681,6 +8220,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog?action=show"
 ```
@@ -7699,12 +8239,14 @@ URL — /rw/elog
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=clearall
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -7718,6 +8260,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Clear all elog messages
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/elog?action=clearall"
@@ -7737,12 +8280,14 @@ Description — Save event log in sys dump format on controller
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=saveraw
 Required
 ```
 
 **Data Params:**
+
 ```
 path={path along with file-name which will contain the system dump} Environment variables such as $system, $syspar shall be possible to have in the path.
 ```
@@ -7757,6 +8302,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Generate elog in system dump format.
 curl --digest -u "Default User":robotics -d "path=/fileservice/$syspar/elog_dump.txt" -X POST "http://localhost/rw/elog?action=saveraw"
@@ -7782,6 +8328,7 @@ URL — /rw/elog/{domain-number}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
@@ -7817,11 +8364,13 @@ example: elogseqnum=8
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 elog-message-li
 msg-type
@@ -7880,6 +8429,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0"
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?resource=count"
@@ -7904,6 +8454,7 @@ URL — /rw/elog/{domain-number}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -7911,11 +8462,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 clear
 Clear elog messages in this domain
@@ -7932,6 +8485,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0?action=show"
 ```
@@ -7950,12 +8504,14 @@ URL — /rw/elog/{domain-number}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=clear
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -7969,6 +8525,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Clear all elog messages
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/elog/0?action=clear"
@@ -7988,6 +8545,7 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -7995,6 +8553,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -8006,6 +8565,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 elog-message-ev
 seqnum
@@ -8025,6 +8585,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on elog domain 0
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -8053,6 +8614,7 @@ URL — /rw/elog/{domain-number}/{sequence-number}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
@@ -8064,11 +8626,13 @@ example: lang=de
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 elog-message
 Specifies a link to the 'elog-domain` resource.
@@ -8125,6 +8689,7 @@ Robot controller errors, See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/elog/0/8?lang=en"
 ```
@@ -8149,6 +8714,7 @@ URL — /rw/iosystem
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -8156,11 +8722,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-networks-li
 Networks list item
@@ -8179,6 +8747,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem"
 ```
@@ -8203,6 +8772,7 @@ URL — /rw/iosystem/networks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -8210,11 +8780,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-network-li
 name
@@ -8236,6 +8808,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks"
 ```
@@ -8254,6 +8827,7 @@ URL — /rw/iosystem/networks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -8263,11 +8837,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 search
 Search IO networks based on name or state
@@ -8288,6 +8864,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks?action=show"
 ```
@@ -8306,12 +8883,14 @@ URL — /rw/iosystem/networks
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=search
 Required
 ```
 
 **Data Params:**
+
 ```
 name
 The network name e.g. Virtual or Local
@@ -8323,6 +8902,7 @@ mandatory
 ```
 
 **Resources:**
+
 ```
 ios-network-li
 name
@@ -8344,6 +8924,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Search IO Networks
 curl --digest -u "Default User":robotics -d "name=Local&state=running" -X POST "http://localhost/rw/iosystem/networks?action=search"
@@ -8369,6 +8950,7 @@ URL — /rw/iosystem/networks/{network}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -8376,11 +8958,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-network
 IO network resource
@@ -8401,6 +8985,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local"
 ```
@@ -8419,6 +9004,7 @@ URL — /rw/iosystem/networks/{network}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -8428,11 +9014,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 Set network state
@@ -8459,6 +9047,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?action=show"
 ```
@@ -8477,12 +9066,14 @@ URL — /rw/iosystem/networks/{network}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
 ```
 
 **Data Params:**
+
 ```
 lstate = Logical network state
 Required
@@ -8499,6 +9090,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=start" -X POST "http://localhost/rw/iosystem/networks/Local?action=set"
@@ -8518,11 +9110,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -8534,6 +9128,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 ios-networkstate
 lstate
@@ -8551,6 +9146,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on IO Network
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -8572,6 +9168,7 @@ URL — /rw/iosystem/networks/{network}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=config
 Required
@@ -8582,11 +9179,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-network-config-runtime
 IO network resource
@@ -8607,6 +9206,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/networks/Local?resource=config&configtype=1"
 ```
@@ -8626,12 +9226,14 @@ URL — /rw/iosystem/networks/{network}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=config
 Required
 ```
 
 **Data Params:**
+
 ```
 config-type = Network configuration type {BITS,GROUPS,BOTH,SCAN,UNITS}
 Required
@@ -8646,6 +9248,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "config-type=BITS" -X POST "http://localhost/rw/iosystem/networks/Local?action=config"
 ```
@@ -8670,6 +9273,7 @@ URL — /rw/iosystem/devices
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -8677,11 +9281,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-device-li
 IO Device list item
@@ -8706,6 +9312,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices"
 ```
@@ -8724,6 +9331,7 @@ URL — /rw/iosystem/devices
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -8733,11 +9341,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 search
 Search devices
@@ -8758,6 +9368,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices?action=show"
 ```
@@ -8776,12 +9387,14 @@ URL — /rw/iosystem/devices
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=search
 Required
 ```
 
 **Data Params:**
+
 ```
 name = The device name e.g. DRV_1
 lstate = The device logical state e.g. enabled
@@ -8792,6 +9405,7 @@ example: name=panel&lstate=enabled (or) lstate=enabled
 ```
 
 **Resources:**
+
 ```
 ios-device-li
 IO Device list item
@@ -8814,6 +9428,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Search IO Devices
 curl --digest -u "Default User":robotics -d "name=DRV_1&lstate=enabled&network=DeviceNet" -X POST "http://localhost/rw/iosystem/devices?action=search"
@@ -8839,6 +9454,7 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -8846,11 +9462,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-device
 IO device resource
@@ -8881,6 +9499,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/Local/PANEL"
 ```
@@ -8899,6 +9518,7 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -8908,11 +9528,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 Set device state
@@ -8943,6 +9565,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/Local/PANEL?action=show"
 ```
@@ -8961,12 +9584,14 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
 ```
 
 **Data Params:**
+
 ```
 lstate = Logical device state
 Required
@@ -8981,6 +9606,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=enable" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set"
@@ -9000,11 +9626,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -9016,6 +9644,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 ios-devicestate-ev
 lstate
@@ -9033,6 +9662,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on IO Device
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -9054,12 +9684,14 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-inputdata
 Required
 ```
 
 **Data Params:**
+
 ```
 startbyte={indexnumber}
 Required
@@ -9078,6 +9710,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set-inputdata"
 ```
@@ -9098,12 +9731,14 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-outputdata
 Required
 ```
 
 **Data Params:**
+
 ```
 startbyte={indexnumber}
 Required
@@ -9122,6 +9757,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "startbyte=0&signaldata=100&datamask=255" -X POST "http://localhost/rw/iosystem/devices/Local/DRV_1?action=set-outputdata"
 ```
@@ -9142,6 +9778,7 @@ URL — /rw/iosystem/devices/{device}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=config
 Required
@@ -9152,11 +9789,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-device-config-runtime
 IO device resource
@@ -9193,6 +9832,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/DeviceNet/DN_Internal_Device?resource=config&configtype=1"
 ```
@@ -9218,6 +9858,7 @@ URL — /rw/iosystem/devices/{network}/{device}/upgradeinfo
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -9225,11 +9866,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 eio-device
 Firmware upgrade info
@@ -9275,6 +9918,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/EtherNetIP/EN_Internal_Device/upgradeinfo"
 ```
@@ -9300,6 +9944,7 @@ URL — /rw/iosystem/devices/{device}/command
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -9307,6 +9952,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 commandName = Name of the device command
 Required
@@ -9327,6 +9973,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "commandName=FIRMWARE_INFO&value=0&valueLength=0&timeout=0" -X POST "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
 ```
@@ -9346,16 +9993,19 @@ URL — /rw/iosystem/devices/{device}/command
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 devicecommand
 commandName
@@ -9375,6 +10025,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/EtherNetIP/Local_IO/command"
 ```
@@ -9399,6 +10050,7 @@ URL — /rw/iosystem/signals
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -9406,11 +10058,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-signal-li
 IO-Signal list item
@@ -9435,6 +10089,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals"
 ```
@@ -9453,6 +10108,7 @@ URL — /rw/iosystem/signals
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=signal-search
 Required
@@ -9463,6 +10119,7 @@ Optional
 ```
 
 **Data Params:**
+
 ```
 name={signal_name}
 Optional
@@ -9499,6 +10156,7 @@ Optional
 ```
 
 **Resources:**
+
 ```
 name
 signal name
@@ -9527,6 +10185,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?action=signal-search"
 ```
@@ -9545,6 +10204,7 @@ URL — /rw/iosystem/signals
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=signal-searchex
 Required
@@ -9554,6 +10214,7 @@ Optional
 ```
 
 **Data Params:**
+
 ```
 name={signal_name}
 Optional
@@ -9590,6 +10251,7 @@ Optional
 ```
 
 **Resources:**
+
 ```
 name
 signal name
@@ -9632,6 +10294,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "category=safety&type=DO" -X POST "http://localhost/rw/iosystem/signals?action=signal-searchex"
 ```
@@ -9650,12 +10313,14 @@ URL — /rw/iosystem/signals
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=unblock-signal
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -9669,6 +10334,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/iosystem/signals?action=unblock-signal"
 ```
@@ -9687,6 +10353,7 @@ URL — /rw/iosystem/signals
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -9695,6 +10362,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -9708,6 +10376,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals?action=show"
 ```
@@ -9732,6 +10401,7 @@ URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -9739,6 +10409,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 ios-signal
 IO-signal resource
@@ -9779,6 +10450,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1"
 ```
@@ -9798,6 +10470,7 @@ URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -9807,11 +10480,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 see
@@ -9854,6 +10529,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=show"
 ```
@@ -9872,12 +10548,14 @@ URL — /rw/iosystem/signals/{network}/{device}/{signal}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
 ```
 
 **Data Params:**
+
 ```
 lstate = Logical signal state {simulated | not simulated}
 Required
@@ -9894,6 +10572,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set signal value
 curl --digest -u "Default User":robotics -d "lstate=simulated" -X POST "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?action=set"
@@ -9913,12 +10592,14 @@ URL — /rw/iosystem/signals/{network}/{device}/{signal}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
 ```
 
 **Data Params:**
+
 ```
 lvalue
 : logical signal value
@@ -9967,11 +10648,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -9983,6 +10666,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 ios-signalstate-ev
 lvalue
@@ -10000,6 +10684,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on IO-Signal, it is possible to subscribe with any subscription priority (i.e High,Medium,Low priority) on IO-Signals.
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/iosystem/signals/Local/DRV_1/DRV1K1;state&1-p=2" -X POST "http://localhost/subscription"
@@ -10021,6 +10706,7 @@ URL — /rw/iosystem/signals/{network}/{unit}/{signal}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=config
 Required
@@ -10031,11 +10717,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ios-signal-config-runtime
 IO-signal resource
@@ -10066,6 +10754,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/signals/Local/DRV_1/DRV1K1?resource=config&configtype=1"
 ```
@@ -10091,6 +10780,7 @@ URL — /rw/mastership
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -10098,11 +10788,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 msh-resource-li
 Provides link to the detailed
@@ -10123,6 +10815,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership"
 ```
@@ -10141,6 +10834,7 @@ URL — /rw/mastership
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -10150,11 +10844,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 request-mastership
 Request mastership on all resources under mastership i.e. on CFG, MOTION and RAPID domains
@@ -10178,6 +10874,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership?action=show"
 ```
@@ -10196,12 +10893,14 @@ URL — /rw/mastership
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=request
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -10217,6 +10916,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Request mastership on all domains
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership?action=request"
@@ -10237,12 +10937,14 @@ URL — /rw/mastership
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=release
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -10258,6 +10960,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Release mastership on all domains
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership?action=release"
@@ -10277,11 +10980,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -10303,6 +11008,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on mastership state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -10330,6 +11036,7 @@ URL — /rw/mastership/{domain-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -10337,11 +11044,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 msh-resource
 The specified mastership resource.
@@ -10368,6 +11077,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg"
 ```
@@ -10386,6 +11096,7 @@ URL — /rw/mastership/{domain-name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -10395,11 +11106,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 request-mastership
 Request mastership on a particular resource.
@@ -10425,6 +11138,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/mastership/cfg?action=show"
 ```
@@ -10443,12 +11157,14 @@ URL — /rw/mastership/{domain}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=request
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -10464,6 +11180,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Request mastership on cfg domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership/cfg?action=request"
@@ -10484,12 +11201,14 @@ URL — /rw/mastership/{domain}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=release
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -10505,6 +11224,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Release mastership on cfg domain
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/mastership/cfg?action=release"
@@ -10524,11 +11244,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -10540,6 +11262,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 msh-resource-value
 The mastership information
@@ -10569,6 +11292,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on cfg domain for changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -10596,6 +11320,7 @@ URL — /rw/panel
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -10603,11 +11328,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 pnl-ctrlstate-li
 The controller state resource
@@ -10632,6 +11359,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel"
 ```
@@ -10650,6 +11378,7 @@ URL — /rw/panel
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -10657,11 +11386,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 restart
 restart the controller
@@ -10690,6 +11421,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel?action=show"
 ```
@@ -10708,12 +11440,14 @@ URL — /rw/panel
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setlang
 Required
 ```
 
 **Data Params:**
+
 ```
 lang-code = The langauge code e.g.
 en
@@ -10734,6 +11468,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set the controller language
 curl --digest -u "Default User":robotics -d "lang-code=en" -X POST "http://localhost/rw/panel?action=setlang"
@@ -10753,12 +11488,14 @@ URL — /rw/panel
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=restart
 Required
 ```
 
 **Data Params:**
+
 ```
 restart-mode = restart modes are {restart | istart | pstart | bstart}
 Required
@@ -10773,6 +11510,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Restart the controller
 curl --digest -u "Default User":robotics -d "restart-mode=restart" -X POST "http://localhost/rw/panel?action=restart"
@@ -10798,6 +11536,7 @@ URL — /rw/panel/ctrlstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -10805,11 +11544,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 ctrlstate
 The controller state. {init | motoron | motoroff | guardstop | emergencystop | emergencystopreset | sysfail}
@@ -10826,6 +11567,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate"
 ```
@@ -10858,6 +11600,7 @@ URL — /rw/panel/ctrlstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -10866,11 +11609,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 ctrl-state
@@ -10893,6 +11638,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/ctrlstate?action=show"
 ```
@@ -10911,12 +11657,14 @@ URL — /rw/panel/ctrlstate
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setctrlstate
 Required
 ```
 
 **Data Params:**
+
 ```
 ctrl-state = The controller state {motoron | motoroff}
 Required
@@ -10931,6 +11679,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set controller state
 curl --digest -u "Default User":robotics -d "ctrl-state=motoron" -X POST "http://localhost/rw/panel/ctrlstate?action=setctrlstate"
@@ -10950,11 +11699,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -10966,6 +11717,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 pnl-ctrlstate-ev
 ctrlstate
@@ -10983,6 +11735,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -11024,6 +11777,7 @@ URL — /rw/panel/opmode
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -11031,11 +11785,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 opmode
 The operation mode {INIT | AUTO_CH | MANF_CH | MANR | MANF | AUTO | UNDEF}
@@ -11064,6 +11820,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode"
 ```
@@ -11072,9 +11829,9 @@ curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode"
 
 ---
 
-## Get Operation  Mode Actions
+## Get Operation Mode Actions
 
-**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation  Mode Actions
+**Path:** RobotWare Services › Panel service › Operations on Operation Mode Resource › Get Operation Mode Actions
 
 URL — /rw/panel/opmode
 
@@ -11082,6 +11839,7 @@ URL — /rw/panel/opmode
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -11090,11 +11848,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set
 set the opmode as { Lock | unlock}
@@ -11112,6 +11872,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?action=show"
 ```
@@ -11130,11 +11891,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -11146,6 +11909,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 pnl-opmode-ev
 opmode
@@ -11163,6 +11927,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -11184,12 +11949,14 @@ URL — /rw/panel/opmode
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=acknowledge
 Required
 ```
 
 **Data Params:**
+
 ```
 opmode={auto | manf | coldet}
 Required
@@ -11206,6 +11973,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "opmode=auto" -X POST "http://localhost/rw/panel/opmode?action=acknowledge"
 ```
@@ -11226,17 +11994,20 @@ URL — /rw/panel/opmode
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=lock-state
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 lock-state:
 The Mode selector lock state gives { error | unlocked | locked | permlocked | pendpermlocked}
@@ -11251,6 +12022,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/opmode?resource=lock-state"
 ```
@@ -11269,6 +12041,7 @@ URL — /rw/panel/opmode
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=lock
 Required
@@ -11277,6 +12050,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 pin=<4-digit-pin>
 Required
@@ -11293,6 +12067,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "pin=1234&permanent=0" -X POST "http://localhost/rw/panel/opmode?action=lock"
 ```
@@ -11313,6 +12088,7 @@ URL — /rw/panel/opmode
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=unlock
 Required
@@ -11321,6 +12097,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 pin=<4-digit-pin>
 Required
@@ -11335,6 +12112,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "pin=1234" -X POST "http://localhost/rw/panel/opmode?action=unlock"
 ```
@@ -11361,6 +12139,7 @@ URL — /rw/panel/speedratio
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -11368,11 +12147,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 speedratio
 The speed ratio value. {0-100}
@@ -11387,6 +12168,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio"
 ```
@@ -11405,6 +12187,7 @@ URL — /rw/panel/speedratio
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -11413,11 +12196,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 set-speed-ratio
 Set the speed ratio
@@ -11439,6 +12224,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/speedratio?action=show"
 ```
@@ -11457,12 +12243,14 @@ URL — /rw/panel/speedratio
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setspeedratio
 Required
 ```
 
 **Data Params:**
+
 ```
 speed-ratio = The speed ratio value between 0 and 100
 Required
@@ -11477,6 +12265,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Set speed ratio
 curl --digest -u "Default User":robotics -d "speed-ratio=60" -X POST "http://localhost/rw/panel/speedratio?action=setspeedratio"
@@ -11497,11 +12286,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -11513,6 +12304,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 pnl-speedratio-ev
 speedratio
@@ -11530,6 +12322,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on controller state changes
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -11557,17 +12350,20 @@ URL — /rw/panel/coldetstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 coldetstate
 The collision detection states {INIT | TRIGGERED | CONFIRMED | TRIGGERED_ACK}
@@ -11582,6 +12378,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate"
 ```
@@ -11600,6 +12397,7 @@ URL — /rw/panel/coldetstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -11608,11 +12406,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 subscribe
 for more information refer Subscription Service documentation.
@@ -11628,6 +12428,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/panel/coldetstate?action=show"
 ```
@@ -11646,11 +12447,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 <identifier> = An identifier
 Required
@@ -11672,6 +12475,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on controller state changes
 only low priority subscription(1-p=0) and medium priority subscription(1-p=1) are allowed on this resource
@@ -11699,6 +12503,7 @@ URL — /rw/rapid
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -11706,11 +12511,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-tasks-li
 Rapid tasks resource list item
@@ -11727,6 +12534,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl –digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid
@@ -11753,6 +12561,7 @@ URL — /rw/rapid/execution
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 Optional
@@ -11762,11 +12571,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-execution
 Rapid execution resource
@@ -11787,6 +12598,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/execution"
 ```
@@ -11806,6 +12618,7 @@ URL — /rw/rapid/execution
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -11815,11 +12628,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Actions:**
+
 ```
 rap-execution
 start
@@ -11847,6 +12662,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/execution?action=show
@@ -11867,6 +12683,7 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=start
 Required
@@ -11875,6 +12692,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 regain={continue | regain | clear}
 Required
@@ -11903,6 +12721,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "regain=continue&execmode=continue&cycle=forever&condition=none&stopatbp=disabled&alltaskbytsp=false" "http://localhost/rw/rapid/execution?action=start"
 ```
@@ -11921,12 +12740,14 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=stop
 Required
 ```
 
 **Data Params:**
+
 ```
 stopmode={cycle | instr | stop | qstop} (default: stop)
 usetsp={normal | alltsk} (default: normal)
@@ -11943,6 +12764,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=stop"
 ```
@@ -11961,12 +12783,14 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=startprodentry
 Required
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
@@ -11982,6 +12806,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=startprodentry"
 ```
@@ -12000,12 +12825,14 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=resetpp
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -12021,6 +12848,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/execution?action=resetpp"
 ```
@@ -12039,12 +12867,14 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setcycle
 Required
 ```
 
 **Data Params:**
+
 ```
 cycle= {once | forever}
 Required
@@ -12061,6 +12891,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "cycle=once" -X POST "http://localhost/rw/rapid/execution?action=setcycle"
 ```
@@ -12080,6 +12911,7 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -12087,6 +12919,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources={identifier}
 *<identifier>*= The subscription resource URI
@@ -12096,6 +12929,7 @@ Get RAPID Execution actions
 ```
 
 **Resources:**
+
 ```
 rap-ctrlexecstate-ev
 Controller rapid execution event resource
@@ -12114,6 +12948,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID execution state
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12135,12 +12970,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources={identifier}
 *<identifier>*= The subscription resource URI
@@ -12150,6 +12987,7 @@ Get RAPID Execution actions
 ```
 
 **Resources:**
+
 ```
 rap-execcycle-ev
 Controller rapid execution cycle event resource
@@ -12168,6 +13006,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID execution cycle
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12189,12 +13028,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -12203,6 +13044,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-hdtr-ev
 hdtr-State
@@ -12220,6 +13062,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID hold to run
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -12241,12 +13084,14 @@ URL — /rw/rapid/execution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=holdtorun-state
 Required
 ```
 
 **Data Params:**
+
 ```
 state={press | held | release}
 Required
@@ -12260,6 +13105,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "state={press | held | release}" "http://localhost/rw/rapid/execution?action=holdtorun-state"
 ```
@@ -12291,6 +13137,7 @@ URL — /rw/rapid/modules
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -12300,6 +13147,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -12315,6 +13163,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/modules?action=show
@@ -12335,6 +13184,7 @@ URL — /rw/rapid/modules
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task={task name}
 Required
@@ -12344,11 +13194,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-module-info-li
 Rapid tasks resource list item
@@ -12367,6 +13219,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?task=T_ROB1"
 ```
@@ -12385,17 +13238,20 @@ URL — /rw/rapid/modules
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=mod-possible-all
 Required
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 module-name
 Rapid module name
@@ -12418,6 +13274,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/modules?resource=mod-possible-all"
 ```
@@ -12436,12 +13293,14 @@ URL — /rw/rapid/modules
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=modify-all-position
 Required
 ```
 
 **Data Params:**
+
 ```
 checklimit={true | false}
 Required
@@ -12456,6 +13315,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "checklimit=false&checkdeactaxes=false" "http://localhost/rw/rapid/modules?action=modify-all-position"
 ```
@@ -12481,6 +13341,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task
 = {task}
@@ -12497,6 +13358,7 @@ None
 ```
 
 **Resources:**
+
 ```
 rap-mod-text
 Provides RAPID module text
@@ -12511,6 +13373,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&startrow=1&startcol=1&endrow=20&endcol=-1"
 ```
@@ -12529,6 +13392,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -12538,6 +13402,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
@@ -12551,6 +13416,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/modules/MainModule?action=show
@@ -12571,6 +13437,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 task={Task Name}
 Required
@@ -12581,6 +13448,7 @@ Get rapid module actions
 ```
 
 **Data Params:**
+
 ```
 name={module_name} Saved module will be with .mod extension.
 Required
@@ -12597,6 +13465,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=MainModule&path=C:\Users\mymod" -X POST "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&action=save"
 ```
@@ -12615,12 +13484,14 @@ URL — /rw/rapid/modules/{module}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-text-range
 Required
 ```
 
 **Data Params:**
+
 ```
 task={Task Name}
 Required
@@ -12647,6 +13518,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "task=T_ROB1&replace-mode=After&query-mode=Force&startrow=8&startcol=8&endrow=8&endcol=15&text=SampleTest" -X POST "http://localhost/rw/rapid/modules/MainModule?action=set-text-range"
 ```
@@ -12666,6 +13538,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 task={Task Name}
 Required
@@ -12674,6 +13547,7 @@ Required
 ```
 
 **Data Params:**
+
 ```
 text={Input Text}
 Required
@@ -12686,6 +13560,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "text=SampleTest" -X POST "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&action=set-module-text"
 ```
@@ -12704,6 +13579,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task=T_ROB1
 Required
@@ -12713,11 +13589,13 @@ Default value is 0. In case input is 1, the API continues execution even if any 
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-module
 Provides RAPID module attributes
@@ -12738,6 +13616,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1"
 ```
@@ -12756,6 +13635,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=change-count
 Required
@@ -12764,11 +13644,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-module-changecount
 count changecount.
@@ -12783,6 +13665,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=change-count&task=T_ROB1"
 ```
@@ -12799,6 +13682,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=rules-instr
 Required
@@ -12814,11 +13698,13 @@ altnum={altnum_value}
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-module-rulesinstr
 rapid module suggested templete for data type or instruction.
@@ -12872,6 +13758,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=rules-instr&task=T_ROB1&name=movej"
 ```
@@ -12888,6 +13775,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task=T_ROB1
 Required
@@ -12896,11 +13784,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-mod-text
 Provides RAPID module text
@@ -12917,6 +13807,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/mymodule?task=T_ROB1&attribute=readonly&attribute=nostepin"
 ```
@@ -12936,6 +13827,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task={Task Name}
 Required
@@ -12948,11 +13840,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-text-position
 Row- Row number of Text.
@@ -12966,6 +13860,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?task=T_ROB1&startrow=1&startcol=1&text=main"
 ```
@@ -12985,6 +13880,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task
 = {task}
@@ -13001,11 +13897,13 @@ Optional
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-object
 start-row
@@ -13039,6 +13937,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/BASE?task=T_ROB1&startrow=3&startcol=2&destination=Inner"
 ```
@@ -13057,6 +13956,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-syncpers
 Required
@@ -13065,6 +13965,7 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -13079,6 +13980,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/modules/MainModule?action=set-syncpers&task=T_ROB1"
 ```
@@ -13095,6 +13997,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=modify-position
 Required
@@ -13103,6 +14006,7 @@ Required
 ```
 
 **Data Params:**
+
 ```
 startrow={start Row Number}
 Required
@@ -13129,6 +14033,7 @@ NOT_FOUND(404) see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "startrow=3&startcol=9&endrow=3&endcol=102&checklimit=false&checkdeactaxes=false&allowdeact=false" "http://localhost:2222/rw/rapid/modules/MainModule?action=modify-position&task=T_ROB1"
 ```
@@ -13145,6 +14050,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=module-extension
 Required
@@ -13153,11 +14059,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 num-of-lines:
 Number of rows in RAPID module
@@ -13174,6 +14082,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-extension&task=T_ROB1"
 ```
@@ -13190,6 +14099,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=mod-possible
 Required
@@ -13206,11 +14116,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 no_lines_modifiable
 Number of modifiable motion instructions
@@ -13231,6 +14143,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=mod-possible&task=T_ROB1&startrow=19&startcol=1&endrow=21&endcol=1"
 ```
@@ -13247,6 +14160,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=object-child
 Required
@@ -13266,11 +14180,13 @@ choose the entire extent of the object, to obtain the details(children) of the o
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 object-type:
 type of the object for which extent details are obtained.
@@ -13287,6 +14203,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost:4444/rw/rapid/modules/base?resource=object-child&task=T_ROB1&startline=1&startcolumn=1&endline=16&endcolumn=9"
 ```
@@ -13303,6 +14220,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=syncper-status
 Required
@@ -13311,11 +14229,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 syncperstatus:
 status from Persistent variable {1 - TRUE|0 - FALSE}
@@ -13328,6 +14248,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/base?resource=syncper-status&task=T_ROB1"
 ```
@@ -13344,6 +14265,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=module-text
 Required
@@ -13352,11 +14274,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 change-count:
 System configuration change count number
@@ -13373,6 +14297,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-text&task=T_ROB1"
 ```
@@ -13389,6 +14314,7 @@ URL — /rw/rapid/modules/{module}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=module-symbol
 Required
@@ -13401,11 +14327,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 version:
 version number
@@ -13440,6 +14368,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule?resource=module-symbol&task=T_ROB1&row=5&col=9"
 ```
@@ -13462,6 +14391,7 @@ URL — /rw/rapid/modules/{module}/routine
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 task={task}
 Required
@@ -13474,11 +14404,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-routine-prop
 name
@@ -13502,6 +14434,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?task=T_ROB1&row=10&column=9"
 ```
@@ -13520,6 +14453,7 @@ URL — /rw/rapid/modules/{module}/routine
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=routine-args
 Required
@@ -13536,11 +14470,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 next
 Link to next page (Will be absent if there is no next page)
@@ -13578,6 +14514,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/modules/MainModule/routine?resource=routine-args&mark=3&limit=3&task=T_ROB1&row=4&column=9"
 ```
@@ -13606,6 +14543,7 @@ URL — /rw/rapid/symbols
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -13613,11 +14551,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 None*
 ```
@@ -13627,6 +14567,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols
@@ -13647,6 +14588,7 @@ URL — /rw/rapid/symbols
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -13656,11 +14598,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 search-symbols
 view
@@ -13713,6 +14657,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols?action=show
@@ -13733,12 +14678,14 @@ URL — /rw/rapid/symbols
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=search-symbol
 Required
 ```
 
 **Data Params:**
+
 ```
 At least one data parameter should be provided.
 view = {block | scope | stack }. For both scope and stack you must use blockurl with task, for stack even program pointer should be set.
@@ -13772,6 +14719,7 @@ dattyp = {string}.,Datatype which has to be filtered.
 ```
 
 **Resources:**
+
 ```
 rap-sympropvar-li
 Rapid-Symbol resource
@@ -13808,6 +14756,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "view=block&vartyp=any&blockurl=RAPID/T_ROB1&symtyp=var&recursive=true&dattyp=num&skipshared=TRUE&onlyused=TRUE&stack=0&posl=0&posc=0" "http://127.0.0.1/rw/rapid/symbols?action=search-symbols"
 ```
@@ -13832,6 +14781,7 @@ URL — /rw/rapid/symbols/{symbol URL}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 info=object-list-ext
 type={Statements | BackwardStmts | ErrorStmts | UndoStmts | TypeDecls | DataDecls | ParDecls | RtnDecls | Attribs}
@@ -13849,11 +14799,13 @@ Attribs = Attributes
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 ext-begin-line
 Begin line number of the object extension list
@@ -13889,6 +14841,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/symbols/RAPID/T_ROB1/mainmodule?info=object-list-ext&type=DataDecls
@@ -13921,6 +14874,7 @@ URL — /rw/rapid/symbol/properties/{symbolurl}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -13928,6 +14882,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 rap-sympropvar
 symburl
@@ -13966,6 +14921,7 @@ See
 Common return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics
 http://192.168.8.105/rw/rapid/symbol/properties/RAPID/T_ROB1/user/reg1
@@ -13991,6 +14947,7 @@ URL — /rw/rapid/symbol/data/{symbolurl}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 value=raw* Returns a non stringify json value.
 See
@@ -13998,11 +14955,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-data
 rapid data
@@ -14037,6 +14996,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics
 http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1
@@ -14056,6 +15016,7 @@ URL — /rw/rapid/symbols/{symbolurl}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -14065,11 +15026,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 sub-value
 sub value
@@ -14080,6 +15043,7 @@ selected value
 ```
 
 **Actions:**
+
 ```
 set
 Update RAPID data
@@ -14097,6 +15061,7 @@ HTTP Status codes
 Robot controller errors, see common_return_code
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics
 http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=show
@@ -14116,6 +15081,7 @@ URL — /rw/rapid/symbol/data/{symbolurl}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -14124,6 +15090,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 value = {value_num}
 Required
@@ -14138,6 +15105,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Update a num:
 curl --digest -u "Default User":robotics -d "value=10" "http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set"
@@ -14161,6 +15129,7 @@ URL — /rw/rapid/symbol/data
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=validate
 Required
@@ -14169,6 +15138,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 task
 Task name
@@ -14192,6 +15162,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "task=T_ROB1&value=[TRUE,[[0,0,0],[-1,0,0,0]],[1,[0,0,-1],[1,0,0,0],0,0,0]]&datatype=tooldata" "http://localhost/rw/rapid/symbol/data?action=validate"
 ```
@@ -14210,11 +15181,13 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None*
 ```
 
 **Data Params:**
+
 ```
 resources
 = {resource_value}
@@ -14224,6 +15197,7 @@ Get rapid symbol data actions
 ```
 
 **Resources:**
+
 ```
 rap-value-ev
 rapid value event resource
@@ -14238,6 +15212,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID persistent value. The resource url to subscribe on shall be on the form /rw/rapid/symbol/data/{symbolurl};value.
 It is possible to possible to subscribe with any subscription priority (i.e High, Medium, Low priority) for RAPID persistent variables value.
@@ -14260,6 +15235,7 @@ URL — /rw/rapid/symbol/data/{symbolurl}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setInitValue
 Required
@@ -14268,6 +15244,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 value={some_value} form data see
 Get rapid symbol data actions
@@ -14283,6 +15260,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Update a num:
 curl --digest -u "Default User":robotics -d value=10 "http://localhost/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=setInitValue"
@@ -14308,6 +15286,7 @@ URL — /rw/rapid/tasks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 Optional
@@ -14315,11 +15294,13 @@ Default value is 0. In case input is 1, the API continues execution even if any 
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-task-li
 RAPID tasks resource list item
@@ -14346,6 +15327,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks"
 ```
@@ -14364,6 +15346,7 @@ URL — /rw/rapid/tasks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -14378,6 +15361,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?action=show"
 ```
@@ -14396,6 +15380,7 @@ URL — /rw/rapid/tasks
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=start-spy
 Required
@@ -14404,6 +15389,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 log-file={file-path}
 Required
@@ -14418,6 +15404,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "log-file=log.txt" -X POST "http://localhost/rw/rapid/tasks?action=start-spy"
 ```
@@ -14436,6 +15423,7 @@ URL — /rw/rapid/tasks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=spy-status
 Required
@@ -14444,6 +15432,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 rap-spy-status
 status
@@ -14455,6 +15444,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=spy-status"
 ```
@@ -14473,6 +15463,7 @@ URL — /rw/rapid/tasks
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=stop-spy
 Required
@@ -14481,6 +15472,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -14494,6 +15486,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=stop-spy"
 ```
@@ -14512,12 +15505,14 @@ URL — /rw/rapid/tasks
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=activate | deactivate
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -14531,6 +15526,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks?action=activate"
 ```
@@ -14550,6 +15546,7 @@ URL — /rw/rapid/tasks
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=sync-state
 Required
@@ -14560,6 +15557,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -14571,6 +15569,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks?resource=sync-state&type=program-pointer"
 ```
@@ -14589,12 +15588,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -14603,6 +15604,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-rap-buildlog-ev
 task-name
@@ -14624,6 +15626,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID build log change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -14651,6 +15654,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 Optional
@@ -14658,11 +15662,13 @@ Default value is 0. In case input is 1, the API continues execution even if any 
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-task
 Rapid task resource
@@ -14709,6 +15715,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1
@@ -14729,6 +15736,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -14738,11 +15746,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Actions:**
+
 ```
 loadmod
 Load RAPID module
@@ -14769,6 +15779,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1?action=show
@@ -14789,6 +15800,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=loadmod
 Required
@@ -14797,6 +15809,7 @@ Get rapid task actions
 ```
 
 **Data Params:**
+
 ```
 modulepath = {module_path}
 Required
@@ -14814,6 +15827,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "modulepath=$HOME/mymod.mod" "http://localhost/rw/rapid/tasks/T_ROB1?action=loadmod"
 ```
@@ -14833,6 +15847,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=unloadmod
 Required
@@ -14841,6 +15856,7 @@ Get rapid task actions
 ```
 
 **Data Params:**
+
 ```
 module={modulename}
 ```
@@ -14857,6 +15873,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename" "http://localhost/rw/rapid/tasks/T_ROB1?action=unloadmod"
 ```
@@ -14876,12 +15893,14 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=abortexeclevel
 Required
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
@@ -14895,6 +15914,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=abortexeclevel"
 ```
@@ -14914,6 +15934,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=activate | deactivate
 Required
@@ -14930,6 +15951,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=activate"
 ```
@@ -14948,6 +15970,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=activation-record
 stackframe={stack frame} The stack frame is a number starting with 1 for the current activation record, i.e., the activation record containing the user program pointer. The stack frame increases with one for each previous activation record until the entry point is reached.
@@ -14956,11 +15979,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-stackframe
 Rapid-Symbol resource
@@ -14987,6 +16012,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=activation-record&stackframe=1
@@ -15008,17 +16034,20 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=task-struc-change-count See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 task-struc-change-count
 Structural Change Count resource
@@ -15035,6 +16064,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-struc-change-count
@@ -15054,6 +16084,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=pref-data-types
 Required
@@ -15066,11 +16097,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 task-pref-data-types
 Get Preferable Data Types resources
@@ -15087,6 +16120,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=pref-data-types&instruction=AliasIO&parameter=FromSignal
@@ -15106,6 +16140,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=task-sync-state
 Required
@@ -15114,11 +16149,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-sync-state
 Rapid-sync-State resource
@@ -15135,6 +16172,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-sync-state&type=program-pointer
@@ -15154,6 +16192,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=task-sync-state
 Required
@@ -15162,6 +16201,7 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -15173,6 +16213,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1?resource=task-sync-state&type=motion-pointer
@@ -15192,6 +16233,7 @@ URL — /rw/rapid/tasks/{task}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=build
 Required
@@ -15200,6 +16242,7 @@ Get rapid task actions
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -15213,6 +16256,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1?action=build"
 ```
@@ -15232,6 +16276,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource={pallet}&number={pallet_no}
 Required
@@ -15241,11 +16286,13 @@ pallet_no. 1 - Common, pallet_no. 2 - Prog.Flow, pallet_no. 3 - Various, pallet_
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-pallet
 RAPID Pallet
@@ -15268,6 +16315,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost:7777/rw/rapid/tasks/T_ROB1?resource=pallet&number=9&start=1&limit=3
@@ -15287,6 +16335,7 @@ URL — /rw/rapid/tasks/{task_name}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource={pallet-head}
 Required
@@ -15295,11 +16344,13 @@ optional
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-pallet-head
 RAPID Pallet head
@@ -15316,6 +16367,7 @@ HTTP Status codes
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost:7777/rw/rapid/tasks/T_ROB1?resource=pallet-head&start=1&limit=5
@@ -15335,12 +16387,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -15349,6 +16403,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-task-ev
 change-count
@@ -15374,6 +16429,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID task change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15395,12 +16451,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -15409,6 +16467,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-syncstate-ev
 sync-state
@@ -15426,6 +16485,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID task sync state change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15447,12 +16507,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -15461,6 +16523,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-execstate-ev
 pgmtaskexec-state
@@ -15478,6 +16541,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID task sync state change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -15505,16 +16569,19 @@ URL — /rw/rapid/tasks/{task}/motion
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 robtarget
 The target position from the home position.
@@ -15533,6 +16600,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion"
 ```
@@ -15551,6 +16619,7 @@ URL — /rw/rapid/tasks/{task}/motion
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=robtarget
 Required
@@ -15561,11 +16630,13 @@ Optional
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 robtarget
 The target position from the home position.
@@ -15582,6 +16653,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=robtarget&tool=tool0&wobj=wobj1"
 ```
@@ -15600,17 +16672,20 @@ URL — /rw/rapid/tasks/{task}/motion
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=jointtarget
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 jointtarget
 The target position of the joint.
@@ -15625,6 +16700,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=jointtarget"
 ```
@@ -15643,17 +16719,20 @@ URL — /rw/rapid/tasks/{task}/motion
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=mechunit
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rapid-mechunit
 The Unit in which robtarget, jointtarget and extjoint applies.
@@ -15672,6 +16751,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=mechunit"
 ```
@@ -15690,17 +16770,20 @@ URL — /rw/rapid/tasks/{task}/motion
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=extjointstate
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rapid-extjointstate
 If any ext mechnical unit is attached than provide the extjoints.
@@ -15714,6 +16797,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion?resource=extjointstate"
 ```
@@ -15738,11 +16822,13 @@ URL — /rw/rapid/tasks/{task}/motion/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=Displacement
 Required
@@ -15761,6 +16847,7 @@ point10=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}, {x2}, {y2}, {z2}, {q2_1}, {q2_2}
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -15781,6 +16868,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=Displacement&type=POSE2&point1=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]&point2=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]&point3=[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion/calib"
 ```
@@ -15797,11 +16885,13 @@ URL — /rw/rapid/tasks/{task}/motion/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=TCP
 Required
@@ -15822,6 +16912,7 @@ point10=[{x}, {y}, {z}, {q1}, {q2}, {q3}, {q4}]
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -15842,6 +16933,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=TCP&type=POSE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0]" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/motion/calib"
 ```
@@ -15864,6 +16956,7 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 Optional
@@ -15873,11 +16966,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-program
 Rapid program resource
@@ -15897,6 +16992,7 @@ HTTP Status codes
 **Error:** BAD_REQUEST(400)
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program
@@ -15917,6 +17013,7 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -15926,11 +17023,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 loadprog
 Load RAPID program into a task
@@ -15957,6 +17056,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=show
@@ -15977,6 +17077,7 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=loadprog
 Required
@@ -15985,6 +17086,7 @@ Get rapid program actions
 ```
 
 **Data Params:**
+
 ```
 progpath={program path}
 Required
@@ -16001,6 +17103,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "progpath=$HOME/myprog.pgf" "http://localhost:7777/rw/rapid/tasks/T_ROB2/program?action=loadprog"
 ```
@@ -16019,12 +17122,14 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=unloadprog
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -16040,6 +17145,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=unloadprog"
 ```
@@ -16058,12 +17164,14 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=save
 Required
 ```
 
 **Data Params:**
+
 ```
 path={program_path}
 Required
@@ -16080,6 +17188,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "path=$HOME/myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=save"
 ```
@@ -16098,12 +17207,14 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=setname
 Required
 ```
 
 **Data Params:**
+
 ```
 name={program_name}
 Required
@@ -16120,6 +17231,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=myprog" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=setname"
 ```
@@ -16138,6 +17250,7 @@ URL — /rw/rapid/tasks/{task}/program
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-entrypoint
 Required
@@ -16146,6 +17259,7 @@ Get rapid task actions
 ```
 
 **Data Params:**
+
 ```
 routine= {routine-name}
 Required
@@ -16160,6 +17274,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "routine=myroutine" -X POST "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program?action=set-entrypoint"
 ```
@@ -16185,6 +17300,7 @@ URL — /rw/rapid/tasks/{task}/program/builderror
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 limit={limit_value}
 Optional
@@ -16195,11 +17311,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 start
 Reference to where the retrieval of build errors should start. Set to 1 to start from the beginning. The value returned can be used in the next call.
@@ -16229,6 +17347,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/builderror?start=1&limit=2
@@ -16257,6 +17376,7 @@ URL — /rw/rapid/tasks/{task}/program/breakpoint
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -16266,6 +17386,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -16281,6 +17402,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1/program/breakpoint?action=show
@@ -16301,12 +17423,14 @@ URL — /rw/rapid/tasks/{task}/program/breakpoint
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
 ```
 
 **Data Params:**
+
 ```
 module={module-name}
 Required
@@ -16325,6 +17449,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST -d "module=MainModule&row=15&column=3" "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?action=set"
 ```
@@ -16344,6 +17469,7 @@ URL — /rw/rapid/tasks/{task}/program/breakpoint
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 start={start_value}
 limit={limit_value}, See
@@ -16351,11 +17477,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-program-breakpoint
 module-name
@@ -16381,6 +17509,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/tasks/T_ROB1/program/breakpoint?start=1&limit=2"
 ```
@@ -16405,16 +17534,19 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None*
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 pcp-info
 Rapid task pcp resource
@@ -16441,6 +17573,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1/pcp
@@ -16460,6 +17593,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -16469,11 +17603,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Actions:**
+
 ```
 setPPtocursor
 Set the ProgramPointer(PP) to cursor
@@ -16504,6 +17640,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=show
@@ -16524,6 +17661,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-pp-cursor
 Required
@@ -16532,6 +17670,7 @@ Get RAPID task pcp actions
 ```
 
 **Data Params:**
+
 ```
 module= {module name}
 Required
@@ -16552,11 +17691,12 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&line=6&column=14&routine=routinename" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-cursor"
 ```
 
-**Notes:** Line number and Column number should be in given routine range.**
+**Notes:** Line number and Column number should be in given routine range.\*\*
 Not supported in bootserver mode
 Rapid Mastership Required
 
@@ -16572,6 +17712,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-pp-routine
 Required
@@ -16580,6 +17721,7 @@ Get RAPID task pcp actions
 ```
 
 **Data Params:**
+
 ```
 module= {module name}
 Required
@@ -16597,6 +17739,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename&userlevel=true" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-routine"
 ```
@@ -16616,6 +17759,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-pp-routine-from-url
 Required
@@ -16624,6 +17768,7 @@ Get RAPID task pcp actions
 ```
 
 **Data Params:**
+
 ```
 module= {module name}
 Required
@@ -16640,6 +17785,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "module=modulename&routine=routinename" -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-routine-from-url"
 ```
@@ -16659,6 +17805,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-pp-prev-inst
 Required
@@ -16667,6 +17814,7 @@ Get RAPID task pcp actions
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
@@ -16680,6 +17828,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-prev-inst"
 ```
@@ -16699,6 +17848,7 @@ URL — /rw/rapid/tasks/{task}/pcp
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-pp-next-inst
 Required
@@ -16707,6 +17857,7 @@ Get RAPID task pcp actions
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
@@ -16720,6 +17871,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/rapid/tasks/T_ROB1/pcp?action=set-pp-next-inst"
 ```
@@ -16739,12 +17891,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -16753,6 +17907,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-pcp-ev
 module-nam
@@ -16780,6 +17935,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID program pointer
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -16801,12 +17957,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -16815,6 +17973,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-pcp-ev
 module-nam
@@ -16842,6 +18001,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID motion pointer
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -16869,6 +18029,7 @@ URL — /rw/rapid/tasks/{task}/serviceroutine
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 start={PageNumber}
 Optional
@@ -16881,11 +18042,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-task-routine
 Rapid task serviceroutine
@@ -16903,6 +18066,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics"
 http://localhost/rw/rapid/tasks/T_ROB1/serviceroutine
@@ -16928,11 +18092,13 @@ URL — /rw/rapid/tasks/{task}/execution
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -16946,6 +18112,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/tasks/T_ROB1/execution"
 ```
@@ -16970,17 +18137,20 @@ URL — /rw/rapid/uiinstr
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-active-li
 Active UI instruction resource list
@@ -16995,6 +18165,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr"
 ```
@@ -17013,6 +18184,7 @@ URL — /rw/rapid/uiinstr
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -17022,11 +18194,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 sub-uievent
 resources
@@ -17040,6 +18214,7 @@ selected UI instruction.
 ```
 
 **Actions:**
+
 ```
 subscribe
 Subscribe on UI instruction
@@ -17054,6 +18229,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr?action=show"
 ```
@@ -17072,17 +18248,20 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources=1&1=/rw/rapid/uiinstr;uievent&1-p=0
 ```
 
 **Resources:**
+
 ```
 rap-ui-ev
 UI instruction event
@@ -17107,6 +18286,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on UI Events
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -17134,17 +18314,20 @@ URL — /rw/rapid/uiinstr/active
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-uiactive-li
 The pending UI instruction resource
@@ -17172,6 +18355,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active"
 ```
@@ -17190,6 +18374,7 @@ URL — /rw/rapid/uiinstr/active
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -17199,11 +18384,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 set
 value
@@ -17211,6 +18398,7 @@ value of UI param
 ```
 
 **Actions:**
+
 ```
 set
 see
@@ -17227,6 +18415,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/uiinstr/active?action=show"
 ```
@@ -17245,6 +18434,7 @@ URL — /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -17255,6 +18445,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 value={value}
 For example, TPFK3 can accept a value like
@@ -17272,6 +18463,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "value=0" -X POST "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%$104/TPFK3?action=set"
 curl --digest -u "Default User":robotics -d "value=TRUE" X POST "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%$104/TPCompleted?action=set"
@@ -17294,17 +18486,20 @@ URL — /rw/rapid/uiinstr/active/param/{stackurl}/{uiparam}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-uiparam
 UI param
@@ -17320,6 +18515,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/param/RAPID/T_ROB1/%25%2499/Result"
 ```
@@ -17338,17 +18534,20 @@ URL — /rw/rapid/uiinstr/active/params/{stackurl}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-uiparam-li
 UI instruction parameter
@@ -17366,6 +18565,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://127.0.0.1/rw/rapid/uiinstr/active/params/RAPID/T_ROB1/%25%2499"
 ```
@@ -17390,16 +18590,19 @@ URL — /rw/rapid/taskselection
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 rap-taskselection
 Rapid tasks user modify flag.
@@ -17414,6 +18617,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/rapid/taskselection"
 ```
@@ -17432,12 +18636,14 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 See
 Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -17446,6 +18652,7 @@ resources
 ```
 
 **Resources:**
+
 ```
 rap-taskpanel-ev
 change-count
@@ -17463,6 +18670,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID build log change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -17490,6 +18698,7 @@ URL — /rw/rapid/aliasio
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 start={start position}
 Optional
@@ -17498,11 +18707,13 @@ Optional
 ```
 
 **Data Params:**
+
 ```
 None*
 ```
 
 **Resources:**
+
 ```
 rap-alias-io
 Rapid AliasIO resource
@@ -17522,6 +18733,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://127.0.0.1/rw/rapid/aliasio?start=0
@@ -17548,6 +18760,7 @@ URL — /rw/system
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -17555,11 +18768,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 sys-system-li
 below system information tags are valid only for RC, not VC
@@ -17615,6 +18830,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system"
 ```
@@ -17633,16 +18849,19 @@ URL — /rw/system/robottype
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 robottype
 type of robot.
@@ -17656,6 +18875,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/robottype"
 ```
@@ -17682,6 +18902,7 @@ URL — /rw/system/options
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -17689,11 +18910,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 sys-options-li
 option
@@ -17709,6 +18932,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/options"
 ```
@@ -17733,6 +18957,7 @@ URL — /rw/system/energy
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -17742,11 +18967,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 subscribe
 subscribe to system energy information.
@@ -17765,6 +18992,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=show"
 ```
@@ -17783,6 +19011,7 @@ URL — /rw/system/energy
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource = change-count
 Required
@@ -17791,11 +19020,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 sys-energy-changecount-li
 change-count
@@ -17811,6 +19042,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?resource=change-count"
 ```
@@ -17829,6 +19061,7 @@ URL — /rw/system/energy
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=reset
 Required
@@ -17837,6 +19070,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -17852,6 +19086,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy?action=reset"
 ```
@@ -17870,6 +19105,7 @@ URL — /rw/system/energy
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -17877,11 +19113,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 sys-energy-state-li
 state
@@ -17919,6 +19157,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/energy"
 ```
@@ -17937,6 +19176,7 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -17944,6 +19184,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 = An identifier
@@ -17965,6 +19206,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
 curl --digest -u "Default User":robotics -d "resources=1&1=/rw/system/energy&1-p=0" -X POST "http://localhost/subscription"
@@ -17991,6 +19233,7 @@ URL — /rw/system/license
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -17998,11 +19241,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 license
 System robotware license.
@@ -18017,6 +19262,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/system/license"
 ```
@@ -18041,17 +19287,20 @@ URL — /rw/system/products
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 name={product-name}
 optional
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 title
 RobotWare system product title
@@ -18069,6 +19318,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 `curl –digest -u "Default User":robotics " "
 http://localhost:7777/rw/system/products/
@@ -18085,8 +19335,7 @@ http://localhost:7777/rw/system/products/
 
 Example — Update a RAPID variable without required master ship.
 
-**URL:** `/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set.`  
----
+## **URL:** `/rw/rapid/symbol/data/RAPID/T_ROB1/user/reg1?action=set.`
 
 ## Get a list of RobotWare return codes
 
@@ -18098,6 +19347,7 @@ URL — /rw/retcode
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 code={code}
 optional
@@ -18106,11 +19356,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 err-descr-li
 title
@@ -18130,6 +19382,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://192.168.8.105/rw/retcode"
 ```
@@ -18155,6 +19408,7 @@ URL — /rw/devices
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 Lang={lang}
 Optional
@@ -18163,11 +19417,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 dev-id-li
 name
@@ -18204,6 +19460,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/devices"
 curl --digest -u "Default User":robotics "http://localhost/rw/devices/hw_devices/CONTROLLER/COMPUTER_SYSTEM/SERIAL_PORTS/COM1_PORT"
@@ -18229,6 +19486,7 @@ URL — /rw/motionsystem
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 Continues the execution even if any error occurs and default value is 0
@@ -18238,11 +19496,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 motionsystem = domain name
 change-count = counter to keep count for every change in the motion system(domain)
@@ -18263,6 +19523,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem"
 ```
@@ -18279,6 +19540,7 @@ URL — /rw/motionsystem
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -18287,6 +19549,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -18299,6 +19562,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem?action=show"
 ```
@@ -18315,6 +19579,7 @@ URL — /rw/motionsystem
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-mechunit
 Required
@@ -18323,6 +19588,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mechunit-name={mechunit}
 Required
@@ -18337,6 +19603,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1" -X POST "http://localhost/rw/motionsystem?action=set-mechunit"
 ```
@@ -18353,6 +19620,7 @@ URL — /rw/motionsystem
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=jog
 Required
@@ -18361,6 +19629,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 axis1={axis1}
 Required
@@ -18387,6 +19656,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "axis1=900&axis2=0&axis3=0&axis4=0&axis5=0&axis6=0&ccount=0&inc-mode=Large" -X POST "http://localhost/rw/motionsystem?action=jog"
 ```
@@ -18403,6 +19673,7 @@ URL — /rw/motionsystem
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=positiontarget
 Required
@@ -18411,6 +19682,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 pos-x={value of x}
 Required
@@ -18457,6 +19729,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "pos-x=634.609&pos-y=50.7298&pos-z=432.9419&orient-q1=0.4932235&orient-q2=-0.03467758&orient-q3=0.8689883&orient-q4=0.01968242&config-j1=0&config-j4=0&config-j6=0&config-jx=0&extjoint-1=0&extjoint-2=8.999999&extjoint-3=8.999999&extjoint-4=8.999999&extjoint-5=8.999999&extjoint-6=8.999999" -X POST "http://localhost/rw/motionsystem?action=positiontarget"
 ```
@@ -18473,6 +19746,7 @@ URL — /rw/motionsystem/checkchangecount
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 changecount={changecount}
 Required
@@ -18481,11 +19755,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 changestate
 changecount changed or not, {TRUE|FALSE}
@@ -18499,6 +19775,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/checkchangecount?changecount=0"
 ```
@@ -18515,6 +19792,7 @@ URL — /subscription
 **Method:** `POST`
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -18536,6 +19814,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource**
 curl --digest -u "Default User":robotics -X POST -d "resources=1&1=/rw/motionsystem/errorstate;erroreventchange&1-p=0" "http://localhost/subscription"
@@ -18562,6 +19841,7 @@ URL — /rw/motionsystem/errorstate
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -18569,6 +19849,7 @@ Common URL parameters
 ```
 
 **Resources:**
+
 ```
 ms-errorstate
 err-state
@@ -18597,6 +19878,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/errorstate"
 ```
@@ -18619,6 +19901,7 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 mechunit={mechunit name}
 Required
@@ -18627,6 +19910,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -18640,6 +19924,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?mechunit=ROB_1"
 ```
@@ -18656,6 +19941,7 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -18664,6 +19950,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -18676,6 +19963,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=show"
 ```
@@ -18692,6 +19980,7 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-mode
 Required
@@ -18700,6 +19989,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mechunit-name={mechanical unit name}
 Required
@@ -18716,6 +20006,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&mode=True" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-mode"
 ```
@@ -18732,6 +20023,7 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-level
 Required
@@ -18740,6 +20032,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mechunit-name= {mechunit}
 Required
@@ -18756,6 +20049,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit-name=ROB_1&sensitivity=30" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-level"
 ```
@@ -18772,12 +20066,14 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=collision-prediction-mode
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -18790,6 +20086,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/motionsupervision?action=collision-prediction-mode"
 ```
@@ -18806,12 +20103,14 @@ URL — /rw/motionsystem/motionsupervision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-colpred-mode
 Required
 ```
 
 **Data Params:**
+
 ```
 mode={true | false}
 Required
@@ -18824,6 +20123,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mode=true" - POST "http://localhost/rw/motionsystem/motionsupervision?action=set-colpred-mode"
 ```
@@ -18846,6 +20146,7 @@ URL — /rw/motionsystem/pathsupervision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 mechunit={mechunit}
 Required
@@ -18854,11 +20155,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 mode
 Path supervision mode
@@ -18875,6 +20178,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?mechunit=ROB_1"
 ```
@@ -18891,6 +20195,7 @@ URL — /rw/motionsystem/pathsupervision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -18899,11 +20204,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 mode
 Path supervision mode
@@ -18920,6 +20227,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/pathsupervision?action=show"
 ```
@@ -18936,6 +20244,7 @@ URL — /rw/motionsystem/pathsupervision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-mode
 Required
@@ -18944,6 +20253,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mechunit={mechunit}
 Required
@@ -18960,6 +20270,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit=ROB_1&mode=ON" -X POST "http://localhost/rw/motionsystem/pathsupervision?action=set-mode"
 ```
@@ -18976,6 +20287,7 @@ URL — /rw/motionsystem/pathsupervision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-level
 Required
@@ -18984,6 +20296,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mechunit={mechunit}
 Required
@@ -19000,6 +20313,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mechunit=ROB_1&level=90" -X POST "http://localhost/rw/motionsystem/pathsupervision?action=set-level"
 ```
@@ -19022,6 +20336,7 @@ URL — /rw/motionsystem/nonmotionexecution
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -19029,11 +20344,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 mode
 {ON|OFF} Nonmotion Execution mode
@@ -19048,6 +20365,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution"
 ```
@@ -19064,6 +20382,7 @@ URL — /rw/motionsystem/nonmotionexecution
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -19072,11 +20391,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 mode
 NonMotion Execution mode
@@ -19090,6 +20411,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/nonmotionexecution?action=show"
 ```
@@ -19106,6 +20428,7 @@ URL — /rw/motionsystem/nonmotionexecution
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-mode
 Required
@@ -19114,6 +20437,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 mode={ON|OFF}
 Required
@@ -19128,6 +20452,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "mode=ON" -X POST "http://localhost/rw/motionsystem/nonmotionexecution?action=set-mode"
 ```
@@ -19150,6 +20475,7 @@ URL — /rw/motionsystem/mechunits
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -19157,11 +20483,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 Gives the information regarding the different mechanical units and the mechanical unit parameters.
 title = name of the mechanical unit
@@ -19179,6 +20507,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits"
 ```
@@ -19201,6 +20530,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 continue-on-err={1|0}
 resource={static | dynamic | tool | wobj | payload | total-payload | status | mode | jog-mode | type | task | coord-system | axes | axes-total | is-integrated | has-integrated}
@@ -19213,11 +20543,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 resource=static
 It gives mechanical unit static(task, type, axes, axes-total, is-integrated, has-integrated) properties info
@@ -19258,6 +20590,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Sample call1:
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?continue-on-err=1"
@@ -19279,6 +20612,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 See
@@ -19286,6 +20620,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -19299,6 +20634,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?action=show"
 ```
@@ -19315,6 +20651,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -19324,6 +20661,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 tool={tool_name}
 wobj={wobj_name}
@@ -19344,6 +20682,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "tool=tool1&wobj=wobj2&payload=load2" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=set&continue-on-err=1"
 ```
@@ -19360,6 +20699,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-lead-through
 Required
@@ -19368,6 +20708,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 status={active|inactive}
 Required
@@ -19382,6 +20723,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "status=active" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_R?action=set-lead-through"
 ```
@@ -19398,6 +20740,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=lead-through
 See
@@ -19405,11 +20748,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 status = {active | Inactive}, active if complianceleadthrough functionality is opted for.
 ```
@@ -19423,6 +20768,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1?resource=lead-through"
 ```
@@ -19439,6 +20785,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=fine-calibrate
 Required
@@ -19447,6 +20794,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 axis={axis-value}
 Required
@@ -19461,6 +20809,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=fine-calibrate"
 ```
@@ -19477,6 +20826,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=update-revcounter
 Required
@@ -19485,6 +20835,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 axis={axis-value}
 Required
@@ -19499,6 +20850,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "axis=3" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=update-revcounter"
 ```
@@ -19515,6 +20867,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/pjoints
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -19522,6 +20875,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -19535,6 +20889,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/pjoints"
 ```
@@ -19551,6 +20906,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/cartesian
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 tool={tool_name} By default, active tool configured for the mechunit will be taken.
 wobj={wobj_name} By default, active wobj configured for the mechunit will be taken.
@@ -19562,6 +20918,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -19574,6 +20931,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/cartesian?tool=tool0&wobj=wobj1&coordinate=Base&elog-at-err=1"
 ```
@@ -19590,6 +20948,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=mechunit-position
 Required
@@ -19598,6 +20957,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 rob_joint=[rob_joint1-value,rob_joint1-value,rob_joint3-value,rob_joint4-value,rob_joint5-value,rob_joint6-value]
 Required
@@ -19614,6 +20974,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "rob_joint=[18.23,8.45,-13.23,-5.25,13.63,-72.31]&ext_joint=[0,0,0,0,0,0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1?action=mechunit-position"
 ```
@@ -19630,6 +20991,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/robtarget
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 tool={tool_name} By default, active tool configured for the mechunit will be taken.
 wobj={wobj_name} By default, active wobj configured for the mechunit will be taken.
@@ -19640,6 +21002,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -19652,6 +21015,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/robtarget?tool=tool0&wobj=wobj0&coordinate=Base"
 ```
@@ -19668,6 +21032,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/jointtarget
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 ignore
 =1 if present will get joint target always.
@@ -19676,6 +21041,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -19688,6 +21054,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/jointtarget"
 ```
@@ -19704,6 +21071,7 @@ URL — /subscription
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 See
@@ -19711,6 +21079,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 resources
 =An identifier
@@ -19722,6 +21091,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 motionsystem-ev
 change-count
@@ -19739,6 +21109,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 Subscribe on RAPID task change
 only low priority subscription(-p=0) and medium priority subscription(-p=1) are allowed on this resource
@@ -19760,6 +21131,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=CalcJointsFromPose
 See
@@ -19767,6 +21139,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 curr_position = [x,y,z]
 Required
@@ -19791,6 +21164,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 robotjoint
 Robot joints
@@ -19807,6 +21181,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.184474304,-0.599885881,-0.00642657699,-0.778501570]&tool_frame_orientation=[1.0,0,0,0]&old_rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&old_ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,0,0]&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=CalcJointsFromPose"
 ```
@@ -19823,6 +21198,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=CalcPoseFromJoints
 See
@@ -19830,6 +21206,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 tool_frame_position = [x, y, z]
 Required
@@ -19846,6 +21223,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 position-(x-z)
 Current Position
@@ -19868,6 +21246,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "tool_frame_position=[0,0,0]&tool_frame_orientation=[1.0,0,0,0]&rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=CalcPoseFromJoints"
 ```
@@ -19884,6 +21263,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=AllJointSolutions
 See
@@ -19891,6 +21271,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 curr_position = [x,y,z]
 Required
@@ -19909,6 +21290,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 robotjoint
 Robot joints
@@ -19927,6 +21309,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547102,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.675245225,-0.425338209,-0.423074305,-0.429114610]&tool_frame_orientation=[1.0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,1,0]" "http://localhost/rw/motionsystem/mechunits/ROB_R?action=AllJointSolutions"
 ```
@@ -19943,6 +21326,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=JointsFromCartesian
 See
@@ -19950,6 +21334,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 curr_position = [x,y,z]
 Required
@@ -19974,6 +21359,7 @@ Required
 ```
 
 **Resources:**
+
 ```
 robotjoint
 Robot joints
@@ -19990,6 +21376,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "curr_position=[0.511087716,-0.0101547204,0.665710211]&curr_ext_joints=[0,0,0,0,0,0]&tool_frame_position=[0,0,0]&curr_orientation=[0.184474304,-0.599885881,-0.00642657699,-0.778501570]&tool_frame_orientation=[1.0,0,0,0]&old_rob_joints=[-0.0554263890,0.0185516607,0.151851505,2.56702399,0.540392220,0.813871026]&old_ext_joints=[0,0,0,0,0,0]&robot_fixed_object=FALSE&robot_configuration=[-1,1,0,0]&elog_at_error=FALSE" "http://localhost/rw/motionsystem/mechunits/ROB_1?action=JointsFromCartesian"
 ```
@@ -20006,6 +21393,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calibrationinfo
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -20013,11 +21401,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 usecalibrationwindowtype
 calibration window count
@@ -20045,6 +21435,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/calibrationinfo"
 ```
@@ -20067,11 +21458,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=BaseFrame
 Required
@@ -20093,6 +21486,7 @@ At least 3 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20115,6 +21509,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=BaseFrame&type=ROBOT&reference=[0,0,0]&point1=[349.9289,7.176809,509.6597,0.5466173,-0.008585534,0.8373197,0.005604791,0,0,0,0]&point2=[285.9633,106.211,689.8639,0.7294637,-0.1187442,0.6607552,0.1310918,0,0,0,0]&point3=[269.1732,143.5324,689.8639,0.7190274,-0.1627988,0.6513019,0.1797274,0,0,0,0]&point4=[270.8943,144.4501,659.9161,0.6966563,-0.1687667,0.6751775,0.1741356,0,0,0,0]&point5=[304.7093,37.4411,659.9161,0.7167487,-0.04251764,0.6946503,0.04387021,0,0,0,0]&point6=[229.2431,28.16821,705.6543,0.7913748,-0.0372306,0.6082709,0.04843788,0,0,0,0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20131,11 +21526,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=BaseFrameMoving
 Required
@@ -20155,6 +21552,7 @@ At least 3 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20175,6 +21573,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=BaseFrameMoving&type=ROBOT2&point1=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]&point2=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]&point3=[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20191,11 +21590,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=ExternalRobotNomBaseNew
 Required
@@ -20215,6 +21616,7 @@ At least 3 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20237,6 +21639,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=ExternalRobotNomBaseNew&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20253,11 +21656,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=RobotAxisRot
 Required
@@ -20281,6 +21686,7 @@ At least 4 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20303,6 +21709,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=RobotAxisRot&type=SINGLE&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20319,11 +21726,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=SingleUserRotNew
 Required
@@ -20345,6 +21754,7 @@ At least 4 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20366,6 +21776,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleUserRotNew&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20382,11 +21793,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=RotExtCtrlZdef
 Required
@@ -20410,6 +21823,7 @@ At least 4 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20432,6 +21846,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=RotExtCtrlZdef&type=SINGLE&tolerance=1&pose=[0, 0, 0, 0, 1, 0, 0]&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20448,11 +21863,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=SingleUserLin
 Required
@@ -20474,6 +21891,7 @@ At least 3 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20495,6 +21913,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleUserLin&type=SINGLE&tolerance=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20511,11 +21930,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=SingleTrack
 Required
@@ -20535,6 +21956,7 @@ At least 3 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20556,6 +21978,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=SingleTrack&type=SINGLE&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20572,11 +21995,13 @@ URL — /rw/motionsystem/mechunits/{mechunit}/calib
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 method=RobotAxisRot2
 Required
@@ -20600,6 +22025,7 @@ At least 4 points are required.
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents base frame position
@@ -20622,6 +22048,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "method=RobotAxisRot2&type=SINGLE2&tolerance=0&axis=0&point1=[0, 0, 0, 1, 0, 0, 0, 0]&point2=[0, 0, 0, 1, 0, 0, 0, 0]&point3=[0, 0, 0, 1, 0, 0, 0, 0]&point4=[0, 0, 0, 1, 0, 0, 0, 0]" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/calib"
 ```
@@ -20644,6 +22071,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -20651,6 +22079,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -20663,6 +22092,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe"
 ```
@@ -20679,6 +22109,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -20687,6 +22118,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -20700,6 +22132,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=show"
 ```
@@ -20716,6 +22149,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/baseframe
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -20724,6 +22158,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 x={x-cordinate}
 y={y-cordinate}
@@ -20743,6 +22178,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "x=1&y=2&z=3&q1=0.1825742&q2=0.3651484&q3=0.5477226&q4=0.7302967" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/baseframe?action=set"
 ```
@@ -20765,16 +22201,19 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 This API provides the number of joints of the mechanical unit under consideration.
 title = axes, provides the number of joints on the mechanical unit.
@@ -20789,6 +22228,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes"
 ```
@@ -20805,16 +22245,19 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 This API provides the details of the specific axis of the mechanical unit.
 axisstatus
@@ -20842,6 +22285,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1"
 ```
@@ -20858,6 +22302,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -20866,11 +22311,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 x, y, z = 3D co-ordinates of the position of the mechanical unit.
 q1, q2, q3, q4 = angles of rotation
@@ -20885,6 +22332,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=show
@@ -20903,6 +22351,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=axis-pose
 See
@@ -20910,11 +22359,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 x, y, z
 Represents axis pose position
@@ -20930,6 +22381,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?resource=axis-pose"
 ```
@@ -20946,6 +22398,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-axispose
 Required
@@ -20954,6 +22407,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 x={x_position}
 y={y_position}
@@ -20972,6 +22426,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "x=0&y=0&z=0&q1=0&q2=1&q3=0&q4=0" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=set-axispose"
 ```
@@ -20988,6 +22443,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=update-commutate
 Required
@@ -20996,6 +22452,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -21009,6 +22466,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics" "
 http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=update-commutate
@@ -21027,6 +22485,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/axes/{axis_num}
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=update-syncrevcounter
 Required
@@ -21035,6 +22494,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 syncType=1
 Required
@@ -21049,6 +22509,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "syncType=1" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/axes/1?action=update-syncrevcounter"
 ```
@@ -21071,6 +22532,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set
 Required
@@ -21079,6 +22541,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 type=robot-to-controller | controller-to-robot
 ```
@@ -21087,6 +22550,7 @@ type=robot-to-controller | controller-to-robot
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "type=robot-to-controller" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=set"
 ```
@@ -21103,6 +22567,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=clear
 Required
@@ -21111,6 +22576,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 type={robot|controller}
 ```
@@ -21119,6 +22585,7 @@ type={robot|controller}
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "type=robot" -X POST "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=clear"
 ```
@@ -21135,6 +22602,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -21142,11 +22610,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 cabinet_sis_data_status
 = {0|1|2|3}, where 0 is SMB_VALID, 1 is SMB_VALID_NOT_EQUAL, 2 is SMB_NOT_VALID and 3 is SMB_NOT_USED
@@ -21171,6 +22641,7 @@ see
 HTTP Status codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata"
 ```
@@ -21187,6 +22658,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/smbdata
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -21195,6 +22667,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -21207,6 +22680,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/smbdata?action=show"
 ```
@@ -21229,6 +22703,7 @@ URL — /rw/motionsystem/mechunits/{mechunit}/motorcalib
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -21236,6 +22711,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -21248,6 +22724,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/motionsystem/mechunits/ROB_1/motorcalib"
 ```
@@ -21270,11 +22747,13 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -21288,6 +22767,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision"
 ```
@@ -21306,6 +22786,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=num-of-cameras
 Required
@@ -21314,11 +22795,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 number-of-cameras:
 Number of cameras present in Integrated Vision Device
@@ -21333,6 +22816,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=num-of-cameras"
 ```
@@ -21351,6 +22835,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=camera-validity
 Required
@@ -21361,11 +22846,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 is-valid-camera-name:
 Given camera Name is valid or not
@@ -21380,6 +22867,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-validity&name=camera1"
 ```
@@ -21398,6 +22886,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 action=show
 Required
@@ -21406,11 +22895,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 restart:
 Restart the Camera.
@@ -21433,6 +22924,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?action=show"
 ```
@@ -21451,6 +22943,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=camera-job
 Required
@@ -21459,11 +22952,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 jobname:
 name of the job on the camera
@@ -21478,6 +22973,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-job&name=mycamera"
 ```
@@ -21496,12 +22992,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=restart
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21517,6 +23015,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=restart"
 ```
@@ -21535,12 +23034,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=flash-led
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21556,6 +23057,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=flash-led"
 ```
@@ -21574,12 +23076,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-state
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21597,6 +23101,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&state=run" -X POST "http://localhost/rw/vision?action=set-state"
 ```
@@ -21615,12 +23120,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=refresh
 Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -21634,6 +23141,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X POST "http://localhost/rw/vision?action=refresh"
 ```
@@ -21652,12 +23160,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-hostname
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21675,6 +23185,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&host=hostname" -X POST "http://localhost/rw/vision?action=set-hostname"
 ```
@@ -21694,12 +23205,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-dhcp
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21714,6 +23227,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera" -X POST "http://localhost/rw/vision?action=set-dhcp"
 ```
@@ -21733,12 +23247,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-dns-settings
 Required
 ```
 
 **Data Params:**
+
 ```
 name={camera-name}
 Required
@@ -21757,6 +23273,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "name=mycamera&dns-server=192.168.125.76&dns-suffix=yourdomain.com" -X POST "http://localhost/rw/vision?action=set-dns-settings"
 ```
@@ -21776,6 +23293,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=camera-status
 Required
@@ -21784,11 +23302,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 camera-status:
 status of the camera {Disconnected | Program | Running | Unconfigured}
@@ -21803,6 +23323,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-status&name=mycamera"
 ```
@@ -21821,6 +23342,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=camera-info-index
 Required
@@ -21831,11 +23353,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 camera-info-using-index:
 Gives all information about camera
@@ -21850,6 +23374,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info-index&index=0"
 ```
@@ -21868,12 +23393,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-cameraname
 Required
 ```
 
 **Data Params:**
+
 ```
 index={camera-index}
 Required
@@ -21891,6 +23418,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "index=0&name=mycamera" -X POST "http://localhost/rw/vision?action=set-cameraname"
 ```
@@ -21910,12 +23438,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-user-credential
 Required
 ```
 
 **Data Params:**
+
 ```
 index={camera-index}
 Required
@@ -21934,6 +23464,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "index=0&user=cmycamera&password=123" -X POST "http://localhost/rw/vision?action=set-user-credential"
 ```
@@ -21953,12 +23484,14 @@ URL — /rw/vision
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 action=set-ip-settings
 Required
 ```
 
 **Data Params:**
+
 ```
 name={cameraname}
 Required
@@ -21979,6 +23512,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics-d "name=mycamera&address=192.168.125.206&netmask=255.255.255.0&gateway=0.0.0.0" -X POST "http://localhost/rw/vision?action=set-ip-settings"
 ```
@@ -21998,6 +23532,7 @@ URL — /rw/vision
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 resource=camera-info
 Required
@@ -22006,11 +23541,13 @@ Required
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 camera-info:
 Gives all information about camera
@@ -22025,6 +23562,7 @@ Robot controller errors, see
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/vision?resource=camera-info&name=myCamera"
 ```
@@ -22049,6 +23587,7 @@ URL — rw/iosystem/devices/{network}/{device}/implicitdata
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 slot = Device slot number
 Required
@@ -22069,6 +23608,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -22082,6 +23622,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
 ```
@@ -22100,11 +23641,13 @@ URL — rw/iosystem/devices/{network}/{device}/implicitdata
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 slot = Device slot number
 Required
@@ -22131,6 +23674,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60&vendorid=42&deviceid=787&ip=127.1.1.0" -X POST "http://localhost/rw/iosystem/devices/{profinet}/{pnet}/implicitdata"
 ```
@@ -22149,16 +23693,19 @@ URL — rw/iosystem/devices/{network}/{device}/implicitdata
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 None
 ```
@@ -22171,6 +23718,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/implicitdata"
 ```
@@ -22189,6 +23737,7 @@ URL — rw/iosystem/devices/{network}/{device}/explicitdata
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 slot = Device slot number
 Required
@@ -22203,6 +23752,7 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -22216,6 +23766,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
@@ -22234,11 +23785,13 @@ URL — rw/iosystem/devices/{network}/{device}/explicitdata
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 slot = Device slot number
 Required
@@ -22259,6 +23812,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d "slot=1&subslot=2&index=2&datalength=60" -X POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
@@ -22277,16 +23831,19 @@ URL — rw/iosystem/devices/{network}/{device}/explicitdata
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 None
 ```
@@ -22299,6 +23856,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/explicitdata"
 ```
@@ -22317,6 +23875,7 @@ URL — rw/iosystem/devices/{network}/{device}/alarms
 **Method:** `GET`
 
 **URL Params:**
+
 ```
 None
 See
@@ -22324,11 +23883,13 @@ Common URL parameters
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Resources:**
+
 ```
 nrofretrievedalarms
 Total number of received PROFINET alarms since system start.
@@ -22377,6 +23938,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms"
 ```
@@ -22395,11 +23957,13 @@ URL — rw/iosystem/devices/{network}/{device}/alarms/clear
 **Method:** `POST`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
@@ -22413,6 +23977,7 @@ See
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -d POST "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms/clear"
 ```
@@ -22431,16 +23996,19 @@ URL — rw/iosystem/devices/{network}/{device}/alarms/clear
 **Method:** `OPTIONS`
 
 **URL Params:**
+
 ```
 None
 ```
 
 **Data Params:**
+
 ```
 None
 ```
 
 **Actions:**
+
 ```
 None
 ```
@@ -22453,6 +24021,7 @@ HTTP Status codes
 Robot controller return codes
 
 **Sample Call:**
+
 ```bash
 curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosystem/devices/PROFINET/PN_Internal_Device/alarms/clear"
 ```
@@ -22460,4 +24029,3 @@ curl --digest -u "Default User":robotics -X OPTIONS "http://localhost/rw/iosyste
 **Notes:** Not supported in bootserver mode.
 
 ---
-

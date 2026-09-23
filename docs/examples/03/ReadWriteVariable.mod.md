@@ -7,7 +7,7 @@ MODULE ReadWriteVariable
     !**********************************************************************
     ! Example 03 - Read / Write RAPID variables
     !
-    ! Auteur : Clement RACINET
+    ! Auteur : C. RACINET
     !
     ! Date : 13/07/2026
     !

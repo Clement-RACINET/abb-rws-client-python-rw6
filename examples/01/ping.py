@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # examples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Prerequisites:
     - ``.env`` at the repository root with ``RWS_HOST``, ``RWS_USER``,

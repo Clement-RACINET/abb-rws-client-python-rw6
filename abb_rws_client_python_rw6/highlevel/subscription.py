@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 C. RACINET
 #
 # SPDX-License-Identifier: X11
 
 # abb_rws_client_python_rw6/highlevel/subscription.py
 """High-level RWS subscription management for ABB RobotWare 6.
 
-Author: Clement RACINET
+Author: C. RACINET
 
 Wraps the ABB RWS Subscription Service and the WebSocket event stream behind
 a resource-oriented API: the caller declares a list of `SubscribedResource`
