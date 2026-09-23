@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Clément RACINET
+
+SPDX-License-Identifier: X11
+-->
+
 # ABB Robot Web Services — API Reference
 
 > 555 documented routes

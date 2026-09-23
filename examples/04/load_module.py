@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/04/example_load_module.py
 """Example 04 — Load a RAPID module into a task at runtime.
 

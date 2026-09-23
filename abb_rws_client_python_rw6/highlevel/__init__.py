@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client_python_rw6/highlevel/__init__.py
 """Public re-exports for the highlevel package.
 

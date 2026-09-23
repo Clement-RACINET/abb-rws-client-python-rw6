@@ -1,5 +1,7 @@
-# tests/core/test_logger.py
-# Copyright (c) 2026 Clément RACINET
+# Copyright (C) 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
 """Tests for abb_rws_client_python_rw6.core.logger."""
 
 from __future__ import annotations

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/01/example_ping.py
 """Example 01 — Ping: verify connectivity and read controller state.
 

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/06/subscription.py
 """Example 06 — RWS WebSocket subscription on two RAPID PERS variables.
 

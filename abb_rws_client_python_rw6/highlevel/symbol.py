@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client_python_rw6/highlevel/symbol.py
 """High-level RAPID symbol introspection for ABB RWS RobotWare 6.
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client/core/exceptions.py
 """
 Custom exceptions for abb_rws_client_python_rw6.

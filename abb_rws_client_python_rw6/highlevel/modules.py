@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client/highlevel/modules.py
 """High-level RAPID module load/unload for ABB RWS RobotWare 6.
 

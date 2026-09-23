@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Clément RACINET
+
+SPDX-License-Identifier: X11
+-->
 
 # `utils/` — Internal development tools
 

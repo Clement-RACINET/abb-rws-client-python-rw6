@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/07/write_robtarget_array.py
 """Example 07 — Write an array of robtargets to a RAPID PERS variable.
 

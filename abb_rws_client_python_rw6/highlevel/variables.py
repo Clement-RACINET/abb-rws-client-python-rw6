@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client/highlevel/variables.py
 """High-level RAPID variable read/write for ABB RWS RobotWare 6.
 

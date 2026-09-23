@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client/highlevel/execution.py
 """High-level RAPID execution control for ABB RWS RobotWare 6.
 

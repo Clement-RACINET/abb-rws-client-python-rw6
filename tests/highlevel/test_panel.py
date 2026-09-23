@@ -1,5 +1,7 @@
-# tests/highlevel/test_panel.py
-# Copyright (c) 2026 Clément RACINET
+# Copyright (C) 2026 Clément RACINET
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
 """Tests for abb_rws_client_python_rw6.highlevel.panel.
 
 Author: Clement RACINET

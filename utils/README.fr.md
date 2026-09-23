@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Clément RACINET
+
+SPDX-License-Identifier: X11
+-->
+
 ## `utils/README.fr.md` (FR)
 
 ```markdown

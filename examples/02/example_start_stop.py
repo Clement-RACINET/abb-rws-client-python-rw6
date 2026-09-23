@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/02/example_start_stop.py
 """Example 02 — Start and stop RAPID execution.
 

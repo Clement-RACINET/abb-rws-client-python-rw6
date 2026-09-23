@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client_python_rw6/highlevel/subscription.py
 """High-level RWS subscription management for ABB RobotWare 6.
 

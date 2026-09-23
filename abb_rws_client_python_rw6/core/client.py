@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # abb_rws_client/core/client.py
 """
 HTTP session management for an ABB RWS controller (RobotWare 6).

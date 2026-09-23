@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # examples/03/example_read_write_variable.py
 """Example 03 — Read and write a RAPID variable.
 

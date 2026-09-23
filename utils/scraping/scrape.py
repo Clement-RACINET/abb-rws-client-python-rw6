@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 # utils/scraping/scrape.py
 """
 ABB RobotWare 6 RWS API scraper.

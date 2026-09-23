@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
 [workspace]
 name = "abb_rws_client_python_rw6"
 version = "1.0.0"
@@ -22,19 +26,20 @@ websockets = ">=13.0"
 
 # ── Feature : dev ─────────────────────────────────────────────────────────
 [feature.dev.pypi-dependencies]
-pytest          = ">=8.0,<9.0"
-pytest-asyncio  = ">=0.24,<1.0"
-anyio           = ">=4.0"
-pytest-cov      = ">=7.1.0,<8"
-ruff            = ">=0.4,<1.0"
-mkdocs          = ">=1.6,<2.0"
-mkdocs-material = ">=9.5,<10.0"
-mkdocstrings    = { version = ">=0.25,<1.0", extras = ["python"] }
-mkdocs-coverage = ">=2.0.0,<3"
-py-init-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-init-tools.git", branch = "main"}
-py-clean-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-clean-tools.git", branch = "main" }
-py-structure-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-structure-tools.git", branch = "main" }
-py-doc-tools = { git = "https://gitlab.com/dev-tools-cr/python/py-doc-tools.git", branch = "main" }
+pytest               = ">=8.0,<9.0"
+pytest-asyncio       = ">=0.24,<1.0"
+anyio                = ">=4.0"
+pytest-cov           = ">=7.1.0,<8"
+ruff                 = ">=0.4,<1.0"
+mkdocs               = ">=1.6,<2.0"
+mkdocs-material      = ">=9.5,<10.0"
+mkdocstrings         = { version = ">=0.25,<1.0", extras = ["python"] }
+mkdocs-coverage      = ">=2.0.0,<3"
+py-init-tools        = { git = "https://gitlab.com/dev-tools-cr/python/py-init-tools.git", branch = "main"}
+py-clean-tools       = { git = "https://gitlab.com/dev-tools-cr/python/py-clean-tools.git", branch = "main" }
+py-structure-tools   = { git = "https://gitlab.com/dev-tools-cr/python/py-structure-tools.git", branch = "main" }
+py-doc-tools         = { git = "https://gitlab.com/dev-tools-cr/python/py-doc-tools.git", branch = "main" }
+reuse                = ">=6.0,<7.0"
 
 # ── scraping ──────
 requests       = ">=2.32,<3.0"
@@ -67,6 +72,9 @@ docs        = "pydocs generate --all"
 docs-build  = "python -m mkdocs build"
 docs-serve  = "python -m mkdocs serve"
 
+# REUSE
+reuse = "reuse"
+reuse-complete-copyright = "python utils/annotate_missing_copyright.py"
 
 # ── Feature : examples ────────────────────────────────────────────────────
 [feature.examples.pypi-dependencies]

@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2026 Clément RACINET
+#
+# SPDX-License-Identifier: X11
+
+version = 1
+
+# Fichiers __init__.py générés par py-init-tools.
+# Ils sont couverts sans modifier leur contenu.
+[[annotations]]
+path = [
+    "abb_rws_client_python_rw6/__init__.py",
+    "abb_rws_client_python_rw6/core/**/__init__.py",
+    "abb_rws_client_python_rw6/highlevel/**/__init__.py",
+    "tests/**/__init__.py",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-License-Identifier = "X11"
+
+# Fichiers de configuration et de documentation.
+# Leur contenu n'est pas modifié.
+[[annotations]]
+path = [
+    ".gitignore",
+    ".github/**",
+    ".gitlab-ci.yml",
+    "README.md",
+    "pyproject.toml",
+    "mkdocs.yml",
+    "pixi.lock",
+    ".coveragerc",
+    ".coverage",
+    ".gitattributes",
+    ".pre-commit-config.yaml",
+    "basedpyrightconfig.json",
+    "reuse.toml",
+    "ruff.toml",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-License-Identifier = "X11"
+
+# Fichiers générés automatiquement.
+[[annotations]]
+path = [
+    "abb_rws_client_python_rw6/rws/**",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-License-Identifier = "X11"
+
+
+# Documentation maintenue dans ce projet.
+[[annotations]]
+path = [
+    "docs/**",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Clément RACINET"
+SPDX-License-Identifier = "X11"
